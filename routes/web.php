@@ -1,5 +1,5 @@
 <?php
-
+ use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,6 +11,10 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+$app->group(['prefix' => 'client/api/v1', 'namespace'=>'\App\Http\Controllers\v1\Client'], function ($group)    {
+    $group->get('/newslist','NewsListController@get');
+});
+
+$app->group(['prefix' => 'cms/api/v1'], function ($group)   {
+    return $group->version();
 });

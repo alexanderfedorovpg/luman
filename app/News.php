@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+/**
+ * Class News
+ * @package App
+ */
+class News extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -18,15 +22,21 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'login'
+        'publish_date',
+        'is_publish',
+        'top',
+        'title',
+        'sub_title',
+        'note',
+        'video_stream',
+        'body',
+        'keywords',
+        'tags',
+        'editor_id',
+        'image_main',
+        'image_preview',
+        'is_online',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-    ];
+
 }
