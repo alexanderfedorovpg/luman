@@ -1,0 +1,36 @@
+include ../../node_modules/bemto.pug/bemto
+include ../components/icon/icon
+
+include ../components/header/header
+//- include ../components/footer/footer
+include ../components/nav-side/nav-side
+
+-const pageSettings = {}
+-pageSettings.title = '';
+-pageSettings.useSocialMetaTags = false;
+-pageSettings.navSide = true;
+-pageSettings.header = true;
+-pageSettings.contentWrap = true;
+
+-const jv0 = 'javascript:void(0)';
+
+block vars
+
+doctype html
+html(lang='ru')
+    include ../components/head/head
+
+    body
+        +header()
+
+        +nav-side()
+
+        if pageSettings.contentWrap
+            .content
+                block content
+        else
+            block content
+
+        //- +footer()
+
+        script(src='%=static=%js/main%=hash=%%=min=%.js')

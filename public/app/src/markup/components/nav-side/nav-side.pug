@@ -1,0 +1,43 @@
+mixin nav-side(data)
+    if pageSettings.navSide
+        +b.NAV.nav-side()&attributes(attributes)
+            +e.A.item.logo(href=jv0)
+                +e.pic
+                    i.icon.icon-logo
+            +e.A.item.is-active(href=jv0)
+                +e.pic
+                    i.icon.icon-feed
+                //- Выбор из ленты
+
+            +e.A.item(href=jv0)
+                +e.pic
+                    i.icon.icon-view
+                //- Просмотр выпускающим
+
+            +e.A.item(href=jv0)
+                +e.pic
+                    i.icon.icon-draft
+                //- В работе
+
+            +e.A.item(href=jv0)
+                +e.pic
+                    i.icon.icon-ready
+                .badge.badge-success 8
+                //- Готовые
+
+            +e.A.item(href=jv0)
+                +e.pic
+                    i.icon.icon-main
+                //- Главная
+
+            +e.A.item(href=jv0)
+                +e.pic
+                    i.icon.icon-tv
+                .badge.badge-success 2
+                //- Программы
+
+            +e.A.item(href=jv0)
+                +e.pic
+                    i.icon.icon-live
+                .badge.badge-danger off
+                //-  Прямой off

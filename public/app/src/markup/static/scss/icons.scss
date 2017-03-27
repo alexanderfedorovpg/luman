@@ -1,0 +1,91 @@
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+
+    &.arrowRight {
+        opacity: 0.33;
+        margin-right: 4px;
+    }
+
+    &-okay {
+        @include bg($okay);
+    }
+
+    &-delete {
+        @include bg($delete);
+    }
+
+    &_logout {
+        opacity: 0.59;
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    // иконки в левом вертикальном меню
+    &-logo {
+        @include bg($logo);
+    }
+
+    &-feed {
+        @include bg($feed);
+    }
+
+    &-view {
+        @include bg($view);
+    }
+
+    &-draft {
+        @include bg($draft);
+    }
+
+    &-ready {
+        @include bg($ready);
+    }
+
+    &-main {
+        @include bg($main);
+    }
+
+    &-tv {
+        @include bg($tv);
+    }
+
+    &-live {
+        @include bg($live);
+    }
+
+}
+
+// если активный пункт меню
+.is-active {
+    .icon {
+        &-feed {
+            @include bg($feed-active);
+        }
+
+        &-view {
+            @include bg($view-active);
+        }
+
+        &-draft {
+            @include bg($draft-active);
+        }
+
+        &-ready {
+            @include bg($ready-active);
+        }
+
+        &-main {
+            @include bg($main-active);
+        }
+
+        &-tv {
+            @include bg($tv-active);
+        }
+
+        &-live {
+            @include bg($live-active);
+        }
+    }
+}

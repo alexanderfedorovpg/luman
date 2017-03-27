@@ -1,0 +1,29 @@
+/* Your custom fonts here */
+
+/* Example
+
+@include font-face('Open Sans', '../fonts/OpenSans-Italic', normal, italic, $exts: woff woff2 ttf);
+
+// Var for using custom font
+$font-1: 'Open Sans', Helvetica, Arial, sans-serif;
+*/
+
+// font Open Sans
+@include font-face('Open Sans', '../fonts/hinted-OpenSans', 400, normal, $exts: woff woff2);
+@include font-face('Open Sans', '../fonts/hinted-OpenSans-Light', 300, normal, $exts: woff woff2);
+@include font-face('Open Sans', '../fonts/hinted-OpenSans-Semibold', 600, normal, $exts: woff woff2);
+@include font-face('Open Sans', '../fonts/hinted-OpenSans-Bold', 700, normal, $exts: woff woff2);
+
+// font Helvetice Neue
+@include font-face('HelveticaNeue', '../fonts/hinted-HelveticaNeueCyr-Medium', 400, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/hinted-HelveticaNeueCyr-Light', 300, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/hinted-HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
+
+// font Nexa without Cyrillic
+@include font-face('Nexa', '../fonts/hinted-HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
+
+
+$georgia: Georgia, Times, 'Times New Roman', serif;
+$opensans: 'Open Sans', Arial, sans-serif;
+$helvetica: 'HelveticaNeue', Helvetica, Arial, sans-serif;
+$nexa: 'Nexa';

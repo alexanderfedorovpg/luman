@@ -1,0 +1,12 @@
+**/_*.js
+**/*.min.js
+node_modules
+bower_components
+plugins-config.json
+
+markup/components/**/data/data.js
+
+markup/static/js/libraries
+markup/static/js/plugins
+markup/static/js/separate-js
+markup/static/js/framework

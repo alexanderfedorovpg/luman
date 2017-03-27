@@ -1,0 +1,102 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'UI elements';
+
+block content
+    // Контент здесь
+    div
+
+        h2 Buttons
+        .row
+            button.btn.btn-md.btn-danger
+                i.icon.icon-delete
+                | Удалить
+            button.btn.btn-md.btn-primary
+                +icon({ icon: 'arrowRight', class: 'arrowRight' })
+                | В работу
+            button.btn.btn-md.btn-success
+                i.icon.icon-okay
+                | Опубликовать
+            button.btn.btn-xs.btn-success ОК
+
+        h2 Disabled buttons
+        .row
+            button.btn.btn-md.btn-danger(disabled)
+                i.icon.icon-delete
+                | Удалить
+            button.btn.btn-md.btn-primary(disabled)
+                +icon({ icon: 'arrowRight', class: 'arrowRight' })
+                | В работу
+            button.btn.btn-md.btn-success(disabled)
+                i.icon.icon-okay
+                | Опубликовать
+            button.btn.btn-xs.btn-success(disabled) ОК
+
+        h2 Active Buttons
+        .row
+            button.btn.btn-md.btn-danger.is-active
+                i.icon.icon-delete
+                | Удалить
+            button.btn.btn-md.btn-primary.is-active
+                +icon({ icon: 'arrowRight', class: 'arrowRight' })
+                | В работу
+            button.btn.btn-md.btn-success.is-active
+                i.icon.icon-okay
+                | Опубликовать
+            button.btn.btn-xs.btn-success.is-active ОК
+
+        h2 Form Elements
+        .row
+            form(action="" method="POST")
+                input.input.input-md(type="text", value="Disabled Input" disabled)
+                input.input.input-md(type="text", value="Default Input")
+                input.input.input-success.input-md(type="text", value="Validated Input")
+                input.input.input-error.input-md(type="text", value="Error Input")
+
+            form(action="" method="POST")
+                div(style="margin-right: 50px; float: left;")
+                    .checkbox
+                        input(type="checkbox" id="checkbox1" name="checkbox1" value="kek")
+                        label(for="checkbox1") Изображения
+                    .checkbox
+                        input(type="checkbox" id="checkbox2" name="checkbox1" value="kek")
+                        label(for="checkbox2") Видео
+                    .checkbox
+                        input(type="checkbox" id="checkbox3" name="checkbox1" value="kek")
+                        label(for="checkbox3") Музыка
+                    .checkbox
+                        input(type="checkbox" id="checkbox4" name="checkbox1" value="kek" disabled)
+                        label(for="checkbox4") Disabled
+                div(style="float: left; margin-right: 50px;")
+                    .radio
+                        input(type="radio" id="radio1" name="radio1" value="lol")
+                        label(for="radio1") Изображения
+                    .radio
+                        input(type="radio" id="radio2" name="radio1" value="lol")
+                        label(for="radio2") Видео
+                    .radio
+                        input(type="radio" id="radio3" name="radio1" value="lol")
+                        label(for="radio3") Музыка
+                    .radio
+                        input(type="radio" id="radio4" name="radio1" value="lol" disabled)
+                        label(for="radio4") Disabled
+
+                div(style="float: left")
+                    .toggle
+                        span Активен
+                        input#cb1(type="checkbox" checked)
+                        label(for="cb1")
+                    .toggle
+                        input#cb2(type="checkbox" disabled)
+                        label(for="cb2")
+                        span Заблокирован
+
+        h2 Tags
+        .row
+            .tags
+                a.tag(href=jv0).is-active Политика
+                a.tag(href=jv0) Экономика
+                a.tag(href=jv0) Общество
+                a.tag(href=jv0) Наука
+                a.tag(href=jv0) Спорт
