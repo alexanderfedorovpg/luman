@@ -6,34 +6,40 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    protected function responseOk($data)
-    {
-        return response()->json([
-            'code' => 200,
-            'data' => $data,
-        ], 200);
+    protected $statusCode = 200;
+
+    public function getStatusCode() {
+        return $this->statusCode;
     }
 
-    protected function responseNotFound()
-    {
-        return response()->json([
-            'code' => 404,
-            'message' => 'Resource not found'
-        ], 404);
-    }
-    protected function responseForbidden()
-    {
-        return response()->json([
-            'code' => 403,
-            'message' => 'Forbidden'
-        ], 403);
+    public function setStatusCode($statusCode) {
+        $this->statusCode=$statusCode;
+        return $this;
     }
 
-    protected function responseServerError()
-    {
-        return response()->json([
-            'code' => 500,
-            'message' => 'Server error'
-        ], 500);
+    public function respondNotFound($message="Not found!") {
+        return $this->setStatusCode('404')->respondWithError($message);
+    }
+
+    public function respondFail500x($message="Internal Error") {
+        return $this->setStatusCode('500')->respondWithError($message);
+    }
+
+    public function respondFail403x($message="Unauthorized action!") {
+        return $this->setStatusCode('403')->respondWithError($message);
+    }
+
+    public function respond($data, $headers = []) {
+        return response()->json($data , $this->getStatusCode() , $headers);
+    }
+
+    public function respondWithError($message) {
+        return $this->respond([
+            'error'=>[
+                'message'=>$message,
+                'staus_code'=>$this->getStatusCode(),
+            ]
+        ]);
+
     }
 }
