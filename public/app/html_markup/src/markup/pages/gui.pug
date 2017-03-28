@@ -48,69 +48,117 @@ block content
 
         h2 Form Elements
         .row
-            form(action="" method="POST")
-                input.input.input-md(type="text", value="Disabled Input" disabled)
-                input.input.input-md(type="text", value="Default Input")
-                input.input.input-success.input-md(type="text", value="Validated Input")
-                input.input.input-error.input-md(type="text", value="Error Input")
+            form(action='' method='POST')
 
-            form(action="" method="POST")
-                div(style="margin-right: 50px; float: left;")
-                    .checkbox
-                        input(type="checkbox" id="checkbox1" name="checkbox1" value="kek")
-                        label(for="checkbox1") Изображения
-                    .checkbox
-                        input(type="checkbox" id="checkbox2" name="checkbox1" value="kek")
-                        label(for="checkbox2") Видео
-                    .checkbox
-                        input(type="checkbox" id="checkbox3" name="checkbox1" value="kek")
-                        label(for="checkbox3") Музыка
-                    .checkbox
-                        input(type="checkbox" id="checkbox4" name="checkbox1" value="kek" disabled)
-                        label(for="checkbox4") Disabled
-                div(style="float: left; margin-right: 50px;")
-                    .radio
-                        input(type="radio" id="radio1" name="radio1" value="lol")
-                        label(for="radio1") Изображения
-                    .radio
-                        input(type="radio" id="radio2" name="radio1" value="lol")
-                        label(for="radio2") Видео
-                    .radio
-                        input(type="radio" id="radio3" name="radio1" value="lol")
-                        label(for="radio3") Музыка
-                    .radio
-                        input(type="radio" id="radio4" name="radio1" value="lol" disabled)
-                        label(for="radio4") Disabled
+                .form-group
 
-                div(style="float: left")
+                    input.input.input-md(type='text', value='Disabled Input' disabled)
+
+                    input.input.input-md(type='text', value='Default Input')
+
+                    input.input.input-success.input-md(type='text', value='Validated Input')
+
+                    input.input.input-error.input-md(type='text', value='Error Input')
+
+                .form-group
+                    .input-icon
+                        input.input.input-block#ko6(type='text' placeholder='Комментарий')
+                        +icon({ icon: 'clip', class: 'clip' }) 
+
+                .form-group
+                    label.label.label__bold(for='ko4') Собрать команду для съемки сюжета
+                    .input-icon
+                        input.input.input-block#ko4(type='text')
+                        +icon({ icon: 'search', class: 'search' }) 
+
+
+            form(action='' method='POST' style='margin-top: 20px')
+                div.form-group(style='margin-right: 50px; float: left;')
+                    .checkbox
+                        input(type='checkbox' id='checkbox1' name='checkbox1' value='kek')
+                        label(for='checkbox1') Изображения
+                    .checkbox
+                        input(type='checkbox' id='checkbox2' name='checkbox1' value='kek')
+                        label(for='checkbox2') Видео
+                    .checkbox
+                        input(type='checkbox' id='checkbox3' name='checkbox1' value='kek')
+                        label(for='checkbox3') Музыка
+                    .checkbox
+                        input(type='checkbox' id='checkbox4' name='checkbox1' value='kek' disabled)
+                        label(for='checkbox4') Disabled
+                div.form-group(style='float: left; margin-right: 50px;')
+                    .radio
+                        input(type='radio' id='radio1' name='radio1' value='lol')
+                        label(for='radio1') Изображения
+                    .radio
+                        input(type='radio' id='radio2' name='radio1' value='lol')
+                        label(for='radio2') Видео
+                    .radio
+                        input(type='radio' id='radio3' name='radio1' value='lol')
+                        label(for='radio3') Музыка
+                    .radio
+                        input(type='radio' id='radio4' name='radio1' value='lol' disabled)
+                        label(for='radio4') Disabled
+
+                div.form-group(style='float: left')
                     .toggle
                         span Активен
-                        input#cb1(type="checkbox" checked)
-                        label(for="cb1")
+                        input#cb1(type='checkbox' checked)
+                        label(for='cb1')
                     .toggle
-                        input#cb2(type="checkbox" disabled)
-                        label(for="cb2")
+                        input#cb2(type='checkbox' disabled)
+                        label(for='cb2')
                         span Заблокирован
 
         h2 Select
         .row
-            div
-                select(name="" data-placeholder="Группа пользователей")
-                    option(value="Практикант") Практикант
-                    option(value="Редактор") Редактор
-                    option(value="Выпускающий") Выпускающий
+
+            .form-group
+                .select.select-default
+                    .input-dropdown
+                        input.input.input-block#ko4(type='text' value='Группа пользователей')
+                        i.icon.icon-dropdown
+
+                    .select-dropdown
+                        .select-item
+                            .select-item__cnt
+                                p Ковалев Максим
+
+                        .select-item
+                            .select-item__cnt
+                                p Короленко Анастасия
             
-            div
-                label(for="select") Назначить редактора статьи
-                select(name="name" id="select")
-                    option(value="Ковалев Максим") Ковалев Максим
-                    option(value="Короленко Анастасия") Короленко Анастасия
+            .form-group
+                label.label.label__bold(for='ko4') Назначить редактора статьи
+                .select.select-diff
+                    .input-icon
+                        input.input.input-block#ko4(type='text')
+                        +icon({ icon: 'search', class: 'search' }) 
+
+                    .select-dropdown
+                        .select-item
+                            .select-item__pic
+                                img(src='%=static=%img/content/user1.png', alt='')
+                            .select-item__cnt
+                                p Ковалев Максим
+                                span Выбрать
+
+                        .select-item
+                            .select-item__pic
+                                img(src='%=static=%img/content/user2.png', alt='')
+                            .select-item__cnt
+                                p Короленко Анастасия
+                                span Выбрать
+
+
 
         h2 Tags
         .row
-            .tags
-                a.tag(href=jv0).is-active Политика
-                a.tag(href=jv0) Экономика
-                a.tag(href=jv0) Общество
-                a.tag(href=jv0) Наука
-                a.tag(href=jv0) Спорт
+            +tags()
+
+        h2 Rate news
+        .row
+            +rating()
+
+        h2 Text elements
+        .row

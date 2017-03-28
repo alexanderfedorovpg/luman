@@ -7,6 +7,10 @@
         margin-right: 4px;
     }
 
+    &-dropdown {
+        @include bg($dropdown-arrow);
+    }
+
     &-okay {
         @include bg($okay);
     }
@@ -53,6 +57,11 @@
 
     &-live {
         @include bg($live);
+    }
+
+    // source
+    &-tass {
+        @include bg($tass);
     }
 
 }

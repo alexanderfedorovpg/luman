@@ -2,9 +2,10 @@
 // For example, styles of the links, buttons and so on.
 
 // buttons
-.btn     {
+.btn {
     display: inline-block;
     height: $el-height;
+    padding: 0;
     border: 1px solid #cccccc;
     
     font-family: $helvetica;
@@ -149,45 +150,7 @@
 
 }
 
-// Form elements
 
-// input
-.input {
-    display: inline-block;
-    height: $el-height;
-    padding-left: 11px;
-    padding-right: 11px;
-    border: 1px solid #cccccc;
-
-    color: #666666;
-    font-family: $opensans;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: $el-height;
-
-    &-success {
-        border-color: $cl-success;
-    }
-
-    &-error {
-        border-color: $cl-danger;
-    }
-
-    &[disabled] {
-        color: #cccccc;
-    }
-
-    // sizing
-    &-md {
-        width: 247px;
-    }
-
-    &-block {
-        display: block;
-        width: 100%;
-    }
-
-}
 
 // checkbox
 .radio,
@@ -356,38 +319,102 @@
 
 }
 
+// select
+.select {
+    position: relative;
 
-// tags
-.tags {
+    .icon-dropdown {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+    }
 
-    .tag {
-        display: inline-block;
-        vertical-align: middle;
-        padding: 5px 9px 3px 9px;
-        margin-right: 6px;
-        border: 1px solid #cccccc;
+    &-dropdown {
+        position: absolute;
+        z-index: 8;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
 
-        font-family: $helvetica;
-        font-size: rem(14);
-        font-weight: 400;
-        color: #666666;
-        text-decoration: none;
+        background-color: #fff;
+    }
 
-        border-radius: 15px;
+    &-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 3px 19px 5px 2px;
+
+        cursor: pointer;
 
         &:hover {
-            background-color: #f1f1f1;
+            background-color: #f0f0f0;
+
+            .select-item__cnt span {
+                display: block;
+            }
+
+            .select-item__cnt p {
+                color: #333333;
+                font-weight: 600;
+            }
+
         }
 
-        &:last-child {
-            margin-right: 0;
+        &__pic {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            margin-right: 11px;
+
+            img {
+                max-width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
         }
 
-        &.is-active {
-            color: #ffffff;
-            background-color: #56647b;
-            border-color: #56647b;
+        &__cnt {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+
+            p {
+                margin: 0;
+
+                font-family: $opensans;
+                font-size: 14px;
+                color: #666666;
+                font-weight: 400;
+            }
+
+            span {
+                display: none;
+
+                color: #999999;
+                font-family: $opensans;
+                font-size: 12px;
+                font-weight: 300;
+            }
+
         }
+
+    }
+
+    &-default {
+
+        .select-dropdown {
+            margin-top: 10px;
+        }
+
+        .select-item {
+            padding: 8px 13px 9px 13px;
+        }
+
     }
 
 }

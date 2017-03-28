@@ -1,0 +1,30 @@
+.news-list {
+
+    &__item {
+        display: flex;
+        align-items: flex-start;
+        padding: 18px 0 17px;
+
+        border-bottom: 1px solid #f0f0f0;
+
+        cursor: pointer;
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    &__source {
+        flex-shrink: 0;
+    }
+
+    &__preview {
+        margin: 0 0 0 6px;
+
+        font-family: $opensans;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18px;
+        color: #333333;
+    }
+
+}

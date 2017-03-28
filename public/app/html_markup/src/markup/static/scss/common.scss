@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+*:focus {
+    outline: 0;
+}
+
 html, body {
     height: 100%;
 
@@ -20,10 +24,30 @@ html, body {
 }
 
 .content {
-    padding-left: rem(24);
-    padding-right: rem(24);
-    margin-top: 60px;
+    padding-left: $pad;
+    padding-right: $pad;
+    margin-top: 138px;
     margin-left: 67px;
+
+    &-wrap {
+        display: flex;
+        align-items: stretch;
+    }
+
+    &-l {
+        flex: 1;
+        padding-right: $pad;
+        margin-top: -11px;
+        border-right: 1px solid #d7d7d7;
+    }
+
+    &-r {
+        width: 40.384%;
+        flex-basis: 40.383%;
+        margin-top: 0;
+        padding-left: $pad;
+    }
+
 }
 
 .login {
@@ -99,6 +123,38 @@ html, body {
     .icon_arrowRight {
         margin-top: -3px;
         margin-right: rem(9);
+    }
+
+}
+
+.form-feed {
+    &__input {
+        margin-right: 7px;
+
+        &:nth-child(1) {
+            flex: 1;
+            width: 55.182%;
+            // flex-basis: 55.182%;
+        }
+
+        &:nth-child(2) {
+            width: 37.192%;
+            // flex-basis: 37.192%;
+        }
+
+    }
+
+    .btn {
+        opacity: 0.5;
+        color: #666666;
+        font-family: $opensans;
+        font-size: 13px;
+        line-height: 36px;
+        font-weight: 700;
+        &:hover {
+            color: #fff;
+            opacity: 1;
+        }
     }
 
 }

@@ -1,0 +1,51 @@
+// tags
+.tags {
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+    &__item {
+        display: inline-block;
+        margin-right: 3px;
+        margin-bottom: 15px;
+
+        vertical-align: middle;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        input {
+            display: none;
+
+            &:checked + label {
+                color: #ffffff;
+
+                border-color: #56647b;
+                background-color: #56647b;
+            }
+
+        }
+
+        label {
+            padding: 6px 10px 4px 10px;
+
+            font-family: $helvetica;
+            font-size: rem(14);
+            font-weight: 300;
+            color: #666666;
+            text-decoration: none;
+
+            border: 1px solid #cccccc;
+
+            border-radius: 15px;
+            cursor: pointer;
+            
+            &:hover {
+                background-color: #f1f1f1;
+            }
+
+        }
+
+    }
+
+}

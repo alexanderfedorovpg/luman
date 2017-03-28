@@ -1,0 +1,28 @@
+mixin tags(data)
+    +b.tags()&attributes(attributes)
+        //- +e.A.item(href=jv0).is-active Политика
+        //- +e.A.item(href=jv0) Экономика
+        //- +e.A.item(href=jv0) Общество
+        //- +e.A.item(href=jv0) Наука
+        //- +e.A.item(href=jv0) Спорт
+        +e.DIV.item
+            input#tag1(type='radio' name='tags')
+            label(for='tag1') Политика
+        +e.DIV.item
+            input#tag2(type='radio' name='tags')
+            label(for='tag2') Экономика
+        +e.DIV.item
+            input#tag3(type='radio' name='tags')
+            label(for='tag3') Общество
+        +e.DIV.item
+            input#tag4(type='radio' name='tags')
+            label(for='tag4') Наука
+        +e.DIV.item
+            input#tag5(type='radio' name='tags')
+            label(for='tag5') Спорт
+        +e.DIV.item
+            input#tag6(type='radio' name='tags')
+            label(for='tag6') Культура
+        +e.DIV.item
+            input#tag7(type='radio' name='tags')
+            label(for='tag7') Бизнес
