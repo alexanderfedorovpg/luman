@@ -77,7 +77,7 @@ html, body {
 
     &__form {
         width: rem(394);
-        padding: rem(67) rem(43);
+        padding: rem(67) rem(42) rem(67) rem(44);
 
         background-color: #fff;
 
@@ -87,8 +87,12 @@ html, body {
     }
 
     .btn {
-        background-color: $cl-success;
+        height: 33px;
+
+        line-height: 33px;
         color: #fff;
+
+        background-color: $cl-success;
         border-color: $cl-success;
     }
 

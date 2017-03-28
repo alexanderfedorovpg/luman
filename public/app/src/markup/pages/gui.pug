@@ -92,6 +92,20 @@ block content
                         label(for="cb2")
                         span Заблокирован
 
+        h2 Select
+        .row
+            div
+                select(name="" data-placeholder="Группа пользователей")
+                    option(value="Практикант") Практикант
+                    option(value="Редактор") Редактор
+                    option(value="Выпускающий") Выпускающий
+            
+            div
+                label(for="select") Назначить редактора статьи
+                select(name="name" id="select")
+                    option(value="Ковалев Максим") Ковалев Максим
+                    option(value="Короленко Анастасия") Короленко Анастасия
+
         h2 Tags
         .row
             .tags
