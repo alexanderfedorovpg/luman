@@ -21,6 +21,9 @@ class CreateTableNewsComments extends Migration
             $table->boolean('is_publish')->nullable();
             $table->binary('body');
             $table->timestamps();
+
+            $table->foreign('news_id')->references('id')->on('users');
+            $table->foreign('editor_id')->references('id')->on('users');
         });
     }
 
