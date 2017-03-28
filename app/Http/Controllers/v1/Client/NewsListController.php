@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1\Client;
 
 use App\Http\Controllers\ApiController;
 use App\News;
+use Illuminate\Http\Request;
 
 /**
  * Class NewsListController
@@ -29,7 +30,7 @@ class NewsListController extends ApiController
      * Получить список новостей
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get()
+    public function get(Request $request)
     {
 
         /**
@@ -39,11 +40,70 @@ class NewsListController extends ApiController
 //            return $this->respondFail403x();
 //        };
 
-        $news =  News::get();
-        return $this->respond(['data' => $this->newsListTransformer->transformCollection($news->toArray())]);
+        $news = News::published();
+        $searchString = $request->input('searchString');
+        if ($searchString) {
+            $substrings = explode(',', $searchString);
+            $news->substring($substrings);
+        }
 
-        $this->respond();
+        $tagList = $request->input('tagList');
+        if ($tagList) {
+            $tags = explode(',', $tagList);
+            $news->tags($tags);
+        }
+
+        $video = $request->input('video');
+        if ($video !== null) {
+            if ($video === 'true') {
+                $news->existVideo(true);
+            } elseif ($video === 'false') {
+                $news->existVideo(false);
+            }
+        }
+
+        $start = $request->input('start');
+        if ($start !== null) {
+            $news->skip($start);
+        }
+
+        $limit = $request->input('limit');
+        if ($limit !== null) {
+            $news->take($limit);
+        }
+
+        if ($limit === null && $start !== null) {
+            $limit = News::count() - $start;
+            $news->take($limit);
+        }
+
+        $news = $news->get();
+        return $this->respond(['data' => $this->newsListTransformer->transformCollection($news->toArray())]);
     }
 
+    /**
+     * Получить новость по ID
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getOne($id)
+    {
+        $news = News::whereId($id)->published()->first();
+        if (!$news) {
+            return $this->respondNotFound();
+        }
+        return $this->respond(['data' => $this->newsListTransformer->transform($news->toArray())]);
+    }
 
+    /**
+     * Получить список связонных новостей
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getRelated($id)
+    {
+
+    }
 }
