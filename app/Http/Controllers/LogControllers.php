@@ -6,6 +6,7 @@
 	use App\Log;
 	use Laravel\Lumen\Routing\Controller;
 	use Illuminate\Database\Eloquent\Builder;
+	use Illuminate\Support\Facades\DB;
 
 
 	class LogController extends Controller {
