@@ -1,6 +1,31 @@
 // GUI stylies of the project
 // For example, styles of the links, buttons and so on.
 
+// links
+.link {
+
+    &-black {
+
+        font-family: $opensans;
+        font-size: 13px;
+        font-weight: 700;
+        color: #000000;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        span {
+            margin-right: 3px;
+            
+            font-family: $helvetica;
+            font-size: 18px;
+        }
+
+    }
+
+
+}
+
 // buttons
 .btn {
     display: inline-block;
@@ -90,6 +115,7 @@
     i.icon {
         margin-right: 6px;
     }
+
 }
 
 // disabled button
@@ -172,9 +198,15 @@
 
         &[type='radio'] + label,
         &[type='checkbox'] + label {
+            position: relative;
             display: block;
             padding-left: 22px;
-            position: relative;
+
+            font-family: $opensans;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 18px;
+            color: #767676;
             cursor: pointer;
         }
 
@@ -196,19 +228,30 @@
               /* Radio Unchecked */
             }
 
-            + label:hover:before {
-                @include bg($radio-hover);
+            + label:hover {
+                color: #333;
+
+                &:before {
+                    @include bg($radio-hover);
+                }
             }
 
-            &:checked + label:before {
-                @include bg($radio-active);
-                /* Radio Checked */
+
+            &:checked + label {
+                color: #333;
+                
+                &:before {
+                    @include bg($radio-active);
+                    /* Radio Checked */
+                }
             }
+
 
             &[disabled] {
 
                 + label {
-                    cursor: default
+                    color: #999999;
+                    cursor: default;
                 }
 
                 + label:before {
@@ -226,14 +269,24 @@
                 /* Checkbox Unchecked */
             }
 
-            + label:hover:before {
-                @include bg($checkbox-hover);
+            + label:hover {
+                color: #333;
+                
+                &:before {
+                    @include bg($checkbox-hover);
+                }
             }
 
-            &:checked + label:before {
-                @include bg($checkbox-active);
-                /* Checkbox Checked */
+
+            &:checked + label {
+                color: #333333;
+
+                &:before {
+                    @include bg($checkbox-active);
+                    /* Checkbox Checked */
+                }
             }
+
 
             &[disabled] {
 
@@ -264,7 +317,7 @@
         font-family: $opensans;
         font-size: 13px;
         font-weight: 700;
-        color: #333333;
+        color: #808080;
     }
 
     input {
@@ -284,7 +337,7 @@
 
         cursor: pointer;
         user-select: none;
-
+    
         background: #cb0813;
         border-radius: 2em;
         outline: 0;
@@ -316,13 +369,22 @@
     
     input:checked + label {
         background: #359918;
+
         &:after {
             left: 65%;
+        }
+
+        + span {
+            color: #333;
         }
     }
 
     input[disabled] + label {
         cursor: default;
+
+        & + span {
+            color: #808080;
+        }
     }
 
 }
@@ -345,6 +407,7 @@
         left: 0;
         right: 0;
         display: none;
+        padding-top: 9px;
 
         background-color: #fff;
     }
@@ -425,4 +488,50 @@
 
     }
 
+}
+
+.text-opacity {
+    position: relative;
+
+    &:after {
+        content: ' ';
+        position: absolute;
+        bottom: -23px;
+        left: 0;
+        right: 0;
+
+        height: 124px;
+        width: 723px;
+
+        background-image: url('%=static=%general/text-opacity.png');
+        background-repeat: repeat-x;
+        background-position: bottom left;
+    }
+}
+
+// tooltip
+.tooltip {
+    position: relative;
+    z-index: 9;
+    &:after {
+        display: none;
+        position: absolute;
+        top: calc( 100% + 18px );
+        right: -10px;
+        z-index: 5;
+        padding: 4px 9px;
+
+        color: #666666;
+        font-family: $opensans;
+        font-size: 11px;
+        font-weight: 400;
+
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.28);
+        background-color: #ffffff;
+        content: attr(data-tooltip);
+    }
+
+    &:hover:after {
+        display: block;
+    }
 }

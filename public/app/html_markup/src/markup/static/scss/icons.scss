@@ -27,6 +27,10 @@
         }
     }
 
+    &-delete-lg {
+        @include bg($delete-lg);
+    }
+
     &-go-right {
         @include bg($go-right);
 

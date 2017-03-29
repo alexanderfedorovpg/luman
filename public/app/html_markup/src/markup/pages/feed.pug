@@ -18,14 +18,14 @@ block content
                             +icon({ icon: 'search', class: 'search' })
                         button.btn.btn-xs.btn-success ОК
             +b.header-r 
-                a.header-link(href=jv0)
+                a.link-black(href=jv0)
                     span ?
                     | справка
     .content-wrap
         .content-l
             +news-list()
         .content-r
-            form(action='' method='POST')
+            form.form-select(action='' method='POST')
                 +tags()
                 +rating()
                 +b.form-group
@@ -104,3 +104,5 @@ block content
 
                 +b.form-grop
                     button.btn.btn-block.btn-success Отправить в работу
+
+    +popups()
