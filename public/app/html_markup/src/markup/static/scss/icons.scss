@@ -17,6 +17,26 @@
 
     &-delete {
         @include bg($delete);
+
+        &:hover {
+            @include bg($delete-bold);
+        }
+
+        &-reverse {
+            @include bg($delete-bold);
+        }
+    }
+
+    &-delete-lg {
+        @include bg($delete-lg);
+    }
+
+    &-go-right {
+        @include bg($go-right);
+
+        &:hover {
+            @include bg($go-right-active);
+        }
     }
 
     &_logout {
@@ -29,6 +49,10 @@
     // иконки в левом вертикальном меню
     &-logo {
         @include bg($logo);
+    }
+
+    &-logo-light {
+        @include bg($logo-light);
     }
 
     &-feed {

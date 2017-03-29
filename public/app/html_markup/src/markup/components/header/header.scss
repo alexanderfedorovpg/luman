@@ -3,9 +3,14 @@
     z-index: 9;
     top: 0;
     right: 0;
-    left: 67px;
+    left: 0;
 
     height: 60px;
+    padding-left: 67px;
+
+    background-color: #131e27;
+
+    transition: all 0.4s ease;
 
     &-top,
     &-bot {
@@ -16,23 +21,28 @@
         padding-right: $pad;
         padding-left: $pad;
 
-        background-color: #131e27;
+    }
+
+    &-top {
+        .header-r {
+            flex-grow: 1;
+        }
     }
 
     &-bot {
-        position: fixed;
-        z-index: 9;
+        .header-l {
+            flex-grow: 1;
+        }
+    }
+
+    &-off {
         top: 60px;
-        right: 0;
-        left: 67px;
-
-        height: 60px;
-
+        
         background-color: #f0f0f0;
+
     }
 
     &-l {
-        flex-grow: 1;
         padding-right: 2px;
     }
 
@@ -40,8 +50,8 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        flex-basis: 40.383%;
-        width: 40.383%;
+        flex-basis: 42.2%;
+        width: 42.2%;
         padding-left: 2px;
     }
 
@@ -49,11 +59,15 @@
 
         &__hamburger {
             padding: 0;
-            margin-right: rem(5);
+            margin-right: rem(9);
 
             border: 0;
             background: transparent;
             outline: 0;
+
+            .icon_hamburger {
+                margin-top: -4px;
+            }
         }
 
         &__time {
@@ -64,10 +78,12 @@
             font-weight: 400;
 
             color: #999999;
-            letter-spacing: 0.4px;
-            word-spacing: 0.85px;
         }
     
+        &__date {
+            margin-right: 7px;
+        }
+
     }
 
     &-action {
@@ -105,7 +121,7 @@
     &-user {
         display: flex;
         align-items: center;
-        margin-right: rem(27);
+        margin-right: rem(29);
         margin-left: rem(20);
         &__pic {
             display: block;
@@ -131,23 +147,6 @@
 
             color: #ffffff;
             text-decoration: none;
-        }
-
-    }
-
-    &-link {
-        font-family: $opensans;
-        font-size: 13px;
-        font-weight: 700;
-        color: #000000;
-        text-decoration: none;
-        text-transform: uppercase;
-        
-        span {
-            margin-right: 3px;
-            
-            font-family: $helvetica;
-            font-size: 18px;
         }
 
     }

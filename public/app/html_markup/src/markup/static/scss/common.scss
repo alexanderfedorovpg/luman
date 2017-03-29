@@ -16,7 +16,36 @@ html, body {
     font-family: $opensans;
     font-size: 16px;
     font-weight: 400;
-    color: #999;
+    color: #333333;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+h1 {
+
+}
+
+h2 {
+    color: #333333;
+    font-size: rem(24);
+    line-height: rem(29);
+    letter-spacing: -0.18px;
+    font-weight: 600;
+    // font-weight: bold;
+}
+
+h3 {
+    font-weight: 600;
+    color: #333333;
+    font-size: 16px;
+    letter-spacing: 0.12px;
+    // font-weight: bold;
+}
+
+h4 {
+
 }
 
 .row {
@@ -24,10 +53,15 @@ html, body {
 }
 
 .content {
-    padding-left: $pad;
+    position: relative;
+    left: 0;
+    // padding-left: $pad;
     padding-right: $pad;
-    margin-top: 138px;
+    margin-top: 60px;
     margin-left: 67px;
+    padding-top: 78px;
+
+    transition: all 0.4s ease;
 
     &-wrap {
         display: flex;
@@ -36,14 +70,15 @@ html, body {
 
     &-l {
         flex: 1;
-        padding-right: $pad;
-        margin-top: -11px;
+        // padding-right: $pad;
+        // margin-top: -11px;
+        margin-top: 0;
         border-right: 1px solid #d7d7d7;
     }
 
     &-r {
-        width: 40.384%;
-        flex-basis: 40.383%;
+        width: 41.584%;
+        flex-basis: 41.584%;
         margin-top: 0;
         padding-left: $pad;
     }
@@ -155,6 +190,192 @@ html, body {
             color: #fff;
             opacity: 1;
         }
+    }
+
+}
+
+// form-select
+.form-select {
+    .btn {
+        margin-top: 29px;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+
+// help-form
+.help {
+    max-width: 749px;
+    padding-left: $pad;
+    padding-right: $pad;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 46px;
+    }
+
+    &__form {
+
+        .checkbox {
+            margin-right: 18px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+        }
+
+    }
+
+    .textarea {
+        resize: vertical;
+    }
+
+    .checkbox {
+        margin-top: -4px;
+    }
+
+    .btn {
+        height: 43px;
+        line-height: 43px;
+    }
+
+    .gallery {
+        margin-top: 40px;
+        margin-bottom: 35px;
+    }
+
+    &__text {
+        font-family: $opensans;
+        font-size: 14px;
+        font-weight: 400;
+        color: #666666;
+        line-height: 24px;
+    }
+
+    .tags-default {
+        margin-top: 26px;
+    }
+
+}
+
+// gallery
+.gallery {
+    display: flex;
+    justify-content: flex-start;
+
+    height: 90px;
+
+    &__pics {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        margin-right: 8px;
+    }
+
+    &__item {
+        flex: 1;
+        margin-right: 4px;
+        
+        &:last-child {
+            margin-right: 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+    }
+
+    &__btn-add {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90px;
+        height: 90px;
+
+        font-family: $opensans;
+        font-size: 48px;
+        font-weight: 300;
+        text-align: center;
+
+        background-color: #f0f0f0;
+        text-decoration: none;
+
+        span {
+            opacity: 0.39;
+            color: #666666;
+        }
+
+    }
+
+}
+
+.news-view {
+    position: relative;
+    max-width: 536px;
+    padding-top: 27px;
+    padding-bottom: 41px;
+    padding-left: $pad;
+    padding-right: $pad;
+
+    &__header {
+        font-family: $opensans;
+        font-size: 14px;
+        font-weight: 400;
+        color: #999999;
+    }
+
+    &__title {
+        margin-top: 16px;
+    }
+
+    &__source {
+        margin-left: 11px;
+
+        color: $cl-primary;
+        text-decoration: none;
+    }
+
+    &__text {
+        color: #666666;
+        font-size: 14px;
+        line-height: 18px;
+
+        p {
+            margin-bottom: 19px;
+        }
+
+    }
+
+    &__buttons {
+        display: flex;
+        margin-top: 40px;
+
+        .btn-danger {
+            height: 40px;
+            line-height: 42px;
+            margin-right: 3px;
+        }
+
+        .btn-success {
+            height: 40px;
+            line-height: 42px;
+        }
+
+    }
+
+    .icon-delete-lg {
+        position: absolute;
+        top: 14px;
+        right: 14px;
     }
 
 }
