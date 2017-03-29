@@ -11,5 +11,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NewsRelated extends Model
 {
-
+    public $table = 'news_related';
 }

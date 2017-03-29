@@ -39,11 +39,31 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     /**
+     * Возвращает связь с комментарими
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\NewsComments');
+    }
+
+    /**
+     * Возвращает связь связонных новостей
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function newsRelated()
+    {
+        return $this->belongsToMany('App\News', 'news_related', 'news_id_1', 'news_id_2');
+    }
+
+    /**
      * Фильтрация по наличию подстроки в заголовке или тегах
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @oaram array $tags
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSubstring($query, array $strings)
     {
@@ -57,9 +77,9 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
     /**
      * Фильтрация по тегам
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @oaram array $tags
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeTags($query, array $tags)
     {
@@ -72,9 +92,9 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
     /**
      * Фильтрация по наличию или отсутсвию видеокассета
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @oaram bool $isExxist
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeExistVideo($query, $isExist)
     {
@@ -89,9 +109,9 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
     /**
      * Фильтрация по наличию опубликованости
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @param bool $$published
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param bool $published
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePublished($query, $published = true)
     {
