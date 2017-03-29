@@ -1,40 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ifProp } from '../../utils/style'
+import { font, color, height } from '../../constants/style'
 
-export const Input = styled.input`
+const Input = styled.input`
     display: inline-block;
-    height: 36px;
+    height: ${height};
     padding-left: 11px;
     padding-right: 11px;
     border: 1px solid #cccccc;
 
     color: #666666;
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: ${font.opensans};
     font-size: 14px;
     font-weight: 400;
-    line-height: 36px;
+    line-height: ${height};
 
     &.success {
-        border-color: #390;
+        border-color: ${color.success};
     }
 
     &.error {
-        border-color: #c00;
+        border-color: ${color.danger};
     }
 
     &[disabled] {
         color: #cccccc;
     }
 
+    ${ifProp('block')`
+        display: block;
+        width: 100%;
+    `}
+
+    ${ifProp('md')`
+        width: 214px;
+    `}
 `
 
-export const InputBlock = styled(Input)`
-    display: block;
-    width: 100%;
-
-`
-
-export const InputMd = styled(Input)`
-    width: 247px;
-
-`
+export default Input

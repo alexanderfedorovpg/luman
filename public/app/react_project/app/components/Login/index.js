@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { rem, below } from '../../utils/style'
+import { color } from '../../constants/style'
 
-import { InputBlock } from '../Input'
-import { ButtonBlock } from '../Button'
+import Input from '../Input'
+import Button from '../Button'
 import { ArrowRightLight } from '../SvgIcons'
 
 import bgImage from './login-bg.png'
@@ -23,6 +24,11 @@ const Form = styled.form`
     display: flex;
     align-items: stretch;
     width: 787px;
+
+    ${below('860px')`
+        flex-direction: column;
+        align-items: center;
+    `}
 `
 
 const Pic = styled.div`
@@ -41,6 +47,10 @@ const Pic = styled.div`
         content: ' ';
         background: url(${rtvi}) no-repeat;
     }
+
+    ${below('400px')`
+        width: 100%
+    `}
 `
 
 const Image = styled.img`
@@ -57,6 +67,10 @@ const Inputs = styled.div`
     padding: ${rem(67)} ${rem(42)} ${rem(67)} ${rem(44)};
 
     background-color: #fff;
+
+    ${below('400px')`
+        width: 100%
+    `}
 `
 
 const FormGroup = styled.div`
@@ -67,14 +81,14 @@ const FormGroup = styled.div`
     }
 `
 
-const LoginButton = styled(ButtonBlock)`
+const LoginButton = styled(Button)`
     height: 33px;
 
     line-height: 33px;
     color: #fff;
 
-    background-color: #690;
-    border-color: #690;
+    background-color: ${color.success};
+    border-color: ${color.success};
 `
 
 function Login() {
@@ -87,13 +101,13 @@ function Login() {
                 </Pic>
                 <Inputs>
                     <FormGroup>
-                        <InputBlock placeholder="login" type="name" />
+                        <Input placeholder="login" type="name" block />
                     </FormGroup>
                     <FormGroup>
-                        <InputBlock placeholder="password" type="password" />
+                        <Input placeholder="password" type="password" block />
                     </FormGroup>
                     <FormGroup>
-                        <LoginButton className="success">
+                        <LoginButton className="success" block>
                             <ArrowRightLight style={{ marginRight: '4px', opacity: .33 }} />
                             Войти
                         </LoginButton>

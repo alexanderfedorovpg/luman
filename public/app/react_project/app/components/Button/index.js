@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { rem } from '../../utils/style'
+import { rem, ifProp } from '../../utils/style'
+import { font, color, height } from '../../constants/style'
 
-export const Button = styled.button`
+const Button = styled.button`
     display: inline-block;
-    height: 36px;
+    height: ${height};
     border: 1px solid #cccccc;
 
-    font-family: 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-family: ${font.helvetica};
     font-size: ${rem(14)};
-    line-height: 36px;
+    line-height: ${height};
     font-weight: 700;
     color: #333333;
 
@@ -24,7 +25,7 @@ export const Button = styled.button`
     &.success {
 
         &:not([disabled]):hover {
-            background-color: #390;
+            background-color: ${color.success};
         }
 
     }
@@ -34,7 +35,7 @@ export const Button = styled.button`
         color: #666666;
 
         &:not([disabled]):hover {
-            background-color: #c00;
+            background-color: ${color.danger};
         }
 
     }
@@ -42,7 +43,7 @@ export const Button = styled.button`
     &.primary {
 
         &:not([disabled]):hover {
-            background-color: #369;
+            background-color: ${color.primary};
         }
 
     }
@@ -54,34 +55,37 @@ export const Button = styled.button`
     i.icon {
         margin-right: 6px;
     }
-`
 
-export const ButtonBlock = styled(Button)`
-    display: block;
-    width: 100%;
-`
+    ${ifProp('block')`
+        display: block;
+        width: 100%;
+    `}
 
-export const ButtonMd = styled(Button)`
-    width: 214px;
-`
+    ${ifProp('md')`
+        width: 214px;
+    `}
 
-export const ButtonXs = styled(Button)`
-    padding-left: ${rem(9)};
-    padding-right: ${rem(9)};
-    &:not([disabled]):hover,
-    &:not([disabled]):active {
+    ${ifProp('xs')`
+        padding-left: ${rem(9)};
+        padding-right: ${rem(9)};
+        &:not([disabled]):hover,
+        &:not([disabled]):active {
 
-        &.btn-success {
-            border-color: #390;
+            &.success {
+                border-color: ${color.success};
+            }
+
+            &.danger {
+                border-color: ${color.danger};
+            }
+
+            &.primary {
+                border-color: ${color.primary};
+            }
+
         }
+    `}
 
-        &.btn-danger {
-            border-color: #c00;
-        }
-
-        &.btn-primary {
-            border-color: #369;
-        }
-
-    }
 `
+
+export default Button
