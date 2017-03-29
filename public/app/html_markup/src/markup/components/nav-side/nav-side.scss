@@ -1,5 +1,6 @@
 .nav-side {
     position: fixed;
+    z-index: 12;
     top: 0;
     bottom: 0;
     left: 0;
@@ -8,6 +9,8 @@
 
     background-color: #000000;
 
+    transition: all 0.4s ease;
+
     &__item {
         position: relative;
 
@@ -15,6 +18,8 @@
         align-items: center;
         justify-content: center;
         height: 60px;
+
+        text-decoration: none;
 
         border-bottom: 1px solid #000;
 
@@ -27,11 +32,30 @@
         &.is-active,
         &:hover {
             background-color: #2e2e2e;
+
+            .nav-side__name {
+                color: #fff;
+            }
+
         }
     }
 
     &__item.logo {
         background-color: #000000;
+    }
+
+    .icon-logo-light {
+        display: none;
+    }
+
+    &__name {
+        display: none;
+
+        font-family: $opensans;
+        font-size: 13px;
+        font-weight: 400;
+        color: #999999;
+        text-transform: uppercase;
     }
 
     .badge {
@@ -40,4 +64,51 @@
         right: 13px;
     }
 
+    // раскрытая навигация
+    &.is-active {
+        width: 251px;
+
+        transition: all 0.4s ease;
+
+        .nav-side__item {
+            justify-content: flex-start;
+            padding-left: $pad;
+        }
+
+        .nav-side__name {
+            display: block;
+            margin-left: 13px;
+        }
+
+        .badge {
+            top: 14px;
+            right: 22px;
+        }
+
+        .icon-logo {
+            display: none;
+        }
+
+        .icon-logo-light {
+            display: block;
+        }
+
+    }
+
+}
+
+// .is-open-nav {
+//     overflow-x: hidden;
+
+// }
+.is-moved-content {
+    left: 180px;
+
+    transition: all 0.4s ease;
+}
+.is-moved-header {
+    right: -180px;
+    left: 180px;
+
+    transition: all 0.4s ease;
 }

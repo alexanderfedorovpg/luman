@@ -47,6 +47,10 @@
         @include bg($logo);
     }
 
+    &-logo-light {
+        @include bg($logo-light);
+    }
+
     &-feed {
         @include bg($feed);
     }

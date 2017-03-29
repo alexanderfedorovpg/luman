@@ -5,21 +5,22 @@ block vars
 
 block content
     // Контент здесь
-    +b.header-bot
-        +b.header-l
-            +b.FORM.form-feed(action='' method='POST')
-                .form-horizontal
-                    +e.input.input-icon
-                        input.input.input-block#ko4(type='text' placeholder='Ключевые слова')
-                        +icon({ icon: 'search', class: 'search' }) 
-                    +e.input.input-icon
-                        input.input.input-block#ko4(type='text' placeholder='Агенство')
-                        +icon({ icon: 'search', class: 'search' })
-                    button.btn.btn-xs.btn-success ОК
-        +b.header-r 
-            a.header-link(href=jv0)
-                span ?
-                | справка
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                +b.FORM.form-feed(action='' method='POST')
+                    .form-horizontal
+                        +e.input.input-icon
+                            input.input.input-block#ko4(type='text' placeholder='Ключевые слова')
+                            +icon({ icon: 'search', class: 'search' }) 
+                        +e.input.input-icon
+                            input.input.input-block#ko4(type='text' placeholder='Агенство')
+                            +icon({ icon: 'search', class: 'search' })
+                        button.btn.btn-xs.btn-success ОК
+            +b.header-r 
+                a.header-link(href=jv0)
+                    span ?
+                    | справка
     .content-wrap
         .content-l
             +news-list()

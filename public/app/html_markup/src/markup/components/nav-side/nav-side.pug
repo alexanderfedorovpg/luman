@@ -4,40 +4,41 @@ mixin nav-side(data)
             +e.A.item.logo(href=jv0)
                 +e.pic
                     i.icon.icon-logo
+                    i.icon.icon-logo-light
             +e.A.item.is-active(href=jv0)
                 +e.pic
                     i.icon.icon-feed
-                //- Выбор из ленты
+                +e.SPAN.name Лента
 
             +e.A.item(href=jv0)
                 +e.pic
                     i.icon.icon-view
-                //- Просмотр выпускающим
+                +e.SPAN.name Задания
 
             +e.A.item(href=jv0)
                 +e.pic
                     i.icon.icon-draft
-                //- В работе
+                +e.SPAN.name В работе
 
             +e.A.item(href=jv0)
                 +e.pic
                     i.icon.icon-ready
                 .badge.badge-success 8
-                //- Готовые
+                +e.SPAN.name Готово
 
             +e.A.item(href=jv0)
                 +e.pic
                     i.icon.icon-main
-                //- Главная
+                +e.SPAN.name Главная страница
 
             +e.A.item(href=jv0)
                 +e.pic
                     i.icon.icon-tv
                 .badge.badge-success 2
-                //- Программы
+                +e.SPAN.name Программы
 
             +e.A.item(href=jv0)
                 +e.pic
                     i.icon.icon-live
                 .badge.badge-danger off
-                //-  Прямой off
+                +e.SPAN.name Прямой эфир

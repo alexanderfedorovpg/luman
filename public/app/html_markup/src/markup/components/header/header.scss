@@ -3,9 +3,14 @@
     z-index: 9;
     top: 0;
     right: 0;
-    left: 67px;
+    left: 0;
 
     height: 60px;
+    padding-left: 67px;
+
+    background-color: #131e27;
+
+    transition: all 0.4s ease;
 
     &-top,
     &-bot {
@@ -16,17 +21,10 @@
         padding-right: $pad;
         padding-left: $pad;
 
-        background-color: #131e27;
     }
 
-    &-bot {
-        position: fixed;
-        z-index: 9;
+    &-off {
         top: 60px;
-        right: 0;
-        left: 67px;
-
-        height: 60px;
 
         background-color: #f0f0f0;
     }

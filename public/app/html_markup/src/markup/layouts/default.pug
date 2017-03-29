@@ -25,14 +25,13 @@ html(lang='ru')
 
     body
 
+        +nav-side()
+
         +header()
             +b.header-bot
                 +b.header-l
 
                 +b.header-r
-
-
-        +nav-side()
 
         if pageSettings.contentWrap
             .content
@@ -40,6 +39,6 @@ html(lang='ru')
         else
             block content
 
-        //- +footer()
+            //- +footer()
 
         script(src='%=static=%js/main%=hash=%%=min=%.js')
