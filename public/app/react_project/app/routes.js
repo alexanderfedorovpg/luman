@@ -5,42 +5,62 @@
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 
 const errorLoading = (err) => {
-  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
+    console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
 };
 
 const loadModule = (cb) => (componentModule) => {
-  cb(null, componentModule.default);
+    cb(null, componentModule.default);
 };
 
 export default function createRoutes(store) {
-  // Create reusable async injectors using getAsyncInjectors factory
-  const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
+    // Create reusable async injectors using getAsyncInjectors factory
+    const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
-  return [
-    {
-      path: '/',
-      name: 'home',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('components/Login'),
-        ]);
+    return [
+        {
+            path: '/login',
+            name: 'login',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('components/Login'),
+                ]);
 
-        const renderRoute = loadModule(cb);
+                const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
-          renderRoute(component);
-        });
+                importModules.then(([component]) => {
+                    renderRoute(component);
+                });
 
-        importModules.catch(errorLoading);
-      },
-    }, {
-      path: '*',
-      name: 'notfound',
-      getComponent(nextState, cb) {
-        import('containers/NotFoundPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      },
-    },
-  ];
+                importModules.catch(errorLoading);
+            },
+        },
+        {
+            path: '/feed',
+            name: 'feed',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('components/Feed'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([component]) => {
+                    document.title = 'Лента'
+
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
+        },
+        {
+            path: '*',
+            name: 'notfound',
+            getComponent(nextState, cb) {
+                import('containers/NotFoundPage')
+                    .then(loadModule(cb))
+                    .catch(errorLoading);
+            },
+        },
+    ];
 }
