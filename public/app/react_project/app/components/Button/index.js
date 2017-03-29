@@ -3,6 +3,27 @@ import styled from 'styled-components'
 import { rem, ifProp } from '../../utils/style'
 import { font, color, height } from '../../constants/style'
 
+const xsStyle = `
+    padding-left: ${rem(9)};
+    padding-right: ${rem(9)};
+    &:not([disabled]):hover,
+    &:not([disabled]):active {
+
+        &.success {
+            border-color: ${color.success};
+        }
+
+        &.danger {
+            border-color: ${color.danger};
+        }
+
+        &.primary {
+            border-color: ${color.primary};
+        }
+
+    }
+`
+
 const Button = styled.button`
     display: inline-block;
     height: ${height};
@@ -65,26 +86,7 @@ const Button = styled.button`
         width: 214px;
     `}
 
-    ${ifProp('xs')`
-        padding-left: ${rem(9)};
-        padding-right: ${rem(9)};
-        &:not([disabled]):hover,
-        &:not([disabled]):active {
-
-            &.success {
-                border-color: ${color.success};
-            }
-
-            &.danger {
-                border-color: ${color.danger};
-            }
-
-            &.primary {
-                border-color: ${color.primary};
-            }
-
-        }
-    `}
+    ${ifProp('xs')(xsStyle)}
 
 `
 

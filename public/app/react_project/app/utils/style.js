@@ -13,8 +13,13 @@ export const below = (width, orientation = 'width') => {
     `
 }
 
-export const ifProp = propName => {
+export const ifProp = propNames => {
+    let names = Array.isArray(propNames) ? propNames : [propNames]
     return content => {
-        return props => props[propName] ? content : ''
+        return props => {
+            return names.find(name => !props[name])
+                ? ''
+                : content
+        }
     }
 }

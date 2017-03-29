@@ -14,21 +14,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Root = styled.div`
-    height: 100%
-`
+import Root from '../../components/Root'
+import Header from '../../components/Header'
+import NavSide from '../../components/NavSide'
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    children: React.PropTypes.node,
-  };
+    static propTypes = {
+        children: React.PropTypes.node,
+    };
 
-  render() {
-    return (
-      <Root>
-        {React.Children.toArray(this.props.children)}
-      </Root>
-    );
-  }
+    render() {
+        return (
+            <Root>
+                <Header />
+                <NavSide />
+                {React.Children.toArray(this.props.children)}
+            </Root>
+        );
+    }
 }

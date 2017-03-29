@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { rem, below } from '../../utils/style'
 import { color } from '../../constants/style'
 
-import Input from '../Input'
+import { Input } from '../Form'
 import Button from '../Button'
-import { ArrowRightLight } from '../SvgIcons'
+import { ArrowRightLight } from '../Icon'
 
 import bgImage from './login-bg.png'
 import pic from './login-pic.png'
