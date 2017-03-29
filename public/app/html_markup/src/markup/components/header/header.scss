@@ -23,14 +23,26 @@
 
     }
 
+    &-top {
+        .header-l {
+            flex-grow: 1;
+        }
+    }
+
+    &-bot {
+        .header-r {
+            flex-grow: 1;
+        }
+    }
+
     &-off {
         top: 60px;
-
+        
         background-color: #f0f0f0;
+
     }
 
     &-l {
-        flex-grow: 1;
         padding-right: 2px;
     }
 
