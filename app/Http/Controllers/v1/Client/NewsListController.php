@@ -78,9 +78,9 @@ class NewsListController extends ApiController
         }
 
         $news = $news->get();
-        return $this->respond([
-            'data' => $this->newsListTransformer->transformCollection($news->toArray())
-        ]);
+        return $this->respond(
+            $this->newsListTransformer->transformCollection($news->toArray())
+        );
     }
 
     /**
@@ -95,9 +95,11 @@ class NewsListController extends ApiController
         if (!$news) {
             return $this->respondNotFound();
         }
-        return $this->respond([
-            'data' => $this->newsListTransformer->transform($news->toArray())
-        ]);
+        $newsArray = $news->toArray();
+        $comments = $news->comments()->published()->get();
+        return $this->respond(
+            $this->newsListTransformer->transformOneNews($newsArray, $comments)
+        );
     }
 
     /**
@@ -113,8 +115,8 @@ class NewsListController extends ApiController
         if ($news) {
             $newsRelated = $news->newsRelated()->get()->toArray();
         }
-        return $this->respond([
-            'data' => $this->newsListTransformer->transformCollection($newsRelated)
-        ]);
+        return $this->respond(
+            $this->newsListTransformer->transformCollection($newsRelated)
+        );
     }
 }

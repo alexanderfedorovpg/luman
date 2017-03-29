@@ -39,6 +39,16 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     /**
+     * Возвращает связь с комментарими
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\NewsComments');
+    }
+
+    /**
      * Возвращает связь связонных новостей
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
