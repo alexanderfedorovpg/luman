@@ -78,7 +78,9 @@ class NewsListController extends ApiController
         }
 
         $news = $news->get();
-        return $this->respond(['data' => $this->newsListTransformer->transformCollection($news->toArray())]);
+        return $this->respond([
+            'data' => $this->newsListTransformer->transformCollection($news->toArray())
+        ]);
     }
 
     /**
@@ -93,7 +95,9 @@ class NewsListController extends ApiController
         if (!$news) {
             return $this->respondNotFound();
         }
-        return $this->respond(['data' => $this->newsListTransformer->transform($news->toArray())]);
+        return $this->respond([
+            'data' => $this->newsListTransformer->transform($news->toArray())
+        ]);
     }
 
     /**
@@ -104,6 +108,13 @@ class NewsListController extends ApiController
      */
     public function getRelated($id)
     {
-
+        $news = News::whereId($id)->published()->first();
+        $newsRelated = [];
+        if ($news) {
+            $newsRelated = $news->newsRelated()->get()->toArray();
+        }
+        return $this->respond([
+            'data' => $this->newsListTransformer->transformCollection($newsRelated)
+        ]);
     }
 }
