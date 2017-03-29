@@ -20,7 +20,7 @@ html, body {
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .row {
@@ -32,8 +32,9 @@ body {
     left: 0;
     // padding-left: $pad;
     padding-right: $pad;
-    margin-top: 138px;
+    margin-top: 60px;
     margin-left: 67px;
+    padding-top: 78px;
 
     transition: all 0.4s ease;
 
