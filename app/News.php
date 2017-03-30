@@ -68,8 +68,10 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
     public function scopeSubstring($query, array $strings)
     {
         foreach ($strings as $string) {
-            $query->orWhere('title', 'like', "%{$string}%")
-                ->orWhere('tags', 'like', "%{$string}%");
+            $query->where(function ($query) use ($string) {
+                $query->orWhere('title', 'like', "%{$string}%")
+                    ->orWhere('tags', 'like', "%{$string}%");
+            });
         }
         return $query;
     }
