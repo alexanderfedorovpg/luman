@@ -17,11 +17,11 @@ class CreateNewsFeedTable extends Migration
             $table->increments('id');
             $table->string('header');
             $table->binary('body');
-            $table->string('type');
             $table->string('period');
             $table->string('anons_create_dt');
             $table->string('anons_event_dt');
             $table->string('source_feed');
+            $table->string('tags');
         }); 
     }
 
