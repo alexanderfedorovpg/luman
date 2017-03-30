@@ -17,6 +17,10 @@ $app->group(['prefix' => 'client/api/v1', 'namespace'=>'\App\Http\Controllers\v1
     $group->get('/news/{id}/related','NewsListController@getRelated');
 });
 
+$app->group(['prefix' => 'cms/api/v1', 'namespace'=>'\App\Http\Controllers\v1\Cms'], function ($group) {
+    $group->post('/auth/login','AuthController@login');
+});
+
 $app->group(['prefix' => 'cms/api/v1'], function ($group)   {
     return $group->version();
 });
