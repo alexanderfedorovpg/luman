@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Hamburger as HamburgerIcon, Logout as LogoutIcon } from './../Icon'
-import { rem } from './../../utils/style'
+import Icon from './../Icon'
+import { rem, ifProp } from './../../utils/style'
 import { padding, font } from './../../constants/style'
 
 const Wrapper = styled.header`
@@ -10,9 +10,17 @@ const Wrapper = styled.header`
     z-index: 9;
     top: 0;
     right: 0;
-    left: 67px;
+    left: 0;
+    padding-left: 67px;
 
     height: 60px;
+
+    transition: all 0.4s ease;
+
+    ${ifProp('moved')`
+        right: -180px;
+        left: 180px;
+    `}
 `
 
 const Top = styled.div`
@@ -29,6 +37,30 @@ const Top = styled.div`
 export const Left = styled.div`
     flex-grow: 1;
     padding-right: 2px;
+`
+
+export const Bot = styled.div`
+    position: fixed;
+    z-index: 9;
+    top: 60px;
+    right: 0;
+    left: 67px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding-right: ${padding};
+    padding-left: ${padding};
+
+    background-color: #f0f0f0;
+
+    transition: all 0.4s ease;
+
+    ${ifProp('moved')`
+        right: -180px;
+        left: 180px;
+    `}
 `
 
 const Hamburger = styled.button`
@@ -139,14 +171,15 @@ export const Link = styled.a`
 
 `
 
-function Header() {
+function Header({ moved, onToggle }) {
+
     return (
-        <Wrapper>
+        <Wrapper moved={moved}>
             <Top>
                 <Left>
                     <div>
-                        <Hamburger>
-                            <HamburgerIcon />
+                        <Hamburger onClick={onToggle}>
+                            <Icon type="hamburger" />
                         </Hamburger>
                         <Time datetime="2017-04-02T16:35">5 января 2017 16:35</Time>
                     </div>
@@ -170,7 +203,7 @@ function Header() {
                             </UserName>
                         </User>
                         <Logout href="#">
-                            <LogoutIcon />
+                            <Icon type="logout" />
                         </Logout>
                     </Action>
                 </Right>

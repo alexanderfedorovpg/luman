@@ -23,3 +23,13 @@ export const ifProp = propNames => {
         }
     }
 }
+
+export const equalProp = (propName, value) => {
+    return content => {
+        return props => {
+            return props[propName] === value
+                ? content
+                : ''
+        }
+    }
+}

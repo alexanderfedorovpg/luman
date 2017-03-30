@@ -36,11 +36,6 @@ injectGlobal`
         margin: 0;
     }
 
-    #app {
-        height: 100%
-    }
-
-
     .icon {
         display: inline-block;
         vertical-align: middle;
