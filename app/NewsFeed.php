@@ -22,11 +22,11 @@ class NewsFeed extends Model
     protected $fillable = [
         'header',
         'body',
-        'type',
         'period',
         'anons_create_dt',
         'anons_event_dt',
         'source_feed',
+        'tags',
     ];
 
 }
