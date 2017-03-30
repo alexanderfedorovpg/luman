@@ -24,7 +24,8 @@
 				array(
 					'type_event'  => $type_event,
 					'user_id'     => $user_id,
-					'description' => $description
+					'description' => $description,
+					'created_at'   => time(),
 				)
 			);
 
