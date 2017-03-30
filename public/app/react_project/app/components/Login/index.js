@@ -5,13 +5,20 @@ import { color } from '../../constants/style'
 
 import { Input } from '../Form'
 import Button from '../Button'
-import { ArrowRightLight } from '../Icon'
+import Icon from '../Icon'
 
 import bgImage from './login-bg.png'
 import pic from './login-pic.png'
 import rtvi from './rtvi.png'
 
 const Wrap = styled.div`
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 99999999;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,8 +114,8 @@ function Login() {
                         <Input placeholder="password" type="password" block />
                     </FormGroup>
                     <FormGroup>
-                        <LoginButton className="success" block>
-                            <ArrowRightLight style={{ marginRight: '4px', opacity: .33 }} />
+                        <LoginButton success block>
+                            <Icon type="arrow-right-light" style={{ marginTop: '-3px', opacity: .33,  marginRight: '4px', }} />
                             Войти
                         </LoginButton>
                     </FormGroup>
