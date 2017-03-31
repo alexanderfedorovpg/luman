@@ -17,6 +17,7 @@ $app->group(['prefix' => 'client/api/v1', 'namespace'=>'\App\Http\Controllers\v1
     $group->get('/news/{id}/related','NewsListController@getRelated');
 });
 
-$app->group(['prefix' => 'cms/api/v1'], function ($group)   {
+$app->group(['prefix' => 'cms/api/v1', 'namespace'=>'\App\Http\Controllers\v1\cms'], function ($group)   {
+    $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
     return $group->version();
 });
