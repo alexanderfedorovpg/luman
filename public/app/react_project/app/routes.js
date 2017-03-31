@@ -39,14 +39,12 @@ export default function createRoutes(store) {
             name: 'feed',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    import('components/Feed'),
+                    import('containers/FeedPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([component]) => {
-                    document.title = 'Лента'
-
                     renderRoute(component);
                 });
 

@@ -2,12 +2,20 @@ import React from 'react'
 import styled from 'styled-components';
 
 import { padding } from './../../constants/style'
+import { ifProp } from './../../utils/style'
 
 const Content = styled.div`
+    position: relative;
     padding-right: ${padding};
-    margin-top: 138px;
+    padding-top: 138px;
     margin-left: 67px;
+    left: 0;
 
+    transition: all 0.4s ease;
+
+    ${ifProp('moved')`
+        left: 180px
+    `}
 `
 
 export const Wrap = styled.div`

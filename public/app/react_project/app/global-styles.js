@@ -34,12 +34,9 @@ injectGlobal`
 
     body {
         margin: 0;
-    }
 
-    #app {
-        height: 100%
+        overflow-x: hidden;
     }
-
 
     .icon {
         display: inline-block;

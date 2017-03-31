@@ -13,24 +13,54 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Root from '../../components/Root'
 import Header from '../../components/Header'
 import NavSide from '../../components/NavSide'
+import Content from '../../components/Content'
 
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
     static propTypes = {
         children: React.PropTypes.node,
     };
 
     render() {
+        let { menuOpen, toggleMenu, closeMenu } = this.props
+
         return (
-            <Root>
-                <Header />
-                <NavSide />
-                {React.Children.toArray(this.props.children)}
+            <Root onClick={closeMenu}>
+                <Header
+                    moved={menuOpen}
+                    onToggle={toggleMenu} />
+                <NavSide
+                    expanded={menuOpen} />
+                <Content moved={menuOpen}>
+                    {React.Children.toArray(this.props.children)}
+                </Content>
             </Root>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    menuOpen: state.get('app').get('menuOpen')
+})
+
+const mapDispatchToProps = dispatch => ({
+    toggleMenu() {
+        dispatch({
+            type: 'TOGGLE_MENU'
+        })
+    },
+
+    closeMenu() {
+        dispatch({
+            type: 'CLOSE_MENU'
+        })
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

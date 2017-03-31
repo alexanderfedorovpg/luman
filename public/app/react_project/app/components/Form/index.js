@@ -1,8 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+import Select from './Select'
+import Input, { InputIcon, Checkbox } from './Input'
 
 import { ifProp, rem } from './../../utils/style'
 import { color, height, font } from './../../constants/style'
+
+export { Select, Input, InputIcon, Checkbox }
 
 export const Horizontal = styled.div`
     display: flex;
@@ -17,60 +22,41 @@ export const Group = styled.div`
         margin-bottom: 0;
     }
 
-    ${ifProp('md')`
+    ${ifProp('sm')`
         margin-bottom: 15px;
     `}
+
+    ${ifProp('horizontal')`
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    `}
 `
 
-export const Input = styled.input`
-    display: inline-block;
-    height: ${height};
-    padding-left: 11px;
-    padding-right: 11px;
-    border: 1px solid rgba(204, 204, 204, 0.74);
+export const Label = styled.label`
+    display: block;
+    margin-bottom: 5px;
 
-    color: #666666;
-    font-family: ${font.opensans};
-    font-size: 14px;
-    font-weight: 400;
-    line-height: ${height};
+    letter-spacing: -0.1px;
 
-    &.success {
-        border-color: ${color.success};
-    }
+    ${ifProp('bold')(css`
+        color: #333333;
+        font-family: ${font.opensans};
+        font-size: ${rem(13)};
+        font-weight: 700;
+        line-height: ${rem(18)};
+    `)}
 
-    &.error {
-        border-color: ${color.danger};
-    }
+    ${ifProp('light')(css`
+        color: #999999;
+        font-family: ${font.opensans};
+        font-size: 11px;
+        font-weight: 400;
+    `)}
 
-    &[disabled] {
-        color: #cccccc;
-    }
-
-    ${ifProp('md')`
-        width: 247px;
+    ${ifProp('right')`
+        float: right;
     `}
-
-    ${ifProp('block')`
-        display: block;
-        width: 100%;
-    `}
-
-    ${ifProp('icon')`
-        padding-left: 35px;
-    `}
-
-`
-
-export const InputIconWrapper = styled.div`
-    position: relative;
-`
-
-export const IconWrapper = Icon => styled(Icon)`
-    position: absolute;
-    top: 50%;
-    left: 9px;
-    transform: translateY(-50%);
 `
 
 export const Textarea = styled.textarea`
@@ -85,29 +71,18 @@ export const Textarea = styled.textarea`
 
     resize: none;
 
+    ${ifProp('block')`
+        display: block;
+        width: 100%;
+    `}
+
+    ${ifProp('light')(css`
+        min-height: 91px;
+
+        color: #666666;
+        font-family: ${font.opensans};
+        font-size: ${rem(16)};
+        font-weight: 400;
+        line-height: ${rem(21)};
+    `)}
 `
-
-// .form-horizontal {
-// }
-
-// .form-group {
-
-// }
-
-// // input
-// .input {
-
-//     // input with icon
-//     &-icon {
-//         position: relative;
-
-//         input {
-//             padding-left: 35px;
-//         }
-
-//         .icon {
-//         }
-
-//     }
-
-// }
