@@ -1,0 +1,64 @@
+.news-view {
+    position: relative;
+
+    max-width: 536px;
+    padding-top: 27px;
+    padding-right: $pad;
+    padding-bottom: 41px;
+    padding-left: $pad;
+
+    &__header {
+        font-family: $opensans;
+        font-size: rem(14);
+        font-weight: 400;
+        color: #999999;
+    }
+
+    &__title {
+        margin-top: 16px;
+    }
+
+    &__source {
+        margin-left: rem(11);
+
+        color: $cl-primary;
+        text-decoration: none;
+    }
+
+    &__text {
+        font-size: rem(14);
+        line-height: rem(18);
+        color: #666666;
+
+        p {
+            margin-bottom: 19px;
+        }
+
+    }
+
+    &__buttons {
+        display: flex;
+        margin-top: 40px;
+
+        .btn-danger {
+            height: 40px;
+            margin-right: rem(3);
+
+            line-height: 42px;
+        }
+
+        .btn-success {
+            height: 40px;
+
+            line-height: 42px;
+        }
+
+    }
+
+    .icon-delete-lg {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+    }
+
+}

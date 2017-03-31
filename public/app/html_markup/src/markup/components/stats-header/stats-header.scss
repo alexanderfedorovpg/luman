@@ -1,0 +1,55 @@
+// period
+.period {
+    display: flex;
+    align-items: center;
+    margin-left: rem(39);
+    &__link {
+        margin-right: rem(15);
+
+        font-family: $opensans;
+        font-size: rem(16);
+        font-weight: 400;
+
+        color: #000000;
+        text-decoration: none;
+        letter-spacing: -0.2px;
+    }
+
+    &__date {
+        display: flex;
+        align-items: center;
+
+        .input-icon--right {
+            max-width: 117px;
+        }
+
+        .input {
+            padding-left: rem(8);
+        }
+
+        .icon_calendar {
+            opacity: 0.26;
+        }
+
+        span {
+            margin-right: rem(11);
+            margin-left: 9px;
+
+            font-family: $opensans;
+            font-size: rem(14);
+            font-weight: 400;
+            color: #666666;
+        }
+
+    }
+
+    .btn {
+        height: 36px;
+        padding-right: rem(7);
+        padding-left: rem(7);
+        margin-left: 11px;
+
+        line-height: 36px;
+    }
+
+}

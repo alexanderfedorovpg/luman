@@ -1,0 +1,47 @@
+// tabs-nav
+.tabs-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    &__item {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        height: 100%;
+        margin-right: 19px;
+
+        font-family: $opensans;
+        font-size: 16px;
+        font-weight: 400;
+        color: #666666;
+
+        text-decoration: none;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &.is-active,
+        &:hover {
+            font-weight: 600;
+            color: #000000;
+            &:after {
+                content: '';
+
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                left: 0;
+
+                height: 3px;
+
+                background-color: #2a2f38;
+            }
+
+        }
+
+    }
+
+}

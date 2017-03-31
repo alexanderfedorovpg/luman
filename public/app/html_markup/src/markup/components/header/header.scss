@@ -43,6 +43,10 @@
     }
 
     &-l {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
         padding-right: 2px;
     }
 
@@ -50,8 +54,9 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        flex-basis: 42.2%;
-        width: 42.2%;
+        // flex-basis: 42.2%;
+        // width: 42.2%;
+        height: 100%;
         padding-left: 2px;
     }
 
@@ -81,7 +86,7 @@
         }
     
         &__date {
-            margin-right: 7px;
+            margin-right: rem(7);
         }
 
     }
@@ -92,7 +97,6 @@
         justify-content: flex-end;
 
         &__logout {
-            // fill: rgba(0,0,0, 0.59);
             color: rgba(0, 0, 0, 0.59);
         }
     }

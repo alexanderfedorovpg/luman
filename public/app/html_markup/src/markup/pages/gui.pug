@@ -162,3 +162,12 @@ block content
 
         h2 Text elements
         .row
+
+        h2 Tabs Nav
+        .row(style='margin-bottom: 50px; height: 60px')
+            +tabs-nav(tabsNav.stats)
+
+        h2 Status Online or Not
+        .row
+            +status(class='is-active')
+            +status()

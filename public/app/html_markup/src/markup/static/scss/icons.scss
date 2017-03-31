@@ -46,6 +46,31 @@
         }
     }
 
+    &-twitter {
+        @include bg($twitter);
+    }
+
+    &-facebook {
+        @include bg($facebook);
+    }
+
+    // иконки со страницы статистики
+    &-article {
+        @include bg($article);
+    }
+
+    &-video {
+        @include bg($video);
+    }
+
+    &-programms {
+        @include bg($programms);
+    }
+
+    &-summary {
+        @include bg($summary);
+    }
+
     // иконки в левом вертикальном меню
     &-logo {
         @include bg($logo);

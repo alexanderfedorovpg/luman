@@ -1,0 +1,27 @@
+.status {
+
+    display: flex;
+    align-items: center;
+
+    &__item {
+        display: block;
+        width: 8px;
+        height: 8px;
+        margin-right: 3px;
+        
+        border-radius: 50%;
+        background-color: #cdcdcd;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+    }
+
+    &.is-active {
+        .status__item {
+            background-color: $cl-success;
+        }
+    }
+
+}

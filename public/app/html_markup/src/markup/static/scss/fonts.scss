@@ -15,9 +15,9 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 @include font-face('Open Sans', '../fonts/hinted-OpenSans-Bold', 700, normal, $exts: woff woff2);
 
 // font Helvetice Neue
-@include font-face('HelveticaNeue', '../fonts/hinted-HelveticaNeueCyr-Roman', 400, normal, $exts: woff woff2);
-@include font-face('HelveticaNeue', '../fonts/hinted-HelveticaNeueCyr-Light', 300, normal, $exts: woff woff2);
-@include font-face('HelveticaNeue', '../fonts/hinted-HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/HelveticaNeueCyr-Roman', 400, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/HelveticaNeueCyr-Light', 300, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
 
 // font Nexa without Cyrillic
 @include font-face('Nexa', '../fonts/hinted-HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
