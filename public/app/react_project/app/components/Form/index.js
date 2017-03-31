@@ -2,12 +2,12 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import Select from './Select'
-import Input, { InputIcon } from './Input'
+import Input, { InputIcon, Checkbox } from './Input'
 
 import { ifProp, rem } from './../../utils/style'
 import { color, height, font } from './../../constants/style'
 
-export { Select, Input, InputIcon }
+export { Select, Input, InputIcon, Checkbox }
 
 export const Horizontal = styled.div`
     display: flex;
@@ -24,6 +24,12 @@ export const Group = styled.div`
 
     ${ifProp('sm')`
         margin-bottom: 15px;
+    `}
+
+    ${ifProp('horizontal')`
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     `}
 `
 
@@ -69,4 +75,14 @@ export const Textarea = styled.textarea`
         display: block;
         width: 100%;
     `}
+
+    ${ifProp('light')(css`
+        min-height: 91px;
+
+        color: #666666;
+        font-family: ${font.opensans};
+        font-size: ${rem(16)};
+        font-weight: 400;
+        line-height: ${rem(21)};
+    `)}
 `

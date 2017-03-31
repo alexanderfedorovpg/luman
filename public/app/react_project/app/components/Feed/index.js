@@ -1,20 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
+import Header from './Header'
 import { Wrap, Left, Right } from './../Content'
 import News from './../News'
 import Tags from './../Tags'
 import Rating from './../Rating'
-import {
-    Left as HeaderLeft,
-    Right as HeaderRight,
-    Link as HeaderLink,
-    Bot as Header
-} from './../Header'
 import Icon from './../Icon'
 import Button from './../Button'
 import {
-    Horizontal as FormHorizontal,
     Input,
     InputIcon,
     Group,
@@ -23,56 +17,10 @@ import {
     Select
 } from './../Form'
 
-import { padding, font } from './../../constants/style'
-
-const FormInput = styled(InputIcon)`
-    margin-right: 7px;
-
-    &:nth-child(1) {
-        flex: 1;
-        width: 55.182%;
-    }
-
-    &:nth-child(2) {
-        width: 37.192%;
-    }
-`
-
-// const SearchIcon = IconWrapper(Search)
-
-const FormButton = styled(Button)`
-    opacity: 0.5;
-    color: #666666;
-    font-family: ${font.opensans};
-    font-size: 13px;
-    line-height: 36px;
-    font-weight: 700;
-    &:hover {
-        color: #fff;
-        opacity: 1;
-    }
-`
-
 function Feed({ news, moved, users }) {
     return (
         <div>
-            <Header moved={moved}>
-                <HeaderLeft>
-                    <form>
-                        <FormHorizontal>
-                            <FormInput placeholder="Ключевые слова" block icon="search" />
-                            <FormInput placeholder="Агенство" block icon="search" />
-                            <FormButton success xs>OK</FormButton>
-                        </FormHorizontal>
-                    </form>
-                </HeaderLeft>
-                <HeaderRight>
-                    <HeaderLink>
-                        <span>?</span>
-                        Справка
-                    </HeaderLink>
-                </HeaderRight>
-            </Header>
+            <Header moved={moved} />
             <Wrap>
                 <Left>
                     <News data={news} />

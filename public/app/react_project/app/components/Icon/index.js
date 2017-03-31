@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { ifProp, equalProp } from './../../utils/style'
 import SvgIcons from './svg.js'
 
-let icons = loadIcons()
+export const icons = loadIcons()
 
 const Icon = styled.i`
     display: inline-block;
@@ -36,6 +36,36 @@ const Icon = styled.i`
         background-image: url(${icons['delete-bold'].data});
         width: ${icons['delete-bold'].width}px;
         height: ${icons['delete-bold'].height}px;
+    `)}
+
+    ${equalProp('type', 'delete-lg')(css`
+        background-image: url(${icons['delete-lg'].data});
+        width: ${icons['delete-lg'].width}px;
+        height: ${icons['delete-lg'].height}px;
+    `)}
+
+    ${equalProp('type', 'checkbox')(css`
+        background-image: url(${icons['checkbox'].data});
+        width: ${icons['checkbox'].width}px;
+        height: ${icons['checkbox'].height}px;
+    `)}
+
+    ${equalProp('type', 'checkbox-hover')(css`
+        background-image: url(${icons['checkbox-hover'].data});
+        width: ${icons['checkbox-hover'].width}px;
+        height: ${icons['checkbox-hover'].height}px;
+    `)}
+
+    ${equalProp('type', 'checkbox-active')(css`
+        background-image: url(${icons['checkbox-active'].data});
+        width: ${icons['checkbox-active'].width}px;
+        height: ${icons['checkbox-active'].height}px;
+    `)}
+
+    ${equalProp('type', 'checkbox-disabled')(css`
+        background-image: url(${icons['checkbox-disabled'].data});
+        width: ${icons['checkbox-disabled'].width}px;
+        height: ${icons['checkbox-disabled'].height}px;
     `)}
 
     ${equalProp('type', 'go-right')(css`
