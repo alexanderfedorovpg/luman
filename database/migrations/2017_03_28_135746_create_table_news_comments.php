@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableNewsComments extends Migration
+class CreateNewsFeedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,21 @@ class CreateTableNewsComments extends Migration
      */
     public function up()
     {
-        Schema::create('news_comments', function (Blueprint $table) {
+        Schema::create('news_feed', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('news_id')->unsigned();
-            $table->integer('editor_id')->unsigned();
-            $table->dateTime('publish_date')->nullable();
-            $table->boolean('is_publish')->nullable();
+            $table->string('header');
             $table->binary('body');
+            $table->string('period');
+            $table->string('anons_create_dt');
+            $table->string('anons_event_dt');
+            $table->string('source_feed');
+            $table->string('tags');
+            $table->string('crc32');
+            $table->string('hidden')->default('0');
+            $table->unique(['header', 'crc32', 'anons_create_dt', 'tags']);
             $table->timestamps();
-
-            $table->foreign('news_id')->references('id')->on('users');
-            $table->foreign('editor_id')->references('id')->on('users');
-        });
+        }); 
     }
-
     /**
      * Reverse the migrations.
      *
@@ -34,6 +35,6 @@ class CreateTableNewsComments extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_comments');
+        Schema::drop('news_feed');
     }
 }
