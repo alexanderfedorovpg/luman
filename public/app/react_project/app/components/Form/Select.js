@@ -6,6 +6,7 @@ import { InputIcon } from './Input'
 import Icon from './../Icon'
 
 import { ifProp } from './../../utils/style'
+import { font } from './../../constants/style'
 
 const Root = styled.div`
     position: relative;
@@ -37,11 +38,11 @@ const Item = styled.div`
     &:hover {
         background-color: #f0f0f0;
 
-        .select-item__cnt span {
+        span {
             display: block;
         }
 
-        .select-item__cnt p {
+        p {
             color: #333333;
             font-weight: 600;
         }
@@ -70,7 +71,7 @@ const Text = styled.div`
     p {
         margin: 0;
 
-        font-family: $opensans;
+        font-family: ${font.opensans};
         font-size: 14px;
         color: #666666;
         font-weight: 400;
@@ -80,7 +81,7 @@ const Text = styled.div`
         display: none;
 
         color: #999999;
-        font-family: $opensans;
+        font-family: ${font.opensans};
         font-size: 12px;
         font-weight: 300;
     }

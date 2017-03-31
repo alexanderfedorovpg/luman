@@ -1,143 +1,126 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { ifProp, equalProp } from './../../utils/style'
-import sprite from './img/96dpi/spritem0tpnpb2ho6g7yn6zuxr.png'
 import SvgIcons from './svg.js'
+
+let icons = loadIcons()
 
 const Icon = styled.i`
     display: inline-block;
     vertical-align: middle;
 
-    background-image: url(${sprite});
-    background-size: 149px, 124px;
-    background-repeat: no-repeat;
 
-    ${equalProp('type', 'dropdown')`
-        background-position: -133px -62px;
-        width: 13px;
-        height: 8px;
-    `}
+    ${equalProp('type', 'dropdown')(css`
+        background-image: url(${icons['dropdown-arrow'].data});
+        width: ${icons['dropdown-arrow'].width}px;
+        height: ${icons['dropdown-arrow'].height}px;
+    `)}
 
-    ${equalProp('type', 'okay')`
-        background-position: -133px -50px;
-        width: 14px;
-        height: 8px;
-    `}
+    ${equalProp('type', 'okay')(css`
+        background-image: url(${icons.okay.data});
+        width: ${icons.okay.width}px;
+        height: ${icons.okay.height}px;
+    `)}
 
-    ${equalProp('type', 'delete')`
-        background-position: -133px -35px;
-        width: 11px;
-        height: 11px;
+    ${equalProp('type', 'delete')(css`
+        background-image: url(${icons.delete.data});
+        width: ${icons.delete.width}px;
+        height: ${icons.delete.height}px;
 
         &:hover {
-            background-position: -133px -20px;
+            background-image: url(${icons['delete-bold'].data});
         }
-    `}
+    `)}
 
-    ${equalProp('type', 'delete-reverse')`
-        background-position: -133px -20px;
-        width: 11px;
-        height: 11px;
-    `}
+    ${equalProp('type', 'delete-reverse')(css`
+        background-image: url(${icons['delete-bold'].data});
+        width: ${icons['delete-bold'].width}px;
+        height: ${icons['delete-bold'].height}px;
+    `)}
 
-    ${equalProp('type', 'do-right')`
-        background-position: -50px -82px;
-        width: 21px;
-        height: 21px;
+    ${equalProp('type', 'go-right')(css`
+        background-image: url(${icons['go-right'].data});
+        width: ${icons['go-right'].width}px;
+        height: ${icons['go-right'].height}px;
 
         &:hover {
-            background-position: -25px -82px;
+            background-image: url(${icons['go-right-active'].data});
         }
-    `}
+    `)}
 
-    ${equalProp('type', 'logo')`
-        background-position: 0px 0px;
-        width: 25px;
-        height: 25px;
-    `}
+    ${equalProp('type', 'logo')(css`
+        background-image: url(${icons.logo.data});
+        width: ${icons.logo.width}px;
+        height: ${icons.logo.height}px;
+    `)}
 
-    ${equalProp('type', 'logo-light')`
-          background-position: 0px 0px;
-          width: 65px;
-          height: 18px;
-    `}
+    ${equalProp('type', 'logo-light')(css`
+        background-image: url(${icons['logo-light'].data});
+        width: ${icons['logo-light'].width}px;
+        height: ${icons['logo-light'].height}px;
+    `)}
 
-    ${equalProp('type', 'feed')`
-        background-position: -83px -26px;
-        width: 21px;
-        height: 22px;
-    `}
+    ${equalProp('type', 'feed')(css`
+        background-image: url(${icons.feed.data});
+        width: ${icons.feed.width}px;
+        height: ${icons.feed.height}px;
+    `)}
 
-    ${equalProp('type', 'view')`
-        background-position: -52px -29px;
-        width: 22px;
-        height: 22px;
-    `}
+    ${equalProp('type', 'view')(css`
+        background-image: url(${icons.view.data});
+        width: ${icons.view.width}px;
+        height: ${icons.view.height}px;
+    `)}
 
-    ${equalProp('type', 'draft')`
-        background-position: 0px -82px;
-        width: 21px;
-        height: 22px;
-    `}
+    ${equalProp('type', 'draft')(css`
+        background-image: url(${icons.draft.data});
+        width: ${icons.draft.width}px;
+        height: ${icons.draft.height}px;
+    `)}
 
-    ${equalProp('type', 'ready')`
-        background-position: -51px -56px;
-        width: 21px;
-        height: 22px;
-    `}
+    ${equalProp('type', 'ready')(css`
+        background-image: url(${icons.ready.data});
+        width: ${icons.ready.width}px;
+        height: ${icons.ready.height}px;
+    `)}
 
-    ${equalProp('type', 'main')`
-        background-position: -75px -82px;
-        width: 21px;
-        height: 21px;
-    `}
+    ${equalProp('type', 'main')(css`
+        background-image: url(${icons.main.data});
+        width: ${icons.main.width}px;
+        height: ${icons.main.height}px;
+    `)}
 
-    ${equalProp('type', 'tv')`
-        background-position: -29px 0px;
-        width: 23px;
-        height: 24px;
-    `}
+    ${equalProp('type', 'tv')(css`
+        background-image: url(${icons.tv.data});
+        width: ${icons.tv.width}px;
+        height: ${icons.tv.height}px;
+    `)}
 
-    ${equalProp('type', 'live')`
-        background-position: 0px -29px;
-        width: 22px;
-        height: 23px;
-    `}
+    ${equalProp('type', 'live')(css`
+        background-image: url(${icons.live.data});
+        width: ${icons.live.width}px;
+        height: ${icons.live.height}px;
+    `)}
 
-    ${equalProp('type', 'tass')`
-        background-position: -80px -108px;
-        width: 16px;
-        height: 16px;
-    `}
+    ${equalProp('type', 'tass')(css`
+        background-image: url(${icons.tass.data});
+        width: ${icons.tass.width}px;
+        height: ${icons.tass.height}px;
+    `)}
 
-    ${ifProp(['active', 'feed'])`
-        background-position: -83px 0px;
-    `}
-
-    ${ifProp(['active', 'view'])`
-        background-position: 0px -56px;
-    `}
-
-    ${ifProp(['active', 'draft'])`
-        background-position: -26px -56px;
-    `}
-
-    ${ifProp(['active', 'ready'])`
-        background-position: -83px -52px;
-    `}
-
-    ${ifProp(['active', 'main'])`
-        background-position: -108px 0px;
-    `}
-
-    ${ifProp(['active', 'tv'])`
-        background-position: -56px 0px;
-    `}
-
-    ${ifProp(['active', 'live'])`
-        background-position: -26px -29px;
-    `}
-
+    ${props => {
+        return props.active
+            ? css`
+                ${props.type === 'feed' && `background-image: url(${icons['feed-active'].data});`}
+                ${props.type === 'view' && `background-image: url(${icons['view-active'].data});`}
+                ${props.type === 'draft' && `background-image: url(${icons['draft-active'].data});`}
+                ${props.type === 'ready' && `background-image: url(${icons['ready-active'].data});`}
+                ${props.type === 'main' && `background-image: url(${icons['main-active'].data});`}
+                ${props.type === 'tv' && `background-image: url(${icons['tv-active'].data});`}
+                ${props.type === 'live' && `background-image: url(${icons['live-active'].data});`}
+            `
+            : ''
+    }}
 `
 
 const Render = props => {
@@ -162,7 +145,6 @@ const Render = props => {
             return <SvgIcons.Search {...props} />
 
         default:
-            // console.log(req(`./${props.type}.png`))
             return <Icon {...props} />
     }
 }
@@ -172,3 +154,31 @@ Render.PropTypes = {
 }
 
 export default Render
+
+/////////////
+
+function getPngDimensions(base64) {
+  let header = base64.slice(0, 50)
+  let uint8 = Uint8Array.from(atob(header), c => c.charCodeAt(0))
+  let dataView = new DataView(uint8.buffer, 0, 28)
+
+  return {
+    width: dataView.getInt32(16),
+    height: dataView.getInt32(20)
+  }
+}
+
+function loadIcons() {
+    let req = require.context('./img/96dpi', true, /\.png$/)
+
+    return req.keys().map(key => {
+        let data = req(key)
+        let name = key.replace(/\.png$/g, '').replace(/^\.\//g, '')
+        let dimensions = getPngDimensions(data.split(',')[1])
+        return {
+            name,
+            data,
+            ...dimensions
+        }
+    }).reduce((acc, item) => ({ [item.name]: item, ...acc }), {})
+}

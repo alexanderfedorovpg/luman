@@ -84,8 +84,9 @@ const NavBadge = styled(Badge)`
 `
 
 function NavSide({ expanded }) {
+
     return (
-        <Wrapper expanded={expanded}>
+        <Wrapper expanded={expanded} onClick={e => e.stopPropagation()}>
             <NavItem href="#">
                 {expanded
                     ? <Icon type="logo-light" />
@@ -143,34 +144,3 @@ function NavSide({ expanded }) {
 }
 
 export default NavSide
-
-
-// is-active {
-//         width: 251px;
-
-//         transition: all 0.4s ease;
-
-//         .nav-side__item {
-//             justify-content: flex-start;
-//             padding-left: $pad;
-//         }
-
-//         .nav-side__name {
-//             display: block;
-//             margin-left: 13px;
-//         }
-
-//         .badge {
-//             top: 14px;
-//             right: 22px;
-//         }
-
-//         .icon-logo {
-//             display: none;
-//         }
-
-//         .icon-logo-light {
-//             display: block;
-//         }
-
-//     }

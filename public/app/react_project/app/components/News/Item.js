@@ -105,13 +105,13 @@ function Item({ data }) {
             <Wrapper>
                 <ItemIcon type="tass" />
                 <Title className={titleClassName}>
-                    {data.title}
+                    {data.get('header')}
                 </Title>
                 <Ignore message="Игнорировать" eventType="hover" direction="bottom">
                     <Icon type="delete" />
                 </Ignore>
                 <Work message="Работаем!" eventType="hover" direction="bottom">
-                    <Icon type="do-right" />
+                    <Icon type="go-right" />
                 </Work>
             </Wrapper>
         </Root>

@@ -58,8 +58,8 @@ export const Bot = styled.div`
     transition: all 0.4s ease;
 
     ${ifProp('moved')`
-        right: -180px;
-        left: 180px;
+        right: -251px;
+        left: 251px;
     `}
 `
 
@@ -178,7 +178,10 @@ function Header({ moved, onToggle }) {
             <Top>
                 <Left>
                     <div>
-                        <Hamburger onClick={onToggle}>
+                        <Hamburger onClick={e => {
+                                e.stopPropagation()
+                                onToggle()
+                            }}>
                             <Icon type="hamburger" />
                         </Hamburger>
                         <Time datetime="2017-04-02T16:35">5 января 2017 16:35</Time>

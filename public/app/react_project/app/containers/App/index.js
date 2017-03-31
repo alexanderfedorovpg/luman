@@ -28,14 +28,15 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     };
 
     render() {
-        let { menuOpen, toggleMenu } = this.props
+        let { menuOpen, toggleMenu, closeMenu } = this.props
 
         return (
-            <Root>
+            <Root onClick={closeMenu}>
                 <Header
                     moved={menuOpen}
                     onToggle={toggleMenu} />
-                <NavSide expanded={menuOpen} />
+                <NavSide
+                    expanded={menuOpen} />
                 <Content moved={menuOpen}>
                     {React.Children.toArray(this.props.children)}
                 </Content>
@@ -52,6 +53,12 @@ const mapDispatchToProps = dispatch => ({
     toggleMenu() {
         dispatch({
             type: 'TOGGLE_MENU'
+        })
+    },
+
+    closeMenu() {
+        dispatch({
+            type: 'CLOSE_MENU'
         })
     }
 })

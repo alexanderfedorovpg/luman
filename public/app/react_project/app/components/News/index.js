@@ -8,7 +8,7 @@ function News({ data }) {
         <div>
             {data.map(value => {
                 return (
-                    <Item key={value.id} data={value} />
+                    <Item key={value.get('id')} data={value} />
                 )
             })}
         </div>

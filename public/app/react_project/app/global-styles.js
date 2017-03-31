@@ -34,6 +34,8 @@ injectGlobal`
 
     body {
         margin: 0;
+
+        overflow-x: hidden;
     }
 
     .icon {
