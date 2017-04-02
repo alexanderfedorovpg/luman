@@ -22,6 +22,10 @@ class CreateNewsFeedTable extends Migration
             $table->string('anons_event_dt');
             $table->string('source_feed');
             $table->string('tags');
+            $table->string('crc32');
+            $table->string('hidden')->default('0');
+            $table->unique(['header', 'crc32', 'anons_create_dt', 'tags']);
+            $table->timestamps();
         }); 
     }
 
@@ -34,4 +38,6 @@ class CreateNewsFeedTable extends Migration
     {
         Schema::drop('news_feed');
     }
+
 }
+
