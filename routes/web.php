@@ -24,6 +24,9 @@ $app->group(['prefix' => 'cms/api/v1', 'namespace'=>'\App\Http\Controllers\v1\cm
 
 $app->group(['prefix' => 'cms/api/v1', 'namespace'=>'\App\Http\Controllers\v1\Cms'], function ($group) {
     $group->post('/auth/login','AuthController@login');
+    $group->post('/user/create', 'UserController@create');
+
+    //$group->post('/test','AuthController@test');
 });
 
 $app->group(['prefix' => 'cms/api/v1'], function ($group) {

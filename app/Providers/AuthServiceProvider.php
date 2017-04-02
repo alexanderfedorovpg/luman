@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use App\User;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Http\Response;
+use App\Auth\Rbac;
+use App\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        App::bind('Rbac', function () {
+            return new Rbac();
+        });
     }
 
     /**

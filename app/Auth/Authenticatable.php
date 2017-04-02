@@ -15,14 +15,16 @@ trait Authenticatable
     /**
      * Проверяет логин и пароль
      *
-     * @param string $email Email пользователя
+     * @param string $login Логин пользователя
      * @param string $password Пароль польщователя
      */
-    public static function checkAccessByLogin($email, $password)
+    public static function checkAccessByLogin($login, $password)
     {
-        $user = static::where('email', $email)->first();
-        if ($user && $user->checkAuthPassword($password)) {
-            return $user;
+        $user = static::where('login', $login)->first();
+        if ($user) {
+            if ($user->checkAuthPassword($password)) {
+                return $user;
+            }
         }
 
         return null;
@@ -36,7 +38,26 @@ trait Authenticatable
      */
     public function checkAuthPassword($password)
     {
-        return Hash::check($password, $this->password);
+        $isCorrect = Hash::check($password, $this->password);
+        if (!$isCorrect) {
+            $this->password_err_count += 1;
+            if ($this->isPasswordLimitError()) {
+                $this->enabled = false;
+            }
+        } else {
+            $this->password_err_count = 0;
+        }
+        $this->save();
+
+        return $isCorrect;
+    }
+
+    public function isPasswordLimitError()
+    {
+        if ($this->password_err_count > 2) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -67,6 +88,16 @@ trait Authenticatable
         }
         $this->api_token = $token;
         return $this;
+    }
+
+    /**
+     * Проверяет блокировку пользователя
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return (bool)$this->enabled;
     }
 
 }
