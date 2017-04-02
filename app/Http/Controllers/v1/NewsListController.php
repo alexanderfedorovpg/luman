@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\v1\Client;
+namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\ApiController;
 use App\News;
@@ -19,9 +19,9 @@ class NewsListController extends ApiController
 
     /**
      * NewsListController constructor.
-     * @param \App\Http\Transformers\v1\Client\NewsListTransformer $newsListTransformer
+     * @param \App\Http\Transformers\v1\NewsListTransformer $newsListTransformer
      */
-    public function __construct(\App\Http\Transformers\v1\Client\NewsListTransformer $newsListTransformer)
+    public function __construct(\App\Http\Transformers\v1\NewsListTransformer $newsListTransformer)
     {
         $this->newsListTransformer = $newsListTransformer;
     }
@@ -32,13 +32,6 @@ class NewsListController extends ApiController
      */
     public function get(Request $request)
     {
-
-        /**
-         * пример на будующее
-         */
-//        if (\Auth::user()->cannot('show_public_news')) {
-//            return $this->respondFail403x();
-//        };
 
         $news = News::published();
         $searchString = $request->input('searchString');
@@ -78,6 +71,7 @@ class NewsListController extends ApiController
         }
 
         $news = $news->get();
+
         return $this->respond(
             $this->newsListTransformer->transformCollection($news->toArray())
         );

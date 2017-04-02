@@ -11,13 +11,11 @@
 |
 */
 
-$app->group(['prefix' => 'client/api/v1', 'namespace'=>'\App\Http\Controllers\v1\Client'], function ($group)    {
+
+$app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], function ($group)   {
+    $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
-});
 
-$app->group(['prefix' => 'cms/api/v1', 'namespace'=>'\App\Http\Controllers\v1\cms'], function ($group)   {
-    $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
-    return $group->version();
 });

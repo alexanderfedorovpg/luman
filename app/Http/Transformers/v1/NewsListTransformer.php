@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Transformers\v1\Client;
+namespace App\Http\Transformers\v1;
 
 use App\User;
 use App\Http\Transformers\Transformer;
 
 /**
  * Class NewsListTransformer
- * @package App\Http\Transformers\v1\Client
+ * @package App\Http\Transformers\v1
  */
 class NewsListTransformer extends Transformer
 {

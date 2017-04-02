@@ -1,326 +1,95 @@
 <?php
+/**
+ * Author: Arsen
+ */
 
-namespace App\Http\Controllers\v1\cms;
+namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Transformers\v1\NewsFeedTransformer;
+use App\Http\Transformers\v1\NewsListTransformer;
 use Illuminate\Http\Request;
 use App\NewsFeed;
+use Illuminate\Validation\Validator;
 
 define('DEFAULT_VALUE', '50');
 
 /**
  * Class NewsFeedController
- * @package App\Http\Controllers\v1\cms
+ * @package App\Http\Controllers\v1
  */
-class NewsFeedController extends ApiController {
+class NewsFeedController extends ApiController
+{
+
+    /**
+     * @var \App\Http\Transformers\v1\NewsFeedTransformer
+     */
+    protected $newsFeedTransformer;
+
+    /**
+     * NewsFeedController constructor.
+     * @param \App\Http\Transformers\v1\NewsFeedTransformer $newsFeedTransformer
+     */
+    public function __construct(NewsFeedTransformer $newsFeedTransformer)
+    {
+        $this->newsFeedTransformer = $newsFeedTransformer;
+    }
 
     /**
      * Получить выборку новостей с параметрами
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getNewsFeed(Request $request) {
+    public function getNewsFeed(Request $request)
+    {
 
-       $start = $request->input('start');
-       $limit = $request->input('limit');
-       $viewMode = $request->input('viewMode');
-       $fromDate = $request->input('fromDate');
-       $toDate = $request->input('toDate');
+        $this->validate($request, [
+            'viewMode' => 'in:hidden,all',
+            'fromDate'=>'date|date_format:Y-m-d H:i:s',
+            'toDate'=>'date|date_format:Y-m-d H:i:s',
+        ]);
 
-
-       //если есть старт
-       if ($start !== null and $limit === null) {
-        //если значения поля "от" и "до" пустые
-        if ($toDate === null and $fromDate === null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->paginate(DEFAULT_VALUE);
-          }
-
+        if (isset($viewMode) && $viewMode!==null) {
+            if ($viewMode === 'hidden') {
+                $feed = NewsFeed::viewMode(1);
+            } elseif ($viewMode === 'all') {
+                $feed = NewsFeed::viewMode('all');
+            }
+        } else {
+            $feed = NewsFeed::viewMode(0);
         }
 
-        //если есть дата "до"
-        if ($toDate !== null and $fromDate === null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-
+        $searchString = $request->input('searchString');
+        if ($searchString) {
+            $substrings = explode(',', $searchString);
+            $feed->substring($substrings);
         }
 
-        //если есть дата "от"
-        if ($toDate === null and $fromDate !== null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-
-        }
-
-        //обе даты
-        if ($toDate !== null and $fromDate !== null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate(DEFAULT_VALUE);
-          }
-
-        }
-
-       } 
-
-       //если есть "лимит"
-       elseif($limit !== null and $start === null) {
-
-        //если значения поля "от" и "до" пустые
-        if ($toDate === null and $fromDate === null) {
-
-          if ($viewMode === 'all') {
-          $feed = NewsFeed::paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('hidden', '1')
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('hidden', '0')
-                            ->paginate($limit);
-          }
-          
-        }
-
-        //если есть дата "до"
-        if ($toDate !== null and $fromDate === null) {
-
-          if ($viewMode === 'all') {
-          $feed = NewsFeed::where('anons_create_dt', '<=', $toDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('hidden', '1')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('hidden', '0')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate($limit);
-          }
-
-        }
-
-        //если дата "от"
-        if ($toDate === null and $fromDate !== null) {
-
-          if ($viewMode === 'all') {
-          $feed = NewsFeed::where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('hidden', '1')
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('hidden', '0')
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-
-        }
-
-        //обе даты
-        if ($toDate !== null and $fromDate !== null) {
-
-          if ($viewMode === 'all') {
-          $feed = NewsFeed::where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('hidden', '1')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('hidden', '0')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
+        $tagList = $request->input('tagList');
+        if ($tagList) {
+            $tags = explode(',', $tagList);
+            $feed->tags($tags);
         }
 
 
 
-        
-
-       } 
-
-       //если лимит и старт имеются
-       elseif ($limit !== null and $start !== null) {
-        //если значения поля "от"и "до" пустые
-        if ($toDate === null and $fromDate === null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)->paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->paginate($limit);
-          }
-
-        }
-
-        //если есть дата "до"
-        if ($toDate !== null and $fromDate === null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->paginate($limit);
-          }
-
-
-        }
-        //если дата "от"
-        if ($toDate === null and $fromDate !== null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-
-        }
-        //обе даты
-        if ($toDate !== null and $fromDate !== null) {
-
-          if ($viewMode === 'all') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === 'hidden') {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '1')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-          elseif ($viewMode === null) {
-            $feed = NewsFeed::where('id', '>=', $start)
-                            ->where('hidden', '0')
-                            ->where('anons_create_dt', '<=', $toDate)
-                            ->where('anons_create_dt', '>=', $fromDate)
-                            ->paginate($limit);
-          }
-
+        $limit = $request->input('limit');
+        if ($limit !== null) {
+            $feed->take($limit);
         }
 
 
-       }
-       //дата "от"
-       elseif ($fromDate !== null and $toDate === null) {
-          $feed = NewsFeed::where('anons_create_dt', '>=', $fromDate)->paginate(DEFAULT_VALUE);
-       }
-       //только дата "до"
-       elseif ($toDate !== null and $fromDate === null) {
-          $feed = NewsFeed::where('anons_create_dt', '<=', $toDate)
-                          ->paginate(DEFAULT_VALUE);
-       }
-       //обе даты
-       elseif ($toDate !== null and $fromDate !== null) {
-          $feed = NewsFeed::where('anons_create_dt', '<=', $toDate)->paginate(DEFAULT_VALUE);
-       }
+        $fromDate = $request->input('fromDate');
+        $toDate = $request->input('toDate');
+        $feed->dateFilter($fromDate,$toDate);
 
-       return response()->json(['feed' => $feed]);
+
+        $feed = $feed->paginate(DEFAULT_VALUE);
+
+
+        return $this->respond(
+            $this->newsFeedTransformer->transformCollection( $feed->toArray() )
+        );
     }
-
 
 
 }

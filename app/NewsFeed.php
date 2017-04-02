@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class NewsFeed extends Model
 {
 
-	/**
+    /**
      * Определяем таблицу, с которой связана эта модель.
      *
      * @var array
@@ -27,6 +27,64 @@ class NewsFeed extends Model
         'anons_event_dt',
         'source_feed',
         'tags',
+        'hidden',
     ];
+
+    /**
+     * @param $query
+     * @param array $strings
+     * @return mixed
+     */
+    public function scopeSubstring($query, array $strings)
+    {
+        foreach ($strings as $string) {
+            $query->where(function ($query) use ($string) {
+                $query->orWhere('title', 'like', "%{$string}%")
+                    ->orWhere('text', 'like', "%{$string}%");
+            });
+        }
+        return $query;
+    }
+
+    /**
+     * @param $query
+     * @param array $tags
+     * @return mixed
+     */
+    public function scopeTags($query, array $tags)
+    {
+        foreach ($tags as $tag) {
+            $query->where('tags', 'like', "%{$tag}%");
+        }
+        return $query;
+    }
+
+
+    /**
+     * @param $query
+     * @param $viewMode
+     * @return mixed
+     */
+    public function scopeViewMode($query, $viewMode)
+    {
+        if (!$viewMode!='all') {
+            $query->where('hidden', '=', $viewMode);
+        }
+        return $query;
+    }
+
+    public function scopeDateFilter($query,$fromDate,$toDate){
+        if ($fromDate && !$toDate){
+            $query->where('anons_create_dt', '>=', $fromDate);
+        }
+        if (!$fromDate &&  $toDate){
+            $query->where('anons_create_dt', '<=', $toDate);
+        }
+        if ($fromDate &&  $toDate){
+            $query->where('anons_create_dt', '>', $fromDate);
+            $query->where('anons_create_dt', '<=',$toDate);
+        }
+
+    }
 
 }
