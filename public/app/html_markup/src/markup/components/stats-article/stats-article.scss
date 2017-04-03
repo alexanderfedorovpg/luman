@@ -29,6 +29,12 @@
         padding-top: 6px;
     }
 
+    .user__name {
+        margin-top: 3px;
+
+        letter-spacing: 0.4px;
+    }
+
     thead {
 
         th {
@@ -44,17 +50,17 @@
         &:first-child {
             position: relative;
 
-            font-weight: 700;
-
+            font-size: 16px;
+            font-weight: 600;
             color: #333;
-            letter-spacing: 0.82px;
 
         }
 
     }
 
     .summary  td {
-        letter-spacing: 0;
+        font-size: 14px;
+        font-weight: 700;
     }
 
 }
