@@ -9,40 +9,6 @@
         // height: 28px;
         margin-right: 1px;
 
-        &:nth-child(1) label:before {
-            background-color: #fbd78f;
-        }
-
-        &:nth-child(2) label:before {
-            background-color: #fecd4b;
-        }
-
-        &:nth-child(3) label:before {
-            background-color: #ffba00;
-        }
-
-        &:nth-child(4) label:before {
-            background-color: #ff9c00;
-        }
-
-        &:nth-child(5) label:before {
-            background-color: #ff7800;
-        }
-
-        &:nth-child(6) label:before {
-            background-color: #ff4e00;
-        }
-        
-        &:nth-child(7) label:before {
-            background-color: #eb1c01;
-        }
-
-        &:nth-child(8) label:before {
-            margin-right: 0;
-
-            background-color: #aa0111;
-        }
-
         input {
             display: none;
             &:checked + label {
@@ -52,6 +18,7 @@
 
         label {
             position: relative;
+            z-index: 5;
 
             display: block;
             width: 28px;
@@ -60,7 +27,7 @@
             font-family: $helvetica;
             font-size: rem(14);
             font-weight: 700;
-            line-height: rem(32);
+            line-height: rem(28);
 
             color: #ffffff;
             text-align: center;
@@ -94,5 +61,46 @@
 
         }
 
+        &.is-active {
+            label {
+                opacity: 1;
+            }
+        }
+
     }
+
+    .rate1 label:before {
+        background-color: #fbd78f;
+    }
+
+    .rate2 label:before {
+        background-color: #fecd4b;
+    }
+
+    .rate3 label:before {
+        background-color: #ffba00;
+    }
+
+    .rate4 label:before {
+        background-color: #ff9c00;
+    }
+
+    .rate5 label:before {
+        background-color: #ff7800;
+    }
+
+    .rate6 label:before {
+        background-color: #ff4e00;
+    }
+    
+    .rate7 label:before {
+        background-color: #eb1c01;
+    }
+
+    .rate8 label:before {
+        margin-right: 0;
+
+        background-color: #aa0111;
+    }
+
 }

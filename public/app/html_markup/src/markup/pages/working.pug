@@ -17,30 +17,4 @@ block content
                     | справка
 
     .content-wrap
-        +b.working
-            +e.item
-                +e.col-l
-                    +e.HEADER
-                        +e.rating 6
-                        +e.tag Политика
-                    +e.cnt
-                        p Петагон: США готовы сбить ракеты КНДР при наличии угрозы
-                    +e.d-tag
-                        +e.SPAN.item #внешняя политика
-                        +e.SPAN.item #США
-
-                +e.col-r
-                    +b.user
-                        +e.pic
-                            img(src="%=static=%img/content/user.png", alt="")
-                        +e.SPAN.name Ковалев Максим
-
-                    +e.SPAN.time 15 мин
-
-                    +status(class='is-active')
-
-                    +b.nav
-
-                        +e.A.item(href=jv0) Пуш-уведомление
-                        +e.A.item(href=jv0) Сменить редактора
-                        +e.A.item(href=jv0) Снять задание
+        +p-working(pWorking)
