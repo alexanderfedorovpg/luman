@@ -14,8 +14,8 @@
 
 $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], function ($group)   {
     $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
+    $group->post('/newsfeed/work', 'NewsFeedController@add');
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
-
 });
