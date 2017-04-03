@@ -21,7 +21,10 @@ define('DEFAULT_VALUE', '50');
  */
 class NewsFeedController extends ApiController
 {
-
+    public function __construct() {
+		$this->middleware('auth');
+	}
+	
     /**
      * @var \App\Http\Transformers\v1\NewsFeedTransformer
      */
