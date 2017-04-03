@@ -38,18 +38,12 @@ block content
                             +icon({ icon: 'search', class: 'search' }) 
                         .select-dropdown
                             .select-item
-                                .select-item__pic
-                                    img(src='%=static=%img/content/user1.png', alt='')
-                                .select-item__cnt
-                                    p Ковалев Максим
-                                    span Выбрать
+                                +user('Ковалев Максим', '%=static=%img/content/user1.png')
+                                span Выбрать
 
                             .select-item
-                                .select-item__pic
-                                    img(src='%=static=%img/content/user2.png', alt='')
-                                .select-item__cnt
-                                    p Короленко Анастасия
-                                    span Выбрать
+                                +user('Короленко Анастасия', '%=static=%img/content/user2.png')
+                                span Выбрать
 
                 +b.form-group.form-group-sm
                     label.label.label__bold(for='ko3') Назначить редактора в прямой эфир
@@ -59,18 +53,12 @@ block content
                             +icon({ icon: 'search', class: 'search' }) 
                         .select-dropdown
                             .select-item
-                                .select-item__pic
-                                    img(src='%=static=%img/content/user1.png', alt='')
-                                .select-item__cnt
-                                    p Ковалев Максим
-                                    span Выбрать
+                                +user('Ковалев Максим', '%=static=%img/content/user1.png')
+                                span Выбрать
 
                             .select-item
-                                .select-item__pic
-                                    img(src='%=static=%img/content/user2.png', alt='')
-                                .select-item__cnt
-                                    p Короленко Анастасия
-                                    span Выбрать
+                                +user('Короленко Анастасия', '%=static=%img/content/user2.png')
+                                span Выбрать
 
                 +b.form-group.form-group-sm
                     label.label.label__bold(for='ko4') Собрать команду для съемки сюжета
@@ -104,5 +92,3 @@ block content
 
                 +b.form-grop
                     button.btn.btn-block.btn-success Отправить в работу
-
-    +popups()

@@ -1,7 +1,7 @@
 extends ../layouts/default
 
 block vars
-    -pageSettings.title = 'Главная';
+    -pageSettings.title = 'Статистика';
 
 block content
     // Контент здесь
@@ -84,43 +84,31 @@ block content
                             
                     tr
                         td
-                            +e.pic
-                                img(src='%=static=%img/content/user.png')
-                            | Константинов Виталий
+                            +user('Константинов Виталий', '%=static=%img/content/user.png')
                         td 8
                         td 12 мин
                     tr
                         td
-                            +e.pic
-                                img(src='%=static=%img/content/user1.png')
-                            | Ковалев Максим
+                            +user('Ковалев Максим', '%=static=%img/content/user1.png')
                         td 6
                         td 16 мин
                     tr
                         td
-                            +e.pic
-                                img(src='%=static=%img/content/user2.png')
-                            | Короленко Анастасия
+                            +user('Короленко Анастасия', '%=static=%img/content/user2.png')
                         td 4
                         td 32 мин
                     tr
                         td
-                            +e.pic
-                                img(src='%=static=%img/content/user3.png')
-                            | Поликарпов Анатолий
+                            +user('Поликарпов Анатолий', '%=static=%img/content/user3.png')
                         td 4
                         td 26 мин
                     tr
                         td
-                            +e.pic
-                                img(src='%=static=%img/content/user4.png')
-                            | Марышева Елена
+                            +user('Марышева Елена', '%=static=%img/content/user4.png')
                         td 3
                         td 1 ч 10 мин
                     tr
                         td
-                            +e.pic
-                                img(src='%=static=%img/content/user5.png')
-                            | Санченков Роман
+                            +user('Санченков Роман', '%=static=%img/content/user5.png')
                         td 2
                         td 54 мин

@@ -426,7 +426,7 @@ a {
     &-item {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
         padding: 3px 19px 5px 2px;
 
         cursor: pointer;
@@ -434,11 +434,11 @@ a {
         &:hover {
             background-color: #f0f0f0;
 
-            .select-item__cnt span {
+            span {
                 display: block;
             }
 
-            .select-item__cnt p {
+            .select__name {
                 color: #333333;
                 font-weight: 600;
             }
@@ -459,30 +459,13 @@ a {
 
         }
 
-        &__cnt {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex: 1;
+        span {
+            display: none;
 
-            p {
-                margin: 0;
-
-                font-family: $opensans;
-                font-size: 14px;
-                color: #666666;
-                font-weight: 400;
-            }
-
-            span {
-                display: none;
-
-                color: #999999;
-                font-family: $opensans;
-                font-size: 12px;
-                font-weight: 300;
-            }
-
+            color: #999999;
+            font-family: $opensans;
+            font-size: 12px;
+            font-weight: 300;
         }
 
     }
@@ -616,6 +599,11 @@ a {
             &:hover {
                 background-color: #f0f0f0;
                 cursor: pointer;
+
+                .user__name {
+                    font-weight: 600;
+                    color: #333;
+                }
 
                 td {
 

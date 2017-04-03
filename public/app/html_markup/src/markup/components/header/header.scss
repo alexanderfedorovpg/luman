@@ -122,35 +122,13 @@
 
     }
 
-    &-user {
-        display: flex;
-        align-items: center;
-        margin-right: rem(29);
+    .user {
+        margin-right: rem(30);
         margin-left: rem(20);
-        &__pic {
-            display: block;
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-            margin-right: rem(12);
-            img {
-                max-width: 100%;
-                height: 100%;
-
-                border-radius: 50%;
-                object-fit: cover;
-            }
-        }
 
         &__name {
-            margin-top: 5px;
-
-            font-family: $helvetica;
-            font-size: rem(14);
-            font-weight: 400;
-
-            color: #ffffff;
-            text-decoration: none;
+            color: #fff;
+            letter-spacing: 0;
         }
 
     }

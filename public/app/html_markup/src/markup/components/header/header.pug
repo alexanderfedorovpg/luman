@@ -17,9 +17,6 @@ mixin header(data)
                         +b.NAV.header-nav
                             +e.A.item(href=jv0) Статистика
                             +e.A.item(href=jv0) Аналитика
-                        +b.header-user
-                            +e.A.pic(href=jv0)
-                                img(src="%=static=%img/content/user.png")
-                            +e.A.name(href=jv0) Поликарпов Анатолий
+                        +user('Поликарпов Анатолий', '%=static=%img/content/user.png')
                         +e.A.logout(href=jv0)
                             +icon({ icon: 'logout', class: 'logout' }) 

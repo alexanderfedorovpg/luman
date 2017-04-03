@@ -115,18 +115,18 @@ block content
 
             .form-group
                 .select.select-default
-                    .input-dropdown
-                        input.input.input-block#ko4(type='text' value='Группа пользователей')
-                        i.icon.icon-dropdown
-
+                    .input-icon
+                        input.input.input-block#ko4(type='text')
+                        +icon({ icon: 'search', class: 'search' }) 
+                        
                     .select-dropdown
                         .select-item
-                            .select-item__cnt
-                                p Ковалев Максим
+                            +user('Ковалев Максим', '%=static=%img/content/user1.png')
+                            span Выбрать
 
                         .select-item
-                            .select-item__cnt
-                                p Короленко Анастасия
+                            +user('Короленко Анастасия', '%=static=%img/content/user2.png')
+                            span Выбрать
             
             .form-group
                 label.label.label__bold(for='ko4') Назначить редактора статьи
@@ -137,18 +137,12 @@ block content
 
                     .select-dropdown
                         .select-item
-                            .select-item__pic
-                                img(src='%=static=%img/content/user1.png', alt='')
-                            .select-item__cnt
-                                p Ковалев Максим
-                                span Выбрать
+                            +user('Ковалев Максим', '%=static=%img/content/user1.png')
+                            span Выбрать
 
                         .select-item
-                            .select-item__pic
-                                img(src='%=static=%img/content/user2.png', alt='')
-                            .select-item__cnt
-                                p Короленко Анастасия
-                                span Выбрать
+                            +user('Короленко Анастасия', '%=static=%img/content/user2.png')
+                            span Выбрать
 
 
 

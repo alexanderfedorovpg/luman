@@ -3,10 +3,9 @@ mixin stats-editor(data)
         thead
             tr
                 th.col-name 
-                    +e.pic
-                        img(src='%=static=%img/content/user1.png')
-                    | Поликарпов Анатолий
+                    +user('Поликарпов Анатолий', '%=static=%img/content/user1.png')
                 th.col-time Опубликовано
+                    i.icon.icon-dropdown
                 th.col-write Время написания
                 th.col-views Просмотры
                 th.col-clicks Клики
