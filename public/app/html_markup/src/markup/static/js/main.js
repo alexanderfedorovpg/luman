@@ -7,9 +7,9 @@ $(() => {
     // ================ Здесь инициализируем модули =====================
 
     // autoresize textarea on load
-    $('.textarea').each(function () {
-        this.style.height = (this.scrollHeight + 10) + 'px';
-    });
+    // $('.textarea').each(function () {
+    //     this.style.height = (this.scrollHeight + 10) + 'px';
+    // });
 
     // show/hide select dropdown with photo
     $('.select').each(function () {
@@ -46,5 +46,4 @@ $(() => {
         e.stopPropagation();
     });
 
-    // $('textarea').height( $('textarea')[0].scrollHeight );
 });

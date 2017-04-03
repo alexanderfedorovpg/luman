@@ -18,14 +18,26 @@
         margin-top: 16px;
     }
 
+    &__sub-title {
+        padding-right: 13px;
+        margin-bottom: 18px;
+
+        line-height: 22px;
+        letter-spacing: 0.08px;
+    }
+
     &__source {
         margin-left: rem(11);
+
+        font-weight: 600;
 
         color: $cl-primary;
         text-decoration: none;
     }
 
     &__text {
+        padding-right: 17px;
+
         font-size: rem(14);
         line-height: rem(18);
         color: #666666;
@@ -44,13 +56,27 @@
             height: 40px;
             margin-right: rem(3);
 
-            line-height: 42px;
+            font-weight: 600;
+            line-height: 39px;
+
+            .icon {
+                margin-left: 8px;
+
+                vertical-align: baseline;
+            }
         }
 
         .btn-success {
             height: 40px;
 
-            line-height: 42px;
+            line-height: 39px;
+
+            .icon {
+                margin-top: 2px;
+                margin-left: -23px;
+
+                vertical-align: text-top;
+            }
         }
 
     }

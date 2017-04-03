@@ -285,6 +285,7 @@ a {
                 
                 &:before {
                     @include bg($checkbox-hover);
+                    // background-size: cover;
                 }
             }
 

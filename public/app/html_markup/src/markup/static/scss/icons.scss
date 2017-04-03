@@ -7,6 +7,10 @@
         margin-right: 4px;
     }
 
+    &-arrowRight-light {
+        @include bg($arrowRight-light);
+    }
+
     &-dropdown {
         @include bg($dropdown-arrow);
     }
@@ -145,5 +149,12 @@
         &-live {
             @include bg($live-active);
         }
+    }
+}
+
+.btn:hover {
+    .icon-arrowRight-light {
+        @include bg($arrowRight-light-hover);
+        opacity: 0.33;
     }
 }
