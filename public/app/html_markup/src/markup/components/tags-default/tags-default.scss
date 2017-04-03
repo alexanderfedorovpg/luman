@@ -10,8 +10,10 @@
 
         font-family: $opensans;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 600;
         color: $cl-primary;
+        color: #41719f;
+        letter-spacing: -0.4px;
 
         &:after {
 
@@ -24,11 +26,12 @@
             display: block;
             width: 4px;
             height: 4px;
+            margin-top: -1px;
 
             border-radius: 50%;
 
             background-color: #9a9a9a;
-            transform: translateY(-50%);
+            // transform: translateY(-50%);
 
         }
 
