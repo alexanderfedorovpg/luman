@@ -31,7 +31,7 @@
 
         font-weight: 600;
 
-        color: $cl-primary;
+        color: #3b77b2;
         text-decoration: none;
     }
 
@@ -70,6 +70,12 @@
             height: 40px;
 
             line-height: 39px;
+
+            color: #666;
+            
+            &:hover {
+                color: #fff;
+            }
 
             .icon {
                 margin-top: 2px;

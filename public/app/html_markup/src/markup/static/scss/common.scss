@@ -68,8 +68,9 @@ h4 {
         align-items: stretch;
 
         @include below(1100px) {
-            flex-wrap: wrap;
-            flex-direction: column;
+            display: block;
+            // flex-wrap: wrap;
+            // flex-direction: column;
         }
 
     }
@@ -291,6 +292,7 @@ h4 {
         padding-right: $pad;
 
         @include below(1100px) {
+            padding-right: 0;
             flex-basis: 100%;
             width: 100%;
         }

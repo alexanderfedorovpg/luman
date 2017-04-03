@@ -13,7 +13,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 @include font-face('Open Sans', '../fonts/hinted-OpenSans-Light', 300, normal, $exts: woff woff2);
 @include font-face('Open Sans', '../fonts/hinted-OpenSans-Semibold', 600, normal, $exts: woff woff2);
 @include font-face('Open Sans', '../fonts/hinted-OpenSans-Bold', 700, normal, $exts: woff woff2);
-
+@include font-face('Open Sans', '../fonts/hinted-OpenSans-Extrabold', 800, normal, $exts: woff woff2);
 // font Helvetice Neue
 @include font-face('HelveticaNeue', '../fonts/helveticaneuecyr-roman', 400, normal, $exts: woff woff2);
 @include font-face('HelveticaNeue', '../fonts/helveticaneuecyr-light', 300, normal, $exts: woff woff2);
