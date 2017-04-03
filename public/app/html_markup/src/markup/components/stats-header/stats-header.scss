@@ -25,6 +25,8 @@
 
         .input {
             padding-left: rem(8);
+
+            color: #ccc;
         }
 
         .icon_calendar {
@@ -33,7 +35,7 @@
 
         span {
             margin-right: rem(11);
-            margin-left: 9px;
+            margin-left: rem(9);
 
             font-family: $opensans;
             font-size: rem(14);
@@ -45,11 +47,16 @@
 
     .btn {
         height: 36px;
-        padding-right: rem(7);
-        padding-left: rem(7);
-        margin-left: 11px;
+        padding-right: rem(8);
+        padding-left: rem(8);
+        margin-left: rem(11);
 
+        font-size: 12px;
         line-height: 36px;
+    
+        color: #b4b4b4;
+        
+        background-color: #f1f1f1;
     }
 
 }

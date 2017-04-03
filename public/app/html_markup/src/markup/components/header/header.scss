@@ -112,12 +112,19 @@
 
             color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
+
             &:hover {
                 text-decoration: underline;
             }
+
             &:last-child {
                 margin-right: 0;
             }
+
+            &.is-active {
+                color: #fff;
+            }
+
         }
 
     }
