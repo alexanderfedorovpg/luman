@@ -1,0 +1,60 @@
+.stats-article {
+    width: 100%;
+    margin-top: 24px;
+
+    .col-name {
+        width: 38.72%;
+    }
+
+    .col-time {
+        width: 14.3%;
+    }
+
+    .col-editor {
+        width: 28%;
+    }
+
+    .col-views {
+        width: 10.6%;
+    }
+
+    .col-clicks {
+
+    }
+
+    .col-time,
+    .col-editor,
+    .col-views,
+    .col-clicks {
+        padding-top: 6px;
+    }
+
+    thead {
+
+        th {
+            padding-bottom: 4px;
+        }
+
+    }
+
+    td {
+
+        padding-left: 1px;
+        
+        &:first-child {
+            position: relative;
+
+            font-weight: 700;
+
+            color: #333;
+            letter-spacing: 0.82px;
+
+        }
+
+    }
+
+    .summary  td {
+        letter-spacing: 0;
+    }
+
+}

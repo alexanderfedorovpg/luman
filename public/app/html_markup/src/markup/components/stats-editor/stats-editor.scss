@@ -1,0 +1,70 @@
+.stats-editor {
+    width: 100%;
+    margin-top: 11px;
+
+    .col-name {
+        width: 38.7%;
+        padding-top: 13px;
+    }
+
+    .col-time {
+        width: 14.3%;
+        padding-left: rem(4);
+    }
+
+    .col-write {
+        width: 28.4%;
+        padding-left: rem(4);
+    }
+
+    .col-views {
+        width: 10.3%;
+    }
+
+    .col-clicks {
+
+    }
+
+    .col-time,
+    .col-write,
+    .col-views,
+    .col-clicks {
+        padding-top: 21px;
+    }
+
+    
+
+    thead {
+
+        th {
+            padding-bottom: 4px;
+        }
+
+        .table__pic {
+            margin-top: -13px;
+            margin-right: rem(8);
+        }
+
+    }
+
+    td {
+
+        padding-left: 1px;
+        
+        &:first-child {
+            position: relative;
+
+            font-weight: 700;
+
+            color: #333;
+            letter-spacing: 0.82px;
+
+        }
+
+    }
+
+    .summary  td {
+        letter-spacing: 0;
+    }
+
+}

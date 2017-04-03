@@ -1,0 +1,58 @@
+// help-form
+.help {
+    max-width: 749px;
+    padding-right: $pad;
+    padding-left: $pad;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 46px;
+    }
+
+    &__form {
+
+        .checkbox {
+            margin-right: rem(18);
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+        }
+
+    }
+
+    .textarea {
+        resize: vertical;
+    }
+
+    .checkbox {
+        margin-top: -4px;
+    }
+
+    .btn {
+        height: 43px;
+
+        line-height: 43px;
+    }
+
+    .gallery {
+        margin-top: 40px;
+        margin-bottom: 35px;
+    }
+
+    &__text {
+        font-family: $opensans;
+        font-size: rem(14);
+        font-weight: 400;
+        line-height: rem(24);
+        color: #666666;
+    }
+
+    .tags-default {
+        margin-top: 26px;
+    }
+
+}

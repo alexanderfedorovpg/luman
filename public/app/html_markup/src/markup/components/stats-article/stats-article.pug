@@ -1,0 +1,57 @@
+mixin stats-article(data)
+    +b.TABLE.table.stats-article()&attributes(attributes)
+        thead
+            tr
+                th.col-name Статьи
+                th.col-time Опубликовано
+                th.col-editor Редактор
+                th.col-views Просмотры
+                th.col-clicks Клики
+        tbody
+            //- создает 2ух пиксельную прослойку между шапкой и телом
+            tr.table-space
+                td
+
+            tr
+                td Ожидания и реальность выборов в Америке
+                td 10:35
+                td 
+                    +e.pic
+                        img(src='%=static=%img/content/user1.png')
+                    | Поликарпов Анатолий
+                td 6 780
+                td 7 674
+            tr
+                td Почему Трамп победил: секрет
+                td 16:00
+                td 
+                    +e.pic
+                        img(src='%=static=%img/content/user2.png')
+                    | Ковалев Максим
+                td 4 539
+                td 4 539
+            tr
+                td Тайны, скандалы, расследования
+                td 17:10
+                td 
+                    +e.pic
+                        img(src='%=static=%img/content/user3.png')
+                    | Короленко Анастасия
+                td 1 343
+                td 1 343
+            tr
+                td Патриоты, которые запросто могут предать Родину: кто они?
+                td 22:30
+                td 
+                    +e.pic
+                        img(src='%=static=%img/content/user5.png')
+                    | Костантинов Виталий
+                td 789
+                td 789
+
+            tr.summary
+                td Всего
+                td
+                td
+                td 13 993
+                td 25 742

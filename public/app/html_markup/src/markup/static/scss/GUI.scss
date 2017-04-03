@@ -2,6 +2,10 @@
 // For example, styles of the links, buttons and so on.
 
 // links
+a {
+    color: $cl-primary;
+    font-weight: 400;
+}
 .link {
 
     &-black {
@@ -23,6 +27,13 @@
 
     }
 
+    &-default {
+        letter-spacing: -1.17px;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 
 }
 
@@ -534,4 +545,132 @@
     &:hover:after {
         display: block;
     }
+}
+
+// table
+.table {
+    width: 100%;
+    text-align: left;
+    table-layout: fixed;
+    white-space: nowrap;
+
+    td {
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &:after {
+            content: ' ';
+
+            position: absolute;
+            right: 0;
+            top: 1px;
+            bottom: 1px;
+            width: 50px;
+            height: 48px;
+
+            background-image: url('%=static=%general/table-opacity.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+    }
+
+    thead {
+        border-bottom: 2px solid #d2d2d2;
+
+        tr {
+
+        }
+
+    }
+
+    th {
+        padding-bottom: 8px;
+
+        color: #4d4d4d;
+        font-family: $opensans;
+        font-size: 14px;
+        font-weight: 700;
+
+        &:first-child {
+            // big title
+            font-size: 24px;
+            color: #333;
+            font-weight: 600;
+            letter-spacing: -0.7px;
+        }
+
+    }
+
+    tbody {
+
+        tr {
+            border-bottom: 1px solid #e9e9e9;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+            
+
+            &:hover {
+                background-color: #f0f0f0;
+                cursor: pointer;
+
+                td {
+
+                    &:after {
+                        display: none;
+                    }
+
+                }
+
+            }
+            
+            &.summary {
+
+                td {
+                    color: #333333;
+                    font-weight: 700;
+                }
+
+            }
+
+            .icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 11px;
+            }
+
+        }
+
+    }
+
+    td {
+        height: 52px;
+        padding: 0 0 0 2px;
+
+        font-family: $opensans;
+        font-size: 14px;
+        color: #666666;
+        font-weight: 400;
+
+        vertical-align: middle;
+    }
+
+    &__pic {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        margin-right: 11px;
+        vertical-align: middle;
+    }
+
+    &-space {
+        border: 0 !important;
+        td {
+            height: 3px !important;
+        }
+    }
+
 }

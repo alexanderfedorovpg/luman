@@ -53,12 +53,12 @@
     }
 
     &__preview {
-        margin: 0 0 0 8px;
+        margin: 0 0 0 rem(8);
 
         font-family: $opensans;
-        font-size: 14px;
+        font-size: rem(14);
         font-weight: 400;
-        line-height: 18px;
+        line-height: rem(18);
         color: #333333;
         letter-spacing: 0.35px;
     }
