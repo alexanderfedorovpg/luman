@@ -62,7 +62,7 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
      * Фильтрация по наличию подстроки в заголовке или тегах
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @oaram array $tags
+     * @param array $tags
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSubstring($query, array $strings)
@@ -80,7 +80,7 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
      * Фильтрация по тегам
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @oaram array $tags
+     * @param array $tags
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeTags($query, array $tags)
@@ -95,7 +95,7 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
      * Фильтрация по наличию или отсутсвию видеокассета
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @oaram bool $isExxist
+     * @param bool $isExist
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeExistVideo($query, $isExist)
