@@ -15,6 +15,7 @@ class CreateTableNewsCommentsEditor extends Migration
     {
         Schema::create('news_comments_editor', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('news_id')->unsigned();
             $table->dateTime('publish_date')->nullable();
             $table->boolean('is_publish')->nullable();
             $table->string('description',240);
