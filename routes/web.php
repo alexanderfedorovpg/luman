@@ -17,5 +17,10 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
+    $group->post('/auth/login','AuthController@login');
+    $group->post('/user/create', 'UserController@create');
+});
 
+$app->group(['prefix' => 'cms/api/v1'], function ($group) {
+    return $group->version();
 });
