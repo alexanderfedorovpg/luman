@@ -8,7 +8,12 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import { selectFeedList, selectedFeed } from './selectors';
+import {
+    selectFeedList,
+    selectedFeed,
+    selectedPagination,
+    selectedLoading
+} from './selectors';
 
 import { loadFeed, hideFeedItem, selectFeed } from './actions'
 
@@ -24,7 +29,17 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
     }
 
     componentDidMount() {
-        this.props.dispatch(loadFeed())
+        let { page } = this.props.location.query
+        this.props.dispatch(loadFeed({ page }))
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let page = this.props.location.query.page || 1
+        let nextPage = nextProps.location.query.page || 1
+
+        if (+page !== +nextPage) {
+            this.props.dispatch(loadFeed({ page: nextPage }))
+        }
     }
 
     hideItem(id) {
@@ -36,7 +51,7 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
     }
 
     render() {
-        let { news, menuOpen, users, selectedFeed } = this.props
+        let { news, menuOpen, users, selectedFeed, pagination, router, loading } = this.props
 
         return (
             <div>
@@ -47,6 +62,8 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
                     ]} />
                     <Feed
                         news={news}
+                        pagination={pagination}
+                        loading={loading}
                         moved={menuOpen}
                         users={users}
                         toWork={this.toWork}
@@ -74,7 +91,9 @@ const mapStateToProps = state => ({
                     pic: '/img/user2.png'
             }
     ],
-    selectedFeed: selectedFeed(state)
+    selectedFeed: selectedFeed(state),
+    pagination: selectedPagination(state),
+    loading: selectedLoading(state)
 })
 
 function mapDispatchToProps(dispatch) {
