@@ -39,12 +39,15 @@ export default function createRoutes(store) {
             name: 'feed',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
+                    import('containers/FeedPage/sagas'),
                     import('containers/FeedPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([component]) => {
+                importModules.then(([sagas, component]) => {
+                    injectSagas(sagas.default);
+
                     renderRoute(component);
                 });
 

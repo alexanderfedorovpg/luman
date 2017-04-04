@@ -17,20 +17,23 @@ import {
     Select
 } from './../Form'
 
-function Feed({ news, moved, users }) {
+function Feed({ news, moved, users, hideItem, toWork, worked }) {
     return (
         <div>
             <Header moved={moved} />
             <Wrap>
                 <Left>
-                    <News data={news} />
+                    <News
+                        data={news}
+                        hide={hideItem}
+                        toWork={toWork} />
                 </Left>
                 <Right>
                     <form>
-                        <Tags data={['tag1', 'tag2', 'tag3']} />
+                        <Tags data={(worked.tags || "").split(', ')} />
                         <Rating value={5} />
                         <Group>
-                            <Textarea block defaultValue="Кремль заявил о «серьезной усталости» от обвинений в кибератаках" />
+                            <Textarea block defaultValue={worked.header} />
                         </Group>
                         <Group sm>
                             <Label bold for="ko2">Назначить редактора статьи</Label>

@@ -99,19 +99,29 @@ const Ignore = styled(Work)`
     right: 24px;
 `
 
-function Item({ data }) {
+function Item({ data, toWork, hide, open }) {
     return (
-        <Root>
+        <Root onClick={() => open(data.id)}>
             <Wrapper>
                 <ItemIcon type="tass" />
                 <Title className={titleClassName}>
-                    {data.get('header')}
+                    {data.header}
                 </Title>
                 <Ignore message="Игнорировать" eventType="hover" direction="bottom">
-                    <Icon type="delete" />
+                    <Icon
+                        type="delete"
+                        onClick={e => {
+                            hide(data.id)
+                            e.stopPropagation()
+                        }} />
                 </Ignore>
                 <Work message="Работаем!" eventType="hover" direction="bottom">
-                    <Icon type="go-right" />
+                    <Icon
+                        type="go-right"
+                        onClick={e => {
+                            toWork(data.id)
+                            e.stopPropagation()
+                        }} />
                 </Work>
             </Wrapper>
         </Root>

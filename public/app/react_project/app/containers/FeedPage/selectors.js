@@ -1,25 +1,25 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the feedPage state domain
- */
 const selectFeedPageDomain = () => (state) => state.get('feedPage');
 
-/**
- * Other specific selectors
- */
+const selectFeedList = createSelector(
+    selectFeedPageDomain(),
+    root => root.get('news').get('data')
+)
 
+const selectedFeedId = createSelector(
+    selectFeedPageDomain(),
+    root => root.get('selectedFeed')
+)
 
-/**
- * Default selector used by FeedPage
- */
+const selectedFeed = createSelector(
+    selectFeedList,
+    selectedFeedId,
+    (list, id) => list.find(value => value.get('id') === id)
+)
 
-const makeSelectFeedPage = () => createSelector(
-  selectFeedPageDomain(),
-  (substate) => substate.toJS()
-);
-
-export default makeSelectFeedPage;
 export {
-  selectFeedPageDomain,
+    selectFeedPageDomain,
+    selectFeedList,
+    selectedFeed
 };

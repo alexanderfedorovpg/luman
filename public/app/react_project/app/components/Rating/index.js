@@ -149,7 +149,7 @@ class Rating extends Component {
 }
 
 Rating.PropTypes = {
-    data: React.PropTypes.array.isRequired
+    value: React.PropTypes.number
 }
 
 export default Rating
