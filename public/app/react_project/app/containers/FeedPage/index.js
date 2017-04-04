@@ -56,19 +56,16 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         return (
             <div>
                 <Helmet
-                    title="Лента"
-                    meta={[
-                        { name: 'description', content: 'Description of FeedPage' },
-                    ]} />
-                    <Feed
-                        news={news}
-                        pagination={pagination}
-                        loading={loading}
-                        moved={menuOpen}
-                        users={users}
-                        toWork={this.toWork}
-                        hideItem={this.hideItem}
-                        worked={selectedFeed ? selectedFeed.toJS() : {}} />
+                    title="Лента" />
+                <Feed
+                    news={news}
+                    pagination={pagination}
+                    loading={loading}
+                    moved={menuOpen}
+                    users={users}
+                    toWork={this.toWork}
+                    hideItem={this.hideItem}
+                    worked={selectedFeed ? selectedFeed.toJS() : {}} />
             </div>
         );
     }

@@ -34,7 +34,8 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
             <Root onClick={closeMenu}>
                 <Header
                     moved={menuOpen}
-                    onToggle={toggleMenu} />
+                    onToggle={toggleMenu}
+                    isActive={router.isActive} />
                 <NavSide
                     expanded={menuOpen}
                     isActive={router.isActive} />
