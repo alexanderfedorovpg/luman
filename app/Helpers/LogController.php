@@ -1,15 +1,14 @@
 <?php
 
 
-	namespace App\Http\Controllers;
+	namespace App\Helpers;
 
 	use App\Log;
-	use Laravel\Lumen\Routing\Controller;
 	use Illuminate\Database\Eloquent\Builder;
 	use Illuminate\Support\Facades\DB;
 
 
-	class LogController extends Controller {
+	class LogController implements LogHelpers {
 
 		/**
 		 * Добавление лога
@@ -20,12 +19,12 @@
 		 */
 		public function setLog( $type_event, $user_id, $description ) {
 
-			DB::table( 'log' )->insert(
+			DB::table( 'logs' )->insert(
 				array(
 					'type_event'  => $type_event,
 					'user_id'     => $user_id,
 					'description' => $description,
-					'created_at'  => time(),
+					'created_at'  => ''.date('Y-m-d H:i:s'),
 				)
 			);
 
@@ -40,7 +39,7 @@
 
 			$log = Log::find( $id );
 
-			return response()->$log;
+			return response()->json($log);
 		}
 
 		/**
@@ -50,7 +49,8 @@
 
 			$log = Log::all();
 
-			return response()->$log;
+			return response()->json($log);
+
 
 		}
 
@@ -66,7 +66,7 @@
 						->where( 'crated_at', '>=', $DateFrom )
 						->where( 'crated_at', '<=', $DateTo );
 
-			return response()->$log;
+			return response()->json($log);
 
 		}
 
