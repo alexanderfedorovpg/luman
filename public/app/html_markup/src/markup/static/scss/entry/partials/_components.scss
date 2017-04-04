@@ -8,8 +8,12 @@
 @import 'components/user/user';
 @import 'components/status/status';
 @import 'components/tags-default/tags-default';
+@import 'components/chat/chat';
+@import 'components/image-header/image-header';
+@import 'components/text-header/text-header';
 @import 'components/popup-help/popup-help';
 @import 'components/popup-news-view/popup-news-view';
+@import 'components/popup-push/popup-push';
 @import 'components/popup-dynamic/popup-dynamic';
 @import 'components/popups/popups';
 @import 'components/tabs-nav/tabs-nav';
@@ -18,3 +22,4 @@
 @import 'components/footer/footer';
 
 @import 'components/p-working/p-working';
+@import 'components/p-editor-view/p-editor-view';

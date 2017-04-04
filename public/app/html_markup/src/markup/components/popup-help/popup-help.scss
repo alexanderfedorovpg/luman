@@ -1,8 +1,12 @@
 // help-form
 .help {
     max-width: 749px;
+    padding-top: 20px;
     padding-right: $pad;
+    padding-bottom: 20px;
     padding-left: $pad;
+
+    background-color: #fff;
 
     .form-group {
         margin-bottom: 24px;

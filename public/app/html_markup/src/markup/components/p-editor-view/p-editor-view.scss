@@ -1,0 +1,95 @@
+.editor-view {
+    padding-left: $pad;
+    
+    margin-top: 6px;
+
+    &__top {
+
+        .header-l {
+
+            .form-feed {
+                width: 100%;
+            }
+
+            .btn {
+                flex: 1;
+                margin-right: 7px;
+
+                font-family: $helvetica;
+                font-size: 14px;
+                font-weight: 400;
+
+                color: #666666;
+                text-align: center;
+
+                background-color: #fff;
+                opacity: 1;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+            }
+
+        }
+
+        .header-r {
+            width: 259px;
+        }
+
+    }
+
+    &__action {
+
+        align-items: center;
+        margin-top: 17px;
+        margin-bottom: 16px;
+
+        .rating {
+            margin-right: 20px;
+            margin-bottom: 21px;
+        }
+
+        .tags__item label {
+            padding-right: 9px;
+            padding-left: 9px;
+        }
+
+    }
+
+    .content-l {
+
+        border-right: 0;
+
+    }
+
+    .content-r {
+        flex-basis: auto;
+
+        width: auto;
+
+    }
+
+    &__header {
+
+        .content-r {
+
+            .user {
+                width: 235px;
+                margin-right: 0;
+            }
+
+        }
+
+        .input-block {
+            padding-right: 7px;
+
+            padding-left: 7px;
+
+            color: #999999;
+
+        }
+
+    }
+
+}

@@ -11,6 +11,10 @@
         @include bg($arrowRight-light);
     }
 
+    &_arrowLeft {
+        opacity: 0.33;
+    }
+
     &-dropdown {
         @include bg($dropdown-arrow);
     }
@@ -33,6 +37,9 @@
 
     &-delete-lg {
         @include bg($delete-lg);
+        &:hover {
+            @include bg($delete-lg-active);
+        }
     }
 
     &-go-right {
@@ -47,6 +54,63 @@
         opacity: 0.59;
         &:hover {
             opacity: 1;
+        }
+    }
+
+    &-resize {
+        @include bg($resize);
+        &:hover {
+            @include bg($resize-active);
+        }
+    }
+
+    &-rotate {
+        @include bg($rotate);
+        &:hover {
+            @include bg($rotate-active);
+        }
+    }
+
+    &-crop {
+        @include bg($crop);
+        &:hover {
+            @include bg($crop-active);
+        }
+    }
+
+    &-text-bold {
+        @include bg($text-bold);
+        &:hover {
+            @include bg($text-bold-active);
+        }
+    }
+
+    &-text-italic {
+        @include bg($text-italic);
+        &:hover {
+            @include bg($text-italic-active);
+        }
+    }
+
+    &-image {
+        @include bg($image);
+    }
+
+    &-images {
+        @include bg($images);
+    }
+
+    &-text-video {
+        @include bg($text-video);
+        &:hover {
+            @include bg($text-video-active);
+        }
+    }
+
+    &-orph {
+        @include bg($orph);
+        &:hover {
+            @include bg($orph-active);
         }
     }
 
