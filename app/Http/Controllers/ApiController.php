@@ -57,6 +57,7 @@ class ApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function respond($data, $headers = []) {
+       $headers=['Access-Control-Allow-Origin'=>'*'];
         return response()->json($data , $this->getStatusCode() , $headers);
     }
 
