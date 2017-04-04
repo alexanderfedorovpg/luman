@@ -6,6 +6,8 @@ import spriteSvg from './img/svg-symbols68uwdhftu0zqimxtj4i.svg'
 const Svg = styled.svg`
     display: inline-block;
     vertical-align: middle;
+
+    fill: currentColor;
 `
 
 export const ArrowRight = (props) => {

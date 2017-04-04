@@ -84,6 +84,8 @@ class Tags extends Component {
         return (
             <Root>
                 {data.map(tag => {
+                    if (!tag) return null
+
                     return (
                         <Item key={tag}>
                             <Label checked={checked === tag}>

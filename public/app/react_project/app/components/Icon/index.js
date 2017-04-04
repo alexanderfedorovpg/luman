@@ -138,6 +138,42 @@ const Icon = styled.i`
         height: ${icons.tass.height}px;
     `)}
 
+    ${equalProp('type', 'twitter')(css`
+        background-image: url(${icons.twitter.data});
+        width: ${icons.twitter.width}px;
+        height: ${icons.twitter.height}px;
+    `)}
+
+    ${equalProp('type', 'facebook')(css`
+        background-image: url(${icons.facebook.data});
+        width: ${icons.facebook.width}px;
+        height: ${icons.facebook.height}px;
+    `)}
+
+    ${equalProp('type', 'article')(css`
+        background-image: url(${icons.article.data});
+        width: ${icons.article.width}px;
+        height: ${icons.article.height}px;
+    `)}
+
+    ${equalProp('type', 'video')(css`
+        background-image: url(${icons.video.data});
+        width: ${icons.video.width}px;
+        height: ${icons.video.height}px;
+    `)}
+
+    ${equalProp('type', 'programms')(css`
+        background-image: url(${icons.programms.data});
+        width: ${icons.programms.width}px;
+        height: ${icons.programms.height}px;
+    `)}
+
+    ${equalProp('type', 'summary')(css`
+        background-image: url(${icons.summary.data});
+        width: ${icons.summary.width}px;
+        height: ${icons.summary.height}px;
+    `)}
+
     ${props => {
         return props.active
             ? css`

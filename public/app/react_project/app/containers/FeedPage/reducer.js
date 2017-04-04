@@ -6,43 +6,45 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+    LOAD_FEED,
+    LOAD_FEED_SUCCESS,
+    LOAD_FEED_FAILURE,
+
+    SELECT_FEED
 } from './constants';
 
 const initialState = fromJS({
-    data: [
-        {
-            id: 1,
-            header: 'Песков: Москва уже «серьёзно устала» от обвинений в хакерских атаках'
-        },
-        {
-            id: 2,
-            header: 'Смертник на грузовике въехал в здание полиции в Египте'
-        },
-        {
-            id: 3,
-            header: 'Кремль заявил о «серьезной усталости» от обвинений в кибератаках'
-        },
-        {
-            id: 4,
-            header: 'В Кремле прокомментировали антитабачную концепцию Минздрава'
-        },
-        {
-            id: 5,
-            header: 'Сын вице-президента "Лукойла" снова развлекается за рулем'
-        },
-        {
-            id: 6,
-            header: 'Ученые: два небесных объекта летят в сторону Земли'
-        }
-    ]
+    news: {
+        loading: false,
+        current: 1,
+        max: 1,
+        data: []
+    },
+    selectedFeed: null
 });
 
 function feedPageReducer(state = initialState, action) {
   switch (action.type) {
+    case LOAD_FEED:
+        return state.setIn(['news', 'loading'], true)
+
+    case LOAD_FEED_SUCCESS:
+        return state
+            .setIn(['news', 'data'], fromJS(action.payload.data.data))
+            .setIn(['news', 'current'], action.payload.data.current_page)
+            .setIn(['news', 'max'], fromJS(action.payload.data.last_page))
+            .setIn(['news', 'loading'], false)
+
+    case LOAD_FEED_FAILURE:
+        console.log('failure', action.error)
+        return state
+            .setIn(['news', 'loading'], false)
+
+    case SELECT_FEED:
+        return state.set('selectedFeed', action.payload)
 
     default:
-      return state;
+        return state;
   }
 }
 

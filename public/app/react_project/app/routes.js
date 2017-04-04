@@ -39,7 +39,27 @@ export default function createRoutes(store) {
             name: 'feed',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
+                    import('containers/FeedPage/sagas'),
                     import('containers/FeedPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([sagas, component]) => {
+                    injectSagas(sagas.default);
+
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
+        },
+        {
+            path: '/stats',
+            name: 'stats',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/StatsPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);

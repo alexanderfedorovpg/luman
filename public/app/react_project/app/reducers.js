@@ -47,7 +47,7 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     language: languageProviderReducer,
     app: appReducer,
-    news: feedPageReducer,
+    feedPage: feedPageReducer,
     ...asyncReducers,
   });
 }
