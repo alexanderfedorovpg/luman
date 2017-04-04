@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { Link } from 'react-router'
 
 import Icon from '../Icon'
 import Badge from '../Badge'
@@ -24,7 +25,7 @@ const Wrapper = styled.nav`
         width: 251px;
     `}
 `
-const NavItem = styled.a`
+const NavItem = styled(({expanded, ...rest}) => <Link {...rest} />)`
     position: relative;
 
     display: flex;
@@ -83,7 +84,7 @@ const NavBadge = styled(Badge)`
     `)}
 `
 
-function NavSide({ expanded }) {
+function NavSide({ expanded, isActive }) {
 
     return (
         <Wrapper expanded={expanded} onClick={e => e.stopPropagation()}>
@@ -94,46 +95,46 @@ function NavSide({ expanded }) {
                 }
 
             </NavItem>
-            <NavItem href="#" expanded={expanded}>
-                <Icon type="feed" active />
+            <NavItem to="/feed" expanded={expanded}>
+                <Icon type="feed" active={isActive('/feed')} />
                 <Name expanded={expanded}>
                     Лента
                 </Name>
             </NavItem>
-            <NavItem href="#" expanded={expanded}>
-                <Icon type="view" />
+            <NavItem to="#" expanded={expanded}>
+                <Icon type="view" active={isActive('/randomurl')} />
                 <Name expanded={expanded}>
                     Задания
                 </Name>
             </NavItem>
-            <NavItem href="#" expanded={expanded}>
-                <Icon type="draft" />
+            <NavItem to="#" expanded={expanded}>
+                <Icon type="draft" active={isActive('/randomurl')} />
                 <Name expanded={expanded}>
                     В работе
                 </Name>
             </NavItem>
-            <NavItem href="#" expanded={expanded}>
-                <Icon type="ready" />
+            <NavItem to="#" expanded={expanded}>
+                <Icon type="ready" active={isActive('/randomurl')} />
                 <Name expanded={expanded}>
                     Готово
                 </Name>
                 <NavBadge success expanded={expanded}>8</NavBadge>
             </NavItem>
-            <NavItem href="#" expanded={expanded}>
-                <Icon type="main" />
+            <NavItem to="#" expanded={expanded}>
+                <Icon type="main" active={isActive('/randomurl')} />
                 <Name expanded={expanded}>
                     Главная страница
                 </Name>
             </NavItem>
-            <NavItem href="#" expanded={expanded}>
-                <Icon type="tv" />
+            <NavItem to="#" expanded={expanded}>
+                <Icon type="tv" active={isActive('/randomurl')} />
                 <Name expanded={expanded}>
                     Программы
                 </Name>
                 <NavBadge success expanded={expanded}>2</NavBadge>
             </NavItem>
-            <NavItem href="#" expanded={expanded}>
-                <Icon type="live" />
+            <NavItem to="#" expanded={expanded}>
+                <Icon type="live" active={isActive('/randomurl')} />
                 <Name expanded={expanded}>
                     Прямой эфир
                 </Name>
