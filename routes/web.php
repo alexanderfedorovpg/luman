@@ -18,7 +18,29 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
     $group->post('/auth/login','AuthController@login');
-    $group->post('/user/create', 'UserController@create');
+
+    //Пользователи
+    $group->get('/user','UserController@index');
+    $group->get('/user/{id}','UserController@show');
+    $group->post('/user','UserController@create');
+    $group->put('/user/{id}','UserController@update');
+    $group->delete('/user/{id}','UserController@destroy');
+
+    //Группы
+    $group->get('/group','GroupController@index');
+    $group->get('/group/{id}','GroupController@show');
+    $group->post('/group','GroupController@create');
+    $group->put('/group/{id}','GroupController@update');
+    $group->delete('/group/{id}','GroupController@destroy');
+    $group->post('/group/{groupId}/bind/{userId}','GroupController@bindUser');
+    $group->delete('/group/{groupId}/bind/{userId}','GroupController@unbindUser');
+    $group->post('/group/{groupId}/permiss','GroupController@addPermiss');
+    $group->delete('/group/{groupId}/permiss/{permissId}','GroupController@addPermiss');
+
+
+    //Права
+    $group->get('/permission','PermissionController@index');
+
 });
 
 $app->group(['prefix' => 'cms/api/v1'], function ($group) {
