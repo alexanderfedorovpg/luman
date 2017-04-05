@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
  * Class NewsListController
  * @package App\Http\Controllers\v1\Client
  */
-class NewsListController extends ApiController
+class NewsListController extends CmsController
 {
     /**
      * @var \App\Http\Transformers\v1\Client\NewsListTransformer

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class LogTable extends Migration
+class DropGroupsColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class LogTable extends Migration
      */
     public function up()
     {
-	    Schema::create('logs', function (Blueprint $table) {
-		    $table->increments('id');
-		    $table->timestamps();
-		    $table->string('type_event');
-		    $table->integer('user_id')->unsigned();
-		    $table->string('description');
-	    });
+        Schema::table('groups', function (Blueprint $table) {
+            $table->dropColumn('permissions');
+        });
     }
 
     /**
@@ -29,6 +25,8 @@ class LogTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('logs');
+        Schema::table('groups', function (Blueprint $table) {
+            $table->string('permissions');
+        });
     }
 }

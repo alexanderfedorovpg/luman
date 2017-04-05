@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class LogTable extends Migration
+class AlterPasswordColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,7 @@ class LogTable extends Migration
      */
     public function up()
     {
-	    Schema::create('logs', function (Blueprint $table) {
-		    $table->increments('id');
-		    $table->timestamps();
-		    $table->string('type_event');
-		    $table->integer('user_id')->unsigned();
-		    $table->string('description');
-	    });
+        DB::statement('ALTER TABLE users MODIFY password  VARCHAR(64) NOT NULL;');
     }
 
     /**
@@ -29,6 +23,6 @@ class LogTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('logs');
+        DB::statement('ALTER TABLE users MODIFY password  VARCHAR(50) NOT NULL;');
     }
 }

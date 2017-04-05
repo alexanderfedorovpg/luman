@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\Rbac\Administarator::class,
+        \App\Console\Commands\Rbac\Permission::class
     ];
 
     /**

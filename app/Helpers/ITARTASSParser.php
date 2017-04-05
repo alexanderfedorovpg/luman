@@ -3,9 +3,7 @@
  * Author: Arsen
  */
 
-namespace App\Http\Controllers;
-
-use Laravel\Lumen\Routing\Controller;
+namespace App\Helpers;
 
 //используемые модели
 use App\NewsFeed;
@@ -13,9 +11,9 @@ use App\NewsFeed;
 /**
  * Class ITARTASSParser
  * Парсер новостного фида ТАСС
- * @package App\Http\Controllers
+ * @package  App\Helpers;
  */
-class ITARTASSParser extends Controller
+class ITARTASSParser implements ParserHelpers
 {
 
     /**
@@ -23,7 +21,7 @@ class ITARTASSParser extends Controller
      */
     public function parse()
     {
-
+		echo "111";
         //ссылка на тот сайт, откуда будем парсить
         //формат - http://login:password@site.com указывается
         //если закрытое подключение, если нет - обычный url

@@ -38,6 +38,10 @@ const Top = styled.div`
 
 export const Left = styled.div`
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
     padding-right: 2px;
 `
 

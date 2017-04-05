@@ -7,10 +7,10 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Transformers\v1\NewsFeedTransformer;
-use App\Http\Transformers\v1\NewsListTransformer;
 use Illuminate\Http\Request;
 use App\NewsFeed;
-use Illuminate\Validation\Validator;
+use App\News;
+
 
 define('DEFAULT_VALUE', '50');
 
@@ -18,7 +18,7 @@ define('DEFAULT_VALUE', '50');
  * Class NewsFeedController
  * @package App\Http\Controllers\v1
  */
-class NewsFeedController extends ApiController
+class NewsFeedController extends CmsController
 {
 
     /**
@@ -91,5 +91,69 @@ class NewsFeedController extends ApiController
         );
     }
 
+    public function add(Request $request) {
+
+		//все данные из реквест переносим
+		//в $data, для удобного использования
+		$data = $request->except('_token');
+
+		//устанавливаем часовой пояс
+		date_default_timezone_set('Europe/Moscow');
+
+		$this->validate($request, [
+            'feed_id' => 'required|numeric',
+            'editor_id' => 'required|numeric',
+            'keywords' => 'required',
+            'top' => 'required|numeric',
+            'video_stream' => 'url',
+            'image_main' => 'mimes:jpeg,png',
+            'image_preview' => 'mimes:jpeg,png',
+            'is_online' => 'in:0,1',
+            'is_war_mode' => 'in:0,1',
+        ]);
+
+		if(NewsFeed::find($data['feed_id'])) {
+
+		$feed = NewsFeed::find($data['feed_id']);
+
+		$news = new News;
+		$news->title = $feed->header;
+		$news->is_publish = '0';
+		$news->publish_date = 'null';
+		$news->top = $data['top'];
+		$news->body = $feed->body;
+		$news->tags = $feed->tags;
+		$news->keywords = $data['keywords'];
+		$news->editor_id = $data['editor_id'];
+		//необязательные поля
+		if(isset($data['sub_title'])) {
+		$news->sub_title = $data['sub_title'];
+		}
+		if(isset($data['video_stream'])) {
+		$news->video_stream = $data['video_stream'];
+		}
+		if(isset($data['image_main'])) {
+		$news->image_main = $data['image-main'];
+		}
+		if(isset($data['image_preview'])) {
+		$news->image_main = $data['image-preview'];
+		}
+		if(isset($data['is_online'])) {
+		$news->image_main = $data['is_online'];
+		}
+		if(isset($data['is_war_mode'])) {
+		$news->image_main = $data['is_war_mode'];
+		}
+
+		$news->save();
+
+		if($news->save()) {
+			$feed->hidden = '1';
+			$feed->save();
+		}
+
+		}
+
+	}
 
 }
