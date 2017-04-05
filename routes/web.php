@@ -17,10 +17,9 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
+
+    $group->get('/newslisteditor/','NewsListEditorController@get');
+    $group->get('/newseditor/{id}','NewsListEditorController@getOne');
 });
 
-$app->group(['prefix' => 'cms/api/v1', 'namespace'=>'\App\Http\Controllers\v1\Cms'], function ($group)   {
-    $group->get('/newslist','NewsListControllerEditor@get');
-    $group->get('/news/{id}','NewsListControllerEditor@getOne');
-});
 

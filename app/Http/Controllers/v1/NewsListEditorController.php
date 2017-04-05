@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\v1\Cms;
+namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\v1\NewsListController;
-use App\News;
 use Illuminate\Http\Request;
 
 /**
  * Class NewsListController
  * @package App\Http\Controllers\v1\Client
  */
-class NewsListControllerEditor extends NewsListController
+class NewsListEditorController extends NewsListController
 {
 
     /**
@@ -19,8 +18,8 @@ class NewsListControllerEditor extends NewsListController
      */
     public function get(Request $request)
     {
-        var_dump(1);
-        //parent::get($request);
+        //var_dump(1);
+       return parent::get($request);
     }
 
     /**
