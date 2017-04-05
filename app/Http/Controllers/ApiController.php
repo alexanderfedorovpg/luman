@@ -52,6 +52,14 @@ class ApiController extends Controller
     }
 
     /**
+     * @param string $message
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function respondFail422x($message="Unprocessable Entity!") {
+        return $this->setStatusCode('422')->respondWithError($message);
+    }
+
+    /**
      * @param $data
      * @param array $headers
      * @return \Illuminate\Http\JsonResponse

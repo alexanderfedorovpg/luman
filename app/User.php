@@ -30,6 +30,27 @@ class User extends Model implements AuthenticatableContract
         'password',
     ];
 
+    public static $rules = [
+        'name' => 'required|max:255',
+        'login' => 'required|max:255|unique:users,login',
+        'email' => 'required|email|unique:users,email',
+        'need_change_password' => 'required|boolean',
+        'enabled' => 'boolean'
+    ];
+
+    /**
+     * Создает нового пользователя
+     *
+     * @return \App\User
+     */
+    public static function createNew(array $fields)
+    {
+        $user = new static($fields);
+        $user->setAuthPassword($fields['password']);
+
+        return $user->save();
+    }
+
     /**
      * Возвращает коллекцию групп к которым пренадлежит пользователь
      *
