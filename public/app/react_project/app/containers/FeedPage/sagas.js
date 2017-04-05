@@ -17,10 +17,10 @@ import {
 
 import * as api from 'api'
 
-export function* getFeed() {
+export function* getFeed({ payload }) {
 
     try {
-        const feed = yield call(api.getFeed);
+        const feed = yield call(api.getFeed, payload);
         yield put(feedLoaded(feed));
     } catch (err) {
         yield put(feedLoadingError(err));

@@ -82,7 +82,8 @@ const CloseIcon = styled(Icon)`
 `
 
 function Detail({ data, onClose }) {
-    let date = data.get('anons_create_dt')
+
+    let date = data.anons_create_dt
 
     return (
         <Root>
@@ -92,12 +93,12 @@ function Detail({ data, onClose }) {
                     {', '}
                     <FormattedTime value={date} />
                 </time>
-                <Source href="#">Источник: {data.get('source_feed')}</Source>
+                <Source href="#">Источник: {data.source_feed}</Source>
             </Header>
-            <Title>{data.get('header')}</Title>
+            <Title>{data.header}</Title>
             <H3></H3>
             <Text>
-                {data.get('body')}
+                {data.body}
             </Text>
             <ButtonsContainer>
                 <IgnoreBtn block danger>

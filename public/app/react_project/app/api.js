@@ -2,8 +2,10 @@ import axios from 'axios'
 
 const baseUrl = `http://librorum.rtvi.ddemo.ru/api/v1`
 
-export const getFeed = () => {
-    return axios.get(`${baseUrl}/newsfeed`)
+export const getFeed = params => {
+    return axios.get(`${baseUrl}/newsfeed`, {
+        params
+    })
 }
 
 export const hideFeedItem = (config) => {

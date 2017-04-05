@@ -17,7 +17,7 @@ import {
     Select
 } from './../Form'
 
-function Feed({ news, moved, users, hideItem, toWork, worked }) {
+function Feed({ news, moved, users, hideItem, toWork, worked, pagination, loading }) {
     return (
         <div>
             <Header moved={moved} />
@@ -26,7 +26,9 @@ function Feed({ news, moved, users, hideItem, toWork, worked }) {
                     <News
                         data={news}
                         hide={hideItem}
-                        toWork={toWork} />
+                        toWork={toWork}
+                        pagination={pagination}
+                        loading={loading} />
                 </Left>
                 <Right>
                     <form>

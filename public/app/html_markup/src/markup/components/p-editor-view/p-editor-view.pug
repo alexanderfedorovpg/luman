@@ -1,0 +1,32 @@
+mixin p-editor-view(data)
+    +b.editor-view()&attributes(attributes)
+        +e.HEADER.header
+            .content-wrap
+                .content-l
+                    form(action='')
+                        input.input.input-block(value='rtvi.com/news/2017/10/10/url/kiberataki')
+                .content-r
+                    
+
+        +e.action.content-wrap
+            +rating(rating)
+            +tags()
+
+        .content-wrap
+            .content-l
+                form(action='')
+                    .form-group
+                        textarea.textarea.input-block(name='', cols='30', rows='10') Разведка США заявила о причастности высшего руководства РФ к хакерским атакам
+                    .form-group
+                        textarea.textarea.input-block(name='', cols='30', rows='10') При этом директор национальной разведки Джеймс Клэппер сообщил, что доклад по хакерским атакам 'будет распространен в начале будущей недели'
+                    .form-group
+                        textarea.textarea.input-block(name='', cols='30', rows='10') В Москве во время антикоррупционного митинга задержали Навального // Навального решили на ночь оставить под присмотром полиции //
+                    .form-group
+                        textarea.textarea.input-block(name='', cols='30', rows='10') Разведка США исходит из того, что недавние хакерские атаки на США, приписываемые Вашингтоном Москве, могли быть санкционированы только высшим российским руководством. Такое утверждение приводится в совместном заявлении директора национальной разведки США Джеймса Клэппера, заместителя министра обороны США по разведке Марселя Леттре и главы Агентства национальной безопасности и Киберкомандования<br>Хакер Guccifer сравнил нападки США на Россию с 'фейковой кибервойной'<br>'Мы считаем, что только самые высокопоставленные официальные лица в России могли санкционировать недавнее
+                    .form-group
+                        textarea.textarea.input-block(name='', cols='30', rows='10')
+                    .form-group
+                        input.input.input-block(placeholder='Ключевые слова')
+            .content-r
+                +user('Поликарпов Анатолий', '%=static=%img/content/user.png')
+                +chat()

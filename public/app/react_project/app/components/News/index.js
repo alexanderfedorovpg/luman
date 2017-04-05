@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Item from './Item'
 import Detail from './Detail'
 import Modal from '../Modal'
+import Paginator from '../Paginator'
 
 class News extends Component {
 
@@ -45,32 +46,39 @@ class News extends Component {
     }
 
     getItemById(id) {
-        return this.props.data.find(value => value.get('id') === this.state.selected)
+        let item = this.props.data.find(value => value.get('id') === this.state.selected)
+
+        return item ? item.toJS() : {}
     }
 
     render() {
-        let { data, hide, toWork } = this.props
+        let { data, hide, toWork, pagination, loading } = this.props
 
         let selected = this.getItemById(this.state.selected)
 
         return (
             <div>
-                {data.map((value, index) => {
-                    return (
-                        <Item
-                            key={value.get('id')}
-                            data={value.toJS()}
-                            hide={hide}
-                            toWork={toWork}
-                            open={this.selectItem} />
-                    )
-                })}
+                <div style={{ opacity: loading ? .3 : 1 }}>
+                    {data.map((value, index) => {
+                        return (
+                            <Item
+                                key={value.get('id')}
+                                data={value.toJS()}
+                                hide={hide}
+                                toWork={toWork}
+                                open={this.selectItem} />
+                        )
+                    })}
+                </div>
                 <Modal
                     isOpen={this.state.modalOpen}
                     contentLabel="Новость"
                     onRequestClose={this.closeModal}>
                     <Detail onClose={this.closeModal} data={selected} />
                 </Modal>
+                {data.count()
+                    ? <Paginator {...pagination} />
+                    : null}
             </div>
         )
     }

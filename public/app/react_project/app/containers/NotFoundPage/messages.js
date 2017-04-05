@@ -9,5 +9,6 @@ export default defineMessages({
   header: {
     id: 'app.components.NotFoundPage.header',
     defaultMessage: 'This is NotFoundPage component!',
+    ru: 'Страница не найдена!',
   },
 });
