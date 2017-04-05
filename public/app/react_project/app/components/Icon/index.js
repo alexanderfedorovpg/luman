@@ -210,6 +210,9 @@ const Render = props => {
         case 'search':
             return <SvgIcons.Search {...props} />
 
+        case 'calendar':
+            return <SvgIcons.Calendar {...props} />
+
         default:
             return <Icon {...props} />
     }
