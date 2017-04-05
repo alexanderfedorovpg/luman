@@ -1,6 +1,6 @@
 .working {
     width: 100%;
-    margin-top: -18px;
+    margin-top: -15px;
 
     &__item {
         padding-left: $pad;
@@ -22,7 +22,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        padding-top: 17px;
+        padding-top: 20px;
         padding-bottom: 15px;
 
         border-bottom: 1px solid #e9e9e9;
@@ -32,7 +32,7 @@
     &__col-l {
         flex-shrink: 0;
         width: 49.35%;
-        padding-top: 7px;
+        padding-top: 0;
         padding-right: 20px;
 
         border-right: 1px solid #e9e9e9;
@@ -44,7 +44,7 @@
         justify-content: flex-start;
         flex-grow: 1;
         width: 50.75%;
-        padding-top: 7px;
+        padding-top: 0;
         margin-top: -8px;
         margin-left: 20px;
     }
@@ -72,7 +72,7 @@
 
     &__cnt {
         margin-top: 2px;
-        margin-bottom: 2px;
+        margin-bottom: 3px;
 
         &--new {
             font-weight: 600;
