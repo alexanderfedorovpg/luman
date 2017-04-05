@@ -11,8 +11,15 @@
 |
 */
 
-
 $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], function ($group)   {
+    $group->options('/{any:.*}',function (){
+        $headers=
+            [
+                'Access-Control-Allow-Origin'=>'*',
+                'Access-Control-Request-Method' => ['POST, GET, PUT, OPTIONS, DELETE'],
+            ];
+        return response()->json([] ,200 , $headers);
+    });
     $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
     $group->post('/newsfeed/work', 'NewsFeedController@add');
     $group->get('/newslist','NewsListController@get');
