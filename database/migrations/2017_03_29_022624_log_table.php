@@ -13,7 +13,7 @@ class LogTable extends Migration
      */
     public function up()
     {
-	    Schema::create('log', function (Blueprint $table) {
+	    Schema::create('logs', function (Blueprint $table) {
 		    $table->increments('id');
 		    $table->timestamps();
 		    $table->string('type_event');
@@ -29,6 +29,6 @@ class LogTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('log');
+	    Schema::dropIfExists('logs');
     }
 }
