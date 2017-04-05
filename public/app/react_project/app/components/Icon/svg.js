@@ -65,11 +65,21 @@ export const Clip = (props) => {
     )
 }
 
+export const Calendar = (props) => {
+    return (
+        <Svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="17">
+            <path d="M5 9V7h2v2zm3 0V7h2v2zm4 0V7h1v2zm-7 3v-1h2v1zm3 0v-1h2v1zm4 0v-1h1v1zm5.46-9.9v14.5H.66V2.1h2.52V.4h1.68v1.7h1.68V.4h1.68v1.7H9.9V.4h1.68v1.7h1.68V.4h1.68v1.7zm-1.68 1.71h-.84v.85h-1.68v-.85h-1.68v.85H9.9v-.85H8.22v.85H6.54v-.85H4.86v.85H3.18v-.85h-.84V14.9h13.44z"/>
+            <path fill="#666" d="M5 9V7h2v2zm3 0V7h2v2zm4 0V7h1v2zm-7 3v-1h2v1zm3 0v-1h2v1zm4 0v-1h1v1zm5.46-9.9v14.5H.66V2.1h2.52V.4h1.68v1.7h1.68V.4h1.68v1.7H9.9V.4h1.68v1.7h1.68V.4h1.68v1.7zm-1.68 1.71h-.84v.85h-1.68v-.85h-1.68v.85H9.9v-.85H8.22v.85H6.54v-.85H4.86v.85H3.18v-.85h-.84V14.9h13.44z"/>
+        </Svg>
+    )
+}
+
 export default {
     ArrowRight,
     ArrowRightLight,
     Hamburger,
     Logout,
     Search,
-    Clip
+    Clip,
+    Calendar
 }
