@@ -55,6 +55,23 @@ export default function createRoutes(store) {
             },
         },
         {
+            path: '/stats',
+            name: 'stats',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/StatsPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([component]) => {
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
+        },
+        {
             path: '*',
             name: 'notfound',
             getComponent(nextState, cb) {

@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Helpers\LogController;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Controllers\LogController;
+
 
 class LogServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,7 @@ class LogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-	    $this->app->bind('App\Http\Controllers\LogController', function(){
+	    $this->app->bind('App\Helpers\LogHelpers', function(){
 		    return new LogController();
 	    });
     }

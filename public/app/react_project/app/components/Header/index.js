@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link as ReactLink } from 'react-router'
 
 import Icon from './../Icon'
+import User, { Name as UserName } from './../User'
 import { rem, ifProp } from './../../utils/style'
 import { padding, font } from './../../constants/style'
 
@@ -36,6 +38,10 @@ const Top = styled.div`
 
 export const Left = styled.div`
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
     padding-right: 2px;
 `
 
@@ -99,7 +105,7 @@ const Action = styled.div`
     justify-content: flex-end;
 `
 
-const NavItem = styled.a`
+const NavItem = styled(({ active, ...rest }) => <ReactLink {...rest} />)`
     margin-right: ${rem(24)};
 
     font-family: ${font.helvetica};
@@ -114,40 +120,10 @@ const NavItem = styled.a`
     &:last-child {
         margin-right: 0;
     }
-`
 
-const User = styled.div`
-    display: flex;
-    align-items: center;
-    margin-right: ${rem(27)};
-    margin-left: ${rem(20)};
-`
-
-const UserPic = styled.a`
-    display: block;
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    margin-right: ${rem(12)};
-`
-
-const UserImg = styled.img`
-    max-width: 100%;
-    height: 100%;
-
-    border-radius: 50%;
-    object-fit: cover;
-`
-
-const UserName = styled.a`
-    margin-top: 5px;
-
-    font-family: ${font.helvetica};
-    font-size: ${rem(14)};
-    font-weight: 400;
-
-    color: #ffffff;
-    text-decoration: none;
+    ${ifProp('active')`
+        color: #fff;
+    `}
 `
 
 const Logout = styled.a`
@@ -168,10 +144,15 @@ export const Link = styled.a`
         font-family: ${font.helvetica};
         font-size: 18px;
     }
-
 `
 
-function Header({ moved, onToggle }) {
+const CustomUserName = styled(UserName)`
+    margin-top: 5px;
+    letter-spacing: 0;
+    color: #fff;
+`
+
+function Header({ moved, onToggle, isActive }) {
 
     return (
         <Wrapper moved={moved}>
@@ -190,20 +171,17 @@ function Header({ moved, onToggle }) {
                 <Right>
                     <Action>
                         <nav>
-                            <NavItem href="#">
+                            <NavItem to="/stats" active={isActive('/stats')}>
                                 Статистика
                             </NavItem>
-                            <NavItem href="#">
+                            <NavItem to="#" active={false}>
                                 Аналитика
                             </NavItem>
                         </nav>
-                        <User>
-                            <UserPic href="#">
-                                <UserImg src="/img/user.png" />
-                            </UserPic>
-                            <UserName href="#">
+                        <User data={{ pic: '/img/user.png' }}>
+                            <CustomUserName href="#">
                                 Поликарпов Анатолий
-                            </UserName>
+                            </CustomUserName>
                         </User>
                         <Logout href="#">
                             <Icon type="logout" />

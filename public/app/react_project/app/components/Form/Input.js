@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import Icon, { icons } from './../Icon'
 
-import { ifProp } from './../../utils/style'
+import { ifProp, rem } from './../../utils/style'
 import { color, height, font } from './../../constants/style'
 
 const Input = styled.input`
@@ -44,6 +44,10 @@ const Input = styled.input`
         padding-left: 35px;
     `}
 
+    ${ifProp(['icon', 'right'])(css`
+        padding-left: ${rem(8)};
+        padding-right: 35px;
+    `)}
 `
 
 export const InputIconWrapper = styled.div`
@@ -55,6 +59,11 @@ export const IconWrapper = Icon => styled(Icon)`
     top: 50%;
     left: 9px;
     transform: translateY(-50%);
+
+    ${ifProp('right')`
+        left: auto;
+        right: 9px;
+    `}
 `
 
 const StyledIcon = IconWrapper(Icon)
@@ -67,8 +76,8 @@ export const InputIcon = props => {
 
     return (
         <InputIconWrapper className={props.className}>
-            <Input {...inputProps} />
-            <StyledIcon type={props.icon} />
+            <Input {...inputProps} block />
+            <StyledIcon type={props.icon} right={props.right} />
         </InputIconWrapper>
     )
 }
@@ -89,6 +98,8 @@ const StyledCheckbox = styled.input`
     &:checked {
         + span {
             background-image: url(${icons['checkbox-active'].data}) !important;
+            width: ${icons['checkbox-active'].width}px;
+            height: ${icons['checkbox-active'].height}px;
         }
     }
 

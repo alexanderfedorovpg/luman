@@ -20,9 +20,10 @@ import {
         SELECT_FEED
 } from './constants';
 
-export function loadFeed() {
+export function loadFeed(params) {
     return {
-        type: LOAD_FEED
+        type: LOAD_FEED,
+        payload: params
     };
 }
 

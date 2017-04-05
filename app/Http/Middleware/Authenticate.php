@@ -39,6 +39,35 @@ class Authenticate
             return response('Unauthorized.', 401);
         }
 
-        return $next($request);
+        list($controller, $action) = $this->parseRequestRoute($request->route());
+        if ($this->auth->guard($guard)->user()->canRoute($controller, $action)) {
+            return $next($request);
+        }
+
+        return response('Unauthorized.', 401);
+    }
+
+    /**
+     * Костыль для получения вызываемого контроллера и экшена
+     * TODO: Выпилить! Не нашел способа как получить текущей роут
+     *
+     * @param array $routeParams
+     * @return array
+     */
+    private function parseRequestRoute(array $routeParams)
+    {
+        $route = null;
+        foreach ($routeParams as $param) {
+            if (isset($param['uses'])) {
+                $route = $param['uses'];
+            }
+        }
+
+        list($controller, $action) = explode('@', $route);
+        if (!$controller || !$action) {
+            return ['', ''];
+        }
+
+        return [$controller, $action];
     }
 }

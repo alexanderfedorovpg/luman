@@ -28,15 +28,17 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     };
 
     render() {
-        let { menuOpen, toggleMenu, closeMenu } = this.props
+        let { menuOpen, toggleMenu, closeMenu, router } = this.props
 
         return (
             <Root onClick={closeMenu}>
                 <Header
                     moved={menuOpen}
-                    onToggle={toggleMenu} />
+                    onToggle={toggleMenu}
+                    isActive={router.isActive} />
                 <NavSide
-                    expanded={menuOpen} />
+                    expanded={menuOpen}
+                    isActive={router.isActive} />
                 <Content moved={menuOpen}>
                     {React.Children.toArray(this.props.children)}
                 </Content>

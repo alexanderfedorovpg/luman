@@ -5,7 +5,7 @@
 	use Illuminate\Database\Eloquent\Model;
 
 	/**
-	 * Class News
+	 *
 	 * @package App
 	 */
 	class Log extends Model
@@ -17,6 +17,7 @@
 		 * @var array
 		 */
 		protected $fillable = [
+			'id',
 			'type_event',
 			'user_id',
 			'description'
