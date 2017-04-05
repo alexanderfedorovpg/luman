@@ -22,3 +22,4 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/user/create', 'UserController@create');
 });
 
+
