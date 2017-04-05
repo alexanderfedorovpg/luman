@@ -17,10 +17,10 @@ import {
     Select
 } from './../Form'
 
-function Feed({ news, moved, users, hideItem, toWork, worked, pagination, loading }) {
+function Feed({ news, moved, users, hideItem, toWork, worked, pagination, loading, onSearchChange }) {
     return (
         <div>
-            <Header moved={moved} />
+            <Header moved={moved} onSearchChange={onSearchChange} />
             <Wrap>
                 <Left>
                     <News

@@ -127,6 +127,7 @@ const NavItem = styled(({ active, ...rest }) => <ReactLink {...rest} />)`
 `
 
 const Logout = styled.a`
+    cursor: pointer;
     color: rgba(0, 0, 0, 0.59);
 `
 
@@ -152,7 +153,7 @@ const CustomUserName = styled(UserName)`
     color: #fff;
 `
 
-function Header({ moved, onToggle, isActive }) {
+function Header({ moved, onToggle, isActive, onLogout }) {
 
     return (
         <Wrapper moved={moved}>
@@ -183,7 +184,7 @@ function Header({ moved, onToggle, isActive }) {
                                 Поликарпов Анатолий
                             </CustomUserName>
                         </User>
-                        <Logout href="#">
+                        <Logout onClick={onLogout}>
                             <Icon type="logout" />
                         </Logout>
                     </Action>

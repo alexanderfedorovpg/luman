@@ -12,10 +12,11 @@ import {
     selectFeedList,
     selectedFeed,
     selectedPagination,
-    selectedLoading
+    selectedLoading,
+    selectSearchVars
 } from './selectors';
 
-import { loadFeed, hideFeedItem, selectFeed } from './actions'
+import { loadFeed, hideFeedItem, selectFeed, setFilters } from './actions'
 
 import Feed from '../../components/Feed'
 
@@ -26,11 +27,11 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
 
         this.hideItem = this.hideItem.bind(this)
         this.toWork = this.toWork.bind(this)
+        this.applyFilters = this.applyFilters.bind(this)
     }
 
     componentDidMount() {
-        let { page } = this.props.location.query
-        this.props.dispatch(loadFeed({ page }))
+        this.loadFeed()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -38,7 +39,7 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         let nextPage = nextProps.location.query.page || 1
 
         if (+page !== +nextPage) {
-            this.props.dispatch(loadFeed({ page: nextPage }))
+            this.loadFeed({ page: nextPage })
         }
     }
 
@@ -50,8 +51,30 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         this.props.dispatch(selectFeed(id))
     }
 
+    applyFilters(filters) {
+        this.props.dispatch(setFilters(filters))
+
+        this.loadFeed(filters)
+    }
+
+    loadFeed(params) {
+        let { search } = this.props;
+        let page = this.props.location.query.page || 1
+
+        this.props.dispatch(loadFeed({ page, ...search, ...params }))
+    }
+
     render() {
-        let { news, menuOpen, users, selectedFeed, pagination, router, loading } = this.props
+        let {
+            news,
+            menuOpen,
+            users,
+            selectedFeed,
+            pagination,
+            router,
+            loading,
+            search
+        } = this.props
 
         return (
             <div>
@@ -65,6 +88,7 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
                     users={users}
                     toWork={this.toWork}
                     hideItem={this.hideItem}
+                    onSearchChange={this.applyFilters}
                     worked={selectedFeed ? selectedFeed.toJS() : {}} />
             </div>
         );
@@ -88,6 +112,7 @@ const mapStateToProps = state => ({
                     pic: '/img/user2.png'
             }
     ],
+    search: selectSearchVars(state).toJS(),
     selectedFeed: selectedFeed(state),
     pagination: selectedPagination(state),
     loading: selectedLoading(state)
@@ -95,7 +120,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatch,
+        dispatch
     };
 }
 

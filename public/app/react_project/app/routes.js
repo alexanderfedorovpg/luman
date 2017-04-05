@@ -17,23 +17,26 @@ export default function createRoutes(store) {
     const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
     return [
-        {
-            path: '/login',
-            name: 'login',
-            getComponent(nextState, cb) {
-                const importModules = Promise.all([
-                    import('components/Login'),
-                ]);
+        // {
+        //     path: '/login',
+        //     name: 'login',
+        //     getComponent(nextState, cb) {
+        //         const importModules = Promise.all([
+        //             import('containers/LoginPage/sagas'),
+        //             import('containers/LoginPage'),
+        //         ]);
 
-                const renderRoute = loadModule(cb);
+        //         const renderRoute = loadModule(cb);
 
-                importModules.then(([component]) => {
-                    renderRoute(component);
-                });
+        //         importModules.then(([sagas, component]) => {
+        //             injectSagas(sagas.default);
 
-                importModules.catch(errorLoading);
-            },
-        },
+        //             renderRoute(component);
+        //         });
+
+        //         importModules.catch(errorLoading);
+        //     },
+        // },
         {
             path: '/feed',
             name: 'feed',

@@ -21,6 +21,10 @@ import Header from '../../components/Header'
 import NavSide from '../../components/NavSide'
 import Content from '../../components/Content'
 
+import LoginPage from '../LoginPage'
+
+import { logout } from '../LoginPage/actions'
+
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
     static propTypes = {
@@ -28,14 +32,15 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     };
 
     render() {
-        let { menuOpen, toggleMenu, closeMenu, router } = this.props
+        let { menuOpen, toggleMenu, closeMenu, router, token } = this.props
 
-        return (
-            <Root onClick={closeMenu}>
+        return token
+            ? <Root onClick={closeMenu}>
                 <Header
                     moved={menuOpen}
                     onToggle={toggleMenu}
-                    isActive={router.isActive} />
+                    isActive={router.isActive}
+                    onLogout={this.props.logout} />
                 <NavSide
                     expanded={menuOpen}
                     isActive={router.isActive} />
@@ -43,12 +48,14 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
                     {React.Children.toArray(this.props.children)}
                 </Content>
             </Root>
-        );
+
+            : <LoginPage />
     }
 }
 
 const mapStateToProps = state => ({
-    menuOpen: state.get('app').get('menuOpen')
+    menuOpen: state.get('app').get('menuOpen'),
+    token: state.get('app').get('api-token'),
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -62,6 +69,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch({
             type: 'CLOSE_MENU'
         })
+    },
+
+    logout() {
+        dispatch(logout())
     }
 })
 

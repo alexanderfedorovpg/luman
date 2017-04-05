@@ -31,10 +31,16 @@ const selectedLoading = createSelector(
     root => root.getIn(['news', 'loading'])
 )
 
+const selectSearchVars = createSelector(
+    selectFeedPageDomain(),
+    root => root.getIn(['news', 'search'])
+)
+
 export {
     selectFeedPageDomain,
     selectFeedList,
     selectedFeed,
     selectedPagination,
-    selectedLoading
+    selectedLoading,
+    selectSearchVars
 };
