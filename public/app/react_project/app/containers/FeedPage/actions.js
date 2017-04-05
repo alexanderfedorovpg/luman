@@ -17,8 +17,17 @@ import {
         FEED_TO_WORK_SUCCESS,
         FEED_TO_WORK_FAILURE,
 
-        SELECT_FEED
+        SELECT_FEED,
+
+        SET_FILTERS
 } from './constants';
+
+export function setFilters(payload) {
+    return {
+        type: SET_FILTERS,
+        payload
+    };
+}
 
 export function loadFeed(params) {
     return {
