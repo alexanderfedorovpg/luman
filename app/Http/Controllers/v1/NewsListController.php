@@ -30,7 +30,7 @@ class NewsListController extends CmsController
      * Получить список новостей
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get(Request $request)
+    public function get(Request $request, $getArray = false)
     {
 
         $news = News::published();
@@ -72,9 +72,14 @@ class NewsListController extends CmsController
 
         $news = $news->get();
 
-        return $this->respond(
-            $this->newsListTransformer->transformCollection($news->toArray())
-        );
+        $data = $this->newsListTransformer->transformCollection($news->toArray());
+
+        if($getArray){
+            return $data;
+        } else {
+            return $this->respond($data);
+        }
+
     }
 
     /**
@@ -83,7 +88,7 @@ class NewsListController extends CmsController
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getOne($id)
+    public function getOne($id, $getArray = false)
     {
         $news = News::whereId($id)->published()->first();
         if (!$news) {
@@ -91,9 +96,16 @@ class NewsListController extends CmsController
         }
         $newsArray = $news->toArray();
         $comments = $news->comments()->published()->get();
-        return $this->respond(
-            $this->newsListTransformer->transformOneNews($newsArray, $comments)
-        );
+
+
+        $data = $this->newsListTransformer->transformOneNews($newsArray, $comments);
+
+
+        if($getArray){
+            return $data;
+        } else {
+            return $this->respond($data);
+        }
     }
 
     /**

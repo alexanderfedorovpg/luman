@@ -19,7 +19,9 @@ class NewsListEditorController extends NewsListController
     public function get(Request $request)
     {
         //var_dump(1);
-       return parent::get($request);
+       $arr = parent::get($request, true);
+       //return $arr;
+       var_dump($arr);
     }
 
     /**
