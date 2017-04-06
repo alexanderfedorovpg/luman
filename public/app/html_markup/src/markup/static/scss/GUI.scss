@@ -197,7 +197,21 @@ a {
 
 }
 
-
+.blockquote {
+    padding-top: 16px;
+    padding-bottom: 21px;
+    padding-left: 14px;
+    padding-right: 3px;
+    border-top: 1px solid #2e3136;
+    border-bottom: 1px solid #2e3136;
+    
+    font-family: $opensans;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    line-height: 24px;
+    letter-spacing: -0.195px;
+}
 
 // checkbox
 .radio,

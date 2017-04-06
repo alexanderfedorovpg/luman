@@ -1,0 +1,94 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'Главная';
+
+block content
+    // Контент здесь
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                +b.FORM.form-feed(action='' method='POST')
+                    .form-horizontal
+                        button.btn.btn-xs.btn-danger 
+                            +icon({ icon: 'arrowRight', class: 'arrowRight' })
+                            | Отменить изменения
+                        button.btn.btn-xs.btn-primary Предпросмотр
+                        button.btn.btn-xs.btn-success
+                            i.icon.icon-okay
+                            | Сохранить
+            +b.header-r 
+                a.link-black(href=jv0)
+                    span ?
+                    | справка
+    .content-wrap
+        .content-l
+            //- +news-list()
+        .content-r
+            form.form-select(action='' method='POST')
+                +tags()
+                +rating(rating)
+                +b.form-group
+                    textarea.textarea.input-block Кремль заявил о «серьезной усталости» от обвинений в кибератаках
+                +b.form-group.form-group-sm
+                    label.label.label__bold(for='ko2') Назначить редактора статьи
+                    .select
+                        .input-icon
+                            input.input.input-block#ko4(type='text')
+                            +icon({ icon: 'search', class: 'search' }) 
+                        .select-dropdown
+                            .select-item
+                                +user('Ковалев Максим', '%=static=%img/content/user1.png')
+                                span Выбрать
+
+                            .select-item
+                                +user('Короленко Анастасия', '%=static=%img/content/user2.png')
+                                span Выбрать
+
+                +b.form-group.form-group-sm
+                    label.label.label__bold(for='ko3') Назначить редактора в прямой эфир
+                    .select
+                        .input-icon
+                            input.input.input-block#ko4(type='text')
+                            +icon({ icon: 'search', class: 'search' }) 
+                        .select-dropdown
+                            .select-item
+                                +user('Ковалев Максим', '%=static=%img/content/user1.png')
+                                span Выбрать
+
+                            .select-item
+                                +user('Короленко Анастасия', '%=static=%img/content/user2.png')
+                                span Выбрать
+
+                +b.form-group.form-group-sm
+                    label.label.label__bold(for='ko4') Собрать команду для съемки сюжета
+                    .select
+                        .input-icon
+                            input.input.input-block#ko4(type='text')
+                            +icon({ icon: 'search', class: 'search' }) 
+                        .select-dropdown
+                            .select-item
+                                .select-item__pic
+                                    img(src='%=static=%img/content/user1.png', alt='')
+                                .select-item__cnt
+                                    p Ковалев Максим
+                                    span Выбрать
+
+                            .select-item
+                                .select-item__pic
+                                    img(src='%=static=%img/content/user2.png', alt='')
+                                .select-item__cnt
+                                    p Короленко Анастасия
+                                    span Выбрать
+
+                +b.form-group
+                    label.label.label__light.label__right(for='ko5') Не более 4 слов через пробел
+                    input.input.input-block#ko5(type='text' placeholder='Ключевые слова')
+
+                +b.form-group
+                    +e.input.input-icon
+                        input.input.input-block#ko6(type='text' placeholder='Комментарий')
+                        +icon({ icon: 'clip', class: 'clip' }) 
+
+                +b.form-grop
+                    button.btn.btn-block.btn-success Отправить в работу

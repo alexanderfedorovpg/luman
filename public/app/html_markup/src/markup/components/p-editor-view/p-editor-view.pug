@@ -23,19 +23,21 @@ mixin p-editor-view(data)
                         +b.form-group__label.form-group__label--right
                             span Заголовок 
                             | : осталось 30 символов
-                        textarea.textarea.input-title.input-block(name='', cols='30', rows='10') Разведка США заявила о причастности высшего руководства РФ к хакерским атакам
+                        textarea.textarea.input-title.input-block Разведка США заявила о причастности высшего руководства РФ к хакерским атакам
                     .form-group
                         +b.form-group__label.form-group__label--right
-                            span Подзаголовок 
-                            | : осталось 
-                            span.form-group__label--out -5 
+                            <span> Подзаголовок </span> : осталось
+                            
+                            <span class='form-group__label--out'>-5 </span> 
+                            =' '
                             | символов
-                        textarea.textarea.input-subtitle.input-block(name='', cols='30', rows='10') При этом директор национальной разведки Джеймс Клэппер сообщил, что доклад по хакерским атакам "будет распространен в начале будущей недели"
+                        
+                        textarea.textarea.input-subtitle.input-block При этом директор национальной разведки Джеймс Кэппер сообщил, что доклад по хакерским атакм будет распространен в начале будущей недели
                     .form-group
                         +b.form-group__label.form-group__label--right
                             span Тезисы через // 
                             | : осталось 30 символов
-                        textarea.textarea.input-thesis.input-block(name='', cols='30', rows='10') В Москве во время антикоррупционного митинга задержали Навального // Навального решили на ночь оставить под присмотром полиции //
+                        textarea.textarea.input-thesis.input-block В Москве во время антикоррупционного митинга задержали Навального // Навального решили на ночь оставить под присмотром полиции //
 
                     .form-group
                         +b.text-edit
