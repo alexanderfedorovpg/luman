@@ -20,8 +20,10 @@ const CustomButton = styled(Button)`
 `
 
 function Paginator({ current, max, goPrev, goNext }) {
-    return (
-        <Root>
+    return current === max
+        ? null
+
+        : <Root>
             <Link to={{
                     pathname: '/feed',
                     query: {
@@ -42,7 +44,6 @@ function Paginator({ current, max, goPrev, goNext }) {
                 &gt;
             </Link>
         </Root>
-    )
 }
 
 export default Paginator

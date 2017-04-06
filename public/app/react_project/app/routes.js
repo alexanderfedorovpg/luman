@@ -75,6 +75,23 @@ export default function createRoutes(store) {
             },
         },
         {
+            path: '/working',
+            name: 'working',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/WorkingPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([component]) => {
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
+        },
+        {
             path: '*',
             name: 'notfound',
             getComponent(nextState, cb) {

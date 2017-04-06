@@ -31,7 +31,7 @@ const Label = styled.label`
     display: flex;
     align-items: center;
     height: 24px;
-    padding: 0 10px 0 10px;
+    padding: 4px 10px 0 10px;
 
     font-family: ${font.helvetica};
     font-size: ${rem(14)};
@@ -61,7 +61,7 @@ class Tags extends Component {
         super(props);
 
         this.state = {
-            checked: null
+            checked: []
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -69,10 +69,22 @@ class Tags extends Component {
 
     handleChange(e) {
         let value = e.target.value
+        let index = this.state.checked.indexOf(value)
 
-        if (value !== this.state.checked) {
+        if (index > -1) {
             this.setState({
-                checked: value
+                checked: [
+                    ...this.state.checked.slice(0, index),
+                    ...this.state.checked.slice(index+1)
+                ]
+            })
+        }
+        else {
+            this.setState({
+                checked: [
+                    ...this.state.checked,
+                    value
+                ]
             })
         }
     }
@@ -88,13 +100,17 @@ class Tags extends Component {
 
                     return (
                         <Item key={tag}>
-                            <Label checked={checked === tag}>
+                            <Label checked={checked.indexOf(tag) > -1}>
                                 <CustomInput
-                                    type="radio"
+                                    type="checkbox"
                                     name="tags"
                                     value={tag}
+                                    checked={checked.indexOf(tag) > -1}
                                     onChange={this.handleChange} />
-                                {tag}
+
+                                <span>
+                                    {tag}
+                                </span>
                             </Label>
                         </Item>
                     )
