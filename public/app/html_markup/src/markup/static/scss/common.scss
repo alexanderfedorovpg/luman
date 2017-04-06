@@ -496,3 +496,28 @@ h4 {
         max-width: 100%;
     }
 }
+
+.time-publish {
+
+    font-family: $opensans;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: right;
+    
+    &__date {
+
+        display: block;
+
+        color: #666666;
+
+    }
+
+    &__hours {
+
+        display: block;
+
+        color: #999999;
+
+    }
+
+}
