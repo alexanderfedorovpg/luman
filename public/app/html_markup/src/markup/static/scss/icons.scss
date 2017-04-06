@@ -57,6 +57,14 @@
         }
     }
 
+    &-undo-lite {
+        @include bg($undo-lite);
+    }
+
+    &-question-lite {
+        @include bg($question-lite);
+    }
+
     &-resize {
         @include bg($resize);
         &:hover {
@@ -105,6 +113,11 @@
         &:hover {
             @include bg($text-video-active);
         }
+    
+        &-lg {
+            @include bg($text-video-lg);
+        }
+
     }
 
     &-orph {
@@ -112,6 +125,10 @@
         &:hover {
             @include bg($orph-active);
         }
+    }
+
+    &-youtube {
+        @include bg($youtube);
     }
 
     &-twitter {

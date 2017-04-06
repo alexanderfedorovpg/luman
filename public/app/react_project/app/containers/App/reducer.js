@@ -8,6 +8,11 @@ import { fromJS } from 'immutable';
 import {
 } from './constants';
 
+import {
+    LOGIN_SUCCESS,
+    LOGOUT
+} from '../LoginPage/constants';
+
 const initialState = fromJS({
     menuOpen: false
 });
@@ -26,6 +31,12 @@ function AppReducer(state = initialState, action) {
             return state
         }
         break
+
+    case LOGIN_SUCCESS:
+        return state.set('api-token', action.payload)
+
+    case LOGOUT:
+        return state.set('api-token', null)
 
     default:
         return state;

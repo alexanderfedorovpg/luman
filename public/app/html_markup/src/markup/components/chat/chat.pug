@@ -1,7 +1,7 @@
 mixin chat(data)
     +b.chat-wrap()&attributes(attributes)
         +b.chat
-
+            //- необходимо заменить дефолтные скролл
             +b.chat-message
                 +user('Поликарпов Анатолий', '%=static=%img/content/user.png')
                 +e.date 15:32
@@ -38,5 +38,13 @@ mixin chat(data)
                 +e.date 16:25
                 +e.cnt 
                     +e.P Толик, вставялй фото и я накатаю тебе правки
+
+        +b.chat-send
+            +e.message
+                input.input.input-block(placeholder='Комментарий')
+                +e.file
+                    input#file(type='file')
+                    label(for="file")
+                        +icon({ icon: 'file', class: 'file' }) 
 
         block
