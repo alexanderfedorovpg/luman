@@ -1,0 +1,23 @@
+mixin p-main(data)
+    +b.p-main()&attributes(attributes)
+        each item in data.items
+            +e.item
+                +e.wrap
+                    +e.col-l
+                        
+                    +e.col-r
+                        +e.HEADER.header
+                            +b.rating
+                                +e.SPAN.item.rate6.is-active
+                                    input(type="radio", name="rating", id="rate6" disabled)
+                                    label(for="rate6") 6
+
+                            +e.P.tag= item.tag
+
+                        +e.cnt(class= item.cntClass)
+                            p(class= item.ratingClass)= item.cnt
+
+                        +b.working-d-tag
+                            +e.SPAN.item #внешняя политика
+                            +e.SPAN.item #США
+        block
