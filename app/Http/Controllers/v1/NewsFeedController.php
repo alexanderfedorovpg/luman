@@ -110,7 +110,7 @@ class NewsFeedController extends CmsController
 
 
             if ($feed->save) {
-                return $this->respond(
+                $this->respond(
                     ["data"=>"hidden"]
                 );
             }
@@ -118,7 +118,7 @@ class NewsFeedController extends CmsController
             throw new \Exception('Ошибка, новость не скрыта');
         }
         catch (\Exception $e) {
-
+                $this->respondFail500x($e->getMessage());
         }
     }
 
