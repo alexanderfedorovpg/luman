@@ -39,8 +39,7 @@ class NewsFeed extends Model
     {
         foreach ($strings as $string) {
             $query->where(function ($query) use ($string) {
-                $query->orWhere('title', 'like', "%{$string}%")
-                    ->orWhere('text', 'like', "%{$string}%");
+                $query->orWhere('header', 'like', "%{$string}%");
             });
         }
         return $query;

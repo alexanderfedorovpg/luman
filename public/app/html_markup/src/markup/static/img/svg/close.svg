@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.82" height="9.812" viewBox="0 0 9.82 9.812">
+  <defs>
+    <filter id="filter" x="1207.59" y="398.594" width="9.82" height="9.812" filterUnits="userSpaceOnUse">
+      <feFlood result="flood"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="Фигура_2_копия" data-name="Фигура 2 копия" class="cls-1" d="M1207.58,399.321l0.74-.743,9.1,9.1-0.74.743Zm9.84,0-0.74-.743-9.1,9.1,0.74,0.743Z" transform="translate(-1207.59 -398.594)"/>
+</svg>

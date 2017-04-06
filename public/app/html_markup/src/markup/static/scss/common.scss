@@ -217,6 +217,13 @@ h4 {
     }
 }
 
+// form-programs
+.form-programs {
+    &__input {
+        width: 29rem;
+    }
+}
+
 .video-status {
     
     font-family: $opensans;
@@ -375,6 +382,19 @@ h4 {
 
 }
 
+.programs-page {
+    flex-direction: column;
+
+    .row {
+        padding-left: $pad;
+        margin-top: -.4rem;
+    }
+
+    .btn {
+        margin-right: .3rem;
+    }
+}
+
 .text-edit {
     border: 1px solid rgba(204, 204, 204, 0.74);
 
@@ -447,5 +467,4 @@ h4 {
         height: auto;
         max-width: 100%;
     }
-
 }

@@ -16,12 +16,14 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
         $headers=
             [
                 'Access-Control-Allow-Origin'=>'*',
-                'Access-Control-Allow-Headers'=> 'Api-Token',
+                'Access-Control-Allow-Headers'=> ['Content-Type, Api-Token'],
                 'Access-Control-Request-Method' => ['POST, GET, PUT, OPTIONS, DELETE'],
+
             ];
         return response()->json([] ,200 , $headers);
     });
     $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
+    $group->post('/newsfeed/', 'NewsFeedController@update');
     $group->post('/newsfeed/work', 'NewsFeedController@add');
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
@@ -49,6 +51,13 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 
     //Права
     $group->get('/permission','PermissionController@index');
+
+    //Теги
+    $group->get('/tags','TagsController@index');
+    $group->get('/tags/{id}','TagsController@show');
+    $group->post('/tags','TagsController@create');
+    $group->put('/tags/{id}','TagsController@update');
+    $group->delete('/tags/{id}','TagsController@destroy');
 
 });
 

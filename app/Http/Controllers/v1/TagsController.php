@@ -5,9 +5,13 @@ namespace App\Http\Controllers\v1;
 use App\Tag;
 
 use Illuminate\Validation\Validator;
-use App\Http\Controllers\CmsController;
+
 use Illuminate\Http\Request;
 
+/**
+ * Class TagsController
+ * @package App\Http\Controllers\v1
+ */
 class TagsController extends CmsController {
 
 	public function create(Request $request) {
@@ -22,20 +26,30 @@ class TagsController extends CmsController {
 
 	}
 
-	public function read() {
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+	public function index() {
 
 		$tags = Tag::all();
 
 		return response()->json(['tags' => $tags]);
 	}
 
-	public function read_id($id) {
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+	public function show($id) {
 
 		$tag = Tag::find($id);
 
 		return response()->json(['tag' => $tag]);
 	}
 
+    /**
+     * @param Request $request
+     */
 	public function update(Request $request) {
 
 		if(Tag::find($request->id)) {
@@ -53,7 +67,10 @@ class TagsController extends CmsController {
 		
 	}
 
-	public function delete(Request $request) {
+    /**
+     * @param Request $request
+     */
+	public function destroy(Request $request) {
 
 		if(Tag::find($request->id)) {
 

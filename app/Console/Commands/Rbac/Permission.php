@@ -126,5 +126,30 @@ class Permission extends Command
             ],
         ];
     }
-
+    /**
+     * Доступы для контроллера \App\Controllers\v1\TagsController
+     *
+     * @return array
+     */
+    private function permissTags()
+    {
+        return [
+            [
+                'name' => 'v1.tags-index',
+                'description' => 'Список тегов',
+            ],
+            [
+                'name' => 'v1.tags-create',
+                'description' => 'Создание тега',
+            ],
+            [
+                'name' => 'v1.tags-destroy',
+                'description' => 'Удаление тега',
+            ],
+            [
+                'name' => 'v1.tags-show',
+                'description' => 'Вывод тега',
+            ],
+        ];
+    }
 }
