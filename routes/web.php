@@ -23,6 +23,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
         return response()->json([] ,200 , $headers);
     });
     $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
+    $group->post('/newsfeed/', 'NewsFeedController@update');
     $group->post('/newsfeed/work', 'NewsFeedController@add');
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
