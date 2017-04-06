@@ -92,6 +92,7 @@ class NewsFeedController extends CmsController
     }
 
     public function update(Request $request) {
+
         try {
 
             $this->validate($request, [
@@ -99,18 +100,18 @@ class NewsFeedController extends CmsController
                 'id'=> 'required|numeric',
             ]);
 
-            $action = $request->input('hide');
+            $action = $request->input('action');
             $id = $request->input('id');
 
             $feed= NewsFeed::find($id);
 
             if ($action=="hide") {
                 $feed->hidden=1;
+
             }
 
-
-            if ($feed->save) {
-                $this->respond(
+            if ($feed->save()) {
+                return $this->respond(
                     ["data"=>"hidden"]
                 );
             }
@@ -118,7 +119,7 @@ class NewsFeedController extends CmsController
             throw new \Exception('Ошибка, новость не скрыта');
         }
         catch (\Exception $e) {
-                $this->respondFail500x($e->getMessage());
+            return $this->respondFail500x($e->getMessage());
         }
     }
 
