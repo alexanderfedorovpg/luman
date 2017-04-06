@@ -60,6 +60,7 @@ h4 {
     margin-top: 60px;
     margin-left: 67px;
     padding-top: 78px;
+    padding-bottom: 78px;
 
     transition: all 0.4s ease;
 
@@ -229,11 +230,11 @@ h4 {
     font-family: $opensans;
     font-size: 13px;
     color: #999999;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 0.1px;
 
     .icon {
-        margin-top: -5px;
+        margin-top: -3px;
         margin-left: 2px;
         margin-right: 5px;
     }
@@ -247,7 +248,10 @@ h4 {
 
     &__ready {
 
-        color: $cl-success;
+        margin-left: 3px;
+        // color: $cl-success;
+        // color: #3C8C13;
+        color: #1f9d29;
 
     }
 
@@ -498,7 +502,6 @@ h4 {
 }
 
 .time-publish {
-
     font-family: $opensans;
     font-size: 12px;
     font-weight: 400;
