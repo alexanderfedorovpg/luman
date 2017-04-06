@@ -21,20 +21,51 @@ export const login = ({ username, password }) => {
 
 export const getFeed = params => {
     return axios.get(`${baseUrl}/newsfeed`, {
+        params: {
+            ...params
+        }
+    })
+}
+
+export const hideFeedItem = id => {
+    return axios.post(`${baseUrl}/newsfeed`, {
+            action: 'hide',
+            id
+        })
+}
+
+export const feedToWork = data => {
+    let {
+        id,
+        tags,
+        keywords,
+        editor,
+        top,
+        rating
+    } = data
+
+    return axios.post(`${baseUrl}/work/${id}`, {
+            action: 'work',
+            id,
+            tags: tags.join(', '),
+            keywords: keywords.join(', '),
+            editor_id: editor,
+            top: rating
+        })
+}
+
+export const getUser = (id, params) => {
+    return axios.get(`${baseUrl}/user${id ? `/${id}` : ''}`, {
         params
     })
 }
 
-export const hideFeedItem = (config) => {
-    return axios.post(`${baseUrl}/newsfeed`, config)
+export const getGroup = id => {
+    return axios.get(`${baseUrl}/group${id ? `/${id}` : ''}`)
 }
 
-export const feedToWork = (id, config) => {
-    return axios.post(`${baseUrl}/work/{$id}`, config)
-}
-
-export const getUser = () => {
-    return axios.get(`${baseUrl}/user`)
+export const getPermissions = () => {
+    return axios.get(`${baseUrl}/permission`)
 }
 
 export default axios

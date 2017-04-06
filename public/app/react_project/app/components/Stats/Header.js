@@ -73,7 +73,7 @@ function Header() {
     return (
         <Root>
             <Wrapper>
-                <Tabs />
+                <Tabs data={['Сегдня','За неделю','За месяц','За год']} />
                 <Period>
                     <Link href="#">Показать за период</Link>
                     <Date>

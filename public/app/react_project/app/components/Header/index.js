@@ -147,6 +147,10 @@ export const Link = styled.a`
     }
 `
 
+const CustomUser = styled(User)`
+    margin-right: ${rem(27)};
+    margin-left: ${rem(20)};
+`
 const CustomUserName = styled(UserName)`
     margin-top: 5px;
     letter-spacing: 0;
@@ -179,11 +183,11 @@ function Header({ moved, onToggle, isActive, onLogout }) {
                                 Аналитика
                             </NavItem>
                         </nav>
-                        <User data={{ pic: '/img/user.png' }}>
+                        <CustomUser data={{ pic: '/img/user.png' }}>
                             <CustomUserName href="#">
                                 Поликарпов Анатолий
                             </CustomUserName>
-                        </User>
+                        </CustomUser>
                         <Logout onClick={onLogout}>
                             <Icon type="logout" />
                         </Logout>
