@@ -38,9 +38,12 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/group/{groupId}/permiss','GroupController@addPermiss');
     $group->delete('/group/{groupId}/permiss/{permissId}','GroupController@addPermiss');
 
-
     //Права
     $group->get('/permission','PermissionController@index');
+
+    //Чат новостей
+    $group->get('/newschat/{newsId}','NewsChatController@index');
+    $group->post('/newschat/{newsId}','NewsChatController@create');
 
 });
 

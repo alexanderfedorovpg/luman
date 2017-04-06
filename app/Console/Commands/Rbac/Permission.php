@@ -127,4 +127,23 @@ class Permission extends Command
         ];
     }
 
+    /**
+     * Доступы для контроллера \App\Controllers\v1\NewsChatController
+     *
+     * @return array
+     */
+    public function permissNewsChat()
+    {
+        return [
+            [
+                'name' => 'v1.newsChat-index',
+                'description' => 'Чат новости. Просмотор сообщений',
+            ],
+            [
+                'name' => 'v1.newsChat-create',
+                'description' => 'Чат новости. Сооздание сообщений',
+            ],
+        ];
+    }
+
 }
