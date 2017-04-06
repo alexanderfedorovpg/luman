@@ -7,6 +7,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Transformers\v1\NewsFeedTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\NewsFeed;
 use App\News;
@@ -123,7 +124,7 @@ class NewsFeedController extends CmsController
         }
     }
 
-    public function add(Request $request)
+    public function create(Request $request)
     {
         try {
             //все данные из реквест переносим
@@ -134,20 +135,22 @@ class NewsFeedController extends CmsController
             date_default_timezone_set('Europe/Moscow');
 
             $this->validate($request, [
-                'feed_id' => 'required|numeric',
+                'action' => 'required',
+                'id' => 'required|numeric',
                 'editor_id' => 'required|numeric',
                 'keywords' => 'required',
+                'tags' => 'required',
                 'top' => 'required|numeric',
-                'video_stream' => 'url',
-                'image_main' => 'mimes:jpeg,png',
-                'image_preview' => 'mimes:jpeg,png',
-                'is_online' => 'in:0,1',
-                'is_war_mode' => 'in:0,1',
+//                'video_stream' => 'url',
+//                'image_main' => 'mimes:jpeg,png',
+//                'image_preview' => 'mimes:jpeg,png',
+//                'is_online' => 'in:0,1',
+//                'is_war_mode' => 'in:0,1',
             ]);
 
-            if (NewsFeed::find($data['feed_id'])) {
+            $feed =NewsFeed::ViewMode(0)->findOrFail($data['id']);
 
-                $feed = NewsFeed::find($data['feed_id']);
+            if ($feed && $data['action']=='work' ) {
 
                 $news = new News;
                 $news->title = $feed->header;
@@ -155,7 +158,7 @@ class NewsFeedController extends CmsController
                 $news->publish_date = 'null';
                 $news->top = $data['top'];
                 $news->body = $feed->body;
-                $news->tags = $feed->tags;
+                $news->tags = $data['tags'];
                 $news->keywords = $data['keywords'];
                 $news->editor_id = $data['editor_id'];
                 //необязательные поля
@@ -169,13 +172,13 @@ class NewsFeedController extends CmsController
                     $news->image_main = $data['image-main'];
                 }
                 if (isset($data['image_preview'])) {
-                    $news->image_main = $data['image-preview'];
+                    $news->image->preview = $data['image-preview'];
                 }
                 if (isset($data['is_online'])) {
-                    $news->image_main = $data['is_online'];
+                    $news->is_online = $data['is_online'];
                 }
                 if (isset($data['is_war_mode'])) {
-                    $news->image_main = $data['is_war_mode'];
+                    $news->is_war_mode = $data['is_war_mode'];
                 }
 
                 $news->save();
@@ -191,8 +194,11 @@ class NewsFeedController extends CmsController
                 throw new \Exception("Ошибка, новость не создана...");
             }
 
-        } catch (\Exception $e) {
-            $this->respondFail500x($e->getMessage());
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound(['Исходня запись в ленте новостей не найдена либо скрыта']);
+        }
+         catch (\Exception $e) {
+            return $this->respondFail500x([$e->getTrace()]);
         }
     }
 
