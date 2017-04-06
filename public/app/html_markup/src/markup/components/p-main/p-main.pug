@@ -1,9 +1,13 @@
-mixin p-working(data)
-    +b.working&attributes(attributes)
+mixin p-main(data)
+    +b.working.working--main()&attributes(attributes)
         each item in data.items
             +e.item
                 +e.wrap
                     +e.col-l
+                        +b.time-publish
+                            +e.TIME.date 15 января 2017
+                            +e.TIME.hours 15:18
+                    +e.col-r
                         +e.HEADER.header
                             +b.rating
                                 +e.SPAN.item.is-active(class= item.ratingClass)
@@ -19,21 +23,6 @@ mixin p-working(data)
                             +e.SPAN.item #внешняя политика
                             +e.SPAN.item #США
 
-                    +e.col-r
-                        +b.user
-                            +e.A.pic(href=jv0)
-                                img(src= item.userPic)
-                            +e.A.name(href=jv0)= item.userName
-
-                        +e.SPAN.time(class= item.timeClass)= item.time
-                         //- 15 мин
-
-                        +status(class= item.statusClass)
-
-                        +b.working-nav
-                            +e.A.item(href=jv0) Пуш-уведомление
-                            +e.A.item(href=jv0) Сменить редактора
-                            +e.A.item(href=jv0) Снять задание
-
-
-    block
+                    +e.SPAN.ignore.icon.icon-delete.tooltip(data-tooltip='Игнорировать')
+                    +e.SPAN.work.icon.icon-go-right.tooltip(data-tooltip='Работаем!')
+        block

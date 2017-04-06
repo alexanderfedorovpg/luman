@@ -437,13 +437,41 @@ h4 {
         position: relative;
         float: left;
         cursor: pointer;
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
         .icon-youtube {
+            display: none;
             position: absolute;
             top: 50%;
             left: 50%;
+            z-index: 6;
             transform: translate(-50%, -50%);
         }
+
+        &:after {
+            display: none;
+            content: ' ';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+            opacity: .3;
+        }
+
+        &:hover:after,
+        &:hover .icon-youtube {
+            display: block
+        }
+
     }
+
     .icon-delete-reverse {
         margin-left: 7px;
         vertical-align: top;
@@ -467,4 +495,29 @@ h4 {
         height: auto;
         max-width: 100%;
     }
+}
+
+.time-publish {
+
+    font-family: $opensans;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: right;
+    
+    &__date {
+
+        display: block;
+
+        color: #666666;
+
+    }
+
+    &__hours {
+
+        display: block;
+
+        color: #999999;
+
+    }
+
 }

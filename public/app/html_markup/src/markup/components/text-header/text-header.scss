@@ -1,12 +1,19 @@
 .text-header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     height: 42px;
+    padding-right: 14px;
     padding-bottom: 7px;
     padding-left: $pad;
 
     background-color: #f4f4f4;
+
+    &__btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
 
     &__item {
         margin-right: 17px;
@@ -22,6 +29,7 @@
         }
         
         &:nth-child(4) {
+            margin-top: -3px;
             margin-right: 13px;
         }
 
@@ -29,6 +37,20 @@
             margin-right: 12px;
         }
 
+    }
+
+    &__remove {
+
+        padding-top: 5px;
+
+        font-family: $opensans;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 12px;
+
+        color: #666666;
+
+        opacity: 0.62;
     }
 
 }

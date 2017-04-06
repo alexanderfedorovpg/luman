@@ -1,0 +1,32 @@
+.p-main {
+
+}
+
+.working {
+
+    &--main {
+
+        .working__wrap {
+
+            align-items: flex-start;
+
+        }
+        
+        .working__cnt {
+            margin-top: -2px;
+        }
+
+        .working__col-l {
+            width: 16.6%;
+
+            border-right: 0;
+        }
+        .working__col-r {
+            display: block;
+            margin-top: 2px;
+            margin-left: 5px;
+        }
+
+    }
+
+}
