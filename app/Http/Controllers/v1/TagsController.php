@@ -5,7 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Tag;
 
 use Illuminate\Validation\Validator;
-use App\Http\Controllers\CmsController;
+
 use Illuminate\Http\Request;
 
 /**
