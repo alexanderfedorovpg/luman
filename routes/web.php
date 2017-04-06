@@ -51,6 +51,13 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     //Права
     $group->get('/permission','PermissionController@index');
 
+    //Теги
+    $group->get('/tags','TagsController@index');
+    $group->get('/tags/{id}','TagsController@show');
+    $group->post('/tags','TagsController@create');
+    $group->put('/tags/{id}','TagsController@update');
+    $group->delete('/tags/{id}','TagsController@destroy');
+
 });
 
 
