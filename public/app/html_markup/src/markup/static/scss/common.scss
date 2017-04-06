@@ -217,6 +217,12 @@ h4 {
     }
 }
 
+// form-programs
+.form-programs {
+    &__input {
+        width: 29rem;
+    }
+}
 
 
 
@@ -346,4 +352,16 @@ h4 {
         }
     }
 
+}
+
+.programs-page {
+    flex-direction: column;
+
+    .row {
+        margin-top: -.4rem;
+    }
+
+    .btn {
+        margin-right: .3rem;
+    }
 }
