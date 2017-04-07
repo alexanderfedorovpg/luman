@@ -49,6 +49,13 @@ class NewsListTransformer extends Transformer
             $transform['time_edit'] = ['hh' => $hh, 'mm' => $mm];
         }
 
+        if(is_string($news['original_source_link'])) {
+            $transform['OriginalLink'] = $news['original_source_link'];
+        } else {
+            $transform['OriginalLink'] = false;
+        }
+
+
         return $transform;
     }
 
