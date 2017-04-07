@@ -27,6 +27,17 @@ class ApiController extends Controller
         return $this;
     }
 
+
+    /**
+     * Запрос был выполнен, и, в результате, создан новый ресурс.
+     * @param string $message
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function respondCreated($message="Created")
+    {
+        return $this->setStatusCode('201')->respond($message);
+    }
+
     /**
      * @param string $message
      * @return \Illuminate\Http\JsonResponse

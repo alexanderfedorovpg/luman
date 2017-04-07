@@ -187,7 +187,7 @@ class NewsFeedController extends CmsController
                     $feed->hidden = '1';
                     $feed->save();
                     $this->respond($news);
-                    return $this->respond(
+                    return $this->respondCreated(
                         $this->newsFeedTransformer->transform($feed->toArray())
                     );
                 }
