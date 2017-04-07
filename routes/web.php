@@ -59,6 +59,10 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->put('/tags/{id}','TagsController@update');
     $group->delete('/tags/{id}','TagsController@destroy');
 
+    //Справка
+    $group->get('/reference/search','ReferenceController@search');
+    $group->get('/reference/page','ReferenceController@getPage');
+
 });
 
 
