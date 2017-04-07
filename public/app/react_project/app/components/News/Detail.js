@@ -81,7 +81,7 @@ const CloseIcon = styled(Icon)`
     right: 14px;
 `
 
-function Detail({ data, onClose }) {
+function Detail({ data, onClose, toWork, ignore }) {
 
     let date = data.anons_create_dt
 
@@ -101,11 +101,25 @@ function Detail({ data, onClose }) {
                 {data.body}
             </Text>
             <ButtonsContainer>
-                <IgnoreBtn block danger>
+                <IgnoreBtn
+                    onClick={e => {
+                        ignore(data.id)
+                        onClose()
+                    }}
+                    danger
+                    block >
+
                     <CustomIcon type="delete-reverse" />
                     Игнорировать
                 </IgnoreBtn>
-                <WorkBtn block success>
+                <WorkBtn
+                    onClick={e => {
+                        toWork(data.id)
+                        onClose()
+                    }}
+                    success
+                    block>
+
                     <CustomIcon type="arrow-right" />
                     В работу
                 </WorkBtn>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import { Input } from '../Form'
@@ -55,21 +55,30 @@ const Label = styled.label`
     `}
 `
 
-class Tags extends Component {
+class Tags extends PureComponent {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            checked: []
+            checked: (this.props.value || []).slice(0)
         }
 
         this.handleChange = this.handleChange.bind(this)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState({
+                checked: (nextProps.value || []).slice(0)
+            })
+        }
+    }
+
     handleChange(e) {
         let value = e.target.value
         let index = this.state.checked.indexOf(value)
+        let cb = () => (this.props.onChange || (()=>{}))(this.state.checked)
 
         if (index > -1) {
             this.setState({
@@ -77,7 +86,7 @@ class Tags extends Component {
                     ...this.state.checked.slice(0, index),
                     ...this.state.checked.slice(index+1)
                 ]
-            })
+            }, cb)
         }
         else {
             this.setState({
@@ -85,7 +94,7 @@ class Tags extends Component {
                     ...this.state.checked,
                     value
                 ]
-            })
+            }, cb)
         }
     }
 

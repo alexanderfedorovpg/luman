@@ -8,6 +8,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+
 import {
     selectFeedList,
     selectedFeed,
@@ -17,12 +18,18 @@ import {
 } from './selectors';
 
 import {
+    selectEditors
+} from 'containers/App/selectors';
+
+import {
     loadFeed,
     hideFeedItem,
     selectFeed,
     setFilters,
     feedToWork
 } from './actions'
+
+import { loadEditors } from 'containers/App/actions'
 
 import Header from 'components/Feed/Header'
 import Form from 'components/Feed/Form'
@@ -42,6 +49,7 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
 
     componentDidMount() {
         this.loadFeed()
+        this.props.dispatch(loadEditors())
     }
 
     componentWillReceiveProps(nextProps) {
@@ -67,8 +75,9 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
 
     applyFilters(filters) {
         let searchString = filters.keywords
+        let ia = filters.agency
 
-        this.props.dispatch(setFilters({ searchString }))
+        this.props.dispatch(setFilters({ searchString, ia }))
 
         this.loadFeed()
     }
@@ -81,12 +90,12 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         let {
             news,
             menuOpen,
-            users,
             selectedFeed,
             pagination,
             router,
             loading,
-            search
+            search,
+            editors
         } = this.props
 
         return (
@@ -106,8 +115,8 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
                     </Left>
                     <Right>
                         <Form
-                            data={selectedFeed ? selectedFeed.toJS() : {}}
-                            users={users}
+                            data={selectedFeed}
+                            users={editors}
                             onSubmit={this.sendToWork} />
                     </Right>
                 </Wrap>
@@ -123,20 +132,11 @@ FeedPage.propTypes = {
 const mapStateToProps = state => ({
     menuOpen: state.get('app').get('menuOpen'),
     news: selectFeedList(state),
-    users: [
-            {
-                    name: 'Ковалев Максим',
-                    pic: '/img/user1.png'
-            },
-            {
-                    name: 'Короленко Анастасия',
-                    pic: '/img/user2.png'
-            }
-    ],
     search: selectSearchVars(state).toJS(),
     selectedFeed: selectedFeed(state),
     pagination: selectedPagination(state),
-    loading: selectedLoading(state)
+    loading: selectedLoading(state),
+    editors: selectEditors(state)
 })
 
 function mapDispatchToProps(dispatch) {
