@@ -85,4 +85,9 @@ export const Textarea = styled.textarea`
         font-weight: 400;
         line-height: ${rem(21)};
     `)}
+
+
+    ${ifProp('error')(css`
+        border-color: ${color.danger};
+    `)}
 `

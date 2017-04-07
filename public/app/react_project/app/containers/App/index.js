@@ -16,20 +16,28 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import Root from '../../components/Root'
-import Header from '../../components/Header'
-import NavSide from '../../components/NavSide'
-import Content from '../../components/Content'
+import Root from 'components/Root'
+import Header from 'components/Header'
+import NavSide from 'components/NavSide'
+import Content from 'components/Content'
 
-import LoginPage from '../LoginPage'
+import LoginPage from 'containers/LoginPage'
 
-import { logout } from '../LoginPage/actions'
+import { logout } from 'containers/LoginPage/actions'
+
+import * as api from 'api'
 
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
     static propTypes = {
         children: React.PropTypes.node,
     };
+
+    componentWillMount() {
+        if (this.props.token) {
+            api.setToken(this.props.token)
+        }
+    }
 
     render() {
         let { menuOpen, toggleMenu, closeMenu, router, token } = this.props
