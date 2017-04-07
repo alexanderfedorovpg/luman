@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\ApiController;
 use App\News;
 use Illuminate\Http\Request;
+use App\Http\Traits\NewsListTrait;
 
 /**
  * Class NewsListController
@@ -12,10 +13,12 @@ use Illuminate\Http\Request;
  */
 class NewsListController extends CmsController
 {
+    use NewsListTrait;
     /**
      * @var \App\Http\Transformers\v1\Client\NewsListTransformer
      */
     protected $newsListTransformer;
+    protected $getArray = false;
 
     /**
      * NewsListController constructor.
@@ -23,6 +26,7 @@ class NewsListController extends CmsController
      */
     public function __construct(\App\Http\Transformers\v1\NewsListTransformer $newsListTransformer)
     {
+        parent::__construct();
         $this->newsListTransformer = $newsListTransformer;
     }
 
@@ -30,51 +34,18 @@ class NewsListController extends CmsController
      * Получить список новостей
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get(Request $request, $getArray = false)
+    public function get(Request $request)
     {
 
         $news = News::published();
-        $searchString = $request->input('searchString');
-        if ($searchString) {
-            $substrings = explode(',', $searchString);
-            $news->substring($substrings);
-        }
 
-        $tagList = $request->input('tagList');
-        if ($tagList) {
-            $tags = explode(',', $tagList);
-            $news->tags($tags);
-        }
-
-        $video = $request->input('video');
-        if ($video !== null) {
-            if ($video === 'true') {
-                $news->existVideo(true);
-            } elseif ($video === 'false') {
-                $news->existVideo(false);
-            }
-        }
-
-        $start = $request->input('start');
-        if ($start !== null) {
-            $news->skip($start);
-        }
-
-        $limit = $request->input('limit');
-        if ($limit !== null) {
-            $news->take($limit);
-        }
-
-        if ($limit === null && $start !== null) {
-            $limit = News::count() - $start;
-            $news->take($limit);
-        }
+        $this->processing($request, $news);
 
         $news = $news->get();
 
         $data = $this->newsListTransformer->transformCollection($news->toArray());
 
-        if($getArray){
+        if($this->getArray){
             return $data;
         } else {
             return $this->respond($data);
@@ -88,7 +59,7 @@ class NewsListController extends CmsController
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getOne($id, $getArray = false)
+    public function getOne($id)
     {
         $news = News::whereId($id)->published()->first();
         if (!$news) {
@@ -101,7 +72,7 @@ class NewsListController extends CmsController
         $data = $this->newsListTransformer->transformOneNews($newsArray, $comments);
 
 
-        if($getArray){
+        if($this->getArray){
             return $data;
         } else {
             return $this->respond($data);

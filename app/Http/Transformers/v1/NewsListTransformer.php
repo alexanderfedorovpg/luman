@@ -29,6 +29,7 @@ class NewsListTransformer extends Transformer
 
         $transform['Top'] = $news['top'];
         $transform['Title'] = $news['title'];
+        $transform['Subtitle'] = $news['sub_title'];
         $transform['Tags'] =  explode(',', $news['tags']);
         $transform['ImagePreview'] = $news['image_preview'];
 
@@ -36,8 +37,16 @@ class NewsListTransformer extends Transformer
             $transform['VideoStream'] = $news['video_stream'];
         }
 
-        if ($news['is_war_mode']) {
-            $transform['WarMode'] = true;
+        $hh = 0;
+        $mm = 0;
+        $ss = 0;
+
+        if ($news['time_edit'] && $news['moderation']) {
+            $time_edit = implode('T', explode(' ', $news['time_edit']));
+            $diff = strtotime($time_edit) - time(); // разница в секундах
+            list($hh, $mm, $ss) = explode(':', gmdate('H:i:s', $diff));
+
+            $transform['time_edit'] = ['hh' => $hh, 'mm' => $mm];
         }
 
         return $transform;
