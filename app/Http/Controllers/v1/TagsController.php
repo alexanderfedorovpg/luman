@@ -73,26 +73,29 @@ class TagsController extends CmsController
 
     /**
      * @param Request $request
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         try {
-            if (Tag::find($request->id)) {
 
-                $this->validate($request, [
-                    'name' => 'required',
-                ]);
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
 
-                $tag = Tag::find($request->id);
-                $tag->name = $request->name;
+            $tag = Tag::findOrFail($id);
+            $tag->name = $request->input('name');
 
-                if ($tag->save()) {
-                    return $this->respondCreated($tag);
-                };
+            if ($tag->save()) {
+                return $this->respondCreated($tag);
+            };
 
-            }
-        } catch (\Exception $e) {
+        } catch (ModelNotFoundException $e) {
+            $this->respondNotFound($e);
+
+        } catch
+        (\Exception $e) {
             return $this->respondFail500x($e->getMessage());
         }
 
@@ -100,19 +103,18 @@ class TagsController extends CmsController
 
     /**
      * @param Request $request
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
         try {
-            if (Tag::find($request->id)) {
 
-                $tag = Tag::findOrFail($request->id);
-                if ($tag->delete()) {
-                    return $this->respond([]);
-                };
+            $tag = Tag::findOrFail($id);
+            if ($tag->delete()) {
+                return $this->respond([]);
+            };
 
-            }
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound($e->getMessage());
         } catch (\Exception $e) {
