@@ -17,3 +17,5 @@ export const FEED_TO_WORK_SUCCESS = 'app/FeedPage/FEED_TO_WORK_SUCCESS';
 export const FEED_TO_WORK_FAILURE = 'app/FeedPage/FEED_TO_WORK_FAILURE';
 
 export const SELECT_FEED = 'app/FeedPage/SELECT_FEED';
+
+export const SET_FILTERS = 'app/FeedPage/SET_FILTERS';

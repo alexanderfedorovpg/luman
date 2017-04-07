@@ -65,13 +65,16 @@ const Item = styled.a`
     `}
 `
 
-function Tabs() {
+function Tabs({ data }) {
     return (
         <Root>
-            <Item href="#" active>Сегодня</Item>
-            <Item href="#">За неделю</Item>
-            <Item href="#">За месяц</Item>
-            <Item href="#">Год</Item>
+            {data.map((value, i) => {
+                return (
+                    <Item href="#" key={value} active={!i}>
+                        {value}
+                    </Item>
+                )
+            })}
         </Root>
     )
 }

@@ -127,6 +127,7 @@ const NavItem = styled(({ active, ...rest }) => <ReactLink {...rest} />)`
 `
 
 const Logout = styled.a`
+    cursor: pointer;
     color: rgba(0, 0, 0, 0.59);
 `
 
@@ -146,13 +147,17 @@ export const Link = styled.a`
     }
 `
 
+const CustomUser = styled(User)`
+    margin-right: ${rem(27)};
+    margin-left: ${rem(20)};
+`
 const CustomUserName = styled(UserName)`
     margin-top: 5px;
     letter-spacing: 0;
     color: #fff;
 `
 
-function Header({ moved, onToggle, isActive }) {
+function Header({ moved, onToggle, isActive, onLogout }) {
 
     return (
         <Wrapper moved={moved}>
@@ -178,12 +183,12 @@ function Header({ moved, onToggle, isActive }) {
                                 Аналитика
                             </NavItem>
                         </nav>
-                        <User data={{ pic: '/img/user.png' }}>
+                        <CustomUser data={{ pic: '/img/user.png' }}>
                             <CustomUserName href="#">
                                 Поликарпов Анатолий
                             </CustomUserName>
-                        </User>
-                        <Logout href="#">
+                        </CustomUser>
+                        <Logout onClick={onLogout}>
                             <Icon type="logout" />
                         </Logout>
                     </Action>

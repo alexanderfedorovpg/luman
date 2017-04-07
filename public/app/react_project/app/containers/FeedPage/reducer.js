@@ -10,11 +10,16 @@ import {
     LOAD_FEED_SUCCESS,
     LOAD_FEED_FAILURE,
 
-    SELECT_FEED
+    SELECT_FEED,
+
+    SET_FILTERS,
+
+    HIDE_FEED_ITEM_SUCCESS
 } from './constants';
 
 const initialState = fromJS({
     news: {
+        search: {},
         loading: false,
         current: 1,
         max: 1,
@@ -42,6 +47,15 @@ function feedPageReducer(state = initialState, action) {
 
     case SELECT_FEED:
         return state.set('selectedFeed', action.payload)
+
+    case SET_FILTERS:
+        return state.mergeIn(['news', 'search'], action.payload)
+
+    case HIDE_FEED_ITEM_SUCCESS:
+        return state
+            .updateIn(['news', 'data'], value => {
+                return value.filter(value => value.get('id') !== action.payload)
+            })
 
     default:
         return state;

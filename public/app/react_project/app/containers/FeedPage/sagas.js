@@ -1,4 +1,4 @@
-import { take, call, put, select, cancel, takeLatest, takeEvery } from 'redux-saga/effects';
+import { take, call, put, select, cancel, takeLatest, takeEvery, fork } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {
@@ -6,6 +6,7 @@ import {
     HIDE_FEED_ITEM,
     FEED_TO_WORK
 } from './constants';
+
 import {
     feedLoaded,
     feedLoadingError,
@@ -15,12 +16,19 @@ import {
     feedToWorkError
 } from './actions';
 
+import { selectFeedParams } from './selectors'
+
 import * as api from 'api'
 
 export function* getFeed({ payload }) {
 
+    const stateParams = yield select(selectFeedParams)
+
     try {
-        const feed = yield call(api.getFeed, payload);
+        const feed = yield call(api.getFeed, {
+            ...stateParams,
+            ...payload
+        });
         yield put(feedLoaded(feed));
     } catch (err) {
         yield put(feedLoadingError(err));
@@ -38,36 +46,24 @@ export function* feedData() {
 export function* hideItem({ payload }) {
 
     try {
-        yield call(api.hideFeedItem, {
-            data: {
-                action: 'hide',
-                id: payload
-            }
-        });
-        yield put(feedItemHidden());
+        yield call(api.hideFeedItem, payload);
+        yield put(feedItemHidden(payload));
+
+        yield fork(getFeed, {})
     } catch (err) {
         yield put(feedItemHidingError(err));
     }
 }
 
 export function* hideData() {
-    yield takeEvery(HIDE_FEED_ITEM, hideItem);
+    yield takeLatest(HIDE_FEED_ITEM, hideItem);
 }
 
 export function* feedToWork({ payload }) {
-    let { id, tags, keywords, editor, top } = payload
 
     try {
-        yield call(api.feedToWork, id, {
-            data: {
-                action: 'work',
-                id,
-                tags: tags.join(', '),
-                keywords: keywords.join(', '),
-                editor_id: editor,
-                top
-            }
-        });
+        yield call(api.feedToWork, payload);
+
         yield put(feedInWork());
     } catch (err) {
         yield put(feedToWorkError(err));

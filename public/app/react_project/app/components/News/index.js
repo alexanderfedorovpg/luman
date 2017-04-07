@@ -76,9 +76,7 @@ class News extends Component {
                     onRequestClose={this.closeModal}>
                     <Detail onClose={this.closeModal} data={selected} />
                 </Modal>
-                {data.count()
-                    ? <Paginator {...pagination} />
-                    : null}
+                <Paginator {...pagination} />
             </div>
         )
     }

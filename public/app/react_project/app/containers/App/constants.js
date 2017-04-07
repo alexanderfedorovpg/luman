@@ -10,3 +10,8 @@
  */
 
 export const DEFAULT_LOCALE = 'ru';
+
+export const groups = {
+    'admin': 1,
+    'editor': 2
+}

@@ -29,7 +29,7 @@ injectGlobal`
         font-family: ${font.opensans};
         font-size: 16px;
         font-weight: 400;
-        color: #999;
+        color: #333;
     }
 
     body {
