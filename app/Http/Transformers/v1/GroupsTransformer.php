@@ -28,5 +28,15 @@ class GroupsTransformer extends Transformer
         return $transform;
     }
 
+    public function transformUsersByGroup($group){
+        $transform = $group;
 
+        $hasGroup=HasGroups::where('group_id', '=',$group['id'])->get(['user_id'])->toArray();
+
+        if ($hasGroup) {
+            $transform = User::find(array_pluck($hasGroup,'user_id'))->toArray();
+        }
+
+        return $transform;
+    }
 }

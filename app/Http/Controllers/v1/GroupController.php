@@ -238,4 +238,16 @@ class GroupController extends CmsController
         return $this->respond(['success' => $group->removePermissions($permissId)]);
     }
 
+    public function UsersByGroup($id) {
+        try {
+            $group = Group::findOrFail($id);
+            if ($group) {
+                return $this->respond($this->groupsTransformer->transformUsersByGroup($group->toArray()));
+            }
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('Group is not found');
+        } catch (\Exception $e) {
+            $this->respondFail500x();
+        }
+    }
 }
