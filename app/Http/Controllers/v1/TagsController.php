@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Tag;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\Validator;
 
 use Illuminate\Http\Request;
@@ -12,75 +13,110 @@ use Illuminate\Http\Request;
  * Class TagsController
  * @package App\Http\Controllers\v1
  */
-class TagsController extends CmsController {
+class TagsController extends CmsController
+{
 
-	public function create(Request $request) {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function create(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'name' => 'required|max:50',
+            ]);
 
-		$this->validate($request, [
-            'name' => 'required|max:50',
-        ]);
+            $tags = new Tag;
+            $tags->name = $request->name;
+            if ($tags->save()) {
+                return $this->respondCreated(["id" => $tags->id]);
+            };
 
-		$tags = new Tag;
-		$tags->name = $request->name;
-		$tags->save();
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
 
-	}
+    }
 
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-	public function index() {
+    public function index()
+    {
+        try {
+            $tags = Tag::all();
+            return $this->respond($tags);
 
-		$tags = Tag::all();
+        } catch (ModelNotFoundException $e) {
+            $this->respondNotFound($e->getMessage());
+        }
 
-		return response()->json(['tags' => $tags]);
-	}
+    }
 
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-	public function show($id) {
+    public function show($id)
+    {
+        try {
+            $tag = Tag::findOrFail($id);
 
-		$tag = Tag::find($id);
+            return $this->respond($tag);
 
-		return response()->json(['tag' => $tag]);
-	}
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound($e->getMessage());
+        }
 
-    /**
-     * @param Request $request
-     */
-	public function update(Request $request) {
-
-		if(Tag::find($request->id)) {
-
-			$this->validate($request, [
-            'name' => 'required',
-        	]);
-
-			$tag = Tag::find($request->id);
-			$tag->name = $request->name;
-			$tag->save();
-
-		}
-		
-		
-	}
+    }
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-	public function destroy(Request $request) {
+    public function update(Request $request)
+    {
+        try {
+            if (Tag::find($request->id)) {
 
-		if(Tag::find($request->id)) {
+                $this->validate($request, [
+                    'name' => 'required',
+                ]);
 
-			$tag = Tag::find($request->id);
-			$tag->delete();
+                $tag = Tag::find($request->id);
+                $tag->name = $request->name;
 
-		}
-		
-	}
+                if ($tag->save()) {
+                    return $this->respondCreated($tag);
+                };
 
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
 
+    }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Request $request)
+    {
+        try {
+            if (Tag::find($request->id)) {
+
+                $tag = Tag::findOrFail($request->id);
+                if ($tag->delete()) {
+                    return $this->respond([]);
+                };
+
+            }
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound($e->getMessage());
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
 }

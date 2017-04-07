@@ -33,7 +33,7 @@ class ApiController extends Controller
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function respondCreated($message="Created")
+    public function respondCreated($message="")
     {
         return $this->setStatusCode('201')->respond($message);
     }
