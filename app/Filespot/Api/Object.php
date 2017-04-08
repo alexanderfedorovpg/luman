@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Filespot;
+namespace App\Filespot\Api;
+
+use App\Filespot\Configuration;
+use App\Filespot\Request;
+
 
 class Object
 {
@@ -10,6 +14,7 @@ class Object
     {
         $this->baseUrl = $config->getApiUrl();
         $this->authParams = $config->getAuthString();
+        $this->signatureKey = $config->getUserKey();
     }
 
     /**
@@ -17,12 +22,12 @@ class Object
      *
      * @param string $file Путь к файлу
      * @param string $name Название файла. Можно указывать директорию
-     * @return void
+     *
      */
     public function uploadFile($file, $name = null)
     {
-        $url = '';
-        $result = $this->uploadRequest($url, $file, $name);
+        $subUrl = 'objects';
+        return $this->requestUpload($subUrl, $file, $name);
     }
 
 

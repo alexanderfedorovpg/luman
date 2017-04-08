@@ -15,7 +15,7 @@ class Configuration
      *
      * @var string
      */
-    private $apiUrl = 'https://api.platformcraft.ru';
+    private $apiUrl = 'api.platformcraft.ru';
 
     /**
      * Версия API
@@ -31,13 +31,13 @@ class Configuration
      */
     private $userId;
 
+
     /**
-     * Подпись текущего запроса (HMAC хеш-сумма в шестнадцатеричном виде
-     * с использованием SHA-256 и ключа пользователя)
+     * Ключ пользователя для подписи запросов
      *
      * @var string
      */
-    private $hash;
+    private $userKey;
 
     /**
      * текущее время в Unix формате
@@ -53,7 +53,7 @@ class Configuration
     {
         $this->userId = env('FILESPOT_USER_ID');
         $this->timestamp = time();
-        $this->hash = hash_hmac('sha256', $this->timestamp, env('FILESPOT_USER_KEY'));
+        $this->userKey = env('FILESPOT_USER_KEY');
     }
 
     /**
@@ -73,10 +73,17 @@ class Configuration
      */
     public function getAuthString()
     {
-        return "?apiuserid={$this->userId}" .
-            "&timestamp={$this->timestamp}" .
-            "&hash={$this->hash}";
+        return "apiuserid={$this->userId}" .
+            "&timestamp={$this->timestamp}";
     }
 
-
+    /**
+     * Возвращает ключ пользователя
+     *
+     * @var string
+     */
+    public function getUserKey()
+    {
+        return $this->userKey;
+    }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Filespot;
 
-use App\Filespot\Configuration;
-use App\Filespot\Object;
+use App\Filespot\Api\Object;
 
-class Filespot
+class FilespotAPI
 {
     public static function object()
     {
