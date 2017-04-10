@@ -49,7 +49,7 @@ class NewsListEditorController extends CmsController
         $user_id = Auth::id();
 
         if(empty($user_id)) {
-            var_dump("not auth");
+//            var_dump("not auth");
             $user_id = 2;
         }
 
@@ -83,7 +83,7 @@ class NewsListEditorController extends CmsController
 
         $newsList = $this->newsListTransformer->transformCollection($newsList);
 
-        return $this->respondCreated($newsList);
+        return $this->respond($newsList);
 
     }
 
