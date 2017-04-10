@@ -39,8 +39,7 @@ class NewsFeed extends Model
     {
         foreach ($strings as $string) {
             $query->where(function ($query) use ($string) {
-                $query->orWhere('title', 'like', "%{$string}%")
-                    ->orWhere('text', 'like', "%{$string}%");
+                $query->orWhere('header', 'like', "%{$string}%");
             });
         }
         return $query;
@@ -65,24 +64,25 @@ class NewsFeed extends Model
      * @param $viewMode
      * @return mixed
      */
-    public function scopeViewMode($query, $viewMode)
+    public function scopeViewMode($query, $viewMode = 0)
     {
-        if (!$viewMode!='all') {
-            $query->where('hidden', '=', $viewMode);
-        }
+
+        $query->where('hidden', '=', $viewMode);
+
         return $query;
     }
 
-    public function scopeDateFilter($query,$fromDate,$toDate){
-        if ($fromDate && !$toDate){
+    public function scopeDateFilter($query, $fromDate, $toDate)
+    {
+        if ($fromDate && !$toDate) {
             $query->where('anons_create_dt', '>=', $fromDate);
         }
-        if (!$fromDate &&  $toDate){
+        if (!$fromDate && $toDate) {
             $query->where('anons_create_dt', '<=', $toDate);
         }
-        if ($fromDate &&  $toDate){
+        if ($fromDate && $toDate) {
             $query->where('anons_create_dt', '>', $fromDate);
-            $query->where('anons_create_dt', '<=',$toDate);
+            $query->where('anons_create_dt', '<=', $toDate);
         }
 
     }

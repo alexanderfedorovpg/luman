@@ -17,8 +17,17 @@ import {
         FEED_TO_WORK_SUCCESS,
         FEED_TO_WORK_FAILURE,
 
-        SELECT_FEED
+        SELECT_FEED,
+
+        SET_FILTERS
 } from './constants';
+
+export function setFilters(payload) {
+    return {
+        type: SET_FILTERS,
+        payload
+    };
+}
 
 export function loadFeed(params) {
     return {
@@ -48,9 +57,10 @@ export function hideFeedItem(id) {
     };
 }
 
-export function feedItemHidden() {
+export function feedItemHidden(id) {
     return {
-        type: HIDE_FEED_ITEM_SUCCESS
+        type: HIDE_FEED_ITEM_SUCCESS,
+        payload: id
     };
 }
 

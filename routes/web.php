@@ -11,10 +11,20 @@
 |
 */
 
-
 $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], function ($group)   {
-    $group->get('/newsfeed/', 'NewsFeedController@getNewsFeed');
-    $group->post('/newsfeed/work', 'NewsFeedController@add');
+    $group->options('/{any:.*}',function (){
+        $headers=
+            [
+                'Access-Control-Allow-Origin'=>'*',
+                'Access-Control-Allow-Headers'=> ['Content-Type, Api-Token'],
+                'Access-Control-Request-Method' => ['POST, GET, PUT, OPTIONS, DELETE'],
+
+            ];
+        return response()->json([] ,200 , $headers);
+    });
+    $group->get('/newsfeed', 'NewsFeedController@getNewsFeed');
+    $group->post('/newsfeed', 'NewsFeedController@update');
+    $group->post('/newsfeed/work', 'NewsFeedController@create');
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
@@ -37,6 +47,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->delete('/group/{groupId}/bind/{userId}','GroupController@unbindUser');
     $group->post('/group/{groupId}/permiss','GroupController@addPermiss');
     $group->delete('/group/{groupId}/permiss/{permissId}','GroupController@addPermiss');
+    $group->get('/group/{id}/users','GroupController@UsersByGroup');
 
     //Права
     $group->get('/permission','PermissionController@index');
@@ -45,6 +56,19 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newschat/{newsId}','NewsChatController@index');
     $group->post('/newschat/{newsId}','NewsChatController@create');
 
+    //Теги
+    $group->get('/tags','TagsController@index');
+    $group->get('/tags/{id}','TagsController@show');
+    $group->post('/tags','TagsController@create');
+    $group->put('/tags/{id}','TagsController@update');
+    $group->delete('/tags/{id}','TagsController@destroy');
+
+    //Справка
+    $group->get('/reference/search','ReferenceController@search');
+    $group->get('/reference/page','ReferenceController@getPage');
+
+    //Файлы
+    $group->post('/file','FileController@upload');
+    $group->delete('/file/{id}','FileController@destroy');
+
 });
-
-

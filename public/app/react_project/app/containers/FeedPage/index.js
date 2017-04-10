@@ -12,12 +12,22 @@ import {
     selectFeedList,
     selectedFeed,
     selectedPagination,
-    selectedLoading
+    selectedLoading,
+    selectSearchVars
 } from './selectors';
 
-import { loadFeed, hideFeedItem, selectFeed } from './actions'
+import {
+    loadFeed,
+    hideFeedItem,
+    selectFeed,
+    setFilters,
+    feedToWork
+} from './actions'
 
-import Feed from '../../components/Feed'
+import Header from 'components/Feed/Header'
+import Form from 'components/Feed/Form'
+import { Wrap, Left, Right } from 'components/Content'
+import News from 'components/News'
 
 export class FeedPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -25,12 +35,13 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         super(props);
 
         this.hideItem = this.hideItem.bind(this)
-        this.toWork = this.toWork.bind(this)
+        this.work = this.work.bind(this)
+        this.applyFilters = this.applyFilters.bind(this)
+        this.sendToWork = this.sendToWork.bind(this)
     }
 
     componentDidMount() {
-        let { page } = this.props.location.query
-        this.props.dispatch(loadFeed({ page }))
+        this.loadFeed()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -38,7 +49,7 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         let nextPage = nextProps.location.query.page || 1
 
         if (+page !== +nextPage) {
-            this.props.dispatch(loadFeed({ page: nextPage }))
+            this.loadFeed({ page: nextPage })
         }
     }
 
@@ -46,26 +57,60 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         this.props.dispatch(hideFeedItem(id))
     }
 
-    toWork(id) {
+    work(id) {
         this.props.dispatch(selectFeed(id))
     }
 
+    sendToWork(data) {
+        this.props.dispatch(feedToWork(data))
+    }
+
+    applyFilters(filters) {
+        let searchString = filters.keywords
+
+        this.props.dispatch(setFilters({ searchString }))
+
+        this.loadFeed()
+    }
+
+    loadFeed(params) {
+        this.props.dispatch(loadFeed(params))
+    }
+
     render() {
-        let { news, menuOpen, users, selectedFeed, pagination, router, loading } = this.props
+        let {
+            news,
+            menuOpen,
+            users,
+            selectedFeed,
+            pagination,
+            router,
+            loading,
+            search
+        } = this.props
 
         return (
             <div>
                 <Helmet
                     title="Лента" />
-                <Feed
-                    news={news}
-                    pagination={pagination}
-                    loading={loading}
-                    moved={menuOpen}
-                    users={users}
-                    toWork={this.toWork}
-                    hideItem={this.hideItem}
-                    worked={selectedFeed ? selectedFeed.toJS() : {}} />
+
+                <Header moved={menuOpen} onSearchChange={this.applyFilters} />
+                <Wrap>
+                    <Left>
+                        <News
+                            data={news}
+                            hide={this.hideItem}
+                            toWork={this.work}
+                            pagination={pagination}
+                            loading={loading} />
+                    </Left>
+                    <Right>
+                        <Form
+                            data={selectedFeed ? selectedFeed.toJS() : {}}
+                            users={users}
+                            onSubmit={this.sendToWork} />
+                    </Right>
+                </Wrap>
             </div>
         );
     }
@@ -88,6 +133,7 @@ const mapStateToProps = state => ({
                     pic: '/img/user2.png'
             }
     ],
+    search: selectSearchVars(state).toJS(),
     selectedFeed: selectedFeed(state),
     pagination: selectedPagination(state),
     loading: selectedLoading(state)
@@ -95,7 +141,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatch,
+        dispatch
     };
 }
 

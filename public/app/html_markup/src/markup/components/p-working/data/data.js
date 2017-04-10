@@ -4,7 +4,7 @@ var data = {pWorking: {
 
         {
             rating: '6',
-            ratingClass: 'rating-6',
+            ratingClass: 'rate6',
             tag: 'Политика',
             cnt: 'Петагон: США готовы сбить ракеты КНДР при наличии угрозы',
             cntClass: 'working__cnt--newest',
@@ -16,7 +16,7 @@ var data = {pWorking: {
 
         {
             rating: '8',
-            ratingClass: 'rating-8',
+            ratingClass: 'rate8',
             tag: 'Политика',
             cnt: 'Южная Корея и США формируют отряд спецназа для убийства Ким Чен Ына',
             cntClass: 'working__cnt--new',
@@ -28,7 +28,7 @@ var data = {pWorking: {
 
         {
             rating: '2',
-            ratingClass: 'rating-2',
+            ratingClass: 'rate2',
             tag: 'Общество',
             cnt: 'Гвардеец едва не застрелил королеву Великобритании Елизавету II',
             userName: 'Марышева Елена',
@@ -38,7 +38,7 @@ var data = {pWorking: {
 
         {
             rating: '7',
-            ratingClass: 'rating-7',
+            ratingClass: 'rate7',
             tag: 'Наука',
             cnt: 'Российские ученые нашли противоречия в самом популярном методе теоретической химии',
             userName: 'Короленко Анастасия',
@@ -50,7 +50,7 @@ var data = {pWorking: {
 
         {
             rating: '6',
-            ratingClass: 'rating-6',
+            ratingClass: 'rate6',
             tag: 'Спорт',
             cnt: 'НХЛ рассматривает возможность проводить матчи в Китае',
             userName: 'Поликарпов Анатолий',
@@ -62,7 +62,7 @@ var data = {pWorking: {
 
         {
             rating: '5',
-            ratingClass: 'rating-5',
+            ratingClass: 'rate5',
             tag: 'Политика',
             cnt: 'Помощник Трампа не исключил «принятия мер» против РФ из-за «кибератак»',
             userName: 'Санченков Роман',

@@ -126,6 +126,32 @@ class Permission extends Command
             ],
         ];
     }
+    /**
+     * Доступы для контроллера \App\Controllers\v1\TagsController
+     *
+     * @return array
+     */
+    private function permissTags()
+    {
+        return [
+            [
+                'name' => 'v1.tags-index',
+                'description' => 'Список тегов',
+            ],
+            [
+                'name' => 'v1.tags-create',
+                'description' => 'Создание тега',
+            ],
+            [
+                'name' => 'v1.tags-destroy',
+                'description' => 'Удаление тега',
+            ],
+            [
+                'name' => 'v1.tags-show',
+                'description' => 'Вывод тега',
+            ],
+        ];
+    }
 
     /**
      * Доступы для контроллера \App\Controllers\v1\NewsChatController
@@ -142,6 +168,44 @@ class Permission extends Command
             [
                 'name' => 'v1.newsChat-create',
                 'description' => 'Чат новости. Сооздание сообщений',
+            ]
+        ];
+    }
+
+    /*
+     * Доступы для контроллера \App\Controllers\v1\ReferenceController
+     *
+     * @return array
+     */
+    public function permissReference()
+    {
+        return [
+            [
+                'name' => 'v1.tags-search',
+                'description' => 'Поиск справки',
+            ],
+            [
+                'name' => 'v1.tags-getPage',
+                'description' => 'Получение страницы спрвки',
+            ],
+        ];
+    }
+
+    /**
+     * Доступы для контроллера \App\Controllers\v1\FileController
+     *
+     * @return array
+     */
+    public function permissFile()
+    {
+        return [
+            [
+                'name' => 'v1.file-upload',
+                'description' => 'Загрузка файлов',
+            ],
+            [
+                'name' => 'v1.file-destroy',
+                'description' => 'Удаление файлов',
             ],
         ];
     }

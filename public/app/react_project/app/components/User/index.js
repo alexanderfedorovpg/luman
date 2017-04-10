@@ -7,8 +7,7 @@ import { font } from 'constants/style'
 const Root = styled.div`
     display: flex;
     align-items: center;
-    margin-right: ${rem(27)};
-    margin-left: ${rem(20)};
+    margin-right: ${rem(11)};
 `
 
 const Pic = styled.a`
@@ -37,9 +36,9 @@ export const Name = styled.a`
     letter-spacing: 0.25px;
 `
 
-function User({ data, children }) {
+function User({ data, children, className }) {
     return (
-        <Root>
+        <Root className={className}>
             <Pic href="#">
                 <Img src={data.pic} />
             </Pic>

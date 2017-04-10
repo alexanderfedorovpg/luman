@@ -4,10 +4,13 @@ namespace App\Http\Controllers\v1;
 
 
 use App\Auth\Rbac\Models\Permission;
+use App\Http\Transformers\v1\GroupsTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\ValidationException;
 use App\Auth\Rbac\Models\Group;
 use App\User;
+use Mockery\Exception;
 
 
 /**
@@ -18,6 +21,20 @@ class GroupController extends CmsController
 {
 
     /**
+     * @var GroupsTransformer
+     */
+    protected $groupsTransformer;
+
+    /**
+     * GroupController constructor.
+     * @param GroupsTransformer $groupsTransformer
+     */
+    public function __construct(GroupsTransformer  $groupsTransformer)
+    {
+        $this->groupsTransformer = $groupsTransformer;
+    }
+
+    /**
      * Получение всех груп
      *
      * @return \Illuminate\Http\JsonResponse
@@ -26,22 +43,29 @@ class GroupController extends CmsController
     {
         $groups = Group::all();
 
-        return $this->respond($groups);
+        return $this->respond($this->groupsTransformer->transformCollection($groups->toArray()));
     }
 
     /**
      * Получение группы по ID
      *
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        $group = Group::find($id);
-        if ($group) {
-            return $this->respond($group);
+        try {
+            $group = Group::findOrFail($id);
+            if ($group) {
+                return $this->respond($this->groupsTransformer->transform($group->toArray()));
+            }
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('Group is not found');
+        } catch (\Exception $e) {
+            $this->respondFail500x();
         }
 
-        return $this->respondNotFound('Group is not found');
+
     }
 
     /**
@@ -60,7 +84,7 @@ class GroupController extends CmsController
 
         $group = new Group($request->all());
         if ($group->save()) {
-            return $this->respond(['success' => true]);
+            return $this->respondCreated(['success' => true]);
         }
 
         return $this->respondFail500x();
@@ -69,7 +93,8 @@ class GroupController extends CmsController
     /**
      * Редактирование группы
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
@@ -85,13 +110,13 @@ class GroupController extends CmsController
             return $this->respondFail422x($e->getMessage());
         }
 
-        return $this->respond(['success' => $group->update($request->all())]);
+        return $this->respondCreated(['success' => $group->update($request->all())]);
     }
 
     /**
      * Удаление группы
      *
-     * @param \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
@@ -112,21 +137,26 @@ class GroupController extends CmsController
      */
     public function bindUser($groupId, $userId)
     {
-        $group = Group::find($groupId);
-        if (!$group) {
-            return $this->respondNotFound('Group not found');
+        try {
+            $group = Group::find($groupId);
+            if (!$group) {
+                return $this->respondNotFound('Group not found');
+            }
+
+            $user = User::find($userId);
+            if (!$user) {
+                return $this->respondNotFound('User not found');
+            }
+
+            if ($group->isBindUser($user)) {
+                return $this->respondFail403x('The user already associated with this group');
+            }
+
+            return $this->respond(['success' => $group->bindUser($user)]);
+        } catch (\Exception $e) {
+            $this->respondFail500x($e);
         }
 
-        $user = User::find($userId);
-        if (!$user) {
-            return $this->respondNotFound('User not found');
-        }
-
-        if ($group->isBindUser($user)) {
-            return $this->respondFail403x('The user already associated with this group');
-        }
-
-        return $this->respond(['success' => $group->bindUser($user)]);
     }
 
     /**
@@ -138,17 +168,21 @@ class GroupController extends CmsController
      */
     public function unbindUser($groupId, $userId)
     {
-        $group = Group::find($groupId);
-        if (!$group) {
-            return $this->respondNotFound('Group not found');
-        }
+        try {
+            $group = Group::find($groupId);
+            if (!$group) {
+                return $this->respondNotFound('Group not found');
+            }
 
-        $user = User::find($userId);
-        if (!$user) {
-            return $this->respondNotFound('User not found');
-        }
+            $user = User::find($userId);
+            if (!$user) {
+                return $this->respondNotFound('User not found');
+            }
 
-        return $this->respond(['success' => $group->unbindUser($user)]);
+            return $this->respond(['success' => $group->unbindUser($user)]);
+        } catch (\Exception $e) {
+            $this->respondFail500x($e);
+        }
     }
 
     /**
@@ -156,10 +190,11 @@ class GroupController extends CmsController
      *
      * @param \Illuminate\Http\Request $request
      * @param int $groupId ID группы
-     * return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function addPermiss(Request $request, $groupId)
     {
+
         $group = Group::find($groupId);
         if (!$group) {
             return $this->respondNotFound('Group not found');
@@ -190,8 +225,8 @@ class GroupController extends CmsController
      *
      * @param \Illuminate\Http\Request $request
      * @param int $groupId ID группы
-     * @param int $permisId ID доступа
-     * return \Illuminate\Http\JsonResponse
+     * @param int $permissId ID доступа
+     * @return \Illuminate\Http\JsonResponse
      */
     public function removePermiss($groupId, $permissId)
     {
@@ -203,4 +238,16 @@ class GroupController extends CmsController
         return $this->respond(['success' => $group->removePermissions($permissId)]);
     }
 
+    public function UsersByGroup($id) {
+        try {
+            $group = Group::findOrFail($id);
+            if ($group) {
+                return $this->respond($this->groupsTransformer->transformUsersByGroup($group->toArray()));
+            }
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('Group is not found');
+        } catch (\Exception $e) {
+            $this->respondFail500x();
+        }
+    }
 }

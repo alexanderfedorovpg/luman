@@ -6,16 +6,16 @@ import {
     Right as HeaderRight,
     Link as HeaderLink,
     Bot as HeaderBot
-} from './../Header'
+} from 'components/Header'
 
 import {
     Horizontal as FormHorizontal,
     InputIcon
-} from './../Form'
+} from 'components/Form'
 
-import Modal from './../Modal'
-import Help from './../Help'
-import Button from './../Button'
+import Modal from 'components/Modal'
+import Help from 'components/Help'
+import Button from 'components/Button'
 
 import { padding, font } from './../../constants/style'
 
@@ -51,11 +51,15 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            modalOpen: false
+            modalOpen: false,
+            form: {
+
+            }
         }
 
         this.openModal = this.openModal.bind(this)
         this.closeModal = this.closeModal.bind(this)
+        this.onChangeValue = this.onChangeValue.bind(this)
     }
 
     openModal() {
@@ -74,17 +78,44 @@ class Header extends Component {
         }
     }
 
+    onChangeValue(prop) {
+        return e => {
+            this.setState({
+                form: {
+                    [prop]: e.target.value
+                }
+            })
+        }
+    }
+
     render() {
-        let { moved } = this.props
+        let { moved, onSearchChange } = this.props
 
         return (
             <HeaderBot moved={moved}>
                 <HeaderLeft>
                     <form>
                         <FormHorizontal>
-                            <FormInput placeholder="Ключевые слова" block icon="search" />
-                            <FormInput placeholder="Агенство" block icon="search" />
-                            <FormButton success xs>OK</FormButton>
+                            <FormInput
+                                placeholder="Ключевые слова"
+                                block
+                                icon="search"
+                                onChange={this.onChangeValue('keywords')}
+                                value={this.state.form.keywords || ''} />
+                            <FormInput
+                                placeholder="Агенство"
+                                block
+                                icon="search"
+                                onChange={this.onChangeValue('agency')}
+                                value={this.state.form.agency || ''} />
+                            <FormButton
+                                success xs
+                                onClick={e => {
+                                    e.preventDefault()
+                                    onSearchChange(this.state.form)
+                                }}>
+                                OK
+                            </FormButton>
                         </FormHorizontal>
                     </form>
                 </HeaderLeft>

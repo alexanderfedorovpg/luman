@@ -1,6 +1,6 @@
 .working {
     width: 100%;
-    margin-top: -18px;
+    margin-top: -15px;
 
     &__item {
         padding-left: $pad;
@@ -22,7 +22,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        padding-top: 17px;
+        padding-top: 20px;
         padding-bottom: 15px;
 
         border-bottom: 1px solid #e9e9e9;
@@ -32,7 +32,7 @@
     &__col-l {
         flex-shrink: 0;
         width: 49.35%;
-        padding-top: 7px;
+        padding-top: 0;
         padding-right: 20px;
 
         border-right: 1px solid #e9e9e9;
@@ -44,7 +44,7 @@
         justify-content: flex-start;
         flex-grow: 1;
         width: 50.75%;
-        padding-top: 7px;
+        padding-top: 0;
         margin-top: -8px;
         margin-left: 20px;
     }
@@ -72,7 +72,7 @@
 
     &__cnt {
         margin-top: 2px;
-        margin-bottom: 2px;
+        margin-bottom: 3px;
 
         &--new {
             font-weight: 600;
@@ -89,40 +89,40 @@
             letter-spacing: -0.3px;
         }
 
-        .rating-1 {
+        p.rate1 {
             font-size: 14px;
         }
 
-        .rating-2 {
+        p.rate2 {
             font-size: 15px;
         }
 
-        .rating-3 {
+        p.rate3 {
             font-size: 16px;
         }
 
-        .rating-4 {
+        p.rate4 {
             font-size: 17px;
         }
 
-        .rating-5 {
+        p.rate5 {
             font-size: 18px;
             letter-spacing: -0.15px;
         }
 
-        .rating-6 {
+        p.rate6 {
             font-size: 19px;
             line-height: 24px;
             letter-spacing: -0.15px;
         }
 
-        .rating-7 {
+        p.rate7 {
             font-size: 20px;
             line-height: 27px;
             letter-spacing: 0.3px;
         }
 
-        .rating-8 {
+        p.rate8 {
             font-size: 24px;
             line-height: 29px;
             letter-spacing: -0.3px;

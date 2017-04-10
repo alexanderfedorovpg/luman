@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { rem, below } from '../../utils/style'
 import { color } from '../../constants/style'
@@ -98,31 +98,95 @@ const LoginButton = styled(Button)`
     border-color: ${color.success};
 `
 
-function Login() {
+class Login extends Component {
 
-    return (
-        <Wrap>
-            <Form method="POST" action="">
-                <Pic>
-                    <Image src={pic} alt="" role="presentation" />
-                </Pic>
-                <Inputs>
-                    <FormGroup>
-                        <Input placeholder="login" type="name" block />
-                    </FormGroup>
-                    <FormGroup>
-                        <Input placeholder="password" type="password" block />
-                    </FormGroup>
-                    <FormGroup>
-                        <LoginButton success block>
-                            <Icon type="arrow-right-light" style={{ marginTop: '-3px', opacity: .33,  marginRight: '4px', }} />
-                            Войти
-                        </LoginButton>
-                    </FormGroup>
-                </Inputs>
-            </Form>
-        </Wrap>
-    )
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: {
+                username: '',
+                password: ''
+            },
+
+            error: {
+
+            }
+        }
+
+        this.onSubmitHandler = this.onSubmitHandler.bind(this)
+    }
+
+    onChangeHandler(prop) {
+        return e => {
+            this.setState({
+                data: {
+                    ...this.state.data,
+                    [prop]: e.target.value
+                }
+            })
+        }
+    }
+
+    onSubmitHandler(e) {
+        e.preventDefault()
+
+        let { data } = this.state
+
+        if (!data.username || !data.password) {
+            this.setState({
+                error: {
+                    username: !data.username,
+                    password: !data.password
+                }
+            })
+
+            return
+        }
+
+        this.props.onLogin(
+            data.username,
+            data.password
+        )
+    }
+
+    render() {
+
+        return (
+            <Wrap>
+                <Form onSubmit={this.onSubmitHandler}>
+                    <Pic>
+                        <Image src={pic} alt="" role="presentation" />
+                    </Pic>
+                    <Inputs>
+                        <FormGroup>
+                            <Input
+                                onChange={this.onChangeHandler('username')}
+                                value={this.state.data.username}
+                                error={this.state.error.username}
+                                placeholder="login"
+                                block />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input
+                                onChange={this.onChangeHandler('password')}
+                                value={this.state.data.password}
+                                error={this.state.error.password}
+                                placeholder="password"
+                                type="password"
+                                block />
+                        </FormGroup>
+                        <FormGroup>
+                            <LoginButton success block>
+                                <Icon type="arrow-right-light" style={{ marginTop: '-3px', opacity: .33,  marginRight: '4px', }} />
+                                Войти
+                            </LoginButton>
+                        </FormGroup>
+                    </Inputs>
+                </Form>
+            </Wrap>
+        )
+    }
 }
 
 export default Login

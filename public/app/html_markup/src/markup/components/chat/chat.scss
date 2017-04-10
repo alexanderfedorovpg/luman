@@ -4,18 +4,16 @@
     height: 437px;
     padding-top: 15px;
     padding-right: 6px;
-    padding-bottom: 15px;
+    padding-bottom: 7px;
 
     padding-left: 16px;
-    // padding-bottom: 15px;
-
     overflow-y: auto;
+
+    border: 1px solid rgba(204, 204, 204, 0.74);
     
     &-wrap {
 
         overflow-y: hidden;
-
-        border: 1px solid rgba(204, 204, 204, 0.74);
 
     }
 
@@ -63,6 +61,7 @@
         }
 
         .user {
+            margin-right: 0;
 
             margin-bottom: 9px;
 
@@ -90,6 +89,47 @@
     }
 
     &__date {
+
+    }
+
+    &-send {
+
+        margin-top: 19px;
+
+        &__message {
+
+            position: relative;
+
+            font-family: $helvetica;
+            font-size: 14px;
+            font-weight: 400;
+
+            color: #999999;
+
+            .input {
+
+                padding-left: 33px;
+
+                letter-spacing: -0.35px;
+
+            }
+
+        }
+
+        &__file {
+
+            position: absolute;
+            top: 9px;
+            left: 7px;
+
+            width: 19px;
+            height: 18px;
+
+            input {
+                display: none;
+            }
+
+        }
 
     }
 

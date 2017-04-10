@@ -18,6 +18,7 @@
                 font-family: $helvetica;
                 font-size: 14px;
                 font-weight: 400;
+                line-height: 34px;
 
                 color: #666666;
                 text-align: center;
@@ -27,6 +28,20 @@
 
                 &:last-child {
                     margin-right: 0;
+                }
+
+                .icon-delete-reverse {
+                    margin-right: 9px;
+                    margin-left: -13px;
+                }
+
+                .icon_arrowLeft {
+                    margin-right: 5px;
+                    margin-left: -15px;
+                }
+
+                .btn-success {
+                    letter-spacing: 0.5px;
                 }
 
             }
@@ -39,11 +54,27 @@
 
     }
 
+    &__header {
+
+        .content-wrap {
+
+            align-items: center;
+
+            .video-status {
+
+                width: 235px;
+
+            }
+
+        }
+
+    }
+
     &__action {
 
         align-items: center;
-        margin-top: 17px;
-        margin-bottom: 16px;
+        margin-top: 21px;
+        margin-bottom: -3px;
 
         .rating {
             margin-right: 20px;
@@ -64,20 +95,49 @@
     }
 
     .content-r {
-        flex-basis: auto;
 
+        flex-basis: auto;
         width: auto;
+
+        > .user {
+
+            position: relative;
+
+            width: 235px;
+            padding-right: 18px;
+            margin-top: 12px;
+            margin-right: 0;
+            margin-bottom: 8px;
+        
+            .user__pic {
+
+                margin-right: 10px;
+
+            }
+
+            .user__name {
+
+                margin-top: 4px;
+
+                letter-spacing: 0.08px;
+
+            }
+
+            .icon-dropdown {
+
+                position: absolute;
+                top: 18px;
+                right: 0;
+
+            }
+
+        }
 
     }
 
     &__header {
 
         .content-r {
-
-            .user {
-                width: 235px;
-                margin-right: 0;
-            }
 
         }
 
@@ -90,6 +150,27 @@
 
         }
 
+    }
+
+    .text-edit {
+        margin-top: 35px;
+    }
+
+    .image-edit {
+        margin-top: 8px;
+        margin-bottom: -7px;
+    }
+
+    .input-title {
+        margin-bottom: 3px;
+    }
+
+    .input-subtitle {
+        margin-bottom: -3px;
+    }
+
+    .keyword {
+        padding-left: 16px;
     }
 
 }

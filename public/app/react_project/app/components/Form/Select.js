@@ -124,8 +124,9 @@ class Select extends React.Component {
         let { icon, options } = this.props
 
         return (
-            <Root {...this.props} onClick={this.open}>
-                <InputIcon icon={icon} block />
+            <Root className={this.props.className} onClick={this.open}>
+                <InputIcon icon={icon} block name={this.props.name} />
+
                 <Options open={this.state.open}>
                     {options.map((option, index) => {
                         return (

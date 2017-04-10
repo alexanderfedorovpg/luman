@@ -6,7 +6,11 @@ mixin p-editor-view(data)
                     form(action='')
                         input.input.input-block(value='rtvi.com/news/2017/10/10/url/kiberataki')
                 .content-r
-                    
+                    +b.video-status
+                        i.icon.icon-text-video-lg
+                        +e.B Статус видео:
+                        +e.SPAN.ready  готово
+                        
 
         +e.action.content-wrap
             +rating(rating)
@@ -16,17 +20,63 @@ mixin p-editor-view(data)
             .content-l
                 form(action='')
                     .form-group
-                        textarea.textarea.input-block(name='', cols='30', rows='10') Разведка США заявила о причастности высшего руководства РФ к хакерским атакам
+                        +b.form-group__label.form-group__label--right
+                            span Заголовок 
+                            | : осталось 30 символов
+                        textarea.textarea.input-title.input-block
+                            | Разведка США заявила о причастности высшего руководства РФ к хакерским атакам
                     .form-group
-                        textarea.textarea.input-block(name='', cols='30', rows='10') При этом директор национальной разведки Джеймс Клэппер сообщил, что доклад по хакерским атакам 'будет распространен в начале будущей недели'
+                        +b.form-group__label.form-group__label--right
+                            span Подзаголовок
+                            |  : осталось 
+                            
+                            span.form-group__label--out -5
+                            |  символов
+                        
+                        textarea.textarea.input-subtitle.input-block
+                            | При этом директор национальной разведки Джеймс Клэппер сообщил, что доклад по хакерским атакам "будет распространен в начале будущей недели"
                     .form-group
-                        textarea.textarea.input-block(name='', cols='30', rows='10') В Москве во время антикоррупционного митинга задержали Навального // Навального решили на ночь оставить под присмотром полиции //
+                        +b.form-group__label.form-group__label--right
+                            span Тезисы через //
+                            |  : осталось 30 символов
+                        textarea.textarea.input-thesis.input-block В Москве во время антикоррупционного митинга задержали Навального // Навального решили на ночь оставить под присмотром полиции //
+
                     .form-group
-                        textarea.textarea.input-block(name='', cols='30', rows='10') Разведка США исходит из того, что недавние хакерские атаки на США, приписываемые Вашингтоном Москве, могли быть санкционированы только высшим российским руководством. Такое утверждение приводится в совместном заявлении директора национальной разведки США Джеймса Клэппера, заместителя министра обороны США по разведке Марселя Леттре и главы Агентства национальной безопасности и Киберкомандования<br>Хакер Guccifer сравнил нападки США на Россию с 'фейковой кибервойной'<br>'Мы считаем, что только самые высокопоставленные официальные лица в России могли санкционировать недавнее
+                        +b.text-edit
+                            +text-header()
+                                +e.SPAN.remove Очистить
+                            +e.cnt
+                                p Разведка США исходит из того, что недавние хакерские атаки на США, приписываемые Вашингтоном Москве, могли быть санкционированы только высшим российским руководством. Такое утверждение приводится в совместном заявлении директора национальной разведки США Джеймса Клэппера, заместителя министра обороны США по разведке Марселя Леттре и главы Агентства национальной безопасности и Киберкомандования. 
+                                +e.image
+                                    +e.image-cnt
+                                        img(src='%=static=%img/content/trump.jpeg', alt='')
+                                        i.icon.icon-youtube
+                                    i.icon.icon-delete-reverse
+
+                                p Хакер Guccifer сравнил нападки США на Россию с "фейковой кибервойной".<br>"Мы считаем, что только самые высокопоставленные
+                                    span.text-selected  официальные лица в России 
+                                        +b.SPAN.text-selected-popup
+                                            +e.SPAN.item
+                                                +e.SPAN.icon
+                                                    i.icon.icon-question-lite
+                                                | Справка
+                                            +e.SPAN.item
+                                                +e.SPAN.icon
+                                                    i.icon.icon-undo-lite
+                                                | Править
+                                    | могли санкционировать недавнее
+
                     .form-group
-                        textarea.textarea.input-block(name='', cols='30', rows='10')
+                        +b.image-edit
+                            +image-header()
+                            +e.cnt
+                                img(src="%=static=%img/content/edit-image.png", alt="")
+
                     .form-group
-                        input.input.input-block(placeholder='Ключевые слова')
+                        +b.form-group__label.form-group__label--right Не более 4 слов через пробел
+                        input.input.input-block.keyword(placeholder='Ключевые слова')
+
             .content-r
                 +user('Поликарпов Анатолий', '%=static=%img/content/user.png')
+                    i.icon.icon-dropdown
                 +chat()
