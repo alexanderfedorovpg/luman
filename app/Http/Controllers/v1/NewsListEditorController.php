@@ -52,7 +52,7 @@ class NewsListEditorController extends CmsController
 
         switch ($assigned){
             case 'me' : $params = ['editor_id' => $user_id, 'moderation' => 1]; break;
-            case 'all' : $params = ['editor_id' => 0, 'moderation' => 1]; break;
+            case 'all' : $params = ['editor_id' => 6, 'moderation' => 1]; break;
             default : $params = false;
         }
 
@@ -76,7 +76,6 @@ class NewsListEditorController extends CmsController
             $item["lostComment"] = $comments[0];
             $newsList[] =  $item;
         }
-
 
         $newsList = $this->newsListTransformer->transformCollection($newsList);
 
