@@ -54,7 +54,7 @@ class NewsChat extends Model
      * @param \App\User $user Пользователь
      * @return @return bool
      */
-    public function newMessage($message, User $user)
+    public function newMessage($message, User $user, array $fileIds = [])
     {
         $chatMessage = new NewsChatMessage([
             'news_chat_id' => $this->id,
@@ -62,6 +62,16 @@ class NewsChat extends Model
             'user_id' => $user->id
         ]);
 
-        return $chatMessage->save();
+        $chatMessage->save();
+
+        $files = [];
+        foreach ($fileIds as $fileId) {
+            $files[] = [
+                'message_id' => $chatMessage->id,
+                'file_id' => $fileId
+            ];
+        }
+
+        return NewsChatFile::insert($files);
     }
 }

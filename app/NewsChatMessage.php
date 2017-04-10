@@ -30,4 +30,14 @@ class NewsChatMessage extends Model
     public static $rules = [
         'message' => 'required|min:1',
     ];
+
+    /**
+     * Файлы сообщения
+     *
+     * @return @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function files()
+    {
+        return $this->belongsToMany(CdnFile::class, 'message_id', 'file_id');
+    }
 }

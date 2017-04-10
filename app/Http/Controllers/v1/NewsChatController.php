@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use Illuminate\Http\Request;
+use App\Http\Transformers\v1\NewsChatTransformer;
 use App\News;
 use App\NewsChat;
 use App\NewsChatMessage;
@@ -16,6 +17,22 @@ use Auth;
  */
 class NewsChatController extends CmsController
 {
+
+    /**
+     * @var \App\Http\Transformers\v1\NewsChatTransformer
+     */
+    protected $newsChatTransformer;
+
+    /**
+     * NewsChatController constructor.
+     * @param \App\Http\Transformers\v1\NewsChatTransformer $newsChatTransformer
+     */
+    public function __construct(NewsChatTransformer $newsChatTransformer)
+    {
+        parent::__construct();
+        $this->newsChatTransformer = $newsChatTransformer;
+    }
+
     /**
      * Возвращает все сообщения чата
      *
@@ -29,7 +46,9 @@ class NewsChatController extends CmsController
             return $this->respondNotFound('News not found');
         }
 
-        return $this->respond($news->chat->messages);
+        return $this->respond(
+            $this->newsChatTransformer->transformMessages($news->chat->messages)
+        );
     }
 
     /**
@@ -59,8 +78,9 @@ class NewsChatController extends CmsController
         }
 
         $message = $request->input('message');
+        $files = (array) $request->input('files');
         $user = Auth::user();
 
-        return $this->respond(['success' => $chat->newMessage($message, $user)]);
+        return $this->respond(['success' => $chat->newMessage($message, $user, $files)]);
     }
 }
