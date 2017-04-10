@@ -1,0 +1,36 @@
+mixin live-list(data)
+    +b.live-list()&attributes(attributes)
+        each item in data.items
+            +e.item
+                +e.wrap(class=(item.state ? '_' + item.state : undefined))
+                    +e.col-l
+                        +e.P.date= item.date
+                        +e.P.time= item.time
+
+                    +e.col-r
+                        +e.HEADER.header
+                            +b.rating
+                                +e.SPAN.item.is-active(class = "rate" + item.rating)
+                                    input(
+                                        type="radio", 
+                                        name="rating", 
+                                        id = "rate" + item.rating, 
+                                        disabled
+                                    )
+                                    label(for = "rate" + item.rating)= item.rating
+
+                            +e.P.category= item.category
+
+                        +e.title(class= (item.titleCustom ? '_' + item.titleCustom : undefined))
+                            p(class = "rate" + item.rating)= item.title
+
+                        +b.live-list-tag
+                            each tag in item.tags
+                                +e.SPAN.item
+                                    | #
+                                    = tag
+                        +e.to-live
+                            i.icon.icon-go-right
+                            +e.to-live-tip В прямой эфир
+
+    block

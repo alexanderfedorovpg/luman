@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Навигация</title>
+    <title>Профиль пользователя</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,47 +112,76 @@
     </header>
     <div class="content">
         <!-- Контент здесь-->
-        <ul>
-            <li>
-                <a href="gui.html">Элементы сайта</a>
-            </li>
-            <li>
-                <a href="popups.html">Всплывающие окна</a>
-            </li>
-            <li>
-                <a href="login.html">Авторизация</a>
-            </li>
-            <li>
-                <a href="feed.html">Лента</a>
-            </li>
-            <li>
-                <a href="stats.html">Статистика</a>
-            </li>
-            <li>
-                <a href="stats-article.html">Статистика статьи</a>
-            </li>
-            <li>
-                <a href="stats-editor.html">Статистика пользователя</a>
-            </li>
-            <li>
-                <a href="working.html">В работе</a>
-            </li>
-            <li>
-                <a href="editor-view.html">Просмотр выпускающим</a>
-            </li>
-            <li>
-                <a href="programs.html">Программы</a>
-            </li>
-            <li>
-                <a href="live.html">Прямой эфир</a>
-            </li>
-            <li>
-                <a href="profile.html">Профиль пользователя</a>
-            </li>
-            <li>
-                <a href="profile-history.html">Профиль пользователя - История</a>
-            </li>
-        </ul>
+        <header class="header header-off">
+            <div class="header-bot">
+                <div class="header-l">
+                    <div class="tabs-nav">
+                        <a class="tabs-nav__item is-active" href="javascript:void(0)">Профиль пользователя</a>
+                        <a class="tabs-nav__item" href="javascript:void(0)">Последние действия</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="profile">
+            <form class="profile__profile-form" action="" method="POST">
+                <div class="profile__column profile__column_left">
+                    <img class="profile__img" src="static/img/content/avatar.png" alt="" role="presentation" />
+                    <input class="profile__img-input" type="file" id="avatar" name="avatar" accept="image/*" />
+                    <label class="profile__img-label" for="avatar">Изменить
+                    </label>
+                </div>
+                <div class="profile__column profile__column_right">
+                    <input class="input input-full" type="text" value="Поликарпов" />
+                    <input class="input input-full" type="text" value="Анатолий" />
+                    <hr class="profile__hr" />
+                    <p class="profile__text">Даные для авторизации
+                    </p>
+                    <input class="input input-full" type="text" value="polikarpov@gmail.com" />
+                    <input class="input input-full" type="text" value="tolik2003" />
+                    <input class="input input-full" type="text" id="password" value="kitty_kitty_1978" />
+                    <label class="profile__pass-label" for="password">Сменить пароль
+                    </label>
+                    <div class="row">
+                        <button class="btn btn-md btn-danger">
+                            <i class="icon icon-delete-reverse"></i>Отменить изменения</button>
+                        <button class="btn btn-md btn-success is-active">
+                            <i class="icon icon-okay"></i>Сохранить</button>
+                    </div>
+                </div>
+            </form>
+            <div class="profile__properties">
+                <div class="profile__col">
+                    <p class="profile__title">Добавлен:
+                    </p>
+                    <p class="profile__value">14 апреля 2015
+                    </p>
+                </div>
+                <div class="profile__col">
+                    <p class="profile__title">Всего написано статей:
+                    </p>
+                    <p class="profile__value">244
+                    </p>
+                </div>
+                <div class="profile__col">
+                    <p class="profile__title">Группа:
+                    </p>
+                    <p class="profile__value">Редактор
+                    </p>
+                </div>
+                <div class="profile__col">
+                    <p class="profile__title">Отредактировано:
+                    </p>
+                    <p class="profile__value">96
+                    </p>
+                </div>
+                <div class="profile__col">
+                    <p class="profile__title">Статус профиля:
+                    </p>
+                    <p class="profile__value">Активный
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="static/js/main.min.js"></script>
 </body>

@@ -198,6 +198,14 @@
         @include bg($tass);
     }
 
+    &-live-on {
+        @include bg($live-on);
+    }
+
+    &-live-off {
+        @include bg($live-off);
+    }
+
 }
 
 // если активный пункт меню
