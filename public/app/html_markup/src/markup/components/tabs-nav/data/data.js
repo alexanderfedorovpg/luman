@@ -49,6 +49,6 @@ var data = {tabsNav: {
             }
         ]
 
-    },
+    }
 
 }}

@@ -1,0 +1,9 @@
+mixin toggle(data)
+
+    +b.toggle-btn()&attributes(attributes)
+
+        each item in data.items
+
+            +e.SPAN.item(class= item.class)= item.name
+
+        block
