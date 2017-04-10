@@ -66,6 +66,11 @@ class NewsFeedController extends CmsController
                 $feed->substring($substrings);
             }
 
+            $searchString = $request->input('ia');
+            if ($searchString) {
+                $feed->InformAgency($searchString);
+            }
+
             $tagList = $request->input('tagList');
             if ($tagList) {
                 $tags = explode(',', $tagList);
