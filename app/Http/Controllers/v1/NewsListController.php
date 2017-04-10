@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\ApiController;
 use App\News;
 use Illuminate\Http\Request;
+use App\Http\Traits\NewsListTrait;
 
 /**
  * Class NewsListController
@@ -12,10 +13,12 @@ use Illuminate\Http\Request;
  */
 class NewsListController extends CmsController
 {
+    use NewsListTrait;
     /**
      * @var \App\Http\Transformers\v1\Client\NewsListTransformer
      */
     protected $newsListTransformer;
+    protected $getArray = false;
 
     /**
      * NewsListController constructor.
@@ -23,6 +26,7 @@ class NewsListController extends CmsController
      */
     public function __construct(\App\Http\Transformers\v1\NewsListTransformer $newsListTransformer)
     {
+        parent::__construct();
         $this->newsListTransformer = $newsListTransformer;
     }
 
@@ -34,47 +38,19 @@ class NewsListController extends CmsController
     {
 
         $news = News::published();
-        $searchString = $request->input('searchString');
-        if ($searchString) {
-            $substrings = explode(',', $searchString);
-            $news->substring($substrings);
-        }
 
-        $tagList = $request->input('tagList');
-        if ($tagList) {
-            $tags = explode(',', $tagList);
-            $news->tags($tags);
-        }
-
-        $video = $request->input('video');
-        if ($video !== null) {
-            if ($video === 'true') {
-                $news->existVideo(true);
-            } elseif ($video === 'false') {
-                $news->existVideo(false);
-            }
-        }
-
-        $start = $request->input('start');
-        if ($start !== null) {
-            $news->skip($start);
-        }
-
-        $limit = $request->input('limit');
-        if ($limit !== null) {
-            $news->take($limit);
-        }
-
-        if ($limit === null && $start !== null) {
-            $limit = News::count() - $start;
-            $news->take($limit);
-        }
+        $this->processing($request, $news);
 
         $news = $news->get();
 
-        return $this->respond(
-            $this->newsListTransformer->transformCollection($news->toArray())
-        );
+        $data = $this->newsListTransformer->transformCollection($news->toArray());
+
+        if($this->getArray){
+            return $data;
+        } else {
+            return $this->respond($data);
+        }
+
     }
 
     /**
@@ -91,9 +67,16 @@ class NewsListController extends CmsController
         }
         $newsArray = $news->toArray();
         $comments = $news->comments()->published()->get();
-        return $this->respond(
-            $this->newsListTransformer->transformOneNews($newsArray, $comments)
-        );
+
+
+        $data = $this->newsListTransformer->transformOneNews($newsArray, $comments);
+
+
+        if($this->getArray){
+            return $data;
+        } else {
+            return $this->respond($data);
+        }
     }
 
     /**

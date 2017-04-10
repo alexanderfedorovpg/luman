@@ -30,6 +30,9 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/news/{id}/related','NewsListController@getRelated');
     $group->post('/auth/login','AuthController@login');
 
+    $group->get('/newslisteditor/{assigned}','NewsListEditorController@get');
+    $group->get('/newseditor/{id}','NewsListEditorController@getOne');
+
     //Пользователи
     $group->get('/user','UserController@index');
     $group->get('/user/{id}','UserController@show');
@@ -71,5 +74,6 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/reference/page','ReferenceController@getPage');
 
 });
+
 
 
