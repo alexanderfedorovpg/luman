@@ -1,10 +1,27 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import { injectGlobal } from 'styled-components'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import randomString from 'random-string'
 
 import Item from './Item'
 import Detail from './Detail'
 import Modal from '../Modal'
 import Paginator from '../Paginator'
+
+const animationClassName = randomString()
+
+injectGlobal`
+    .${animationClassName}-leave {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    .${animationClassName}-leave-active {
+        opacity: 0.01;
+        max-height: 0px;
+        transition: all .5s;
+    }
+`
 
 class News extends Component {
 
@@ -57,28 +74,32 @@ class News extends Component {
         let selected = this.getItemById(this.state.selected)
 
         return (
-            <div>
-                <div style={{ opacity: loading ? .3 : 1 }}>
-                    {data.map((value, index) => {
-                        return (
-                            <Item
-                                key={value.get('id')}
-                                data={value.toJS()}
-                                hide={hide}
-                                toWork={toWork}
-                                open={this.selectItem} />
-                        )
-                    })}
-                </div>
+            <div style={{ opacity: loading ? .3 : 1}}>
+                <ReactCSSTransitionGroup
+                    transitionName={animationClassName}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+
+                    {data.toJS().map(value => (
+                        <Item
+                            key={value.id}
+                            data={value}
+                            hide={hide}
+                            toWork={toWork}
+                            open={this.selectItem} />
+                    ))}
+                </ReactCSSTransitionGroup>
                 <Modal
                     isOpen={this.state.modalOpen}
                     contentLabel="Новость"
                     onRequestClose={this.closeModal}>
-                    <Detail onClose={this.closeModal} data={selected} />
+                    <Detail
+                        onClose={this.closeModal}
+                        data={selected}
+                        toWork={toWork}
+                        ignore={hide} />
                 </Modal>
-                {data.count()
-                    ? <Paginator {...pagination} />
-                    : null}
+                <Paginator {...pagination} />
             </div>
         )
     }

@@ -27,6 +27,17 @@ class ApiController extends Controller
         return $this;
     }
 
+
+    /**
+     * Запрос был выполнен, и, в результате, создан новый ресурс.
+     * @param string $message
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function respondCreated($message="")
+    {
+        return $this->setStatusCode('201')->respond($message);
+    }
+
     /**
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
@@ -69,6 +80,7 @@ class ApiController extends Controller
            [
            'Access-Control-Allow-Origin'=>'*',
            'Access-Control-Request-Method' => ['POST, GET, PUT, OPTIONS, DELETE'],
+           'Access-Control-Allow-Headers'=> ['Content-Type, Api-Token'],
            ];
         return response()->json($data , $this->getStatusCode() , $headers);
     }

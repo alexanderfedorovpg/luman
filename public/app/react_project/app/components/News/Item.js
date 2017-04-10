@@ -99,9 +99,9 @@ const Ignore = styled(Work)`
     right: 24px;
 `
 
-function Item({ data, toWork, hide, open }) {
+function Item({ data, toWork, hide, open, style }) {
     return (
-        <Root onClick={() => open(data.id)}>
+        <Root onClick={() => open(data.id)} style={style}>
             <Wrapper>
                 <ItemIcon type="tass" />
                 <Title className={titleClassName}>

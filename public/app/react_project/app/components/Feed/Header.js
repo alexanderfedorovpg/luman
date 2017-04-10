@@ -6,16 +6,16 @@ import {
     Right as HeaderRight,
     Link as HeaderLink,
     Bot as HeaderBot
-} from './../Header'
+} from 'components/Header'
 
 import {
     Horizontal as FormHorizontal,
     InputIcon
-} from './../Form'
+} from 'components/Form'
 
-import Modal from './../Modal'
-import Help from './../Help'
-import Button from './../Button'
+import Modal from 'components/Modal'
+import Help from 'components/Help'
+import Button from 'components/Button'
 
 import { padding, font } from './../../constants/style'
 
@@ -82,6 +82,7 @@ class Header extends Component {
         return e => {
             this.setState({
                 form: {
+                    ...this.state.form,
                     [prop]: e.target.value
                 }
             })

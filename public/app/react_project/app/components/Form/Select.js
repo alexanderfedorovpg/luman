@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import ClickOutside from 'react-click-outside'
 
@@ -87,13 +87,17 @@ const Text = styled.div`
     }
 `
 
-class Select extends React.Component {
+class Select extends PureComponent {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            open: false
+            open: false,
+            value: {
+                name: '',
+                id: ''
+            }
         }
 
         this.open = this.open.bind(this)
@@ -120,16 +124,38 @@ class Select extends React.Component {
         this.close()
     }
 
+    selectHandler(item) {
+        this.setState({
+            value: item
+        })
+
+        this.close();
+
+        (this.props.onChange || (()=>{}))(item)
+    }
+
     render() {
-        let { icon, options } = this.props
+        let { icon, options, error } = this.props
 
         return (
-            <Root {...this.props} onClick={this.open}>
-                <InputIcon icon={icon} block />
+            <Root className={this.props.className} onClick={this.open}>
+                <InputIcon
+                    icon={icon}
+                    value={this.state.value.name}
+                    error={error}
+                    block />
+                <input
+                    type="hidden"
+                    name={this.props.name}
+                    value={this.state.value.id} />
+
                 <Options open={this.state.open}>
                     {options.map((option, index) => {
                         return (
-                            <Item key={index}>
+                            <Item
+                                key={index}
+                                onClick={this.selectHandler.bind(this, option)}>
+
                                 <Pic>
                                     <img src={option.pic} />
                                 </Pic>

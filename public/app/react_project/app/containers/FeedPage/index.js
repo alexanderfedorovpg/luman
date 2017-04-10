@@ -8,6 +8,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+
 import {
     selectFeedList,
     selectedFeed,
@@ -16,9 +17,24 @@ import {
     selectSearchVars
 } from './selectors';
 
-import { loadFeed, hideFeedItem, selectFeed, setFilters } from './actions'
+import {
+    selectEditors
+} from 'containers/App/selectors';
 
-import Feed from '../../components/Feed'
+import {
+    loadFeed,
+    hideFeedItem,
+    selectFeed,
+    setFilters,
+    feedToWork
+} from './actions'
+
+import { loadEditors } from 'containers/App/actions'
+
+import Header from 'components/Feed/Header'
+import Form from 'components/Feed/Form'
+import { Wrap, Left, Right } from 'components/Content'
+import News from 'components/News'
 
 export class FeedPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -26,12 +42,14 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         super(props);
 
         this.hideItem = this.hideItem.bind(this)
-        this.toWork = this.toWork.bind(this)
+        this.work = this.work.bind(this)
         this.applyFilters = this.applyFilters.bind(this)
+        this.sendToWork = this.sendToWork.bind(this)
     }
 
     componentDidMount() {
         this.loadFeed()
+        this.props.dispatch(loadEditors())
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,49 +65,61 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
         this.props.dispatch(hideFeedItem(id))
     }
 
-    toWork(id) {
+    work(id) {
         this.props.dispatch(selectFeed(id))
     }
 
-    applyFilters(filters) {
-        this.props.dispatch(setFilters(filters))
+    sendToWork(data) {
+        this.props.dispatch(feedToWork(data))
+    }
 
-        this.loadFeed(filters)
+    applyFilters(filters) {
+        let searchString = filters.keywords
+        let ia = filters.agency
+
+        this.props.dispatch(setFilters({ searchString, ia }))
+
+        this.loadFeed()
     }
 
     loadFeed(params) {
-        let { search } = this.props;
-        let page = this.props.location.query.page || 1
-
-        this.props.dispatch(loadFeed({ page, ...search, ...params }))
+        this.props.dispatch(loadFeed(params))
     }
 
     render() {
         let {
             news,
             menuOpen,
-            users,
             selectedFeed,
             pagination,
             router,
             loading,
-            search
+            search,
+            editors
         } = this.props
 
         return (
             <div>
                 <Helmet
                     title="Лента" />
-                <Feed
-                    news={news}
-                    pagination={pagination}
-                    loading={loading}
-                    moved={menuOpen}
-                    users={users}
-                    toWork={this.toWork}
-                    hideItem={this.hideItem}
-                    onSearchChange={this.applyFilters}
-                    worked={selectedFeed ? selectedFeed.toJS() : {}} />
+
+                <Header moved={menuOpen} onSearchChange={this.applyFilters} />
+                <Wrap>
+                    <Left>
+                        <News
+                            data={news}
+                            hide={this.hideItem}
+                            toWork={this.work}
+                            pagination={pagination}
+                            loading={loading} />
+                    </Left>
+                    <Right>
+                        <Form
+                            data={selectedFeed}
+                            users={editors}
+                            onSubmit={this.sendToWork} />
+                    </Right>
+                </Wrap>
             </div>
         );
     }
@@ -102,20 +132,11 @@ FeedPage.propTypes = {
 const mapStateToProps = state => ({
     menuOpen: state.get('app').get('menuOpen'),
     news: selectFeedList(state),
-    users: [
-            {
-                    name: 'Ковалев Максим',
-                    pic: '/img/user1.png'
-            },
-            {
-                    name: 'Короленко Анастасия',
-                    pic: '/img/user2.png'
-            }
-    ],
     search: selectSearchVars(state).toJS(),
     selectedFeed: selectedFeed(state),
     pagination: selectedPagination(state),
-    loading: selectedLoading(state)
+    loading: selectedLoading(state),
+    editors: selectEditors(state)
 })
 
 function mapDispatchToProps(dispatch) {

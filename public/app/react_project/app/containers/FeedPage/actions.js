@@ -57,9 +57,10 @@ export function hideFeedItem(id) {
     };
 }
 
-export function feedItemHidden() {
+export function feedItemHidden(id) {
     return {
-        type: HIDE_FEED_ITEM_SUCCESS
+        type: HIDE_FEED_ITEM_SUCCESS,
+        payload: id
     };
 }
 
