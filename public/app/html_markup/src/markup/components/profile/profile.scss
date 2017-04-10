@@ -6,7 +6,7 @@
     &__profile-form {
         display: flex;
         width: 55.8%;
-        padding: .4rem 1.5rem 0;
+        padding: .4rem 1.3rem 0 1.5rem;
 
         border-right: 1px solid #d2d2d2;
     }
@@ -63,6 +63,9 @@
 
     .input {
         margin-bottom: .9rem;
+
+        font-weight: 400;
+        color: #333333;
     }
 
     &__hr {
@@ -86,12 +89,12 @@
     
     &__pass-label {
         position: absolute;
-        right: .65rem;
+        right: .75rem;
 
-        margin-top: -2.66rem;
+        margin-top: -2.62rem;
 
-        font-size: .75rem;
-        font-weight: 300;
+        font-size: .72rem;
+        font-weight: 400;
         color: #336699;
     }
 
@@ -106,6 +109,27 @@
     .btn-md {
         width: 48%;
         margin: 0;
+    }
+
+    .btn-danger {
+        font-size: .78rem;
+        font-weight: 400;
+        letter-spacing: .05rem;
+
+        .icon {
+            margin-right: .6rem;
+            margin-left: .2rem;
+        }
+    }
+
+    .btn-success {
+        font-size: .86rem;
+        font-weight: 600;
+
+        .icon {
+            margin-right: .2rem;
+            margin-left: -1.1rem;
+        }
     }
 
     &__properties {
@@ -136,7 +160,9 @@
         display: inline-block;
         margin: 0;
 
-        font-size: rem(14);
+        font-size: 0.868rem;
+        font-weight: 600;
         color: #333;
+        letter-spacing: -.01rem;
     }
 }
