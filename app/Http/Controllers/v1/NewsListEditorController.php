@@ -50,10 +50,6 @@ class NewsListEditorController extends CmsController
 
             $user_id = Auth::id();
 
-//            if (empty($user_id)) {
-//                $user_id = 2;
-//            }
-
             switch ($assigned) {
                 case 'me' :
                     $params = ['editor_id' => $user_id, 'moderation' => 1];
@@ -113,8 +109,24 @@ class NewsListEditorController extends CmsController
      */
     public function getOne($id)
     {
-        var_dump(2);
-        // parent::getOne($id);
+        $this->getArray = true;
+        $news = News::whereId($id)->published()->first();
+        if (!$news) {
+            return $this->respondNotFound();
+        }
+        $newsArray = $news->toArray();
+        $comments = $news->comments()->published()->get();
+
+
+        $data = $this->newsListTransformer->transformOneNews($newsArray, $comments);
+
+
+        if($this->getArray){
+            return $data;
+        } else {
+            return $this->respond($data);
+        }
+        dd($newsList);
     }
 
 }
