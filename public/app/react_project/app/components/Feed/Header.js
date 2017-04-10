@@ -82,6 +82,7 @@ class Header extends Component {
         return e => {
             this.setState({
                 form: {
+                    ...this.state.form,
                     [prop]: e.target.value
                 }
             })

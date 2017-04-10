@@ -45,6 +45,15 @@ class NewsFeed extends Model
         return $query;
     }
 
+
+    public function scopeInformAgency($query, $string)
+    {
+
+        $query->orWhere('source_feed', 'like', "%{$string}%");
+
+        return $query;
+    }
+
     /**
      * @param $query
      * @param array $tags

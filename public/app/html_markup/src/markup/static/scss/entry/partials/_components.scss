@@ -9,6 +9,7 @@
 @import 'components/status/status';
 @import 'components/tags-default/tags-default';
 @import 'components/chat/chat';
+@import 'components/toggle/toggle';
 @import 'components/image-header/image-header';
 @import 'components/text-header/text-header';
 @import 'components/popup-help/popup-help';
@@ -21,8 +22,13 @@
 @import 'components/stats-article/stats-article';
 @import 'components/stats-editor/stats-editor';
 @import 'components/programs/programs';
+@import 'components/live-list/live-list';
+@import 'components/live-item/live-item';
+@import 'components/profile/profile';
+@import 'components/profile-history/profile-history';
 @import 'components/footer/footer';
 
 @import 'components/p-working/p-working';
 @import 'components/p-editor-view/p-editor-view';
 @import 'components/p-main/p-main';
+@import 'components/p-ready/p-ready';

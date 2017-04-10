@@ -10,8 +10,9 @@ block content
             +b.header-l
                 +b.FORM.form-feed(action='' method='POST')
                     .form-horizontal
-                        button.btn.btn-xs.btn-danger 
-                            +icon({ icon: 'arrowLeft', class: 'arrowLeft' })
+                        button.btn.btn-xs.btn-danger
+                            i.icon-arrowLeft-wrap
+                                +icon({ icon: 'arrowLeft', class: 'arrowLeft' })
                             | Отменить изменения
                         button.btn.btn-xs.btn-primary Предпросмотр
                         button.btn.btn-xs.btn-success

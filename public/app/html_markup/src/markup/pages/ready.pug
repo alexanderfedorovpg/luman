@@ -1,0 +1,29 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'Главная';
+
+block content
+    // Контент здесь
+    +b.HEADER.header.header-off.header-ready
+        
+        +b.header-bot
+
+            +b.header-l
+
+                form(action="")
+                    
+                    .input-icon
+                        input.input.input-block#ko4(type='text' placeholder='Поиск по готовым материалам')
+                        +icon({ icon: 'search', class: 'search' }) 
+
+                    +toggle(toggle.ready)
+
+            +b.header-r 
+                a.link-black(href=jv0)
+                    span ?
+                    | справка
+
+    .content-wrap
+
+        +p-ready(pReady)

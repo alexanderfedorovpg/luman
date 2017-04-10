@@ -30,6 +30,9 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/news/{id}/related','NewsListController@getRelated');
     $group->post('/auth/login','AuthController@login');
 
+    $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
+    $group->get('/newseditor/{id}','NewsListEditorController@getOne');
+
     //Пользователи
     $group->get('/user','UserController@index');
     $group->get('/user/{id}','UserController@show');
@@ -48,6 +51,14 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/group/{groupId}/permiss','GroupController@addPermiss');
     $group->delete('/group/{groupId}/permiss/{permissId}','GroupController@addPermiss');
     $group->get('/group/{id}/users','GroupController@UsersByGroup');
+
+
+    // Уведомления
+	$group->get('/notification/{id}','NotificationController@sendMessage');
+	$group->post('/notification/','NotificationController@addDevice');
+	$group->delete('/notification/{guid}','NotificationController@removeDevice');
+	$group->post('/notification/one','NotificationController@sendOneMessage');
+	$group->post('/notification/to','NotificationController@sendMessageTo');
 
     //Права
     $group->get('/permission','PermissionController@index');

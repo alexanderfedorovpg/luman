@@ -191,6 +191,7 @@ class Permission extends Command
         ];
     }
 
+
     /**
      * Доступы для контроллера \App\Controllers\v1\FileController
      *
@@ -210,4 +211,17 @@ class Permission extends Command
         ];
     }
 
+    public function permissNewslisteditor()
+    {
+        return [
+            [
+                'name' => 'v1.newslisteditor-get',
+                'description' => 'Список новостей',
+            ],
+            [
+                'name' => 'v1.newslisteditor-getOne',
+                'description' => 'Просмотр новости',
+            ],
+        ];
+    }
 }

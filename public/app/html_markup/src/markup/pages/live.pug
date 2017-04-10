@@ -1,0 +1,18 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'Прямой эфир';
+
+block content
+    // Контент здесь
+
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                //i.icon.icon-live-on
+                i.icon.icon-live-off
+                +b.H2.header-title Прямой эфир
+    
+    .content-wrap.list-page
+        +live-list(liveList)
+        +live-item
