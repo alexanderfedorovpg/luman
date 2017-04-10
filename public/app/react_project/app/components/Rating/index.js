@@ -21,6 +21,14 @@ class Rating extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.state.checked !== nextProps.value) {
+            this.setState({
+                checked: nextProps.value
+            })
+        }
+    }
+
     handleChange(e) {
         let value = e.target.value
 
@@ -28,6 +36,8 @@ class Rating extends Component {
             this.setState({
                 checked: value
             })
+
+            this.props.onChange(value)
         }
     }
 
@@ -54,8 +64,3 @@ Rating.PropTypes = {
 }
 
 export default Rating
-
-
-// +e.SPAN.item
-//             input#rate1(type="radio" name="rating")
-//             label(for="rate1") 1

@@ -49,6 +49,30 @@ var data = {tabsNav: {
             }
         ]
 
+    },
+
+    profile: {
+        items: [
+            {
+                name: 'Профиль пользователя',
+                class: 'is-active'
+            },
+            {
+                name: 'Последние действия'
+            }
+        ]
+    },
+
+    profileHistory: {
+        items: [
+            {
+                name: 'Профиль пользователя'
+            },
+            {
+                name: 'Последние действия',
+                class: 'is-active'
+            }
+        ]
     }
 
 }}

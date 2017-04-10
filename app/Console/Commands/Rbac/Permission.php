@@ -152,4 +152,23 @@ class Permission extends Command
             ],
         ];
     }
+
+    /**
+     * Доступы для контроллера \App\Controllers\v1\ReferenceController
+     *
+     * @return array
+     */
+    public function permissReference()
+    {
+        return [
+            [
+                'name' => 'v1.tags-search',
+                'description' => 'Поиск справки',
+            ],
+            [
+                'name' => 'v1.tags-getPage',
+                'description' => 'Получение страницы спрвки',
+            ],
+        ];
+    }
 }

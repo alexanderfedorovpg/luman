@@ -14,7 +14,9 @@ import {
 
     SET_FILTERS,
 
-    HIDE_FEED_ITEM_SUCCESS
+    HIDE_FEED_ITEM_SUCCESS,
+
+    FEED_TO_WORK_SUCCESS
 } from './constants';
 
 const initialState = fromJS({
@@ -47,6 +49,9 @@ function feedPageReducer(state = initialState, action) {
 
     case SELECT_FEED:
         return state.set('selectedFeed', action.payload)
+
+    case FEED_TO_WORK_SUCCESS:
+        return state.set('selectedFeed', null)
 
     case SET_FILTERS:
         return state.mergeIn(['news', 'search'], action.payload)

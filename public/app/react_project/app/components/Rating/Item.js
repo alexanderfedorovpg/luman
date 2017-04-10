@@ -40,7 +40,6 @@ const Root = styled.div`
                     `
             }
         }}
-        ;
     }
 `
 

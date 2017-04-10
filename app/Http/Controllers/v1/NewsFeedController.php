@@ -43,83 +43,94 @@ class NewsFeedController extends CmsController
      */
     public function getNewsFeed(Request $request)
     {
+        try {
+            $this->validate($request, [
+                'viewMode' => 'in:hidden,all',
+                'fromDate' => 'date|date_format:Y-m-d H:i:s',
+                'toDate' => 'date|date_format:Y-m-d H:i:s',
+            ]);
 
-        $this->validate($request, [
-            'viewMode' => 'in:hidden,all',
-            'fromDate' => 'date|date_format:Y-m-d H:i:s',
-            'toDate' => 'date|date_format:Y-m-d H:i:s',
-        ]);
-
-        if (isset($viewMode) && $viewMode !== null) {
-            if ($viewMode === 'hidden') {
-                $feed = NewsFeed::viewMode(1);
-            } elseif ($viewMode === 'all') {
-                $feed = NewsFeed::viewMode('all');
+            if (isset($viewMode) && $viewMode !== null) {
+                if ($viewMode === 'hidden') {
+                    $feed = NewsFeed::viewMode(1);
+                } elseif ($viewMode === 'all') {
+                    $feed = NewsFeed::viewMode('all');
+                }
+            } else {
+                $feed = NewsFeed::viewMode(0);
             }
-        } else {
-            $feed = NewsFeed::viewMode(0);
+
+            $searchString = $request->input('searchString');
+            if ($searchString) {
+                $substrings = explode(',', $searchString);
+                $feed->substring($substrings);
+            }
+
+            $searchString = $request->input('ia');
+            if ($searchString) {
+                $feed->InformAgency($searchString);
+            }
+
+            $tagList = $request->input('tagList');
+            if ($tagList) {
+                $tags = explode(',', $tagList);
+                $feed->tags($tags);
+            }
+
+
+            $limit = $request->input('limit');
+            if ($limit !== null) {
+                $feed->take($limit);
+            }
+
+
+            $fromDate = $request->input('fromDate');
+            $toDate = $request->input('toDate');
+            $feed->dateFilter($fromDate, $toDate);
+
+
+            $feed = $feed->paginate(DEFAULT_VALUE);
+
+
+            return $this->respond(
+                $this->newsFeedTransformer->transformCollection($feed->toArray())
+            );
+
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound($e->getMessage());
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
         }
-
-        $searchString = $request->input('searchString');
-        if ($searchString) {
-            $substrings = explode(',', $searchString);
-            $feed->substring($substrings);
-        }
-
-        $tagList = $request->input('tagList');
-        if ($tagList) {
-            $tags = explode(',', $tagList);
-            $feed->tags($tags);
-        }
-
-
-        $limit = $request->input('limit');
-        if ($limit !== null) {
-            $feed->take($limit);
-        }
-
-
-        $fromDate = $request->input('fromDate');
-        $toDate = $request->input('toDate');
-        $feed->dateFilter($fromDate, $toDate);
-
-
-        $feed = $feed->paginate(DEFAULT_VALUE);
-
-
-        return $this->respond(
-            $this->newsFeedTransformer->transformCollection($feed->toArray())
-        );
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
         try {
 
             $this->validate($request, [
                 'action' => 'in:hide',
-                'id'=> 'required|numeric',
+                'id' => 'required|numeric',
             ]);
 
             $action = $request->input('action');
             $id = $request->input('id');
 
-            $feed= NewsFeed::find($id);
+            $feed = NewsFeed::find($id);
 
-            if ($action=="hide") {
-                $feed->hidden=1;
+            if ($action == "hide") {
+                $feed->hidden = 1;
 
             }
 
             if ($feed->save()) {
-                return $this->respond(
-                    ["data"=>"hidden"]
+                return $this->respondCreated(
+                    ["data" => "hidden"]
                 );
             }
 
             throw new \Exception('Ошибка, новость не скрыта');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->respondFail500x($e->getMessage());
         }
     }
@@ -148,9 +159,9 @@ class NewsFeedController extends CmsController
 //                'is_war_mode' => 'in:0,1',
             ]);
 
-            $feed =NewsFeed::ViewMode(0)->findOrFail($data['id']);
+            $feed = NewsFeed::ViewMode(0)->findOrFail($data['id']);
 
-            if ($feed && $data['action']=='work' ) {
+            if ($feed && $data['action'] == 'work') {
 
                 $news = new News;
                 $news->title = $feed->header;
@@ -187,7 +198,7 @@ class NewsFeedController extends CmsController
                     $feed->hidden = '1';
                     $feed->save();
                     $this->respond($news);
-                    return $this->respond(
+                    return $this->respondCreated(
                         $this->newsFeedTransformer->transform($feed->toArray())
                     );
                 }
@@ -196,8 +207,7 @@ class NewsFeedController extends CmsController
 
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound(['Исходня запись в ленте новостей не найдена либо скрыта']);
-        }
-         catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->respondFail500x([$e->getTrace()]);
         }
     }

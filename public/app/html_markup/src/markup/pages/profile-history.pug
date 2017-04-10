@@ -1,0 +1,12 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'Профиль пользователя';
+
+block content
+    // Контент здесь
+
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                +tabs-nav(tabsNav.profileHistory)
