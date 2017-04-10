@@ -120,4 +120,19 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
         return $query->where('is_publish', '=', $published);
     }
 
+    /**
+     * Фильтрация по наличию опубликованости
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param bool $published
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeModerationThisEditor($query, $editor_id, $moderation = true)
+    {
+        return $query->where($editor_id, $moderation, function ($query, $moderation, $editor_id) {
+                                        $query  ->where('moderation', '=', $moderation)
+                                                ->where('editor_id', '=', $editor_id);
+        });
+    }
+
 }

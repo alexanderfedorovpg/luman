@@ -1,12 +1,16 @@
-mixin p-main(data)
-    +b.working.working--main()&attributes(attributes)
+mixin p-ready(data)
+    +b.working.working--ready()&attributes(attributes)
         each item in data.items
             +e.item
                 +e.wrap
                     +e.col-l
+
                         +b.time-publish
-                            +e.TIME.date 15 января 2017
-                            +e.TIME.hours 15:18
+                            +e.TIME.date 15 января 2017,
+                            +e.TIME.hours  15:18
+
+                        .user__name= item.author
+
                     +e.col-r
                         +e.HEADER.header
                             +b.rating
@@ -23,6 +27,13 @@ mixin p-main(data)
                             +e.SPAN.item #внешняя политика
                             +e.SPAN.item #США
 
-                        +e.SPAN.ignore.icon.icon-delete.tooltip(data-tooltip='Игнорировать')
-                        +e.SPAN.work.icon.icon-go-right.tooltip(data-tooltip='Редактируем')
+                        +b.working-btns
+
+                            button.btn.btn-md.btn-primary
+                                | Предпросмотр
+
+                            button.btn.btn-md.btn-success
+                                +icon({ icon: 'arrowRight', class: 'arrowRight' })
+                                | Редактировать
+
         block
