@@ -48,10 +48,6 @@ class NewsListEditorController extends CmsController
 
             $this->getArray = true;
 
-
-            //$arr = parent::get($request);
-            //return $arr;
-
             $user_id = Auth::id();
 
 //            if (empty($user_id)) {
@@ -63,7 +59,7 @@ class NewsListEditorController extends CmsController
                     $params = ['editor_id' => $user_id, 'moderation' => 1];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => 0, 'moderation' => 1];
+                    $params = ['editor_id' => 5, 'moderation' => 1];
                     break;
                 default :
                     $params = false;
@@ -94,17 +90,18 @@ class NewsListEditorController extends CmsController
                 $comments = $comments->get();
                 $comments = $comments->toArray();
 
-                $item["lostComment"] = $comments[0];
+                if(!empty($comments)) {
+                    $item["lostComment"] = $comments[0];
+                }
+
                 $newsList[] = $item;
             }
 
-
             $newsList = $this->newsListTransformer->transformCollection($newsList);
-
             return $this->respond($newsList);
-        } catch (\Exception $e) {
+         } catch (\Exception $e) {
             return $this->respondFail500x($e);
-        }
+         }
 
     }
 
