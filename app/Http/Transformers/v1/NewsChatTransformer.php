@@ -27,10 +27,22 @@ class NewsChatTransformer extends Transformer
                 'id' => $message->id,
                 'message' => $message->message,
                 'created_at' => $message->created_at,
-                'files' => $message->files
+                'files' => $this->transformFiles($message->files)
             ];
         }
 
+        return $transform;
+    }
+
+    public function transformFiles($files)
+    {
+        $transform = [];
+        foreach ($files as $file) {
+            $transform[] = [
+                'id' => $file->id,
+                'url' => $file->url
+            ];
+        }
         return $transform;
     }
 }

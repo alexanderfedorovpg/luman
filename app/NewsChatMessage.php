@@ -38,6 +38,6 @@ class NewsChatMessage extends Model
      */
     public function files()
     {
-        return $this->belongsToMany(CdnFile::class, 'message_id', 'file_id');
+        return $this->belongsToMany(CdnFile::class, 'news_chat_files', 'message_id', 'file_id');
     }
 }
