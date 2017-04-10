@@ -1,0 +1,22 @@
+mixin header(data)
+    if pageSettings.navSide
+        +b.HEADER.header()&attributes(attributes)
+
+            +b.header-top
+
+                +b.header-l
+                    +b.header-info
+                        +e.BUTTON.hamburger
+                            +icon({ icon: 'hamburger', class: 'hamburger' })
+                        +e.TIME.time(datetime="2017-04-02T16:35")
+                            +e.SPAN.date 5 января 2017 
+                            | 16:35
+
+                +b.header-r
+                    +b.header-action
+                        +b.NAV.header-nav
+                            +e.A.item.is-active(href=jv0) Статистика
+                            +e.A.item(href=jv0) Аналитика
+                        +user('Поликарпов Анатолий', '%=static=%img/content/user.png')
+                        +e.A.logout(href=jv0)
+                            +icon({ icon: 'logout', class: 'logout' }) 

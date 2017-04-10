@@ -1,0 +1,86 @@
+.stats-editor {
+    width: 100%;
+    margin-top: 11px;
+
+    .col-name {
+        width: 38.7%;
+        padding-top: 17px;
+
+        .user__name {
+            // big title
+            margin-top: -3px;
+
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: -0.2px;
+        }
+
+    }
+
+    .col-time {
+        width: 14.3%;
+        padding-left: rem(4);
+
+        .icon-dropdown {
+            margin-left: 1px;
+        }
+
+    }
+
+    .col-write {
+        width: 28.4%;
+        padding-left: rem(4);
+    }
+
+    .col-views {
+        width: 10.3%;
+    }
+
+    .col-clicks {
+
+    }
+
+    .col-time,
+    .col-write,
+    .col-views,
+    .col-clicks {
+        padding-top: 21px;
+    }
+
+    
+
+    thead {
+
+        th {
+            padding-bottom: 4px;
+        }
+
+        .user__pic {
+            margin-top: -10px;
+            margin-right: rem(8);
+        }
+
+    }
+
+    td {
+
+        padding-left: 1px;
+        
+        &:first-child {
+            position: relative;
+            
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+
+        }
+
+    }
+
+    .summary  td {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+}

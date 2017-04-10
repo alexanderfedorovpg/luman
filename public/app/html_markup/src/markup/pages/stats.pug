@@ -1,0 +1,114 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'Статистика';
+
+block content
+    // Контент здесь
+    +stats-header
+
+    .content-wrap.stats
+
+        .content-l
+
+            +b.TABLE.table
+                thead
+                    tr
+                        th.col-name
+                        th.col-public Опубликовано
+                        th.col-views Просмотры
+                        th.col-clicks Клики
+                tbody
+                    //- создает 2ух пиксельную прослойку между шапкой и телом
+                    tr.table-space
+                        td
+
+                    tr
+                        td
+                            i.icon.icon-article
+                            | Статьи
+                        td 8
+                        td 6 780
+                        td 6 780
+                    tr
+                        td
+                            i.icon.icon-video
+                            | Видео
+                        td 6
+                        td 4 539
+                        td 4 539
+                    tr
+                        td
+                            i.icon.icon-programms
+                            | Программы
+                        td 4
+                        td 1 343
+                        td 1 343
+                    tr
+                        td
+                            i.icon.icon-facebook
+                            | Facebook
+                        td 4
+                        td 789
+                        td 789
+                    tr
+                        td
+                            i.icon.icon-twitter
+                            | Twitter
+                        td 3
+                        td 542
+                        td 542
+
+                    tr.summary
+                        td
+                            i.icon.icon-summary
+                            | Всего
+                        td 35
+                        td 13 993
+                        td 25 742
+            
+
+        .content-r
+    
+            +b.TABLE.table
+                thead
+                    tr
+                        th.col-name
+                        th.col-count Материалы
+                        th.col-time Среднее время
+
+                tbody
+                    //- создает 2ух пиксельную прослойку между шапкой и телом
+                    tr.table-space
+                        td
+                            
+                    tr
+                        td
+                            +user('Константинов Виталий', '%=static=%img/content/user.png')
+                        td 8
+                        td 12 мин
+                    tr
+                        td
+                            +user('Ковалев Максим', '%=static=%img/content/user1.png')
+                        td 6
+                        td 16 мин
+                    tr
+                        td
+                            +user('Короленко Анастасия', '%=static=%img/content/user2.png')
+                        td 4
+                        td 32 мин
+                    tr
+                        td
+                            +user('Поликарпов Анатолий', '%=static=%img/content/user3.png')
+                        td 4
+                        td 26 мин
+                    tr
+                        td
+                            +user('Марышева Елена', '%=static=%img/content/user4.png')
+                        td 3
+                        td 1 ч 10 мин
+                    tr
+                        td
+                            +user('Санченков Роман', '%=static=%img/content/user5.png')
+                        td 2
+                        td 54 мин

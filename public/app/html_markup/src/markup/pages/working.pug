@@ -1,0 +1,20 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'В работе';
+
+block content
+    // Контент здесь
+
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                +tabs-nav(tabsNav.onWork)
+
+            +b.header-r 
+                a.link-black(href=jv0)
+                    span ?
+                    | справка
+
+    .content-wrap
+        +p-working(pWorking)

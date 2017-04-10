@@ -1,0 +1,26 @@
+.image-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 32px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+
+    background-color: #f4f4f4;
+
+    &__item {
+        margin-left: 9px;
+
+        cursor: pointer;
+        
+        &:nth-child(2) {
+            margin-left: 11px;
+        }
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+    }
+
+}

@@ -1,0 +1,48 @@
+.tags-default {
+    display: flex;
+    align-items: center;
+
+    &__item {
+        position: relative;
+
+        padding-right: 8px;
+        margin-right: 5px;
+
+        font-family: $opensans;
+        font-size: 14px;
+        font-weight: 600;
+        color: $cl-primary;
+        color: #41719f;
+        letter-spacing: -0.4px;
+
+        &:after {
+
+            content: ' ';
+
+            position: absolute;
+            top: 50%;
+            right: 0;
+
+            display: block;
+            width: 4px;
+            height: 4px;
+            margin-top: -1px;
+
+            border-radius: 50%;
+
+            background-color: #9a9a9a;
+            // transform: translateY(-50%);
+
+        }
+
+        &:last-child {
+            margin-right: 0;
+
+            &:after {
+                display: none;
+            }
+        }
+
+    }
+
+}

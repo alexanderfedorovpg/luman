@@ -1,0 +1,39 @@
+mixin p-working(data)
+    +b.working&attributes(attributes)
+        each item in data.items
+            +e.item
+                +e.wrap
+                    +e.col-l
+                        +e.HEADER.header
+                            +b.rating
+                                +e.SPAN.item.is-active(class= item.ratingClass)
+                                    input(type="radio", name="rating", id= item.ratingClass, disabled)
+                                    label(for= item.ratingClass)= item.rating
+
+                            +e.P.tag= item.tag
+
+                        +e.cnt(class= item.cntClass)
+                            p(class= item.ratingClass)= item.cnt
+
+                        +b.working-d-tag
+                            +e.SPAN.item #внешняя политика
+                            +e.SPAN.item #США
+
+                    +e.col-r
+                        +b.user
+                            +e.A.pic(href=jv0)
+                                img(src= item.userPic)
+                            +e.A.name(href=jv0)= item.userName
+
+                        +e.SPAN.time(class= item.timeClass)= item.time
+                         //- 15 мин
+
+                        +status(class= item.statusClass)
+
+                        +b.working-nav
+                            +e.A.item(href=jv0) Пуш-уведомление
+                            +e.A.item(href=jv0) Сменить редактора
+                            +e.A.item(href=jv0) Снять задание
+
+
+    block

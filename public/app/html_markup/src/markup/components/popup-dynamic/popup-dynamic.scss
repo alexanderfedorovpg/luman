@@ -1,0 +1,36 @@
+.popup-dynamic {
+    max-width: 749px;
+    padding-right: $pad;
+    padding-bottom: 20px;
+    padding-left: $pad;
+    
+    background-color: #fff;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        padding-right: $pad;
+        padding-left: $pad;
+        margin-right: -$pad;
+        margin-bottom: 25px;
+        margin-left: -$pad;
+
+        background-color: #f0f0f0;
+    }
+
+    .icon {
+        margin-right: 2px;
+    }
+
+    .link-black {
+        font-weight: 800;
+        letter-spacing: 0;
+    }
+
+    .tags {
+        margin-bottom: 7px;
+    }
+
+}

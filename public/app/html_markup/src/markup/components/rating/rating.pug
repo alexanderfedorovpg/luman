@@ -1,0 +1,6 @@
+mixin rating(data)
+    +b.rating()&attributes(attributes)
+        each item in data.items
+            +e.SPAN.item(class= item.value)
+                input(type="radio", name= item.name, id= item.value)
+                label(for= item.value)= item.dig

@@ -1,0 +1,23 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'Авторизация';
+    -pageSettings.navSide = false;
+    -pageSettings.header = false;
+    -pageSettings.contentWrap = false;
+
+block content
+    // Контент здесь
+    +b.login__wrap
+        +b.FORM.login(method="POST" action="")
+            +b.login__pic
+                +e.IMG(src="%=static=%img/general/login-pic.png")
+            +b.login__form
+                .form-group
+                    +e.INPUT.input.input.input-block(placeholder="login" type="name")
+                .form-group
+                    +e.INPUT.input.input.input-block(placeholder="password" type="password")
+                .form-group
+                    button.btn.btn-success.btn-block
+                        +icon({ icon: 'arrowRight-light', class: 'arrowRight' }) 
+                        | Войти

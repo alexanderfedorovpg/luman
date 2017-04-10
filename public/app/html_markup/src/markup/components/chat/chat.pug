@@ -1,0 +1,50 @@
+mixin chat(data)
+    +b.chat-wrap()&attributes(attributes)
+        +b.chat
+            //- необходимо заменить дефолтные скролл
+            +b.chat-message
+                +user('Поликарпов Анатолий', '%=static=%img/content/user.png')
+                +e.date 15:32
+                +e.cnt 
+                    +e.P Вот тебе фотка на главную
+                    +e.img
+                        img(src='%=static=%img/content/message.png', alt='')
+
+            +b.chat-message
+                +e.date 16:25
+                +e.cnt
+                    +e.P Толик, бля
+
+            +b.chat-message
+                +user('Поликарпов Анатолий', '%=static=%img/content/user2.png')
+                +e.date 16:26
+                +e.cnt 
+                    +e.P Вадим, почти готово
+
+            +b.chat-message
+                +user('Шаховский Вадим', '%=static=%img/content/user3.png')
+                +e.date 16:25
+                +e.cnt 
+                    +e.P Толик, вставялй фото и я накатаю тебе правки
+
+            +b.chat-message
+                +user('Поликарпов Анатолий', '%=static=%img/content/user4.png')
+                +e.date 16:26
+                +e.cnt 
+                    +e.P Вадим, почти готово
+
+            +b.chat-message
+                +user('Шаховский Вадим', '%=static=%img/content/user5.png')
+                +e.date 16:25
+                +e.cnt 
+                    +e.P Толик, вставялй фото и я накатаю тебе правки
+
+        +b.chat-send
+            +e.message
+                input.input.input-block(placeholder='Комментарий')
+                +e.file
+                    input#file(type='file')
+                    label(for="file")
+                        +icon({ icon: 'file', class: 'file' }) 
+
+        block

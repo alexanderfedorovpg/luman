@@ -1,0 +1,140 @@
+.header {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    height: 60px;
+    padding-left: 67px;
+
+    background-color: #131e27;
+
+    transition: all 0.4s ease;
+
+    &-top,
+    &-bot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        padding-right: $pad;
+        padding-left: $pad;
+
+    }
+
+    &-top {
+        .header-r {
+            flex-grow: 1;
+        }
+    }
+
+    &-bot {
+        .header-l {
+            flex-grow: 1;
+        }
+    }
+
+    &-off {
+        top: 60px;
+        
+        background-color: #f0f0f0;
+
+    }
+
+    &-l {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+        padding-right: 2px;
+    }
+
+    &-r {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        // flex-basis: 42.2%;
+        // width: 42.2%;
+        height: 100%;
+        padding-left: 2px;
+    }
+
+    &-info {
+
+        &__hamburger {
+            padding: 0;
+            margin-right: rem(9);
+
+            border: 0;
+            background: transparent;
+            outline: 0;
+
+            .icon_hamburger {
+                margin-top: -4px;
+            }
+        }
+
+        &__time {
+            margin-top: 2px;
+
+            font-family: $opensans;
+            font-size: rem(14);
+            font-weight: 400;
+
+            color: #999999;
+        }
+    
+        &__date {
+            margin-right: rem(7);
+        }
+
+    }
+
+    &-action {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        &__logout {
+            color: rgba(0, 0, 0, 0.59);
+        }
+    }
+
+    &-nav {
+
+        &__item {
+            margin-right: rem(24);
+
+            font-family: $helvetica;
+            font-size: rem(14);
+            font-weight: 400;
+
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &.is-active,
+            &:hover {
+                color: #fff;
+            }
+
+        }
+
+    }
+
+    .user {
+        margin-right: rem(30);
+        margin-left: rem(20);
+
+        &__name {
+            color: #fff;
+            letter-spacing: 0;
+        }
+
+    }
+
+}

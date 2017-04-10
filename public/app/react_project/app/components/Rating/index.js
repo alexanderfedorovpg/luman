@@ -1,0 +1,61 @@
+import React, { Component } from 'react'
+import styled from 'styled-components'
+
+import Item from './Item'
+
+const Root = styled.div`
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 29px;
+`
+
+class Rating extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            checked: props.value || null
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(e) {
+        let value = e.target.value
+
+        if (value !== this.state.checked) {
+            this.setState({
+                checked: value
+            })
+        }
+    }
+
+    render() {
+        let { checked } = this.state
+
+        return (
+            <Root>
+                {[1, 2, 3, 4, 5, 6, 7, 8].map(rating => {
+                    return (
+                        <Item
+                            key={rating}
+                            {...{ rating, checked }}
+                            onChange={this.handleChange} />
+                    )
+                })}
+            </Root>
+        )
+    }
+}
+
+Rating.PropTypes = {
+    value: React.PropTypes.number
+}
+
+export default Rating
+
+
+// +e.SPAN.item
+//             input#rate1(type="radio" name="rating")
+//             label(for="rate1") 1
