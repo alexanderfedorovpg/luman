@@ -171,4 +171,18 @@ class Permission extends Command
             ],
         ];
     }
+
+    public function permissNewslisteditor()
+    {
+        return [
+            [
+                'name' => 'v1.newslisteditor-get',
+                'description' => 'Список новостей',
+            ],
+            [
+                'name' => 'v1.newslisteditor-getOne',
+                'description' => 'Просмотр новости',
+            ],
+        ];
+    }
 }
