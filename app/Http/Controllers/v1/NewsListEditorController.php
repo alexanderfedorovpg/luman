@@ -80,9 +80,10 @@ class NewsListEditorController extends CmsController
             $newsList[] =  $item;
         }
 
-        echo "<pre>"; print_r($newsList);
+
         $newsList = $this->newsListTransformer->transformCollection($newsList);
-        echo "<pre>"; print_r($newsList);
+
+        return $this->respondCreated($newsList);
 
     }
 
