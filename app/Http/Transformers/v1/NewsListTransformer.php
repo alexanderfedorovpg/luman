@@ -55,6 +55,9 @@ class NewsListTransformer extends Transformer
             $transform['OriginalLink'] = false;
         }
 
+        if(!empty($news["lostComment"])) {
+            $transform['lostComment'] = $news["lostComment"];
+        }
 
         return $transform;
     }
