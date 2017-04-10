@@ -1,1 +1,0 @@
-var data = {image-header: {}}
