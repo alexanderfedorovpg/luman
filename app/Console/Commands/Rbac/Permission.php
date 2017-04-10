@@ -171,4 +171,23 @@ class Permission extends Command
             ],
         ];
     }
+
+    /**
+     * Доступы для контроллера \App\Controllers\v1\FileController
+     *
+     * @return array
+     */
+    public function permissFile()
+    {
+        return [
+            [
+                'name' => 'v1.file-upload',
+                'description' => 'Загрузка файлов',
+            ],
+            [
+                'name' => 'v1.file-destroy',
+                'description' => 'Удаление файлов',
+            ],
+        ];
+    }
 }

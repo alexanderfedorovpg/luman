@@ -64,7 +64,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/reference/search','ReferenceController@search');
     $group->get('/reference/page','ReferenceController@getPage');
 
-    //Тест
-    $group->post('/file/upload','FilespotController@upload');
-
+    //Файлы
+    $group->post('/file','FileController@upload');
+    $group->delete('/file/{id}','FileController@destroy');
 });

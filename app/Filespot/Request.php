@@ -69,8 +69,6 @@ class Request
             $url .= "&{$key}=" . urlencode($value);
         }
 
-        echo $url;
-
         return "https://" . $url;
     }
 

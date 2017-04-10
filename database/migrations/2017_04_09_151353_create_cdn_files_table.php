@@ -15,8 +15,8 @@ class CreateCdnFilesTable extends Migration
     {
         Schema::create('cdn_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('cdn_id');
-            $table->text('cdn_url');
+            $table->string('external_id');
+            $table->text('url');
             $table->string('content_type');
             $table->timestamps();
         });
