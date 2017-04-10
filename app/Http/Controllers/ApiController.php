@@ -39,6 +39,17 @@ class ApiController extends Controller
     }
 
     /**
+     * Запрос принят в обработку, но еще не завершен
+     *
+     * @param string $message
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function respondAccepted($message="")
+    {
+        return $this->setStatusCode('202')->respond($message);
+    }
+
+    /**
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
      */

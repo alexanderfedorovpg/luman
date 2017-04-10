@@ -8,7 +8,7 @@
 	use App\News;
 	use App\Device;
 
-	class NotificationController extends ApiController {
+	class NotificationController extends CmsController {
 
 
 		function sendFCM( $message, $target ) {
@@ -82,7 +82,7 @@
 			$device->guid   = $request->input( 'guid' );
 			$device->device = $request->input( 'device' );
 			if ( $device->save() ) {
-				return $this->respond( [ 'success' => true ] );
+				return $this->respondCreated( [ 'success' => true ] );
 			}
 
 			return $this->respondFail500x();
