@@ -70,13 +70,13 @@ class NewsListTransformer extends Transformer
      */
     public function transformOneNews($news, $comments)
     {
-        $transfrom = $this->transform($news);
-        $transfrom['Note'] = $news['note'];
-        $transfrom['Body'] = $news['body'];
-        $transfrom['ImageMain'] = $news['image_main'];
-        $transfrom['Comments'] = $this->transformComments($comments);
+        $transform = $this->transform($news);
+        $transform['Note'] = $news['note'];
+        $transform['Body'] = $news['body'];
+        $transform['ImageMain'] = $news['image_main'];
+        $transform['Comments'] = $this->transformComments($comments);
 
-        return $transfrom;
+        return $transform;
     }
 
     /**

@@ -1,0 +1,38 @@
+mixin profile(data)
+    +b.profile()&attributes(attributes)
+        +e.FORM.profile-form(action='' method='POST')
+
+            +e.column_left
+
+                +e.IMG.img(src='%=static=%' + data.img)
+                +e.INPUT.img-input(type='file' id='avatar' name='avatar' accept='image/*')
+                +e.LABEL.img-label(for='avatar') Изменить
+
+            +e.column_right
+
+                input.input.input-full(type='text', value=data.surname)
+                input.input.input-full(type='text', value=data.name)
+                +e.HR.hr
+
+                +e.P.text Даные для авторизации
+
+                input.input.input-full(type='text', value=data.email)
+                input.input.input-full(type='text', value=data.nickname)
+                input.input.input-full(type='text', id='password', value=data.password)
+                +e.LABEL.pass-label(for='password') Сменить пароль
+
+                .row
+                    button.btn.btn-md.btn-danger
+                        i.icon.icon-delete-reverse
+                        | Отменить изменения
+                    button.btn.btn-md.btn-success.is-active
+                        i.icon.icon-okay
+                        | Сохранить
+
+        +e.properties
+            each item in data.properties
+                +e.col
+                    +e.P.title= item.title + ':'
+                    +e.P.value= item.value
+
+        block

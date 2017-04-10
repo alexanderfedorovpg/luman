@@ -2,13 +2,24 @@ import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {
+    LOAD_EDITORS,
+
+    groups
+} from './constants'
+
+import {
     LOGIN
-} from '../LoginPage/constants'
+} from 'containers/LoginPage/constants'
+
+import {
+    editorsLoaded,
+    editorsLoadingError
+} from './actions'
 
 import {
     loginSuccess,
     loginError
-} from '../LoginPage/actions'
+} from 'containers/LoginPage/actions'
 
 import * as api from 'api'
 
@@ -31,6 +42,21 @@ function* loginWatcher() {
     yield takeLatest(LOGIN, login);
 }
 
+function* fetchEditors() {
+    try {
+        let { data: editors } = yield call(api.getUsersInGroup, groups.editor);
+
+        yield put(editorsLoaded(editors));
+    } catch (err) {
+        yield put(editorsLoadingError(err));
+    }
+}
+
+function* usersData() {
+    yield takeLatest(LOAD_EDITORS, fetchEditors);
+}
+
 export default [
-    loginWatcher
+    loginWatcher,
+    usersData
 ]

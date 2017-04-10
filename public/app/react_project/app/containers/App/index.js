@@ -24,6 +24,7 @@ import Content from 'components/Content'
 import LoginPage from 'containers/LoginPage'
 
 import { logout } from 'containers/LoginPage/actions'
+import { closeMenu, toggleMenu } from './actions'
 
 import * as api from 'api'
 
@@ -68,15 +69,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     toggleMenu() {
-        dispatch({
-            type: 'TOGGLE_MENU'
-        })
+        dispatch(toggleMenu())
     },
 
     closeMenu() {
-        dispatch({
-            type: 'CLOSE_MENU'
-        })
+        dispatch(closeMenu())
     },
 
     logout() {

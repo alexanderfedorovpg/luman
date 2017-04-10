@@ -152,4 +152,37 @@ class Permission extends Command
             ],
         ];
     }
+
+    /**
+     * Доступы для контроллера \App\Controllers\v1\ReferenceController
+     *
+     * @return array
+     */
+    public function permissReference()
+    {
+        return [
+            [
+                'name' => 'v1.tags-search',
+                'description' => 'Поиск справки',
+            ],
+            [
+                'name' => 'v1.tags-getPage',
+                'description' => 'Получение страницы спрвки',
+            ],
+        ];
+    }
+
+    public function permissNewslisteditor()
+    {
+        return [
+            [
+                'name' => 'v1.newslisteditor-get',
+                'description' => 'Список новостей',
+            ],
+            [
+                'name' => 'v1.newslisteditor-getOne',
+                'description' => 'Просмотр новости',
+            ],
+        ];
+    }
 }
