@@ -9,6 +9,7 @@ use App\Http\Controllers\v1\NewsListController,
     App\News,
     App\NewsCommentsEditor,
     App\Http\Traits\NewsListTrait;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 /**
@@ -42,48 +43,68 @@ class NewsListEditorController extends CmsController
      */
     public function get(Request $request, $assigned = 'me')
     {
-        //var_dump(1);
-        $this->getArray = true;
-        //$arr = parent::get($request);
-        //return $arr;
-        $user_id = Auth::id();
 
-        if(empty($user_id)) {
-//            var_dump("not auth");
-            $user_id = 2;
+        try {
+
+            $this->getArray = true;
+
+
+            //$arr = parent::get($request);
+            //return $arr;
+
+            $user_id = Auth::id();
+
+//            if (empty($user_id)) {
+//                $user_id = 2;
+//            }
+
+            switch ($assigned) {
+                case 'me' :
+                    $params = ['editor_id' => $user_id, 'moderation' => 1];
+                    break;
+                case 'all' :
+                    $params = ['editor_id' => 0, 'moderation' => 1];
+                    break;
+                default :
+                    $params = false;
+            }
+
+            if (!$params) {
+                $this->respondFail422x();
+            }
+
+            $news = News::ModerationThisEditor($params);
+
+            $this->processing($request, $news);
+
+            $news = $news->get();
+
+            if ($news->isEmpty()) {
+                return $this->respondNotFound();
+            }
+
+            $news = $news->toArray();
+
+
+            $newsList = [];
+
+            foreach ($news as $item) {
+
+                $comments = NewsCommentsEditor::PublishedLostComment($item['id']);
+                $comments = $comments->get();
+                $comments = $comments->toArray();
+
+                $item["lostComment"] = $comments[0];
+                $newsList[] = $item;
+            }
+
+
+            $newsList = $this->newsListTransformer->transformCollection($newsList);
+
+            return $this->respond($newsList);
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e);
         }
-
-        switch ($assigned){
-            case 'me' : $params = ['editor_id' => $user_id, 'moderation' => 1]; break;
-            case 'all' : $params = ['editor_id' => 0, 'moderation' => 1]; break;
-            default : $params = false;
-        }
-
-        if(!$params) {
-            // исключение
-        }
-
-        $news = News::ModerationThisEditor($params);
-
-        $this->processing($request, $news);
-
-        $news = $news->get();
-        $news = $news->toArray();
-
-        foreach ($news as $item) {
-
-            $comments = NewsCommentsEditor::PublishedLostComment($item['id']);
-            $comments = $comments->get();
-            $comments = $comments->toArray();
-
-            $item["lostComment"] = $comments[0];
-            $newsList[] =  $item;
-        }
-
-
-        $newsList = $this->newsListTransformer->transformCollection($newsList);
-
-        return $this->respond($newsList);
 
     }
 
@@ -96,7 +117,7 @@ class NewsListEditorController extends CmsController
     public function getOne($id)
     {
         var_dump(2);
-       // parent::getOne($id);
+        // parent::getOne($id);
     }
 
 }
