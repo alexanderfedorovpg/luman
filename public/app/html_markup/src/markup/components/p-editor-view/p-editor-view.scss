@@ -81,11 +81,6 @@
             margin-bottom: 21px;
         }
 
-        .tags__item label {
-            padding-right: 9px;
-            padding-left: 9px;
-        }
-
     }
 
     .content-l {
@@ -110,8 +105,10 @@
             margin-bottom: 8px;
         
             .user__pic {
-
+                
+                margin-top: 1px;
                 margin-right: 10px;
+                margin-left: 3px;
 
             }
 

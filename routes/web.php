@@ -52,6 +52,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->delete('/group/{groupId}/permiss/{permissId}','GroupController@addPermiss');
     $group->get('/group/{id}/users','GroupController@UsersByGroup');
 
+
     // Уведомления
 	$group->get('/notification/{id}','NotificationController@sendMessage');
 	$group->post('/notification/','NotificationController@addDevice');
@@ -61,6 +62,10 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 
     //Права
     $group->get('/permission','PermissionController@index');
+
+    //Чат новостей
+    $group->get('/newschat/{newsId}','NewsChatController@index');
+    $group->post('/newschat/{newsId}','NewsChatController@create');
 
     //Теги
     $group->get('/tags','TagsController@index');
@@ -73,7 +78,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/reference/search','ReferenceController@search');
     $group->get('/reference/page','ReferenceController@getPage');
 
+    //Файлы
+    $group->post('/file','FileController@upload');
+    $group->delete('/file/{id}','FileController@destroy');
+
 });
-
-
-

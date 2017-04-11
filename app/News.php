@@ -2,19 +2,14 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 /**
  * Class News
  * @package App
  */
-class News extends Model implements AuthenticatableContract, AuthorizableContract
+class News extends Model
 {
-    use Authenticatable, Authorizable;
 
     /**
      * The attributes that are mass assignable.
@@ -121,6 +116,16 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
+     * Чат
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function chat()
+    {
+        return $this->hasOne(NewsChat::class);
+    }
+
+    /**
      * Фильтрация по наличию опубликованости
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -133,6 +138,7 @@ class News extends Model implements AuthenticatableContract, AuthorizableContrac
                                         $query  ->where('moderation', '=', $moderation)
                                                 ->where('editor_id', '=', $editor_id);
         });
+
     }
 
 }
