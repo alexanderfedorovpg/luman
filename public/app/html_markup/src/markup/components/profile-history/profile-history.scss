@@ -1,3 +1,84 @@
 .profile-history {
+    &__wrapper {
+        margin-left: 1.5rem;
+    }
 
+    &__table {
+        padding-bottom: .2rem;
+
+        border-bottom: 2px solid #d2d2d2;
+    }
+
+    &__row {
+        display: flex;
+
+        padding-top: .13rem;
+
+        font-size: .88rem;
+        line-height: 3.56;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        &_title {
+            margin-top: 1rem;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: .55rem;
+
+            color: #4d4d4d;
+            line-height: normal;
+            font-size: .85rem;
+            font-weight: 700;
+            border-bottom: 2px solid #d2d2d2;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &__cell {
+
+        &:first-child {
+            //padding-left: .1rem;
+        }
+
+        &_date {
+            width: 7.8%;
+        }
+
+        &_time {
+            width: 8.7%;
+        }
+
+        &_event {
+            width: 16.7%;
+        }
+
+        &_session {
+            width: 12%;
+        }
+
+        &_host {
+            width: 9%;
+        }
+
+        &_ip {
+            width: 35%;
+        }
+
+        &_link {
+            width: 10%;
+        }
+    }
+
+    &__link-more {
+        display: inline-block;
+        margin-top: 1rem;
+        font-size: .88em;
+        letter-spacing: -.01rem;
+        text-decoration: none;
+    }
 }

@@ -89,13 +89,18 @@
     
     &__pass-label {
         position: absolute;
+        top: .55rem;
         right: .75rem;
-
-        margin-top: -2.62rem;
 
         font-size: .72rem;
         font-weight: 400;
         color: #336699;
+
+        background-color: #fff;
+    }
+
+    &__container {
+        position: relative;
     }
 
     .row {

@@ -10,16 +10,17 @@ mixin profile(data)
 
             +e.column_right
 
-                input.input.input-full(type='text', value=data.surname)
-                input.input.input-full(type='text', value=data.name)
+                input.input.input-full(type='text' value=data.surname)
+                input.input.input-full(type='text' value=data.name)
                 +e.HR.hr
 
                 +e.P.text Даные для авторизации
 
-                input.input.input-full(type='text', value=data.email)
-                input.input.input-full(type='text', value=data.nickname)
-                input.input.input-full(type='text', id='password', value=data.password)
-                +e.LABEL.pass-label(for='password') Сменить пароль
+                input.input.input-full(type='text' value=data.email)
+                input.input.input-full(type='text' value=data.nickname)
+                +e.container
+                    input.input.input-full(type='text' id='password' value=data.password maxlength='50')
+                    +e.LABEL.pass-label(for='password') Сменить пароль
 
                 .row
                     button.btn.btn-md.btn-danger
