@@ -33,6 +33,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
     $group->put('/newseditor/edit','NewsListEditorController@edit');
+    $group->delete('/newseditor/{id}','NewsListEditorController@delete');
 
     //Пользователи
     $group->get('/user','UserController@index');

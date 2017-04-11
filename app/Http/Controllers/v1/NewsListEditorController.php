@@ -57,10 +57,10 @@ class NewsListEditorController extends CmsController
 
             switch ($assigned) {
                 case 'me' :
-                    $params = ['editor_id' => $user_id, 'moderation' => 1];
+                    $params = ['editor_id' => $user_id, 'moderation' => 1, 'delete' => 0];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => 5, 'moderation' => 1];
+                    $params = ['editor_id' => 5, 'moderation' => 1, 'delete' => 0];
                     break;
                 default :
                     $params = false;
@@ -175,12 +175,6 @@ class NewsListEditorController extends CmsController
             $publish_date = $request->input('publish_date');
             $original_source_link = $request->input('original_source_link');
 
-
-
-            if($this->user_id != $editor_id) {
-                return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
-            }
-
             $newsEdit = News::ModerationMode()->find(intval($id));
 
             if($newsEdit == null) {
@@ -199,7 +193,11 @@ class NewsListEditorController extends CmsController
                 $newsEdit->body = $body;
                 $newsEdit->tags = $tags;
                 $newsEdit->keywords = $keywords;
-                $newsEdit->editor_id = $editor_id;
+
+                if($this->user_id != $newsEdit->editor_id) {
+                    return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
+                }
+
                 //необязательные поля
                 if (isset($sub_title)) {
                     $newsEdit->sub_title = $sub_title;
@@ -239,27 +237,25 @@ class NewsListEditorController extends CmsController
         }
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
         try {
 
-            $this->validate($request, [
-                'id' => 'required|numeric',
-            ]);
+            $news = News::find($id);
 
-            $id = $request->input('id');
+            if($this->user_id != $news->editor_id) {
+                return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
+            }
 
-            $feed = News::find($id);
+            $news->delete = 1;
 
-            $feed->hidden = 1;
-
-            if ($feed->save()) {
+            if ($news->save()) {
                 return $this->respondCreated(
-                    ["data" => "hidden"]
+                    ["data" => "delete"]
                 );
             }
 
-            throw new \Exception('Ошибка, новость не скрыта');
+            throw new \Exception('Error, news don\'t delete');
         } catch (\Exception $e) {
             return $this->respondFail500x($e->getMessage());
         }
