@@ -1,3 +1,22 @@
 mixin profile-history(data)
     +b.profile-history()&attributes(attributes)
+        +e.wrapper
+            +e.table
+                +e.row_title
+                    each item in data.titles
+                        +e.cell(class= '_' + item.class, class= (item.type ? '_' + item.type : undefined))= item.name
+                
+                each item in data.values
+                    +e.row
+                        +e.cell_date= item.date
+                        +e.cell_time= item.time
+                        +e.cell_event= item.event
+                        +e.cell_session= item.session
+                        +e.cell_host= item.host
+                        +e.cell_ip= item.ip
+                        +e.cell_link
+                            a(href=item.link) Перейти
+
+            +e.A.link-more(href=jv0) Показать следующие 10 записей
+
         block
