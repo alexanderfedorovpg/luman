@@ -3,10 +3,13 @@ mixin programs(data)
         block
         each item in data.items
 
-            +e.item(class=(item.class ? '_' + item.class : undefined))
+            +e.item(
+                class=(item.state ? '_' + item.state : undefined)
+                class=(item.class ? '_' + item.class : undefined))
 
-                +e.DIV.img-container
+                +e.A.img-container(href=jv0)
                     +e.IMG.img(src= '%=static=%' + item.image)
+                    +e.img-layer
 
                 +e.DIV.info
                     +e.P.date
@@ -14,7 +17,7 @@ mixin programs(data)
                         | ,
                         +e.SPAN.time= item.time
                     +e.A.category(href-jv0)= item.category
-                    +e.P.title(class=(item.titleClass ? '_' + item.titleClass : undefined))= item.title
+                    +e.P.title= item.title
 
                     +e.DIV.tags
                         each tag in item.tags

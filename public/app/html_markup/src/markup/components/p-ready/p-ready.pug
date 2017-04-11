@@ -12,22 +12,25 @@ mixin p-ready(data)
                         .user__name= item.author
 
                     +e.col-r
-                        +e.HEADER.header
-                            +b.rating
-                                +e.SPAN.item.is-active(class= item.ratingClass)
-                                    input(type="radio", name="rating", id= item.ratingClass, disabled)
-                                    label(for= item.ratingClass)= item.rating
 
-                            +e.P.tag= item.tag
+                        +e.article
 
-                        +e.cnt(class= item.cntClass)
-                            p(class= item.ratingClass)= item.cnt
+                            +e.HEADER.header
+                                +b.rating
+                                    +e.SPAN.item.is-active(class= item.ratingClass)
+                                        input(type="radio", name="rating", id= item.ratingClass, disabled)
+                                        label(for= item.ratingClass)= item.rating
 
-                        +b.working-d-tag
-                            +e.SPAN.item #внешняя политика
-                            +e.SPAN.item #США
+                                +e.P.tag= item.tag
 
-                        +b.working-btns
+                            +e.cnt(class= item.cntClass)
+                                p(class= item.ratingClass)= item.cnt
+
+                            +b.working-d-tag
+                                +e.SPAN.item #внешняя политика
+                                +e.SPAN.item #США
+
+                        +b.working__btns
 
                             button.btn.btn-md.btn-primary
                                 | Предпросмотр
@@ -35,5 +38,5 @@ mixin p-ready(data)
                             button.btn.btn-md.btn-success
                                 +icon({ icon: 'arrowRight', class: 'arrowRight' })
                                 | Редактировать
-
+                    i.icon.icon-delete-reverse
         block
