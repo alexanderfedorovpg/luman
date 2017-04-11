@@ -126,7 +126,107 @@ class NewsListEditorController extends CmsController
         } else {
             return $this->respond($data);
         }
-        dd($newsList);
     }
+
+    public function update(Request $request)
+    {
+        try {
+
+            //устанавливаем часовой пояс
+            date_default_timezone_set('Europe/Moscow');
+
+            $this->validate($request, [
+                'action' => 'required',
+                'title' => 'required|max:120',
+                'sub_title' => 'required|max:140',
+                'id' => 'required|numeric',
+                'editor_id' => 'required|numeric',
+                'keywords' => 'required',
+                'tags' => 'required',
+                'top' => 'required|numeric',
+                'original_source_link' => 'url',
+                'image_main' => 'mimes:jpeg,png',
+                'image_preview' => 'mimes:jpeg,png',
+                'is_online' => 'in:0,1',
+                'is_war_mode' => 'in:0,1',
+            ]);
+
+            $id = $request->input('id');
+            $action = $request->input('action');
+            $title = $request->input('title');
+            $sub_title = $request->input('sub_title');
+            $note = $request->input('note');
+            $video_stream = $request->input('video_stream');
+            $body = $request->input('body');
+            $keywords = $request->input('keywords');
+            $tags = $request->input('tags');
+            $editor_id = $request->input('editor_id');
+            $is_publish = $request->input('action');
+            $publish_date = $request->input('action');
+            $top = $request->input('action');
+
+            if ($request->hasFile('photo')) {
+                $image_main = $request->file('image_main');
+                $file = $request->photo;
+            }
+
+            $image_preview = $request->file('image_preview');
+
+
+
+
+            $feed = News::ModerationMode(1)->findOrFail($id);
+
+            if ($feed && $action == 'work') {
+
+                $news = new News;
+                $news->title = $feed->header;
+                $news->is_publish = '0';
+                $news->publish_date = 'null';
+                $news->top = $top;
+                $news->body = $body;
+                $news->tags = $tags;
+                $news->keywords = $keywords;
+                $news->editor_id = $editor_id;
+                //необязательные поля
+                if (isset($sub_title)) {
+                    $news->sub_title = $sub_title;
+                }
+                if (isset($video_stream)) {
+                    $news->video_stream = $video_stream;
+                }
+                if (isset($image_main)) {
+                    $news->image_main = $image_main;
+                }
+                if (isset($image_preview)) {
+                    $news->image->preview = $image_preview;
+                }
+                if (isset($is_online)) {
+                    $news->is_online = $is_online;
+                }
+                if (isset($is_war_mode)) {
+                    $news->is_war_mode = $is_war_mode;
+                }
+
+                $news->save();
+
+                if ($news->save()) {
+                    $feed->hidden = '1';
+                    $feed->save();
+                    $this->respond($news);
+                    return $this->respondCreated(
+                        $feed->toArray()
+                    );
+                }
+                throw new \Exception("Ошибка, новость не создана...");
+            }
+
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound(['Исходня запись в ленте новостей не найдена либо скрыта']);
+        } catch (\Exception $e) {
+            return $this->respondFail500x([$e->getTrace()]);
+        }
+    }
+
 
 }
