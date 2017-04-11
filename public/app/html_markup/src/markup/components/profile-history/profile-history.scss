@@ -22,15 +22,17 @@
         }
 
         &_title {
-            margin-top: 1rem;
-            margin-bottom: 0;
             padding-top: 0;
             padding-bottom: .55rem;
+            margin-top: 1rem;
+            margin-bottom: 0;
 
-            color: #4d4d4d;
-            line-height: normal;
             font-size: .85rem;
             font-weight: 700;
+            line-height: normal;
+
+            color: #4d4d4d;
+
             border-bottom: 2px solid #d2d2d2;
 
             &:hover {
@@ -77,8 +79,9 @@
     &__link-more {
         display: inline-block;
         margin-top: 1rem;
+
         font-size: .88em;
-        letter-spacing: -.01rem;
         text-decoration: none;
+        letter-spacing: -.01rem;
     }
 }

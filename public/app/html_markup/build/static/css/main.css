@@ -2230,6 +2230,7 @@ h3 {
 
 .time-publish__hours {
   display: block;
+  margin-left: 3px;
   color: #999999;
 }
 
@@ -4256,11 +4257,16 @@ h3 {
 
 .profile__pass-label {
   position: absolute;
+  top: .55rem;
   right: .75rem;
-  margin-top: -2.62rem;
   font-size: .72rem;
   font-weight: 400;
   color: #336699;
+  background-color: #fff;
+}
+
+.profile__container {
+  position: relative;
 }
 
 .profile .row {
@@ -4329,6 +4335,80 @@ h3 {
   font-size: 0.868rem;
   font-weight: 600;
   color: #333;
+  letter-spacing: -.01rem;
+}
+
+.profile-history__wrapper {
+  margin-left: 1.5rem;
+}
+
+.profile-history__table {
+  padding-bottom: .2rem;
+  border-bottom: 2px solid #d2d2d2;
+}
+
+.profile-history__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: .13rem;
+  font-size: .88rem;
+  line-height: 3.56;
+}
+
+.profile-history__row:hover {
+  background-color: #f0f0f0;
+}
+
+.profile-history__row_title {
+  padding-top: 0;
+  padding-bottom: .55rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: normal;
+  color: #4d4d4d;
+  border-bottom: 2px solid #d2d2d2;
+}
+
+.profile-history__row_title:hover {
+  background-color: transparent;
+}
+
+.profile-history__cell_date {
+  width: 7.8%;
+}
+
+.profile-history__cell_time {
+  width: 8.7%;
+}
+
+.profile-history__cell_event {
+  width: 16.7%;
+}
+
+.profile-history__cell_session {
+  width: 12%;
+}
+
+.profile-history__cell_host {
+  width: 9%;
+}
+
+.profile-history__cell_ip {
+  width: 35%;
+}
+
+.profile-history__cell_link {
+  width: 10%;
+}
+
+.profile-history__link-more {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: .88em;
+  text-decoration: none;
   letter-spacing: -.01rem;
 }
 
@@ -4847,27 +4927,34 @@ h3 {
   margin-top: 2px;
 }
 
+.header-ready .toggle-btn__item {
+  margin-right: 0;
+}
+
 .working--ready {
   margin-top: -9px;
 }
 
 .working--ready .working__wrap {
   position: relative;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  padding-top: 12px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 14px;
   padding-right: 24px;
-  padding-bottom: 12px;
+  padding-bottom: 14px;
 }
 
-.working--ready .working__item:hover .working__ignore,
-.working--ready .working__item:hover .working__work {
+.working--ready .working__item:hover .working__btns {
+  visibility: visible;
+}
+
+.working--ready .working__item:hover .icon-delete-reverse {
   display: block;
 }
 
 .working--ready .working__cnt {
-  margin-top: -2px;
+  margin-top: 2px;
 }
 
 .working--ready .working__col-l {
@@ -4886,12 +4973,19 @@ h3 {
           justify-content: flex-end;
   -ms-flex-preferred-size: 16.85%;
       flex-basis: 16.85%;
-  margin-top: 27px;
   border-right: 0;
 }
 
 .working--ready .working__col-r {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   margin-top: 2px;
   margin-left: 5px;
 }
@@ -4914,6 +5008,44 @@ h3 {
           transform: translateY(-50%);
 }
 
+.working--ready .working__btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -ms-flex-preferred-size: 364px;
+      flex-basis: 364px;
+  width: 364px;
+  padding-left: 40px;
+  margin-right: 21px;
+  visibility: hidden;
+}
+
+.working--ready .working__btns .btn-primary {
+  font-weight: 400;
+  border: 0;
+  background-color: #fff;
+}
+
+.working--ready .working__btns .btn-success {
+  margin-left: 8px;
+  border: 0;
+  background-color: #fff;
+}
+
+.working--ready .working__btns .btn-success .icon {
+  position: relative;
+  top: 1px;
+  margin-left: -6px;
+}
+
 .working--ready .time-publish {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4922,7 +5054,20 @@ h3 {
 
 .working--ready .user__name {
   margin-top: 5px;
-  letter-spacing: 0.05px;
+  letter-spacing: 0.1px;
+}
+
+.working--ready .icon-delete-reverse {
+  position: absolute;
+  top: 13px;
+  right: 12px;
+  display: none;
+}
+
+.working__article {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 /* Additional style files. */
@@ -5152,5 +5297,3 @@ h3 {
 .label__right {
   float: right;
 }
-
-/*# sourceMappingURL=main.css.map */
