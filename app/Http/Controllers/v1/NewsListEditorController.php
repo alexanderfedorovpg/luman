@@ -133,6 +133,12 @@ class NewsListEditorController extends CmsController
         }
     }
 
+    /**
+     * Редактировать новость
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function edit(Request $request)
     {
         try {
@@ -237,6 +243,9 @@ class NewsListEditorController extends CmsController
         }
     }
 
+    /*
+     * Удалить новость
+     */
     public function delete($id)
     {
         try {
@@ -250,13 +259,124 @@ class NewsListEditorController extends CmsController
             $news->delete = 1;
 
             if ($news->save()) {
+                $this->log->setLog('DELETE_NEWS', $this->user_id, "Successful, news id=".$id." delete");
                 return $this->respondCreated(
                     ["data" => "delete"]
                 );
             }
-
+            $this->log->setLog('DELETE_NEWS', $this->user_id, "Error, news id=".$id." don't delete");
             throw new \Exception('Error, news don\'t delete');
         } catch (\Exception $e) {
+            $this->log->setLog('DELETE_NEWS', $this->user_id, "Error 500 news id=".$id);
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    /*
+     * Делегировать новость
+     */
+    public function delegate(Request $request)
+    {
+        try {
+
+            $this->validate($request, [
+                'id' => 'required|numeric',
+                'new_editor_id' => 'required|numeric',
+            ]);
+
+            $id = $request->input('id');
+            $new_editor_id = $request->input('new_editor_id');
+
+            $news = News::find($id);
+
+            if($this->user_id != $news->editor_id) {
+                return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
+            }
+
+            $news->editor_id = $new_editor_id;
+
+            if ($news->save()) {
+                $this->log->setLog('DELEGATE', $this->user_id, "Successful, news id=".$id." delegate [".$this->user_id.">".$new_editor_id."]");
+                return $this->respondCreated(
+                    ["data" => "delegate"]
+                );
+            }
+            $this->log->setLog('DELEGATE', $this->user_id, "Error, news id=".$id." don't delegate  [".$this->user_id.">".$new_editor_id."]");
+            throw new \Exception('Error, news don\'t delegate');
+        } catch (\Exception $e) {
+            $this->log->setLog('DELEGATE', $this->user_id, "Error 500 news id=".$id);
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    /* REJECTION
+     * Отказаться от редактирования новости
+     */
+    public function rejection(Request $request)
+    {
+        try {
+
+            $this->validate($request, [
+                'id' => 'required|numeric',
+            ]);
+
+            $id = $request->input('id');
+
+            $news = News::find($id);
+
+            if($this->user_id != $news->editor_id) {
+                return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
+            }
+
+            $news->editor_id = 'NULL'; //fixme: поле то у нас привязано к юзерам
+
+            if ($news->save()) {
+                $this->log->setLog('REJECTION', $this->user_id, "Successful, news id=".$id." rejection ".$this->user_id);
+                return $this->respondCreated(
+                    ["data" => "rejection"]
+                );
+            }
+
+            $this->log->setLog('REJECTION', $this->user_id, "Error, news id=".$id." don't rejection  ".$this->user_id);
+            throw new \Exception('Error, news don\'t rejection');
+        } catch (\Exception $e) {
+            $this->log->setLog('REJECTION', $this->user_id, "Error 500 news id=".$id);
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    /* REJECTION
+     * Отказаться от редактирования новости
+     */
+    public function in_work(Request $request)
+    {
+        try {
+
+            $this->validate($request, [
+                'id' => 'required|numeric',
+            ]);
+
+            $id = $request->input('id');
+
+            $news = News::find($id);
+
+            if($this->user_id != $news->editor_id) {
+                return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
+            }
+
+            $news->editor_id = 'NULL'; //fixme: поле то у нас привязано к юзерам
+
+            if ($news->save()) {
+                $this->log->setLog('REJECTION', $this->user_id, "Successful, news id=".$id." rejection ".$this->user_id);
+                return $this->respondCreated(
+                    ["data" => "rejection"]
+                );
+            }
+
+            $this->log->setLog('REJECTION', $this->user_id, "Error, news id=".$id." don't rejection  ".$this->user_id);
+            throw new \Exception('Error, news don\'t rejection');
+        } catch (\Exception $e) {
+            $this->log->setLog('REJECTION', $this->user_id, "Error 500 news id=".$id);
             return $this->respondFail500x($e->getMessage());
         }
     }
