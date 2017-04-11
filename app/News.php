@@ -31,6 +31,7 @@ class News extends Model
         'image_main',
         'image_preview',
         'is_online',
+        'moderation',
     ];
 
     /**
@@ -139,6 +140,21 @@ class News extends Model
                                                 ->where('editor_id', '=', $editor_id);
         });
 
+    }
+
+    /**
+     * Получаем текущую новость
+     *
+     * @param $query
+     * @param $viewMode
+     * @return mixed
+     */
+    public function scopeModerationMode($query)
+    {
+
+        $query->where('moderation', '=', 1);
+
+        return $query;
     }
 
 }

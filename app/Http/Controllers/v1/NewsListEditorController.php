@@ -8,7 +8,8 @@ use App\Http\Controllers\v1\NewsListController,
     App\Http\Controllers\ApiController,
     App\News,
     App\NewsCommentsEditor,
-    App\Http\Traits\NewsListTrait;
+    App\Http\Traits\NewsListTrait,
+    App\Helpers\LogController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
@@ -25,6 +26,8 @@ class NewsListEditorController extends CmsController
      * @var \App\Http\Transformers\v1\Client\NewsListTransformer
      */
     protected $newsListTransformer;
+    protected $log;
+    private $user_id;
 
     /**
      * NewsListController constructor.
@@ -33,6 +36,8 @@ class NewsListEditorController extends CmsController
     public function __construct(\App\Http\Transformers\v1\NewsListTransformer $newsListTransformer)
     {
         parent::__construct();
+        $this->user_id = Auth::id();
+        $this->log = new LogController();
         $this->newsListTransformer = $newsListTransformer;
     }
 
@@ -48,7 +53,7 @@ class NewsListEditorController extends CmsController
 
             $this->getArray = true;
 
-            $user_id = Auth::id();
+            $user_id = $this->user_id;
 
             switch ($assigned) {
                 case 'me' :
@@ -128,7 +133,7 @@ class NewsListEditorController extends CmsController
         }
     }
 
-    public function update(Request $request)
+    public function edit(Request $request)
     {
         try {
 
@@ -145,8 +150,8 @@ class NewsListEditorController extends CmsController
                 'tags' => 'required',
                 'top' => 'required|numeric',
                 'original_source_link' => 'url',
-                'image_main' => 'mimes:jpeg,png',
-                'image_preview' => 'mimes:jpeg,png',
+                'image_main' => 'required',
+                'image_preview' => 'required',
                 'is_online' => 'in:0,1',
                 'is_war_mode' => 'in:0,1',
             ]);
@@ -155,78 +160,109 @@ class NewsListEditorController extends CmsController
             $action = $request->input('action');
             $title = $request->input('title');
             $sub_title = $request->input('sub_title');
+            $top = $request->input('top');
             $note = $request->input('note');
             $video_stream = $request->input('video_stream');
             $body = $request->input('body');
             $keywords = $request->input('keywords');
             $tags = $request->input('tags');
             $editor_id = $request->input('editor_id');
-            $is_publish = $request->input('action');
-            $publish_date = $request->input('action');
-            $top = $request->input('action');
+            $image_main = $request->input('image_main');
+            $image_preview = $request->input('image_preview');
+            $is_online = $request->input('is_online');
+            $updated_at = new \DateTime(); // date('Y-m-d H:i:s')
+            $is_war_mode = $request->input('is_war_mode');
+            $publish_date = $request->input('publish_date');
+            $original_source_link = $request->input('original_source_link');
 
-            if ($request->hasFile('photo')) {
-                $image_main = $request->file('image_main');
-                $file = $request->photo;
+
+
+            if($this->user_id != $editor_id) {
+                return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
-            $image_preview = $request->file('image_preview');
+            $newsEdit = News::ModerationMode()->find(intval($id));
 
+            if($newsEdit == null) {
+                return $this->respondWithError("Элемент не найден");
+            }
 
+            if ($newsEdit && $action == 'edit') {
 
-
-            $feed = News::ModerationMode(1)->findOrFail($id);
-
-            if ($feed && $action == 'work') {
-
-                $news = new News;
-                $news->title = $feed->header;
-                $news->is_publish = '0';
-                $news->publish_date = 'null';
-                $news->top = $top;
-                $news->body = $body;
-                $news->tags = $tags;
-                $news->keywords = $keywords;
-                $news->editor_id = $editor_id;
+                $newsEdit->title = $title;
+                $newsEdit->sub_title = $sub_title;
+                $newsEdit->note = $note;
+                $newsEdit->video_stream = $video_stream;
+                $newsEdit->is_publish = '0';
+                $newsEdit->publish_date = 'null';
+                $newsEdit->top = $top;
+                $newsEdit->body = $body;
+                $newsEdit->tags = $tags;
+                $newsEdit->keywords = $keywords;
+                $newsEdit->editor_id = $editor_id;
                 //необязательные поля
                 if (isset($sub_title)) {
-                    $news->sub_title = $sub_title;
+                    $newsEdit->sub_title = $sub_title;
                 }
                 if (isset($video_stream)) {
-                    $news->video_stream = $video_stream;
+                    $newsEdit->video_stream = $video_stream;
                 }
                 if (isset($image_main)) {
-                    $news->image_main = $image_main;
+                    $newsEdit->image_main = $image_main;
                 }
                 if (isset($image_preview)) {
-                    $news->image->preview = $image_preview;
+                    $newsEdit->image_preview = $image_preview;
                 }
                 if (isset($is_online)) {
-                    $news->is_online = $is_online;
+                    $newsEdit->is_online = $is_online;
                 }
                 if (isset($is_war_mode)) {
-                    $news->is_war_mode = $is_war_mode;
+                    $newsEdit->is_war_mode = $is_war_mode;
                 }
 
-                $news->save();
-
-                if ($news->save()) {
-                    $feed->hidden = '1';
-                    $feed->save();
-                    $this->respond($news);
-                    return $this->respondCreated(
-                        $feed->toArray()
+                if ($newsEdit->save()) {
+                    $this->respond($newsEdit);
+                    $this->log->setLog('MODERATION_NEWS', $this->user_id, "Successful");
+                    return $this->respond(
+                        $newsEdit->toArray()
                     );
                 }
-                throw new \Exception("Ошибка, новость не создана...");
+                $this->log->setLog('MODERATION_NEWS', $this->user_id, "Save error");
+                throw new \Exception("Ошибка, новость не отредактирована");
             }
 
         } catch (ModelNotFoundException $e) {
-            return $this->respondNotFound(['Исходня запись в ленте новостей не найдена либо скрыта']);
+            return $this->respondNotFound(['Исходная запись в ленте новостей не найдена либо скрыта']);
         } catch (\Exception $e) {
+            $this->log->setLog('MODERATION_NEWS', $this->user_id, "Error 500");
             return $this->respondFail500x([$e->getTrace()]);
         }
     }
 
+    public function delete(Request $request)
+    {
+        try {
+
+            $this->validate($request, [
+                'id' => 'required|numeric',
+            ]);
+
+            $id = $request->input('id');
+
+            $feed = News::find($id);
+
+            $feed->hidden = 1;
+
+            if ($feed->save()) {
+                return $this->respondCreated(
+                    ["data" => "hidden"]
+                );
+            }
+
+            throw new \Exception('Ошибка, новость не скрыта');
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
 
 }
