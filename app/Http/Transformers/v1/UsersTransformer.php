@@ -27,7 +27,7 @@ class UsersTransformer extends Transformer
 
         unset($transform['avatar_id']);
         $avatar = CdnFile::where('id', '=', $user['avatar_id'])->get(['url'])->first();
-        $transform['avatar_url'] = $avatar;
+        $transform['avatar_url'] = $avatar ? $avatar->url : null;
 
         return $transform;
     }
