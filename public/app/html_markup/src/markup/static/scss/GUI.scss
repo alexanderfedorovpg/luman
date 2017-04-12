@@ -301,7 +301,8 @@ a {
                 /* Checkbox Unchecked */
             }
 
-            + label:hover {
+            + label:hover,
+            &.active + label {
                 color: #333;
                 
                 &:before {

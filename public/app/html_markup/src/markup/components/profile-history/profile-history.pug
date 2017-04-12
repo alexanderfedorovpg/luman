@@ -5,6 +5,8 @@ mixin profile-history(data)
                 +e.row_title
                     each item in data.titles
                         +e.cell(class= '_' + item.class, class= (item.type ? '_' + item.type : undefined))= item.name
+                            if item.type
+                                i.icon.icon-sort-arrow
                 
                 each item in data.values
                     +e.row

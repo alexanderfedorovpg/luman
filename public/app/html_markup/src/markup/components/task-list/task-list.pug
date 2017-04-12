@@ -1,0 +1,54 @@
+mixin task-list(data)
+    +b.task-list()&attributes(attributes)
+        each item in data.items
+            +e.item(class=(item.state ? '_' + item.state : undefined))
+                +e.col-l
+                    +e.P.time= item.time
+
+                +e.col-r
+                        +e.HEADER.header
+                            +b.rating
+                                +e.SPAN.item.is-active(class = "rate" + item.rating)
+                                    input(
+                                        type="radio", 
+                                        name="rating", 
+                                        id = "rate" + item.rating, 
+                                        disabled
+                                    )
+                                    label(for = "rate" + item.rating)= item.rating
+
+                            +e.P.category= item.category
+
+                        +e.title(class= (item.titleCustom ? '_' + item.titleCustom : undefined))
+                            p(class = "rate" + item.rating)= item.title
+                        
+                        if item.text
+                            +e.P.text
+                                - var length = item.text.length
+                                each titem, index in item.text
+                                    = titem
+                                    if index!=(length - 1)
+                                        br
+                                +e.A.link(href=jv0) Посмотреть источник
+                        
+                        if item.comname
+                            +e.comment
+                                +e.comname= item.comname + ':'
+                                +e.comtext= item.comtext
+
+                        +b.task-list-tag
+                            each tag in item.tags
+                                +e.SPAN.item
+                                    | #
+                                    = tag
+
+                        +e.DIV.btn-container
+                            button.btn.btn-md.btn-danger Отказаться
+                            button.btn.btn-md.btn-success
+                                +icon({ icon: 'arrowRight', class: 'arrowRight' }) 
+                                | В работу
+
+                        +e.DIV.close-container
+                            i.icon.icon-delete-reverse
+
+        block

@@ -206,6 +206,10 @@
         @include bg($live-off);
     }
 
+    &-sort-arrow {
+        @include bg($sortArrow);
+    }
+
 }
 
 // если активный пункт меню
