@@ -34,10 +34,20 @@ class NewsChatMessage extends Model
     /**
      * Файлы сообщения
      *
-     * @return @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function files()
     {
         return $this->belongsToMany(CdnFile::class, 'news_chat_files', 'message_id', 'file_id');
+    }
+
+    /**
+     * Автор сообщения
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function author()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }
