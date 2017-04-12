@@ -1,0 +1,19 @@
+extends ../layouts/default
+
+block vars
+    -pageSettings.title = 'Список заданий';
+
+block content
+    // Контент здесь
+
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                +tabs-nav(tabsNav.takeTask)
+
+            +b.header-r 
+                a.link-black(href=jv0)
+                    span ?
+                    | справка
+
+    +task-list(taskList)

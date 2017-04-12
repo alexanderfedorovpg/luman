@@ -33,6 +33,18 @@ var data = {tabsNav: {
         ]
     },
 
+    takeTask: {
+        items: [
+            {
+                name: 'Назначенные мне',
+                class: 'is-active'
+            },
+            {
+                name: 'Общие'
+            }
+        ]
+    },
+
     // табы в шапке на странице программы
     programs: {
 

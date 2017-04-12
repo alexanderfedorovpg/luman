@@ -8,10 +8,10 @@ mixin live-item(data)
                 input.input.input-block(type='text' placeholder='Комментарий')
                 +icon({ icon: 'clip', class: 'clip' })
             .checkbox
-                input(type='checkbox' id='checkbox1' name='checkbox1' value='kek' checked)
+                input.active(type='checkbox' id='checkbox1' name='checkbox1' value='kek' checked)
                 label(for='checkbox1') Вывести на главную
             .checkbox
-                input(type='checkbox' id='checkbox2' name='checkbox1' value='kek')
+                input.active(type='checkbox' id='checkbox2' name='checkbox1' value='kek')
                 label(for='checkbox2') Включить таймер
             button.btn.btn-full.btn-success
                 | Включить прямой эфир

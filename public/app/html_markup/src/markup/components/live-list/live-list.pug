@@ -1,13 +1,12 @@
 mixin live-list(data)
     +b.live-list()&attributes(attributes)
         each item in data.items
-            +e.item
-                +e.wrap(class=(item.state ? '_' + item.state : undefined))
-                    +e.col-l
-                        +e.P.date= item.date
-                        +e.P.time= item.time
+            +e.item(class=(item.state ? '_' + item.state : undefined))
+                +e.col-l
+                    +e.P.date= item.date
+                    +e.P.time= item.time
 
-                    +e.col-r
+                +e.col-r
                         +e.HEADER.header
                             +b.rating
                                 +e.SPAN.item.is-active(class = "rate" + item.rating)

@@ -12,10 +12,12 @@
     &__row {
         display: flex;
 
-        padding-top: .13rem;
+        padding-top: .18rem;
 
         font-size: .88rem;
-        line-height: 3.56;
+        line-height: 3.5;
+
+        border-bottom: 1px solid #f0f0f0;
 
         &:hover {
             background-color: #f0f0f0;
@@ -47,6 +49,14 @@
             //padding-left: .1rem;
         }
 
+        &_sort {
+            cursor: pointer;
+            
+            .icon {
+                margin-left: .2rem;
+            }
+        }
+
         &_date {
             width: 7.8%;
         }
@@ -73,6 +83,12 @@
 
         &_link {
             width: 10%;
+
+            text-decoration: none;
+
+            a {
+                text-decoration: none;
+            }
         }
     }
 
