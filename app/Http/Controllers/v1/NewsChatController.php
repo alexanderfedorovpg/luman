@@ -46,9 +46,14 @@ class NewsChatController extends CmsController
             return $this->respondNotFound('News not found');
         }
 
-        return $this->respond(
-            $this->newsChatTransformer->transformMessages($news->chat->messages)
-        );
+        $chat = $news->chat;
+        if ($chat) {
+            return $this->respond(
+                $this->newsChatTransformer->transformMessages($chat->messages)
+            );
+        } else {
+            return $this->respond([]);
+        }
     }
 
     /**
