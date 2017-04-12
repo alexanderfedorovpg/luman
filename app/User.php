@@ -18,7 +18,10 @@ class User extends Model implements AuthenticatableContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'login'
+        'name',
+        'email',
+        'login',
+        'avatar_id'
     ];
 
     /**
@@ -36,7 +39,8 @@ class User extends Model implements AuthenticatableContract
         'login' => 'required|max:255|unique:users,login',
         'email' => 'required|email|unique:users,email',
         'need_change_password' => 'required|boolean',
-        'enabled' => 'boolean'
+        'enabled' => 'boolean',
+        'avatar_id' => 'integer|exists:cdn_files,id'
     ];
 
     /**
@@ -74,7 +78,7 @@ class User extends Model implements AuthenticatableContract
             ->enabled()
             ->first();
 
-        return (bool) $adminGroup;
+        return (bool)$adminGroup;
     }
 
     /**
@@ -100,5 +104,15 @@ class User extends Model implements AuthenticatableContract
 
         return false;
 
+    }
+
+    /**
+     * Аватар пользоватля
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function avatar()
+    {
+        return $this->hasOne(CdnFile::class, 'avatar_id');
     }
 }

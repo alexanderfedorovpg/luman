@@ -30,8 +30,15 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/news/{id}/related','NewsListController@getRelated');
     $group->post('/auth/login','AuthController@login');
 
+    //Редакторы новостей
     $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
+    $group->put('/newseditor/edit','NewsListEditorController@edit');
+    $group->delete('/newseditor/{id}','NewsListEditorController@delete');
+    $group->post('/newseditor/delegate','NewsListEditorController@delegate');
+    $group->post('/newseditor/rejection','NewsListEditorController@rejection');
+    $group->post('/newseditor/work','NewsListEditorController@in_work');
+
 
     //Пользователи
     $group->get('/user','UserController@index');
@@ -67,12 +74,12 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newschat/{newsId}','NewsChatController@index');
     $group->post('/newschat/{newsId}','NewsChatController@create');
 
-    //Теги
-    $group->get('/tags','TagsController@index');
-    $group->get('/tags/{id}','TagsController@show');
-    $group->post('/tags','TagsController@create');
-    $group->put('/tags/{id}','TagsController@update');
-    $group->delete('/tags/{id}','TagsController@destroy');
+    //Рубрики
+    $group->get('/rubrics','RubricsController@index');
+    $group->get('/rubrics/{id}','RubricsController@show');
+    $group->post('/rubrics','RubricsController@create');
+    $group->put('/rubrics/{id}','RubricsController@update');
+    $group->delete('/rubrics/{id}','RubricsController@destroy');
 
     //Справка
     $group->get('/reference/search','ReferenceController@search');

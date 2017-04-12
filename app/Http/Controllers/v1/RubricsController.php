@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\v1;
 
-use App\Tag;
+use App\Rubrics;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\Validator;
@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  * Class TagsController
  * @package App\Http\Controllers\v1
  */
-class TagsController extends CmsController
+class RubricsController extends CmsController
 {
 
     /**
@@ -27,10 +27,10 @@ class TagsController extends CmsController
                 'name' => 'required|max:50',
             ]);
 
-            $tags = new Tag;
-            $tags->name = $request->name;
-            if ($tags->save()) {
-                return $this->respondCreated(["id" => $tags->id]);
+            $rubrics = new Rubrics;
+            $rubrics->name = $request->input('name');
+            if ($rubrics->save()) {
+                return $this->respondCreated(["id" => $rubrics->id]);
             };
 
         } catch (\Exception $e) {
@@ -45,7 +45,7 @@ class TagsController extends CmsController
     public function index()
     {
         try {
-            $tags = Tag::all();
+            $tags = Rubrics::all();
             return $this->respond($tags);
 
         } catch (ModelNotFoundException $e) {
@@ -61,9 +61,9 @@ class TagsController extends CmsController
     public function show($id)
     {
         try {
-            $tag = Tag::findOrFail($id);
+            $rubric = Rubrics::findOrFail($id);
 
-            return $this->respond($tag);
+            return $this->respond($rubric);
 
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound($e->getMessage());
@@ -84,11 +84,11 @@ class TagsController extends CmsController
                 'name' => 'required',
             ]);
 
-            $tag = Tag::findOrFail($id);
-            $tag->name = $request->input('name');
+            $rubric = Rubrics::findOrFail($id);
+            $rubric->name = $request->input('name');
 
-            if ($tag->save()) {
-                return $this->respondCreated($tag);
+            if ($rubric->save()) {
+                return $this->respondCreated($rubric);
             };
 
         } catch (ModelNotFoundException $e) {
@@ -110,8 +110,8 @@ class TagsController extends CmsController
     {
         try {
 
-            $tag = Tag::findOrFail($id);
-            if ($tag->delete()) {
+            $rubric = Rubrics::findOrFail($id);
+            if ($rubric->delete()) {
                 return $this->respond([]);
             };
 

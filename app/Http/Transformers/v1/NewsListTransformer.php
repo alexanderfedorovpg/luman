@@ -37,6 +37,8 @@ class NewsListTransformer extends Transformer
             $transform['VideoStream'] = $news['video_stream'];
         }
 
+        $transform['EditorId'] = $news['editor_id'];
+
         $hh = 0;
         $mm = 0;
         $ss = 0;
