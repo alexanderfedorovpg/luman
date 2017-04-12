@@ -67,12 +67,12 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newschat/{newsId}','NewsChatController@index');
     $group->post('/newschat/{newsId}','NewsChatController@create');
 
-    //Теги
-    $group->get('/tags','TagsController@index');
-    $group->get('/tags/{id}','TagsController@show');
-    $group->post('/tags','TagsController@create');
-    $group->put('/tags/{id}','TagsController@update');
-    $group->delete('/tags/{id}','TagsController@destroy');
+    //Рубрики
+    $group->get('/rubrics','RubricsController@index');
+    $group->get('/rubrics/{id}','RubricsController@show');
+    $group->post('/rubrics','RubricsController@create');
+    $group->put('/rubrics/{id}','RubricsController@update');
+    $group->delete('/rubrics/{id}','RubricsController@destroy');
 
     //Справка
     $group->get('/reference/search','ReferenceController@search');
