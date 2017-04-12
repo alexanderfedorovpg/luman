@@ -60,7 +60,7 @@ class NewsListEditorController extends CmsController
                     $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
+                    $params = ['editor_id' => 0, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
                     break;
                 default :
                     $params = false;
