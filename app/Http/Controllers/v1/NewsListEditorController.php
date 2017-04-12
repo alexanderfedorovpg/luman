@@ -60,7 +60,7 @@ class NewsListEditorController extends CmsController
                     $params = ['editor_id' => $user_id, 'moderation' => 1, 'delete' => 0];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => 5, 'moderation' => 1, 'delete' => 0];
+                    $params = ['editor_id' => null, 'moderation' => 1, 'delete' => 0];
                     break;
                 default :
                     $params = false;
@@ -257,6 +257,7 @@ class NewsListEditorController extends CmsController
             }
 
             $news->delete = 1;
+            $news->moderation = 0;
 
             if ($news->save()) {
                 $this->log->setLog('DELETE_NEWS', $this->user_id, "Successful, news id=".$id." delete");
@@ -294,6 +295,7 @@ class NewsListEditorController extends CmsController
             }
 
             $news->editor_id = $new_editor_id;
+            $news->moderation = 1;
 
             if ($news->save()) {
                 $this->log->setLog('DELEGATE', $this->user_id, "Successful, news id=".$id." delegate [".$this->user_id.">".$new_editor_id."]");
@@ -328,7 +330,8 @@ class NewsListEditorController extends CmsController
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
-            $news->editor_id = 'NULL'; //fixme: поле то у нас привязано к юзерам
+            $news->editor_id = 'NULL';
+            $news->moderation = 0;
 
             if ($news->save()) {
                 $this->log->setLog('REJECTION', $this->user_id, "Successful, news id=".$id." rejection ".$this->user_id);
@@ -345,8 +348,8 @@ class NewsListEditorController extends CmsController
         }
     }
 
-    /* REJECTION
-     * Отказаться от редактирования новости
+    /* IN_WORK
+     * Начать редактирование новости
      */
     public function in_work(Request $request)
     {
@@ -364,19 +367,20 @@ class NewsListEditorController extends CmsController
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
-            $news->editor_id = 'NULL'; //fixme: поле то у нас привязано к юзерам
+            $news->time_edit = date('Y-m-d H:i:s');
+            $news->moderation = 1;
 
             if ($news->save()) {
-                $this->log->setLog('REJECTION', $this->user_id, "Successful, news id=".$id." rejection ".$this->user_id);
+                $this->log->setLog('IN_WORK', $this->user_id, "Successful, news id=".$id." in work user_id=".$this->user_id);
                 return $this->respondCreated(
-                    ["data" => "rejection"]
+                    ["data" => "in_work"]
                 );
             }
 
-            $this->log->setLog('REJECTION', $this->user_id, "Error, news id=".$id." don't rejection  ".$this->user_id);
+            $this->log->setLog('IN_WORK', $this->user_id, "Error, news id=".$id." don't in work user_id=".$this->user_id);
             throw new \Exception('Error, news don\'t rejection');
         } catch (\Exception $e) {
-            $this->log->setLog('REJECTION', $this->user_id, "Error 500 news id=".$id);
+            $this->log->setLog('IN_WORK', $this->user_id, "Error 500 news id=".$id);
             return $this->respondFail500x($e->getMessage());
         }
     }

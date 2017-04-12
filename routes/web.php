@@ -37,6 +37,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->delete('/newseditor/{id}','NewsListEditorController@delete');
     $group->post('/newseditor/delegate','NewsListEditorController@delegate');
     $group->post('/newseditor/rejection','NewsListEditorController@rejection');
+    $group->post('/newseditor/work','NewsListEditorController@in_work');
 
 
     //Пользователи
