@@ -135,13 +135,7 @@ class News extends Model
      */
     public function scopeModerationThisEditor($query, $editor_id, $moderation = true, $delete = 0, $is_publish = 0)
     {
-        return $query->where($editor_id, $moderation, $delete, $is_publish,
-                        function ($query, $moderation, $editor_id, $delete, $is_publish) {
-                                        $query  ->where('moderation', '=', $moderation)
-                                                ->where('editor_id', '=', $editor_id)
-                                                ->where('delete', '=', $delete)
-                                                ->where('is_publish', '=', $is_publish);
-        });
+        return $query->where(['editor_id' =>$editor_id,'moderation' =>$moderation,'delete' =>$delete,'is_publish' =>$is_publish]);
 
     }
 
