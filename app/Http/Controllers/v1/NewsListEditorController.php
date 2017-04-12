@@ -57,10 +57,10 @@ class NewsListEditorController extends CmsController
 
             switch ($assigned) {
                 case 'me' :
-                    $params = ['editor_id' => $user_id, 'moderation' => 1, 'delete' => 0];
+                    $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => null, 'moderation' => 1, 'delete' => 0];
+                    $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
                     break;
                 default :
                     $params = false;
@@ -115,7 +115,7 @@ class NewsListEditorController extends CmsController
     public function getOne($id)
     {
         $this->getArray = true;
-        $news = News::whereId($id)->published()->first();
+        $news = News::whereId($id)->published(false)->first();
         if (!$news) {
             return $this->respondNotFound();
         }
@@ -152,6 +152,7 @@ class NewsListEditorController extends CmsController
                 'sub_title' => 'required|max:140',
                 'id' => 'required|numeric',
                 'editor_id' => 'required|numeric',
+                'rubrics_id' => 'required|numeric',
                 'keywords' => 'required',
                 'tags' => 'required',
                 'top' => 'required|numeric',
@@ -169,6 +170,7 @@ class NewsListEditorController extends CmsController
             $top = $request->input('top');
             $note = $request->input('note');
             $video_stream = $request->input('video_stream');
+            $rubrics_id = $request->input('rubrics_id');
             $body = $request->input('body');
             $keywords = $request->input('keywords');
             $tags = $request->input('tags');
@@ -180,6 +182,7 @@ class NewsListEditorController extends CmsController
             $is_war_mode = $request->input('is_war_mode');
             $publish_date = $request->input('publish_date');
             $original_source_link = $request->input('original_source_link');
+            $moderation = $request->input('moderation');
 
             $newsEdit = News::ModerationMode()->find(intval($id));
 
@@ -199,6 +202,8 @@ class NewsListEditorController extends CmsController
                 $newsEdit->body = $body;
                 $newsEdit->tags = $tags;
                 $newsEdit->keywords = $keywords;
+                $newsEdit->moderation = 0;
+                $newsEdit->rubrics_id = $rubrics_id;
 
                 if($this->user_id != $newsEdit->editor_id) {
                     return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
@@ -295,7 +300,7 @@ class NewsListEditorController extends CmsController
             }
 
             $news->editor_id = $new_editor_id;
-            $news->moderation = 1;
+            $news->moderation = 0;
 
             if ($news->save()) {
                 $this->log->setLog('DELEGATE', $this->user_id, "Successful, news id=".$id." delegate [".$this->user_id.">".$new_editor_id."]");

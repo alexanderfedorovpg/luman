@@ -133,12 +133,14 @@ class News extends Model
      * @param bool $published
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeModerationThisEditor($query, $editor_id, $moderation = true, $delete = 0)
+    public function scopeModerationThisEditor($query, $editor_id, $moderation = true, $delete = 0, $is_publish = 0)
     {
-        return $query->where($editor_id, $moderation, $delete, function ($query, $moderation, $editor_id, $delete) {
+        return $query->where($editor_id, $moderation, $delete, $is_publish,
+                        function ($query, $moderation, $editor_id, $delete, $is_publish) {
                                         $query  ->where('moderation', '=', $moderation)
                                                 ->where('editor_id', '=', $editor_id)
-                                                ->where('delete', '=', $delete);
+                                                ->where('delete', '=', $delete)
+                                                ->where('is_publish', '=', $is_publish);
         });
 
     }
