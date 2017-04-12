@@ -31,6 +31,7 @@ class News extends Model
         'image_main',
         'image_preview',
         'is_online',
+        'moderation',
     ];
 
     /**
@@ -132,13 +133,30 @@ class News extends Model
      * @param bool $published
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeModerationThisEditor($query, $editor_id, $moderation = true)
+    public function scopeModerationThisEditor($query, $editor_id, $moderation = true, $delete = 0, $is_publish = 0)
     {
-        return $query->where($editor_id, $moderation, function ($query, $moderation, $editor_id) {
+        return $query->where($editor_id, $moderation, $delete, $is_publish,
+                        function ($query, $moderation, $editor_id, $delete, $is_publish) {
                                         $query  ->where('moderation', '=', $moderation)
-                                                ->where('editor_id', '=', $editor_id);
+                                                ->where('editor_id', '=', $editor_id)
+                                                ->where('delete', '=', $delete)
+                                                ->where('is_publish', '=', $is_publish);
         });
 
+    }
+
+    /**
+     * Получаем текущую новость
+     *
+     * @param $query
+     * @param $viewMode
+     * @return mixed
+     */
+    public function scopeModerationMode($query)
+    {
+        $query->where('moderation', '=', 1);
+
+        return $query;
     }
 
 }

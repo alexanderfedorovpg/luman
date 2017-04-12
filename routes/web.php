@@ -30,8 +30,15 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/news/{id}/related','NewsListController@getRelated');
     $group->post('/auth/login','AuthController@login');
 
+    //Редакторы новостей
     $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
+    $group->put('/newseditor/edit','NewsListEditorController@edit');
+    $group->delete('/newseditor/{id}','NewsListEditorController@delete');
+    $group->post('/newseditor/delegate','NewsListEditorController@delegate');
+    $group->post('/newseditor/rejection','NewsListEditorController@rejection');
+    $group->post('/newseditor/work','NewsListEditorController@in_work');
+
 
     //Пользователи
     $group->get('/user','UserController@index');
