@@ -98,7 +98,6 @@ class NewsListEditorController extends CmsController
                 $newsList[] = $item;
             }
 
-            $newsList = $this->newsListTransformer->transformCollection($newsList);
             return $this->respond($newsList);
          } catch (\Exception $e) {
             return $this->respondFail500x($e);
