@@ -13,10 +13,7 @@ class AlterTableTags extends Migration
      */
     public function up()
     {
-
-
-
-
+        Schema::rename('tags', 'rubrics');
     }
 
     /**
@@ -26,8 +23,8 @@ class AlterTableTags extends Migration
      */
     public function down()
     {
-        Schema::table('tags', function (Blueprint $table) {
+
             Schema::rename('rubrics', 'tags');
-        });
+
     }
 }
