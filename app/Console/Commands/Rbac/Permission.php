@@ -124,6 +124,10 @@ class Permission extends Command
                 'name' => 'v1.user-view',
                 'description' => 'Просмотор пользователя',
             ],
+            [
+                'name' => 'v1.user-profile',
+                'description' => 'Профиль текущего пользователя',
+            ],
         ];
     }
     /**
