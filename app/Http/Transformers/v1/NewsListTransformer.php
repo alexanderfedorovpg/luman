@@ -4,7 +4,7 @@ namespace App\Http\Transformers\v1;
 
 use App\User;
 use App\Http\Transformers\Transformer;
-
+use App\Rubrics;
 /**
  * Class NewsListTransformer
  * @package App\Http\Transformers\v1
@@ -60,6 +60,9 @@ class NewsListTransformer extends Transformer
         if(!empty($news["lostComment"])) {
             $transform['lostComment'] = $news["lostComment"];
         }
+
+        $transform['Keywords'] = explode(',', $news['keywords']);
+        $transform['Rubrics'] = Rubrics::where('id', '=', $news['rubrics_id'])->get();
 
         return $transform;
     }
