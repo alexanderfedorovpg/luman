@@ -32,6 +32,7 @@ class NewsListTransformer extends Transformer
         $transform['Subtitle'] = $news['sub_title'];
         $transform['Tags'] =  explode(',', $news['tags']);
         $transform['ImagePreview'] = $news['image_preview'];
+        $transform['ExistVideo'] = (bool) $news['video_stream'];
 
         if ($news['video_stream']) {
             $transform['VideoStream'] = $news['video_stream'];
