@@ -31,6 +31,7 @@ class GroupController extends CmsController
      */
     public function __construct(GroupsTransformer  $groupsTransformer)
     {
+        parent::__construct();
         $this->groupsTransformer = $groupsTransformer;
     }
 

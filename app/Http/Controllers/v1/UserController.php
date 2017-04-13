@@ -28,6 +28,7 @@ class UserController extends CmsController
      */
     public function __construct(UsersTransformer  $usersTransformer)
     {
+        parent::__construct();
         $this->usersTransformer = $usersTransformer;
     }
 
