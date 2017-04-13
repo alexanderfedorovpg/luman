@@ -1,0 +1,8 @@
+mixin search(data)
+    +b.search()&attributes(attributes)
+        block
+        +e.FORM.form
+            +e.INPUT(type="text"
+                     placeholder="Поиск по сайту").input-text
+            +e.INPUT(type="submit"
+                     value="").input-submit

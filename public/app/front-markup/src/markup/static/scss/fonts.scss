@@ -1,0 +1,15 @@
+/* Your custom fonts here */
+
+/* Example
+
+@include font-face('Open Sans', '../fonts/OpenSans-Italic', normal, italic, $exts: woff woff2 ttf);
+
+// Var for using custom font
+$font-1: 'Open Sans', Helvetica, Arial, sans-serif;
+*/
+
+@include font-face('StemText Regular', '../fonts/StemText-Regular', normal, $exts: woff woff2 ttf);
+@include font-face('StemText Bold', '../fonts/StemText-Bold', normal, $exts: woff woff2 ttf);
+
+$stemReg: 'StemText Regular', sans-serif;
+$stemBold: 'StemText Bold', sans-serif;

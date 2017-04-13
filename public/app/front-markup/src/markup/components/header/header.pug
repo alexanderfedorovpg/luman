@@ -1,0 +1,25 @@
+include ../search/search
+include ../rss/rss
+include ../top-menu/top-menu
+include ../burger/burger
+include ../logo/logo
+
+mixin header(data)
+    +b.HEADER.header()&attributes(attributes)
+        block
+        +e.container.container
+            +e.left-part
+                +e.part-wrapper
+
+                    +burger(class="header__burger")
+
+                    +logo(class="header__logo")
+
+                    +top-menu(top_menu.list)(class="header__top-menu")
+
+            +e.right-part
+
+                +rss(class="header__rss")
+
+                +search(class="header__search")
+

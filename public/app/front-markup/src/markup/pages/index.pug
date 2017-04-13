@@ -1,0 +1,13 @@
+extends ../layouts/default
+
+include ../components/general-news/general-news
+
+block vars
+    -pageSettings.title = 'Главная';
+
+block content
+    // Контент здесь
+    main
+
+        +general-news
+

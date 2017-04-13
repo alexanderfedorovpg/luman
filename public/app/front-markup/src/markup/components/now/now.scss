@@ -1,0 +1,10 @@
+.now {
+    width: rem(299);
+    padding-left: rem(14);
+
+    background-color: $gray-light;
+
+    &__mini-news {
+        margin-top: rem(16);
+    }
+}

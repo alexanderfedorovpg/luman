@@ -1,0 +1,22 @@
+.search {
+    color: rgba(255, 255, 255, .42);
+
+    &__input-text {
+        padding-right: rem(9);
+
+        text-align: right;
+
+border: none;
+        background-color: transparent;
+    }
+
+    &__input-submit {
+        width: rem(18);
+        height: rem(17);
+
+        border: none;
+        background-color: transparent;
+        background-image: url(%=static=%general/search/search.png);
+        background-size: cover;
+    }
+}

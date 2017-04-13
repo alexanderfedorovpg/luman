@@ -1,0 +1,14 @@
+include ../big-news/big-news
+include ../now/now
+
+mixin general-news(data)
+    +b.general-news()&attributes(attributes)
+        block
+        +e.container.container
+            +e.left
+                +e.left-wrapper
+                    +big-news(big_news.first)(class="general-news__big-news")
+
+                    +now(now)(class="general-news__now")
+
+            +e.right

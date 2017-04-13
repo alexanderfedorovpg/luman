@@ -1,0 +1,8 @@
+.mini-news {
+
+    &__title {
+        font: #{rem(18)}/#{rem(24)} $stemBold;
+        text-decoration: none;
+        color: $dark;
+    }
+}

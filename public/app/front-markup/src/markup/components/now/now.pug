@@ -1,0 +1,11 @@
+include ../mini-news/mini-news
+
+mixin now(data)
+    - items = data
+    +b.now()&attributes(attributes)
+        block
+        +e.P.title.section-title Сейчас
+        each item in items
+
+            +mini-news(item)(class="now__mini-news")
+

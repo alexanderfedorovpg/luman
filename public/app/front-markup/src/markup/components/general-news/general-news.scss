@@ -1,0 +1,25 @@
+.general-news {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: space-between;
+
+    &__left {
+        width: rem(916);
+    }
+
+    &__left-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__right {
+        width: rem(300);
+    }
+
+    &__now {
+        height: rem(505);
+        padding-top: rem(11);
+    }
+}

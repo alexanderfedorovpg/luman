@@ -1,0 +1,6 @@
+mixin mini-news(data)
+    +b.mini-news()&attributes(attributes)
+        block
+        +e.A(href=jv0).title #{data.title}
+        +e.IMG(src=data.img alt=data.alt).img
+        +e.P.date #{data.when}
