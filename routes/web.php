@@ -46,6 +46,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/user','UserController@create');
     $group->put('/user/{id}','UserController@update');
     $group->delete('/user/{id}','UserController@destroy');
+    $group->get('/user/profile','UserController@profile');
 
     //Группы
     $group->get('/group','GroupController@index');
