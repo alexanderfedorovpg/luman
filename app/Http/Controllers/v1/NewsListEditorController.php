@@ -77,7 +77,7 @@ class NewsListEditorController extends CmsController
             $news = $news->get();
 
             if ($news->isEmpty()) {
-                return [];
+                return $this->respond([]);
             }
 
             $news = $news->toArray();
