@@ -1,8 +1,9 @@
 .per-day {
 
     &__title {
-        border-bottom: none;
         line-height: rem(32);
+
+        border-bottom: none;
     }
 
     &__wrapper {

@@ -59,14 +59,21 @@
                 <div class="rss header__rss">
                     <a class="rss__link" href="javascript:void(0)">
                         <span class="rss__text rss__float rss__float_left">RSS</span>
-                        <img class="rss__img rss__float rss__float_right" src="static/img/general/rss/rss.png"
-                        alt="" role="presentation" />
+                        <svg class="rss__img rss__float_right" width="0" height="0">
+                            <use xlink:href="svg-symbols.svg#rss"></use>
+                        </svg>
                     </a>
                 </div>
                 <div class="search header__search">
                     <form class="search__form">
                         <input class="search__input-text" type="text" placeholder="Поиск по сайту" />
-                        <input class="search__input-submit" type="submit" value="" />
+                        <div class="search__wrapper">
+                            <input class="search__input-submit" type="submit" value="" />
+                            <svg class="search__ico" width="17" height="17">
+                                <use xlink:href="svg-symbols.svg#search"></use>
+                            </svg>
+
+                        </div>
                     </form>
                 </div>
             </div>
@@ -79,6 +86,7 @@
                 <div class="general-news__left">
                     <div class="general-news__left-wrapper">
                         <div class="big-news general-news__big-news">
+                            <a class="big-news__link" href="javascript:void(0)"></a>
                             <img class="big-news__img" src="static//img/content/big-news/trump.jpg" alt="" role="presentation"
                             />
                             <div class="big-news__info">
@@ -91,6 +99,11 @@
                                 <p class="big-news__description big-news__position big-news__position_margin">Дональд трамп считает президента Сирии Башара Асада виноватым в атаке с использованием химического
                                     оружия
                                 </p>
+                                <div class="big-news__logo">
+                                    <span class="big-news__logo-title">News</span>
+                                    <img class="big-news__logo" src="static//img/content/rtvi/blue-rtvi.png" alt=""
+                                    role="presentation" />
+                                </div>
                             </div>
                         </div>
                         <div class="now general-news__now">
@@ -98,40 +111,450 @@
                             </p>
                             <div class="now__news">
                                 <div class="mini-news now__mini-news">
-                                    <a class="mini-news__title" href="javascript:void(0)">Овечкина и Малкина не пустили на Олимпиаду</a>
-                                    <img class="mini-news__img" src="static/img/content/cow/peskov.jpg"
-                                    alt="" role="presentation" />
-                                    <p class="mini-news__date">Сегодня, 15:02
-                                    </p>
+                                    <img class="mini-news__img" src="static/img/content/now/peskov.jpg" alt="" role="presentation"
+                                    />
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Овечкина и Малкина не пустили на Олимпиаду</a>
+                                        <p class="mini-news__date">Сегодня, 15:02
+                                        </p>
+                                    </div>
                                 </div>
                                 <div class="mini-news now__mini-news">
-                                    <a class="mini-news__title" href="javascript:void(0)">В гибели Ту-154 обвинили диспетчеров</a>
-                                    <img class="mini-news__img" src="static/img/content/cow/peskov.jpg"
-                                    alt="" role="presentation" />
-                                    <p class="mini-news__date">Вчера, 14:44
-                                    </p>
+                                    <img class="mini-news__img" src="static/img/content/now/peskov.jpg" alt="" role="presentation"
+                                    />
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">В гибели Ту-154 обвинили диспетчеров</a>
+                                        <p class="mini-news__date">Вчера, 14:44
+                                        </p>
+                                    </div>
                                 </div>
                                 <div class="mini-news now__mini-news">
-                                    <a class="mini-news__title" href="javascript:void(0)">МВФ одобрили выеделение $1 млрд для Украины</a>
-                                    <img class="mini-news__img" src="static/img/content/cow/peskov.jpg"
-                                    alt="" role="presentation" />
-                                    <p class="mini-news__date">Сегодня, 15:02
-                                    </p>
+                                    <img class="mini-news__img" src="static/img/content/now/peskov.jpg" alt="" role="presentation"
+                                    />
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">МВФ одобрили выеделение $1 млрд для Украины</a>
+                                        <p class="mini-news__date">Сегодня, 15:02
+                                        </p>
+                                    </div>
                                 </div>
                                 <div class="mini-news now__mini-news">
-                                    <a class="mini-news__title" href="javascript:void(0)">Новая газета рассказала о секретных тюрьмах для геев в Чечне</a>
-                                    <img class="mini-news__img"
-                                    src="static/img/content/cow/peskov.jpg" alt="" role="presentation" />
-                                    <p class="mini-news__date">Сегодня, 15:02
+                                    <img class="mini-news__img" src="static/img/content/now/peskov.jpg" alt="" role="presentation"
+                                    />
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Новая газета рассказала о секретных тюрьмах для геев в Чечне</a>
+                                        <p class="mini-news__date">Сегодня, 15:02
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="general-news__left-wrapper two-wrapper">
+                        <div class="per-day general-news__per-day">
+                            <p class="per-day__title section-title">Главное за последние сутки
+                            </p>
+                            <div class="block-rectangle">
+                                <a class="block-rectangle__link" href="javascript:void(0)"></a>
+                                <img class="block-rectangle__img" src="static/img/content/per-day/per-one.png" alt=""
+                                role="presentation" />
+                                <div class="block-rectangle__info">
+                                    <p class="block-rectangle__title">Плакат с накрашенным Путиным признали экстремистским
+                                    </p>
+                                    <p class="block-rectangle__time-add">5 часов назад /
+                                        <span class="block-rectangle__time-upadate">Обновлено 15 минут назад</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="per-day__wrapper per-day__wrapper per-day__wrapper_margin">
+                                <div class="block-square">
+                                    <a class="block-square__link" href="javascript:void(0)"></a>
+                                    <img class="block-square__img" src="static/img/content/per-day/per-two.png" alt=""
+                                    role="presentation" />
+                                    <div class="block-square__info">
+                                        <div class="block-square__time-keeping">
+                                            <img class="block-square__ico" src="/static/img/content/video-ico/video-ico.png"
+                                            alt="" role="presentation" />
+                                            <span class="block-square__keeping">03:40</span>
+                                        </div>
+                                        <p class="block-square__title">Как следователи ФБР нашли доказательства вины России
+                                        </p>
+                                        <p class="block-square__time-add">час назад
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="block-square">
+                                    <a class="block-square__link" href="javascript:void(0)"></a>
+                                    <img class="block-square__img" src="static/img/content/per-day/per-three.png" alt=""
+                                    role="presentation" />
+                                    <div class="block-square__info">
+                                        <div class="block-square__time-keeping">
+                                            <img class="block-square__ico" src="/static/img/content/video-ico/video-ico.png"
+                                            alt="" role="presentation" />
+                                            <span class="block-square__keeping">03:40</span>
+                                        </div>
+                                        <p class="block-square__title">Нацгвардию Украины боятся взрослые российские мужчины
+                                        </p>
+                                        <p class="block-square__time-add">час назад
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-noize general-news__info-noize">
+                            <p class="info-noize__title section-title">Инфошум
+                            </p>
+                            <div class="info-noize__wrapper">
+                                <div class="mini-news info-noize__mini-news">
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Палестинец на машине врезался в группу израильских солдат</a>
+                                        <p class="mini-news__date">10 часов назад
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mini-news info-noize__mini-news">
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Марин Ле Пен пообещала бороться за отмену санкций против россиян</a>
+                                        <p class="mini-news__date">Вчера, 14:44
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mini-news info-noize__mini-news">
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Зюганов назвал Навального трезвым Ельциным</a>
+                                        <p class="mini-news__date">Вчера, 09:18
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mini-news info-noize__mini-news">
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">У Лондонского террориста оказалось другое имя</a>
+                                        <p class="mini-news__date">6 апреля, 07:12
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mini-news info-noize__mini-news">
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Медведев: Навальный подставляет молодых людей для достижения шкурных целей</a>
+                                        <p class="mini-news__date">5 апреля, 16:10
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-news__right">
+                    <div class="general-video general-news__general-video">
+                        <a class="general-video__link" href="javascript:void(0)"></a>
+                        <img class="general-video__img" src="static/img/content/general-video/general-video.jpg" alt=""
+                        role="presentation" />
+                        <div class="general-video__info">
+                            <div class="general-video__date general-video__date general-video__date_position">
+                                <img class="general-video__ico" src="static/img/content/video-ico/video-ico.png" alt="" role="presentation"
+                                />
+                                <span class="general-video__span">27 марта</span>
+                            </div>
+                            <div class="general-video__title">Все ключевые события этого дня
+                            </div>
+                            <div class="general-video__logo">
+                                <span class="general-video__logo-title">Today</span>
+                                <img class="general-video__logo" src="static/img/content/rtvi/purple-rtvi.png"
+                                alt="" role="presentation" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="enter-one general-news__enter-one enter-one__no-border">
+                        <p class="enter-one__title section-title">Из эфира
+                        </p>
+                        <div class="from-enter general-news__from-enter">
+                            <a class="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
+                                <img class="from-enter__img" src="static/img/content/from-enter/from-enter.png" atl="" alt=""
+                                role="presentation" />
+                                <span class="from-enter__time-keeping">
+                                    <img class="from-enter__ico" src="static/img/content/video-ico/video-ico.png" alt="" role="presentation"
+                                    />
+                                    <span class="from-enter__keeping">03:40</span>
+                                </span>
+                            </a>
+                            <div class="from-enter__info">
+                                <a class="from-enter__link" href="javascript:void(0)">Подробности атаки на Вестминстер: кем был лондонский террорист?</a>
+                                <p class="from-enter__category">Новости
+                                    <span class="from-enter__time-add">2 часа назад</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-news__left general-news__left_more">
+                    <div class="general-news__left-wrapper">
+                        <div class="banner general-news__banner banner__where-view">
+                            <div class="banner__title">Как смотреть RTVI
+                            </div>
+                            <div class="banner__subtitle">По обе стороны
+                            </div>
+                        </div>
+                    </div>
+                    <div class="random-news general-news__random-news">
+                        <div class="random-news__row">
+                            <div class="block-rectangle random-news__block-rectangle random-news__block">
+                                <a class="block-rectangle__link" href="javascript:void(0)"></a>
+                                <img class="block-rectangle__img" src="static/img/content/random-news/queen.png" alt=""
+                                role="presentation" />
+                                <div class="block-rectangle__info">
+                                    <div class="block-rectangle__time-keeping">
+                                        <img class="block-rectangle__ico" src="/static/img/content/video-ico/video-ico.png" alt=""
+                                        role="presentation" />
+                                        <span class="block-rectangle__keeping">03:40</span>
+                                    </div>
+                                    <p class="block-rectangle__title block-rectangle__title block-rectangle__title_font_small">Более 250 погибших в результате катаклизма в Колумбии
+                                    </p>
+                                    <p class="block-rectangle__time-add">5 часов назад /
+                                        <span class="block-rectangle__time-upadate">Обновлено 15 минут назад</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="block-square random-news__block-square random-news__block">
+                                <a class="block-square__link" href="javascript:void(0)"></a>
+                                <img class="block-square__img" src="static/img/content/random-news/random.png" alt=""
+                                role="presentation" />
+                                <div class="block-square__info">
+                                    <p class="block-square__title">Президент РФ подписал закон о дебоширах на общественном транспорте‍
+                                    </p>
+                                    <p class="block-square__time-add">3 часа назад
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="block-square random-news__block-square random-news__block">
+                                <a class="block-square__link" href="javascript:void(0)"></a>
+                                <img class="block-square__img" src="static/img/content/random-news/usa.png" alt="" role="presentation"
+                                />
+                                <div class="block-square__info">
+                                    <p class="block-square__title">Спецслужбы США ищут российского шпиона, помогавшего Трампу
+                                    </p>
+                                    <p class="block-square__time-add">3 часа назад
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="block-square random-news__block-square random-news__block">
+                                <a class="block-square__link" href="javascript:void(0)"></a>
+                                <img class="block-square__img" src="static/img/content/random-news/putin.png" alt=""
+                                role="presentation" />
+                                <div class="block-square__info">
+                                    <p class="block-square__title">Закон о праве отказа от налогового резидентства РФ подписан Путиным
+                                    </p>
+                                    <p class="block-square__time-add">3 часа назад
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="block-square random-news__block-square random-news__block-square random-news__block-square_list random-news__block">
+                                <div class="mini-news">
+                                    <img class="mini-news__img" src="static/img/content/now/peskov.jpg" alt="" role="presentation"
+                                    />
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Центробанк России впервые с 2014 года установил ключевую ставку ниже 10%</a>
+                                        <p class="mini-news__date">Сегодня, 15:02
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mini-news">
+                                    <img class="mini-news__img" src="static/img/content/now/peskov.jpg" alt="" role="presentation"
+                                    />
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Марин Ле Пен пообещала бороться за отмену санкций против россиян</a>
+                                        <p class="mini-news__date">Вчера, 14:44
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mini-news">
+                                    <img class="mini-news__img" src="static/img/content/now/peskov.jpg" alt="" role="presentation"
+                                    />
+                                    <div class="mini-news__info">
+                                        <a class="mini-news__title" href="javascript:void(0)">Зюганов назвал Навального трезвым Ельциным</a>
+                                        <p class="mini-news__date">Сегодня, 15:02
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-news__right general-news__right_more">
+                    <div class="subscribe general-news__subscribe">
+                        <a class="subscribe__link" href="javascript:void(0)">
+                            <img class="subscribe__img" src="static/img/content/subscribe/subscribe.png" alt="" role="presentation"
+                            />
+                        </a>
+                    </div>
+                    <div class="more-news general-news__more-news">
+                        <div class="mini-news">
+                            <div class="mini-news__info">
+                                <a class="mini-news__title" href="javascript:void(0)">Ройзман придет как свидетель защиты на процесс блогера Соколовского</a>
+                                <p class="mini-news__date">10 часов назад
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mini-news">
+                            <div class="mini-news__info">
+                                <a class="mini-news__title" href="javascript:void(0)">Силовики нарушили перемирие почти 80 раз за два дня, заявили в ДНР</a>
+                                <p class="mini-news__date">Вчера, 14:44
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mini-news">
+                            <div class="mini-news__info">
+                                <a class="mini-news__title" href="javascript:void(0)">Путин: действующих ограничений в интернете пока достаточно</a>
+                                <p class="mini-news__date">Вчера, 09:18
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mini-news">
+                            <div class="mini-news__info">
+                                <a class="mini-news__title" href="javascript:void(0)">РПЦ раскритиковала законопроект, который разрешает носить хиджабы в школах Чечни</a>
+                                <p class="mini-news__date">6 апреля, 07:12
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mini-news">
+                            <div class="mini-news__info">
+                                <a class="mini-news__title" href="javascript:void(0)">ФБР создаст отдел для расследования вмешательства России в выборы</a>
+                                <p class="mini-news__date">5 апреля, 16:10
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-news__middle">
+                    <div class="banner-preview general-news__banner-preview">
+                        <img class="banner-preview__img" src="static/img/content/banner/banner.png" alt="" role="presentation"
+                        />
+                        <div class="banner-preview__left-part">
+                            <p class="banner-preview__title-group">RTVI
+                            </p>
+                            <p class="banner-preview__subtitle-group">Наши эфиры
+                            </p>
+                        </div>
+                        <div class="banner-preview__right-part">
+                            <div class="banner-preview__wrapper">
+                                <div class="banner-preview__part-title">
+                                    <p class="banner-preview__title-programm">Тайм код: итоги недели
+                                    </p>
+                                    <p class="banner-preview__subtitle-programm">С Владимиром Ленским
+                                    </p>
+                                </div>
+                                <div class="banner-preview__delimeter banner-preview__delimeter banner-preview__delimeter_one">
+                                    <img src="static/img/content/banner/delimeter.png" alt="" role="presentation" />
+                                </div>
+                                <div class="banner-preview__part-time banner-preview__part-time banner-preview__part-time_one">
+                                    <p class="banner-preview__programm-title">По субботам
+                                    </p>
+                                    <p class="banner-preview__programm-time">19:00
+                                    </p>
+                                </div>
+                                <div class="banner-preview__delimeter banner-preview__delimeter banner-preview__delimeter_two">
+                                    <img src="static/img/content/banner/delimeter.png" alt="" role="presentation" />
+                                </div>
+                                <div class="banner-preview__part-time">
+                                    <p class="banner-preview__programm-title">По воскресеньям
+                                    </p>
+                                    <p class="banner-preview__programm-time">11:00
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="general-news__left-wrapper">
+                </div>
+                <div class="general-news__left general-news__left_more">
+                    <div class="more-video general-news__more-video more-video__no-border">
+                        <div class="more-video__title section-title">Из эфира
+                        </div>
+                        <div class="more-video__list">
+                            <div class="from-enter more-video__from-enter">
+                                <a class="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
+                                    <img class="from-enter__img" src="static/img/content/from-enter/from-enter.png" atl="" alt=""
+                                    role="presentation" />
+                                    <span class="from-enter__time-keeping">
+                                        <img class="from-enter__ico" src="static/img/content/video-ico/video-ico.png" alt=""
+                                        role="presentation" />
+                                        <span class="from-enter__keeping">03:40</span>
+                                    </span>
+                                </a>
+                                <div class="from-enter__info">
+                                    <a class="from-enter__link" href="javascript:void(0)">Подробности атаки на Вестминстер: кем был лондонский террорист?</a>
+                                    <p class="from-enter__category">Новости
+                                        <span class="from-enter__time-add">2 часа назад</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="from-enter more-video__from-enter">
+                                <a class="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
+                                    <img class="from-enter__img" src="static/img/content/from-enter/ny.png" atl="" alt="" role="presentation"
+                                    />
+                                    <span class="from-enter__time-keeping">
+                                        <img class="from-enter__ico" src="static/img/content/video-ico/video-ico.png" alt=""
+                                        role="presentation" />
+                                        <span class="from-enter__keeping">03:40</span>
+                                    </span>
+                                </a>
+                                <div class="from-enter__info">
+                                    <a class="from-enter__link" href="javascript:void(0)">Почему бездомных в Нью-Йорке селят в отелях, и кто за это платит?</a>
+                                    <p class="from-enter__category">Тайм код
+                                        <span class="from-enter__time-add">2 часа назад</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="from-enter more-video__from-enter">
+                                <a class="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
+                                    <img class="from-enter__img" src="static/img/content/from-enter/euro.png" atl="" alt="" role="presentation"
+                                    />
+                                    <span class="from-enter__time-keeping">
+                                        <img class="from-enter__ico" src="static/img/content/video-ico/video-ico.png" alt=""
+                                        role="presentation" />
+                                        <span class="from-enter__keeping">03:40</span>
+                                    </span>
+                                </a>
+                                <div class="from-enter__info">
+                                    <a class="from-enter__link" href="javascript:void(0)">Конкурс политической песни: может ли Киев отказать во въезде Юлии Самойловой?</a>
+                                    <p class="from-enter__category">Русский акцент
+                                        <span class="from-enter__time-add">2 часа назад</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="general-news__right">
+                <div class="general-news__right general-news__right_more">
+                    <div class="list-video general-news__list-video">
+                        <div class="list-video__item">
+                            <img class="list-video__ico-play" src="static/img/content/video-ico/video-ico-blue.png" alt="" role="presentation"
+                            />
+                            <div class="list-video__info">
+                                <a class="list-video__title" href="javascript:void(0)">Овечкина и Малкина не пустили на Олимпиаду</a>
+                                <p class="list-video__category">Тайм код
+                                    <span class="list-video__time-add">25 марта</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="list-video__item">
+                            <img class="list-video__ico-play" src="static/img/content/video-ico/video-ico-blue.png" alt="" role="presentation"
+                            />
+                            <div class="list-video__info">
+                                <a class="list-video__title" href="javascript:void(0)">В гибели Ту-154 обвинили диспетчеров</a>
+                                <p class="list-video__category">Название передачи
+                                    <span class="list-video__time-add">20 марта</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="list-video__item">
+                            <img class="list-video__ico-play" src="static/img/content/video-ico/video-ico-blue.png" alt="" role="presentation"
+                            />
+                            <div class="list-video__info">
+                                <a class="list-video__title" href="javascript:void(0)">МВФ одобрил выделение $1 млрд для Украины</a>
+                                <p class="list-video__category">Название
+                                    <span class="list-video__time-add">20 марта</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
