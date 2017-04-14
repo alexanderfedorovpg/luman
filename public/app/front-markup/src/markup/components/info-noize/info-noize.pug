@@ -1,0 +1,12 @@
+include ../mini-news/mini-news
+
+mixin info-noize(data)
+    - params = data
+    +b.info-noize()&attributes(attributes)
+        block
+        +e.P.title.section-title Инфошум
+        +e.wrapper
+            each item in params
+                +mini-news(item)(class="info-noize__mini-news")
+
+

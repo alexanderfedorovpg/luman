@@ -1,0 +1,13 @@
+mixin general-video(data)
+    +b.general-video()&attributes(attributes)
+        block
+        +e.A(href=jv0).link
+        +e.IMG(src="%=static=%img/content/general-video/general-video.jpg" alt="").img
+        +e.info
+            +e.date.general-video__date_position
+                +e.IMG(src="%=static=%img/content/video-ico/video-ico.png").ico
+                +e.SPAN.span 27 марта
+            +e.title Все ключевые события этого дня
+            +e.logo
+                +e.SPAN.logo-title Today
+                +e.IMG(src="%=static=%img/content/rtvi/purple-rtvi.png" alt="").logo

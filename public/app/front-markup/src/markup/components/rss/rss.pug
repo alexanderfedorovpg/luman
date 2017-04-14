@@ -3,4 +3,4 @@ mixin rss(data)
         block
         +e.A(href=jv0).link
             +e.SPAN.text.rss__float_left RSS
-            +e.IMG(src="%=static=%img/general/rss/rss.png").img.rss__float_right
+            != pugHelpers.Icon.call(locals, {iconName: 'rss', className: 'rss__img rss__float_right', iconWidth: '0', iconHeight: '0'})

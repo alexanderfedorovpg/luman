@@ -1,0 +1,9 @@
+
+mixin more-video(data)
+    - params = data
+    +b.more-video()&attributes(attributes)
+        block
+        +e.title.section-title Из эфира
+        +e.list
+            each item in params
+                +from-enter(item)(class="more-video__from-enter")

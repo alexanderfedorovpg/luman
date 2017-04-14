@@ -12,7 +12,14 @@
         float: left;
     }
 
+    &__img {
+        width: rem(14);
+        height: rem(14);
+    }
+
     &__float_right {
         float: right;
+        margin-top: rem(3);
+        margin-right: rem(6);
     }
 }

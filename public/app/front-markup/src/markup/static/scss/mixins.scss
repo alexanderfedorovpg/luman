@@ -185,3 +185,13 @@
     margin-left: $param;
     margin-right: $param;
 }
+
+@mixin padding_y($param) {
+    padding-top: $param;
+    padding-bottom: $param;
+}
+
+@mixin padding_x($param) {
+    padding-left: $param;
+    padding-right: $param;
+}

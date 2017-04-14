@@ -5,7 +5,8 @@ mixin now(data)
     +b.now()&attributes(attributes)
         block
         +e.P.title.section-title Сейчас
-        each item in items
+        +e.news
+            each item in items
 
-            +mini-news(item)(class="now__mini-news")
+                +mini-news(item)(class="now__mini-news")
 

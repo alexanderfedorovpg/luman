@@ -1,0 +1,12 @@
+mixin list-video(data)
+    - params = data
+    +b.list-video()&attributes(attributes)
+        block
+        each item in params
+            +e.item
+                +e.IMG(src=item.img alt="").ico-play
+                +e.info
+                    +e.A(href=jv0).title #{item.title}
+                    +e.P.category #{item.category}
+                        = ' '
+                        +e.SPAN.time-add #{item.time_add}

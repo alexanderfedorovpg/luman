@@ -1,8 +1,54 @@
 .mini-news {
+    position: relative;
+
+    padding-top: rem(15);
+    padding-bottom: rem(11);
+    overflow: hidden;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $gray;
+    }
+
+    &__info {
+        position: relative;
+        z-index: 1;
+
+        transition: all .5s ease-in-out;
+    }
+
+    &__img {
+        position: absolute;
+        z-index: 0;
+        top: 50%;
+        left: 50%;
+
+        display: block;
+        width: auto;
+        min-width: 100%;
+        height: auto;
+        min-height: 100%;
+
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+
+        transition: all .5s ease-in-out;
+    }
 
     &__title {
-        font: #{rem(18)}/#{rem(24)} $stemBold;
-        text-decoration: none;
+        font: #{rem(18)}/#{rem(22)} $stemBold;
         color: $dark;
+        text-decoration: none;
+
+        transition: color .5s ease-in-out;
+    }
+
+
+    &__date {
+        margin-top: rem(3);
+
+        font-size: rem(12);
+        line-height: rem(24);
+        color: $gray-date;
     }
 }

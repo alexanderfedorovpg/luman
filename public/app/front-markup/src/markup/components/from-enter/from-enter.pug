@@ -1,0 +1,15 @@
+mixin from-enter(data)
+    - params = data
+    +b.from-enter()&attributes(attributes)
+        block
+        +e.A(href=jv0).link.from-enter__link_position
+            +e.IMG(src=params.img atl=params.alt).img
+            +e.time-keeping
+                +e.IMG(src=params.time_keeping_img alt="").ico
+                +e.keeping #{params.time_keeping}
+        +e.info
+            +e.A(href=jv0).link #{params.title}
+            +e.P.category #{params.category}
+                = ' '
+                +e.SPAN.time-add #{params.time_add}
+

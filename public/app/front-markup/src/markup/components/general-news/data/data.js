@@ -1,1 +1,1 @@
-var data = {general-news: {}}
+var data = {general_news: {}}

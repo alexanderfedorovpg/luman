@@ -1,0 +1,17 @@
+.per-day {
+
+    &__title {
+        border-bottom: none;
+        line-height: rem(32);
+    }
+
+    &__wrapper {
+       display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__wrapper_margin {
+        margin-top: rem(17);
+    }
+}

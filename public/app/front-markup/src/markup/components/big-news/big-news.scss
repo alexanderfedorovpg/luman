@@ -7,6 +7,7 @@
         content: '';
 
         position: absolute;
+        z-index: 0;
         top: 0;
         left: 0;
 
@@ -17,11 +18,29 @@
         background-image: linear-gradient(to bottom, rgba(0, 0, 0, .21), rgba(0, 0, 0, .53));
     }
 
+    &__link {
+        content: '';
+
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+
+        display: block;
+        width: rem(617);
+        height: rem(505);
+
+        color: transparent;
+        text-decoration: none;
+    }
+
     &__info {
         position: absolute;
         top: 0;
         left: 0;
 
+        width: rem(617);
+        height: rem(486);
         padding-top: rem(235);
         padding-right: rem(113);
         padding-left: rem(20);
@@ -56,7 +75,9 @@
     }
 
     &__description {
+        width: rem(548);
         padding-top: rem(12);
+        padding-right: rem(76);
         padding-bottom: rem(11);
         padding-left: rem(20);
         margin-left: rem(-20);
@@ -71,5 +92,28 @@
 
     &__position_margin {
         margin-top: rem(23);
+    }
+
+    &__logo {
+        position: absolute;
+        z-index: 0;
+        right: 0;
+        bottom: 0;
+
+        display: inline-block;
+        width: rem(146);
+        height: rem(83);
+    }
+
+    &__logo-title {
+        position: absolute;
+        z-index: 1;
+        top: rem(8);
+        left: rem(14);
+
+        font-size: rem(16);
+        line-height: rem(18);
+        color: $white;
+        text-transform: uppercase;
     }
 }
