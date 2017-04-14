@@ -121,12 +121,16 @@ class Permission extends Command
                 'description' => 'Удаление пользователя',
             ],
             [
-                'name' => 'v1.user-view',
+                'name' => 'v1.user-show',
                 'description' => 'Просмотор пользователя',
             ],
             [
                 'name' => 'v1.user-profile',
                 'description' => 'Профиль текущего пользователя',
+            ],
+            [
+                'name' => 'v1.user-index',
+                'description' => 'Просмотор списка пользователей',
             ],
         ];
     }
@@ -225,6 +229,37 @@ class Permission extends Command
             [
                 'name' => 'v1.newslisteditor-getOne',
                 'description' => 'Просмотр новости',
+            ],
+        ];
+    }
+
+    /**
+     * Доступы для контроллера \App\Controllers\v1\RubricsController
+     *
+     * @return array
+     */
+    public function permissRubrics()
+    {
+        return [
+            [
+                'name' => 'v1.rubrics-create',
+                'description' => 'Создание рубрики',
+            ],
+            [
+                'name' => 'v1.rubrics-index',
+                'description' => 'Просмотор всех рубрик',
+            ],
+            [
+                'name' => 'v1.rubrics-show',
+                'description' => 'Просмотр рубрики',
+            ],
+            [
+                'name' => 'v1.rubrics-update',
+                'description' => 'Редактирование рубрики',
+            ],
+            [
+                'name' => 'v1.rubrics-destroy',
+                'description' => 'Удаление рубрики',
             ],
         ];
     }
