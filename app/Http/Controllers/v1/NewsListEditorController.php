@@ -77,7 +77,7 @@ class NewsListEditorController extends CmsController
             $news = $news->get();
 
             if ($news->isEmpty()) {
-                return $this->respondNotFound();
+                return $this->respond([]);
             }
 
             $news = $news->toArray();
@@ -125,11 +125,12 @@ class NewsListEditorController extends CmsController
         $data = $this->newsListTransformer->transformOneNews($newsArray, $comments);
 
 
-        if($this->getArray){
-            return $data;
-        } else {
-            return $this->respond($data);
-        }
+//        if($this->getArray){
+//            return $data;
+//        } else {
+//            return $this->respond($data);
+//        }
+        return $this->respond($data);
     }
 
     /**

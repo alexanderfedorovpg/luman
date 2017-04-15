@@ -4006,7 +4006,7 @@ h3 {
 }
 
 .live-list__item:hover, .live-list__item_active {
-  border-bottom: none;
+  border-bottom: 1px solid transparent;
   background-color: #f3f3f3;
 }
 
@@ -4258,6 +4258,24 @@ h3 {
   margin-right: .6rem;
 }
 
+.live-item .checkbox input[type=checkbox] + label:hover,
+.live-item .checkbox input[type=checkbox].active + label {
+  color: #767676;
+}
+
+.live-item .checkbox input[type=checkbox].active + label:before,
+.live-item .checkbox input[type=checkbox] + label:hover:before {
+  background-position: -175px -159px;
+}
+
+.live-item .checkbox input[type="checkbox"]:checked + label {
+  color: #333;
+}
+
+.live-item .checkbox input[type="checkbox"]:checked + label:before {
+  background-position: -201px -152px;
+}
+
 .live-item .btn {
   height: 2.6rem;
   margin-top: 1.2rem;
@@ -4451,6 +4469,7 @@ h3 {
 
 .profile-history__row:hover {
   background-color: #f0f0f0;
+  cursor: pointer;
 }
 
 .profile-history__row_title {

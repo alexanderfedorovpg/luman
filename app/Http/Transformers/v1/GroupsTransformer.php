@@ -5,6 +5,7 @@ namespace App\Http\Transformers\v1;
 use App\HasGroups;
 use App\User;
 use App\Http\Transformers\Transformer;
+use App\CdnFile;
 
 /**
  * Class GroupsTransformer
@@ -34,8 +35,23 @@ class GroupsTransformer extends Transformer
         $hasGroup=HasGroups::where('group_id', '=',$group['id'])->get(['user_id'])->toArray();
 
         if ($hasGroup) {
-            $transform = User::find(array_pluck($hasGroup,'user_id'))->toArray();
+            $users = User::find(array_pluck($hasGroup,'user_id'))->all();
+            $transform = [];
+            foreach ($users as $user) {
+                $transform[] = $this->transformUser($user);
+            }
         }
+
+        return $transform;
+    }
+
+    public function transformUser($user)
+    {
+        $transform = $user->toArray();
+
+        unset($transform['avatar_id']);
+        $avatar = CdnFile::where('id', '=', $user->avatar_id)->get(['url'])->first();
+        $transform['avatar_url'] = $avatar ? $avatar->url : null;
 
         return $transform;
     }
