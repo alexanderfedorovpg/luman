@@ -1,0 +1,8 @@
+.copyright {
+
+    &__text {
+        font-size: rem(11);
+        line-height: rem(17);
+        color: fade-out($copyright, .38);
+    }
+}

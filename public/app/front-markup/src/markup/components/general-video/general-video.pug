@@ -1,8 +1,9 @@
 mixin general-video(data)
     +b.general-video()&attributes(attributes)
+        - img = data
         block
         +e.A(href=jv0).link
-        +e.IMG(src="%=static=%img/content/general-video/general-video.jpg" alt="").img
+        +e.IMG(src=img alt="").img
         +e.info
             +e.date.general-video__date_position
                 +e.IMG(src="%=static=%img/content/video-ico/video-ico.png").ico

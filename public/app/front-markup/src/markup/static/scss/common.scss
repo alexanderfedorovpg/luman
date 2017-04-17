@@ -16,13 +16,20 @@ html, body {
 }
 
 body {
-    font-family: $stemReg;
-    font-size: rem(14);
+    font: #{rem(14)}/ #{rem(21)} $stemReg;
 }
 
 html {
     font-size: 1vw;
 }
+
+h1 {
+    font: #{rem(36)}/ #{rem(48)} $stemBold;
+    letter-spacing: rem(-.9);
+    color: $enter;
+}
+
+
 
 main {
     margin-top: 1px;
@@ -66,4 +73,20 @@ main {
         border-top: rem(11) solid $purple;
         border-left: rem(20) solid transparent;
     }
+}
+
+.left-col {
+    width: rem(865);
+
+    &_position_relative {
+        position: relative;
+    }
+}
+
+.middle-col {
+    width: 100%;
+}
+
+.right-col {
+    width: rem(300);
 }

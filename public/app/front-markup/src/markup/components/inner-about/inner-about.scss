@@ -1,0 +1,49 @@
+.inner-about {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-between;
+        margin-bottom: rem(41);
+    }
+
+    &__general-video {
+        height: rem(396);
+
+        &::before,
+        .general-video__img,
+        .general-video__link {
+            height: rem(396);
+        }
+    }
+
+    &__info-noize,
+    &__enter-one {
+        margin-top: rem(24);
+    }
+
+    &__text-bg-gray {
+        position: relative;
+
+        margin-top: rem(20);
+
+        transform: translateX(-17%);
+    }
+
+    &__left {
+        margin-top: rem(-15);
+    }
+
+    &__content {
+        padding-left: rem(82);
+        margin-top: rem(93);
+        color: $enter;
+
+        p {
+            margin-bottom: rem(21);
+        }
+    }
+}
+
