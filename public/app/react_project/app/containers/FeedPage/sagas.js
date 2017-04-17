@@ -77,5 +77,5 @@ export function* toWork() {
 export default [
     feedData,
     hideData,
-    toWork,
-];
+    toWork
+]

@@ -55,6 +55,16 @@ class News extends Model
     }
 
     /**
+     * Возвращает редактора статьи
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function editor()
+    {
+        return $this->hasOne(User::class, 'id', 'editor_id');
+    }
+
+    /**
      * Фильтрация по наличию подстроки в заголовке или тегах
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

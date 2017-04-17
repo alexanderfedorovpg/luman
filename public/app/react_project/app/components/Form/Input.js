@@ -1,10 +1,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import Icon, { icons } from './../Icon'
+import Icon, { icons } from 'components/Icon'
 
-import { ifProp, rem } from './../../utils/style'
-import { color, height, font } from './../../constants/style'
+import { ifProp, rem } from 'utils/style'
+import { color, height, font } from 'constants/style'
 
 const Input = styled.input`
     display: inline-block;

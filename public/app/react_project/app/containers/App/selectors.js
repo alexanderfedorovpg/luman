@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import { List } from 'immutable'
 
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
@@ -32,7 +33,47 @@ const selectEditors = createSelector(
         .map(value => (value && value.toJS) ? value.toJS() : value)
 )
 
+const selectUsersMap = createSelector(
+    selectAppDomain,
+    usersMap,
+    (app, users) => app.getIn(['users', 'data']).toJS()
+)
+
+const selectUsers = createSelector(
+    selectAppDomain,
+    usersMap,
+    (app, users) => app.getIn(['users', 'data']).toJS()
+)
+
+const selectCurrentUser = createSelector(
+    selectAppDomain,
+    usersMap,
+    (app, users) => {
+        const user = app.getIn(['current', 'data'])
+
+        if (user && user.toJS)
+            return user.toJS()
+
+        return user
+    }
+)
+
+const selectRubrics = createSelector(
+    selectAppDomain,
+    app => app.getIn(['rubrics', 'data']).toJS()
+)
+
+const selectMenuExpandedStatus = createSelector(
+    selectAppDomain,
+    app => app.get('menuOpen')
+)
+
 export {
     selectEditors,
+    selectUsers,
+    selectCurrentUser,
+    selectUsersMap,
+    selectRubrics,
     makeSelectLocationState,
+    selectMenuExpandedStatus
 }

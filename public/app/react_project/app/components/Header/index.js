@@ -94,8 +94,6 @@ export const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    flex-basis: 40.383%;
-    width: 40.383%;
     padding-left: 2px;
 `
 
@@ -157,7 +155,7 @@ const CustomUserName = styled(UserName)`
     color: #fff;
 `
 
-function Header({ moved, onToggle, isActive, onLogout }) {
+function Header({ moved, onToggle, isActive, onLogout, user }) {
 
     return (
         <Wrapper moved={moved}>
@@ -183,9 +181,9 @@ function Header({ moved, onToggle, isActive, onLogout }) {
                                 Аналитика
                             </NavItem>
                         </nav>
-                        <CustomUser data={{ pic: '/img/user.png' }}>
+                        <CustomUser data={user}>
                             <CustomUserName href="#">
-                                Поликарпов Анатолий
+                                {user.name}
                             </CustomUserName>
                         </CustomUser>
                         <Logout onClick={onLogout}>

@@ -5,8 +5,8 @@ import randomString from 'random-string'
 
 import Item from './Item'
 import Detail from './Detail'
-import Modal from '../Modal'
-import Paginator from '../Paginator'
+import Modal from 'components/Modal'
+import Paginator from 'components/Paginator'
 
 const animationClassName = randomString()
 

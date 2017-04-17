@@ -26,6 +26,24 @@
         margin-right: .6rem;
     }
 
+    .checkbox input[type=checkbox]+label:hover,
+    .checkbox input[type=checkbox].active+label {
+        color: #767676;
+    }
+
+    .checkbox input[type=checkbox].active+label:before,
+    .checkbox input[type=checkbox]+label:hover:before {
+        background-position: -175px -159px;
+    }
+
+    .checkbox input[type="checkbox"]:checked + label {
+        color: #333;
+    }
+
+    .checkbox input[type="checkbox"]:checked + label:before {
+        background-position: -201px -152px;
+    }
+
     .btn {
         height: 2.6rem;
         margin-top: 1.2rem;

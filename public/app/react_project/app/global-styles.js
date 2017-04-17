@@ -42,4 +42,8 @@ injectGlobal`
         display: inline-block;
         vertical-align: middle;
     }
+
+    .ReactModal__Body--open {
+        overflow: hidden
+    }
 `;

@@ -57,18 +57,10 @@ export const feedToWork = data => {
     formData.append('tags', tags)
     formData.append('keywords', keywords)
     formData.append('editor_id', editor)
-    // formData.append('online_editor_id', online_editor)
-    // formData.append('video_group', video_group)
+    formData.append('online_editor_id', online_editor)
+    formData.append('video_group', video_group)
     formData.append('top', rating)
     formData.append('header', header)
-
-    // formData.append('action', 'work')
-    // formData.append('id', '37')
-    // formData.append('tags', ['asdf', 'asf'])
-    // formData.append('keywords', ['asdf', 'asf'])
-    // formData.append('editor_id', '2')
-    // formData.append('top', '1')
-    // formData.append('header', 'asdfsfsadf')
 
     return axios.post(`${baseUrl}/newsfeed/work`, formData, {
         headers: {
@@ -83,6 +75,10 @@ export const getUser = (id, params) => {
     })
 }
 
+export const getCurrentUser = () => {
+    return axios.get(`${baseUrl}/userprofile`)
+}
+
 export const getUsersInGroup = group_id => {
     return axios.get(`${baseUrl}/group/${group_id}/users`)
 }
@@ -91,8 +87,73 @@ export const getGroup = id => {
     return axios.get(`${baseUrl}/group${id ? `/${id}` : ''}`)
 }
 
-export const getPermissions = () => {
-    return axios.get(`${baseUrl}/permission`)
+export const getLinks = query => {
+    return axios.get(`${baseUrl}/reference/search`, {
+        params: {
+            query: query
+        }
+    })
+}
+
+export const getNewslist = () => {
+    return axios.get(`${baseUrl}/newslisteditor`)
+}
+
+export const getTags = () => {
+    return axios.get(`${baseUrl}/tags`)
+}
+
+export const getRubrics = () => {
+    return axios.get(`${baseUrl}/rubrics`)
+}
+
+export const getArticle = id => {
+    return axios.get(`${baseUrl}/newseditor/${id}`)
+}
+
+export const rejectArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/rejection`, {
+        id
+    })
+}
+
+export const acceptArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/work`, {
+        id
+    })
+}
+
+export const publishArticle = () => {
+    return axios.post(`${baseUrl}/`)
+}
+
+export const getChatMessages = room => {
+    return axios.get(`${baseUrl}/newschat/${room}`)
+}
+
+export const postChatMessage = (room, { message, files }) => {
+    let formData = new FormData()
+
+    formData.append('message', message)
+    formData.append('files', files)
+
+    return axios.post(`${baseUrl}/newschat/${room}`, formData, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
+
+export const uploadFile = file => {
+    let formData = new FormData()
+
+    formData.append('file', file)
+
+    return axios.post(`${baseUrl}/file`, formData, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
 }
 
 export default axios

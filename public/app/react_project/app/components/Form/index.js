@@ -39,6 +39,10 @@ export const Label = styled.label`
 
     letter-spacing: -0.1px;
 
+    span {
+        color: #333333;
+    }
+
     ${ifProp('bold')(css`
         color: #333333;
         font-family: ${font.opensans};
@@ -50,7 +54,7 @@ export const Label = styled.label`
     ${ifProp('light')(css`
         color: #999999;
         font-family: ${font.opensans};
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 400;
     `)}
 

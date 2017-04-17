@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Icon from '../Icon'
-import Button from '../Button'
+import Icon from 'components/Icon'
+import Button from 'components/Button'
 import Gallery from './Gallery'
-import Tags from '../Tags/Static'
+import Tags from 'components/Tags/Static'
 import gradient from './img/text-opacity.png'
 
 import {
@@ -13,9 +13,9 @@ import {
     Horizontal,
     Input,
     Checkbox
-} from './../Form'
+} from 'components/Form'
 
-import { padding, font } from '../../constants/style'
+import { padding, font } from 'constants/style'
 
 const Root = styled.div`
     max-width: 749px;
@@ -107,7 +107,8 @@ let dataGallery = [
     '/img/help5.png'
 ]
 
-function Help({ onClose }) {
+function Help({ onClose, getPage, getLinks }) {
+
     return (
         <Root>
             <Header>
@@ -117,38 +118,30 @@ function Help({ onClose }) {
                 </Link>
                 <Icon type="delete-lg" onClick={onClose} />
             </Header>
-            <form>
+            <form onSubmit={submitHandler(getLinks)}>
                 <Group>
-                    <CustomTextarea light block defaultValue="Министр иностранных дел Великобритании Борис Джонсон" />
-                </Group>
-                <Group horizontal>
-                    <CustomCheckbox name="info">
-                        Информация
-                    </CustomCheckbox>
-                    <CustomCheckbox name="photo">
-                        Фото
-                    </CustomCheckbox>
-                    <CustomCheckbox name="video">
-                        Видео
-                    </CustomCheckbox>
+                    <CustomTextarea
+                        name="query"
+                        placeholder="Поисковый запрос"
+                        light block />
                 </Group>
                 <Group>
                     <Button block success>Поиск</Button>
                 </Group>
-                <Group>
-                    <CustomGallery data={dataGallery} />
-                </Group>
-                <Group>
-                    <Text>
-                        Министр иностранных дел и по делам Содружества Наций (англ. Her Majesty's Principal Secretary of State for Foreign and Commonwealth Affairs, точный перевод Её Величества Главный Государственный Секретарь по иностранным и Содружества Наций делам), обычно упоминается как министр иностранных дел, является членом Правительства Её Величества, возглавляя министерство иностранных дел и по делам Содружества Наций, является ответственным за отношения с иностранными государствами, за вопросы, имеющие отношение к Содружеству Наций и заморским территориям Великобритании, а также за продвижение британских интересов за границей...
-                    </Text>
-                </Group>
-                <Group>
-                    <Tags data={dataTags} />
-                </Group>
             </form>
         </Root>
     )
+}
+
+function submitHandler(cb) {
+    return e => {
+        e.preventDefault()
+
+        if (e.target.query.value) {
+
+            cb(e.target.query.value)
+        }
+    }
 }
 
 export default Help
