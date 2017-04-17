@@ -2,11 +2,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router'
 
-import Icon from '../Icon'
-import Badge from '../Badge'
+import Icon from 'components/Icon'
+import Badge from 'components/Badge'
 
-import { ifProp } from './../../utils/style'
-import { padding, font } from './../../constants/style'
+import { ifProp } from 'utils/style'
+import { padding, font } from 'constants/style'
 
 const Wrapper = styled.nav`
     position: fixed;
@@ -84,7 +84,7 @@ const NavBadge = styled(Badge)`
     `)}
 `
 
-function NavSide({ expanded, isActive }) {
+function NavSide({ expanded, isActive, location }) {
 
     return (
         <Wrapper expanded={expanded} onClick={e => e.stopPropagation()}>
@@ -101,14 +101,14 @@ function NavSide({ expanded, isActive }) {
                     Лента
                 </Name>
             </NavItem>
-            <NavItem to="#" expanded={expanded}>
-                <Icon type="view" active={isActive('/randomurl')} />
+            <NavItem to="/editor" expanded={expanded}>
+                <Icon type="view" active={isActive('/editor')} />
                 <Name expanded={expanded}>
                     Задания
                 </Name>
             </NavItem>
-            <NavItem to="#" expanded={expanded}>
-                <Icon type="draft" active={isActive('/randomurl')} />
+            <NavItem to="/newslist" expanded={expanded}>
+                <Icon type="draft" active={isActive('/newslist')} />
                 <Name expanded={expanded}>
                     В работе
                 </Name>

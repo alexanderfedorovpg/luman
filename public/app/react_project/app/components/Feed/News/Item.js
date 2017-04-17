@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import Tooltip from 'react-aria-tooltip'
 import randomString from 'random-string'
 
-import Icon from './../Icon'
+import Icon from 'components/Icon'
 
-import { font, padding } from './../../constants/style'
+import { font, padding } from 'constants/style'
 
 const titleClassName = randomString()
 

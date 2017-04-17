@@ -17,44 +17,39 @@ export default function createRoutes(store) {
     const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
     return [
-        // {
-        //     path: '/login',
-        //     name: 'login',
-        //     getComponent(nextState, cb) {
-        //         const importModules = Promise.all([
-        //             import('containers/LoginPage/sagas'),
-        //             import('containers/LoginPage'),
-        //         ]);
-
-        //         const renderRoute = loadModule(cb);
-
-        //         importModules.then(([sagas, component]) => {
-        //             injectSagas(sagas.default);
-
-        //             renderRoute(component);
-        //         });
-
-        //         importModules.catch(errorLoading);
-        //     },
-        // },
         {
             path: '/feed',
             name: 'feed',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
+                    import('containers/Help/reducer'),
+                    import('containers/Help/sagas'),
+
+                    import('containers/FeedPage/reducer'),
                     import('containers/FeedPage/sagas'),
                     import('containers/FeedPage'),
-                ]);
+                ])
 
-                const renderRoute = loadModule(cb);
+                const renderRoute = loadModule(cb)
 
-                importModules.then(([sagas, component]) => {
-                    injectSagas(sagas.default);
+                importModules.then(results => {
+                    let [
+                        helpReducer,
+                        helpSagas,
+                        reducer,
+                        sagas,
+                        component
+                    ] = results
 
-                    renderRoute(component);
+                    injectReducer('help', helpReducer.default)
+                    injectReducer('feedPage', reducer.default)
+                    injectSagas(sagas.default)
+                    injectSagas(helpSagas.default)
+
+                    renderRoute(component)
                 });
 
-                importModules.catch(errorLoading);
+                importModules.catch(errorLoading)
             },
         },
         {
@@ -75,21 +70,92 @@ export default function createRoutes(store) {
             },
         },
         {
-            path: '/working',
-            name: 'working',
-            getComponent(nextState, cb) {
-                const importModules = Promise.all([
-                    import('containers/WorkingPage'),
-                ]);
+            path: '/newslist',
+            name: 'newslist',
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
 
-                const renderRoute = loadModule(cb);
+                const importModules = System.import('containers/NewslistPage/sagas');
 
-                importModules.then(([component]) => {
-                    renderRoute(component);
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
                 });
 
                 importModules.catch(errorLoading);
             },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/NewslistPage/reducer'),
+                    import('containers/NewslistPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([reducer, component]) => {
+                    injectReducer('newslistPage', reducer.default)
+
+                    renderRoute(component)
+                });
+
+                importModules.catch(errorLoading);
+            },
+        },
+        {
+            path: '/editor',
+            name: 'editor',
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/EditorPage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/EditorPage/reducer'),
+                    import('containers/EditorPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([reducer, component]) => {
+                    injectReducer('editorPage', reducer.default)
+
+                    renderRoute(component)
+                });
+
+                importModules.catch(errorLoading);
+            },
+            childRoutes: [
+                {
+                    path: '/editor/:id',
+                    name: 'editor-old'
+                }
+            ]
         },
         {
             path: '*',

@@ -13,7 +13,8 @@ export const DEFAULT_LOCALE = 'ru';
 
 export const groups = {
     'admin': 1,
-    'editor': 2
+    'editor': 2,
+    'сommissioning-editor': 3
 }
 
 export const TOGGLE_MENU = 'app/TOGGLE_MENU'
@@ -22,3 +23,15 @@ export const CLOSE_MENU = 'app/CLOSE_MENU'
 export const LOAD_EDITORS = 'app/LOAD_EDITORS'
 export const LOAD_EDITORS_SUCCESS = 'app/LOAD_EDITORS_SUCCESS'
 export const LOAD_EDITORS_FAILURE = 'app/LOAD_EDITORS_FAILURE'
+
+export const LOAD_USERS = 'app/LOAD_USERS'
+export const LOAD_USERS_SUCCESS = 'app/LOAD_USERS_SUCCESS'
+export const LOAD_USERS_FAILURE = 'app/LOAD_USERS_FAILURE'
+
+export const LOAD_CURRENT_USER = 'app/LOAD_CURRENT_USER'
+export const LOAD_CURRENT_USER_SUCCESS = 'app/LOAD_CURRENT_USER_SUCCESS'
+export const LOAD_CURRENT_USER_FAILURE = 'app/LOAD_CURRENT_USER_FAILURE'
+
+export const LOAD_RUBRICS = 'app/LOAD_RUBRICS'
+export const LOAD_RUBRICS_SUCCESS = 'app/LOAD_RUBRICS_SUCCESS'
+export const LOAD_RUBRICS_FAILURE = 'app/LOAD_RUBRICS_FAILURE'

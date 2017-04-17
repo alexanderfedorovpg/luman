@@ -42,11 +42,8 @@ const Button = styled.button`
         }
     `)}
 
-    .icon {
+    i, svg {
         margin-top: -3px;
-    }
-
-    i.icon {
         margin-right: 6px;
     }
 
