@@ -22,6 +22,7 @@
 				'notification' => array(
 					'title' => $message['title'],
 					'body'  => $message['body'],
+					'data'  => $message['data']
 				)
 			);
 			$fields = json_encode( $fields );
@@ -59,11 +60,14 @@
 			$news = News::whereId( $id )->first();
 
 
-			$tokens = DB::table( 'client_device_push_id' )->pluck( 'guid' )->toArray();
+			$tokens =  Device::pluck( 'guid' )->toArray();
 
 			$message = array(
 				'title' => $news->title,
-				'body'  => $news->title
+				'body'  => $news->body,
+				'data'  => array(
+						'news/id'=>$id
+			)
 			);
 
 			$fcmRespond = $this->sendFCM( $message, $tokens );
