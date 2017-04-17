@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\v1;
 
-use App\Http\Controllers\v1\NewsListController,
-    Illuminate\Support\Facades\Auth,
+use Illuminate\Support\Facades\Auth,
     Illuminate\Http\Request,
-    App\Http\Controllers\ApiController,
     App\News,
     App\NewsCommentsEditor,
     App\Http\Traits\NewsListTrait,
-    App\Helpers\LogController;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+    App\Helpers\LogController,
+    App\Http\Transformers\v1\NewsEditorTransformer,
+    Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 /**
@@ -23,22 +22,22 @@ class NewsListEditorController extends CmsController
     use NewsListTrait;
 
     /**
-     * @var \App\Http\Transformers\v1\Client\NewsListTransformer
+     * @var \App\Http\Transformers\v1\NewsEditorTransformer
      */
-    protected $newsListTransformer;
+    protected $newsEditorTransformer;
     protected $log;
     private $user_id;
 
     /**
      * NewsListController constructor.
-     * @param \App\Http\Transformers\v1\NewsListTransformer $newsListTransformer
+     * @param \App\Http\Transformers\v1\NewsEditorTransformer $newsEditorTransformer
      */
-    public function __construct(\App\Http\Transformers\v1\NewsListTransformer $newsListTransformer)
+    public function __construct(NewsEditorTransformer $newsEditorTransformer)
     {
         parent::__construct();
         $this->user_id = Auth::id();
         $this->log = new LogController();
-        $this->newsListTransformer = $newsListTransformer;
+        $this->newsEditorTransformer = $newsEditorTransformer;
     }
 
     /**
@@ -80,23 +79,8 @@ class NewsListEditorController extends CmsController
                 return $this->respond([]);
             }
 
-            $news = $news->toArray();
-
-
-            $newsList = [];
-
-            foreach ($news as $item) {
-
-                $comments = NewsCommentsEditor::PublishedLostComment($item['id']);
-                $comments = $comments->get();
-                $comments = $comments->toArray();
-
-                if(!empty($comments)) {
-                    $item["lostComment"] = $comments[0];
-                }
-
-                $newsList[] = $item;
-            }
+            $newsList = $this->newsEditorTransformer
+                ->transformCollection($news->toArray());
 
             return $this->respond($newsList);
          } catch (\Exception $e) {
@@ -122,7 +106,7 @@ class NewsListEditorController extends CmsController
         $comments = $news->comments()->published()->get();
 
 
-        $data = $this->newsListTransformer->transformOneNews($newsArray, $comments);
+        $data = $this->newsEditorTransformer->transformOneNews($newsArray, $comments);
 
 
 //        if($this->getArray){

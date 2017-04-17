@@ -1,0 +1,47 @@
+.popup-message {
+
+    position: relative;
+
+    max-width: 536px;
+    padding: 35px 22px 29px 26px;
+
+    background: #fff;
+
+    .user {
+        margin-bottom: 22px;
+    }
+
+    .icon-delete-lg {
+        position: absolute;
+        top: 21px;
+        right: 24px;
+    }
+
+    .input {
+        padding-left: 14px;
+    }
+
+    .icon-arrowRight-light {
+        position: relative;
+        top: 1px;
+
+        margin-right: 11px;
+        margin-left: -5px;
+    }
+
+    .btn {
+        height: 34px;
+        margin-top: 24px;
+
+        line-height: 34px;
+        color: #fff;
+
+        border: 0;
+        background-color: $cl-danger;
+        .icon-arrowRight-light {
+            background-position: 0px -205px;
+            opacity: 0.33;
+        }
+    }
+
+}

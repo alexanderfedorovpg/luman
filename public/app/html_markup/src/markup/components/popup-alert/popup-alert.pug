@@ -1,0 +1,20 @@
+mixin popup-alert(data)
+    +b.popup-alert()&attributes(attributes)
+
+        h2 Внимание: удаление!
+
+        p Вы уверены, что хотите удалить пользователя Дмитрий Песков?
+
+        +e.buttons
+
+            button.btn.btn-block.btn-danger
+                i.icon.icon-delete-reverse
+                | Отменить
+
+            button.btn.btn-block.btn-success
+                i.icon.icon-arrowRight-light
+                | Подтвердить
+
+        block
+
+        a.icon.icon-delete-lg(href=jv0)
