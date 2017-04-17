@@ -74,7 +74,13 @@ function init(_, state) {
     appSagas.map(store.runSaga);
 
     store.subscribe(() => {
-        localforage.setItem('appState', store.getState().toJS())
+      let state = store.getState().toJS()
+
+      localforage.setItem('appState', {
+        app: state.app,
+        route: state.route,
+        language: state.language
+      })
     })
 
     const render = (messages) => {

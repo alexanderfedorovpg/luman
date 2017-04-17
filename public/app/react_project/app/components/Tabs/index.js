@@ -13,6 +13,7 @@ const Root = styled.div`
 const Item = styled.a`
     position: relative;
 
+    cursor: pointer;
     display: flex;
     align-items: center;
     height: 100%;
@@ -65,13 +66,23 @@ const Item = styled.a`
     `}
 `
 
-function Tabs({ data }) {
+function Tabs({ data, onClick, active }) {
+    const idle = ()=>{}
+
+    const clickHandler = value => () => {
+        if (value.title!==active)
+            (onClick||idle)(value)
+    }
+
     return (
         <Root>
-            {data.map((value, i) => {
+            {data.map(value => {
                 return (
-                    <Item href="#" key={value} active={!i}>
-                        {value}
+                    <Item
+                        key={value.title}
+                        active={value.title === active}
+                        onClick={clickHandler(value)} >
+                        {value.title}
                     </Item>
                 )
             })}

@@ -174,6 +174,66 @@ const Icon = styled.i`
         height: ${icons.summary.height}px;
     `)}
 
+    ${equalProp('type', 'text-video-lg')(css`
+        background-image: url(${icons['text-video-lg'].data});
+        width: ${icons['text-video-lg'].width}px;
+        height: ${icons['text-video-lg'].height}px;
+    `)}
+
+    ${equalProp('type', 'image')(css`
+        background-image: url(${icons['image'].data});
+        width: ${icons['image'].width}px;
+        height: ${icons['image'].height}px;
+    `)}
+
+    ${equalProp('type', 'images')(css`
+        margin-top: -3px;
+        background-image: url(${icons['images'].data});
+        width: ${icons['images'].width}px;
+        height: ${icons['images'].height}px;
+    `)}
+
+    ${equalProp('type', 'text-bold')(css`
+        background-image: url(${icons['text-bold'].data});
+        width: ${icons['text-bold'].width}px;
+        height: ${icons['text-bold'].height}px;
+
+        &:hover {
+            background-image: url(${icons['text-bold-active'].data});
+        }
+    `)}
+
+    ${equalProp('type', 'text-italic')(css`
+        background-image: url(${icons['text-italic'].data});
+        width: ${icons['text-italic'].width}px;
+        height: ${icons['text-italic'].height}px;
+
+        &:hover {
+            background-image: url(${icons['text-italic-active'].data});
+        }
+    `)}
+
+    ${equalProp('type', 'text-video')(css`
+        background-image: url(${icons['text-video'].data});
+        width: ${icons['text-video'].width}px;
+        height: ${icons['text-video'].height}px;
+
+        &:hover {
+            background-image: url(${icons['text-video-active'].data});
+        }
+    `)}
+
+    ${equalProp('type', 'orph')(css`
+        background-image: url(${icons['orph'].data});
+        width: ${icons['orph'].width}px;
+        height: ${icons['orph'].height}px;
+
+        &:hover {
+            height: ${icons['orph-active'].height}px;
+            background-image: url(${icons['orph-active'].data});
+        }
+    `)}
+
     ${props => {
         return props.active
             ? css`
@@ -192,6 +252,9 @@ const Icon = styled.i`
 const Render = props => {
 
     switch (props.type) {
+        case 'arrow-left':
+            return <SvgIcons.ArrowLeft {...props} />
+
         case 'arrow-right':
             return <SvgIcons.ArrowRight {...props} />
 
@@ -212,6 +275,9 @@ const Render = props => {
 
         case 'calendar':
             return <SvgIcons.Calendar {...props} />
+
+        case 'file':
+            return <SvgIcons.File {...props} />
 
         default:
             return <Icon {...props} />

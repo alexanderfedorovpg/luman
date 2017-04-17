@@ -69,11 +69,25 @@ const CustomButton = styled(Button)`
 `
 
 function Header() {
+    let filters = [
+        {
+            title: 'Сегодня'
+        },
+        {
+            title: 'За неделю'
+        },
+        {
+            title: 'За месяц'
+        },
+        {
+            title: 'За год'
+        }
+    ]
 
     return (
         <Root>
             <Wrapper>
-                <Tabs data={['Сегдня','За неделю','За месяц','За год']} />
+                <Tabs data={filters} />
                 <Period>
                     <Link href="#">Показать за период</Link>
                     <Date>

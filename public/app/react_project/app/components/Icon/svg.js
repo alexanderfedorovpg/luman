@@ -26,6 +26,14 @@ export const ArrowRightLight = (props) => {
     )
 }
 
+export const ArrowLeft = (props) => {
+    return (
+        <Svg {...props} xmlns="http://www.w3.org/2000/svg" width="14" height="12">
+            <path d="M5.3 11.14c.32.35.85.35 1.18 0 .17-.17.25-.39.25-.62a.89.89 0 0 0-.25-.61L3.57 6.87h8.89c.46 0 .84-.4.84-.88a.86.86 0 0 0-.84-.87h-8.9l2.92-3.04a.9.9 0 0 0 0-1.24.81.81 0 0 0-1.18 0L.95 5.38a.9.9 0 0 0 0 1.23z"/>
+        </Svg>
+    )
+}
+
 export const Hamburger = (props) => {
     return (
         <Svg {...props} xmlns="http://www.w3.org/2000/svg" width="18" height="15">
@@ -74,12 +82,22 @@ export const Calendar = (props) => {
     )
 }
 
+export const File = (props) => {
+    return (
+        <Svg {...props} xmlns="http://www.w3.org/2000/svg" width="20" height="18">
+            <path d="M4.34 18c-.9 0-1.75-.36-2.38-1.02a3.54 3.54 0 0 1 0-4.9L12.39 1.33a4.38 4.38 0 0 1 6.3 0A4.59 4.59 0 0 1 20 4.58c0 1.22-.46 2.37-1.3 3.24l-8.22 8.45a.62.62 0 0 1-.89 0 .66.66 0 0 1 0-.92L17.8 6.9a3.33 3.33 0 0 0 0-4.64 3.12 3.12 0 0 0-4.51 0L2.85 12.99a2.23 2.23 0 0 0 0 3.07c.8.82 2.19.82 2.99 0l7.01-7.2a1.08 1.08 0 0 0 0-1.49 1 1 0 0 0-1.45 0L6.61 12.3a.61.61 0 0 1-.89 0 .68.68 0 0 1 0-.92l4.79-4.92a2.24 2.24 0 0 1 3.23 0 2.38 2.38 0 0 1 0 3.33l-7.01 7.2A3.3 3.3 0 0 1 4.34 18z"/>
+        </Svg>
+    )
+}
+
 export default {
+    ArrowLeft,
     ArrowRight,
     ArrowRightLight,
     Hamburger,
     Logout,
     Search,
     Clip,
-    Calendar
+    Calendar,
+    File
 }
