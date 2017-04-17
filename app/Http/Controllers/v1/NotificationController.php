@@ -22,8 +22,9 @@
 				'notification' => array(
 					'title' => $message['title'],
 					'body'  => $message['body'],
-					'data'  => $message['data']
-				)
+
+				),
+				'data'  => $message['data']
 			);
 			$fields = json_encode( $fields );
 
