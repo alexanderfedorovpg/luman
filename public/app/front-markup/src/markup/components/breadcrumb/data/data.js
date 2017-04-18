@@ -1,4 +1,4 @@
-var data = {breadcrumbs: {
+var data = {breadcrumb: {
     newsVideo: {
         items: ['Политика', 'Россия']
     }

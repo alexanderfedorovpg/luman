@@ -5,7 +5,7 @@ include ../text-bg-gray/text-bg-gray
 include ../social-links/social-links
 include ../similar-news/similar-news
 include ../blockquote/blockquote
-include ../breadcrumbs/breadcrumbs
+include ../breadcrumb/breadcrumb
 
 mixin p-news-video(data)
     +b.inner-about.inner-video()&attributes(attributes)
@@ -13,7 +13,7 @@ mixin p-news-video(data)
         //- block
         +e.container.container
             +e.left.left-col.left-col_position_relative
-                //- +breadcrumbs(breadcrumbs.newsVideo)
+
                 h1 Навальный сообщил о проверке прокуратурой деятельности ФБК
                 +e.date 5 часов назад
 
@@ -39,7 +39,7 @@ mixin p-news-video(data)
 
                     +b.news-preview
 
-                        +breadcrumbs(breadcrumbs.newsVideo)
+                        +breadcrumb(breadcrumb.newsVideo)
 
                         +e.FIGURE.img
 
