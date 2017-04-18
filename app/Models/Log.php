@@ -1,6 +1,6 @@
 <?php
 
-	namespace App;
+	namespace App\Models;;
 
 	use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +16,8 @@
 		 *
 		 * @var array
 		 */
+		protected $table = 'logs';
+
 		protected $fillable = [
 			'id',
 			'type_event',

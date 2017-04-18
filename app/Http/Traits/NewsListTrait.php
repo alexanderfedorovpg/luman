@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Traits;
 
-use App\News;
+use App\Models\News;
 
 trait NewsListTrait {
 

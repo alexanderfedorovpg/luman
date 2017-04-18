@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\ApiController;
-use App\News;
+use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Traits\NewsListTrait;
 
@@ -96,4 +96,20 @@ class NewsListController extends CmsController
             $this->newsListTransformer->transformCollection($newsRelated)
         );
     }
+
+	/**
+	 * @param $news_id
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function checkNews( $news_id ) {
+		try {
+			News::findorfail( $news_id )->first();
+
+			return $this->respond( array( 'check' => true ) );
+		} catch ( \Exception $e ) {
+			return $this->respond( array( 'check' => false ) );
+		}
+
+	}
 }

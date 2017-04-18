@@ -3,11 +3,14 @@
 
 	namespace App\Helpers;
 
-	use App\Log;
+	use App\Models\Log;
 	use Illuminate\Database\Eloquent\Builder;
-	use Illuminate\Support\Facades\DB;
 
 
+	/**
+	 * Class LogController
+	 * @package App\Helpers
+	 */
 	class LogController implements LogHelpers {
 
 		/**
@@ -19,55 +22,41 @@
 		 */
 		public function setLog( $type_event, $user_id, $description ) {
 
-			DB::table( 'logs' )->insert(
-				array(
-					'type_event'  => $type_event,
-					'user_id'     => $user_id,
-					'description' => $description,
-					'created_at'  => ''.date('Y-m-d H:i:s'),
-				)
-			);
-
+			$log              = new Log;
+			$log->type_event  = $type_event;
+			$log->user_id     = $user_id;
+			$log->description = $description;
+			$log->save();
 		}
 
-		/**
-		 * Получить лог по id
+
+		/** Обновление лога
 		 *
 		 * @param integer $id
+		 * @param string $type_event
+		 * @param integer $user_id
+		 * @param string $description
 		 */
-		public function getItemLog( $id ) {
+		public function updateLog( $id, $type_event, $user_id, $description ) {
 
-			$log = Log::find( $id );
-
-			return response()->json($log);
+			$log              = Log::find( $id );
+			$log->type_event  = $type_event;
+			$log->user_id     = $user_id;
+			$log->description = $description;
+			$log->save();
 		}
 
-		/**
-		 * Получить весь лог
-		 */
-		public function getLog() {
-
-			$log = Log::all();
-
-			return response()->json($log);
-
-
-		}
 
 		/**
-		 * Получить лог по id
+		 * Удаление лога
 		 *
-		 * @param integer $DateFrom
-		 * @param integer $DateTo
+		 * @param  integer $id
 		 */
-		public function getFromDateLog( $DateFrom, $DateTo ) {
-
-			$log = DB::table( 'users' )
-						->where( 'crated_at', '>=', $DateFrom )
-						->where( 'crated_at', '<=', $DateTo );
-
-			return response()->json($log);
+		public function deleteLog( $id ) {
+			$log = Log::find( $id );
+			$log->delete();
 
 		}
+
 
 	}

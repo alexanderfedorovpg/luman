@@ -5,7 +5,7 @@ namespace App\Http\Controllers\v1;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\ValidationException;
-use App\CdnFile;
+use App\Models\CdnFile;
 use App\Filespot\FilespotAPI;
 
 /**

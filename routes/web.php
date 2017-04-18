@@ -28,6 +28,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newslist','NewsListController@get');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
+    $group->get('/news/check/{id}','NewsListController@checkNews');
+
     $group->post('/auth/login','AuthController@login');
 
     //Редакторы новостей
@@ -90,4 +92,10 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/file','FileController@upload');
     $group->delete('/file/{id}','FileController@destroy');
 
+    //Статистика
+	$group->get('/newsstatistics','NewsStatisticsController@getTimeAllEditors');
+	$group->get('/newsstatistics/editor','NewsStatisticsController@getTimeEditor');
+	$group->get('/newsstatistics/counters/','NewsStatisticsController@getCountersAll');
+	$group->get('/newsstatistics/editor/dynamics/','NewsStatisticsController@getTimeDynamicsEditor');
+	$group->get('/newsstatistics/editor/counters/','NewsStatisticsController@getCountersEditor');
 });

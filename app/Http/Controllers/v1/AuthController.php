@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 
 /**
  * Контроллер аутентификации пользователей CMS
