@@ -21,10 +21,18 @@ const Pic = styled.a`
 
 const Img = styled.img`
     max-width: 100%;
-    height: 100%;
+    max-height: 100%;
 
     border-radius: 50%;
-    object-fit: cover;
+
+    @supports (object-fit: cover) {
+        max-width: none;
+        max-height: none;
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
 `
 
 export const Name = styled.a`
