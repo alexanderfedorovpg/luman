@@ -14,7 +14,7 @@ class AlterTableNewsRubrics extends Migration
     public function up()
     {
            Schema::table('news', function (Blueprint $table) {
-               $table->integer('rubrics_id');
+               $table->integer('rubrics_id')->unsigned()->nullable();
                $table->foreign('rubrics_id')->references('id')->on('rubrics');
            });
     }
