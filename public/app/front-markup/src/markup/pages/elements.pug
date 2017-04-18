@@ -1,0 +1,15 @@
+extends ../layouts/default
+
+include ../components/burger-menu/burger-menu
+
+block vars
+    -pageSettings.title = 'Элементы: попапы, всплывающее меню и т.д';
+
+block content
+    // Контент здесь
+    main
+        .container
+            .overlay(style="background-color: rgba(0, 0, 0, .95)")
+                +burger-menu(burger_menu)
+
+

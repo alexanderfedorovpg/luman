@@ -1,0 +1,9 @@
+mixin col-menu(data)
+    - list = data
+    +b.col-menu()&attributes(attributes)
+        block
+        +e.NAV.nav
+            +e.UL.ul
+                each li in list
+                    +e.li
+                        +e.A(href=jv0).link #{li}

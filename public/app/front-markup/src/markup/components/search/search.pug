@@ -1,0 +1,10 @@
+mixin search(data)
+    +b.search()&attributes(attributes)
+        block
+        +e.FORM.form
+            +e.INPUT(type="text"
+                     placeholder="Поиск по сайту").input-text
+            +e.wrapper
+                +e.INPUT(type="submit"
+                     value="").input-submit
+                != pugHelpers.Icon.call(locals, { iconName: 'search', className: 'search__ico',  iconWidth: '17', iconHeight: '17' })

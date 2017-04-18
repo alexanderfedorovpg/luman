@@ -1,0 +1,23 @@
+mixin banner-preview(data)
+    - params = data
+    +b.banner-preview()&attributes(attributes)
+        block
+        +e.IMG(src=params.img alt=params.alt).img
+        +e.left-part
+            +e.P.title-group #{params.title_group}
+            +e.P.subtitle-group #{params.subtitle_group}
+        +e.right-part
+            +e.wrapper
+                +e.part-title
+                    +e.P.title-programm #{params.title_programm}
+                    +e.P.subtitle-programm #{params.subtitle_programm}
+                +e.delimeter.banner-preview__delimeter_one
+                    +e.IMG(src=params.delimeter alt="")
+                +e.part-time.banner-preview__part-time_one
+                    +e.P.programm-title #{params.where_title_one}
+                    +e.P.programm-time #{params.where_time_one}
+                +e.delimeter.banner-preview__delimeter_two
+                    +e.IMG(src=params.delimeter alt="")
+                +e.part-time
+                    +e.P.programm-title #{params.where_title_two}
+                    +e.P.programm-time #{params.where_time_two}

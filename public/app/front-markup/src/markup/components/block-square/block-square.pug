@@ -1,0 +1,21 @@
+include ../mini-news/mini-news
+
+mixin block-square(data)
+    +b.block-square()&attributes(attributes)
+        block
+        if (!data.more)
+            +e.A(href=jv0).link
+            +e.IMG(src=data.img alt=data.alt).img
+            +e.info
+                if (data.time_keeping)
+                    +e.time-keeping
+                        +e.IMG(src="/static/img/content/video-ico/video-ico.png" alt="").ico
+                        +e.SPAN.keeping #{data.time_keeping}
+                +e.P.title #{data.title}
+                +e.P.time-add #{data.time_add}
+                    if (data.time_update)
+                        = ' / '
+                        +e.SPAN.time-upadate #{data.time_update}
+        else
+            each items in data.list
+                +mini-news(items)

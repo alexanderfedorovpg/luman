@@ -1,0 +1,6 @@
+mixin rss(data)
+    +b.rss()&attributes(attributes)
+        block
+        +e.A(href=jv0).link
+            +e.SPAN.text.rss__float_left RSS
+            != pugHelpers.Icon.call(locals, {iconName: 'rss', className: 'rss__img rss__float_right', iconWidth: '0', iconHeight: '0'})

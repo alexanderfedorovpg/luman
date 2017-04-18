@@ -1,0 +1,6 @@
+mixin icon(data)
+    if data.png
+        +b.icon(class=`_${data.icon}`)&attributes(attributes)
+    else
+        != pugHelpers.Icon.call(locals, {iconName: data.icon, className: `icon icon_${data.icon} ${data.class || ''}`})
+

@@ -1,0 +1,8 @@
+include ../mini-news/mini-news
+
+mixin more-news(data)
+    - params = data
+    +b.more-news()&attributes(attributes)
+        block
+        each item in params
+            +mini-news(item)

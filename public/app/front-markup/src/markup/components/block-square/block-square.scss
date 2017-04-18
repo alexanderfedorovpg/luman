@@ -1,0 +1,86 @@
+.block-square {
+    position: relative;
+
+    width: rem(301);
+    height: rem(245);
+
+    &::before {
+        content: '';
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: block;
+        width: rem(301);
+        height: rem(245);
+
+        background-color: rgba(0, 0, 0, .5);
+    }
+
+    &__img {
+        width: rem(301);
+    }
+
+    &__link {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+
+        display: block;
+        width: rem(301);
+        height: rem(245);
+    }
+
+    &__info {
+        position: absolute;
+        z-index: 1;
+        bottom: 9px;
+        left: 0;
+
+        width: rem(252);
+        padding-left: rem(20);
+    }
+
+    &__title {
+        font: #{rem(18)}/#{rem(21)} $stemBold;
+        color: $white;
+    }
+
+    &__title_font_small {
+        font-size: rem(18);
+        line-height: rem(21);
+    }
+
+    &__time-add {
+        font-size: rem(12);
+        line-height: rem(32);
+        color: $gray;
+    }
+
+    &__time-update {
+        color: $purple;
+    }
+
+    &__time-keeping {
+        position: relative;
+
+        margin-bottom: rem(5);
+    }
+
+    &__ico {
+        width: rem(30);
+        height: rem(30);
+    }
+
+    &__keeping {
+        position: absolute;
+        top: calc(50% - #{rem(10)});
+        left: rem(25);
+
+        font-size: rem(12);
+        line-height: rem(18);
+        color: $white;
+    }
+}

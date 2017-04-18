@@ -1,0 +1,20 @@
+include ../block-rectangle/block-rectangle
+include ../block-square/block-square
+
+mixin per-day(data)
+    - params = data
+    +b.per-day()&attributes(attributes)
+        block
+        +e.P.title.section-title Главное за последние сутки
+        if (params.idx)
+            +block-rectangle(params.news_one)
+
+            +e.wrapper.per-day__wrapper_margin
+
+                +block-square(params.news_two)
+
+                +block-square(params.news_three)
+        else
+            +e.wrapper
+                each item in params
+                    +block-square(item)

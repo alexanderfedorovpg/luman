@@ -1,0 +1,17 @@
+extends ../layouts/default
+
+include ../components/inner-about/inner-about
+
+block vars
+    -pageSettings.title = 'О компании';
+
+block content
+    // Контент здесь
+    main
+        .inner-wrapper
+            +inner-about
+
+
+
+
+

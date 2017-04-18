@@ -1,0 +1,63 @@
+include ../big-news/big-news
+include ../now/now
+include ../general-video/general-video
+include ../per-day/per-day
+include ../info-noize/info-noize
+include ../from-enter/from-enter
+include ../banner/banner
+include ../random-news/random-news
+include ../subscribe/subscribe
+include ../more-news/more-news
+include ../more-video/more-video
+include ../enter-one/enter-one
+include ../list-video/list-video
+include ../banner-preview/banner-preview
+
+mixin general-news(data)
+    +b.general-news()&attributes(attributes)
+        block
+        +e.container.container
+            +e.left.left-col
+                +e.left-wrapper
+                    //- большая новость
+                    +big-news(big_news.first)(class="general-news__big-news")
+
+                    //- раздел сейчас
+                    +now(now)(class="general-news__now")
+
+                +e.left-wrapper.two-wrapper
+                    //- главное за последние сутки
+                    +per-day(per_day.index)(class="general-news__per-day")
+
+                    //- инфошум
+                    +info-noize(info_noize)(class="general-news__info-noize")
+            +e.right.right-col
+                //- ключевое видео
+                +general-video(general_video.big_photo)(class="general-news__general-video")
+                //- из эфира справа
+                +enter-one(from_enter.one)(class="general-news__enter-one enter-one__no-border")
+
+            +e.left_more.left-col
+                +e.left-wrapper
+                    //- как смотреть
+                    +banner(class="general-news__banner banner__where-view")
+                //- случайные новости под баннером
+                +random-news(random_news)(class="general-news__random-news")
+
+            +e.right_more.right-col
+                //- подписка
+                +subscribe(class="general-news__subscribe")
+                //- новости под подпиской
+                +more-news(random_news.more_news)(class="general-news__more-news")
+
+            +e.middle.middle-col
+                //- большой инфо баннер
+                +banner-preview(banner_preview)(class="general-news__banner-preview")
+
+            +e.left_more.left-col
+                //- из эфира несколько видео
+                +more-video(from_enter)(class="general-news__more-video")
+
+            +e.right_more.right-col
+                //- список видео с иконкой
+                +list-video(list_video)(class="general-news__list-video")

@@ -1,0 +1,5 @@
+mixin pages-list(data)
+    +b.UL.pages-list()&attributes(attributes)
+        each page in __pages
+            +e.item
+                +e.linkk(href=page.href)= page.name

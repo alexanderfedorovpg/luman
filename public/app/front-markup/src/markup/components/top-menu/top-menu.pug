@@ -1,0 +1,9 @@
+mixin top-menu(data)
+    - menu = data
+    +b.top-menu()&attributes(attributes)
+        block
+        +e.NAV.nav
+            +e.UL.ul
+                each li in menu
+                    +e.item
+                        +e.A(href=jv0).link= li

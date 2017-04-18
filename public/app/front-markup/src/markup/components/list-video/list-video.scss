@@ -1,0 +1,40 @@
+.list-video {
+
+    &__item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        &:not(:first-child) {
+            margin-top: rem(19);
+        }
+    }
+
+    &__ico-play {
+        width: rem(30);
+        height: rem(30);
+    }
+
+    &__info {
+        width: calc(100% - #{rem(40)});
+        margin-top: rem(-2);
+    }
+
+    &__title {
+        font: #{rem(14)}/#{rem(20)} $stemBold;
+        color: $enter;
+        text-decoration: none;
+    }
+
+    &__category {
+        font-size: rem(12);
+        line-height: rem(18);
+        color: $blue;
+        text-transform: uppercase;
+    }
+
+    &__time-add {
+        color: $gray-date;
+    }
+}

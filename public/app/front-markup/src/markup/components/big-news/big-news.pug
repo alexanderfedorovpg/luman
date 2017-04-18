@@ -1,0 +1,16 @@
+mixin big-news(data)
+    - params = data
+    +b.big-news()&attributes(attributes)
+        block
+        +e.A(href=jv0).link
+        +e.IMG(src=params.img alt=params.alt).img
+        +e.info
+            +e.P.title #{params.title}
+            +e.P.time-add #{params.time_add}
+                = ' '
+                | /
+            +e.P.time-update #{params.time_update}
+            +e.P.description.big-news__position_margin #{params.description}
+            +e.logo
+                +e.SPAN.logo-title News
+                +e.IMG(src=params.logo alt=params.alt).logo
