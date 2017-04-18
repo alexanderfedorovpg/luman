@@ -9,8 +9,8 @@ use App\Http\Controllers\ApiController;
 use App\Http\Transformers\v1\NewsFeedTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use App\NewsFeed;
-use App\News;
+use App\Models\NewsFeed;
+use App\Models\News;
 use Mockery\Exception;
 
 

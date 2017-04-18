@@ -5,8 +5,8 @@
 	use App\Http\Controllers\ApiController;
 	use Illuminate\Http\Request;
 	use Illuminate\Support\Facades\DB;
-	use App\News;
-	use App\Device;
+	use App\Models\News;
+	use App\Models\Device;
 
 	class NotificationController extends CmsController {
 
@@ -67,7 +67,7 @@
 				'title' => $news->title,
 				'body'  => $news->body,
 				'data'  => array(
-						'news/id'=>$id
+						'news_id'=>$id
 			)
 			);
 

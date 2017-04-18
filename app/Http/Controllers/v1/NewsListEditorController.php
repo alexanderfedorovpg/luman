@@ -4,8 +4,8 @@ namespace App\Http\Controllers\v1;
 
 use Illuminate\Support\Facades\Auth,
     Illuminate\Http\Request,
-    App\News,
-    App\NewsCommentsEditor,
+    App\Models\News,
+    App\Models\NewsCommentsEditor,
     App\Http\Traits\NewsListTrait,
     App\Helpers\LogController,
     App\Http\Transformers\v1\NewsEditorTransformer,
@@ -189,6 +189,8 @@ class NewsListEditorController extends CmsController
                 $newsEdit->moderation = 0;
                 $newsEdit->rubrics_id = $rubrics_id;
 
+	            $log_moderation = new NewsModerationLogHelper($newsEdit);
+
                 if($this->user_id != $newsEdit->editor_id) {
                     return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
                 }
@@ -213,7 +215,7 @@ class NewsListEditorController extends CmsController
                     $newsEdit->is_war_mode = $is_war_mode;
                 }
 
-                if ($newsEdit->save()) {
+                if ( $log_moderation->setEndModeration() && $newsEdit->save()) {
                     $this->respond($newsEdit);
                     $this->log->setLog('MODERATION_NEWS', $this->user_id, "Successful");
                     return $this->respond(
@@ -240,6 +242,7 @@ class NewsListEditorController extends CmsController
         try {
 
             $news = News::find($id);
+	        $log_moderation = new NewsModerationLogHelper($news);
 
             if($this->user_id != $news->editor_id) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
@@ -248,7 +251,7 @@ class NewsListEditorController extends CmsController
             $news->delete = 1;
             $news->moderation = 0;
 
-            if ($news->save()) {
+	        if ( $log_moderation->rejectionModeration() && $news->save() ) {
                 $this->log->setLog('DELETE_NEWS', $this->user_id, "Successful, news id=".$id." delete");
                 return $this->respondCreated(
                     ["data" => "delete"]
@@ -278,6 +281,7 @@ class NewsListEditorController extends CmsController
             $new_editor_id = $request->input('new_editor_id');
 
             $news = News::find($id);
+	        $log_moderation = new NewsModerationLogHelper($news);
 
             if($this->user_id != $news->editor_id) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
@@ -286,7 +290,7 @@ class NewsListEditorController extends CmsController
             $news->editor_id = $new_editor_id;
             $news->moderation = 0;
 
-            if ($news->save()) {
+	        if ( $log_moderation->setModeration() && $news->save() ) {
                 $this->log->setLog('DELEGATE', $this->user_id, "Successful, news id=".$id." delegate [".$this->user_id.">".$new_editor_id."]");
                 return $this->respondCreated(
                     ["data" => "delegate"]
@@ -314,6 +318,7 @@ class NewsListEditorController extends CmsController
             $id = $request->input('id');
 
             $news = News::find($id);
+	        $log_moderation = new NewsModerationLogHelper($news);
 
             if($this->user_id != $news->editor_id) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
@@ -322,7 +327,7 @@ class NewsListEditorController extends CmsController
             $news->editor_id = 'NULL';
             $news->moderation = 0;
 
-            if ($news->save()) {
+            if ($log_moderation->rejectionModeration() && $news->save()) {
                 $this->log->setLog('REJECTION', $this->user_id, "Successful, news id=".$id." rejection ".$this->user_id);
                 return $this->respondCreated(
                     ["data" => "rejection"]
@@ -351,6 +356,7 @@ class NewsListEditorController extends CmsController
             $id = $request->input('id');
 
             $news = News::find($id);
+	        $log_moderation = new NewsModerationLogHelper($news);
 
             if($this->user_id != $news->editor_id) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
@@ -359,7 +365,7 @@ class NewsListEditorController extends CmsController
             $news->time_edit = date('Y-m-d H:i:s');
             $news->moderation = 1;
 
-            if ($news->save()) {
+            if ($log_moderation->setModeration() && $news->save()) {
                 $this->log->setLog('IN_WORK', $this->user_id, "Successful, news id=".$id." in work user_id=".$this->user_id);
                 return $this->respondCreated(
                     ["data" => "in_work"]
