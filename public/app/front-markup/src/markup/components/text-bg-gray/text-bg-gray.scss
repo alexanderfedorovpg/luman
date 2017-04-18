@@ -1,19 +1,23 @@
 .text-bg-gray {
     width: rem(1039);
     height: rem(386);
+
     background-color: $bg-text;
 
     &__block-text {
         position: absolute;
-        left: 17%;
         bottom: rem(-72);
+        left: 17%;
+
         width: rem(427);
         padding: #{rem(29)} #{rem(33)} #{rem(63)} #{rem(41)};
+
         text-align: right;
+
         background-image: url(%=static=%content/text-bg-gray/text-block.png);
-        background-size: cover;
-        background-position: center;
         background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
     }
 
     &__text {

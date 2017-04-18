@@ -23,6 +23,10 @@
 
 <body>
     <header class="header position">
+        <div class="header__alarm-block">
+            <div class="header__container container">
+            </div>
+        </div>
         <div class="header__container container">
             <div class="header__left-part">
                 <div class="header__part-wrapper">
@@ -81,9 +85,26 @@
     </header>
     <!-- Контент здесь-->
     <main>
+        <div class="container">
+            <p>Список страниц</p>
+            <ul class="pages-list">
+                <li class="pages-list__item">
+                    <a class="pages-list__linkk" href="about.html">about</a>
+                </li>
+                <li class="pages-list__item">
+                    <a class="pages-list__linkk" href="elements.html">elements</a>
+                </li>
+                <li class="pages-list__item">
+                    <a class="pages-list__linkk" href="index.html">index</a>
+                </li>
+                <li class="pages-list__item">
+                    <a class="pages-list__linkk" href="news-top.html">news-top</a>
+                </li>
+            </ul>
+        </div>
         <div class="general-news">
             <div class="general-news__container container">
-                <div class="general-news__left">
+                <div class="general-news__left left-col">
                     <div class="general-news__left-wrapper">
                         <div class="big-news general-news__big-news">
                             <a class="big-news__link" href="javascript:void(0)"></a>
@@ -243,7 +264,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="general-news__right">
+                <div class="general-news__right right-col">
                     <div class="general-video general-news__general-video">
                         <a class="general-video__link" href="javascript:void(0)"></a>
                         <img class="general-video__img" src="static/img/content/general-video/general-video.jpg" alt=""
@@ -264,7 +285,7 @@
                         </div>
                     </div>
                     <div class="enter-one general-news__enter-one enter-one__no-border">
-                        <p class="enter-one__title section-title">Из эфира
+                        <p class="enter-one__title section-title section-title section-title_no-border">Из эфира
                         </p>
                         <div class="from-enter general-news__from-enter">
                             <a class="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
@@ -285,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="general-news__left general-news__left_more">
+                <div class="general-news__left general-news__left_more left-col">
                     <div class="general-news__left-wrapper">
                         <div class="banner general-news__banner banner__where-view">
                             <div class="banner__title">Как смотреть RTVI
@@ -376,9 +397,13 @@
                                 </div>
                             </div>
                         </div>
+                        <a class="random-news__more-goods" href="javascript:void(0)">
+                            <img class="random-news__img-preload" src="static/img/content/random-news/more-news.png" alt="" role="presentation"
+                            />
+                        </a>
                     </div>
                 </div>
-                <div class="general-news__right general-news__right_more">
+                <div class="general-news__right general-news__right_more right-col">
                     <div class="subscribe general-news__subscribe">
                         <a class="subscribe__link" href="javascript:void(0)">
                             <img class="subscribe__img" src="static/img/content/subscribe/subscribe.png" alt="" role="presentation"
@@ -388,42 +413,21 @@
                     <div class="more-news general-news__more-news">
                         <div class="mini-news">
                             <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">Ройзман придет как свидетель защиты на процесс блогера Соколовского</a>
-                                <p class="mini-news__date">10 часов назад
+                                <a class="mini-news__title" href="javascript:void(0)"></a>
+                                <p class="mini-news__date">
                                 </p>
                             </div>
                         </div>
                         <div class="mini-news">
                             <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">Силовики нарушили перемирие почти 80 раз за два дня, заявили в ДНР</a>
-                                <p class="mini-news__date">Вчера, 14:44
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">Путин: действующих ограничений в интернете пока достаточно</a>
-                                <p class="mini-news__date">Вчера, 09:18
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">РПЦ раскритиковала законопроект, который разрешает носить хиджабы в школах Чечни</a>
-                                <p class="mini-news__date">6 апреля, 07:12
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">ФБР создаст отдел для расследования вмешательства России в выборы</a>
-                                <p class="mini-news__date">5 апреля, 16:10
+                                <a class="mini-news__title" href="javascript:void(0)"></a>
+                                <p class="mini-news__date">
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="general-news__middle">
+                <div class="general-news__middle middle-col">
                     <div class="banner-preview general-news__banner-preview">
                         <img class="banner-preview__img" src="static/img/content/banner/banner.png" alt="" role="presentation"
                         />
@@ -463,8 +467,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="general-news__left general-news__left_more">
-                    <div class="more-video general-news__more-video more-video__no-border">
+                <div class="general-news__left general-news__left_more left-col">
+                    <div class="more-video general-news__more-video">
                         <div class="more-video__title section-title">Из эфира
                         </div>
                         <div class="more-video__list">
@@ -522,7 +526,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="general-news__right general-news__right_more">
+                <div class="general-news__right general-news__right_more right-col">
                     <div class="list-video general-news__list-video">
                         <div class="list-video__item">
                             <img class="list-video__ico-play" src="static/img/content/video-ico/video-ico-blue.png" alt="" role="presentation"
@@ -560,6 +564,79 @@
         </div>
     </main>
     <footer class="footer">
+        <div class="footer__container container">
+            <div class="footer__left-part">
+                <div class="logo-footer footer__logo-footer">
+                    <img src="static/img/content/logo-footer/logo-footer.png" alt="" role="presentation" />
+                </div>
+                <div class="copyright footer__copyright">
+                    <p class="copyright__text">&#169; Overseas Media,
+                        <br/>2002–2017
+                    </p>
+                </div>
+            </div>
+            <div class="footer__middle-part">
+                <div class="col-menu footer__col-menu">
+                    <nav class="col-menu__nav">
+                        <ul class="col-menu__ul">
+                            <li class="col-menu__li">
+                                <a class="col-menu__link" href="javascript:void(0)">Телепрограмма</a>
+                            </li>
+                            <li class="col-menu__li">
+                                <a class="col-menu__link" href="javascript:void(0)">Лицензии</a>
+                            </li>
+                            <li class="col-menu__li">
+                                <a class="col-menu__link" href="javascript:void(0)">Как смотреть</a>
+                            </li>
+                            <li class="col-menu__li">
+                                <a class="col-menu__link" href="javascript:void(0)">Карьера</a>
+                            </li>
+                            <li class="col-menu__li">
+                                <a class="col-menu__link" href="javascript:void(0)">Размещение рекламы</a>
+                            </li>
+                            <li class="col-menu__li">
+                                <a class="col-menu__link" href="javascript:void(0)">Правила пользования</a>
+                            </li>
+                            <li class="col-menu__li">
+                                <a class="col-menu__link" href="javascript:void(0)">Контакты</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer__right-part">
+                <div class="subscribe-networks footer__subscribe-networks">
+                    <p class="subscribe-networks__title">Подпишитесь на нас
+                    </p>
+                    <div class="subscribe-networks__list-network">
+                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
+                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/facebook.png"
+                            alt="" role="presentation" />
+                        </a>
+                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
+                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/twitter.png"
+                            alt="" role="presentation" />
+                        </a>
+                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
+                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/youtube.png"
+                            alt="" role="presentation" />
+                        </a>
+                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
+                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/viber.png"
+                            alt="" role="presentation" />
+                        </a>
+                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
+                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/ok.png" alt=""
+                            role="presentation" />
+                        </a>
+                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
+                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/rss.png" alt=""
+                            role="presentation" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
     <script src="static/js/main.min.js"></script>
 </body>

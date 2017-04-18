@@ -1,0 +1,32 @@
+.news-one-line {
+
+    &__row {
+        @include margin_y(#{rem(-7)});
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &__block-rectangle {
+        @include margin_y(#{rem(7)});
+        width: rem(617);
+        height: rem(245);
+
+        .block-rectangle__link,
+        .block-rectangle__img {
+            height: rem(245);
+        }
+    }
+
+    &__block-square {
+        @include margin_y(#{rem(7)});
+        width: rem(300);
+
+        &::before,
+        .block-square__img,
+        .block-square__link {
+            width: rem(300);
+        }
+    }
+}

@@ -1,0 +1,56 @@
+.news-top {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-between;
+        margin-bottom: rem(41);
+    }
+
+    &__news-one-line {
+        margin-top: rem(25);
+    }
+
+    &__left {
+        margin-top: rem(-9);
+    }
+
+    &__info-noize {
+        margin-top: rem(23);
+    }
+
+    &__enter-one {
+        margin-top: rem(26);
+    }
+
+    &__banner {
+        margin-top: rem(47);
+    }
+
+    &__plots-week {
+        margin-top: rem(24);
+    }
+
+    &__per-day {
+        margin-top: rem(35);
+    }
+
+    &__banner-preview {
+        height: rem(142);
+        margin-top: rem(10);
+    }
+
+    &__random-news {
+        margin-top: rem(64);
+    }
+
+    &__subscribe {
+        margin-top: rem(46);
+    }
+
+    &__more-news {
+        margin-top: rem(17);
+    }
+}
