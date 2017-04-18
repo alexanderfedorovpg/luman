@@ -1,0 +1,26 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.top-menu {
+
+    &__ul {
+        font-size: 0;
+    }
+
+    &__item {
+        display: inline-block;
+
+        &:not(:last-child) {
+            margin-right: rem(25);
+        }
+    }
+
+    &__link {
+        font-family: $stemReg;
+        font-size: rem(14);
+        line-height: normal;
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}
