@@ -4,9 +4,9 @@ namespace App\Http\Controllers\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Transformers\v1\NewsChatTransformer;
-use App\News;
-use App\NewsChat;
-use App\NewsChatMessage;
+use App\Models\News;
+use App\Models\NewsChat;
+use App\Models\NewsChatMessage;
 use Auth;
 
 /**

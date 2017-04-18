@@ -7,7 +7,7 @@ use App\Http\Transformers\v1\UsersTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\ValidationException;
-use App\User;
+use App\Models\User;
 use Auth;
 
 /**

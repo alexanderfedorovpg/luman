@@ -2,7 +2,7 @@
 
 namespace App\Http\Transformers\v1;
 
-use App\User;
+use App\Models\User;
 use App\Http\Transformers\Transformer;
 
 /**
