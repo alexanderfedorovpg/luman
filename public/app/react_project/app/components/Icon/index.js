@@ -279,6 +279,9 @@ const Render = props => {
         case 'file':
             return <SvgIcons.File {...props} />
 
+        case 'dynamic':
+            return <SvgIcons.Dynamic {...props} />
+
         default:
             return <Icon {...props} />
     }
