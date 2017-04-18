@@ -1,0 +1,31 @@
+.title-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: space-between;
+    padding-bottom: rem(3);
+
+    border-bottom: 1px solid $gray;
+
+    &__title {
+        line-height: rem(40);
+    }
+
+    &__subtitle {
+        margin-top: rem(7);
+
+        font-size: rem(16);
+        line-height: rem(40);
+        letter-spacing: rem(-.5);
+        color: $enter;
+    }
+
+    &__ico {
+
+        &_point {
+            width: rem(12);
+            height: rem(16);
+        }
+    }
+}

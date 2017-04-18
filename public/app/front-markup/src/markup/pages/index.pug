@@ -1,6 +1,7 @@
 extends ../layouts/default
 
 include ../components/general-news/general-news
+include ../components/pages-list/pages-list
 
 block vars
     -pageSettings.title = 'Главная';
@@ -8,6 +9,8 @@ block vars
 block content
     // Контент здесь
     main
-
+        .container
+            p Список страниц
+            +pages-list
         +general-news
 

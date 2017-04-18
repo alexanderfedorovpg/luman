@@ -1,0 +1,57 @@
+include ../general-video/general-video
+include ../title-block/title-block
+include ../breadcrumbs/breadcrumbs
+include ../banner-preview/banner-preview
+include ../news-one-line/news-one-line
+include ../banner/banner
+include ../plots-week/plots-week
+include ../info-noize/info-noize
+include ../enter-one/enter-one
+include ../per-day/per-day
+include ../random-news/random-news
+include ../subscribe/subscribe
+include ../more-news/more-news
+
+
+mixin news-top(data)
+    +b.news-top()&attributes(attributes)
+        block
+        +e.container.container
+            +e.left.left-col.left-col_width_inner
+
+                //- заголовок страницы
+                +title-block(title_block.news)
+
+                //- хлебные крошки
+                +breadcrumbs(breadcrumbs.news)
+
+                //- первая линия новостей
+                +news-one-line(news_one_line)(class="news-top__news-one-line")
+
+                +banner(class="banner__where-view news-top__banner")
+
+                +plots-week(plots_week.news)(class="news-top__plots-week")
+
+                +per-day(per_day.news)(class="news-top__per-day")
+
+            +e.right.right-col
+                //- ключевое видео
+                +general-video(general_video.mini_photo)(class="news-top__general-video")
+                //- инфошум
+                +info-noize(info_noize)(class="news-top__info-noize")
+                //- из эфира
+                +enter-one(from_enter.one)(class="news-top__enter-one")
+
+            +e.middle.middle-col
+                //- большой инфо баннер
+                +banner-preview(banner_preview)(class="news-top__banner-preview")
+
+            +e.left.left-col.left-col_width_inner
+                //- случайные новости под баннером
+                +random-news(random_news)(class="news-top__random-news")
+
+            +e.right.right-col
+                //- подписка
+                +subscribe(class="news-top__subscribe")
+                //- новости под подпиской
+                +more-news(more_news)(class="news-top__more-news")

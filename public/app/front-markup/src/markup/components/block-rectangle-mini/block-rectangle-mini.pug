@@ -1,0 +1,8 @@
+mixin block-rectangle-mini(data)
+    - params = data
+    +b.block-rectangle-mini()&attributes(attributes)
+        block
+        +e.IMG(src=params.img).img
+        +e.A(href=jv0).link
+            +e.IMG(src="%=static=%img/content/plots-week/points.png").points
+            +e.P.title #{params.title}

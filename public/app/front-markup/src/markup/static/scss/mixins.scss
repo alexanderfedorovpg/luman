@@ -186,6 +186,11 @@
     margin-right: $param;
 }
 
+@mixin margin_y($param) {
+    margin-top: $param;
+    margin-bottom: $param;
+}
+
 @mixin padding_y($param) {
     padding-top: $param;
     padding-bottom: $param;

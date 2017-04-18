@@ -73,6 +73,10 @@ main {
         border-top: rem(11) solid $purple;
         border-left: rem(20) solid transparent;
     }
+
+    &_no-border {
+      border-bottom: none;
+    }
 }
 
 .left-col {
@@ -80,6 +84,10 @@ main {
 
     &_position_relative {
         position: relative;
+    }
+
+    &_width_inner {
+        width: rem(930);
     }
 }
 
@@ -89,4 +97,17 @@ main {
 
 .right-col {
     width: rem(300);
+}
+
+.inner-wrapper {
+
+    .general-video {
+        height: rem(396);
+
+        &::before,
+        .general-video__img,
+        .general-video__link {
+            height: rem(396);
+        }
+    }
 }
