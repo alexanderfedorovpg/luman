@@ -1,0 +1,10 @@
+include ../block-rectangle-mini/block-rectangle-mini
+
+mixin plots-week(data)
+    - params = data
+    +b.plots-week()&attributes(attributes)
+        block
+        +e.P.title.section-title.section-title_no-border Сюжеты недели
+        +e.list
+            each el in params
+                +block-rectangle-mini(el)

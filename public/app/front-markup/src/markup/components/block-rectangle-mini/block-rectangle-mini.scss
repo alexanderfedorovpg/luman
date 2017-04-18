@@ -1,0 +1,59 @@
+.block-rectangle-mini {
+    @include padding_y(#{rem(38)});
+    position: relative;
+
+    width: rem(458);
+    height: rem(100);
+    padding-left: rem(21);
+
+    background-color: $enter;
+
+    &::before {
+        content: '';
+
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba(0, 0, 0, .5);
+    }
+
+    &__points {
+        display: inline;
+        width: rem(5);
+
+        vertical-align: middle;
+    }
+
+    &__img {
+        position: absolute;
+        z-index: 0;
+        z-index: 0;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+        margin-right: rem(8);
+    }
+
+    &__link {
+        position: relative;
+        z-index: 2;
+
+        color: $white;
+        text-decoration: none;
+    }
+
+    &__title {
+        display: inline;
+
+        font: #{rem(21)}/ #{rem(21)} $stemBold;
+        vertical-align: middle;
+    }
+}

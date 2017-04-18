@@ -27,7 +27,7 @@ mixin general-news(data)
 
                 +e.left-wrapper.two-wrapper
                     //- главное за последние сутки
-                    +per-day(per_day)(class="general-news__per-day")
+                    +per-day(per_day.index)(class="general-news__per-day")
 
                     //- инфошум
                     +info-noize(info_noize)(class="general-news__info-noize")
@@ -48,7 +48,7 @@ mixin general-news(data)
                 //- подписка
                 +subscribe(class="general-news__subscribe")
                 //- новости под подпиской
-                +more-news(more_news)(class="general-news__more-news")
+                +more-news(random_news.more_news)(class="general-news__more-news")
 
             +e.middle.middle-col
                 //- большой инфо баннер
@@ -56,7 +56,7 @@ mixin general-news(data)
 
             +e.left_more.left-col
                 //- из эфира несколько видео
-                +more-video(from_enter)(class="general-news__more-video more-video__no-border")
+                +more-video(from_enter)(class="general-news__more-video")
 
             +e.right_more.right-col
                 //- список видео с иконкой

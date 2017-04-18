@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\v1;
 
-use App\Rubrics;
+use App\Models\Rubrics;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\Validator;

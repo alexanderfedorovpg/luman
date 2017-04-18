@@ -6,10 +6,15 @@ mixin per-day(data)
     +b.per-day()&attributes(attributes)
         block
         +e.P.title.section-title Главное за последние сутки
+        if (params.idx)
+            +block-rectangle(params.news_one)
 
-        +block-rectangle(params.news_one)
+            +e.wrapper.per-day__wrapper_margin
 
-        +e.wrapper.per-day__wrapper_margin
-            +block-square(params.news_two)
+                +block-square(params.news_two)
 
-            +block-square(params.news_three)
+                +block-square(params.news_three)
+        else
+            +e.wrapper
+                each item in params
+                    +block-square(item)

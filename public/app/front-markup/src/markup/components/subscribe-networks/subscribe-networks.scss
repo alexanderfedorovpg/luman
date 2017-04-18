@@ -14,11 +14,16 @@
     &__ico-link {
         outline: none;
 
+
         &:not(:last-child) {
 
             .subscribe-networks__ico-image {
                 margin-right: rem(9);
             }
         }
+    }
+
+    &__ico-image {
+        width: rem(30);
     }
 }

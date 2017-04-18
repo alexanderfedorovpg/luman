@@ -1,0 +1,17 @@
+include ../block-rectangle/block-rectangle
+include ../block-square/block-square
+
+mixin news-one-line(data)
+    - params = data
+    +b.news-one-line()&attributes(attributes)
+        block
+        +e.row
+            +block-rectangle(params.news_one)(class="news-one-line__block-rectangle")
+
+            +block-square(params.news_two)(class="news-one-line__block-square")
+
+            +block-square(params.news_three)(class="news-one-line__block-square")
+
+            +block-square(params.news_four)(class="news-one-line__block-square")
+
+            +block-square(params.news_three)(class="news-one-line__block-square")
