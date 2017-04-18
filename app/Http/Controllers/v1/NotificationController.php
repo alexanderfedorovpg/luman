@@ -67,7 +67,7 @@
 				'title' => $news->title,
 				'body'  => $news->body,
 				'data'  => array(
-						'news/id'=>$id
+						'news_id'=>$id
 			)
 			);
 
