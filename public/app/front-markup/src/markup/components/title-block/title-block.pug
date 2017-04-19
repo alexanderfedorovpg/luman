@@ -1,7 +1,18 @@
+include ../icon/icon
+
 mixin title-block(data)
     +b.title-block()&attributes(attributes)
         block
         +e.H1.title #{data.title}
+            if (data.ico_title)
+                +icon({
+                    icon: data.ico_title,
+                    class: `title-block__ico title-block__ico_${data.ico_title}`
+                })
         +e.SPAN.subtitle
-            != pugHelpers.Icon.call(locals, {iconName: 'point', className: 'title-block__ico title-block__ico_point', iconWidth: '0', iconHeight: '0'})
-            | #{data.subtitle}
+            if (data.ico_subtitle)
+                +icon({
+                    icon: data.ico_subtitle,
+                    class: `title-block__ico title-block__ico_${data.ico_subtitle}`
+                })
+                | #{data.subtitle}

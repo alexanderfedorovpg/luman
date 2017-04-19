@@ -29,7 +29,9 @@ h1 {
     color: $enter;
 }
 
-
+a {
+    outline: none;
+}
 
 main {
     margin-top: 1px;
@@ -89,6 +91,7 @@ main {
     &_width_inner {
         width: rem(930);
     }
+
 }
 
 .middle-col {

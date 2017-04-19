@@ -1,5 +1,5 @@
 mixin pages-list(data)
     +b.UL.pages-list()&attributes(attributes)
         each page in __pages
-            +e.item
-                +e.linkk(href=page.href)= page.name
+            +e.item(style="list-style-type: none;")
+                +e.link(href=page.href style="color: #00a5b6;")= page.name

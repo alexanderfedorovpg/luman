@@ -1,0 +1,15 @@
+extends ../layouts/default
+
+include ../components/noize-all/noize-all
+
+block vars
+    -pageSettings.title = 'Инфошум разводящая';
+
+block content
+    // Контент здесь
+    main
+        .inner-wrapper
+            +noize-all
+
+
+

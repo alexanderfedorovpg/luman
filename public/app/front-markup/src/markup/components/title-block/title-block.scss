@@ -8,8 +8,19 @@
 
     border-bottom: 1px solid $gray;
 
+    &__ico {
+        display: inline-block;
+
+        vertical-align: middle;
+    }
+
     &__title {
         line-height: rem(40);
+    }
+
+    &__title-img {
+        width: rem(21);
+        height: rem(21);
     }
 
     &__subtitle {
@@ -26,6 +37,11 @@
         &_point {
             width: rem(12);
             height: rem(16);
+        }
+
+        &_info {
+            width: rem(24);
+            height: rem(24);
         }
     }
 }

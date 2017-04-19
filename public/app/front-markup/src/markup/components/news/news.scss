@@ -1,0 +1,16 @@
+.news {
+
+    &__mini-news {
+        padding-bottom: 0;
+
+        border-bottom: none !important;
+
+        .mini-news__date {
+            margin-top: rem(-4);
+        }
+    }
+
+    &__block-square {
+        height: rem(245) !important;
+    }
+}
