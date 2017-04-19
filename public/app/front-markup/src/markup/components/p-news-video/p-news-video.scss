@@ -1,10 +1,9 @@
-.inner-video {
+.inner-default {
 
     h1 {
         margin-top: rem(4);
 
         line-height: rem(39);
-
     }
 
     .inner-about__content {
@@ -15,6 +14,9 @@
             position: absolute;
             top: rem(-62);
             left: 0;
+        }
+        .social-links--pad {
+            left: rem(18);
         }
         > p {
             letter-spacing: rem(-0.35);
@@ -62,4 +64,27 @@
         color: $enter;
         letter-spacing: rem(-0.45);
     }
+
+    &--wide {
+        width: rem(783);
+        padding-top: rem(12);
+        
+        &.news-preview .news-preview {
+
+            &__img {
+                margin-top: rem(11);
+                margin-bottom: rem(17);
+                img {
+                    width: rem(783);
+                    height: rem(381);
+                }
+            }
+
+            &__text {
+                font-size: rem(18);
+            }
+
+        }
+    }
+
 }
