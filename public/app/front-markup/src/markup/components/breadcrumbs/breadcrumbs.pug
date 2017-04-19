@@ -1,8 +1,6 @@
 mixin breadcrumbs(data)
     +b.breadcrumbs()&attributes(attributes)
+
+        each item in data.items
+            +e.A.item(href=jv0)= item
         block
-        +e.NAV.nav
-            +e.UL.ul
-                each li, idx in data
-                    +e.item(class={'__item_active': idx == 1})
-                        +e.A(href=jv0).link #{li}

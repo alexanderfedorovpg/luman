@@ -1,6 +1,6 @@
 include ../general-video/general-video
 include ../title-block/title-block
-include ../breadcrumbs/breadcrumbs
+include ../breadcrumb/breadcrumb
 include ../banner-preview/banner-preview
 include ../news-one-line/news-one-line
 include ../banner/banner
@@ -23,7 +23,7 @@ mixin news-top(data)
                 +title-block(title_block.news)
 
                 //- хлебные крошки
-                +breadcrumbs(breadcrumbs.news)
+                +breadcrumb(breadcrumb.news)
 
                 //- первая линия новостей
                 +news-one-line(news_one_line)(class="news-top__news-one-line")
