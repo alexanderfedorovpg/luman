@@ -1,0 +1,18 @@
+extends ../layouts/default
+
+include ../components/inner-about/inner-about
+include ../components/p-news-noise/p-news-noise
+
+block vars
+    -pageSettings.title = 'Новость Инфошум';
+
+block content
+    // Контент здесь
+    main
+        .inner-wrapper
+            +p-news-noise()
+
+
+
+
+

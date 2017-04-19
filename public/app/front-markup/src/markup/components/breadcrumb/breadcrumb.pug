@@ -1,0 +1,7 @@
+mixin breadcrumb(data)
+    +b.breadcrumb()&attributes(attributes)
+        block
+        +e.UL.ul
+            each li, idx in data
+                +e.item(class={'__item_active': idx == 1})
+                    +e.A(href=jv0).link #{li}

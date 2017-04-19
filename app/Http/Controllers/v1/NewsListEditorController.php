@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth,
     App\Http\Traits\NewsListTrait,
     App\Helpers\LogController,
     App\Http\Transformers\v1\NewsEditorTransformer,
+	App\Helpers\NewsModerationLogHelper,
     Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
@@ -139,6 +140,7 @@ class NewsListEditorController extends CmsController
                 'rubrics_id' => 'required|numeric',
                 'keywords' => 'required',
                 'tags' => 'required',
+                'theses' => 'required',
                 'top' => 'required|numeric',
                 'original_source_link' => 'url',
                 'image_main' => 'required',
@@ -167,6 +169,7 @@ class NewsListEditorController extends CmsController
             $publish_date = $request->input('publish_date');
             $original_source_link = $request->input('original_source_link');
             $moderation = $request->input('moderation');
+            $theses = $request->input('theses');
 
             $newsEdit = News::ModerationMode()->find(intval($id));
 
@@ -196,6 +199,10 @@ class NewsListEditorController extends CmsController
                 }
 
                 //необязательные поля
+
+                if (isset($theses)) {
+	                $newsEdit->theses = $theses;
+                }
                 if (isset($sub_title)) {
                     $newsEdit->sub_title = $sub_title;
                 }

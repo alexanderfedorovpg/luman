@@ -32,6 +32,7 @@ class News extends Model
         'image_preview',
         'is_online',
         'moderation',
+        'theses',
     ];
 
     /**

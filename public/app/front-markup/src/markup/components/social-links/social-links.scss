@@ -1,0 +1,35 @@
+.social-links {
+
+    &__list {
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+    }
+
+    &__ico-link {
+        max-width: rem(32);
+        max-height: rem(32);
+        margin-bottom: rem(8);
+    }
+
+    &__ico-image {
+
+        display: block;
+        max-width: 100%;
+        height: auto;
+
+    }
+
+    &--vertical {
+
+        .social-links__list {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+    }
+    
+}
+

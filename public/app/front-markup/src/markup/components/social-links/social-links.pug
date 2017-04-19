@@ -1,0 +1,9 @@
+mixin social-links(data)
+    +b.NAV.social-links()&attributes(attributes)
+
+        +e.list
+            each item in data.items
+                +e.A(href=jv0).ico-link
+                    +e.IMG(src=item.icon alt="").ico-image
+
+        block
