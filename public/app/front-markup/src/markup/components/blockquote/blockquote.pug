@@ -1,0 +1,5 @@
+mixin blockquote(author, text)
+    +b.BLOCKQUOTE.blockquote()&attributes(attributes)
+        +e.H4.author= author
+        +e.P.text= text
+        block

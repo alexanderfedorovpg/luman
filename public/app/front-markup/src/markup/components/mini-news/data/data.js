@@ -1,1 +1,3 @@
-var data = {mini_news: {}}
+var data = {mini_news: {
+
+}}
