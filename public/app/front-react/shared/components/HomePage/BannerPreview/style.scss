@@ -57,6 +57,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
+        width: rem(736);
     }
 
     &__subtitle-programm {
@@ -77,6 +78,15 @@
         font-size: rem(24);
         line-height: rem(24);
         color: $white;
+    }
+
+    &__delimeter {
+
+        img {
+            box-sizing: content-box;
+            width: rem(25);
+            height: rem(58);
+        }
     }
 
     &__delimeter_one {
