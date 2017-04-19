@@ -152,6 +152,7 @@ class NewsFeedController extends CmsController
                 'keywords' => 'required',
                 'tags' => 'required',
                 'top' => 'required|numeric',
+                'theses' => 'required',
 //                'video_stream' => 'url',
 //                'image_main' => 'mimes:jpeg,png',
 //                'image_preview' => 'mimes:jpeg,png',
@@ -172,7 +173,12 @@ class NewsFeedController extends CmsController
                 $news->tags = $data['tags'];
                 $news->keywords = $data['keywords'];
                 $news->editor_id = $data['editor_id'];
+
                 //необязательные поля
+
+                if (isset($data['theses'])) {
+	                $news->theses = $data['theses'];
+                }
                 if (isset($data['sub_title'])) {
                     $news->sub_title = $data['sub_title'];
                 }
