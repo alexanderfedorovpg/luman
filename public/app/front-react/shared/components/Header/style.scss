@@ -1,0 +1,55 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.header {
+    background-color: $bg-gray;
+
+    &.position {
+        position: relative;
+        z-index: 1;
+    }
+
+    &_open::before {
+        content: '';
+
+        display: block;
+        width: 100%;
+        height: rem(70);
+
+        background-color: $purple;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: rem(11);
+        padding-bottom: rem(14);
+    }
+
+    &__part-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__burger {
+        margin-top: rem(7);
+    }
+
+    &__logo {
+        position: relative;
+
+        width: rem(138);
+        margin-right: rem(28);
+        margin-left: rem(38);
+    }
+
+    &__rss,
+    &__search {
+        float: right;
+    }
+
+    &__rss {
+        margin-left: rem(27);
+    }
+}

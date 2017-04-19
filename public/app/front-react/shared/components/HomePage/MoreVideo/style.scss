@@ -1,0 +1,33 @@
+@import "~style/mixins";
+
+.more-video {
+
+    &__no-border {
+
+        .more-video__title {
+            border-bottom: none;
+        }
+    }
+
+    &__from-enter {
+        width: rem(301);
+    }
+
+    .from-enter__link,
+    .from-enter__img {
+        width: rem(301);
+        height: rem(185);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .from-enter__link_position::before {
+        width: rem(301);
+        height: rem(185);
+    }
+}

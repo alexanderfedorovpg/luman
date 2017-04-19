@@ -1,0 +1,79 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.from-enter {
+
+
+    &__info {
+        padding-top: rem(15);
+        padding-left: rem(17);
+    }
+
+    &__link {
+        font: #{rem(14)}/#{rem(20)} $stemBold;
+        color: $enter;
+        text-decoration: none;
+    }
+
+    &__img {
+        width: rem(300);
+        height: rem(185);
+    }
+
+    &__link_position {
+        position: relative;
+
+        display: block;
+        width: rem(300);
+        height: rem(185);
+
+        &::before {
+            content: '';
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            display: block;
+            width: rem(300);
+            height: rem(185);
+
+            background-color: rgba(0, 0, 0, .5);
+        }
+    }
+
+    &__time-keeping {
+        position: absolute;
+        bottom: rem(15);
+        left: rem(21);
+    }
+
+    &__ico {
+        width: rem(30);
+        height: rem(30);
+    }
+
+    &__category {
+        margin-top: rem(22);
+
+        font-size: rem(12);
+        line-height: rem(42);
+        color: $blue;
+        text-transform: uppercase;
+    }
+
+    &__time-add {
+        color: $gray-date;
+        text-transform: none;
+    }
+
+    &__keeping {
+        position: absolute;
+        top: calc(50% - #{rem(10)});
+        left: rem(25);
+
+        font-size: rem(12);
+        line-height: rem(18);
+        color: $white;
+    }
+}

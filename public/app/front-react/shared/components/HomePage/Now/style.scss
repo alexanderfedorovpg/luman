@@ -1,0 +1,36 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.now {
+    width: rem(299);
+    padding-left: rem(14);
+
+    background-color: $gray-light;
+
+
+    &__news {
+        padding-right: 1px;
+        margin-top: 1px;
+    }
+
+    &__mini-news {
+        padding-right: rem(46);
+    }
+
+    &__mini-news {
+
+        &:hover .mini-news__img {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &:hover .mini-news__info {
+            transform: translateX(#{rem(18)});
+        }
+
+        &:hover .mini-news__title {
+            color: $white;
+        }
+    }
+
+}
