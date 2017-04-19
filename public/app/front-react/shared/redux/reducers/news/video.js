@@ -1,6 +1,6 @@
 import { createReducer } from 'redux-act'
 
-import { fetched } from 'actions/news'
+import { videoFetched } from 'actions/news'
 
 const initialState = []
 
@@ -11,5 +11,5 @@ const initialState = []
 export const getAll = state => state
 
 export default createReducer({
-    [fetched]: (state, payload) => payload
+    [videoFetched]: (state, payload) => payload
 }, initialState)

@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import { FormattedRelative } from 'react-intl'
 
 import MiniNews from 'components/MiniNews'
 
@@ -9,7 +10,7 @@ function Item({ data, className, rectangle }) {
     const type = rectangle
         ? 'block-rectangle'
         : 'block-square';
-
+if (!data) return null;
     return (
         <div className={classNames(
                 `${type}`,
@@ -42,7 +43,7 @@ function renderItem(type, data) {
     return (
         <div>
             <a className={`${type}__link`} href="javascript:void(0)"></a>
-            <img className={`${type}__img`} src={data.img} alt=" "role="presentation" />
+            <img className={`${type}__img`} src={data.ImagePreview} alt=" "role="presentation" />
             <div className={`${type}__info`}>
                 {data.time_keeping
                     ? (
@@ -54,10 +55,13 @@ function renderItem(type, data) {
                     : null
                 }
                 <p className={`${type}__title`}>
-                    {data.title}
+                    {data.Title}
                 </p>
                 <p className={`${type}__time-add`}>
-                    {data.time_add}
+                    {Date.parse(data.PublishDate)
+                        ? <FormattedRelative value={data.PublishDate} />
+                        : null
+                    }
                     {data.time_update
                         ? (
                             <span className={`${type}__time-upadate`}>

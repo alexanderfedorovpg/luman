@@ -5,17 +5,17 @@ import Block from 'components/Block'
 
 import './style.scss'
 
-function Today({ className }) {
+function Today({ data, className }) {
 
     return (
         <div className={classNames('per-day', className)}>
             <p className="per-day__title section-title">
                 Главное за последние сутки
             </p>
-            <Block data={dataOne} rectangle />
+            <Block data={data[0]} rectangle />
             <div className="per-day__wrapper per-day__wrapper per-day__wrapper_margin">
-                {dataRest.map(value => (
-                    <Block data={value} key={value.title} />
+                {data.slice(1).map(value => (
+                    <Block data={value} key={value.Id} />
                 ))}
             </div>
         </div>
