@@ -1,0 +1,32 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.subscribe-networks {
+
+    &__title {
+        font-size: rem(14);
+        line-height: rem(24);
+        color: $white;
+        text-transform: uppercase;
+    }
+
+    &__list-network {
+        margin-top: rem(7);
+    }
+
+    &__ico-link {
+        outline: none;
+
+
+        &:not(:last-child) {
+
+            .subscribe-networks__ico-image {
+                margin-right: rem(9);
+            }
+        }
+    }
+
+    &__ico-image {
+        width: rem(30);
+    }
+}

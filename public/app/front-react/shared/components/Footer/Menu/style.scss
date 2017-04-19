@@ -1,0 +1,16 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.col-menu {
+
+    &__li {
+        list-style-type: none;
+    }
+
+    &__link {
+        font-size: rem(13);
+        line-height: rem(24);
+        color: $white;
+        text-decoration: none;
+    }
+}
