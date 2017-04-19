@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import { Content, Users, Wrap, Header } from '../../components/Stats'
+import Dynamic from '../../components/Dynamic'
+
 
 class StatsPage extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         return (
@@ -17,6 +23,7 @@ class StatsPage extends Component {
                     <Content />
                     <Users />
                 </Wrap>
+                <Dynamic />
             </div>
         )
     }

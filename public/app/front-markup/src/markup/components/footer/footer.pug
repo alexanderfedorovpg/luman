@@ -1,3 +1,17 @@
+include ../logo-footer/logo-footer
+include ../copyright/copyright
+include ../col-menu/col-menu
+include ../subscribe-networks/subscribe-networks
+
 mixin footer(data)
     +b.FOOTER.footer()&attributes(attributes)
         block
+        +e.container.container
+            +e.left-part
+                +logo-footer(class="footer__logo-footer")
+                +copyright(class="footer__copyright")
+            +e.middle-part
+                +col-menu(col_menu)(class="footer__col-menu")
+            +e.right-part
+                +subscribe-networks(subscribe_networks.footer)(class="footer__subscribe-networks")
+

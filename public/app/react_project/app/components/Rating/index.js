@@ -30,7 +30,7 @@ class Rating extends Component {
     }
 
     handleChange(e) {
-        let value = e.target.value
+        let value = +e.target.value
 
         if (value !== this.state.checked) {
             this.setState({
@@ -45,7 +45,7 @@ class Rating extends Component {
         let { checked } = this.state
 
         return (
-            <Root>
+            <Root className={this.props.className}>
                 {[1, 2, 3, 4, 5, 6, 7, 8].map(rating => {
                     return (
                         <Item

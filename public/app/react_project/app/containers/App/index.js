@@ -24,7 +24,15 @@ import Content from 'components/Content'
 import LoginPage from 'containers/LoginPage'
 
 import { logout } from 'containers/LoginPage/actions'
-import { closeMenu, toggleMenu } from './actions'
+import {
+    closeMenu,
+    toggleMenu,
+    loadRubrics,
+    loadUsers,
+    loadCurrentUser
+} from './actions'
+
+import { selectCurrentUser } from './selectors'
 
 import * as api from 'api'
 
@@ -36,22 +44,40 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 
     componentWillMount() {
         if (this.props.token) {
-            api.setToken(this.props.token)
+            this.loadData(this.props.token)
         }
     }
 
-    render() {
-        let { menuOpen, toggleMenu, closeMenu, router, token } = this.props
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.token && (this.props.token !== nextProps.token)) {
+            this.loadData(nextProps.token)
+        }
+    }
 
-        return token
+    loadData(token) {
+        api.setToken(token)
+
+        setTimeout(() => {
+            this.props.loadRubrics()
+            this.props.loadUsers()
+            this.props.loadCurrentUser()
+        })
+    }
+
+    render() {
+        let { menuOpen, toggleMenu, closeMenu, router, token, currentUser } = this.props
+
+        return token && currentUser
             ? <Root onClick={closeMenu}>
                 <Header
                     moved={menuOpen}
+                    user={currentUser}
                     onToggle={toggleMenu}
                     isActive={router.isActive}
                     onLogout={this.props.logout} />
                 <NavSide
                     expanded={menuOpen}
+                    location={router.location}
                     isActive={router.isActive} />
                 <Content moved={menuOpen}>
                     {React.Children.toArray(this.props.children)}
@@ -63,6 +89,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 }
 
 const mapStateToProps = state => ({
+    currentUser: selectCurrentUser(state),
     menuOpen: state.get('app').get('menuOpen'),
     token: state.get('app').get('api-token'),
 })
@@ -78,6 +105,18 @@ const mapDispatchToProps = dispatch => ({
 
     logout() {
         dispatch(logout())
+    },
+
+    loadRubrics() {
+        dispatch(loadRubrics())
+    },
+
+    loadUsers() {
+        dispatch(loadUsers())
+    },
+
+    loadCurrentUser() {
+        dispatch(loadCurrentUser())
     }
 })
 

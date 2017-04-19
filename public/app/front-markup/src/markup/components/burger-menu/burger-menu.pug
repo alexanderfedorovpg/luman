@@ -1,0 +1,15 @@
+include ../subscribe-networks/subscribe-networks
+
+mixin burger-menu(data)
+    - list = data
+    +b.burger-menu()&attributes(attributes)
+        block
+        each li, idx in list
+            +e.category
+                +e.P.category-title #{idx}
+                +e.UL.ul
+                    each el ,ind in li
+                        +e.li
+                            +e.A(href=jv0 class={'__link_active': ind == 4}).link #{el}
+
+        +subscribe-networks(subscribe_networks.menu)(class="burger-menu__subscribe-networks")

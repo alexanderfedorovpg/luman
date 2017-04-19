@@ -9,7 +9,15 @@ import {
     TOGGLE_MENU,
     CLOSE_MENU,
 
-    LOAD_EDITORS_SUCCESS
+    LOAD_EDITORS_SUCCESS,
+
+    LOAD_USERS_SUCCESS,
+
+    LOAD_CURRENT_USER_SUCCESS,
+
+    LOAD_RUBRICS_SUCCESS,
+
+    groups
 } from './constants';
 
 import {
@@ -23,43 +31,71 @@ const initialState = fromJS({
     users: {
         editors: [],
         data: {}
+    },
+    current: {
+        data: null
+    },
+    rubrics: {
+        data: []
     }
 });
 
 function AppReducer(state = initialState, action) {
-  switch (action.type) {
-    case TOGGLE_MENU:
-        return state.set('menuOpen', !state.get('menuOpen'))
-        break
+    let users = {}
+    let editors = []
 
-    case CLOSE_MENU:
-        if (state.get('menuOpen')) {
-            return state.set('menuOpen', false)
-        }
-        else {
+    switch (action.type) {
+        case TOGGLE_MENU:
+            return state.set('menuOpen', !state.get('menuOpen'))
+            break
+
+        case CLOSE_MENU:
+            if (state.get('menuOpen')) {
+                return state.set('menuOpen', false)
+            }
+            else {
+                return state
+            }
+            break
+
+        case LOGIN_SUCCESS:
+            return state.set('api-token', action.payload)
+
+
+        case LOGOUT:
+            return initialState.concat()
+
+        case LOAD_CURRENT_USER_SUCCESS:
+            return state.setIn(['current', 'data'], fromJS(action.payload))
+
+        case LOAD_EDITORS_SUCCESS:
+            users = action.payload.reduce((result, item) => ({ ...result, [item.id]: item }), {})
+            editors = action.payload.map(value => value.id)
+
             return state
-        }
-        break
+                .setIn(['users', 'editors'], editors)
+                .updateIn(['users', 'data'], data => {
+                    return data.merge(fromJS(users))
+                })
 
-    case LOGIN_SUCCESS:
-        return state.set('api-token', action.payload)
+        case LOAD_USERS_SUCCESS:
+            users = action.payload.reduce((result, item) => ({ ...result, [item.id]: item }), {})
+            editors = action.payload
+                .filter(value => value.groups.indexOf(groups.editor) > -1)
+                .map(value => value.id)
 
-    case LOGOUT:
-        return state.set('api-token', null)
+            return state
+                .setIn(['users', 'editors'], editors)
+                .updateIn(['users', 'data'], data => {
+                    return data.merge(fromJS(users))
+                })
 
-    case LOAD_EDITORS_SUCCESS:
-        let users = action.payload.reduce((result, item) => ({ ...result, [item.id]: item }), {})
-        let editors = action.payload.map(value => value.id)
+        case LOAD_RUBRICS_SUCCESS:
+            return state.setIn(['rubrics', 'data'], fromJS(action.payload))
 
-        return state
-            .setIn(['users', 'editors'], editors)
-            .updateIn(['users', 'data'], data => {
-                return data.merge(fromJS(users))
-            })
-
-    default:
-        return state;
-  }
+        default:
+            return state;
+    }
 }
 
 export default AppReducer;

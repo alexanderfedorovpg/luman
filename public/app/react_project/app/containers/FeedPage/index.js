@@ -29,12 +29,10 @@ import {
     feedToWork
 } from './actions'
 
-import { loadEditors } from 'containers/App/actions'
-
 import Header from 'components/Feed/Header'
+import News from 'components//Feed/News'
 import Form from 'components/Feed/Form'
 import { Wrap, Left, Right } from 'components/Content'
-import News from 'components/News'
 
 export class FeedPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -49,7 +47,6 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
 
     componentDidMount() {
         this.loadFeed()
-        this.props.dispatch(loadEditors())
     }
 
     componentWillReceiveProps(nextProps) {

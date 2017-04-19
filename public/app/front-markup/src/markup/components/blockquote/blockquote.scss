@@ -1,0 +1,37 @@
+.blockquote {
+
+    position: relative;
+
+    padding-top: rem(15);
+    padding-left: rem(39);
+    margin-bottom: rem(30);
+
+    font-style: italic;
+
+    color: $enter;
+
+    &:before {
+        @include bg($quotes);
+        content: '';
+
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &__author {
+        font-family: $stemBold;
+        font-size: rem(14);
+        line-height: rem(21);
+        letter-spacing: rem(-0.35);
+
+        text-transform: uppercase;
+    }
+
+    &__text {
+        font-family: $stemReg;
+        font-size: rem(14);
+        letter-spacing: rem(-0.11);
+    }
+
+}

@@ -7,7 +7,8 @@ use App\Http\Transformers\v1\UsersTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\ValidationException;
-use App\User;
+use App\Models\User;
+use Auth;
 
 /**
  * Контроллер управления пользователя
@@ -128,6 +129,17 @@ class UserController extends CmsController
         }
 
         return $this->respondNotFound('User is not found');
+    }
+
+    /**
+     * Профмль текущего пользователя
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function profile()
+    {
+        $user = Auth::user();
+        return $this->respond($this->usersTransformer->transform($user->toArray()));
     }
 
 

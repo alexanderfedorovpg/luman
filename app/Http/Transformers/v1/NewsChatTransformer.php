@@ -26,7 +26,7 @@ class NewsChatTransformer extends Transformer
             $transform[] = [
                 'id' => $message->id,
                 'message' => $message->message,
-                'author' => $this->transformAuthor($message->author),
+                'author' => $message->author->id,
                 'created_at' => $message->created_at,
                 'files' => $this->transformFiles($message->files)
             ];

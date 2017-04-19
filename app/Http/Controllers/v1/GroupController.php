@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\ValidationException;
 use App\Auth\Rbac\Models\Group;
-use App\User;
+use App\Models\User;
 use Mockery\Exception;
 
 

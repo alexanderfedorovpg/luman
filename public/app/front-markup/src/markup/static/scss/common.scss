@@ -16,13 +16,20 @@ html, body {
 }
 
 body {
-    font-family: $stemReg;
-    font-size: rem(14);
+    font: #{rem(14)}/ #{rem(21)} $stemReg;
 }
 
 html {
     font-size: 1vw;
 }
+
+h1 {
+    font: #{rem(36)}/ #{rem(48)} $stemBold;
+    letter-spacing: rem(-.9);
+    color: $enter;
+}
+
+
 
 main {
     margin-top: 1px;
@@ -65,5 +72,42 @@ main {
         top: calc(50% - #{rem(8)});
         border-top: rem(11) solid $purple;
         border-left: rem(20) solid transparent;
+    }
+
+    &_no-border {
+      border-bottom: none;
+    }
+}
+
+.left-col {
+    width: rem(865);
+
+    &_position_relative {
+        position: relative;
+    }
+
+    &_width_inner {
+        width: rem(930);
+    }
+}
+
+.middle-col {
+    width: 100%;
+}
+
+.right-col {
+    width: rem(300);
+}
+
+.inner-wrapper {
+
+    .general-video {
+        height: rem(396);
+
+        &::before,
+        .general-video__img,
+        .general-video__link {
+            height: rem(396);
+        }
     }
 }

@@ -7,6 +7,8 @@ include ../logo/logo
 mixin header(data)
     +b.HEADER.header()&attributes(attributes)
         block
+        +e.alarm-block
+            +e.container.container
         +e.container.container
             +e.left-part
                 +e.part-wrapper

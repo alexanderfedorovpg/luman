@@ -1,0 +1,10 @@
+mixin subscribe-networks(data)
+    - list = data
+    +b.subscribe-networks()&attributes(attributes)
+        block
+        if (list.title)
+            +e.P.title #{list.title}
+        +e.list-network
+            each el in list.ico
+                +e.A(href=jv0).ico-link
+                    +e.IMG(src=el alt="").ico-image

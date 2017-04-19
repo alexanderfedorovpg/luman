@@ -1,0 +1,5 @@
+mixin breadcrumb(data)
+    +b.breadcrumb()&attributes(attributes)
+        each item in data.items
+            +e.A.item(href=jv0)= item
+        block

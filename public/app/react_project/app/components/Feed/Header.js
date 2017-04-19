@@ -14,10 +14,10 @@ import {
 } from 'components/Form'
 
 import Modal from 'components/Modal'
-import Help from 'components/Help'
+import Help from 'containers/Help'
 import Button from 'components/Button'
 
-import { padding, font } from './../../constants/style'
+import { padding, font } from 'constants/style'
 
 const FormInput = styled(InputIcon)`
     margin-right: 7px;

@@ -1,5 +1,8 @@
+include ../from-enter/from-enter
+
 mixin enter-one(data)
     +b.enter-one()&attributes(attributes)
         block
-        +e.P.title.section-title Из эфира
+        +e.P.title.section-title.section-title_no-border Из эфира
+
         +from-enter(data)(class="general-news__from-enter ")

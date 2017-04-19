@@ -6,8 +6,9 @@
         flex-wrap: wrap;
         align-content: stretch;
         justify-content: space-between;
+        margin-bottom: rem(41);
     }
-
+    // удалить позже
     &__left {
         width: rem(915);
     }
@@ -23,7 +24,7 @@
     &__right {
         width: rem(300);
     }
-
+    //////////////////
     &__left-wrapper {
         display: flex;
         flex-direction: row;
@@ -39,16 +40,13 @@
         padding-top: rem(11);
     }
 
-    &__general-video {
-        position: relative;
-    }
-
     &__info-noize {
         width: rem(300);
         padding-left: rem(14);
     }
 
     &__banner {
+        width: 100%;
         margin-top: rem(24);
     }
 

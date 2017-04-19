@@ -15,7 +15,7 @@ mixin block-square(data)
                 +e.P.time-add #{data.time_add}
                     if (data.time_update)
                         = ' / '
-                        +e.SPAN.time-upadate #{data.time_update}
+                        +e.SPAN.time-update #{data.time_update}
         else
             each items in data.list
                 +mini-news(items)

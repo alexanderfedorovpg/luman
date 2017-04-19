@@ -1,0 +1,17 @@
+mixin popup-message(data)
+    +b.popup-message()&attributes(attributes)
+
+        form
+
+            +user('Марышева Елена', '%=static=%img/content/user5.png')
+
+            .form-group
+                input.input.input-block(type='text', value='' placeholder='Текст')
+
+            button.btn.btn-block.btn-danger
+                i.icon.icon-arrowRight-light
+                | Отправить
+
+            block
+
+        a.icon.icon-delete-lg(href=jv0)

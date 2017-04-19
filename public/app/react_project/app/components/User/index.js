@@ -16,6 +16,7 @@ const Pic = styled.a`
     width: 40px;
     height: 40px;
     margin-right: ${rem(12)};
+    text-align: center;
 `
 
 const Img = styled.img`
@@ -37,10 +38,16 @@ export const Name = styled.a`
 `
 
 function User({ data, children, className }) {
+    let url = data.avatar_url ? `//${data.avatar_url}` : ''
     return (
         <Root className={className}>
             <Pic href="#">
-                <Img src={data.pic} />
+                {url
+                    ? (
+                        <Img src={url} />
+                    )
+                    : null
+                }
             </Pic>
             {children
                 ? children
