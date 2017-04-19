@@ -1,0 +1,74 @@
+mixin p-constructor(data)
+
+    // Контент здесь
+    +b.HEADER.header.header-off.main__top.constructor__top
+        +b.header-bot
+            +b.header-l
+                .input-icon
+                    input.input.input-block#ko4(type='text' placeholder='Ключевые слова')
+                    +icon({ icon: 'search', class: 'search' }) 
+            +b.header-r 
+                +b.FORM.form-feed(action='' method='POST')
+                    .form-horizontal
+                        button.btn.btn-xs.btn-danger
+                            i.icon-arrowLeft-wrap
+                                +icon({ icon: 'arrowLeft', class: 'arrowLeft' })
+                            | Отменить изменения
+                        button.btn.btn-xs.btn-primary Предпросмотр
+                        button.btn.btn-xs.btn-success
+                            i.icon.icon-okay
+                            | Сохранить
+    .content-wrap.constructor
+        .content-l
+            //- top
+            +b.constructor-nav
+                +e.A.item.is-active(href=jv0) Новости
+                +e.A.item(href=jv0) Инфошум
+                +e.A.item(href=jv0) Из эфира
+            //- left cnt
+            +b.working.working--main
+                each item in pConstructor.items
+                    +e.item
+                        +e.wrap
+                            +e.HEADER.header
+                                +b.rating
+                                    +e.SPAN.item.is-active(class= item.ratingClass)
+                                        input(type="radio", name="rating", id= item.ratingClass, disabled)
+                                        label(for= item.ratingClass)= item.rating
+
+                                +e.P.tag= item.tag
+
+                            +e.cnt(class= item.cntClass)
+                                p(class= item.ratingClass)= item.cnt
+
+                            +e.P.media= item.media
+
+                            +e.SPAN.ignore.icon.icon-delete.tooltip(data-tooltip='Не для главной')
+                            +e.SPAN.work.icon.icon-go-right.tooltip(data-tooltip='На главную')
+
+        .content-r
+            //- top
+            +b.constructor-filter
+
+                +e.col-l
+
+                    .toggle.toggle--reverse
+                        input#cb1(type='checkbox')
+                        label(for='cb1')
+                        span ВОЙНА OFF
+
+                    +b.constructor-filter-nav
+                        +e.A.item.is-active(href=jv0) Новости 
+                            span 10
+                        +e.A.item(href=jv0) Инфошум 
+                            span 4
+                        +e.A.item(href=jv0) Из эфира 
+                            span 6
+
+                +e.col-r
+                    +e.SPAN.summary Итого: 20
+
+            //- right cnt
+            +b.constructor-collapse
+
+                +collapse()
