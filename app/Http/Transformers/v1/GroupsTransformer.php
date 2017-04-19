@@ -2,10 +2,10 @@
 
 namespace App\Http\Transformers\v1;
 
-use App\HasGroups;
+use App\Models\HasGroups;
 use App\User;
 use App\Http\Transformers\Transformer;
-use App\CdnFile;
+use App\Models\CdnFile;
 
 /**
  * Class GroupsTransformer

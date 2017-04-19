@@ -6,7 +6,7 @@
 namespace App\Helpers;
 
 //используемые модели
-use App\NewsFeed;
+use App\Models\NewsFeed;
 
 /**
  * Class ITARTASSParser

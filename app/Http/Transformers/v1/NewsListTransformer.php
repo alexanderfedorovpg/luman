@@ -4,7 +4,7 @@ namespace App\Http\Transformers\v1;
 
 use App\Models\User;
 use App\Http\Transformers\Transformer;
-use App\Rubrics;
+use App\Models\Rubrics;
 /**
  * Class NewsListTransformer
  * @package App\Http\Transformers\v1

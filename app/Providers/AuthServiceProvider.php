@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use App\Auth\Rbac;
-use App\User;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {

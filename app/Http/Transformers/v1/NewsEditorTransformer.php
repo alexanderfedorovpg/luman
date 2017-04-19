@@ -5,10 +5,10 @@ namespace App\Http\Transformers\v1;
 
 use App\Http\Transformers\Transformer;
 use App\Http\Transformers\v1\NewsListTransformer;
-use App\NewsCommentsEditor;
-use App\Rubrics;
-use App\News;
-use App\User;
+use App\Models\NewsCommentsEditor;
+use App\Models\Rubrics;
+use App\Models\News;
+use App\Models\User;
 
 class NewsEditorTransformer extends Transformer
 {
