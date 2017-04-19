@@ -1,0 +1,17 @@
+extends ../layouts/default
+
+include ../components/p-news-video/p-news-video
+
+block vars
+    -pageSettings.title = 'Новость Видео';
+
+block content
+    // Контент здесь
+    main
+        .inner-wrapper
+            +p-news-video
+
+
+
+
+
