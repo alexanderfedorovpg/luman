@@ -1,1 +1,1 @@
-var data = {more-video: {}}
+var data = {more_video: {}}

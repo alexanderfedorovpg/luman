@@ -1,0 +1,80 @@
+include ../general-video/general-video
+include ../news/news
+include ../title-block/title-block
+include ../mini-news/mini-news
+include ../block-rectangle-border/block-rectangle-border
+
+mixin noize-all(data)
+    +b.noize-all()&attributes(attributes)
+        block
+        +e.container.container
+            +e.left.left-col.left-col_width_inner
+                +title-block(title_block.noize)(class="noize-all__title-block")
+                +e.list
+                    +e.item
+                        //- квадратный блок
+                        +block-square(noize_all.one)(class="noize-all__block-square")
+
+                    +e.item
+                        //- новости списком
+                        +e.list-mini
+                            each item in  noize_all.two
+                                +mini-news(item)(class="noize-all__mini-news")
+
+                    +e.item
+                        //- прямоугольник с бордером
+                        +block-rectangle-border(noize_all.three)(class="noize-all__block-rectangle-border")
+
+                    +e.item
+                        //- новости списком
+                        +e.list-mini
+                            each item in  noize_all.two
+                                +mini-news(item)(class="noize-all__mini-news")
+
+                    +e.item
+                        //- новости списком
+                        +e.list-mini
+                            each item in  noize_all.four
+                                +mini-news(item)(class="noize-all__mini-news")
+
+                    +e.item
+                        //- квадратный блок
+                        +block-square(noize_all.five)(class="noize-all__block-square")
+
+                    +e.item
+                        //- новости списком
+                        +e.list-mini
+                            each item in  noize_all.two
+                                +mini-news(item)(class="noize-all__mini-news")
+
+                    +e.item
+                        //- квадратный блок
+                        +block-square(noize_all.six)(class="noize-all__block-square")
+
+                    +e.item
+                        //- прямоугольник с бордером
+                        +block-rectangle-border(noize_all.seven)(class="noize-all__block-rectangle-border")
+
+                    +e.item
+                        //- новости списком
+                        +e.list-mini
+                            each item in  noize_all.two
+                                +mini-news(item)(class="noize-all__mini-news")
+
+                    +e.item
+                        //- прямоугольник с бордером
+                        +block-rectangle-border(noize_all.eight)(class="noize-all__block-rectangle-border")
+
+                    +e.item
+                        //- новости списком
+                        +e.list-mini
+                            each item in  noize_all.two
+                                +mini-news(item)(class="noize-all__mini-news")
+                +e.A(href=jv0).more-goods
+                    +e.IMG(src="%=static=%img/content/random-news/more-news.png" alt="").img-preload
+
+            +e.right.right-col
+                //- ключевое видео
+                +general-video(general_video.mini_photo)(class="noize-all__general-video")
+                //- новости
+                +news(news)(class="noize-all__news")

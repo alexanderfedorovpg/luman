@@ -444,6 +444,10 @@ h1 {
   color: #243746;
 }
 
+a {
+  outline: none;
+}
+
 main {
   margin-top: 1px;
 }
@@ -1309,13 +1313,14 @@ main {
   top: 0;
   left: 0;
   display: block;
-  width: 18.8125rem;
-  height: 15.3125rem;
+  width: inherit;
+  height: inherit;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .block-square__img {
-  width: 18.8125rem;
+  width: inherit;
+  height: inherit;
 }
 
 .block-square__link {
@@ -1324,8 +1329,8 @@ main {
   top: 0;
   left: 0;
   display: block;
-  width: 18.8125rem;
-  height: 15.3125rem;
+  width: inherit;
+  height: inherit;
 }
 
 .block-square__info {
@@ -1928,7 +1933,7 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 2.5625rem;
+  margin-bottom: 4.0625rem;
 }
 
 .news-top__news-one-line {
@@ -1995,8 +2000,18 @@ main {
   border-bottom: 1px solid #ccc;
 }
 
+.title-block__ico {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .title-block__title {
   line-height: 2.5rem;
+}
+
+.title-block__title-img {
+  width: 1.3125rem;
+  height: 1.3125rem;
 }
 
 .title-block__subtitle {
@@ -2010,6 +2025,11 @@ main {
 .title-block__ico_point {
   width: 0.75rem;
   height: 1rem;
+}
+
+.title-block__ico_info {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .breadcrumb {
@@ -2194,6 +2214,135 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.noize-all__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 4.0625rem;
+}
+
+.noize-all__list-mini {
+  width: 18.75rem;
+}
+
+.noize-all__list-mini .mini-news__title {
+  font-size: 0.875rem;
+}
+
+.noize-all .block-square {
+  height: 15.625rem;
+}
+
+.noize-all__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 1.875rem;
+}
+
+.noize-all__mini-news {
+  padding-top: 0.625rem;
+  padding-bottom: 0;
+  border-bottom: none !important;
+}
+
+.noize-all__mini-news .mini-news__title {
+  display: inline-block;
+  line-height: 1.1875rem;
+}
+
+.noize-all__mini-news .mini-news__date {
+  margin-top: -0.25rem;
+  font-size: 12px;
+}
+
+.noize-all__block-square .block-square__title {
+  font-size: 1.3125rem;
+  line-height: 1.625rem;
+}
+
+.noize-all__img-preload {
+  width: 58.125rem;
+}
+
+.noize-all__news {
+  margin-top: 1.5625rem;
+}
+
+.noize-all__news .news__list {
+  margin-top: 1.125rem;
+}
+
+.noize-all__title-block {
+  padding-bottom: 0.625rem;
+}
+
+.noize-all__general-video {
+  margin-top: 0.75rem;
+}
+
+.block-rectangle-border {
+  width: 18.6875rem;
+  min-height: 9.0625rem;
+  padding: 1.3125rem 1.875rem 1.5625rem 1.1875rem;
+  border: 1px solid #ccc;
+}
+
+.block-rectangle-border:hover {
+  border-color: #a03761;
+}
+
+.block-rectangle-border:hover .block-rectangle-border__link {
+  color: #00a5b6;
+}
+
+.block-rectangle-border__link {
+  font: 1.3125rem/ 1.625rem "StemText Bold", sans-serif;
+  color: #243746;
+  text-decoration: none;
+}
+
+.block-rectangle-border__date {
+  font: 0.75rem / 1.5rem "StemText Regular", sans-serif;
+  color: #999;
+}
+
+.news__mini-news {
+  padding-bottom: 0;
+  border-bottom: none !important;
+}
+
+.news__mini-news .mini-news__date {
+  margin-top: -0.25rem;
+}
+
+.news__block-square {
+  height: 15.3125rem !important;
 }
 
 /* Additional style files. */
