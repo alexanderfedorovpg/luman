@@ -2,16 +2,16 @@ mixin constructor-right(data)
     +b.constructor-right()&attributes(attributes)
         each item in data.items
             +b.constructor-item
+                +e.wrap
+                    +e.pic
+                        img(src= item.photo, alt="")
 
-                +e.pic
-                    img(src= item.photo, alt="")
-
-                +e.cnt
-                    +b.constructor-tag
-                        each tag in item.tag
-                            +e.SPAN.item= tag
-                    +e.P.title= item.title
-                    +e.SPAN.media= item.media
+                    +e.cnt
+                        +b.constructor-tag
+                            each tag in item.tag
+                                +e.SPAN.item= tag
+                        +e.P.title= item.title
+                        +e.SPAN.media= item.media
 
                 +e.SPAN.ignore.icon.icon-delete.tooltip(data-tooltip='Удалить с главной')
                 +e.SPAN.work.icon.icon-go-right.tooltip(data-tooltip='Редактируем')

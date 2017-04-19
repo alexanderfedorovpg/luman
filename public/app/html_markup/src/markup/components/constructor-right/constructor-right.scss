@@ -5,27 +5,37 @@
 .constructor-item {
     position: relative;
 
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding-top: rem(10);
+    
     padding-right: rem(35);
-    padding-bottom: rem(10);
-    padding-left: rem(18);
 
-    border-bottom: 1px solid #e8e8e8;
+    padding-left: rem(18);
+    
     cursor: pointer;
     &:hover {
-        border-bottom-color: transparent;
         background-color: #f3f3f4;
         .constructor-item__ignore,
         .constructor-item__work {
             display: block;
         }
+        .constructor-item__wrap {
+            border-bottom-color: transparent;
+        }
     }
 
     &:last-child {
-        border-bottom-color: transparent;
+        .constructor-item__wrap {
+            border-bottom-color: transparent;
+        }
+    }
+
+    &__wrap {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: rem(10);
+        padding-bottom: rem(10);
+
+        border-bottom: 1px solid #e8e8e8;
     }
 
     &__pic {
