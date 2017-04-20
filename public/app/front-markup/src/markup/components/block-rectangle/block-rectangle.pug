@@ -1,6 +1,9 @@
 mixin block-rectangle(data)
     +b.block-rectangle()&attributes(attributes)
         block
+        //- если война
+        if (pageSettings.htmlClass == 'war')
+            +e.SPAN.live-tag Live: online
         +e.A(href=jv0).link
         +e.IMG(src=data.img alt=data.alt).img
         +e.info
@@ -8,8 +11,17 @@ mixin block-rectangle(data)
                 +e.time-keeping
                     +e.IMG(src="/static/img/content/video-ico/video-ico.png" alt="").ico
                     +e.SPAN.keeping #{data.time_keeping}
-            +e.P.title(class=data.title_size) #{data.title}
-            +e.P.time-add #{data.time_add}
-                if (data.time_update)
-                    = ' / '
-                    +e.SPAN.time-upadate #{data.time_update}
+            if (pageSettings.htmlClass == 'war')
+                if (data.live)
+                    +e.title-live
+                        +e.IMG(src="/static/img/content/video-ico/video-ico-full.png" alt="").video-ico
+                        +e.SPAN.text Прямой эфир
+
+            if (data.title)
+                +e.P.title(class=data.title_size) #{data.title}
+            if (data.time_add)
+                +e.P.time-add #{data.time_add}
+                    if (data.time_update)
+                        = ' / '
+                        +e.SPAN.time-upadate #{data.time_update}
+

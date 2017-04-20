@@ -1,7 +1,24 @@
 mixin collapse(data)
     +b.collapse-content()&attributes(attributes)
 
-        if data != 'war'
+        if data == 'war'
+
+          +e.item.is-active.is-war
+            +e.P.title.js-collap-ln
+              +e.SPAN.inner(role='button') BREAkING NEWS
+            +e.details.js-collap-content
+              form
+                .form-group
+                  input.input.input-md.input-block(type='text', placeholder='Главный заголовок ')
+                +constructor-right(constructorRight.now)
+
+          +e.item.is-active
+            +e.P.title.js-collap-ln
+              +e.SPAN.inner(role='button') блок новостей
+            +e.details.js-collap-content
+              +constructor-right(constructorRight.day)
+
+        else
 
           +e.item.is-active
             +e.P.title.js-collap-ln
@@ -21,19 +38,3 @@ mixin collapse(data)
             +e.details.js-collap-content
               p empty
 
-        else
-
-          +e.item.is-active.is-war
-            +e.P.title.js-collap-ln
-              +e.SPAN.inner(role='button') BREAkING NEWS
-            +e.details.js-collap-content
-              form
-                .form-group
-                  input.input.input-md.input-block(type='text', placeholder='Главный заголовок ')
-                +constructor-right(constructorRight.now)
-
-          +e.item.is-active
-            +e.P.title.js-collap-ln
-              +e.SPAN.inner(role='button') блок новостей
-            +e.details.js-collap-content
-              +constructor-right(constructorRight.day)

@@ -1,0 +1,12 @@
+include ../mini-news/mini-news
+
+mixin now-war(data)
+    +b.now-war()&attributes(attributes)
+        block
+        +e.A(href=jv0).title #{data.general_title}
+        +e.live.now-war__live_margin
+            +e.P.live-title Live: Главное
+        +e.translate.now-war__translate_margin
+            each item in data.text_stream
+                +mini-news(item)(class="now-war__mini-news")
+        +e.A(href=jv0).translate-link Следить за онлайн-трансляцией

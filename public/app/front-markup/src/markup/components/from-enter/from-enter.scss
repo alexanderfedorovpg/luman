@@ -2,12 +2,13 @@
 
 
     &__info {
+        width: rem(275);
         padding-top: rem(15);
         padding-left: rem(17);
     }
 
     &__link {
-        font: #{rem(14)}/#{rem(20)} $stemBold;
+        font: #{rem(14)}/#{rem(18)} $stemBold;
         color: $enter;
         text-decoration: none;
     }
@@ -51,8 +52,6 @@
     }
 
     &__category {
-        margin-top: rem(22);
-
         font-size: rem(12);
         line-height: rem(42);
         color: $blue;

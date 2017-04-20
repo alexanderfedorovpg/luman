@@ -21,6 +21,13 @@ body {
 
 html {
     font-size: 1vw;
+
+    &.war {
+
+        .header::before {
+            background-color: $war;
+        }
+    }
 }
 
 h1 {
@@ -44,10 +51,11 @@ main {
 
 .section-title {
     position: relative;
-    padding-left: rem(28);
+    padding-left: rem(24);
     font-size: rem(16);
     line-height: rem(30);
     text-transform: uppercase;
+    letter-spacing: rem(-.7);
     color: $black;
     border-bottom: 1px solid $gray;
 
