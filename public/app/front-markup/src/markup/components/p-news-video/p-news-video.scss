@@ -10,18 +10,20 @@
         position: relative;
 
         margin-top: rem(30);
-        .social-links {
-            position: absolute;
-            top: rem(-62);
-            left: 0;
-        }
-        .social-links--pad {
-            left: rem(18);
-        }
+
         > p {
             letter-spacing: rem(-0.35);
         }
 
+    }
+
+    .social-links {
+        position: absolute;
+        bottom: rem(-200);
+        left: rem(196);
+    }
+    .social-links--pad {
+        // left: rem(214);
     }
 
     .inner-about__date {

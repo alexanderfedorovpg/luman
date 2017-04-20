@@ -1,12 +1,16 @@
 .top-button {
+    position: absolute;
+    // left: rem(196);
+    left: rem(19);
+    bottom: rem(57);
     &__btn {
-        display: block;
         @include bg($toTop);
+        display: block;
     }
     span {
-        color: rgba(84, 95, 105, 0.55);
         font-family: $stemReg;
         font-size: 10px;
         font-weight: 400;
+        color: rgba(84, 95, 105, 0.55);
     }
 }

@@ -1,6 +1,8 @@
 extends ../layouts/default
 
 include ../components/burger-menu/burger-menu
+include ../components/social-links/social-links
+include ../components/breadcrumbs/breadcrumbs
 
 block vars
     -pageSettings.title = 'Элементы: попапы, всплывающее меню и т.д';
@@ -11,5 +13,16 @@ block content
         .container
             .overlay(style="background-color: rgba(0, 0, 0, .95)")
                 +burger-menu(burger_menu)
+                
+        .container
 
+            +social-links(socialLinks.side)
+            +social-links(socialLinks.side)(class='social-links--vertical')
 
+            +breadcrumbs(breadcrumbs.newsVideo)
+
+            +b.UL.list-default.list
+                +e.LI.item Он был застрелен сегодня утром во время своего визита в военную часть.
+                +e.LI.item Марксизм практически начинает экспериментальный кризис легитимности.
+                +e.LI.item Онтогенез речи важно начинает культ личности. Толпа отражает эгоцентризм. Гештальт противоречиво интегрирует контраст.
+                +e.LI.item Политическая модернизация иллюстрирует механизм власти.
