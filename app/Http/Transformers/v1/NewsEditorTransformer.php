@@ -25,11 +25,13 @@ class NewsEditorTransformer extends Transformer
             $transform['lastEditorComment'] = null;
         }
 
-        $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
-        $transform['image_main'] = $imageMain;
+        $imageMain = CdnFile::where('id', '=', $news['image_main'])->select(['url', 'id'])->first();
+        $transform['image_main'] = $imageMain['url'];
+        $transform['image_main_id'] = $imageMain['id'];
 
-        $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->pluck('url')->first();
-        $transform['image_preview'] = $imagePreview;
+        $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select(['url', 'id'])->first();
+        $transform['image_preview'] = $imagePreview['url'];
+        $transform['image_preview_id'] = $imagePreview['id'];
 
         unset(
             $transform['rubrics_id'],
