@@ -37,6 +37,9 @@ class NewsListTransformer extends Transformer
         $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->pluck('url')->first();
         $transform['ImagePreview'] = $imagePreview;
 
+	    $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
+	    $transform['ImageMain'] = $imageMain;
+
         $transform['ExistVideo'] = (bool) $news['video_stream'];
 
         if ($news['video_stream']) {
@@ -85,8 +88,7 @@ class NewsListTransformer extends Transformer
         $transform['Note'] = $news['note'];
         $transform['Body'] = $news['body'];
         $transform['Comments'] = $this->transformComments($comments);
-        $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
-        $transform['ImageMain'] = $imageMain;
+
 
         return $transform;
     }
