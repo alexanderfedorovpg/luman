@@ -80,14 +80,7 @@ export const Dynamic = (props) => (
 
 export const YoutubePlayBtn = (props) => (
     <Svg {...props} xmlns="http://www.w3.org/2000/svg" width="40" height="32" viewBox="0 0 40 32">
-        <defs>
-            <filter id="filter" x="199" y="460" width="40" height="32" filterUnits="userSpaceOnUse">
-                <feFlood result="flood" flood-color="#c00"/>
-                <feComposite result="composite" operator="in" in2="SourceGraphic"/>
-                <feBlend result="blend" in2="SourceGraphic"/>
-            </filter>
-        </defs>
-        <path filter="url(#filter)" d="M235 460.8c-1.2-.4-8.6-.8-16-.8s-14.8.4-16 .8c-3.2 1-4 8-4 15.2s.8 14.2 4 15.2c1.2.4 8.6.8 16 .8s14.8-.4 16-.8c3.2-1 4-8 4-15.2s-.8-14.2-4-15.2zM215 485v-18l12 9z" transform="translate(-199 -460)"/>
+        <path fill="#c00" fillRule="evenodd" d="M235 460.8c-1.2-.4-8.6-.8-16-.8s-14.8.4-16 .8c-3.2 1-4 8-4 15.2s.8 14.2 4 15.2c1.2.4 8.6.8 16 .8s14.8-.4 16-.8c3.2-1 4-8 4-15.2s-.8-14.2-4-15.2zM215 485v-18l12 9z" transform="translate(-199 -460)" />
     </Svg>
 );
 

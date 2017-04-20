@@ -1,15 +1,16 @@
-import React, { PureComponent } from 'react'
-import styled from 'styled-components'
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { Input } from '../Form'
+import { Input } from '../Form';
 
-import { ifProp, rem } from './../../utils/style'
-import { font } from './../../constants/style'
+import { ifProp, rem } from './../../utils/style';
+import { font } from './../../constants/style';
 
 const Root = styled.div`
     margin-top: 5px;
     margin-bottom: 6px;
-`
+`;
 
 const Item = styled.div`
     display: inline-block;
@@ -21,11 +22,11 @@ const Item = styled.div`
     &:last-child {
         margin-right: 0;
     }
-`
+`;
 
 const CustomInput = styled(Input)`
     display: none
-`
+`;
 
 const Label = styled.label`
     display: flex;
@@ -53,7 +54,7 @@ const Label = styled.label`
         border-color: #56647b;
         background-color: #56647b !important;
     `}
-`
+`;
 
 class Tags extends PureComponent {
 
@@ -61,76 +62,93 @@ class Tags extends PureComponent {
         super(props);
 
         this.state = {
-            checked: (this.props.value || []).slice(0)
-        }
+            checked: (this.props.value || []).slice(0),
+        };
 
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
             this.setState({
-                checked: (nextProps.value || []).slice(0)
-            })
+                checked: (nextProps.value || []).slice(0),
+            });
         }
     }
 
     handleChange(e) {
-        let value = e.target.value
-        let index = this.state.checked.indexOf(value)
-        let cb = () => (this.props.onChange || (()=>{}))(this.state.checked)
+        const value = e.target.value;
+        const index = this.state.checked.indexOf(value);
+        const cb = () => (this.props.onChange || (() => {}))(this.state.checked);
 
-        if (index > -1) {
+        if (this.props.type === 'radio') {
             this.setState({
-                checked: [
-                    ...this.state.checked.slice(0, index),
-                    ...this.state.checked.slice(index+1)
-                ]
-            }, cb)
+                checked: [value],
+            }, cb);
+
+            return;
         }
-        else {
+
+        if (index === -1) {
             this.setState({
                 checked: [
                     ...this.state.checked,
-                    value
-                ]
-            }, cb)
+                    value,
+                ],
+            }, cb);
+        } else {
+            this.setState({
+                checked: [
+                    ...this.state.checked.slice(0, index),
+                    ...this.state.checked.slice(index + 1),
+                ],
+            }, cb);
         }
     }
 
     render() {
-        let { data } = this.props
-        let { checked } = this.state
+        const { data, type } = this.props;
+        const { checked } = this.state;
 
         return (
             <Root>
-                {data.map(tag => {
-                    if (!tag) return null
+                {data.map((tag) => {
+                    if (!tag) {
+                        return null;
+                    }
 
                     return (
                         <Item key={tag}>
                             <Label checked={checked.indexOf(tag) > -1}>
                                 <CustomInput
-                                    type="checkbox"
+                                    type={type}
                                     name="tags"
                                     value={tag}
                                     checked={checked.indexOf(tag) > -1}
-                                    onChange={this.handleChange} />
+                                    onChange={this.handleChange}
+                                />
 
                                 <span>
                                     {tag}
                                 </span>
                             </Label>
                         </Item>
-                    )
+                    );
                 })}
             </Root>
-        )
+        );
     }
 }
 
-Tags.PropTypes = {
-    data: React.PropTypes.array.isRequired
-}
+Tags.defaultProps = {
+    type: 'checkbox',
+};
 
-export default Tags
+Tags.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.string).isRequired,
+    type: PropTypes.oneOf(['checkbox', 'radio']),
+    onChange: PropTypes.func,
+    value: PropTypes.arrayOf(PropTypes.string),
+};
+
+export default Tags;
