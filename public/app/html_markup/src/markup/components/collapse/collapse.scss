@@ -20,6 +20,9 @@
                 display: block;
             }
         }
+        &.is-war {
+            border-color: #c00;
+        }
     }
     &__title {
         position: relative;
@@ -46,5 +49,18 @@
     }
     &__details {
         display: none;
+
+        .form-group {
+            padding-right: rem(18);
+            padding-left: rem(18);
+            margin-top: 12px;
+            margin-bottom: 4px;
+        }
+        .input-block {
+            @include placeholder {
+                color: #999;
+            }
+        }
+
     }
 }
