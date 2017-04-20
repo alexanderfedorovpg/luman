@@ -123,6 +123,12 @@
                 color: #666;
             }
         }
+        &.is-war {
+            color: #c00;
+            span {
+                color: #c00;
+            }
+        }
         &:last-child {
             margin-right: 0;
         }

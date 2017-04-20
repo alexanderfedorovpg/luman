@@ -1,7 +1,7 @@
-mixin p-constructor(data)
+mixin p-constructor-war(data)
 
     // Контент здесь
-    +b.HEADER.header.header-off.main__top.constructor__top()&attributes(attributes)
+    +b.HEADER.header.header-off.main__top.constructor__top.constructor-war
         +b.header-bot
             +b.header-l
                 .input-icon
@@ -18,7 +18,7 @@ mixin p-constructor(data)
                         button.btn.btn-xs.btn-success
                             i.icon.icon-okay
                             | Сохранить
-    .content-wrap.constructor()&attributes(attributes)
+    .content-wrap.constructor.constructor-war
         .content-l
             //- top
             +b.constructor-nav
@@ -53,11 +53,13 @@ mixin p-constructor(data)
                 +e.col-l
 
                     .toggle.toggle--reverse
-                        input#cb1(type='checkbox')
+                        input#cb1(type='checkbox' checked)
                         label(for='cb1')
                         span ВОЙНА OFF
 
                     +b.constructor-filter-nav
+                        +e.A.item.is-active.is-war(href=jv0) Война 
+                            span 4
                         +e.A.item.is-active(href=jv0) Новости 
                             span 10
                         +e.A.item(href=jv0) Инфошум 
@@ -71,4 +73,4 @@ mixin p-constructor(data)
             //- right cnt
             +b.constructor-collapse
 
-                +collapse()
+                +collapse('war')
