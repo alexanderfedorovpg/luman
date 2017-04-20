@@ -1,0 +1,36 @@
+include ../general-video/general-video
+include ../info-noize/info-noize
+include ../enter-one/enter-one
+include ../text-bg-gray/text-bg-gray
+include ../social-links/social-links
+include ../breadcrumb/breadcrumb
+include ../top-button/top-button
+
+mixin p-text-stream(data)
+    +b.inner-about.inner-default.text-stream()&attributes(attributes)
+
+        //- block
+        +e.container.container
+            +e.left.left-col.left-col_position_relative
+
+                h1 Происшествие во Владивостоке
+                +e.date Последнее обновление 5 минут назад
+
+                +b.text-bg-gray.text-bg-gray--news.inner-about__text-bg-gray
+
+                    +social-links(socialLinks.side)(class='social-links--vertical')
+
+                +e.content
+
+                    +breadcrumb(breadcrumb.textStream)
+                    
+
+            +e.right.right-col
+
+                +general-video(general_video.mini_photo)(class="inner-about__general-video")
+
+                +info-noize(info_noize)(class="inner-about__info-noize")
+
+                +enter-one(from_enter.one)(class="inner-about__enter-one enter-one__no-border")
+
+            +top-button

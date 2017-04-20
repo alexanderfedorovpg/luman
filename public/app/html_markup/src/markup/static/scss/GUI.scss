@@ -421,6 +421,15 @@ a {
         }
     }
 
+    &--reverse {
+        span {
+            order: 0;
+        }
+        label {
+            order: 1;
+        }
+    }
+
 }
 
 // select
@@ -549,7 +558,9 @@ a {
     }
 
     &:hover:after {
-        display: block;
+        display: inline-block;
+        white-space: nowrap;
+        width: auto;
     }
 }
 

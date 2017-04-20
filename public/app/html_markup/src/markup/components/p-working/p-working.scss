@@ -146,6 +146,18 @@
 
     }
 
+    &__media {
+        margin-top: 4px;
+        margin-bottom: 3px;
+
+        font-family: 'Open Sans';
+        font-size: 12px;
+        font-weight: 400;
+        color: #666666;
+        letter-spacing: -0.5px;
+        text-transform: uppercase;
+    }
+
     &__time {
         width: 15.3%;
 

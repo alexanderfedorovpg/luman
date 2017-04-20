@@ -3,7 +3,10 @@ include ../mini-news/mini-news
 mixin block-square(data)
     +b.block-square()&attributes(attributes)
         block
-        if (!data.more)
+        if (data.more)
+            each items in data.list
+                +mini-news(items)
+        else
             +e.A(href=jv0).link
             +e.IMG(src=data.img alt=data.alt).img
             +e.info
@@ -15,7 +18,4 @@ mixin block-square(data)
                 +e.P.time-add #{data.time_add}
                     if (data.time_update)
                         = ' / '
-                        +e.SPAN.time-update #{data.time_update}
-        else
-            each items in data.list
-                +mini-news(items)
+                        +e.SPAN.time-upadate #{data.time_update}
