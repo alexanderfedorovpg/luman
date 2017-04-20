@@ -1,4 +1,6 @@
 .text-bg-gray {
+    position: relative;
+
     width: rem(1039);
     height: rem(386);
 
@@ -25,6 +27,15 @@
 
         color: $white;
     }
+
+    &__title {
+        margin-bottom: 24px;
+        color: $purple;
+        font-family: $stemBold;
+        font-size: 24px;
+        line-height: 21px;
+    }
+
 }
 
 .text-bg-gray--news {
@@ -111,10 +122,10 @@
         }
 
         &__span {
-            left: 33px;
+            left: rem(33);
 
             font-family: $stemReg;
-            font-size: 14px;
+            font-size: rem(14);
         }
 
         &__logo-title {
@@ -138,4 +149,11 @@
 
     }
 
+}
+
+.text-bg-gray--primary {
+    height: auto;
+    padding-top: rem(28);
+    padding-left: rem(198);
+    padding-bottom: rem(50);
 }

@@ -4,7 +4,7 @@ namespace App\Auth\Rbac\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
-use App\User;
+use App\Models\User;
 use App\Auth\Rbac\Models\Permission;
 
 /**
@@ -93,7 +93,7 @@ class Group extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(\App\User::class, 'has_groups');
+        return $this->belongsToMany(User::class, 'has_groups');
     }
 
 

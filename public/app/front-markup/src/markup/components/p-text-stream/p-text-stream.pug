@@ -16,7 +16,19 @@ mixin p-text-stream(data)
                 h1 Происшествие во Владивостоке
                 +e.date Последнее обновление 5 минут назад
 
-                +b.text-bg-gray.text-bg-gray--news.inner-about__text-bg-gray
+                +b.text-bg-gray.text-bg-gray--primary.inner-about__text-bg-gray
+
+                    +e.H2.title Главное
+
+                    +b.UL.list-default.list
+                        +e.LI.item
+                            p Он был застрелен сегодня утром во время своего визита в военную часть.
+                        +e.LI.item
+                            p Марксизм практически начинает экспериментальный кризис легитимности.
+                        +e.LI.item
+                            p Онтогенез речи важно начинает культ<br>личности. Толпа отражает эгоцентризм. Гештальт противоречиво интегрирует контраст.
+                        +e.LI.item
+                            p Политическая модернизация иллюстрирует механизм власти.
 
                     +social-links(socialLinks.side)(class='social-links--vertical')
 
@@ -24,6 +36,7 @@ mixin p-text-stream(data)
 
                     +breadcrumb(breadcrumb.textStream)
                     
+                +top-button
 
             +e.right.right-col
 
@@ -33,4 +46,3 @@ mixin p-text-stream(data)
 
                 +enter-one(from_enter.one)(class="inner-about__enter-one enter-one__no-border")
 
-            +top-button

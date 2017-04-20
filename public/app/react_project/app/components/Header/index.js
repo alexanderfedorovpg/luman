@@ -168,7 +168,7 @@ function Header({ moved, onToggle, isActive, onLogout, user }) {
                             }}>
                             <Icon type="hamburger" />
                         </Hamburger>
-                        <Time datetime="2017-04-02T16:35">5 января 2017 16:35</Time>
+                        <Time dateTime="2017-04-02T16:35">5 января 2017 16:35</Time>
                     </div>
                 </Left>
                 <Right>

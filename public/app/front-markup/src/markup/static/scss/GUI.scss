@@ -1,2 +1,24 @@
 // GUI stylies of the project
 // For example, styles of the links, buttons and so on.
+
+.list-default {
+    &__item {
+        margin-bottom: rem(15);
+        list-style: none;
+        &:before {
+            display: inline-block;
+            margin-right: rem(3);
+            vertical-align: top;
+            content: '—';
+            color: #cc0000;
+            font-family: $stemReg;
+            font-size: rem(14);
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+        p {
+            display: inline-block;
+        }
+    }
+}
