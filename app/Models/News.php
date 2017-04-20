@@ -42,7 +42,7 @@ class News extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\NewsComments');
+        return $this->hasMany(NewsComments::class);
     }
 
     /**
@@ -52,7 +52,7 @@ class News extends Model
      */
     public function newsRelated()
     {
-        return $this->belongsToMany('App\Models\News', 'news_related', 'news_id_1', 'news_id_2');
+        return $this->belongsToMany(NewsRelated::class, 'news_related', 'news_id_1', 'news_id_2');
     }
 
     /**

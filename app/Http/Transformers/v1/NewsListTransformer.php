@@ -5,6 +5,8 @@ namespace App\Http\Transformers\v1;
 use App\Models\User;
 use App\Http\Transformers\Transformer;
 use App\Models\Rubrics;
+use App\Models\CdnFile;
+
 /**
  * Class NewsListTransformer
  * @package App\Http\Transformers\v1
@@ -31,7 +33,10 @@ class NewsListTransformer extends Transformer
         $transform['Title'] = $news['title'];
         $transform['Subtitle'] = $news['sub_title'];
         $transform['Tags'] =  explode(',', $news['tags']);
-        $transform['ImagePreview'] = $news['image_preview'];
+
+        $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->pluck('url')->first();
+        $transform['ImagePreview'] = $imagePreview;
+
         $transform['ExistVideo'] = (bool) $news['video_stream'];
 
         if ($news['video_stream']) {
@@ -79,8 +84,9 @@ class NewsListTransformer extends Transformer
         $transform = $this->transform($news);
         $transform['Note'] = $news['note'];
         $transform['Body'] = $news['body'];
-        $transform['ImageMain'] = $news['image_main'];
         $transform['Comments'] = $this->transformComments($comments);
+        $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
+        $transform['ImageMain'] = $imageMain;
 
         return $transform;
     }
