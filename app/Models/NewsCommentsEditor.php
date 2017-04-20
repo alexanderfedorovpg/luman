@@ -15,7 +15,7 @@
 		 */
 		public function editor()
 		{
-			return $this->hasOne('App\User', 'id', 'editor_id');
+			return $this->hasOne('App\Models\User', 'id', 'editor_id');
 		}
 		/**
 		 * Фильтрация по наличию последнего комментария
