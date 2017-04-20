@@ -917,7 +917,11 @@ main {
 
 .big-news__info {
   position: absolute;
+<<<<<<< HEAD
   bottom: 1.25rem;
+=======
+  bottom: 1.125rem;
+>>>>>>> 08c666a551a749af20fbf4413f68f5b76db128b0
   left: 0;
   width: inherit;
   padding-right: 7.0625rem;
@@ -1044,6 +1048,10 @@ main {
   height: 32.1875rem;
 }
 
+.general-news__big-news_war {
+  height: 32.1875rem;
+}
+
 .general-news__now {
   height: 31.5625rem;
   padding-top: 0.6875rem;
@@ -1051,7 +1059,15 @@ main {
 
 .general-news__info-noize {
   width: 18.75rem;
+}
+
+.general-news__info-noize_margin {
+  margin-top: 1.875rem;
+}
+
+.general-news__info-noize_war {
   padding-left: 0.875rem;
+  margin-top: 0.9375rem;
 }
 
 .general-news__info-noize_right-block {

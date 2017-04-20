@@ -19,9 +19,8 @@
         }
 
         .mini-news {
-            padding-top: rem(6);
             padding-bottom: 0;
-
+            padding-top: rem(6);
             border-bottom: none;
 
             &:not(:first-child) {
@@ -31,7 +30,10 @@
 
         .mini-news__title {
             display: inline-block;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 08c666a551a749af20fbf4413f68f5b76db128b0
             font-size: rem(14);
             line-height: rem(16);
         }

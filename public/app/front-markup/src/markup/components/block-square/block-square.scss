@@ -46,8 +46,8 @@
 
     &__title {
         margin-bottom: rem(3);
-
         font: #{rem(18)}/#{rem(21)} $stemBold;
+        letter-spacing: rem(-.9);
         color: $white;
         letter-spacing: rem(-.9);
     }
