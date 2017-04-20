@@ -4,11 +4,10 @@
 namespace App\Http\Transformers\v1;
 
 use App\Http\Transformers\Transformer;
-use App\Http\Transformers\v1\NewsListTransformer;
 use App\Models\NewsCommentsEditor;
 use App\Models\Rubrics;
 use App\Models\News;
-use App\Models\User;
+use App\Models\CdnFile;
 
 class NewsEditorTransformer extends Transformer
 {
@@ -26,6 +25,12 @@ class NewsEditorTransformer extends Transformer
             $transform['lastEditorComment'] = null;
         }
 
+        $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
+        $transform['image_main'] = $imageMain;
+
+        $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->pluck('url')->first();
+        $transform['image_preview'] = $imagePreview;
+
         unset(
             $transform['rubrics_id'],
             $transform['editor_id']
@@ -33,7 +38,7 @@ class NewsEditorTransformer extends Transformer
         return $transform;
     }
 
-    public function transformOneNews($news, $comments)
+    public function transformOneNews($news)
     {
         $transform = $this->transform($news);
         $transform['editorComments'] = $this->transformEditorComments($news['id']);
