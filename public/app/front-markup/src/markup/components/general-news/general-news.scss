@@ -31,7 +31,7 @@
         justify-content: space-between;
 
         &.two-wrapper {
-            margin-top: rem(13);
+            margin-top: rem(15);
         }
     }
 
@@ -49,13 +49,14 @@
 
     &__info-noize {
         width: rem(300);
+        padding-left: rem(14);
 
-        &_margin {
+        &_right-block {
+            padding-left: 0;
             margin-top: rem(30);
         }
 
         &_war {
-            padding-left: rem(14);
             margin-top: rem(15);
         }
 
@@ -79,7 +80,7 @@
     }
 
     &__more-news {
-        margin-top: rem(25);
+        margin-top: rem(24);
     }
 
     &__enter-one {

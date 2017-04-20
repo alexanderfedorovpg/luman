@@ -22,7 +22,7 @@
     &__time-keeping {
         position: relative;
 
-        margin-top: rem(9);
+        margin-bottom: rem(5);
     }
 
     &__ico {
@@ -63,10 +63,10 @@
     &__info {
         position: absolute;
         z-index: 1;
-        bottom: 5px;
+        bottom: rem(2);
         left: 0;
 
-        width: rem(310);
+        width: rem(345);
         padding-left: rem(19);
     }
 
@@ -78,6 +78,7 @@
     &__title_font_small {
         font-size: rem(18);
         line-height: rem(21);
+        letter-spacing: rem(-.8);
     }
 
     &__time-add {
