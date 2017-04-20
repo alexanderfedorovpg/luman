@@ -19,7 +19,7 @@ class NewsComments extends Model
      */
     public function editor()
     {
-        return $this->hasOne('App\User', 'id', 'editor_id');
+        return $this->hasOne(User::class, 'id', 'editor_id');
     }
 
     /**

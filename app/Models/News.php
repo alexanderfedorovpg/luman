@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -52,7 +52,7 @@ class News extends Model
      */
     public function newsRelated()
     {
-        return $this->belongsToMany('App\News', 'news_related', 'news_id_1', 'news_id_2');
+        return $this->belongsToMany(NewsRelated::class, 'news_related', 'news_id_1', 'news_id_2');
     }
 
     /**
