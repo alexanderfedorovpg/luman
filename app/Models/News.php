@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,6 +32,7 @@ class News extends Model
         'image_preview',
         'is_online',
         'moderation',
+        'theses',
     ];
 
     /**
@@ -41,7 +42,7 @@ class News extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\NewsComments');
+        return $this->hasMany('App\Models\NewsComments');
     }
 
     /**
@@ -51,7 +52,7 @@ class News extends Model
      */
     public function newsRelated()
     {
-        return $this->belongsToMany('App\News', 'news_related', 'news_id_1', 'news_id_2');
+        return $this->belongsToMany('App\Models\News', 'news_related', 'news_id_1', 'news_id_2');
     }
 
     /**

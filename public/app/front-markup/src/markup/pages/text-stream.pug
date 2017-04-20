@@ -1,0 +1,10 @@
+extends ../layouts/default
+
+include  ../components/p-text-stream/p-text-stream
+
+block vars
+    -pageSettings.title = 'Текстовая трансляция';
+
+block content
+    // Контент здесь
+    +p-text-stream

@@ -1,0 +1,40 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.info-noize {
+
+    &__wrapper {
+       margin-top: rem(15);
+    }
+
+    &__title {
+        line-height: rem(34);
+    }
+
+    &__mini-news {
+        @include padding_y(0);
+        border-bottom: none !important;
+
+        &:not(:first-child) {
+            margin-top: rem(10);
+        }
+
+        &:first-child {
+
+            .mini-news__title {
+                font-family: $stemBold;
+                font-size: rem(21);
+                line-height: rem(26);
+            }
+        }
+
+        .mini-news__title {
+            font-size: rem(14);
+            line-height: rem(18);
+        }
+
+        .mini-news__date {
+            margin-top: rem(-5);
+        }
+    }
+}

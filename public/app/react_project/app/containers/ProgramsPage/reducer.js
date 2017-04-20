@@ -6,17 +6,18 @@
 
 import { fromJS } from 'immutable';
 import {
-    DEFAULT_ACTION,
+    SET_FILTER,
+    filters,
 } from './constants';
 
 const initialState = fromJS({
-    filter: '',
+    filter: filters[0].value,
 });
 
 function programsPageReducer(state = initialState, action) {
     switch (action.type) {
-        case DEFAULT_ACTION:
-            return state;
+        case SET_FILTER:
+            return state.set('filter', action.payload);
         default:
             return state;
     }

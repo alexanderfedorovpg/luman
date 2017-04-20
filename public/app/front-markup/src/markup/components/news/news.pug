@@ -1,0 +1,14 @@
+include ../block-square/block-square
+include ../mini-news/mini-news
+
+mixin news(data)
+    - params = data
+    +b.news()&attributes(attributes)
+        block
+        +e.P.title.section-title Новости
+        +e.list
+            +block-square(params.square)(class="news__block-square")
+
+            each item in params.list
+                +mini-news(item)(class="news__mini-news")
+

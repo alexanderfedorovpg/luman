@@ -1,0 +1,21 @@
+mixin collapse(data)
+    +b.collapse-content()&attributes(attributes)
+
+        +e.item.is-active
+          +e.P.title.js-collap-ln
+            +e.SPAN.inner(role='button') Сейчас
+          +e.details.js-collap-content
+            +constructor-right(constructorRight.now)
+
+        +e.item.is-active
+          +e.P.title.js-collap-ln
+            +e.SPAN.inner(role='button') Главное за сутки
+          +e.details.js-collap-content
+            +constructor-right(constructorRight.day)
+
+        +e.item
+          +e.P.title.js-collap-ln
+            +e.SPAN.inner(role='button') Прочее
+          +e.details.js-collap-content
+            p empty
+

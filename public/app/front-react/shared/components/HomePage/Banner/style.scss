@@ -1,0 +1,30 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.banner {
+
+    &__where-view {
+        @include padding_y(#{rem(31)});
+        width: rem(932);
+        height: rem(99);
+
+        text-align: center;
+
+        background-image: url(./where-view.png);
+        background-position: center;
+        background-size: cover;
+    }
+
+    &__title {
+        font: #{rem(24)}/#{rem(26)} $stemBold;
+        color: $white;
+        text-transform: uppercase;
+    }
+
+    &__subtitle {
+        font-size: rem(14);
+        line-height: rem(26);
+        color: $gray-dirty;
+        text-transform: uppercase;
+    }
+}

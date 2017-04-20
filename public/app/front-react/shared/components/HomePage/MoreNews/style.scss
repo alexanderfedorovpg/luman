@@ -1,0 +1,24 @@
+@import "~style/mixins";
+
+.more-news {
+
+    .mini-news__title {
+        font-size: rem(14);
+        line-height: rem(17);
+    }
+
+    .mini-news {
+        @include padding_y(0);
+        border-bottom: none;
+
+        &:not(:first-child) {
+            margin-top: rem(8);
+        }
+    }
+
+    .mini-news__date {
+        margin-top: 0;
+
+        line-height: rem(18);
+    }
+}

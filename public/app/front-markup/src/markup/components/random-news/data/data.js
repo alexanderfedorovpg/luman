@@ -1,5 +1,4 @@
 var data = {random_news: {
-    catalog: true,
     news_one: {
         title: 'Более 250 погибших в результате катаклизма в Колумбии',
         title_size: 'block-rectangle__title_font_small',
