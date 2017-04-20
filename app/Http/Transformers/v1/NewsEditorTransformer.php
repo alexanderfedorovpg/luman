@@ -19,6 +19,7 @@ class NewsEditorTransformer extends Transformer
         $transform['rubrics'] = Rubrics::where('id', '=', $news['rubrics_id'])->get();
         $transform['editor'] = $this->transformEditor($news['id']);
         $editorComments = $this->transformEditorComments($news['id']);
+        $transform['editor_id'] = isset($transform['editor']['id']) ? $transform['editor']['id'] : null;
         if ($editorComments) {
             $transform['lastEditorComment'] = $editorComments[count($editorComments) - 1];
         } else {
@@ -33,10 +34,8 @@ class NewsEditorTransformer extends Transformer
         $transform['image_preview'] = $imagePreview['url'];
         $transform['image_preview_id'] = $imagePreview['id'];
 
-        unset(
-            $transform['rubrics_id'],
-            $transform['editor_id']
-        );
+        unset($transform['rubrics_id']);
+        
         return $transform;
     }
 
