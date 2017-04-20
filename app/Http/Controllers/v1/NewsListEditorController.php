@@ -104,17 +104,10 @@ class NewsListEditorController extends CmsController
             return $this->respondNotFound();
         }
         $newsArray = $news->toArray();
-        $comments = $news->comments()->published()->get();
+
+        $data = $this->newsEditorTransformer->transformOneNews($newsArray);
 
 
-        $data = $this->newsEditorTransformer->transformOneNews($newsArray, $comments);
-
-
-//        if($this->getArray){
-//            return $data;
-//        } else {
-//            return $this->respond($data);
-//        }
         return $this->respond($data);
     }
 

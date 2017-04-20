@@ -33,7 +33,7 @@ class NewsEditorTransformer extends Transformer
         return $transform;
     }
 
-    public function transformOneNews($news, $comments)
+    public function transformOneNews($news)
     {
         $transform = $this->transform($news);
         $transform['editorComments'] = $this->transformEditorComments($news['id']);

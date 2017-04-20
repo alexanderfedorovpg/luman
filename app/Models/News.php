@@ -42,7 +42,7 @@ class News extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\NewsComments');
+        return $this->hasMany(NewsComments::class);
     }
 
     /**
