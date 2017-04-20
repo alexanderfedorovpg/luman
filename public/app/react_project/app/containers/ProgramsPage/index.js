@@ -15,6 +15,7 @@ import {
     setFilter,
 } from './actions';
 
+import Programs from 'components/Programs';
 import Header from './Header';
 import Wrap from './Wrap';
 import TopPanel from './TopPanel';
@@ -22,7 +23,7 @@ import TopPanel from './TopPanel';
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render() {
         const { menuOpen } = this.props;
-        const { filter } = this.props.ProgramsPage;
+        const { filter, programs } = this.props.ProgramsPage;
         return (
             <div>
                 <Header
@@ -32,6 +33,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                 />
                 <Wrap>
                     <TopPanel />
+                    <Programs items={programs} />
                 </Wrap>
             </div>
         );
