@@ -5,6 +5,7 @@
     }
 
     &__title {
+        padding-left: rem(28);
         line-height: rem(34);
     }
 
@@ -26,6 +27,7 @@
         }
 
         .mini-news__title {
+            display: inline-block;
             font-size: rem(14);
             line-height: rem(18);
         }

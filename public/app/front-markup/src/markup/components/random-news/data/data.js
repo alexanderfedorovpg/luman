@@ -57,5 +57,8 @@ var data = {random_news: {
                 alt: ''
             }
         }
+    },
+    random: {
+
     }
 }};

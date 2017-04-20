@@ -40,12 +40,14 @@
         bottom: rem(9);
         left: 0;
 
-        width: rem(252);
+        width: rem(280);
         padding-left: rem(20);
     }
 
     &__title {
+        margin-bottom: rem(3);
         font: #{rem(18)}/#{rem(21)} $stemBold;
+        letter-spacing: rem(-.9);
         color: $white;
     }
 

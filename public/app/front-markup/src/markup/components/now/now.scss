@@ -4,10 +4,12 @@
 
     background-color: $gray-light;
 
+    &__title {
+        padding-left: rem(29);
+    }
 
     &__news {
         padding-right: 1px;
-        margin-top: 1px;
     }
 
     &__mini-news {
