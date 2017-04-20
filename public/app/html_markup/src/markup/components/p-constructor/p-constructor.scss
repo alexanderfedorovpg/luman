@@ -7,7 +7,9 @@
             padding-right: rem(9);
             .input-icon {
                 width: 100%;
-                input {
+                .input {
+                    padding-top: 8px;
+
                     border: 0;
                 }
             }
@@ -19,6 +21,14 @@
                 width: 100%;
                 .btn {
                     border: 0;
+                }
+                .btn:nth-child(2) {
+                    padding-right: rem(20);
+                }
+                .btn:nth-child(3) {
+                    .icon-okay {
+                        margin-left: rem(-26);
+                    }
                 }
             }
         }
@@ -43,8 +53,7 @@
     }
 
     .working__wrap {
-        flex-direction: column;
-
+        display: block;
     }
 
     .content-r {
@@ -73,9 +82,10 @@
 }
 
 .constructor-nav {
-    padding-bottom: 10px;
+    padding-bottom: rem(10);
     padding-left: $pad;
-    margin-left: 1px;
+    margin-top: rem(1);
+    margin-left: rem(1);
 
     border-bottom: 1px solid #e8e8e8;
 
@@ -84,12 +94,12 @@
 
         font-size: 14px;
         font-weight: 700;
-        color: #000;
+        color: #006699;
         text-decoration: none;
         text-transform: uppercase;
         &.is-active,
         &:hover {
-            color: #006699;
+            color: #000;
         }
         &:last-child {
             margin-right: 0;
@@ -105,7 +115,7 @@
 .constructor-filter-nav {
     margin-left: rem(9);
     &__item {
-        margin-right: 20px;
+        margin-right: rem(21);
 
         font-size: 14px;
         font-weight: 700;
@@ -145,6 +155,9 @@
     }
     .toggle {
         margin-bottom: 0;
+        span {
+            color: #000;
+        }
     }
     &__col-l {
         display: flex;
