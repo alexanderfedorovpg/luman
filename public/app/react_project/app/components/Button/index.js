@@ -1,7 +1,6 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { rem, ifProp } from '../../utils/style'
-import { font, color, height } from '../../constants/style'
+import styled, { css } from 'styled-components';
+import { rem, ifProp } from '../../utils/style';
+import { font, color, height } from '../../constants/style';
 
 const Button = styled.button`
     display: inline-block;
@@ -76,7 +75,6 @@ const Button = styled.button`
 
         }
     `)}
+`;
 
-`
-
-export default Button
+export default Button;

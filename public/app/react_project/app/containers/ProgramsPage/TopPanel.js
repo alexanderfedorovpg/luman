@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 
 const TopPanel = () => (
     <Wrapper>
-        <Tags data={tags} value="Все" />
+        <Tags type="radio" data={tags} value={['Все']} />
     </Wrapper>
 );
 

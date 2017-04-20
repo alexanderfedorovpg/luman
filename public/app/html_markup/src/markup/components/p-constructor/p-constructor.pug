@@ -1,7 +1,7 @@
 mixin p-constructor(data)
 
     // Контент здесь
-    +b.HEADER.header.header-off.main__top.constructor__top
+    +b.HEADER.header.header-off.main__top.constructor__top()&attributes(attributes)
         +b.header-bot
             +b.header-l
                 .input-icon
@@ -18,7 +18,7 @@ mixin p-constructor(data)
                         button.btn.btn-xs.btn-success
                             i.icon.icon-okay
                             | Сохранить
-    .content-wrap.constructor
+    .content-wrap.constructor()&attributes(attributes)
         .content-l
             //- top
             +b.constructor-nav

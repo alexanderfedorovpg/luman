@@ -95,12 +95,38 @@ const Arrow = styled.a`
 class Dynamic extends Component {
     constructor(props) {
         super(props);
+        let data1 = [
+                {val: 12, cat: 'Политика'}, 
+                {val: 19, cat: 'Экономика'}, 
+                {val: 3, cat: 'Общество'}, 
+                {val: 17, cat: 'Политика'}, 
+                {val: 6, cat: 'Наука'},
+                {val: 3, cat: 'Спорт'},
+                {val: 7, cat: 'Политика'},
+                {val: 7, cat: 'Политика'},
+                {val: 8, cat: 'Экономика'},
+                {val: 6, cat: 'Политика'},
+            ];
         this.state = {
             modalOpen: false,
+            data1: data1,
+            data2: [
+                {val: 1, cat: 'Политика'}, 
+                {val: 9, cat: 'Экономика'}, 
+                {val: 3, cat: 'Общество'}, 
+                {val: 17, cat: 'Политика'}, 
+                {val: 6, cat: 'Наука'},
+                {val: 3, cat: 'Спорт'},
+                {val: 5, cat: 'Политика'},
+                {val: 7, cat: 'Наука'},
+                {val: 8, cat: 'Экономика'},
+                {val: 9, cat: 'Политика'},
+            ],
             chartData: {
                 labels: ['06.01.2017', '07.01.2017', '08.01.2017', '09.01.2017', '10.01.2017', '11.01.2017', '12.01.2017', '13.01.2017', '14.01.2017', '15.01.2017'],
                 datasets: [{
-                    data: [12, 19, 3, 17, 6, 3, 7, 4, 5, 6],
+                    currData: data1,
+                    data: data1.map(r => r.val),
                     fill: false,
                     lineTension: 0,
                     pointBackgroundColor: '#359918',
@@ -111,13 +137,18 @@ class Dynamic extends Component {
                 }]
             },
             showOld: true,
-            showNew: false
+            showNew: false,
+            filter: []
         };
+
+    //    let fuck = this.state.data1.map(r => r.val);
+
 
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.renderNew = this.renderNew.bind(this);
         this.renderOld = this.renderOld.bind(this);
+        this.filter = this.filter.bind(this);
         // this.chartData = {
 
         // };
@@ -144,7 +175,18 @@ class Dynamic extends Component {
             chartData: {
                 labels: ['26.12.2017', '27.12.2017', '28.12.2017', '29.12.2017', '30.12.2016', '31.12.2016', '01.01.2017', '02.01.2017', '04.01.2017', '05.01.2017'],
                 datasets: [{
-                    data: [1, 1, 1, 17, 9, 8, 6, 5, 3, 1],
+                    currData: this.state.data2,
+                    data: this.state.data2.map(r => {
+                        if (this.state.filter.length > 0) {
+                            if (this.state.filter.join(',').indexOf(r.cat) > -1) {
+                                return r.val;
+                            } else {
+                                return 0;
+                            }
+                        } else {
+                            return r.val;
+                        }
+                    }),
                     fill: false,
                     lineTension: 0,
                     pointBackgroundColor: '#359918',
@@ -166,7 +208,18 @@ class Dynamic extends Component {
             chartData: {
                 labels: ['06.01.2017', '07.01.2017', '08.01.2017', '09.01.2017', '10.01.2017', '11.01.2017', '12.01.2017', '13.01.2017', '14.01.2017', '15.01.2017'],
                 datasets: [{
-                    data: [12, 19, 3, 17, 6, 3, 7, 4, 5, 6],
+                    currData: this.state.data1,
+                    data: this.state.data1.map(r => {
+                        if (this.state.filter.length > 0) {
+                            if (this.state.filter.join(',').indexOf(r.cat) > -1) {
+                                return r.val;
+                            } else {
+                                return 0;
+                            }
+                        } else {
+                            return r.val;
+                        }
+                    }),
                     fill: false,
                     lineTension: 0,
                     pointBackgroundColor: '#359918',
@@ -180,6 +233,28 @@ class Dynamic extends Component {
             showNew: false
         })
     }
+
+    filter() {
+        return (value) => {
+            if (value.length > 0) {
+                let filtered = this.state.chartData.datasets[0].currData.map(r => {
+                    if (value.join(',').indexOf(r.cat) > -1) {
+                        return r.val;
+                    } else {
+                        return 0;
+                    }
+                });
+                this.state.chartData.datasets[0].data = filtered;
+            } else {
+                this.state.chartData.datasets[0].data = this.state.chartData.datasets[0].currData.map(r => r.val);
+            }
+            this.setState({
+                filter: value,
+                chartData: this.state.chartData
+            });
+        }
+    }
+
 
     render() {
         let rubrics = ['Политика', 'Экономика', 'Общество', 'Наука', 'Спорт', 'Культура', 'Бизнес'];
@@ -199,10 +274,6 @@ class Dynamic extends Component {
             // responsive: false,
             maintainAspectRatio: false
         };
-
-        let changeEvent = function () {
-            return;
-        }
 
         let vall;
 
@@ -228,7 +299,7 @@ class Dynamic extends Component {
                             <Tags
                                 data={rubrics}
                                 value={vall}
-                                onChange={changeEvent} />
+                                onChange={this.filter()} />
                             <Chart>
                                 <Line data={this.state.chartData} options={options} redraw={true} />
                                 {this.state.showOld ? <Arrow className="left" onClick={this.renderNew}>{'<'}</Arrow> : null}

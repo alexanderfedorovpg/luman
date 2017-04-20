@@ -1,21 +1,40 @@
 mixin collapse(data)
     +b.collapse-content()&attributes(attributes)
 
-        +e.item.is-active
-          +e.P.title.js-collap-ln
-            +e.SPAN.inner(role='button') Сейчас
-          +e.details.js-collap-content
-            +constructor-right(constructorRight.now)
+        if data == 'war'
 
-        +e.item.is-active
-          +e.P.title.js-collap-ln
-            +e.SPAN.inner(role='button') Главное за сутки
-          +e.details.js-collap-content
-            +constructor-right(constructorRight.day)
+          +e.item.is-active.is-war
+            +e.P.title.js-collap-ln
+              +e.SPAN.inner(role='button') BREAkING NEWS
+            +e.details.js-collap-content
+              form
+                .form-group
+                  input.input.input-md.input-block(type='text', placeholder='Главный заголовок ')
+                +constructor-right(constructorRight.now)
 
-        +e.item
-          +e.P.title.js-collap-ln
-            +e.SPAN.inner(role='button') Прочее
-          +e.details.js-collap-content
-            p empty
+          +e.item.is-active
+            +e.P.title.js-collap-ln
+              +e.SPAN.inner(role='button') блок новостей
+            +e.details.js-collap-content
+              +constructor-right(constructorRight.day)
+
+        else
+
+          +e.item.is-active
+            +e.P.title.js-collap-ln
+              +e.SPAN.inner(role='button') Сейчас
+            +e.details.js-collap-content
+              +constructor-right(constructorRight.now)
+
+          +e.item.is-active
+            +e.P.title.js-collap-ln
+              +e.SPAN.inner(role='button') Главное за сутки
+            +e.details.js-collap-content
+              +constructor-right(constructorRight.day)
+
+          +e.item
+            +e.P.title.js-collap-ln
+              +e.SPAN.inner(role='button') Прочее
+            +e.details.js-collap-content
+              p empty
 

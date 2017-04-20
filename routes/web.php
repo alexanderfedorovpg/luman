@@ -98,4 +98,19 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 	$group->get('/newsstatistics/counters/','NewsStatisticsController@getCountersAll');
 	$group->get('/newsstatistics/editor/dynamics/','NewsStatisticsController@getTimeDynamicsEditor');
 	$group->get('/newsstatistics/editor/counters/','NewsStatisticsController@getCountersEditor');
+
+    //Телепередачи
+    $group->get('/tv-program','TvProgramController@index');
+    $group->get('/tv-program/{id}','TvProgramController@show');
+    $group->post('/tv-program','TvProgramController@create');
+    $group->put('/tv-program/{id}','TvProgramController@update');
+    $group->delete('/tv-program/{id}','TvProgramController@destroy');
+
+    //Записи эфиров
+    $group->get('/air/record','AirRecordController@index');
+    $group->get('/air/record/{id}','AirRecordController@show');
+    $group->post('/air/record','AirRecordController@create');
+    $group->put('/air/record/{id}','AirRecordController@update');
+    $group->delete('/air/record/{id}','AirRecordController@destroy');
+
 });

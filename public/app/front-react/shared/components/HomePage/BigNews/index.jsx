@@ -2,6 +2,8 @@ import React from 'react'
 import classNames from 'classnames'
 import { FormattedRelative } from 'react-intl'
 
+import { ensureAbs } from 'shared/utils/uri'
+
 import './style.scss'
 import logo from './blue-rtvi.png'
 
@@ -10,7 +12,7 @@ function BigNews({ data, className }) {
     return (
         <div className={classNames('big-news', className)}>
             <a className="big-news__link" href="javascript:void(0)"></a>
-            <img className="big-news__img" src={data.ImagePreview} alt="" role="presentation" />
+            <img className="big-news__img" src={ensureAbs(data.ImagePreview)} alt="" role="presentation" />
             <div className="big-news__info">
                 <p className="big-news__title">
                     {data.Title}
