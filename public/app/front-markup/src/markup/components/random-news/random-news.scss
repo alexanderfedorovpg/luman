@@ -5,6 +5,13 @@
         height: rem(245);
     }
 
+    &__block-square {
+
+        &_war {
+            height: rem(223);
+        }
+    }
+
     &__block-square_list {
 
         &::before {
@@ -32,8 +39,8 @@
 
     &__block-rectangle {
 
-        .block-rectangle__img {
-            height: rem(245);
+        &_war {
+            height: rem(358);
         }
     }
 

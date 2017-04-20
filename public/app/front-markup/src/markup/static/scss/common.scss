@@ -21,6 +21,13 @@ body {
 
 html {
     font-size: 1vw;
+
+    &.war {
+
+        .header::before {
+            background-color: $war;
+        }
+    }
 }
 
 h1 {

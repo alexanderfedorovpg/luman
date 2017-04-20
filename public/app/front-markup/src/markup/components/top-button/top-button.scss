@@ -1,12 +1,12 @@
 .top-button {
     &__btn {
-        display: block;
         @include bg($toTop);
+        display: block;
     }
     span {
-        color: rgba(84, 95, 105, 0.55);
         font-family: $stemReg;
         font-size: 10px;
         font-weight: 400;
+        color: rgba(84, 95, 105, 0.55);
     }
 }

@@ -1,0 +1,12 @@
+extends ../layouts/default
+
+include ../components/general-news/general-news
+include ../components/pages-list/pages-list
+
+block vars
+    -pageSettings.title = 'Главная война';
+    -pageSettings.htmlClass = 'war';
+
+block content
+    // Контент здесь
+    +general-news

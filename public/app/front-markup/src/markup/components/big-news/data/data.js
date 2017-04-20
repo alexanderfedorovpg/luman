@@ -7,5 +7,11 @@ var data = {big_news: {
        time_add: '40 минут назад',
        time_update: 'Обновлено 10 минут назад',
        logo: '%=static=%/img/content/rtvi/blue-rtvi.png'
-   }
+   },
+    war: {
+        img: '%=static=%/img/content/big-news/trump.jpg',
+        alt: '',
+        title: 'Убийство Ким Чен Ына',
+        live: true
+    }
 }};

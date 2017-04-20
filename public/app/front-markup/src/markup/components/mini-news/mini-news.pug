@@ -5,4 +5,5 @@ mixin mini-news(data)
             +e.IMG(src=data.img alt=data.alt).img
         +e.info
             +e.A(href=jv0).title #{data.title}
-            +e.P.date #{data.when}
+            if (data.when)
+                +e.P.date #{data.when}

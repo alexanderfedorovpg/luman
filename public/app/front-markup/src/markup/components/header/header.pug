@@ -5,10 +5,14 @@ include ../burger/burger
 include ../logo/logo
 
 mixin header(data)
-    +b.HEADER.header()&attributes(attributes)
+    +b.HEADER.header(class=pageSettings.headerClass)&attributes(attributes)
         block
-        +e.alarm-block
-            +e.container.container
+        if (pageSettings.htmlClass == 'war')
+            +e.alarm-block
+                +e.container.container.header__container_alarm
+                    +e.P.when Сегодня
+                    +e.P.event Руководитель Северной Кореи убит в результате спецоперации
+                    +e.A(href=jv0).event-link Всё об этом
         +e.container.container
             +e.left-part
                 +e.part-wrapper

@@ -2,4 +2,7 @@ mixin logo(data)
     +b.logo()&attributes(attributes)
         block
         +e.A(href=jv0)
-            +e.IMG(src="%=static=%img/general/logo/logo.png" alt="").img
+            if (pageSettings.htmlClass == 'war')
+                +e.IMG(src="%=static=%img/general/logo/logo-war.png" alt="").img.logo-img_war
+            else
+                +e.IMG(src="%=static=%img/general/logo/logo.png" alt="").img
