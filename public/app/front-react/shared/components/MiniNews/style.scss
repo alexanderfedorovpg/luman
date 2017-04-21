@@ -4,8 +4,8 @@
 .mini-news {
     position: relative;
 
-    padding-top: rem(15);
-    padding-bottom: rem(11);
+    padding-top: rem(25);
+    padding-bottom: rem(15);
     overflow: hidden;
 
     &:not(:last-child) {
@@ -55,3 +55,4 @@
         color: $gray-date;
     }
 }
+
