@@ -61,13 +61,7 @@ const Icon = styled.i`
     ${(props) => (
         props.active
             ? css`
-                ${props.type === 'feed' && `background-image: url(${icons['feed-active'].data});`}
-                ${props.type === 'view' && `background-image: url(${icons['view-active'].data});`}
-                ${props.type === 'draft' && `background-image: url(${icons['draft-active'].data});`}
-                ${props.type === 'ready' && `background-image: url(${icons['ready-active'].data});`}
-                ${props.type === 'main' && `background-image: url(${icons['main-active'].data});`}
-                ${props.type === 'tv' && `background-image: url(${icons['tv-active'].data});`}
-                ${props.type === 'live' && `background-image: url(${icons['live-active'].data});`}
+                background-image: url(${icons[`${props.type}-active`].data});
             `
             : ''
     )}
@@ -108,15 +102,15 @@ const Render = (props) => {
         default:
             return <Icon {...props} />;
     }
-}
+};
 
-Render.PropTypes = {
+Render.propTypes = {
     type: React.PropTypes.string.isRequired,
 };
 
 export default Render;
 
-/////////////
+// ========================================================================
 
 function getPngDimensions(base64) {
   let header = base64.slice(0, 50)
