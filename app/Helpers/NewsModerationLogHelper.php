@@ -54,10 +54,9 @@
 		 * @return bool
 		 */
 		public function setEndModeration() {
-
-			$NewsModerationLog           = NewsModerationLog::where( 'news_id', '=', $this->news_id )->first();
-			$NewsModerationLog->end_date = date( 'Y-m-d H:i:s' );
-			if ( $NewsModerationLog->save() ) {
+            $log = $this->getModerationLog();
+			$log->end_date = date( 'Y-m-d H:i:s' );
+			if ( $log->save() ) {
 				return true;
 			} else {
 				return false;
