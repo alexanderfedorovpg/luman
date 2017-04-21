@@ -18,6 +18,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
                 'Access-Control-Allow-Origin'=>'*',
                 'Access-Control-Allow-Headers'=> ['Content-Type, Api-Token'],
                 'Access-Control-Request-Method' => ['POST, GET, PUT, OPTIONS, DELETE'],
+                'Access-Control-Allow-Methods' => ['POST, GET, OPTIONS, PUT, DELETE'],
 
             ];
         return response()->json([] ,200 , $headers);

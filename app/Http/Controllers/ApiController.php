@@ -92,6 +92,7 @@ class ApiController extends Controller
            'Access-Control-Allow-Origin'=>'*',
            'Access-Control-Request-Method' => ['POST, GET, PUT, OPTIONS, DELETE'],
            'Access-Control-Allow-Headers'=> ['Content-Type, Api-Token'],
+           'Access-Control-Allow-Methods' => ['POST, GET, OPTIONS, PUT, DELETE'],
            ];
         return response()->json($data , $this->getStatusCode() , $headers);
     }
