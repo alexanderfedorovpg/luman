@@ -9,7 +9,6 @@ const Icon = styled.i`
     display: inline-block;
     vertical-align: middle;
 
-
     ${equalProp('type', 'dropdown')(css`
         background-image: url(${icons['dropdown-arrow'].data});
         width: ${icons['dropdown-arrow'].width}px;
