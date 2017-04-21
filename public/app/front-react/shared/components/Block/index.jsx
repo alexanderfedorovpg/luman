@@ -13,25 +13,16 @@ function Item({ data, className, rectangle }) {
         : 'block-square';
 if (!data) return null;
     return (
-        <div className={classNames(
-                `${type}`,
-                className,
-                {
-                    [`${type}_list`]: data.list
-                }
-            )}>
-
-            {data.list
-                ? renderList(data.list)
-                : renderItem(type, data)}
-        </div>
+        data.list
+            ? renderList(className, type, data.list)
+            : renderItem(className, type, data)
     )
 }
 
-function renderList(data) {
+function renderList(className, type, data) {
 
     return (
-        <div>
+        <div className={classNames(`${type} ${type}_list`, className)}>
             {data.map((value, i) => (
                 <MiniNews key={i} data={value} />
             ))}
@@ -39,10 +30,10 @@ function renderList(data) {
     )
 }
 
-function renderItem(type, data) {
+function renderItem(className, type, data) {
 
     return (
-        <div>
+        <div className={classNames(`${type}`, className)}>
             <a className={`${type}__link`} href="javascript:void(0)"></a>
             <img className={`${type}__img`} src={ensureAbs(data.ImagePreview)} alt=" "role="presentation" />
             <div className={`${type}__info`}>

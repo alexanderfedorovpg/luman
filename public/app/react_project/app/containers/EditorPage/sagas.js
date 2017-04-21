@@ -1,15 +1,24 @@
 import { take, call, put, cancel, takeLatest, takeEvery } from 'redux-saga/effects'
-import { LOCATION_CHANGE } from 'react-router-redux'
+import { push } from 'react-router-redux'
 
 import {
     LOAD_CHAT_MESSAGES,
     LOAD_ARTICLE,
+    FINISH_ARTICLE,
+    DELETE_ARTICLE,
+    DELEGATE_ARTICLE,
     POST_MESSAGE
 } from './constants'
 
 import {
     articleLoaded,
     articleLoadingError,
+    articleDeleted,
+    articleDeletionError,
+    articleDelegated,
+    articleDelegationError,
+    articleFinished,
+    articleFinishError,
     chatMessagesLoaded,
     chatMessagesLoadingError,
     messagePosted,
@@ -44,8 +53,63 @@ export function* getArticle({ payload }) {
     }
 }
 
+export function* deleteArticle({ payload }) {
+
+    try {
+        yield call(api.deleteArticle, payload)
+
+        yield put(articleDeleted())
+
+        yield put(push(`/newslist`))
+    } catch (err) {
+        yield put(articleDeletionError(err))
+    }
+}
+
+export function* delegateArticle({ payload }) {
+
+    try {
+        yield call(api.delegateArticle, payload)
+
+        yield put(articleDelegated())
+
+        yield put(push(`/newslist`))
+    } catch (err) {
+        yield put(articleDelegationError(err))
+    }
+}
+
+export function* finishArticle({ payload }) {
+    if (!Number.isInteger(payload.image_main)) {
+        let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
+        payload.image_main = idMain
+    }
+
+    if (!Number.isInteger(payload.image_preview)) {
+        let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
+        payload.image_preview = idPreview
+    }
+
+
+    try {
+        yield call(api.finishArticle, payload)
+
+        yield put(articleFinished())
+
+        yield put(push(`/newslist`))
+    } catch (err) {
+        yield put(articleFinishError(err))
+    }
+}
+
 export function* articleData() {
     yield takeLatest(LOAD_ARTICLE, getArticle)
+
+    yield takeLatest(FINISH_ARTICLE, finishArticle)
+
+    yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
+
+    yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
 }
 
 export function* postMessage({ payload }) {

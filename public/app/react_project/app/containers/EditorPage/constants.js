@@ -11,3 +11,15 @@ export const POST_MESSAGE_FAILURE = 'app/EditorPage/POST_MESSAGE_FAILURE';
 export const LOAD_ARTICLE = 'app/EditorPage/LOAD_ARTICLE';
 export const LOAD_ARTICLE_SUCCESS = 'app/EditorPage/LOAD_ARTICLE_SUCCESS';
 export const LOAD_ARTICLE_FAILURE = 'app/EditorPage/LOAD_ARTICLE_FAILURE';
+
+export const DELETE_ARTICLE = 'app/EditorPage/DELETE_ARTICLE';
+export const DELETE_ARTICLE_SUCCESS = 'app/EditorPage/DELETE_ARTICLE_SUCCESS';
+export const DELETE_ARTICLE_FAILURE = 'app/EditorPage/DELETE_ARTICLE_FAILURE';
+
+export const DELEGATE_ARTICLE = 'app/EditorPage/DELEGATE_ARTICLE';
+export const DELEGATE_ARTICLE_SUCCESS = 'app/EditorPage/DELEGATE_ARTICLE_SUCCESS';
+export const DELEGATE_ARTICLE_FAILURE = 'app/EditorPage/DELEGATE_ARTICLE_FAILURE';
+
+export const FINISH_ARTICLE = 'app/EditorPage/FINISH_ARTICLE';
+export const FINISH_ARTICLE_SUCCESS = 'app/EditorPage/FINISH_ARTICLE_SUCCESS';
+export const FINISH_ARTICLE_FAILURE = 'app/EditorPage/FINISH_ARTICLE_FAILURE';

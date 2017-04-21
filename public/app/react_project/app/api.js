@@ -60,46 +60,109 @@ export const feedToWork = (data) => {
 
     return axios.post(`${baseUrl}/newsfeed/work`, formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
 
-export const getUser = (id, params) => axios.get(`${baseUrl}/user${id ? `/${id}` : ''}`, {
-    params,
-});
+export const getUser = (id, params) => {
+    return axios.get(`${baseUrl}/user${id ? `/${id}` : ''}`, {
+        params
+    })
+}
 
-export const getCurrentUser = () => axios.get(`${baseUrl}/userprofile`);
+export const getCurrentUser = () => {
+    return axios.get(`${baseUrl}/userprofile`)
+}
 
-export const getUsersInGroup = (group_id) => axios.get(`${baseUrl}/group/${group_id}/users`);
+export const getUsersInGroup = group_id => {
+    return axios.get(`${baseUrl}/group/${group_id}/users`)
+}
 
-export const getGroup = (id) => axios.get(`${baseUrl}/group${id ? `/${id}` : ''}`);
+export const getGroup = id => {
+    return axios.get(`${baseUrl}/group${id ? `/${id}` : ''}`)
+}
 
-export const getLinks = (query) => axios.get(`${baseUrl}/reference/search`, {
-    params: {
-        query,
-    },
-});
+export const getLinks = query => {
+    return axios.get(`${baseUrl}/reference/search`, {
+        params: {
+            query: query
+        }
+    })
+}
 
-export const getNewslist = () => axios.get(`${baseUrl}/newslisteditor`);
+export const getNewslist = () => {
+    return axios.get(`${baseUrl}/newslisteditor`)
+}
 
-export const getTags = () => axios.get(`${baseUrl}/tags`);
+export const getTags = () => {
+    return axios.get(`${baseUrl}/tags`)
+}
 
-export const getRubrics = () => axios.get(`${baseUrl}/rubrics`);
+export const getRubrics = () => {
+    return axios.get(`${baseUrl}/rubrics`)
+}
 
-export const getArticle = (id) => axios.get(`${baseUrl}/newseditor/${id}`);
+export const getArticle = id => {
+    return axios.get(`${baseUrl}/newseditor/${id}`)
+}
 
-export const rejectArticle = (id) => axios.post(`${baseUrl}/newseditor/rejection`, {
-    id,
-});
+export const deleteArticle = id => {
+    return axios.delete(`${baseUrl}/newseditor/${id}`)
+}
 
-export const acceptArticle = (id) => axios.post(`${baseUrl}/newseditor/work`, {
-    id,
-});
+export const delegateArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/delegate`, {
+        id
+    })
+}
 
-export const publishArticle = () => axios.post(`${baseUrl}/`);
+export const rejectArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/rejection`, {
+        id
+    })
+}
 
-export const getChatMessages = (room) => axios.get(`${baseUrl}/newschat/${room}`);
+export const finishArticle = data => {
+    let formData = xwwwfurlenc({
+        ...data,
+        action: 'edit'
+    })
+
+    return axios.put(`${baseUrl}/newseditor/edit`, formData, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
+
+
+// TODO: найти нормальный npm пакет для конвертации
+//       json -> x-www-form-urlencoded
+function xwwwfurlenc(srcjson){
+    var u = encodeURIComponent;
+    var urljson = "";
+    var keys = Object.keys(srcjson);
+    for(var i=0; i <keys.length; i++){
+        urljson += u(keys[i]) + "=" + u(srcjson[keys[i]]);
+        if(i < (keys.length-1))urljson+="&";
+    }
+    return urljson;
+}
+
+export const acceptArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/work`, {
+        id
+    })
+}
+
+export const publishArticle = () => {
+    return axios.post(`${baseUrl}/`)
+}
+
+export const getChatMessages = room => {
+    return axios.get(`${baseUrl}/newschat/${room}`)
+}
 
 export const postChatMessage = (room, { message, files }) => {
     const formData = new FormData();

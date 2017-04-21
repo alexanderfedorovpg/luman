@@ -40,7 +40,7 @@
 
     &__info {
         position: absolute;
-        bottom: rem(20);
+        bottom: rem(18);
         left: 0;
 
         width: inherit;
@@ -76,10 +76,9 @@
     }
 
     &__description {
+        @include padding_y(#{rem(13)});
         width: rem(548);
-        padding-top: rem(12);
         padding-right: rem(76);
-        padding-bottom: rem(11);
         padding-left: rem(20);
         margin-left: rem(-20);
 
@@ -118,4 +117,3 @@
         text-transform: uppercase;
     }
 }
-

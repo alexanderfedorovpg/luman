@@ -30,7 +30,7 @@ function FromEnter({ data, className }) {
                     {data.Title}
                 </a>
                 <p className="from-enter__category">
-                    {`${data.category} `}
+                    {`${data.Rubrics} `}
                     <span className="from-enter__time-add">
                         {Date.parse(data.PublishDate)
                             ? <FormattedDate value={data.PublishDate} month="long" day="2-digit" />
