@@ -1,1 +1,1 @@
-var data = {block-rectangle: {}}
+var data = {block_rectangle: {}}

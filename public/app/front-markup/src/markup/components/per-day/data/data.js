@@ -70,7 +70,7 @@ var data = {per_day: {
             time_add: 'час назад',
             alt: '',
             time_keeping: '03:40'
-        },
+        }
     }
 
 }};

@@ -1,5 +1,6 @@
 include ../block-rectangle/block-rectangle
 include ../block-square/block-square
+include ../more-goods/more-goods
 
 mixin random-news(data)
     - params = data
@@ -14,9 +15,8 @@ mixin random-news(data)
 
             +block-square(params.news_four)(class="random-news__block-square random-news__block")
 
-            +block-square(params.more_news)(class="random-news__block-square random-news__block-square_list random-news__block")
+            +block-square(random_news.more_news)(class="random-news__block-square random-news__block-square_list random-news__block")
 
         if (params.catalog)
-            +e.A(href=jv0).more-goods
-                +e.IMG(src="%=static=%img/content/random-news/more-news.png" alt="").img-preload
+            +more-goods(class="random-news__more-goods")
 

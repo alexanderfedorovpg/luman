@@ -18,7 +18,8 @@ import {
     loadPrograms,
 } from './actions';
 import Header from './Header';
-import Wrap from './Wrap';
+import Wrapper from './Wrapper';
+import Content from './Content';
 import TopPanel from './TopPanel';
 
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -30,17 +31,17 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
         const { menuOpen } = this.props;
         const { filter, programs } = this.props.ProgramsPage;
         return (
-            <div>
+            <Wrapper>
                 <Header
                     moved={menuOpen}
                     filter={filter}
                     setFilter={this.props.setFilter}
                 />
-                <Wrap>
+                <Content>
                     <TopPanel />
                     <Programs items={programs} />
-                </Wrap>
-            </div>
+                </Content>
+            </Wrapper>
         );
     }
 }
