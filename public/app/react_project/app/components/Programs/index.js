@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Program from './Program';
+import Item from './Item';
 
 const Wrapper = styled.div`
     margin-top: 1rem;
@@ -40,12 +40,12 @@ class Programs extends React.PureComponent {
             return;
         }
 
-        this.props[actionName](e, id);
+        this.props[actionName](id);
     }
 
     renderItem({ id, ...props }) {
         return (
-            <Program
+            <Item
                 key={id}
                 {...props}
                 onPreviewClick={(e) => { this.onPreviewClick(e, id); }}
@@ -75,7 +75,7 @@ Programs.propTypes = {
     onProgramEdit: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     onPreviewClick: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     items: PropTypes.arrayOf(PropTypes.shape({
-        ...Program.propTypes,
+        ...Item.propTypes,
         id: PropTypes.number.isRequired,
     })),
 };
