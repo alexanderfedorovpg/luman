@@ -19,27 +19,32 @@
         }
 
         .mini-news {
-            padding-bottom: 0;
             padding-top: rem(6);
+            padding-bottom: 0;
+
             border-bottom: none;
 
             &:not(:first-child) {
-                margin-top: rem(8);
+                margin-top: rem(5);
+            }
+
+            &:first-child {
+                padding-top: rem(3);
             }
         }
 
         .mini-news__title {
             display: inline-block;
-<<<<<<< HEAD
 
-=======
->>>>>>> 08c666a551a749af20fbf4413f68f5b76db128b0
             font-size: rem(14);
             line-height: rem(16);
+            letter-spacing: rem(-.15);
         }
 
         .mini-news__date {
-            margin-top: 0;
+            margin-top: rem(-1);
+
+            letter-spacing: rem(-.2);
         }
     }
 

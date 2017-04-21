@@ -36,6 +36,11 @@ h1 {
     color: $enter;
 }
 
+h2 {
+    font: #{rem(24)}/ #{rem(40)} $stemBold;
+    color: $enter;
+}
+
 a {
     outline: none;
 }
@@ -122,3 +127,5 @@ main {
         }
     }
 }
+
+

@@ -1,0 +1,9 @@
+mixin more-goods(data)
+    +b.more-goods()&attributes(attributes)
+        block
+        +e.A(href=jv0).link
+            +icon({
+                icon: 'more',
+                class: 'icon more-goods__icon'
+            })
+            +e.SPAN.more-text.more-text Больше новостей
