@@ -5,6 +5,7 @@
     position: relative;
 
     width: rem(617);
+    height: rem(505);
 
     &::before {
         content: '';
@@ -15,8 +16,8 @@
         left: 0;
 
         display: block;
-        width: rem(617);
-        height: rem(505);
+        width: inherit;
+        height: inherit;
 
         background-image: linear-gradient(to bottom, rgba(0, 0, 0, .21), rgba(0, 0, 0, .53));
     }
@@ -30,8 +31,8 @@
         left: 0;
 
         display: block;
-        width: rem(617);
-        height: rem(505);
+        width: inherit;
+        height: inherit;
 
         color: transparent;
         text-decoration: none;
@@ -39,20 +40,17 @@
 
     &__info {
         position: absolute;
-        top: 0;
+        bottom: rem(20);
         left: 0;
 
-        width: rem(617);
-        height: rem(486);
-        padding-top: rem(235);
+        width: inherit;
         padding-right: rem(113);
         padding-left: rem(20);
     }
 
     &__img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
+        width: inherit;
+        height: inherit;
     }
 
     &__title {
@@ -120,3 +118,4 @@
         text-transform: uppercase;
     }
 }
+

@@ -54,6 +54,7 @@
 
     .working__wrap {
         display: block;
+        padding-right: rem(20);
     }
 
     .content-r {
@@ -77,6 +78,33 @@
     }
     .working__work {
         top: 19px;
+    }
+    .working__cnt:not(.working__cnt--newest) {
+        p.rate6 {
+            padding-right: 30px;
+            margin-top: -5px;
+
+            font-size: 21px;
+            line-height: 26px;
+            letter-spacing: -0.35px;
+        }
+    }
+
+    p.rate5 {
+        margin-top: -3px;
+        margin-bottom: -2px;
+
+        font-size: 19px;
+    }
+
+    p.rate7 {
+        padding-right: 26px;
+        margin-top: -4px;
+        margin-bottom: -2px;
+
+        font-size: 18px;
+        line-height: 25px;
+        letter-spacing: -0.2px;
     }
 
 }

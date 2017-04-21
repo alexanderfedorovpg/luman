@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { FormattedTime } from 'react-intl';
 import { rem, ifProp } from 'utils/style';
 import { YoutubePlayBtn } from 'components/Icon/svg';
+import Button from 'components/Button';
 
 export const activeState = css`
     background-color: #f3f3f3;
@@ -10,19 +10,13 @@ export const activeState = css`
         display: none;
     }
 
-    & + .programs__item {
-        &::before {
-            display: none;
-        }
+    .program-buttons {
+        display: block;
     }
 
-    .programs {
-        &__close-container {
-            display: block;
-        }
-
-        &__btn-container {
-            display: block;
+    & + * {
+        &::before {
+            display: none;
         }
     }
 `;
@@ -124,7 +118,7 @@ export const ProgramDate = styled.time`
     letter-spacing: -.01rem;
 `;
 
-export const StyledFormattedTime = styled(FormattedTime)`
+export const Time = styled.span`
     display: inline-block;
     margin-left: .2rem;
 
@@ -155,4 +149,18 @@ export const Buttons = styled.div`
     right: 2.5rem;
 
     display: none;
+
+    .program-btn {
+        width: 9.9rem;
+
+        border: none;
+    }
+`;
+
+export const StyledBtn = styled(Button)`
+    background-color: #fff;
+
+    &:not(:last-child) {
+        margin-right: .3rem;
+    }
 `;

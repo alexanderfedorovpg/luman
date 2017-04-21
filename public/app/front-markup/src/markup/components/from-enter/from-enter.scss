@@ -8,7 +8,9 @@
     }
 
     &__link {
-        font: #{rem(14)}/#{rem(18)} $stemBold;
+        display: inline-block;
+
+        font: #{rem(14)}/#{rem(19)} $stemBold;
         color: $enter;
         text-decoration: none;
     }
