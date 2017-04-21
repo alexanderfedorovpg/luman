@@ -16,7 +16,7 @@ import {
     Title,
     Buttons,
     StyledBtn,
-} from './program-elements';
+} from './style';
 
 const Program = ({
     active,
@@ -27,7 +27,7 @@ const Program = ({
     hashTags,
     onDelete,
     onEdit,
-    onPreviewClick
+    onPreviewClick,
 }) => {
     const dateObj = new Date(Date.parse(date));
 

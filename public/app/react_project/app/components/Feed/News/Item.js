@@ -1,13 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import Tooltip from 'react-aria-tooltip'
-import randomString from 'random-string'
+import React from 'react';
+import styled from 'styled-components';
+import randomString from 'random-string';
+import IconTip from 'components/IconTip';
+import Icon from 'components/Icon';
+import { font, padding } from 'constants/style';
 
-import Icon from 'components/Icon'
-
-import { font, padding } from 'constants/style'
-
-const titleClassName = randomString()
+const titleClassName = randomString();
 
 const Root = styled.a`
     position: relative;
@@ -64,7 +62,7 @@ const Title = styled.span`
     color: #333333;
 `
 
-const Work = styled(Tooltip)`
+const Work = styled(IconTip)`
     position: absolute;
     top: 50%;
     right: -11px;
@@ -72,27 +70,7 @@ const Work = styled(Tooltip)`
 
     display: none;
 
-    cursor: pointer;
     transform: translateY(-50%);
-
-    .ra-tooltip {
-        z-index: 5;
-        padding: 4px 9px;
-        color: #666;
-        font-family: ${font.opensans};
-        font-size: 11px;
-        font-weight: 400;
-        box-shadow: 1px 1px 5px rgba(0,0,0,.28);
-        background-color: #fff;
-    }
-    .ra-tooltip-message:after {
-        display: none
-    }
-
-    p {
-        color: inherit;
-        padding: 0;
-    }
 `
 
 const Ignore = styled(Work)`
@@ -107,22 +85,26 @@ function Item({ data, toWork, hide, open, style }) {
                 <Title className={titleClassName}>
                     {data.header}
                 </Title>
-                <Ignore message="Игнорировать" eventType="hover" direction="bottom">
-                    <Icon
-                        type="delete"
-                        onClick={e => {
-                            hide(data.id)
-                            e.stopPropagation()
-                        }} />
-                </Ignore>
-                <Work message="Работаем!" eventType="hover" direction="bottom">
-                    <Icon
-                        type="go-right"
-                        onClick={e => {
-                            toWork(data.id)
-                            e.stopPropagation()
-                        }} />
-                </Work>
+                <Ignore
+                    message="Игнорировать"
+                    eventType="hover"
+                    direction="bottom"
+                    icon="delete"
+                    onClick={e => {
+                        hide(data.id)
+                        e.stopPropagation()
+                    }}
+                />
+                <Work
+                    message="Работаем!"
+                    eventType="hover"
+                    direction="bottom"
+                    icon="go-right"
+                    onClick={e => {
+                        toWork(data.id)
+                        e.stopPropagation()
+                    }}
+                />
             </Wrapper>
         </Root>
     )
