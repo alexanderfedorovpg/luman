@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes, Children, cloneElement } from 'react'
 import styled from 'styled-components'
 import ReactQuill from 'react-quill'
+import Dropzone from 'react-dropzone'
 
 import { Wrap, Left, Right } from 'components/Content'
 import { Group, Textarea, Label } from 'components/Form'
@@ -13,11 +14,15 @@ import Tags from 'components/Tags'
 import Modal from 'components/Modal'
 import Preview from './Preview'
 import Chat from './Chat'
+import HeaderEditor from './Header.editor'
 
 import { ifProp } from 'utils/style'
 import { font, padding, color } from 'constants/style'
 
 import 'quill/dist/quill.snow.css'
+
+const titleMax = 120
+const subtitleMax = 140
 
 const Root = styled.div`
     margin-top: 6px;
@@ -114,6 +119,36 @@ const Time = styled.div`
     font-size: 13px;
 `
 
+const ImageContainer = styled.div`
+    margin-right: 20px;
+    margin-bottom: 7px;
+    float: left;
+
+    box-sizing: content-box;
+    border: 1px solid rgba(204,204,204,.74);
+    max-width: 50%;
+
+    img {
+        width: 100%;
+        height: auto
+    }
+`
+
+const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    min-height: 243px;
+    border: 2px dashed rgb(102, 102, 102);
+    border-radius: 5px;
+
+    ${ifProp('filled')`
+        border: 0;
+    `}
+`
+
 class Content extends Component {
 
     constructor(props) {
@@ -134,19 +169,61 @@ class Content extends Component {
 
     propsToData(props) {
         return {
-            top: props.article.Top || null,
-            rubrics: (props.article.Rubrics||[]).map(r => r.name),
-            stream: props.article.VideoStream || '',
-            body: props.article.Body || '',
-            title: props.article.Title || '',
-            subtitle: props.article.Subtitle || '',
-            theses: props.article.Note || '',
-            keywords: (props.article.Keywords || []).join(' ').trim(),
+            top: props.article.top || null,
+            rubrics: (props.article.rubrics||[]).map(r => r.name),
+            stream: props.article.video_stream || '',
+            body: props.article.body || '',
+            title: props.article.title || '',
+            subtitle: props.article.sub_title || '',
+            theses: props.article.theses || '',
+            keywords: (props.article.keywords || []).join(' ').trim(),
+            image_main: props.article.image_main || '',
+            image_preview: props.article.image_preview || '',
         }
     }
 
     symbolsLeft(string, max) {
         return `осталось ${max - string.length} символов`
+    }
+
+    dataToSubmit() {
+        let { data } = this.state
+        let { article, rubrics } = this.props
+
+        let r = data.rubrics.map(name => (
+            rubrics.find(r=>r.name==name).id
+        ))[0]
+
+        if (!r) return;
+
+        return {
+            id: article.id,
+            top: data.top,
+            title: data.title.slice(0, titleMax),
+            sub_title: data.subtitle.slice(0, subtitleMax),
+            editor_id: article.editor.id,
+            rubrics_id: r,
+            keywords: data.keywords.split(' '),
+            tags: article.tags,
+            theses: data.theses,
+            image_main: data.image_main_temp || article.image_main_id,
+            image_preview: data.image_preview_temp || article.image_preview_id,
+            body: data.body,
+            video_stream: data.stream
+        }
+    }
+
+    onDrop(prop) {
+        return acceptedFiles => {
+            if (acceptedFiles[0]) {
+                this.setState({
+                    data: {
+                        ...this.state.data,
+                        [prop]: acceptedFiles[0]
+                    }
+                })
+            }
+        }
     }
 
     changeHandlerTarget(prop) {
@@ -184,13 +261,23 @@ class Content extends Component {
             loadMessages,
             getUserById,
             chatRoom,
+            delegate,
             editor,
             preview,
+            finish,
             closePreview
         } = this.props
 
         return (
             <Root>
+                {Children.map(this.props.children, child => {
+                    if (child.type == HeaderEditor) {
+                        return cloneElement(child, { getFormData: this.dataToSubmit.bind(this) })
+                    }
+                    else {
+                        return child
+                    }
+                })}
                 <header>
                     <Wrap>
                         <CustomLeft>
@@ -200,11 +287,11 @@ class Content extends Component {
                                 block />
                         </CustomLeft>
                         <CustomRight>
-                            <VideoStatus ready={article.ExistVideo}>
+                            <VideoStatus ready={article.video_stream}>
                                 <CustomIcon type="text-video-lg" />
                                 <strong>Статус видео:</strong>
                                 <span>
-                                    { article.ExistVideo ? 'готово' : 'не готово' }
+                                    { article.video_stream ? 'готово' : 'не готово' }
                                 </span>
                             </VideoStatus>
                         </CustomRight>
@@ -218,6 +305,7 @@ class Content extends Component {
                         <Tags
                             data={rubrics.map(r => r.name)}
                             value={this.state.data.rubrics}
+                            type="radio"
                             onChange={this.changeHandlerValue('rubrics')} />
                     </Wrap>
                 </Action>
@@ -225,7 +313,7 @@ class Content extends Component {
                     <CustomLeft>
                         <Group>
                             <Label right light>
-                                <span>Заголовок</span> : {this.symbolsLeft(this.state.data.title, 100)}
+                                <span>Заголовок</span> : {this.symbolsLeft(this.state.data.title, titleMax)}
                             </Label>
                             <TitleField
                                 value={this.state.data.title}
@@ -234,7 +322,7 @@ class Content extends Component {
                         </Group>
                         <Group>
                             <Label right light>
-                                <span>Подзаголовок</span> : {this.symbolsLeft(this.state.data.subtitle, 100)}
+                                <span>Подзаголовок</span> : {this.symbolsLeft(this.state.data.subtitle, subtitleMax)}
                             </Label>
                             <SubtitleField
                                 value={this.state.data.subtitle}
@@ -243,7 +331,7 @@ class Content extends Component {
                         </Group>
                         <Group>
                             <Label right light>
-                                <span>Тезисы через //</span> : {this.symbolsLeft(this.state.data.theses, 100)}
+                                <span>Тезисы через //</span>
                             </Label>
                             <ThesesField
                                 value={this.state.data.theses}
@@ -253,6 +341,43 @@ class Content extends Component {
                         <Group>
                             <ReactQuill value={this.state.data.body}
                                 onChange={this.changeHandlerValue('body')} />
+                        </Group>
+                        <Group>
+                            <ImageContainer>
+                                <StyledDropzone
+                                    onDrop={this.onDrop('image_main_temp')}
+                                    multiple={false}
+                                    filled={!!this.state.data.image_main}
+                                    title="Нажмите чтобы выбрать другое изображение">
+
+                                    {this.state.data.image_main
+                                        ? <img src={this.state.data.image_main_temp ? this.state.data.image_main_temp.preview : `//${this.state.data.image_main}`} />
+                                        : (
+                                            <span>
+                                                Переместите изображение<br />
+                                                либо<br />
+                                                кликните для выбора изображения
+                                            </span>
+                                        )}
+                                </StyledDropzone>
+                            </ImageContainer>
+                            <StyledDropzone
+                                onDrop={this.onDrop('image_preview_temp')}
+                                multiple={false}
+                                filled={!!this.state.data.image_preview}
+                                title="Нажмите чтобы выбрать другое изображение">
+
+                                {this.state.data.image_preview
+                                    ? <img src={this.state.data.image_preview_temp ? this.state.data.image_preview_temp.preview : `//${this.state.data.image_preview}`} />
+                                    : (
+                                        <span>
+                                            Переместите изображение<br />
+                                            либо<br />
+                                            кликните для выбора изображения
+                                        </span>
+                                    )}
+                            </StyledDropzone>
+                            <div style={{ clear: 'both' }} />
                         </Group>
                         <Group>
                             <Label right light>
@@ -284,7 +409,9 @@ class Content extends Component {
 
                     <Preview
                         data={this.state.data}
-                        onClose={closePreview} />
+                        onClose={closePreview}
+                        delegate={delegate}
+                        done={()=>finish(this.dataToSubmit())} />
                 </Modal>
             </Root>
         )

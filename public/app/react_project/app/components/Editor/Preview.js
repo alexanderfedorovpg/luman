@@ -110,7 +110,7 @@ const CustomButton = styled(Button)`
     }
 `
 
-function Preview({ data, onClose }) {
+function Preview({ data, onClose, delegate, done }) {
 
     return (
         <Root>
@@ -120,7 +120,7 @@ function Preview({ data, onClose }) {
             <ImageWrapper>
                 <div>
                     <Img>
-                        <img src={''} />
+                        <img src={`//${data.image_main}`} />
                     </Img>
                     <Source>
                         Источник: Интерфакс
@@ -135,11 +135,11 @@ function Preview({ data, onClose }) {
             <Content>
                 {data.body}
                 <Btns>
-                    <CustomButton primary>
+                    <CustomButton primary onClick={e=>delegate()}>
                         <Icon type="arrow-left" />
                         Передать другому
                     </CustomButton>
-                    <CustomButton success>
+                    <CustomButton success onClick={e=>done()}>
                         <Icon type="arrow-right" />
                         Готово
                     </CustomButton>
