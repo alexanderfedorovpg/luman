@@ -43,8 +43,9 @@
     }
 
     &__now {
-        height: rem(505);
+        min-height: rem(505);
         padding-top: rem(11);
+        overflow: hidden;
     }
 
     &__info-noize {

@@ -9,12 +9,12 @@ mixin block-rectangle(data)
         +e.info
             if (data.time_keeping)
                 +e.time-keeping
-                    +e.IMG(src="/static/img/content/video-ico/video-ico.png" alt="").ico
+                    +e.IMG(src="static/img/content/video-ico/video-ico.png" alt="").ico
                     +e.SPAN.keeping #{data.time_keeping}
             if (pageSettings.htmlClass == 'war')
                 if (data.live)
                     +e.title-live
-                        +e.IMG(src="/static/img/content/video-ico/video-ico-full.png" alt="").video-ico
+                        +e.IMG(src="static/img/content/video-ico/video-ico-full.png" alt="").video-ico
                         +e.SPAN.text Прямой эфир
 
             if (data.title)

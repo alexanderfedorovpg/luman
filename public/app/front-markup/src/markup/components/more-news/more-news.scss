@@ -10,10 +10,13 @@
 
     .mini-news {
         @include padding_y(0);
+        width: rem(280);
+
         border-bottom: none;
 
         &:not(:first-child) {
             margin-top: rem(8);
+            margin-bottom: rem(13);
         }
     }
 

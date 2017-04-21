@@ -10,6 +10,10 @@
         &_war {
             height: rem(223);
         }
+
+        .mini-news {
+            width: rem(274);
+        }
     }
 
     &__block-square_list {
@@ -25,7 +29,7 @@
             border-bottom: none;
 
             &:not(:first-child) {
-                margin-top: rem(5);
+                margin-top: rem(3);
             }
 
             &:first-child {
@@ -38,7 +42,7 @@
 
             font-size: rem(14);
             line-height: rem(16);
-            letter-spacing: rem(-.15);
+            letter-spacing: rem(-.1);
         }
 
         .mini-news__date {

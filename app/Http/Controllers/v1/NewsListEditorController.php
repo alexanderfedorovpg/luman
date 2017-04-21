@@ -168,7 +168,7 @@ class NewsListEditorController extends CmsController
             $newsEdit = News::ModerationMode()->find(intval($id));
 
             if($newsEdit == null) {
-                return $this->respondWithError("Элемент не найден");
+                return $this->respondNotFound("Элемент не найден");
             }
 
             if ($newsEdit && $action == 'edit') {
@@ -177,18 +177,18 @@ class NewsListEditorController extends CmsController
                 $newsEdit->sub_title = $sub_title;
                 $newsEdit->note = $note;
                 $newsEdit->video_stream = $video_stream;
-                $newsEdit->is_publish = '0';
-                $newsEdit->publish_date = 'null';
+                $newsEdit->is_publish = false;
+                $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
                 $newsEdit->tags = $tags;
                 $newsEdit->keywords = $keywords;
-                $newsEdit->moderation = 0;
+                $newsEdit->moderation = 1;
                 $newsEdit->rubrics_id = $rubrics_id;
 
 	            $log_moderation = new NewsModerationLogHelper($newsEdit);
 
-                if($this->user_id != $newsEdit->editor_id) {
+                if((!Auth::user()->isAdmin()) && ($this->user_id != $newsEdit->editor_id)) {
                     return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
                 }
 
@@ -229,9 +229,11 @@ class NewsListEditorController extends CmsController
 
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound(['Исходная запись в ленте новостей не найдена либо скрыта']);
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('MODERATION_NEWS', $this->user_id, "Error 500");
-            return $this->respondFail500x([$e->getTrace()]);
+            return $this->respondFail500x([$e->getMessage()]);
         }
     }
 
