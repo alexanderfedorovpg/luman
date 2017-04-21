@@ -41,17 +41,18 @@ const CustomRight = styled(Right)`
     width: 259px
 `
 
-function Header({ moved, del, reject, preview, done }) {
+function Header({ moved, del, delegate, preview, finish, getFormData }) {
+
     return (
         <Bot moved={moved}>
             <Left>
                 <Form>
                     <Horizontal>
-                        <CustomButton xs danger onClick={del}>
+                        <CustomButton xs danger onClick={e=>del()}>
                             <Icon type="delete-reverse" />
                             Удалить
                         </CustomButton>
-                        <CustomButton xs danger onClick={reject}>
+                        <CustomButton xs danger onClick={e=>delegate()}>
                             <Icon type="arrow-left" />
                             Передать другому
                         </CustomButton>
@@ -59,7 +60,7 @@ function Header({ moved, del, reject, preview, done }) {
 
                             Предпросмотр
                         </CustomButton>
-                        <CustomButton xs success onClick={done}>
+                        <CustomButton xs success onClick={e=>finish(getFormData())}>
                             <Icon type="okay" />
                             Готово
                         </CustomButton>

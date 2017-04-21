@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers\v1;
 
+use App\Helpers\UrlReplaceHelper;
 use App\Models\User;
 use App\Http\Transformers\Transformer;
 use App\Models\Rubrics;
@@ -45,6 +46,11 @@ class NewsListTransformer extends Transformer
         if ($news['video_stream']) {
             $transform['VideoStream'] = $news['video_stream'];
         }
+
+        $transHelper = new UrlReplaceHelper();
+	    $url_title = $transHelper->translate($news['title']);
+
+        $transform['ShareLink'] = 'http://rtvi.com/news/'. $news['id'].'-'.$url_title;
 
         $transform['EditorId'] = $news['editor_id'];
 

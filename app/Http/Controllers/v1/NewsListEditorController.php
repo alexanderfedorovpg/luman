@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth,
     App\Helpers\LogController,
     App\Http\Transformers\v1\NewsEditorTransformer,
 	App\Helpers\NewsModerationLogHelper,
-    Illuminate\Database\Eloquent\ModelNotFoundException;
+    Illuminate\Database\Eloquent\ModelNotFoundException,
+    Illuminate\Validation\ValidationException;
 
 
 /**
@@ -167,7 +168,7 @@ class NewsListEditorController extends CmsController
             $newsEdit = News::ModerationMode()->find(intval($id));
 
             if($newsEdit == null) {
-                return $this->respondWithError("Элемент не найден");
+                return $this->respondNotFound("Элемент не найден");
             }
 
             if ($newsEdit && $action == 'edit') {
@@ -176,18 +177,18 @@ class NewsListEditorController extends CmsController
                 $newsEdit->sub_title = $sub_title;
                 $newsEdit->note = $note;
                 $newsEdit->video_stream = $video_stream;
-                $newsEdit->is_publish = '0';
-                $newsEdit->publish_date = 'null';
+                $newsEdit->is_publish = false;
+                $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
                 $newsEdit->tags = $tags;
                 $newsEdit->keywords = $keywords;
-                $newsEdit->moderation = 0;
+                $newsEdit->moderation = 1;
                 $newsEdit->rubrics_id = $rubrics_id;
 
 	            $log_moderation = new NewsModerationLogHelper($newsEdit);
 
-                if($this->user_id != $newsEdit->editor_id) {
+                if((!Auth::user()->isAdmin()) && ($this->user_id != $newsEdit->editor_id)) {
                     return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
                 }
 
@@ -228,9 +229,11 @@ class NewsListEditorController extends CmsController
 
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound(['Исходная запись в ленте новостей не найдена либо скрыта']);
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('MODERATION_NEWS', $this->user_id, "Error 500");
-            return $this->respondFail500x([$e->getTrace()]);
+            return $this->respondFail500x([$e->getMessage()]);
         }
     }
 
@@ -324,7 +327,7 @@ class NewsListEditorController extends CmsController
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
-            $news->editor_id = 'NULL';
+            $news->editor_id = null;
             $news->moderation = 0;
 
             if ($log_moderation->rejectionModeration() && $news->save()) {
@@ -336,6 +339,9 @@ class NewsListEditorController extends CmsController
 
             $this->log->setLog('REJECTION', $this->user_id, "Error, news id=".$id." don't rejection  ".$this->user_id);
             throw new \Exception('Error, news don\'t rejection');
+
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->getMessage());
         } catch (\Exception $e) {
             $this->log->setLog('REJECTION', $this->user_id, "Error 500 news id=".$id);
             return $this->respondFail500x($e->getMessage());
@@ -356,9 +362,9 @@ class NewsListEditorController extends CmsController
             $id = $request->input('id');
 
             $news = News::find($id);
-	        $log_moderation = new NewsModerationLogHelper($news);
+            $log_moderation = new NewsModerationLogHelper($news);
 
-            if($this->user_id != $news->editor_id) {
+            if ($this->user_id != $news->editor_id) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
@@ -366,14 +372,18 @@ class NewsListEditorController extends CmsController
             $news->moderation = 1;
 
             if ($log_moderation->setModeration() && $news->save()) {
-                $this->log->setLog('IN_WORK', $this->user_id, "Successful, news id=".$id." in work user_id=".$this->user_id);
+                $this->log->setLog('IN_WORK', $this->user_id,
+                    "Successful, news id=" . $id . " in work user_id=" . $this->user_id);
                 return $this->respondCreated(
                     ["data" => "in_work"]
                 );
             }
 
-            $this->log->setLog('IN_WORK', $this->user_id, "Error, news id=".$id." don't in work user_id=".$this->user_id);
+            $this->log->setLog('IN_WORK', $this->user_id,
+                "Error, news id=" . $id . " don't in work user_id=" . $this->user_id);
             throw new \Exception('Error, news don\'t rejection');
+        } catch (ValidationException $e) {
+                return $this->respondFail422x($e->getMessage());
         } catch (\Exception $e) {
             $this->log->setLog('IN_WORK', $this->user_id, "Error 500 news id=".$id);
             return $this->respondFail500x($e->getMessage());

@@ -40,12 +40,59 @@
 
     &__content {
         padding-left: rem(82);
-        margin-top: rem(93);
+        margin-top: rem(30);
 
         color: $enter;
 
         p {
             margin-bottom: rem(21);
+
+            letter-spacing: rem(-.3);
+        }
+    }
+
+    &__figure-title {
+        padding-left: rem(20);
+        margin-top: rem(51);
+        margin-bottom: rem(15);
+
+        letter-spacing: rem(-.5);
+    }
+
+    &__box-preview {
+        width: rem(782);
+        height: rem(289);
+        margin-left: rem(81);
+
+        background-color: $box;
+
+        &_position {
+            position: relative;
+        }
+    }
+
+    &__box-img {
+        width: inherit;
+        height: inherit;
+    }
+
+    &__box-text {
+        width: rem(356);
+        height: rem(172);
+        padding: #{rem(50)} #{rem(48) #{rem(28)} #{rem(25)}};
+
+        font: #{rem(16)}/ #{rem(24)} $stemBold;
+        color: $white;
+        letter-spacing: rem(-.8);
+
+        background-image: url(%=static=%content/about/box-text.png);
+        background-position: center;
+        background-size: cover;
+
+        &_position {
+            position: absolute;
+            top: rem(-72);
+            right: rem(-36);
         }
     }
     

@@ -5,15 +5,18 @@
 
         font-size: rem(14);
         line-height: rem(16);
-        letter-spacing: rem(-.5);
+        letter-spacing: rem(-.25);
     }
 
     .mini-news {
         @include padding_y(0);
+        width: rem(280);
+
         border-bottom: none;
 
         &:not(:first-child) {
             margin-top: rem(8);
+            margin-bottom: rem(13);
         }
     }
 

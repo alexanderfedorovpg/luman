@@ -25,7 +25,7 @@
 		 */
 		function __construct( News $news ) {
 
-			$this->news_id   = $news->news_id;
+			$this->news_id   = $news->id;
 			$this->is_online = $news->is_online;
 			$this->editor_id = $news->editor_id;
 
@@ -36,8 +36,8 @@
 		 * @return bool
 		 */
 		public function setModeration() {
-
-			$NewsModerationLog             = NewsModerationLog::firstOrNew( array( 'news_id' => $this->news_id ) )->first();
+            $NewsModerationLog = $this->getModerationLog();
+            $NewsModerationLog->news_id = $this->news_id;
 			$NewsModerationLog->start_date = date( 'Y-m-d H:i:s' );
 			$NewsModerationLog->editor_id  = $this->editor_id;
 			$NewsModerationLog->is_online  = $this->is_online;
@@ -54,25 +54,35 @@
 		 * @return bool
 		 */
 		public function setEndModeration() {
-
-			$NewsModerationLog           = NewsModerationLog::where( 'news_id', '=', $this->news_id )->first();
-			$NewsModerationLog->end_date = date( 'Y-m-d H:i:s' );
-			if ( $NewsModerationLog->save() ) {
+            $log = $this->getModerationLog();
+			$log->end_date = date( 'Y-m-d H:i:s' );
+			if ( $log->save() ) {
 				return true;
 			} else {
 				return false;
 			}
 		}
 		public function rejectionModeration() {
-
-			$NewsModerationLog           = NewsModerationLog::where( 'news_id', '=', $this->news_id )->first();
-			$NewsModerationLog->date_rejection = date( 'Y-m-d H:i:s' );
-			if ( $NewsModerationLog->save() ) {
+            $log = $this->getModerationLog();
+			$log->date_rejection = date( 'Y-m-d H:i:s' );
+			if ($log->save() ) {
 				return true;
 			} else {
 				return false;
 			}
 		}
 
+		private function getModerationLog()
+        {
+            $log = NewsModerationLog::where( 'news_id', '=', $this->news_id )->first();
+            if (!$log) {
+                $log = new NewsModerationLog([
+                    'news_id' => $this->news_id,
+                    'editor_id' => $this->editor_id,
+                    'is_online' => $this->is_online
+                ]);
+            }
 
+            return $log;
+        }
 	}

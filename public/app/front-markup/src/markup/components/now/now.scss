@@ -10,13 +10,19 @@
 
     &__news {
         padding-right: 1px;
+        margin-top: rem(15);
     }
 
     &__mini-news {
-        padding-right: rem(46);
+        padding-right: rem(20);
     }
 
     &__mini-news {
+
+        &:first-child {
+            padding-top: 0 !important;
+            padding-bottom: rem(13) !important;
+        }
 
         &:hover .mini-news__img {
             opacity: 1;

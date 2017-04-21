@@ -222,7 +222,7 @@ function Item({ data, newItem, reject, accept }) {
                     : null
                 }
                 <Tags>
-                    {data.tags.split(',')
+                    {data.tags
                         .filter(value => !!value.trim())
                         .map(tag => (
                             <span key={tag}>

@@ -6,10 +6,9 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import {
-    selectMenuExpandedStatus,
-} from 'containers/App/selectors';
+import { selectMenuExpandedStatus } from 'containers/App/selectors';
 import Programs from 'components/Programs';
 
 import makeSelectProgramsPage from './selectors';
@@ -18,7 +17,8 @@ import {
     loadPrograms,
 } from './actions';
 import Header from './Header';
-import Wrap from './Wrap';
+import Wrapper from './Wrapper';
+import Content from './Content';
 import TopPanel from './TopPanel';
 
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -30,17 +30,18 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
         const { menuOpen } = this.props;
         const { filter, programs } = this.props.ProgramsPage;
         return (
-            <div>
+            <Wrapper>
+                <Helmet title="Список программ" />
                 <Header
                     moved={menuOpen}
                     filter={filter}
                     setFilter={this.props.setFilter}
                 />
-                <Wrap>
+                <Content>
                     <TopPanel />
                     <Programs items={programs} />
-                </Wrap>
-            </div>
+                </Content>
+            </Wrapper>
         );
     }
 }

@@ -2,7 +2,7 @@
     background-color: $bg-gray;
 
     &_margin {
-        margin-bottom: 53px;
+        margin-bottom: rem(43);
     }
 
     &::before {
@@ -25,7 +25,7 @@
         flex-direction: row;
         justify-content: space-between;
         padding-top: rem(11);
-        padding-bottom: rem(14);
+        padding-bottom: rem(8);
 
         &_alarm {
             @include padding_y(0);

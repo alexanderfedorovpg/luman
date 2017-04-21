@@ -15,14 +15,15 @@
         left: 0;
 
         display: block;
-        width: rem(301);
-        height: rem(245);
+        width: inherit;
+        height: inherit;
 
         background-color: rgba(0, 0, 0, .5);
     }
 
     &__img {
-        width: rem(301);
+        width: inherit;
+        height: inherit;
     }
 
     &__link {
@@ -32,23 +33,27 @@
         left: 0;
 
         display: block;
-        width: rem(301);
-        height: rem(245);
+        width: inherit;
+        height: inherit;
     }
 
     &__info {
         position: absolute;
         z-index: 1;
-        bottom: 9px;
+        bottom: rem(9);
         left: 0;
 
-        width: rem(252);
+        width: rem(280);
         padding-left: rem(20);
     }
 
     &__title {
+        margin-bottom: rem(3);
+
         font: #{rem(18)}/#{rem(21)} $stemBold;
         color: $white;
+        letter-spacing: rem(-.9);
+        letter-spacing: rem(-.9);
     }
 
     &__title_font_small {
@@ -98,13 +103,13 @@
         content: '';
 
         position: absolute;
-        z-index: 0;
+        z-index: 1;
         bottom: 0;
         left: 0;
 
         display: block;
-        width: rem(617);
-        height: rem(141);
+        width: inherit;
+        height: inherit;
 
         background-image: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, .1));
     }
@@ -112,7 +117,7 @@
     &__time-keeping {
         position: relative;
 
-        margin-top: rem(9);
+        margin-bottom: rem(5);
     }
 
     &__ico {
@@ -137,8 +142,8 @@
         left: 0;
 
         display: block;
-        width: rem(617);
-        height: rem(250);
+        width: inherit;
+        height: inherit;
     }
 
     &__img {
@@ -146,17 +151,17 @@
         top: 0;
         left: 0;
 
-        width: rem(617);
-        height: rem(250);
+        width: inherit;
+        height: inherit;
     }
 
     &__info {
         position: absolute;
         z-index: 1;
-        bottom: 5px;
+        bottom: rem(2);
         left: 0;
 
-        width: rem(310);
+        width: rem(345);
         padding-left: rem(19);
     }
 
@@ -168,6 +173,7 @@
     &__title_font_small {
         font-size: rem(18);
         line-height: rem(21);
+        letter-spacing: rem(-.8);
     }
 
     &__time-add {
@@ -178,5 +184,26 @@
 
     &__time-upadate {
         color: $purple;
+    }
+
+    &__live-tag {
+        position: absolute;
+        z-index: 2;
+        top: rem(23);
+        left: 0;
+
+        display: none;
+        padding-right: rem(9);
+        padding-left: rem(7);
+
+        font: #{rem(16)} / #{rem(26)} $stemBold;
+        color: $white;
+        text-transform: uppercase;
+
+        background-color: $war;
+    }
+
+    &__title-live {
+
     }
 }

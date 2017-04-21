@@ -173,7 +173,7 @@ function Item({ data, newItem }) {
                         </TitleWrapper>
                     </Title>
                     <Tags>
-                        {data.tags.split(',')
+                        {data.tags
                             .filter(value => !!value.trim())
                             .map(value => (
                                 <span key={value}>

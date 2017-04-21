@@ -18,11 +18,11 @@ import './style.scss'
 
 function HomePage({ news, videoNews }) {
     const lastNews = news.filter(isNow)
-    const oldNews = news.filter(notNow)
 
     const nowNews = lastNews.sort(latestDate).slice(0, 5)
     const todayNews = lastNews.sort(highestRating).slice(0, 3)
     const noiseNews = lastNews.sort(lowestRating).slice(0, 5)
+    const randomNews = lastNews.slice(-7)
 
     const videoByDate = videoNews.sort(latestDate)
     const latestVideo = videoByDate[0] || {}
@@ -50,11 +50,11 @@ function HomePage({ news, videoNews }) {
                     <div className="general-news__left-wrapper">
                         <Banner className="general-news__banner" />
                     </div>
-                    <RandomNews className="general-news__random-news" />
+                    <RandomNews className="general-news__random-news" data={randomNews} />
                 </div>
                 <div className="general-news__right general-news__right_more">
                     <Subscribe className="general-news__subscribe"/>
-                    <MoreNews className="general-news__more-news" data={oldNews.slice(0, 6)} />
+                    <MoreNews className="general-news__more-news" data={lastNews.slice(0, 6)} />
                 </div>
                 <div className="general-news__middle">
                     <BannerPreview className="general-news__banner-preview" />

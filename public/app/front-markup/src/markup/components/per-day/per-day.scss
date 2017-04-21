@@ -16,6 +16,19 @@
         margin-top: rem(17);
     }
 
+    .block-square {
+
+        .block-square__info {
+            width: rem(250);
+        }
+
+        .block-square__title {
+            margin-bottom: 0;
+
+            letter-spacing: rem(-.2);
+        }
+    }
+
     &__block-square {
 
         &_war {
@@ -23,8 +36,11 @@
             overflow: hidden;
 
             .block-square__title {
+                margin-bottom: rem(42) !important;
+
                 font-size: rem(16);
                 line-height: rem(21);
+
             }
         }
 

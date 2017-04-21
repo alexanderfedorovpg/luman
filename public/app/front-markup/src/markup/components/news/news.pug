@@ -7,8 +7,8 @@ mixin news(data)
         block
         +e.P.title.section-title Новости
         +e.list
-            +block-square(params.square)(class="news__block-square")
-
-            each item in params.list
-                +mini-news(item)(class="news__mini-news")
+            +block-square(params.square_two)(class="news__block-square")
+            +e.list-mini
+                each item in params.list
+                    +mini-news(item)(class="news__mini-news")
 

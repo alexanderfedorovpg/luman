@@ -11,7 +11,19 @@ import {
 
     LOAD_ARTICLE,
     LOAD_ARTICLE_SUCCESS,
-    LOAD_ARTICLE_FAILURE
+    LOAD_ARTICLE_FAILURE,
+
+    DELETE_ARTICLE,
+    DELETE_ARTICLE_SUCCESS,
+    DELETE_ARTICLE_FAILURE,
+
+    FINISH_ARTICLE,
+    FINISH_ARTICLE_SUCCESS,
+    FINISH_ARTICLE_FAILURE,
+
+    DELEGATE_ARTICLE,
+    DELEGATE_ARTICLE_SUCCESS,
+    DELEGATE_ARTICLE_FAILURE
 } from './constants'
 
 export const loadArticle = payload => ({
@@ -26,6 +38,51 @@ export const articleLoaded = payload => ({
 
 export const articleLoadingError = error => ({
     type: LOAD_ARTICLE_FAILURE,
+    error
+})
+
+export const deleteArticle = payload => ({
+    type: DELETE_ARTICLE,
+    payload
+})
+
+export const articleDeleted = payload => ({
+    type: DELETE_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articleDeletionError = error => ({
+    type: DELETE_ARTICLE_FAILURE,
+    error
+})
+
+export const finishArticle = payload => ({
+    type: FINISH_ARTICLE,
+    payload
+})
+
+export const articleFinished = payload => ({
+    type: FINISH_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articleFinishError = error => ({
+    type: FINISH_ARTICLE_FAILURE,
+    error
+})
+
+export const delegateArticle = payload => ({
+    type: DELEGATE_ARTICLE,
+    payload
+})
+
+export const articleDelegated = payload => ({
+    type: DELEGATE_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articleDelegationError = error => ({
+    type: DELEGATE_ARTICLE_FAILURE,
     error
 })
 

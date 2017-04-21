@@ -6,7 +6,14 @@ import HeaderEditor from 'components/Editor/Header.editor'
 import HeaderSupervisor from 'components/Editor/Header.supervisor'
 import Content from 'components/Editor/Content'
 
-import { loadChatMessages, postMessage, loadArticle } from './actions'
+import {
+    loadChatMessages,
+    postMessage,
+    loadArticle,
+    deleteArticle,
+    finishArticle,
+    delegateArticle
+} from './actions'
 
 import { loadEditors } from 'containers/App/actions'
 
@@ -65,46 +72,58 @@ class EditorPage extends Component {
             rubrics,
             loadMessages,
             postMessage,
+            deleteArticle,
+            delegateArticle,
+            finishArticle,
             params,
             usersMap,
             user
         } = this.props
 
+        const headerProps = {
+            moved: menuOpen,
+            del: deleteArticle.bind(this, article.id),
+            preview: this.openPreview
+        }
+
+        if (!article.id) return null
+
         if (checkPermissons(user, ['admin', 'сommissioning-editor'])) {
             return (
-                <div>
-                    <HeaderSupervisor
-                        moved={menuOpen}
-                        preview={this.openPreview} />
-                    <Content
-                        chat={chat}
-                        article={article}
-                        rubrics={rubrics}
-                        chatRoom={params.id}
-                        preview={this.state.preview}
-                        closePreview={this.closePreview}
-                        editor={usersMap[article.EditorId]}
-                        loadMessages={loadMessages}
-                        postMessage={postMessage} />
-                </div>
+                <Content
+                    chat={chat}
+                    article={article}
+                    rubrics={rubrics}
+                    chatRoom={params.id}
+                    preview={this.state.preview}
+                    closePreview={this.closePreview}
+                    editor={usersMap[article.EditorId]}
+                    loadMessages={loadMessages}
+                    postMessage={postMessage}>
+
+                    <HeaderSupervisor {...headerProps} />
+                </Content>
             )
         }
         else if (checkPermissons(user, ['editor'])) {
             return (
-                <div>
+                <Content
+                    chat={chat}
+                    article={article}
+                    rubrics={rubrics}
+                    chatRoom={params.id}
+                    delegate={delegateArticle.bind(this, article.id)}
+                    preview={this.state.preview}
+                    finish={finishArticle}
+                    closePreview={this.closePreview}
+                    loadMessages={loadMessages}
+                    postMessage={postMessage}>
+
                     <HeaderEditor
-                        moved={menuOpen}
-                        preview={this.openPreview} />
-                    <Content
-                        chat={chat}
-                        article={article}
-                        rubrics={rubrics}
-                        chatRoom={params.id}
-                        preview={this.state.preview}
-                        closePreview={this.closePreview}
-                        loadMessages={loadMessages}
-                        postMessage={postMessage} />
-                </div>
+                        delegate={delegateArticle.bind(this, article.id)}
+                        finish={finishArticle}
+                        {...headerProps} />
+                </Content>
             )
         }
         else {
@@ -140,6 +159,17 @@ const mapDispatchToProps = dispatch => ({
     },
     loadArticle(id) {
         dispatch(loadArticle(id))
+    },
+    finishArticle(data) {
+        if (data) {
+            dispatch(finishArticle(data))
+        }
+    },
+    deleteArticle(id) {
+        dispatch(deleteArticle(id))
+    },
+    delegateArticle(id) {
+        dispatch(delegateArticle(id))
     },
     postMessage(room, message) {
         dispatch(postMessage(room, message))

@@ -4,30 +4,35 @@
  *
  */
 
-import React, {
-    PropTypes
-} from 'react';
-import {
-    connect
-} from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import {
-    createStructuredSelector
-} from 'reselect';
+import { createStructuredSelector } from 'reselect';
+import { Wrap } from 'components/Content';
+import { LiveList, LiveDetails } from 'components/Live';
+
 import makeSelectLivePage from './selectors';
+import Header from './Header';
 
 export class LivePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render() {
+        const { items } = this.props.LivePage;
         return (
             <div>
-                <Helmet title = "LivePage" />
+                <Helmet title="Прямой эфир" />
+                <Header />
+                <Wrap>
+                    <LiveList items={items} />
+                    <LiveDetails />
+                </Wrap>
             </div>
         );
     }
 }
 
 LivePage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    LivePage: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

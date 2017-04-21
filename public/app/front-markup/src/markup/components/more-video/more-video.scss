@@ -9,9 +9,20 @@
 
     &__from-enter {
         width: rem(301);
+
+        .from-enter__info {
+            padding-left: rem(20);
+        }
     }
 
-    .from-enter__link,
+    .from-enter__link {
+        line-height: rem(21);
+    }
+
+    .from-enter__category {
+        letter-spacing: -.2px;
+    }
+
     .from-enter__img {
         width: rem(301);
         height: rem(185);

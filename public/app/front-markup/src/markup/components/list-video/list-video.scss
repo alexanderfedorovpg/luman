@@ -1,4 +1,5 @@
 .list-video {
+    width: rem(275);
 
     &__item {
         display: flex;
@@ -7,7 +8,7 @@
         justify-content: space-between;
 
         &:not(:first-child) {
-            margin-top: rem(19);
+            margin-top: rem(21);
         }
     }
 
@@ -17,14 +18,17 @@
     }
 
     &__info {
-        width: calc(100% - #{rem(40)});
+        width: calc(100% - #{rem(38)});
         margin-top: rem(-2);
     }
 
     &__title {
-        font: #{rem(14)}/#{rem(20)} $stemBold;
+        display: inline-block;
+
+        font: #{rem(14)}/#{rem(19)} $stemBold;
         color: $enter;
         text-decoration: none;
+        letter-spacing: rem(-.2);
     }
 
     &__category {
