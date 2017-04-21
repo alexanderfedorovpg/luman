@@ -25,7 +25,6 @@ export function loadPrograms() {
 }
 
 export function programsLoaded(payload) {
-    console.log(payload);
     return {
         type: LOAD_PROGRAMS_SUCCESS,
         payload,
