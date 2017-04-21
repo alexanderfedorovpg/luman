@@ -19,6 +19,10 @@
         }
     }
 
+    .block-rectangle__info {
+        bottom: rem(6);
+    }
+
     &__block-square {
         @include margin_y(#{rem(7)});
         width: rem(300);
