@@ -42,7 +42,10 @@ const Program = ({ active, src, date = '2017-04-20 11:52:38', category, title, h
                 }
                 <Category href="#">{category}</Category>
                 <Title>{title}</Title>
-                <HashTags tags={hashTags} />
+                {
+                    !!hashTags &&
+                    <HashTags tags={hashTags} />
+                }
             </Info>
             <Buttons />
         </Wrapper>

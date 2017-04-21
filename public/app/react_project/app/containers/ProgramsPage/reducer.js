@@ -7,6 +7,8 @@
 import { fromJS } from 'immutable';
 import {
     SET_FILTER,
+    LOAD_PROGRAMS_SUCCESS,
+    LOAD_PROGRAMS_FAILURE,
     filters,
 } from './constants';
 
@@ -48,6 +50,9 @@ function programsPageReducer(state = initialState, action) {
     switch (action.type) {
         case SET_FILTER:
             return state.set('filter', action.payload);
+        case LOAD_PROGRAMS_SUCCESS:
+            console.log(action.payload);
+            return state.set('programs', action.payload);
         default:
             return state;
     }

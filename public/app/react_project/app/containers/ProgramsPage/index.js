@@ -10,17 +10,22 @@ import { createStructuredSelector } from 'reselect';
 import {
     selectMenuExpandedStatus,
 } from 'containers/App/selectors';
+import Programs from 'components/Programs';
+
 import makeSelectProgramsPage from './selectors';
 import {
     setFilter,
+    loadPrograms,
 } from './actions';
-
-import Programs from 'components/Programs';
 import Header from './Header';
 import Wrap from './Wrap';
 import TopPanel from './TopPanel';
 
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    componentDidMount() {
+        this.props.loadPrograms();
+    }
+
     render() {
         const { menuOpen } = this.props;
         const { filter, programs } = this.props.ProgramsPage;
@@ -42,7 +47,8 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
 
 ProgramsPage.propTypes = {
     menuOpen: PropTypes.bool,
-    setFilter: PropTypes.func.isRequired,
+    setFilter: PropTypes.func,
+    loadPrograms: PropTypes.func,
     ProgramsPage: PropTypes.object,
 };
 
@@ -55,6 +61,9 @@ function mapDispatchToProps(dispatch) {
     return {
         setFilter(filter) {
             dispatch(setFilter(filter.value));
+        },
+        loadPrograms() {
+            dispatch(loadPrograms());
         },
     };
 }
