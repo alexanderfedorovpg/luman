@@ -17,20 +17,11 @@
         padding-right: rem(20);
     }
 
-    .mini-news__date {
-        margin-top: 0;
-    }
-
     &__mini-news {
 
         &:first-child {
             padding-top: 0 !important;
             padding-bottom: rem(13) !important;
-        }
-
-        &:hover {
-            padding-top: rem(20);
-            padding-bottom: rem(20);
         }
 
         &:hover .mini-news__img {

@@ -462,6 +462,12 @@ html {
   font-size: 1vw;
 }
 
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 html.war .header::before {
   background-color: #cc0000;
 }
@@ -1132,18 +1138,9 @@ main {
   padding-right: 1.25rem;
 }
 
-.now .mini-news__date {
-  margin-top: 0;
-}
-
 .now__mini-news:first-child {
   padding-top: 0 !important;
   padding-bottom: 0.8125rem !important;
-}
-
-.now__mini-news:hover {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
 }
 
 .now__mini-news:hover .mini-news__img {
@@ -1247,13 +1244,13 @@ main {
 .mini-news__img {
   position: absolute;
   z-index: 0;
-  top: calc(50% - 1px);
+  top: 50%;
   left: 50%;
   display: block;
   width: auto;
   min-width: 100%;
   height: auto;
-  min-height: calc(100% + 1px);
+  min-height: 100%;
   opacity: 0;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
