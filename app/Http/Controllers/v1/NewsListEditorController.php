@@ -71,7 +71,12 @@ class NewsListEditorController extends CmsController
                 $this->respondFail422x();
             }
 
-            $news = News::ModerationThisEditor($params);
+            $news = null;
+            if (Auth::user()->isAdmin()) {
+                $news = News::all();
+            } else {
+                $news = News::ModerationThisEditor($params);
+            }
 
             $this->processing($request, $news);
 
@@ -291,13 +296,13 @@ class NewsListEditorController extends CmsController
             $news->sub_title = $sub_title;
             $news->note = $note ? $note : '';
             $news->video_stream = $video_stream;
-            $news->is_publish = false;
-            $news->publish_date = null;
+            $news->is_publish = true;
+            $news->publish_date = new \DateTime();
             $news->top = $top;
             $news->body = $body ? $body : '';
             $news->tags = $tags;
             $news->keywords = $keywords;
-            $news->moderation = 1;
+            $news->moderation = false;
             $news->rubrics_id = $rubrics_id;
             $news->original_source_link = $original_source_link ? $$original_source_link : '';
 
