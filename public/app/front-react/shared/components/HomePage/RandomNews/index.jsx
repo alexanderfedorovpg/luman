@@ -5,13 +5,16 @@ import Block from 'components/Block'
 
 import './style.scss'
 
-function RandomNews({ className }) {
+function RandomNews({ data, className }) {
+    const primal = data[0]
+    const secondary = data.slice(1, 4)
+    const rest = data.slice(4)
 
     return (
         <div className={classNames("random-news", className)}>
             <div className="random-news__row">
-                <Block data={dataOne} rectangle className="random-news__block-rectangle random-news__block" />
-                {dataRest.map((value, i) => (
+                <Block data={primal} rectangle className="random-news__block-rectangle random-news__block" />
+                {[...secondary, { list: rest }].map((value, i) => (
                     <Block data={value} key={i} className="random-news__block-square random-news__block" />
                 ))}
             </div>
