@@ -41,24 +41,25 @@ const CustomRight = styled(Right)`
     width: 259px
 `
 
-function Header({ moved, del, ret, preview, publish }) {
+function Header({ moved, del, ret, preview, publish, getFormData }) {
+
     return (
         <Bot moved={moved}>
             <Left>
                 <Form>
                     <Horizontal>
-                        <CustomButton xs danger onClick={del}>
+                        <CustomButton xs danger onClick={e=>del()}>
                             <Icon type="delete-reverse" />
                             Удалить
                         </CustomButton>
-                        <CustomButton xs danger onClick={ret}>
+                        <CustomButton xs danger onClick={e=>ret()}>
                             <Icon type="arrow-left" />
                             Вернуть на правки
                         </CustomButton>
                         <CustomButton xs primary onClick={preview}>
                             Предпросмотр
                         </CustomButton>
-                        <CustomButton xs success onClick={publish}>
+                        <CustomButton xs success onClick={e=>publish(getFormData())}>
                             <Icon type="okay" />
                             Опубликовать
                         </CustomButton>

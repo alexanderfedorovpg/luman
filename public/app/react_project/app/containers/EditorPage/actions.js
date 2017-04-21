@@ -21,6 +21,10 @@ import {
     FINISH_ARTICLE_SUCCESS,
     FINISH_ARTICLE_FAILURE,
 
+    PUBLISH_ARTICLE,
+    PUBLISH_ARTICLE_SUCCESS,
+    PUBLISH_ARTICLE_FAILURE,
+
     DELEGATE_ARTICLE,
     DELEGATE_ARTICLE_SUCCESS,
     DELEGATE_ARTICLE_FAILURE
@@ -68,6 +72,21 @@ export const articleFinished = payload => ({
 
 export const articleFinishError = error => ({
     type: FINISH_ARTICLE_FAILURE,
+    error
+})
+
+export const publishArticle = payload => ({
+    type: PUBLISH_ARTICLE,
+    payload
+})
+
+export const articlePublished = payload => ({
+    type: PUBLISH_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articlePublishError = error => ({
+    type: PUBLISH_ARTICLE_FAILURE,
     error
 })
 

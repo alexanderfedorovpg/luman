@@ -12,6 +12,7 @@ import {
     loadArticle,
     deleteArticle,
     finishArticle,
+    publishArticle,
     delegateArticle
 } from './actions'
 
@@ -75,6 +76,7 @@ class EditorPage extends Component {
             deleteArticle,
             delegateArticle,
             finishArticle,
+            publishArticle,
             params,
             usersMap,
             user
@@ -96,12 +98,15 @@ class EditorPage extends Component {
                     rubrics={rubrics}
                     chatRoom={params.id}
                     preview={this.state.preview}
+                    publish={publishArticle}
                     closePreview={this.closePreview}
                     editor={usersMap[article.EditorId]}
                     loadMessages={loadMessages}
                     postMessage={postMessage}>
 
-                    <HeaderSupervisor {...headerProps} />
+                    <HeaderSupervisor
+                        {...headerProps}
+                        publish={publishArticle} />
                 </Content>
             )
         }
@@ -163,6 +168,11 @@ const mapDispatchToProps = dispatch => ({
     finishArticle(data) {
         if (data) {
             dispatch(finishArticle(data))
+        }
+    },
+    publishArticle(data) {
+        if (data) {
+            dispatch(publishArticle(data))
         }
     },
     deleteArticle(id) {
