@@ -73,7 +73,7 @@ class NewsListEditorController extends CmsController
 
             $news = null;
             if (Auth::user()->isAdmin()) {
-                $news = News::all();
+                $news = News::query();
             } else {
                 $news = News::ModerationThisEditor($params);
             }
