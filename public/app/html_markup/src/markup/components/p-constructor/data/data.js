@@ -21,32 +21,32 @@ var data = {pConstructor: {
         },
 
         {
-            rating: '2',
-            ratingClass: 'rate2',
+            rating: '5',
+            ratingClass: 'rate5',
             tag: 'Общество',
             cnt: 'Гвардеец едва не застрелил королеву Великобритании Елизавету II',
             media: 'Текст'
         },
 
         {
-            rating: '7',
-            ratingClass: 'rate7',
+            rating: '6',
+            ratingClass: 'rate6',
             tag: 'Наука',
             cnt: 'Российские ученые нашли противоречия в самом популярном методе теоретической химии',
             media: '4 Фото + 1 Видео'
         },
 
         {
-            rating: '6',
-            ratingClass: 'rate6',
+            rating: '5',
+            ratingClass: 'rate5',
             tag: 'Спорт',
             cnt: 'НХЛ рассматривает возможность проводить матчи в Китае',
             media: 'Текст'
         },
 
         {
-            rating: '5',
-            ratingClass: 'rate5',
+            rating: '7',
+            ratingClass: 'rate7',
             tag: 'Политика',
             cnt: 'Помощник Трампа не исключил «принятия мер» против РФ из-за «кибератак»',
             media: '4 Фото + 1 Видео'
