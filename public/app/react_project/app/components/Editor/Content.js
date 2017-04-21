@@ -15,6 +15,7 @@ import Modal from 'components/Modal'
 import Preview from './Preview'
 import Chat from './Chat'
 import HeaderEditor from './Header.editor'
+import HeaderSupervisor from './Header.supervisor'
 
 import { ifProp } from 'utils/style'
 import { font, padding, color } from 'constants/style'
@@ -271,7 +272,7 @@ class Content extends Component {
         return (
             <Root>
                 {Children.map(this.props.children, child => {
-                    if (child.type == HeaderEditor) {
+                    if (child.type == HeaderEditor || child.type == HeaderSupervisor) {
                         return cloneElement(child, { getFormData: this.dataToSubmit.bind(this) })
                     }
                     else {
