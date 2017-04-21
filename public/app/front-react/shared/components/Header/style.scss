@@ -4,9 +4,8 @@
 .header {
     background-color: $bg-gray;
 
-    &.position {
-        position: relative;
-        z-index: 1;
+    &_margin {
+        margin-bottom: rem(43);
     }
 
     &_open::before {
@@ -19,12 +18,25 @@
         background-color: $purple;
     }
 
+    &.position {
+        position: relative;
+        z-index: 1;
+    }
+
     &__container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         padding-top: rem(11);
-        padding-bottom: rem(14);
+        padding-bottom: rem(8);
+
+        &_alarm {
+            @include padding_y(0);
+            align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+            min-height: inherit;
+        }
     }
 
     &__part-wrapper {
@@ -33,7 +45,9 @@
     }
 
     &__burger {
-        margin-top: rem(7);
+        padding-top: rem(7);
+
+        cursor: pointer;
     }
 
     &__logo {
@@ -42,6 +56,10 @@
         width: rem(138);
         margin-right: rem(28);
         margin-left: rem(38);
+
+        .logo__img {
+            width: rem(138);
+        }
     }
 
     &__rss,
@@ -52,4 +70,38 @@
     &__rss {
         margin-left: rem(27);
     }
+
+    &__alarm-block {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: rem(70);
+
+    }
+
+    &__when,
+    &__event-link {
+        font-size: rem(18);
+        line-height: rem(40);
+        color: $white;
+    }
+
+    &__when {
+        margin-right: rem(17);
+    }
+
+    &__event-link {
+        flex-grow: 2;
+
+        text-align: right;
+        text-decoration: none;
+    }
+
+    &__event {
+        font: #{rem(24)} / #{rem(40)} $stemBold;
+        color: $white;
+    }
+
 }
