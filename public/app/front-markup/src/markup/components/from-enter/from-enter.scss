@@ -14,7 +14,8 @@
     }
 
     &__img {
-        width: rem(300);
+        // width: rem(300);
+        width: 100%;
         height: rem(185);
     }
 
@@ -22,7 +23,8 @@
         position: relative;
 
         display: block;
-        width: rem(300);
+        // width: rem(300);
+        width: 100%;
         height: rem(185);
 
         &::before {
@@ -30,11 +32,13 @@
 
             position: absolute;
             top: 0;
+            right: 0;
+            bottom: 0;
             left: 0;
 
             display: block;
-            width: rem(300);
-            height: rem(185);
+            // width: rem(300);
+            // height: rem(185);
 
             background-color: rgba(0, 0, 0, .5);
         }

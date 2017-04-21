@@ -37,6 +37,29 @@
         color: $purple;
     }
 
+    &__update {
+        position: absolute;
+        right: rem(-32);
+        bottom: rem(-22);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: rem(155);
+        height: rem(75);
+        padding-top: rem(8);
+
+        font-family: $stemBold;
+        font-size: 16px;
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        background: url('%=static=%general/geometry/ice-cube.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
 }
 
 .text-bg-gray--news {
@@ -154,7 +177,7 @@
 
 .text-bg-gray--primary {
     height: auto;
-    padding-top: rem(28);
-    padding-bottom: rem(50);
-    padding-left: rem(198);
+    padding-top: rem(26);
+    padding-bottom: rem(68);
+    padding-left: rem(195);
 }

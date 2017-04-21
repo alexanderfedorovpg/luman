@@ -1,14 +1,50 @@
 // GUI stylies of the project
 // For example, styles of the links, buttons and so on.
 
+.icon-play {
+    @include bg($play-btn);
+}
+
+.fs-14 {
+    font-size: rem(14) !important;
+}
+
+.fs-15 {
+    font-size: rem(15);
+}
+
+.fs-16 {
+    font-size: rem(16) !important;
+}
+
+.fs-17 {
+    font-size: rem(17);
+}
+
+.fs-18 {
+    font-size: rem(18) !important;
+}
+
+.fs-19 {
+    font-size: rem(19);
+}
+
+.fs-20 {
+    font-size: rem(20);
+}
+
+.fs-24 {
+    font-size: rem(24) !important;
+}
+
 .list-default {
     &__item {
-        margin-bottom: rem(15);
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: rem(17);
         list-style: none;
         &:before {
-            display: inline-block;
-            margin-right: rem(3);
-            vertical-align: top;
+            margin-right: rem(5);
             content: '—';
             color: #cc0000;
             font-family: $stemReg;
@@ -17,8 +53,57 @@
         &:last-child {
             margin-bottom: 0;
         }
-        p {
-            display: inline-block;
+    }
+}
+
+.subtitle-order {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(15);
+    color: $enter;
+    font-family: $stemReg;
+    font-size: rem(14);
+    letter-spacing: -0.14px;
+    text-transform: uppercase;
+    .dig {
+        position: relative;
+        margin-right: rem(11);
+        @include bg($subtitle-order);
+        font-style: normal;
+        &:before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            content: attr(data-subtitle-order);
+            color: $white;
+            font-family: $stemBold;
+            font-size: 14px;
+            text-transform: uppercase;
+            
         }
     }
+}
+
+.input {
+    outline: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #cccccc;
+    color: #50687b;
+    @include placeholder {
+        color: #50687b;
+    }
+    font-family: $stemReg;
+    font-size: rem(16);
+    line-height: rem(18);
+    letter-spacing: rem(-0.4);
+}
+.input-block {
+    width: 100%;
+}
+
+.subtitle-border {
+    border-bottom: 1px solid #cccccc;
 }

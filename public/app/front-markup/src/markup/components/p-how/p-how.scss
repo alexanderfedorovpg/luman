@@ -1,0 +1,147 @@
+.how-watch {
+    padding-left: rem(82);
+    // padding-top: rem(38);
+    margin-top: rem(-10);
+    .left-col {
+        padding-right: rem(82);
+    }
+    h1 {
+        margin-top: rem(0);
+        margin-bottom: rem(30);
+        margin-left: rem(-83);
+    }
+    h2 {
+        padding-bottom: 10px;
+        padding-left: 2px;
+        margin-top: rem(28);
+        margin-bottom: rem(15);
+        margin-left: rem(-63);
+
+        font-family: $stemBold;
+        font-size: rem(24);
+        color: $enter;
+        letter-spacing: rem(-0.4);
+    }
+    p {
+        letter-spacing: rem(-0.35);
+    }
+    .text-cols {
+        margin-bottom: rem(32);
+        p {
+            line-height: rem(24);
+        }
+    }
+    &__item {
+
+    }
+
+    &__list {
+        &__item {
+            margin-bottom: rem(22);
+            h4 {
+                font-family: $stemReg;
+                font-size: rem(14);
+                font-weight: 700;
+                color: $purple;
+            }
+            p {
+
+            }
+            a {
+                color: $blue;
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__distribution {
+        margin-top: rem(47);
+        .text-cols {
+            margin-top: rem(20);
+        }
+    }
+    &__hotel {
+        padding-right: rem(5);
+        margin-top: rem(50);
+        h4 {
+            margin-top: rem(19);
+
+            font-family: $stemBold;
+            font-size: rem(14);
+            color: $enter;
+            letter-spacing: rem(-0.15);
+            text-transform: uppercase;
+        }
+    }
+
+    &__contacts {
+        padding-right: rem(200);
+        a {
+            color: $blue;
+            text-decoration: none;
+        }
+    }
+
+    &__region {
+        margin-top: rem(59);
+        h2 {
+            margin-bottom: rem(16);
+        }
+    }
+
+    &__form {
+        position: relative;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding-top: rem(42);
+        padding-right: rem(37);
+        padding-bottom: rem(42);
+        padding-left: rem(29);
+
+        border: 1px solid #ccc;
+        .col-l,
+        .col-r {
+            width: 46%;
+        }
+        .input {
+            padding-bottom: rem(4);
+        }
+        .form-group {
+            margin-bottom: rem(31);
+        }
+        .btn-submit {
+            // display: none;
+            position: absolute;
+            right: rem(36);
+            bottom: rem(-33);
+
+            width: rem(155);
+            height: rem(75);
+            padding-bottom: rem(4);
+
+            font-family: $stemBold;
+            font-size: rem(16);
+            color: #e9ebed;
+            letter-spacing: rem(-0.3);
+            text-transform: uppercase;
+
+            border: 0;
+            background: url('%=static=%general/geometry/red-btn.png') no-repeat;
+            background-size: cover;
+            cursor: pointer;
+            outline: 0;
+        }
+    }
+
+}
+.text-cols {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    > p {
+        width: 48.05%;
+        padding-right: 4%;
+    }
+}

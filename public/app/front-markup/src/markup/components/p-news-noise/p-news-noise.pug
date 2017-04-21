@@ -9,7 +9,7 @@ include ../breadcrumbs/breadcrumbs
 
 mixin p-news-noise(data)
 
-    +b.inner-about.inner-default()&attributes(attributes)
+    +b.inner-about.inner-wrapper.inner-default()&attributes(attributes)
         
         //- block
         +e.container.container
@@ -57,5 +57,5 @@ mixin p-news-noise(data)
 
                 +info-noize(info_noize)(class="inner-about__info-noize")
 
-                +enter-one(from_enter.one)(class="inner-about__enter-one enter-one__no-border")
+                +enter-one(from_enter.one)(class="inner-about__enter-one inner-about__enter-one--border")
 
