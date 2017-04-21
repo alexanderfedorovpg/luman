@@ -48,8 +48,6 @@ var data = {info_noize: {
         view: true
     },
     idx: {
-        more: false,
-        list: '',
         title: 'Спецслужбы США ищут "российского шпиона", помогавшего Трампу',
         img: '%=static=%img/content/per-day/per-two.png',
         //time_add: 'час назад',

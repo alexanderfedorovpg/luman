@@ -1,1 +1,1 @@
-var data = {block-square: {}}
+var data = {block_square: {}}

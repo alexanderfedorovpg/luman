@@ -2,7 +2,8 @@
     position: relative;
 
     width: rem(1039);
-    height: rem(386);
+    min-height: rem(386);
+    margin-bottom: rem(98);
 
     background-color: $bg-text;
 
@@ -12,9 +13,11 @@
         left: 17%;
 
         width: rem(427);
-        padding: #{rem(29)} #{rem(33)} #{rem(63)} #{rem(41)};
+        height: rem(205);
+        padding: #{rem(24)} #{rem(33)} #{rem(63)} #{rem(41)};
 
         text-align: right;
+        letter-spacing: rem(-.8);
 
         background-image: url(%=static=%content/text-bg-gray/text-block.png);
         background-repeat: no-repeat;
