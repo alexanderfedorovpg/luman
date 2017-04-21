@@ -8,14 +8,20 @@ mixin block-square(data)
                 +mini-news(items)
         else
             +e.A(href=jv0).link
-            +e.IMG(src=data.img alt=data.alt).img
+            if (data.img)
+                +e.IMG(src=data.img alt=data.alt).img
             +e.info
                 if (data.time_keeping)
                     +e.time-keeping
                         +e.IMG(src="/static/img/content/video-ico/video-ico.png" alt="").ico
                         +e.SPAN.keeping #{data.time_keeping}
                 +e.P.title #{data.title}
-                +e.P.time-add #{data.time_add}
-                    if (data.time_update)
-                        = ' / '
-                        +e.SPAN.time-upadate #{data.time_update}
+                if (data.time_add)
+                    +e.P.time-add #{data.time_add}
+                        if (data.time_update)
+                            = ' / '
+                            +e.SPAN.time-upadate #{data.time_update}
+                //- если война
+                if (pageSettings.htmlClass == 'war')
+                    if (data.title_war)
+                        +e.P.title-war #{data.title_war}

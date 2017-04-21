@@ -5,15 +5,26 @@ mixin per-day(data)
     - params = data
     +b.per-day()&attributes(attributes)
         block
-        +e.P.title.section-title Главное за последние сутки
+        if (pageSettings.htmlClass == 'war')
+        else
+            +e.P.title.section-title Главное за последние сутки
         if (params.idx)
-            +block-rectangle(params.news_one)
+            //- если война
+            if (pageSettings.htmlClass == 'war')
+                +block-rectangle(params.news_war)(class="per-day__block-rectangle_war")
+            else
+                +block-rectangle(params.news_one)
 
             +e.wrapper.per-day__wrapper_margin
+                //- если война
+                if (pageSettings.htmlClass == 'war')
+                    +block-square(params.news_war_two)(class="per-day__block-square_war")
 
-                +block-square(params.news_two)
+                    +block-square(params.news_war_three)(class="per-day__block-square_war")
+                else
+                    +block-square(params.news_two)
 
-                +block-square(params.news_three)
+                    +block-square(params.news_three)
         else
             +e.wrapper
                 each item in params

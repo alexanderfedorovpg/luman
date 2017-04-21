@@ -25,7 +25,7 @@ const Tag = styled.li`
     letter-spacing: .05rem;
 `;
 
-const renderTag = (tag) => <Tag>#{tag}</Tag>;
+const renderTag = (tag) => <Tag key={tag}>#{tag}</Tag>;
 
 function HashTags({ tags }) {
     return (

@@ -5,6 +5,7 @@ include ../components/footer/footer
 
 -const pageSettings = {}
 -pageSettings.title = '';
+-pageSettings.htmlClass = '';
 -pageSettings.useSocialMetaTags = false;
 
 -const jv0 = 'javascript:void(0)';
@@ -12,7 +13,7 @@ include ../components/footer/footer
 block vars
 
 doctype html
-html(lang='ru')
+html(lang='ru' class=pageSettings.htmlClass)
     include ../components/head/head
 
     body

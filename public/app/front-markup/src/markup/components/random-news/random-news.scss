@@ -5,6 +5,13 @@
         height: rem(245);
     }
 
+    &__block-square {
+
+        &_war {
+            height: rem(223);
+        }
+    }
+
     &__block-square_list {
 
         &::before {
@@ -12,7 +19,8 @@
         }
 
         .mini-news {
-           @include padding_y(0);
+            padding-bottom: 0;
+            padding-top: rem(6);
             border-bottom: none;
 
             &:not(:first-child) {
@@ -21,8 +29,13 @@
         }
 
         .mini-news__title {
+            display: inline-block;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 08c666a551a749af20fbf4413f68f5b76db128b0
             font-size: rem(14);
-            line-height: rem(18);
+            line-height: rem(16);
         }
 
         .mini-news__date {
@@ -32,8 +45,8 @@
 
     &__block-rectangle {
 
-        .block-rectangle__img {
-            height: rem(245);
+        &_war {
+            height: rem(358);
         }
     }
 
@@ -47,7 +60,7 @@
     }
 
     &__block {
-        margin-top: rem(7);
+        margin-top: rem(8);
         margin-bottom: rem(7);
     }
 

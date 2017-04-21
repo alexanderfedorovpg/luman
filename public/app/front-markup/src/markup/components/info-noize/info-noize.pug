@@ -1,12 +1,20 @@
 include ../mini-news/mini-news
+include ../block-square/block-square
 
 mixin info-noize(data)
     - params = data
     +b.info-noize()&attributes(attributes)
         block
-        +e.P.title.section-title Инфошум
+        if (params.section_title)
+            +e.P.title.section-title #{params.section_title}
+        //- если война
+        if (params.view)
+            +block-square(info_noize.idx)(class="info-noize__block-square_war")
         +e.wrapper
-            each item in params
-                +mini-news(item)(class="info-noize__mini-news")
-
+            if (params.list)
+                each item in params.list
+                    +mini-news(item)(class="info-noize__mini-news")
+            else
+                each item in params
+                    +mini-news(item)(class="info-noize__mini-news_war")
 

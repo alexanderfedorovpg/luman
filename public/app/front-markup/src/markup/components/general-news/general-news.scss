@@ -24,14 +24,21 @@
     &__right {
         width: rem(300);
     }
-    //////////////////
+
     &__left-wrapper {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
         &.two-wrapper {
-            margin-top: rem(13);
+            margin-top: rem(15);
+        }
+    }
+
+    &__big-news {
+
+        &_war {
+            height: rem(515);
         }
     }
 
@@ -43,6 +50,16 @@
     &__info-noize {
         width: rem(300);
         padding-left: rem(14);
+
+        &_right-block {
+            padding-left: 0;
+            margin-top: rem(30);
+        }
+
+        &_war {
+            margin-top: rem(15);
+        }
+
     }
 
     &__banner {
@@ -56,10 +73,14 @@
 
     &__random-news {
         margin-top: rem(26);
+
+        &_war {
+
+        }
     }
 
     &__more-news {
-        margin-top: rem(25);
+        margin-top: rem(24);
     }
 
     &__enter-one {
@@ -77,5 +98,16 @@
     &__banner-preview {
         height: rem(145);
         margin-top: rem(-18);
+    }
+
+    &__now-war {
+        padding-top: rem(15);
+    }
+
+    &__per-day {
+
+        &_war {
+            margin-top: 15px;
+        }
     }
 }

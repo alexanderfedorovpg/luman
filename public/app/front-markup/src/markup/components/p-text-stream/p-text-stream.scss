@@ -3,10 +3,10 @@
     .text-bg-gray--primary {
         .list-default {
             p {
-                color: $enter;
                 font-family: $stemBold;
                 font-size: rem(16);
                 line-height: rem(18);
+                color: $enter;
             }
         }
     }

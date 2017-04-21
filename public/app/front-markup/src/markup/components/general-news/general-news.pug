@@ -12,6 +12,7 @@ include ../more-video/more-video
 include ../enter-one/enter-one
 include ../list-video/list-video
 include ../banner-preview/banner-preview
+include ../now-war/now-war
 
 mixin general-news(data)
     +b.general-news()&attributes(attributes)
@@ -19,23 +20,49 @@ mixin general-news(data)
         +e.container.container
             +e.left.left-col
                 +e.left-wrapper
-                    //- большая новость
-                    +big-news(big_news.first)(class="general-news__big-news")
 
-                    //- раздел сейчас
-                    +now(now)(class="general-news__now")
+                    if (pageSettings.htmlClass == 'war')
+                        //- большая новость
+                        +big-news(big_news.first)(class="general-news__big-news general-news__big-news_war")
+                    else
+                        //- большая новость
+                        +big-news(big_news.first)(class="general-news__big-news")
+
+                    //- если война
+                    if (pageSettings.htmlClass == 'war')
+                        +now-war(now_war)(class="general-news__now-war")
+                    else
+                        //- иначе
+                        //- раздел сейчас
+                        +now(now)(class="general-news__now")
+
 
                 +e.left-wrapper.two-wrapper
-                    //- главное за последние сутки
-                    +per-day(per_day.index)(class="general-news__per-day")
+                    //- если война
+                    if (pageSettings.htmlClass == 'war')
+                        //- главное война
+                        +per-day(per_day.index)(class="general-news__per-day general-news__per-day_war")
+                    else
+                        //- главное за последние сутки
+                        +per-day(per_day.index)(class="general-news__per-day")
 
-                    //- инфошум
-                    +info-noize(info_noize)(class="general-news__info-noize")
+                    //- если война
+                    if (pageSettings.htmlClass == 'war')
+                        //- инфошум война
+                        +info-noize(info_noize.war)(class="general-news__info-noize_war")
+                    else
+                        //- инфошум
+                        +info-noize(info_noize.news)(class="general-news__info-noize")
             +e.right.right-col
                 //- ключевое видео
                 +general-video(general_video.big_photo)(class="general-news__general-video")
-                //- из эфира справа
-                +enter-one(from_enter.one)(class="general-news__enter-one enter-one__no-border")
+                //- если война
+                if (pageSettings.htmlClass == 'war')
+                    +info-noize(info_noize.news)(class="general-news__info-noize_right-block")
+                else
+                    //- иначе
+                    //- из эфира справа
+                    +enter-one(from_enter.one)(class="general-news__enter-one enter-one__no-border")
 
             +e.left_more.left-col
                 +e.left-wrapper
@@ -48,7 +75,7 @@ mixin general-news(data)
                 //- подписка
                 +subscribe(class="general-news__subscribe")
                 //- новости под подпиской
-                +more-news(random_news.more_news.list)(class="general-news__more-news")
+                +more-news(more_news)(class="general-news__more-news")
 
             +e.middle.middle-col
                 //- большой инфо баннер
@@ -56,7 +83,7 @@ mixin general-news(data)
 
             +e.left_more.left-col
                 //- из эфира несколько видео
-                +more-video(from_enter)(class="general-news__more-video")
+                +more-video(from_enter)(class="general-news__more-video more-video__no-border")
 
             +e.right_more.right-col
                 //- список видео с иконкой

@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { FormattedRelative } from 'react-intl'
 
+import { ensureAbs } from 'shared/utils/uri'
 import MiniNews from 'components/MiniNews'
 
 import './style.scss'
@@ -43,7 +44,7 @@ function renderItem(type, data) {
     return (
         <div>
             <a className={`${type}__link`} href="javascript:void(0)"></a>
-            <img className={`${type}__img`} src={data.ImagePreview} alt=" "role="presentation" />
+            <img className={`${type}__img`} src={ensureAbs(data.ImagePreview)} alt=" "role="presentation" />
             <div className={`${type}__info`}>
                 {data.time_keeping
                     ? (
