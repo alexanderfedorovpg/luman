@@ -157,7 +157,9 @@ class Content extends Component {
 
         this.state = {
             data: this.propsToData(props)
-        }
+        };
+
+        this.changeHandlerTarget = this.changeHandlerTarget.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -396,11 +398,7 @@ class Content extends Component {
                             ? <User data={editor} />
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
-                        <Chat
-                            {...chat}
-                            postMessage={postMessage}
-                            loadMessages={loadMessages}
-                            room={chatRoom} />
+
                     </CustomRight>
                 </Wrap>
                 <Modal
@@ -435,3 +433,10 @@ Content.propTypes = {
 }
 
 export default Content
+
+/*
+                        <Chat
+                            {...chat}
+                            postMessage={postMessage}
+                            loadMessages={loadMessages}
+                            room={chatRoom} />*/
