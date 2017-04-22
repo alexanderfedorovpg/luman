@@ -106,7 +106,7 @@ class EditorPage extends Component {
 
                     <HeaderSupervisor
                         {...headerProps}
-                        publish={publishArticle} />
+                        publish={() => publishArticle(this.props.article)} />
                 </Content>
             )
         }
@@ -171,6 +171,7 @@ const mapDispatchToProps = dispatch => ({
         }
     },
     publishArticle(data) {
+        console.log(data);
         if (data) {
             dispatch(publishArticle(data))
         }
