@@ -104,17 +104,15 @@ class NewsListEditorController extends CmsController
      */
     public function getOne($id)
     {
-        $this->getArray = true;
-        $news = News::whereId($id)->published(false)->first();
-        if (!$news) {
-            return $this->respondNotFound();
+        try {
+            $news = News::findOrFail($id);
+
+            return $this->respond(
+                $this->newsEditorTransformer->transformOneNews($news->toArray())
+            );
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('News not found');
         }
-        $newsArray = $news->toArray();
-
-        $data = $this->newsEditorTransformer->transformOneNews($newsArray);
-
-
-        return $this->respond($data);
     }
 
     /**
