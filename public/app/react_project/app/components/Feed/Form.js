@@ -18,6 +18,7 @@ class Form extends Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
             data: {
                 header: props.data.header || '',
@@ -41,6 +42,12 @@ class Form extends Component {
                 },
                 error: {}
             })
+        }
+    }
+
+    componentDidMount() {
+        if (!this.props.data.tags) {
+            this.setError('tags', false);   
         }
     }
 
@@ -91,7 +98,7 @@ class Form extends Component {
         let form = new FormData(e.target)
 
         let errors = this.validate(form)
-
+        console.log(errors);
         if (Object.values(errors).reduce((a,b) => a || b, false)) return
 
         this.props.onSubmit({
@@ -158,7 +165,7 @@ class Form extends Component {
                         name="keywords"
                         placeholder="Ключевые слова"
                         error={this.state.error.keywords}
-                        onChange={e => this.setError('keywords', !e.target.value)}
+                        onChange={e => this.setError('keywords', false)}
                         block />
                 </Group>
                 <Group>
