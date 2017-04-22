@@ -171,7 +171,6 @@ const mapDispatchToProps = dispatch => ({
         }
     },
     publishArticle(data) {
-        console.log(data);
         if (data) {
             dispatch(publishArticle(data))
         }
