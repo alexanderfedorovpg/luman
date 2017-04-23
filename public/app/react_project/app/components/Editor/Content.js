@@ -15,6 +15,7 @@ import Modal from 'components/Modal'
 import Preview from './Preview'
 import Chat from './Chat'
 import HeaderEditor from './Header.editor'
+import HeaderSupervisor from './Header.supervisor'
 
 import { ifProp } from 'utils/style'
 import { font, padding, color } from 'constants/style'
@@ -156,7 +157,9 @@ class Content extends Component {
 
         this.state = {
             data: this.propsToData(props)
-        }
+        };
+
+        this.changeHandlerTarget = this.changeHandlerTarget.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -271,7 +274,7 @@ class Content extends Component {
         return (
             <Root>
                 {Children.map(this.props.children, child => {
-                    if (child.type == HeaderEditor) {
+                    if (child.type == HeaderEditor || child.type == HeaderSupervisor) {
                         return cloneElement(child, { getFormData: this.dataToSubmit.bind(this) })
                     }
                     else {
@@ -395,11 +398,7 @@ class Content extends Component {
                             ? <User data={editor} />
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
-                        <Chat
-                            {...chat}
-                            postMessage={postMessage}
-                            loadMessages={loadMessages}
-                            room={chatRoom} />
+
                     </CustomRight>
                 </Wrap>
                 <Modal
@@ -434,3 +433,10 @@ Content.propTypes = {
 }
 
 export default Content
+
+/*
+                        <Chat
+                            {...chat}
+                            postMessage={postMessage}
+                            loadMessages={loadMessages}
+                            room={chatRoom} />*/

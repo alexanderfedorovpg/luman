@@ -116,7 +116,7 @@ class Chat extends PureComponent {
 
         if (room) loadMessages(room)
 
-        // this.timeout = setTimeout(this.queueUpdate, 5000)
+        this.timeout = setTimeout(this.queueUpdate, 5000)
     }
 
     submitHandler(e) {
