@@ -90,4 +90,18 @@
         margin-bottom: 0;
     }
 
+    &--wide {
+        .random-news__block-square_list {
+            width: rem(405);
+        }
+        .random-news__block-square .mini-news {
+            width: rem(405);
+        }
+        .random-news__block-square_list .mini-news__title {
+            margin-top: rem(-2);
+
+            line-height: rem(20);
+        }
+    }
+
 }

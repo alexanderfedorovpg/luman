@@ -416,7 +416,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 /* Vars, which are specific for current project */
 /* Styles for UI-elements */
 .icon-play {
-  background-image: url(../img/png-sprite/96dpi/sprite331b0kw36u0elnqrrudi.png);
+  background-image: url(../img/png-sprite/96dpi/sprite7wwdwqcbdss45pwg66r.png);
   background-position: 0px 0px;
   width: 40px;
   height: 40px;
@@ -497,7 +497,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 .subtitle-order .dig {
   position: relative;
   margin-right: 0.6875rem;
-  background-image: url(../img/png-sprite/96dpi/sprite331b0kw36u0elnqrrudi.png);
+  background-image: url(../img/png-sprite/96dpi/sprite7wwdwqcbdss45pwg66r.png);
   background-position: -44px 0px;
   width: 36px;
   height: 38px;
@@ -916,7 +916,11 @@ main {
 }
 
 .top-menu__item:not(:last-child) {
-  margin-right: 1.5625rem;
+  margin-right: 1.4375rem;
+}
+
+.top-menu__item:first-child {
+  margin-right: 1.625rem;
 }
 
 .top-menu__link {
@@ -988,7 +992,7 @@ main {
 }
 
 .top-button__btn {
-  background-image: url(../img/png-sprite/96dpi/sprite331b0kw36u0elnqrrudi.png);
+  background-image: url(../img/png-sprite/96dpi/sprite7wwdwqcbdss45pwg66r.png);
   background-position: 0px -44px;
   width: 32px;
   height: 32px;
@@ -1485,6 +1489,30 @@ main {
   line-height: 1.125rem;
   color: #fff;
   text-transform: uppercase;
+}
+
+.general-video.general-video--sm {
+  height: 23.5rem;
+}
+
+.general-video.general-video--sm .general-video__link, .general-video.general-video--sm:before {
+  right: 0;
+  bottom: 0;
+  height: auto;
+}
+
+.general-video.general-video--sm .general-video__date_position {
+  margin-bottom: 1.3125rem;
+}
+
+.general-video.general-video--sm .general-video__img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.general-video.general-video--sm .general-video__link {
+  height: 23.5rem;
 }
 
 .per-day__title {
@@ -2070,6 +2098,19 @@ main {
   margin-bottom: 0;
 }
 
+.similar-news--wide .random-news__block-square_list {
+  width: 25.3125rem;
+}
+
+.similar-news--wide .random-news__block-square .mini-news {
+  width: 25.3125rem;
+}
+
+.similar-news--wide .random-news__block-square_list .mini-news__title {
+  margin-top: -0.125rem;
+  line-height: 1.25rem;
+}
+
 .breadcrumbs__item {
   position: relative;
   font-family: "StemText Regular", sans-serif;
@@ -2082,7 +2123,7 @@ main {
 .breadcrumbs__item:after {
   content: '/';
   margin-right: 0.5rem;
-  margin-left: 0.375rem;
+  margin-left: 0.5rem;
   font-family: "StemText Regular", sans-serif;
   color: #ccc;
 }
@@ -2421,7 +2462,7 @@ main {
 }
 
 .blockquote:before {
-  background-image: url(../img/png-sprite/96dpi/sprite331b0kw36u0elnqrrudi.png);
+  background-image: url(../img/png-sprite/96dpi/sprite7wwdwqcbdss45pwg66r.png);
   background-position: -36px -44px;
   width: 25px;
   height: 18px;
@@ -2627,7 +2668,7 @@ main {
 }
 
 .inner-about__content {
-  padding-left: 5.125rem;
+  padding-left: 5.3125rem;
   margin-top: 1.875rem;
   color: #243746;
 }
@@ -2773,6 +2814,11 @@ main {
   color: #fff;
 }
 
+.text-bg-gray__text-lite {
+  font: 0.9375rem/ 1.5rem "StemText Bold", sans-serif;
+  color: #fff;
+}
+
 .text-bg-gray__title {
   margin-bottom: 24px;
   font-family: "StemText Bold", sans-serif;
@@ -2819,6 +2865,7 @@ main {
           justify-content: flex-end;
   height: 35.8125rem;
   margin-top: 0.4375rem;
+  margin-bottom: 0;
 }
 
 .text-bg-gray--news.text-bg-gray .text-bg-gray__block-text {
@@ -2826,6 +2873,7 @@ main {
   top: 1.4375rem;
   bottom: auto;
   width: 19.8125rem;
+  min-height: 13.75rem;
   padding: 1.4375rem 1.8125rem 2.0625rem 1.5rem;
   text-align: left;
   background-image: url(../img/content/text-bg-gray/text-block2.png);
@@ -2924,6 +2972,10 @@ main {
   padding-left: 12.1875rem;
 }
 
+.inner-default {
+  margin-top: 3.25rem;
+}
+
 .inner-default h1 {
   margin-top: 0.25rem;
   line-height: 2.4375rem;
@@ -2941,7 +2993,7 @@ main {
 .inner-default .social-links {
   position: absolute;
   bottom: -12.5rem;
-  left: 12.25rem;
+  left: 11.25rem;
 }
 
 .inner-default .inner-about__date {

@@ -31,6 +31,11 @@
         color: $white;
     }
 
+    &__text-lite {
+        font: #{rem(15)}/ #{rem(24)} $stemBold;
+        color: $white;
+    }
+
     &__title {
         margin-bottom: 24px;
 
@@ -72,6 +77,7 @@
     justify-content: flex-end;
     height: rem(573);
     margin-top: rem(7);
+    margin-bottom: 0;
 
     &.text-bg-gray .text-bg-gray {
 
@@ -81,6 +87,7 @@
             bottom: auto;
 
             width: rem(317);
+            min-height: rem(220);
             padding: rem(23) rem(29) rem(33) rem(24);
 
             text-align: left;
