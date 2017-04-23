@@ -50,15 +50,18 @@ class TvProgramController extends CmsController
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         try {
             $program = TvProgram::findOrFail($id);
-            if ($program) {
+            $withRecords = $request->input('withRecords');
+            if ($withRecords === 'true') {
                 return $this->respond(
                     $this->programsTransformer->transformWithRecords($program->toArray())
                 );
             }
+
+            return $this->respond($this->programsTransformer->transform($program->toArray()));
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('TV program not found');
         } catch (\Exception $e) {
@@ -77,7 +80,7 @@ class TvProgramController extends CmsController
         try {
             $this->validate($request, TvProgram::$rules);
         } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+            return $this->respondFail422x($e->response->original);
         }
 
         $program = new TvProgram($request->all());
@@ -86,6 +89,7 @@ class TvProgramController extends CmsController
         }
 
         return $this->respondFail500x();
+
     }
 
     /**
@@ -103,8 +107,8 @@ class TvProgramController extends CmsController
 
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('TV program not found');
-        } catch (\Exception $e) {
-            return $this->respondFail422x($e->getMessage());
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
         }
 
         return $this->respondCreated(['success' => $program->update($request->all())]);

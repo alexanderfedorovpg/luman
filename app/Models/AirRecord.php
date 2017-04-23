@@ -12,7 +12,12 @@ class AirRecord extends Model
      * @var array
      */
     protected $fillable = [
-        'program_id', 'title', 'video_url'
+        'program_id',
+        'title',
+        'video_url',
+        'is_full_video',
+        'rubric_id',
+        'image_preview',
     ];
 
     /**
@@ -23,6 +28,33 @@ class AirRecord extends Model
     public static $rules = [
         'program_id' => 'required|integer|exists:tv_programs,id',
         'title' => 'required|max:255',
-        'video_url' => 'required'
+        'video_url' => 'required',
+        'is_full_video' => 'required|boolean',
+        'rubric_id' => 'required|integer|exists:rubrics,id',
+        'image_preview' => 'required'
     ];
+
+    /**
+     * Фильтрация по Выпуск/Из эфира
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param bool $isFullVideo
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFullVideo($query, $isFullVideo = true)
+    {
+        return $query->where('is_full_video', '=', $isFullVideo);
+    }
+
+    /**
+     * Фильтрация по наличмю посдстраки в заголоках
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param bool $isFullVideo
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSearchText($query, $text)
+    {
+        return $query->where('title', 'like', "%{$text}%");
+    }
 }
