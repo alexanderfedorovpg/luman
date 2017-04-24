@@ -11,10 +11,7 @@ class AirRecordTransformer extends Transformer
     public function transform($record)
     {
         $transform = $record;
-        $transform['program'] = $this->transformProgram($record['program_id']);
-        $transform['rubric'] = $this->transformRubric($record['rubric_id']);
         $transform['is_full_video'] = (bool) $record['is_full_video'];
-        unset($transform['program_id'], $transform['rubric_id']);
         return $transform;
     }
 
