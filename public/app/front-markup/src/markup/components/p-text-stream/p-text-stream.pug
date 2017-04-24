@@ -6,6 +6,8 @@ include ../social-links/social-links
 include ../breadcrumb/breadcrumb
 include ../top-button/top-button
 include ../timeline/timeline
+include ../icon/icon
+include ../more-goods/more-goods
 
 mixin p-text-stream(data)
 
@@ -37,7 +39,7 @@ mixin p-text-stream(data)
 
                         +e.A.update(href=jv0) Обновить
 
-                        +social-links(socialLinks.side)(class='social-links--vertical')
+                        +social-links(socialLinks.side)(class='social-links--vertical social-links--pad')
 
                     +e.content
 
@@ -49,12 +51,14 @@ mixin p-text-stream(data)
 
                             +e.new-content
                                 +e.new-content__message 2 новых сообщения
-                                .checkbox.checkbox-circle
-                                    input#ko1(type='checkbox')
-                                    label(for="ko1") Обновлять автоматически
+                                .checkbox-round
+                                    input#ko2(type='checkbox')
+                                    label(for='ko2') Обновлять автоматически
 
                         +timeline(timeline.textStream)
                         
+                        +more-goods('предыдущие записи')(class='more-goods--left')
+
                     +top-button
 
                 +e.right.right-col

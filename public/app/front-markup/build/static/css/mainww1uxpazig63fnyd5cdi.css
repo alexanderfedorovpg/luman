@@ -416,7 +416,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 /* Vars, which are specific for current project */
 /* Styles for UI-elements */
 .icon-play {
-  background-image: url(../img/png-sprite/96dpi/sprite5w1dii1wpjrt22h2gldi.png);
+  background-image: url(../img/png-sprite/96dpi/spriteww1uxpazig63fnyd5cdi.png);
   background-position: 0px 0px;
   width: 40px;
   height: 40px;
@@ -497,7 +497,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 .subtitle-order .dig {
   position: relative;
   margin-right: 0.6875rem;
-  background-image: url(../img/png-sprite/96dpi/sprite5w1dii1wpjrt22h2gldi.png);
+  background-image: url(../img/png-sprite/96dpi/spriteww1uxpazig63fnyd5cdi.png);
   background-position: -44px 0px;
   width: 36px;
   height: 38px;
@@ -554,6 +554,52 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 
 .subtitle-border {
   border-bottom: 1px solid #cccccc;
+}
+
+.radio-round,
+.checkbox-round {
+  position: relative;
+}
+
+.radio-round input[type='radio'], .radio-round input[type='checkbox'],
+.checkbox-round input[type='radio'],
+.checkbox-round input[type='checkbox'] {
+  display: none;
+}
+
+.radio-round input[type='radio'] + label, .radio-round input[type='checkbox'] + label,
+.checkbox-round input[type='radio'] + label,
+.checkbox-round input[type='checkbox'] + label {
+  position: relative;
+  display: block;
+  padding-left: 1.5rem;
+  cursor: pointer;
+}
+
+.radio-round input[type='checkbox'] + label:before, .radio-round input[type='radio'] + label:before,
+.checkbox-round input[type='checkbox'] + label:before,
+.checkbox-round input[type='radio'] + label:before {
+  width: 1.125rem;
+  height: 1.125rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.radio-round input[type='radio'] + label:before, .radio-round input[type='checkbox'] + label:before,
+.checkbox-round input[type='radio'] + label:before,
+.checkbox-round input[type='checkbox'] + label:before {
+  content: '';
+  background-image: url("../img/general/round-unchecked.svg");
+  background-size: cover;
+}
+
+.radio-round input[type='radio']:checked + label:before, .radio-round input[type='checkbox']:checked + label:before,
+.checkbox-round input[type='radio']:checked + label:before,
+.checkbox-round input[type='checkbox']:checked + label:before {
+  content: '';
+  background-image: url("../img/general/round-checked.svg");
+  background-size: cover;
 }
 
 /* Common styles for current project */
@@ -1073,7 +1119,7 @@ main {
 }
 
 .top-button__btn {
-  background-image: url(../img/png-sprite/96dpi/sprite5w1dii1wpjrt22h2gldi.png);
+  background-image: url(../img/png-sprite/96dpi/spriteww1uxpazig63fnyd5cdi.png);
   background-position: 0px -44px;
   width: 32px;
   height: 32px;
@@ -2658,7 +2704,7 @@ main {
 }
 
 .blockquote:before {
-  background-image: url(../img/png-sprite/96dpi/sprite5w1dii1wpjrt22h2gldi.png);
+  background-image: url(../img/png-sprite/96dpi/spriteww1uxpazig63fnyd5cdi.png);
   background-position: -36px -44px;
   width: 25px;
   height: 18px;
@@ -2842,7 +2888,7 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 2.5625rem;
+  margin-bottom: 3.75rem;
 }
 
 .inner-about__info-noize, .inner-about__enter-one {
@@ -2934,6 +2980,7 @@ main {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
+  padding-right: 1.875rem;
 }
 
 .inner-about__copy {
@@ -2967,9 +3014,9 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -2982,12 +3029,21 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  margin-bottom: 0.3125rem;
+}
+
+.inner-about__new-content__message {
+  margin-right: 1.375rem;
+  font-family: "StemText Regular", sans-serif;
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  color: #999;
 }
 
 .inner-about .inner-about__enter-one--no-category .from-enter__category-link {
@@ -3069,6 +3125,10 @@ main {
   background: url("../img/general/geometry/ice-cube.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.text-bg-gray__update:hover {
+  color: #fff;
 }
 
 .text-bg-gray--news {
@@ -3189,6 +3249,7 @@ main {
   padding-top: 1.625rem;
   padding-bottom: 4.25rem;
   padding-left: 12.1875rem;
+  margin-bottom: 1.875rem;
 }
 
 .inner-default h1 {
@@ -3340,6 +3401,15 @@ main {
 
 .text-stream .breadcrumb__item_active a {
   color: #243746;
+}
+
+.text-stream .more-goods {
+  padding-left: 5rem;
+  margin-top: -0.6875rem;
+}
+
+.text-stream .more-goods__more-text {
+  padding-left: 0.0625rem;
 }
 
 .how-watch {
@@ -4130,6 +4200,16 @@ main {
   letter-spacing: -0.03125rem;
   text-transform: uppercase;
   background-color: #fff;
+}
+
+.more-goods--left {
+  text-align: left;
+}
+
+.more-goods--left .more-goods__link {
+  position: relative;
+  top: 0.1875rem;
+  margin-left: 0.6875rem;
 }
 
 /* Additional style files. */

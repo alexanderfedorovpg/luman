@@ -79,6 +79,9 @@
         background: url('%=static=%general/geometry/ice-cube.png');
         background-repeat: no-repeat;
         background-size: cover;
+        &:hover {
+            color: $white;
+        }
     }
 
 }
@@ -204,4 +207,5 @@
     padding-top: rem(26);
     padding-bottom: rem(68);
     padding-left: rem(195);
+    margin-bottom: rem(30);
 }
