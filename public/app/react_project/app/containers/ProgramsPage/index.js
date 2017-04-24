@@ -9,37 +9,58 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
-import Programs from 'components/Programs';
+import { loadRubrics } from 'containers/App/actions';
+import Records from 'components/Records';
 
-import makeSelectProgramsPage from './selectors';
+import makeSelectProgramsPage, {
+    makeSelectRubricsNames,
+    makeGetRecords,
+} from './selectors';
 import {
-    setFilter,
-    loadPrograms,
+    openPage,
+    setRecordsType,
+    deleteProgram,
+    changeRubric,
+    loadRecords,
 } from './actions';
 import Header from './Header';
 import Wrapper from './Wrapper';
 import Content from './Content';
-import TopPanel from './TopPanel';
+import Rubrics from './Rubrics';
 
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
-        this.props.loadPrograms();
+        this.props.openPage();
     }
 
     render() {
-        const { menuOpen } = this.props;
-        const { filter, programs } = this.props.ProgramsPage;
+        const { menuOpen, rubrics, records } = this.props;
+        const { recordsType, rubric } = this.props.ProgramsPage;
+
         return (
             <Wrapper>
                 <Helmet title="Список программ" />
                 <Header
                     moved={menuOpen}
-                    filter={filter}
-                    setFilter={this.props.setFilter}
+                    type={recordsType}
+                    setRecor={this.props.setRecordsType}
                 />
                 <Content>
-                    <TopPanel />
-                    <Programs items={programs} />
+                    {
+                        !!rubrics &&
+                        <Rubrics
+                            selected={rubric}
+                            onRubricChange={this.props.changeRubric}
+                            rubrics={rubrics}
+                        />
+                    }
+                    {
+                        !!records &&
+                        <Records
+                            onProgramDelete={this.props.deleteProgram}
+                            items={records}
+                        />
+                    }
                 </Content>
             </Wrapper>
         );
@@ -48,24 +69,31 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
 
 ProgramsPage.propTypes = {
     menuOpen: PropTypes.bool,
-    setFilter: PropTypes.func,
-    loadPrograms: PropTypes.func,
+    rubrics: Rubrics.propTypes.rubrics,
+    records: Records.propTypes.items,
+    setRecordsType: PropTypes.func,
+    openPage: PropTypes.func,
+    loadRecords: PropTypes.func,
+    changeRubric: PropTypes.func,
+    deleteProgram: PropTypes.func,
     ProgramsPage: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
     ProgramsPage: makeSelectProgramsPage(),
     menuOpen: selectMenuExpandedStatus,
+    rubrics: makeSelectRubricsNames(),
+    records: makeGetRecords(),
 });
 
 function mapDispatchToProps(dispatch) {
     return {
-        setFilter(filter) {
-            dispatch(setFilter(filter.value));
-        },
-        loadPrograms() {
-            dispatch(loadPrograms());
-        },
+        setRecordsType: (filter) => dispatch(setRecordsType(filter.value)),
+        openPage: () => dispatch(openPage()),
+        deleteProgram: (id) => dispatch(deleteProgram(id)),
+        loadRubrics: () => dispatch(loadRubrics()),
+        changeRubric: (id) => dispatch(changeRubric(id[0])),
+        loadRecords: () => dispatch(loadRecords()),
     };
 }
 

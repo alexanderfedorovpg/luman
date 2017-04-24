@@ -6,22 +6,30 @@
 
 import { fromJS } from 'immutable';
 import {
-    SET_FILTER,
+    SET_RECORDS_TYPE,
+    CHANGE_RUBRIC,
     LOAD_PROGRAMS_SUCCESS,
-    LOAD_PROGRAMS_FAILURE,
-    filters,
+    LOAD_RECORDS_SUCCESS,
+    recordsTypes,
 } from './constants';
 
 const initialState = fromJS({
-    filter: filters[0].value,
+    recordsType: recordsTypes[0].value,
+    rubric: -1,
+    programs: [],
+    records: [],
 });
 
 function programsPageReducer(state = initialState, action) {
     switch (action.type) {
-        case SET_FILTER:
-            return state.set('filter', action.payload);
+        case SET_RECORDS_TYPE:
+            return state.set('recordsType', action.payload.type);
+        case CHANGE_RUBRIC:
+            return state.set('rubric', action.payload.id);
         case LOAD_PROGRAMS_SUCCESS:
-            return state.set('programs', action.payload);
+            return state.set('programs', fromJS(action.payload.programs));
+        case LOAD_RECORDS_SUCCESS:
+            return state.update('records', (records) => records.concat(action.payload.records));
         default:
             return state;
     }

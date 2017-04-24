@@ -195,6 +195,13 @@ export const uploadFile = (file) => {
     });
 };
 
+// =============================================================================
+// RECORDS AND PROGRAMS API
+// =============================================================================
+
 export const getPrograms = () => axios.get(`${baseUrl}/tv-program`);
+export const getRecords = (params) => axios.get(`${baseUrl}/air/record`, { params });
+
+// =============================================================================
 
 export default axios;

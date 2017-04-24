@@ -93,7 +93,7 @@ function* usersData() {
     yield takeLatest(LOAD_CURRENT_USER, fetchUsers);
 }
 
-function* fetchRubrics() {
+export function* fetchRubrics() {
 
     try {
         let { data } = yield call(api.getRubrics);
