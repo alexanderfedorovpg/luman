@@ -61,7 +61,7 @@ class NewsListEditorController extends CmsController
                     $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => 0, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
+                    $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
                     break;
                 default :
                     $params = false;
@@ -186,13 +186,13 @@ class NewsListEditorController extends CmsController
                 $newsEdit->body = $body;
                 $newsEdit->tags = $tags;
                 $newsEdit->keywords = $keywords;
-                $newsEdit->moderation = 1;
+                $newsEdit->moderation = 0;
                 $newsEdit->rubrics_id = $rubrics_id;
 
 	            $log_moderation = new NewsModerationLogHelper($newsEdit);
 
                 if((!Auth::user()->isAdmin()) && ($this->user_id != $newsEdit->editor_id)) {
-                    return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
+                    return $this->respondFail403x("Данный пользователь не являеться редактором данной новости");
                 }
 
                 //необязательные поля
@@ -302,7 +302,7 @@ class NewsListEditorController extends CmsController
             $news->keywords = $keywords;
             $news->moderation = false;
             $news->rubrics_id = $rubrics_id;
-            $news->original_source_link = $original_source_link ? $$original_source_link : '';
+            $news->original_source_link = $original_source_link ? $original_source_link : '';
 
 
             //необязательные поля
@@ -395,7 +395,7 @@ class NewsListEditorController extends CmsController
             $news = News::find($id);
 	        $log_moderation = new NewsModerationLogHelper($news);
 
-            if($this->user_id != $news->editor_id) {
+            if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
@@ -432,7 +432,7 @@ class NewsListEditorController extends CmsController
             $news = News::find($id);
 	        $log_moderation = new NewsModerationLogHelper($news);
 
-            if($this->user_id != $news->editor_id) {
+            if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
@@ -450,7 +450,7 @@ class NewsListEditorController extends CmsController
             throw new \Exception('Error, news don\'t rejection');
 
         } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+            return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('REJECTION', $this->user_id, "Error 500 news id=".$id);
             return $this->respondFail500x($e->getMessage());
@@ -473,7 +473,7 @@ class NewsListEditorController extends CmsController
             $news = News::find($id);
             $log_moderation = new NewsModerationLogHelper($news);
 
-            if ($this->user_id != $news->editor_id) {
+            if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
@@ -492,11 +492,64 @@ class NewsListEditorController extends CmsController
                 "Error, news id=" . $id . " don't in work user_id=" . $this->user_id);
             throw new \Exception('Error, news don\'t rejection');
         } catch (ValidationException $e) {
-                return $this->respondFail422x($e->getMessage());
+                return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('IN_WORK', $this->user_id, "Error 500 news id=".$id);
             return $this->respondFail500x($e->getMessage());
         }
     }
 
+    /**
+     * На исправление
+     */
+    public function toFix(Request $request)
+    {
+        $id = null;
+        try {
+
+            $this->validate($request, [
+                'id' => 'required|integer',
+            ]);
+            
+            $id = $request->input('id');
+
+            $news = News::findOrFail($id);
+            $log_moderation = new NewsModerationLogHelper($news);
+
+            if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
+                return $this->respondFail403x("Данный пользователь не являеться редактором данной новости");
+            }
+
+            if (!$news->editor_id) {
+               return $this->respondWithError('У новости нет редактора');
+            }
+
+            $news->moderation = false;
+            $news->is_publish = false;
+
+            if ($log_moderation->setModeration() && $news->save()) {
+                $this->log->setLog('TO_FIX',
+                    $this->user_id,
+                    "Successful, news id={$id} to fix [{$this->user_id}>{$news['editor_id']}]"
+
+                );
+                return $this->respondCreated(
+                    ["data" => "to fix"]
+                );
+            }
+            $this->log->setLog('TO_FIX',
+                $this->user_id,
+                "Error, news id={$id} don't to fix  [{$this->user_id}>{$news['editor_id']}]"
+            );
+            throw new \Exception('Error, news don\'t to fix');
+
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('News not found');
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
+        } catch (\Exception $e) {
+            $this->log->setLog('TO_FIX', $this->user_id, "Error 500 news id=".$id);
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
 }

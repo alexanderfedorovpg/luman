@@ -71,14 +71,14 @@ class PushNotification extends PureComponent {
 
     handleSubmit(e) {
         e.preventDefault()
-
         if (e.target.text.value) {
-            (this.props.send||(()=>{}))(e.target.text.value)
+            (this.props.send||(()=>{}))({ message: e.target.text.value })
+            this.closeModal()
         }
     }
 
     render() {
-        let { user, children, className } = this.props
+        let { user, children, className, handleSend } = this.props
 
         return (
             <span className={className} onClick={this.openModal}>

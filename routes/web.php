@@ -42,7 +42,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/newseditor/delegate','NewsListEditorController@delegate');
     $group->post('/newseditor/rejection','NewsListEditorController@rejection');
     $group->post('/newseditor/work','NewsListEditorController@in_work');
-
+    $group->post('/newseditor/tofix','NewsListEditorController@toFix');
 
     //Пользователи
     $group->get('/user','UserController@index');
@@ -100,6 +100,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 	$group->get('/newsstatistics/counters/','NewsStatisticsController@getCountersAll');
 	$group->get('/newsstatistics/editor/dynamics/','NewsStatisticsController@getTimeDynamicsEditor');
 	$group->get('/newsstatistics/editor/counters/','NewsStatisticsController@getCountersEditor');
+
+    $group->get('/statistics','StatisticsController@getCountersAll');
 
     //Телепередачи
     $group->get('/tv-program','TvProgramController@index');

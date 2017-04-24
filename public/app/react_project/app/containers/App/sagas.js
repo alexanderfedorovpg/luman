@@ -1,4 +1,4 @@
-import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
+import { take, call, put, select, cancel, takeLatest, takeEvery } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {
@@ -6,6 +6,7 @@ import {
     LOAD_USERS,
     LOAD_CURRENT_USER,
     LOAD_RUBRICS,
+    POST_MESSAGE,
 
     groups
 } from './constants'
@@ -25,7 +26,10 @@ import {
     currentUserLoadingError,
 
     rubricsLoaded,
-    rubricsLoadingError
+    rubricsLoadingError,
+
+    messagePosted,
+    messagePostingError
 } from './actions'
 
 import {
@@ -108,8 +112,41 @@ function* rubricsData() {
     yield takeLatest(LOAD_RUBRICS, fetchRubrics);
 }
 
+function* postMessage({ payload }) {
+    let files = []
+
+    if (payload.message.files) {
+        for (let item, i = 0; item = payload.message.files[i++]; ) {
+            let { data: { file: { id } } } = yield call(api.uploadFile, item)
+            files.push(id)
+        }
+    }
+
+    try {
+        const data = yield call(api.postChatMessage, payload.room, {
+            ...payload.message,
+            files
+        })
+
+        yield put(messagePosted())
+    } catch (err) {
+        yield put(messagePostingError(err))
+    }
+}
+
+function* uploadFile(file) {
+    const data = yield call(api.uploadFile, file)
+
+    yield data
+}
+
+function* addMessage() {
+    yield takeEvery(POST_MESSAGE, postMessage)
+}
+
 export default [
     loginWatcher,
     usersData,
-    rubricsData
+    rubricsData,
+    addMessage
 ]

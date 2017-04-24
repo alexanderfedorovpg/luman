@@ -2,13 +2,13 @@ import { take, call, put, cancel, takeLatest, takeEvery } from 'redux-saga/effec
 import { push } from 'react-router-redux'
 
 import {
+    TO_FIX_ARTICLE,
     LOAD_CHAT_MESSAGES,
     LOAD_ARTICLE,
     FINISH_ARTICLE,
     PUBLISH_ARTICLE,
     DELETE_ARTICLE,
     DELEGATE_ARTICLE,
-    POST_MESSAGE
 } from './constants'
 
 import {
@@ -24,8 +24,8 @@ import {
     articlePublishError,
     chatMessagesLoaded,
     chatMessagesLoadingError,
-    messagePosted,
-    messagePostingError
+    articleSendedToFix,
+    articleToFixError
 } from './actions'
 
 import * as api from 'api'
@@ -106,7 +106,6 @@ export function* finishArticle({ payload }) {
 }
 
 export function* publishArticle({ payload }) {
-
     if (!Number.isInteger(payload.image_main)) {
         let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
         payload.image_main = idMain
@@ -129,8 +128,20 @@ export function* publishArticle({ payload }) {
     }
 }
 
+function* toFixArticle({ payload }) {
+    try {
+        yield call(api.toFixArticle, payload)
+
+        yield put(articleSendedToFix())
+    } catch (err) {
+        yield put(articleToFixError(err))
+    }
+}
+
 export function* articleData() {
     yield takeLatest(LOAD_ARTICLE, getArticle)
+
+    yield takeLatest(TO_FIX_ARTICLE, toFixArticle)
 
     yield takeLatest(FINISH_ARTICLE, finishArticle)
 
@@ -141,39 +152,7 @@ export function* articleData() {
     yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
 }
 
-export function* postMessage({ payload }) {
-    let files = []
-
-    for (let item, i = 0; item = payload.message.files[i++]; ) {
-        let { data: { file: { id } } } = yield call(api.uploadFile, item)
-        files.push(id)
-    }
-
-    try {
-        const data = yield call(api.postChatMessage, payload.room, {
-            ...payload.message,
-            files
-        })
-
-        yield put(messagePosted())
-    } catch (err) {
-        yield put(messagePostingError(err))
-    }
-}
-
-export function* uploadFile(file) {
-    const data = yield call(api.uploadFile, file)
-
-    console.log('f', data)
-    yield data
-}
-
-export function* addMessage() {
-    yield takeEvery(POST_MESSAGE, postMessage)
-}
-
 export default [
     chatData,
-    articleData,
-    addMessage
+    articleData
 ]

@@ -5,9 +5,9 @@ import {
 
     CLEAR_CHAT_MESSAGES,
 
-    POST_MESSAGE,
-    POST_MESSAGE_SUCCESS,
-    POST_MESSAGE_FAILURE,
+    TO_FIX_ARTICLE,
+    TO_FIX_ARTICLE_SUCCESS,
+    TO_FIX_ARTICLE_FAILURE,
 
     LOAD_ARTICLE,
     LOAD_ARTICLE_SUCCESS,
@@ -30,6 +30,20 @@ import {
     DELEGATE_ARTICLE_FAILURE
 } from './constants'
 
+export const toFixArticle = payload => ({
+    type: TO_FIX_ARTICLE,
+    payload
+})
+
+export const articleSendedToFix = payload => ({
+    type: TO_FIX_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articleToFixError = error => ({
+    type: TO_FIX_ARTICLE_FAILURE,
+    error
+})
 export const loadArticle = payload => ({
     type: LOAD_ARTICLE,
     payload
@@ -122,21 +136,4 @@ export const chatMessagesLoadingError = error => ({
 
 export const clearChatMessages = () => ({
     type: CLEAR_CHAT_MESSAGES
-})
-
-export const postMessage = (room, message) => ({
-    type: POST_MESSAGE,
-    payload: {
-        room,
-        message
-    }
-})
-
-export const messagePosted = () => ({
-    type: POST_MESSAGE_SUCCESS
-})
-
-export const messagePostingError = error => ({
-    type: POST_MESSAGE_FAILURE,
-    error
 })
