@@ -5,9 +5,11 @@
     }
 
     &__title {
+        display: block;
         padding-left: rem(28);
 
         line-height: rem(34);
+        text-decoration: none;
     }
 
     &__mini-news {

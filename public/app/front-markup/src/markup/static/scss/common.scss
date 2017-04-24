@@ -9,6 +9,9 @@
 * {
     margin: 0;
     padding: 0;
+    &:focus {
+        outline: 0;
+    }
 }
 
 html, body {
@@ -47,12 +50,21 @@ h2 {
 
 a {
     outline: none;
+    cursor: pointer;
+    &:hover {
+        color: $blue;
+    }
 }
 
 main {
     margin-top: 1px;
+    padding-top: rem(54);
 }
-
+.war {
+    main {
+        padding-top: rem(113);
+    }
+}
 .container {
     width: rem(1250);
     @include margin_x(auto);
