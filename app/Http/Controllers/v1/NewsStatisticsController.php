@@ -130,6 +130,7 @@
 			try {
 				$this->validate( $request, [
 					'type_interval' => 'required',
+                    'editor_id' => 'required|exists:users,id',
 					'start_date'    => 'date_format:Y-m-d',
 					'end_date'      => 'date_format:Y-m-d',
 				] );
@@ -140,15 +141,15 @@
 				$period           = $this->setInterval( $type_interval );
 				$respond          = array();
 
-				$results = NewsModerationLog::  select( 'users.id', 'users.name',
+				$results = NewsModerationLog:: select( 'users.id', 'users.name',
 					DB::raw( ' TIMESTAMPDIFF (SECOND ,start_date,end_date ) as time_work' ),
-					'publish_date', 'news.title' )
+					'news.publish_date', 'news.title',  'news.is_publish' )
 				                            ->join( 'users', 'users.id', '=', 'editor_id' )
 				                            ->join( 'news', 'news.id', '=', 'news_id' )
-				                            ->where( 'end_date', '<>', 'NULL' )
-				                            ->where( 'users.id', '=', $editor_id )
-				                            ->where( 'is_publish', '=', 1 )
-				                            ->whereRaw( $period )
+				                             ->where( 'end_date', '<>', 'NULL' )
+				                             ->where( 'users.id', '=', $editor_id )
+ 				                             ->where( 'news.is_publish', '=', 1 )
+ 				                            ->whereRaw( $period )
 				                            ->get();
 
 				foreach ( $results as $result ) {
@@ -161,6 +162,7 @@
 							'editor_name'   => $result->name,
 							'publish_date'  => $result->publish_date,
 							'news_title'    => $result->title,
+							'is_publish' => $result->is_publish,
 							'avg_time_work' => array(
 								'hours'   => $hours,
 								'minutes' => $minutes
