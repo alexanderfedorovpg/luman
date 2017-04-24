@@ -219,12 +219,21 @@ class Content extends Component {
     onDrop(prop) {
         return acceptedFiles => {
             if (acceptedFiles[0]) {
-                this.setState({
-                    data: {
-                        ...this.state.data,
-                        [prop]: acceptedFiles[0]
-                    }
-                })
+                let reader  = new FileReader()
+
+                reader.onload = () => {
+
+                    this.setState({
+                        data: {
+                            ...this.state.data,
+                            [prop]: reader.result,
+                            [`${prop}_temp`]: acceptedFiles[0]
+                        }
+                    })
+                }
+
+                reader.readAsDataURL(acceptedFiles[0])
+
             }
         }
     }
@@ -348,13 +357,13 @@ class Content extends Component {
                         <Group>
                             <ImageContainer>
                                 <StyledDropzone
-                                    onDrop={this.onDrop('image_main_temp')}
+                                    onDrop={this.onDrop('image_main')}
                                     multiple={false}
                                     filled={!!this.state.data.image_main}
                                     title="Нажмите чтобы выбрать другое изображение">
 
                                     {this.state.data.image_main
-                                        ? <img src={this.state.data.image_main_temp ? this.state.data.image_main_temp.preview : `//${this.state.data.image_main}`} />
+                                        ? <img src={urlHelper(this.state.data.image_main)} />
                                         : (
                                             <span>
                                                 Переместите изображение<br />
@@ -365,13 +374,13 @@ class Content extends Component {
                                 </StyledDropzone>
                             </ImageContainer>
                             <StyledDropzone
-                                onDrop={this.onDrop('image_preview_temp')}
+                                onDrop={this.onDrop('image_preview')}
                                 multiple={false}
                                 filled={!!this.state.data.image_preview}
                                 title="Нажмите чтобы выбрать другое изображение">
 
                                 {this.state.data.image_preview
-                                    ? <img src={this.state.data.image_preview_temp ? this.state.data.image_preview_temp.preview : `//${this.state.data.image_preview}`} />
+                                    ? <img src={urlHelper(this.state.data.image_preview)} />
                                     : (
                                         <span>
                                             Переместите изображение<br />
@@ -437,3 +446,10 @@ Content.propTypes = {
 }
 
 export default Content
+
+// если url не base64 - префиксит его с "//" чтобы он был абсолютным
+function urlHelper(url) {
+    return url.trim().search(/^data:/) > -1
+        ? url
+        : `//${url}`
+}
