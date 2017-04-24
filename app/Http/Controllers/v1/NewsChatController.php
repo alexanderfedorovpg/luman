@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use App\Http\Transformers\v1\NewsChatTransformer;
 use App\Models\News;
 use App\Models\NewsChat;
@@ -73,7 +74,7 @@ class NewsChatController extends CmsController
         try {
             $this->validate($request, NewsChatMessage::$rules);
         } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+            return $this->respondFail422x($e->response->original);
         }
 
         $chat = $news->chat;
