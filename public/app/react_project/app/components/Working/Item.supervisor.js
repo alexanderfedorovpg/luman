@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-``
+import { Link } from 'react-router'
 import randomString from 'random-string'
 
 import Rating from 'components/Rating/Item'
