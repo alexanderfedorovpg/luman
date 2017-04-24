@@ -106,7 +106,6 @@ export function* finishArticle({ payload }) {
 }
 
 export function* publishArticle({ payload }) {
-
     if (!Number.isInteger(payload.image_main)) {
         let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
         payload.image_main = idMain
