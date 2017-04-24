@@ -77,7 +77,8 @@ class Tags extends PureComponent {
     }
 
     handleChange(e) {
-        const value = e.target.value;
+        const valueToNumber = parseInt(e.target.value, 10);
+        const value = isNaN(valueToNumber) ? e.target.value : valueToNumber;
         const index = this.state.checked.indexOf(value);
         const cb = () => (this.props.onChange || (() => {}))(this.state.checked);
 
@@ -117,19 +118,22 @@ class Tags extends PureComponent {
                         return null;
                     }
 
+                    const id = tag.id ? tag.id : tag;
+                    const name = tag.name ? tag.name : tag;
+
                     return (
-                        <Item key={tag}>
-                            <Label checked={checked.indexOf(tag) > -1}>
+                        <Item key={id}>
+                            <Label checked={checked.indexOf(id) > -1}>
                                 <CustomInput
                                     type={type}
                                     name="tags"
-                                    value={tag}
-                                    checked={checked.indexOf(tag) > -1}
+                                    value={id}
+                                    checked={checked.indexOf(id) > -1}
                                     onChange={this.handleChange}
                                 />
 
                                 <span>
-                                    {tag}
+                                    {name}
                                 </span>
                             </Label>
                         </Item>
@@ -145,10 +149,19 @@ Tags.defaultProps = {
 };
 
 Tags.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.string).isRequired,
+    data: PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            id: PropTypes.number,
+            name: PropTypes.string,
+        }),
+    ])).isRequired,
     type: PropTypes.oneOf(['checkbox', 'radio']),
     onChange: PropTypes.func,
-    value: PropTypes.arrayOf(PropTypes.string),
+    value: PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+    ])),
 };
 
 export default Tags;

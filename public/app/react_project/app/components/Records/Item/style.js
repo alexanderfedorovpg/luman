@@ -10,7 +10,7 @@ export const activeState = css`
         display: none;
     }
 
-    .program-buttons {
+    .record-buttons {
         display: block;
     }
 
@@ -61,7 +61,7 @@ export const ImgWrapper = styled.a`
     overflow: hidden;
 
     &:hover {
-        .program-img-overlay {
+        .record-img-overlay {
             display: block;
         }
     }
@@ -107,7 +107,7 @@ export const Info = styled.div`
     text-decoration: none;
 `;
 
-export const ProgramDate = styled.time`
+export const RecordDate = styled.time`
     display: block;
     padding: 0 0 0 .1rem;
     margin-bottom: 0;
@@ -126,7 +126,7 @@ export const Time = styled.span`
     color: #999;
 `;
 
-export const Category = styled.a`
+export const Program = styled.a`
     font-size: .8rem;
     letter-spacing: -.03rem;
     text-transform: uppercase;
@@ -150,7 +150,7 @@ export const Buttons = styled.div`
 
     display: none;
 
-    .program-btn {
+    .record-btn {
         width: 9.9rem;
 
         border: none;

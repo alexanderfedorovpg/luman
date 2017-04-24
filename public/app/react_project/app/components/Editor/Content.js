@@ -156,7 +156,8 @@ class Content extends Component {
         super(props);
 
         this.state = {
-            data: this.propsToData(props)
+            data: this.propsToData(props),
+            error: {}
         };
 
         this.changeHandlerTarget = this.changeHandlerTarget.bind(this);
@@ -168,6 +169,16 @@ class Content extends Component {
                 data: this.propsToData(nextProps)
             })
         }
+    }
+
+    setError(prop, value) {
+
+        this.setState({
+            error: {
+                ...this.state.error,
+                [prop]: value
+            }
+        })
     }
 
     propsToData(props) {
@@ -189,15 +200,53 @@ class Content extends Component {
         return `осталось ${max - string.length} символов`
     }
 
+    validate() {
+        let { data, error } = this.state
+        let { article } = this.props
+
+        if (!data.rubrics.length) {
+            alert('Выберите рубрику!')
+            return
+        }
+        if (!data.image_main_temp && !article.image_main_id) {
+            alert('Выберите основное изображение!')
+            return
+        }
+        if (!data.image_preview_temp && !article.image_preview_id) {
+            alert('Выберите превью!')
+            return
+        }
+        if (!data.top) {
+            alert('Выберите рейтинг!')
+            return
+        }
+        let newError = {
+            ...error,
+            title: !data.title || data.title.length > titleMax,
+            subtitle: !data.subtitle || data.subtitle.length > subtitleMax,
+            theses: !data.theses,
+            keywords: !data.keywords,
+        }
+
+        if (Object.values(newError).reduce((a,b) => a || b, false)) {
+            this.setState({
+                error: newError
+            })
+            return
+        }
+
+        return true
+    }
+
     dataToSubmit() {
-        let { data } = this.state
+        let { data, error } = this.state
         let { article, rubrics } = this.props
 
         let r = data.rubrics.map(name => (
             rubrics.find(r=>r.name==name).id
         ))[0]
 
-        if (!r) return;
+        if (!this.validate()) return
 
         return {
             id: article.id,
@@ -329,7 +378,11 @@ class Content extends Component {
                             </Label>
                             <TitleField
                                 value={this.state.data.title}
-                                onChange={this.changeHandlerTarget('title')}
+                                error={this.state.error.title}
+                                onChange={e => {
+                                    this.changeHandlerTarget('title')(e)
+                                    this.setError('title', !e.target.value || e.target.value.length > titleMax)
+                                }}
                                 block />
                         </Group>
                         <Group>
@@ -338,7 +391,11 @@ class Content extends Component {
                             </Label>
                             <SubtitleField
                                 value={this.state.data.subtitle}
-                                onChange={this.changeHandlerTarget('subtitle')}
+                                error={this.state.error.subtitle}
+                                onChange={e => {
+                                    this.changeHandlerTarget('subtitle')(e)
+                                    this.setError('subtitle', !e.target.value || e.target.value.length > subtitleMax)
+                                }}
                                 block />
                         </Group>
                         <Group>
@@ -347,7 +404,11 @@ class Content extends Component {
                             </Label>
                             <ThesesField
                                 value={this.state.data.theses}
-                                onChange={this.changeHandlerTarget('theses')}
+                                error={this.state.error.theses}
+                                onChange={e => {
+                                    this.changeHandlerTarget('theses')(e)
+                                    this.setError('theses', !e.target.value)
+                                }}
                                 block />
                         </Group>
                         <Group>
@@ -397,7 +458,11 @@ class Content extends Component {
                             </Label>
                             <Input
                                 value={this.state.data.keywords}
-                                onChange={this.changeHandlerTarget('keywords')}
+                                error={this.state.error.keywords}
+                                onChange={e => {
+                                    this.changeHandlerTarget('keywords')(e)
+                                    this.setError('keywords', !e.target.value)
+                                }}
                                 placeholder="Ключевые слова"
                                 block />
                         </Group>

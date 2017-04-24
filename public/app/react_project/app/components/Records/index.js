@@ -1,6 +1,6 @@
 /**
 *
-* Programs
+* Records
 *
 */
 
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `;
 
 // eslint-disable-next-line react/prefer-stateless-function
-class Programs extends React.PureComponent {
+class Records extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -22,11 +22,11 @@ class Programs extends React.PureComponent {
     }
 
     onEdit(e, id) {
-        this.callAction('onProgramEdit', e, id);
+        this.callAction('onRecordEdit', e, id);
     }
 
     onDelete(e, id) {
-        this.callAction('onProgramDelete', e, id);
+        this.callAction('onRecordDelete', e, id);
     }
 
     onPreviewClick(e, id) {
@@ -66,13 +66,13 @@ class Programs extends React.PureComponent {
     }
 }
 
-Programs.defaultProps = {
+Records.defaultProps = {
     items: [],
 };
 
-Programs.propTypes = {
-    onProgramDelete: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
-    onProgramEdit: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+Records.propTypes = {
+    onRecordDelete: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+    onRecordEdit: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     onPreviewClick: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     items: PropTypes.arrayOf(PropTypes.shape({
         ...Item.propTypes,
@@ -80,4 +80,4 @@ Programs.propTypes = {
     })),
 };
 
-export default Programs;
+export default Records;

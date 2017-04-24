@@ -1,9 +1,9 @@
 import React from 'react'
 
+import Help from 'components/Help'
 import {
     Left,
     Right,
-    Link as HeaderLink,
     Bot
 } from 'components/Header'
 import Tabs from 'components/Tabs'
@@ -17,10 +17,7 @@ function Header({ moved, filter, setFilter, filterData }) {
                 <Tabs data={filterData} onClick={setFilter} active={active} />
             </Left>
             <Right>
-                <HeaderLink>
-                    <span>?</span>
-                    Справка
-                </HeaderLink>
+                <Help />
             </Right>
         </Bot>
     )

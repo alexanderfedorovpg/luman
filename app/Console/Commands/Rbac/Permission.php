@@ -263,4 +263,18 @@ class Permission extends Command
             ],
         ];
     }
+
+    public function permissStatistics()
+    {
+        return [
+            [
+                'name' => 'v1.statistics-get',
+                'description' => 'Список новостей',
+            ],
+            [
+                'name' => 'v1.statistics-CountersAll',
+                'description' => 'Список счетчиков',
+            ],
+        ];
+    }
 }

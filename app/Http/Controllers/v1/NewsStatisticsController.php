@@ -2,7 +2,7 @@
 
 	namespace App\Http\Controllers\v1;
 
-	use App\Models\NewsCounters;
+	use App\Models\Counters;
 	use App\Models\News;
 	use App\Models\NewsModerationLog;
 	use Illuminate\Http\Request;
@@ -28,7 +28,7 @@
 		 *
 		 * @return string
 		 */
-		private function setInterval( $type_interval, $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
+		private function setInterval( $type_interval='today', $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
 
 			$period = 'true';
 			switch ( $type_interval ) {
@@ -49,9 +49,11 @@
 					break;
 
 				case 'custom':
-					$period = "$param[1] >= '$this->start_date 00:00:00' AND $param[2] <= '$this->end_date 23:59:59'";
+					$period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
 					break;
 
+                default:
+                    $period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
 			}
 
 			return $period;
@@ -66,9 +68,9 @@
 
 			try {
 				$this->validate( $request, [
-					'type_interval' => 'required',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
+				    'type_interval'=> 'in:today,week,month,year,custom',
+					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
+					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
 				] );
 				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
@@ -129,10 +131,10 @@
 
 			try {
 				$this->validate( $request, [
-					'type_interval' => 'required',
+                    'type_interval'=> 'in:today,week,month,year,custom',
                     'editor_id' => 'required|exists:users,id',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
+					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
+					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
 				] );
 				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
@@ -187,9 +189,9 @@
 			try {
 
 				$this->validate( $request, [
-					'editor_id'     => 'required|numeric',
-					'start_date'    => 'required|date_format:Y-m-d',
-					'end_date'      => 'required|date_format:Y-m-d',
+					'editor_id'     => 'required|exists:users,id',
+					'start_date'    => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'      => 'required|date|date_format:Y-m-d H:i:s',
 					'type_dynamics' => 'required',
 				] );
 
@@ -209,7 +211,7 @@
 				}
 
 
-				if ( $type_dynamics == 'counts_news' ) {
+				if ( $type_dynamics == 'countsNews' ) {
 					$results = DB::select( " SELECT  DATE_FORMAT(publish_date,'%d-%m-%Y') as pdate, COUNT(*) as ncount
 									FROM news
 									WHERE publish_date >='$this->start_date 00:00:00' AND publish_date <='$this->end_date 23:59:59'
@@ -242,9 +244,9 @@
 			try {
 
 				$this->validate( $request, [
-					'type_interval' => 'required',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
+                    'type_interval'=> 'in:today,week,month,year,custom',
+					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
+					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
 				] );
 
 				$type_interval    = $request->input( 'type_interval' );
@@ -254,8 +256,9 @@
 
 				$period = $this->setInterval( $type_interval, array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
-				$results = NewsCounters::select( 'news_id', 'count_click', 'count_views' )
+				$results = Counters::select( 'news_id', 'count_click', 'count_views' )
 				                       ->join( 'news', 'news.id', '=', 'news_id' )
+                                        ->where( 'type', '=', 1 )
 				                       ->whereRaw( $period )
 				                       ->get();
 
@@ -270,7 +273,7 @@
 					);
 
 				}
-				var_dump( $respond );
+
 
 				return $this->respond( $respond );
 			} catch ( \Exception $e ) {
@@ -289,10 +292,10 @@
 			try {
 
 				$this->validate( $request, [
-					'type_interval' => 'required',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
-					'editor_id'     => 'integer',
+                    'type_interval'=> 'in:today,week,month,year,custom',
+					'start_date'    => 'date|date_format:Y-m-d H:i:s',
+					'end_date'      => 'date|date_format:Y-m-d H:i:s',
+                    'editor_id'     => 'required|exists:users,id',
 				] );
 
 				$type_interval    = $request->input( 'type_interval' );
@@ -304,9 +307,10 @@
 				$period = $this->setInterval( $type_interval,
 					array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
-				$results = NewsCounters::select( 'news_id', 'count_click', 'count_views' )
+				$results = Counters::select( 'news_id', 'count_click', 'count_views' )
 				                       ->join( 'news', 'news.id', '=', 'news_id' )
 				                       ->where( 'news.editor_id', '=', $editor_id )
+                                       ->where( 'type', '=', 1 )
 				                       ->whereRaw( $period )
 				                       ->get();
 

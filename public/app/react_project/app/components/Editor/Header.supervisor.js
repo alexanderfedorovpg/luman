@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Horizontal } from 'components/Form'
+import Help from 'components/Help'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 import {
     Left,
     Right,
-    Link as HeaderLink,
     Bot
 } from 'components/Header'
 
@@ -59,7 +59,12 @@ function Header({ moved, del, ret, preview, publish, getFormData }) {
                         <CustomButton xs primary onClick={preview}>
                             Предпросмотр
                         </CustomButton>
-                        <CustomButton xs success onClick={e=>publish(getFormData())}>
+                        <CustomButton xs success onClick={e=>{
+                                const data = getFormData()
+
+                                if (data) publish(data)
+                            }}>
+
                             <Icon type="okay" />
                             Опубликовать
                         </CustomButton>
@@ -67,10 +72,7 @@ function Header({ moved, del, ret, preview, publish, getFormData }) {
                 </Form>
             </Left>
             <CustomRight>
-                <HeaderLink>
-                    <span>?</span>
-                    Справка
-                </HeaderLink>
+                <Help />
             </CustomRight>
         </Bot>
     )

@@ -10,19 +10,19 @@ import {
     ImgOverlay,
     PlayBtn,
     Info,
-    ProgramDate,
+    RecordDate,
     Time,
-    Category,
+    Program,
     Title,
     Buttons,
     StyledBtn,
 } from './style';
 
-const Program = ({
+const Record = ({
     active,
-    src,
+    preview,
     date,
-    category,
+    program,
     title,
     hashTags,
     onDelete,
@@ -34,15 +34,15 @@ const Program = ({
     return (
         <Wrapper active={active}>
             <ImgWrapper onClick={onPreviewClick} href="#">
-                <Img src={src} alt="" role="presentation" />
-                <ImgOverlay className="program-img-overlay">
+                <Img src={preview} alt="" role="presentation" />
+                <ImgOverlay className="record-img-overlay">
                     <PlayBtn />
                 </ImgOverlay>
             </ImgWrapper>
             <Info>
                 {
                     !!date &&
-                    <ProgramDate dateTime={date}>
+                    <RecordDate dateTime={date}>
                         <FormattedDate
                             value={dateObj}
                             year="numeric"
@@ -53,32 +53,32 @@ const Program = ({
                         <Time>
                             <FormattedTime value={dateObj} />
                         </Time>
-                    </ProgramDate>
+                    </RecordDate>
                 }
-                <Category href="#">{category}</Category>
+                <Program href="#">{program}</Program>
                 <Title>{title}</Title>
                 {
                     !!hashTags &&
                     <HashTags tags={hashTags} />
                 }
             </Info>
-            <Buttons className="program-buttons">
-                <StyledBtn danger className="program-btn" onClick={onDelete}>
+            <Buttons className="record-buttons">
+                <StyledBtn danger className="record-btn" onClick={onDelete}>
                     <Close width="14px" height="14px" /> Удалить
                 </StyledBtn>
-                <StyledBtn primary className="program-btn" onClick={onEdit}>
-                    <ArrowUp className="programs-icon" width="12px" height="14px" /> Редактировать
+                <StyledBtn primary className="record-btn" onClick={onEdit}>
+                    <ArrowUp className="record-icon" width="12px" height="14px" /> Редактировать
                 </StyledBtn>
             </Buttons>
         </Wrapper>
     );
 };
 
-Program.propTypes = {
+Record.propTypes = {
     active: PropTypes.bool,
-    src: PropTypes.string,
+    preview: PropTypes.string,
     date: PropTypes.string,
-    category: PropTypes.string,
+    program: PropTypes.string,
     title: PropTypes.string,
     hashTags: PropTypes.arrayOf(PropTypes.string),
     onDelete: PropTypes.func,
@@ -86,4 +86,4 @@ Program.propTypes = {
     onPreviewClick: PropTypes.func,
 };
 
-export default Program;
+export default Record;

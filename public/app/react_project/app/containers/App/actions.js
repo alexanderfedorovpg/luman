@@ -16,7 +16,11 @@ import {
 
     LOAD_RUBRICS,
     LOAD_RUBRICS_SUCCESS,
-    LOAD_RUBRICS_FAILURE
+    LOAD_RUBRICS_FAILURE,
+
+    POST_MESSAGE,
+    POST_MESSAGE_SUCCESS,
+    POST_MESSAGE_FAILURE,
 } from './constants';
 
 export const toggleMenu = () => ({
@@ -80,5 +84,22 @@ export const rubricsLoaded = data => ({
 
 export const rubricsLoadingError = error => ({
     type: LOAD_RUBRICS_FAILURE,
+    error
+})
+
+export const postMessage = (room, message) => ({
+    type: POST_MESSAGE,
+    payload: {
+        room,
+        message
+    }
+})
+
+export const messagePosted = () => ({
+    type: POST_MESSAGE_SUCCESS
+})
+
+export const messagePostingError = error => ({
+    type: POST_MESSAGE_FAILURE,
     error
 })
