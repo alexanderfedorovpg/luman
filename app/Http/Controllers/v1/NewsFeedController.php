@@ -152,7 +152,7 @@ class NewsFeedController extends CmsController
                 'keywords' => 'required',
                 'tags' => 'required',
                 'top' => 'required|numeric',
-                'theses' => 'required',
+                //'theses' => 'required',
 //                'video_stream' => 'url',
 //                'image_main' => 'mimes:jpeg,png',
 //                'image_preview' => 'mimes:jpeg,png',
@@ -214,7 +214,7 @@ class NewsFeedController extends CmsController
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound(['Исходня запись в ленте новостей не найдена либо скрыта']);
         } catch (\Exception $e) {
-            return $this->respondFail500x([$e->getTrace()]);
+            return $this->respondFail500x([$e->getTrace(), $e->getMessage()]);
         }
     }
 

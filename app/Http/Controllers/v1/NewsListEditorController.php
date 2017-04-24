@@ -71,7 +71,12 @@ class NewsListEditorController extends CmsController
                 $this->respondFail422x();
             }
 
-            $news = News::ModerationThisEditor($params);
+            $news = null;
+            if (Auth::user()->isAdmin()) {
+                $news = News::query();
+            } else {
+                $news = News::ModerationThisEditor($params);
+            }
 
             $this->processing($request, $news);
 
@@ -99,17 +104,15 @@ class NewsListEditorController extends CmsController
      */
     public function getOne($id)
     {
-        $this->getArray = true;
-        $news = News::whereId($id)->published(false)->first();
-        if (!$news) {
-            return $this->respondNotFound();
+        try {
+            $news = News::findOrFail($id);
+
+            return $this->respond(
+                $this->newsEditorTransformer->transformOneNews($news->toArray())
+            );
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('News not found');
         }
-        $newsArray = $news->toArray();
-
-        $data = $this->newsEditorTransformer->transformOneNews($newsArray);
-
-
-        return $this->respond($data);
     }
 
     /**
@@ -233,6 +236,112 @@ class NewsListEditorController extends CmsController
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('MODERATION_NEWS', $this->user_id, "Error 500");
+            return $this->respondFail500x([$e->getMessage()]);
+        }
+    }
+
+    public function create(Request $request)
+    {
+        try {
+
+            //устанавливаем часовой пояс
+            date_default_timezone_set('Europe/Moscow');
+
+            $this->validate($request, [
+                //'action' => 'required',
+                'title' => 'required|max:120',
+                'sub_title' => 'required|max:140',
+                //'id' => 'required|numeric',
+                'editor_id' => 'numeric|exists:users,id',
+                'rubrics_id' => 'required|numeric',
+                'keywords' => 'required',
+                'tags' => 'required',
+                'theses' => 'required',
+                'top' => 'required|numeric',
+                'original_source_link' => 'url',
+                'image_main' => 'required',
+                'image_preview' => 'required',
+                'is_online' => 'in:0,1',
+                'is_war_mode' => 'in:0,1',
+            ]);
+
+            //$id = $request->input('id');
+            //$action = $request->input('action');
+            $title = $request->input('title');
+            $sub_title = $request->input('sub_title');
+            $top = $request->input('top');
+            $note = $request->input('note');
+            $video_stream = $request->input('video_stream');
+            $rubrics_id = $request->input('rubrics_id');
+            $body = $request->input('body');
+            $keywords = $request->input('keywords');
+            $tags = $request->input('tags');
+            $editor_id = $request->input('editor_id');
+            $image_main = $request->input('image_main');
+            $image_preview = $request->input('image_preview');
+            $is_online = $request->input('is_online');
+            $updated_at = new \DateTime(); // date('Y-m-d H:i:s')
+            $is_war_mode = $request->input('is_war_mode');
+            $publish_date = $request->input('publish_date');
+            $original_source_link = $request->input('original_source_link');
+            $moderation = $request->input('moderation');
+            $theses = $request->input('theses');
+
+            $news = new News();
+
+            $news->editor_id = $editor_id ? $editor_id : null;
+            $news->title = $title;
+            $news->sub_title = $sub_title;
+            $news->note = $note ? $note : '';
+            $news->video_stream = $video_stream;
+            $news->is_publish = true;
+            $news->publish_date = new \DateTime();
+            $news->top = $top;
+            $news->body = $body ? $body : '';
+            $news->tags = $tags;
+            $news->keywords = $keywords;
+            $news->moderation = false;
+            $news->rubrics_id = $rubrics_id;
+            $news->original_source_link = $original_source_link ? $$original_source_link : '';
+
+
+            //необязательные поля
+            if (isset($theses)) {
+                $news->theses = $theses;
+            }
+            if (isset($sub_title)) {
+                $news->sub_title = $sub_title;
+            }
+            if (isset($video_stream)) {
+                $news->video_stream = $video_stream;
+            }
+            if (isset($image_main)) {
+                $news->image_main = $image_main;
+            }
+            if (isset($image_preview)) {
+                $news->image_preview = $image_preview;
+            }
+            if (isset($is_online)) {
+                $news->is_online = $is_online;
+            }
+            if (isset($is_war_mode)) {
+                $news->is_war_mode = $is_war_mode;
+            }
+
+            if ($news->save()) {
+                $this->respond($news);
+                $this->log->setLog('CREATE_NEWS', $this->user_id, "Successful");
+                return $this->respond(
+                    $news->toArray()
+                );
+            }
+            $this->log->setLog('CREATE_NEWS', $this->user_id, "Save error");
+            throw new \Exception("Ошибка, новость не создана");
+
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
+        } catch (\Exception $e) {
+            $this->log->setLog('CREATE_NEWS', $this->user_id, "Error 500");
             return $this->respondFail500x([$e->getMessage()]);
         }
     }

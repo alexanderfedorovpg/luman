@@ -5,6 +5,7 @@ import {
     LOAD_CHAT_MESSAGES,
     LOAD_ARTICLE,
     FINISH_ARTICLE,
+    PUBLISH_ARTICLE,
     DELETE_ARTICLE,
     DELEGATE_ARTICLE,
     POST_MESSAGE
@@ -19,6 +20,8 @@ import {
     articleDelegationError,
     articleFinished,
     articleFinishError,
+    articlePublished,
+    articlePublishError,
     chatMessagesLoaded,
     chatMessagesLoadingError,
     messagePosted,
@@ -102,10 +105,36 @@ export function* finishArticle({ payload }) {
     }
 }
 
+export function* publishArticle({ payload }) {
+
+    if (!Number.isInteger(payload.image_main)) {
+        let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
+        payload.image_main = idMain
+    }
+
+    if (!Number.isInteger(payload.image_preview)) {
+        let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
+        payload.image_preview = idPreview
+    }
+
+
+    try {
+        yield call(api.publishArticle, payload)
+
+        yield put(articlePublished())
+
+        yield put(push(`/newslist`))
+    } catch (err) {
+        yield put(articlePublishError(err))
+    }
+}
+
 export function* articleData() {
     yield takeLatest(LOAD_ARTICLE, getArticle)
 
     yield takeLatest(FINISH_ARTICLE, finishArticle)
+
+    yield takeLatest(PUBLISH_ARTICLE, publishArticle)
 
     yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
 

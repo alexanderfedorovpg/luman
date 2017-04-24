@@ -1,0 +1,111 @@
+include ../general-video/general-video
+include ../info-noize/info-noize
+include ../enter-one/enter-one
+
+mixin p-how(data)
+
+    +b.inner-about.inner-wrapper.inner-default()&attributes(attributes)
+
+        +e.container.container
+
+            +e.left-col.left-col
+
+                +b.how-watch
+                        
+                    h1 Как смотреть RTVi
+                    p Интеллект начинает материалистический стратегический рыночный план. В соответствии с законом Ципфа, стратификация многопланово индуцирует креативный аутотренинг. Здесь автор сталкивает два таких достаточно далёких друг от друга явления как медиапланирование достижимо в разумные сроки. Как мы уже знаем, рекламное сообщество понимает интеллект. 
+
+                    +e.item.how-watch__viewers
+                        h2.subtitle-border Зрителям
+
+                        h3.subtitle-order
+                            i.icon.dig(data-subtitle-order='1')
+                            | Настроить спутниковую антенну:
+                        .text-cols
+                            p Satellite: Eutelsat, Hotbird 13B<br>Broadcasting format: SD MPEG-2 DVB-S (QPSK)<br>Frequency: 12322<br>Polarization: Horizontal
+                            p Video PID: 41<br>Digital stream speed: 27500<br>FEC: 3/4<br>Conditional Access System: Viaccess 4.0
+
+                        h3.subtitle-order
+                            i.icon.dig(data-subtitle-order='2')
+                            | Подключиться с помощью местных операторов
+
+                        +e.list
+                            +e.list__item
+                                h4 Беларусь
+                                p - Cosmos TV (Космос ТВ),  www.cosmostv.by, +375 17 289-29-29, 
+                                    a(href=jv0) info@cosmostv.com
+                                p - Betateleset' (Бетателесеть), www.betatv.by, +375 17 256-91-03, 
+                                    a(href=jv0) info@betatv.by
+
+                            +e.list__item
+                                h4 Германия
+                                p - Kartina TV, www.kartina.tv, +069 84 84 540, 
+                                    a(href=jv0) info@kartina.tv
+
+                            +e.list__item
+                                h4 Латвия
+                                p - Lattelecom, www.lattelecom.lv, +177 67000177, 
+                                    a(href=jv0) lattelecom@lattelecom.lv
+                                p - Content Generation, www.contentgeneration.eu, +44 20 7870 1104, 
+                                    a(href=jv0) oleg@contentgeneration.eu
+
+                    +e.item.how-watch__distribution
+                        h2.subtitle-border Операторам и дистрибьюторам
+
+                        p Узнавание бренда выбирает институциональный целевой сегмент рынка, что лишний раз подтверждает правоту З.Фрейда. Бюджет на размещение последовательно переворачивает когнитивный генезис. Медиапланирование транслирует выставочный стенд. Восприятие марки повсеместно выбирает жизненный цикл продукции.
+
+                        .text-cols
+                            p Satellite: Eutelsat, Hotbird 13B<br>Broadcasting format: SD MPEG-2 DVB-S (QPSK)<br>Frequency: 12322<br>Polarization: Horizontal<br>Service ID: 14802
+                            p Video PID: 41<br>Digital stream speed: 27500<br>FEC: 3/4<br>Conditional Access System: Viaccess 4.0
+
+                    +e.item.how-watch__hotel
+                        h2.subtitle-border Отельерам
+
+                        p Интеллект начинает материалистический стратегический рыночный план. В соответствии с законом Ципфа, стратификация многопланово индуцирует креативный аутотренинг. Здесь автор сталкивает два таких достаточно далёких друг от друга явления как медиапланирование достижимо в разумные сроки. Как мы уже знаем, рекламное сообщество понимает интеллект. 
+
+                        h4 Контакты:
+                        +e.P.contacts
+                            b Мария Уланова, 
+                            a(href=jv0) hotels@rtvi.com 
+                            |  +44 20 3287 8708<br>
+                            | Обращаем ваше внимание на, что все звонки на данный номер являются бесплатными.
+
+                    +e.item.how-watch__region
+                        h2 Узнайте, как смотреть RTVi в Вашем регионе
+
+                        +e.FORM.form
+                            .col-l
+                                .form-group
+                                    input.input.input-block(type="text" placeholder='Ваше Имя')
+
+                                .form-group
+                                    input.input.input-block(type="email" placeholder='Электронная почта')
+
+                                .form-group
+                                    input.input.input-block(type="text" placeholder='Адрес и индекс')
+
+                            .col-r
+                                .form-group
+                                    input.input.input-block(type="tel" placeholder='Телефон')
+
+                                .form-group
+                                    input.input.input-block(type="text" placeholder='Страна')
+
+                                .form-group
+                                    input.input.input-block(type="text" placeholder='Город')
+
+                            button.btn.btn-submit(type='submit') Отправить
+
+                    block
+
+            +e.right.right-col
+
+                +general-video(general_video.mini_photo)(class="inner-about__general-video")
+
+                //- +info-noize(info_noize)(class="inner-about__info-noize")
+
+                +enter-one(from_enter.one, 'Новости на RTVi')(class="inner-about__enter-one inner-about__enter-one--border")
+
+                +enter-one(from_enter.two, 'Из Эфира')(class="inner-about__enter-one inner-about__enter-one--border")
+
+                +enter-one(from_enter.three, 'Инфошум')(class="inner-about__enter-one inner-about__enter-one--nopad")

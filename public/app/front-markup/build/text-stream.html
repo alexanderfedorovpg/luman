@@ -80,11 +80,12 @@
         </div>
     </header>
     <!-- Контент здесь-->
-    <div class="inner-about inner-default text-stream">
+    <div class="inner-about inner-wrapper inner-default text-stream">
         <div class="inner-about__container container">
-            <div class="inner-about__left left-col left-col left-col_position_relative">
-                <h1>Происшествие во Владивостоке</h1>
-                <div class="inner-about__date">Последнее обновление 5 минут назад
+            <div class="inner-about__left left-col left-col_position_relative">
+                <div class="inner-about__title">
+                    <h1>Происшествие обычного режима</h1>
+                    <a class="inner-about__copy" href="javascript:void(0)">Скопировать ссылку</a>
                 </div>
                 <div class="text-bg-gray text-bg-gray--primary inner-about__text-bg-gray">
                     <h2 class="text-bg-gray__title">Главное
@@ -97,14 +98,15 @@
                             <p>Марксизм практически начинает экспериментальный кризис легитимности.</p>
                         </li>
                         <li class="list-default__item">
-                            <p>Онтогенез речи важно начинает культ
-                                <br>личности. Толпа отражает эгоцентризм. Гештальт противоречиво интегрирует контраст.</p>
+                            <p>Онтогенез речи важно начинает культ личности. Толпа отражает эгоцентризм. Гештальт противоречиво
+                                интегрирует контраст.</p>
                         </li>
                         <li class="list-default__item">
                             <p>Политическая модернизация иллюстрирует механизм власти.</p>
                         </li>
                     </ul>
-                    <nav class="social-links social-links--vertical">
+                    <a class="text-bg-gray__update" href="javascript:void(0)">Обновить</a>
+                    <div class="social-links social-links--vertical">
                         <div class="social-links__list">
                             <a class="social-links__ico-link" href="javascript:void(0)">
                                 <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
@@ -131,21 +133,196 @@
                                 />
                             </a>
                         </div>
-                    </nav>
+                    </div>
                 </div>
                 <div class="inner-about__content">
-                    <div class="breadcrumb">
-                        <ul class="breadcrumb__ul">
-                            <li class="breadcrumb__item breadcrumb__item breadcrumb__item_active">
-                                <a class="breadcrumb__link" href="javascript:void(0)">Показывать сначала</a>
-                            </li>
-                            <li class="breadcrumb__item">
-                                <a class="breadcrumb__link" href="javascript:void(0)">Самые новые</a>
-                            </li>
-                            <li class="breadcrumb__item">
-                                <a class="breadcrumb__link" href="javascript:void(0)">Самые первые</a>
-                            </li>
-                        </ul>
+                    <div class="inner-about__text-stream__head">
+                        <div class="inner-about__sort">
+                            <div class="inner-about__sort-by">Сначала
+                            </div>
+                            <div class="breadcrumb">
+                                <ul class="breadcrumb__ul">
+                                    <li class="breadcrumb__item breadcrumb__item breadcrumb__item_active">
+                                        <a class="breadcrumb__link" href="javascript:void(0)">Самые новые</a>
+                                    </li>
+                                    <li class="breadcrumb__item">
+                                        <a class="breadcrumb__link" href="javascript:void(0)">Самые первые</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="inner-about__new-content">
+                            <div class="inner-about__new-content__message">2 новых сообщения
+                            </div>
+                            <div class="checkbox checkbox-circle">
+                                <input id="ko1" type="checkbox" />
+                                <label for="ko1">Обновлять автоматически</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:23</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title">Еще одна новость по поводу совершенного покушения</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:18</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title is-important">Более важные посты выделены крупнее и болдом</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:14</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title">Согласно результатам генетической экспертизы и записям с камер наблюдения, бомбу на станции
+                                    &quot;Площадь Восстания&quot; петербургском метро оставил тот же человек, который позже
+                                    подовал себя в вагоне на перегоне между станциями &quot;Сенная площадь&quot; и &quot;Технологический
+                                    парк&quot;. Кризис интуитивно понятен. Анализ рыночных цен слабопроницаем. Создание приверженного
+                                    покупателя, как бы это ни казалось парадоксальным, однократно. Нестандартный подход,
+                                    например, слабо оправдывает закон.</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:12</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title is-important">Сновидение отталкивает позитивистский стимул. Бессознательное, суммируя приведенные примеры,
+                                    притягивает ролевой гештальт. Контекстная реклама притягивает страх. Итак, ясно, что
+                                    SWOT-анализ изменяем.</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:12</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title">Рекламное сообщество, как бы это ни казалось парадоксальным, вполне выполнимо. Репрезентативная
+                                    система требовальна к креативу</span>
+                                <div class="timeline__img">
+                                    <img src="https://source.unsplash.com/random/300x200" alt="" />
+                                </div>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:12</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title">Эффективность действий существенно отчуждает из ряда вон выходящий генезис. Скиннер, однако,
+                                    настаивал, что компульсивность начинает медиавес</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:12</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title is-important">Точечное воздействие искажает институциональный стимул. Душа специфицирует креативный гендер,
+                                    не считаясь с затратами. Ценовая стратегия отчуждает автоматизм. Согласно предыдущему,
+                                    мышление устойчиво представляет собой креативный контраст.</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:12</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title">Организация службы маркетинга, конечно, конфронтально вызывает обществвенный принцип восприятия.</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:12</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title is-important fs-24">Стимулирование коммьюнити, по определению, дает комплексный формат события. Восприятие марки,
+                                    как принято считать, вполне выполнимо</span>
+                                <div class="timeline__video">
+                                    <img src="https://source.unsplash.com/random/490x265" alt="" />
+                                    <div class="timeline__video-mask">
+                                    </div>
+                                    <i class="icon icon-play"></i>
+                                </div>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__date">
+                                <time class="timeline__time">08:12</time>
+                            </div>
+                            <div class="timeline__cnt">
+                                <span class="timeline__title">Как отмечает Майкл Мескон, воспитание важно ускоряет оппортунический бизнес-план. Рекламная
+                                    заставка изоморфна времени.</span>
+                            </div>
+                            <div class="social-links">
+                                <a class="social-links__ico-link" href="javascript:void(0)">
+                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
+                                    />
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="top-button">
@@ -214,7 +391,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="enter-one inner-about__enter-one enter-one__no-border">
+                <div class="enter-one inner-about__enter-one inner-about__enter-one--border">
                     <p class="enter-one__title section-title section-title section-title_no-border">Из эфира
                     </p>
                     <div class="from-enter general-news__from-enter">

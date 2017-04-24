@@ -36,6 +36,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     //Редакторы новостей
     $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
+    $group->post('/newseditor','NewsListEditorController@create');
     $group->put('/newseditor/edit','NewsListEditorController@edit');
     $group->delete('/newseditor/{id}','NewsListEditorController@delete');
     $group->post('/newseditor/delegate','NewsListEditorController@delegate');

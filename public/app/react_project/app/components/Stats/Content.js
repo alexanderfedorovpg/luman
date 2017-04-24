@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Icon from '../Icon'
 import User from '../User'
@@ -8,6 +8,8 @@ import Table from '../Table'
 
 import { padding } from 'constants/style'
 import { below } from 'utils/style'
+import { Link } from 'react-router'
+
 
 const CustomLeft = styled(Left)`
     margin-top: 7px;
@@ -37,7 +39,12 @@ const CustomIcon = styled(Icon)`
     margin-right: 11px;
 `
 
-function Content() {
+const navItemStyles =   css(`
+
+`)
+
+
+function Content({rowClickCallback}) {
     return (
         <CustomLeft>
             <Table>
@@ -50,7 +57,7 @@ function Content() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr onClick={()=>rowClickCallback('article')}>
                         <td>
                             <CustomIcon type="article" />
                             Статьи
@@ -59,7 +66,7 @@ function Content() {
                         <td>6 780</td>
                         <td>4 500</td>
                     </tr>
-                    <tr>
+                    <tr onClick={()=>rowClickCallback('video')}>
                         <td>
                             <CustomIcon type="video" />
                             Видео
@@ -68,7 +75,7 @@ function Content() {
                         <td>6 780</td>
                         <td>4 500</td>
                     </tr>
-                    <tr>
+                    <tr onClick={()=>rowClickCallback('programms')}>
                         <td>
                             <CustomIcon type="programms" />
                             Программы
@@ -77,7 +84,7 @@ function Content() {
                         <td>6 780</td>
                         <td>4 500</td>
                     </tr>
-                    <tr>
+                    <tr onClick={()=>rowClickCallback('facebook')}>
                         <td>
                             <CustomIcon type="facebook" />
                             Facebook
@@ -86,7 +93,7 @@ function Content() {
                         <td>6 780</td>
                         <td>4 500</td>
                     </tr>
-                    <tr>
+                    <tr onClick={()=>rowClickCallback('twitter')}>
                         <td>
                             <CustomIcon type="twitter" />
                             Twitter
@@ -95,7 +102,7 @@ function Content() {
                         <td>6 780</td>
                         <td>4 500</td>
                     </tr>
-                    <Summary>
+                    <Summary onClick={()=>rowClickCallback('summary')}>
                         <td>
                             <CustomIcon type="summary" />
                             Всего

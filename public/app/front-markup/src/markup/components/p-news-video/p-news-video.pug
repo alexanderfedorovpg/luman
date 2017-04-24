@@ -8,7 +8,8 @@ include ../blockquote/blockquote
 include ../breadcrumbs/breadcrumbs
 
 mixin p-news-video(data)
-    +b.inner-about.inner-default()&attributes(attributes)
+
+    +b.inner-about.inner-wrapper.inner-default()&attributes(attributes)
 
         //- block
         +e.container.container
@@ -19,9 +20,9 @@ mixin p-news-video(data)
 
                 +b.text-bg-gray.text-bg-gray--news.inner-about__text-bg-gray
                     +e.block-text
-                        +e.P.text Акция не была согласована властями.
-                        +e.P.text В ней участвовали до тысячи человек.
-                        +e.P.text Среди задержанных — несколько журналистов.
+                        +e.P.text.text-bg-gray__text-lite Акция не была согласована властями.
+                        +e.P.text.text-bg-gray__text-lite В ней участвовали до тысячи человек.
+                        +e.P.text.text-bg-gray__text-lite Среди задержанных — несколько журналистов.
 
                     +b.general-video.general-news__general-video
                       +e.A.link(href='javascript:void(0)')
@@ -66,14 +67,14 @@ mixin p-news-video(data)
 
                     p 25 марта в Беларуси отмечается День воли — неофициальный праздник, посвященный объявлению независимости Белоруссии в 1918 году.
 
-                    +similar-news(random_news)
+                    +similar-news(random_news)(class='similar-news--wide')
 
 
             +e.right.right-col
 
-                +general-video(general_video.mini_photo)(class="inner-about__general-video")
+                +general-video(general_video.mini_photo)(class="inner-about__general-video general-video--sm")
 
                 +info-noize(info_noize.news)(class="inner-about__info-noize")
 
-                +enter-one(from_enter.one)(class="inner-about__enter-one enter-one__no-border")
+                +enter-one(from_enter.one)(class="inner-about__enter-one inner-about__enter-one--border")
 

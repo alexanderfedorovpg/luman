@@ -200,3 +200,10 @@
     padding-left: $param;
     padding-right: $param;
 }
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}

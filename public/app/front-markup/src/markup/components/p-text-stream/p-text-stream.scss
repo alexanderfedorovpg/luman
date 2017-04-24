@@ -1,13 +1,58 @@
 .text-stream {
 
     .text-bg-gray--primary {
+        margin-top: rem(23);
         .list-default {
+            margin-left: rem(1);
             p {
                 font-family: $stemBold;
                 font-size: rem(16);
-                line-height: rem(18);
+                line-height: rem(16);
                 color: $enter;
+                letter-spacing: rem(-0.17);
             }
+        }
+        .list-default__item {
+            &:before {
+                position: relative;
+                top: rem(-3);
+            }
+        }
+    }
+
+    .left-col {
+        width: 56.0625rem;
+    }
+
+    .inner-about__content {
+        padding-top: rem(5);
+        padding-left: 0;
+    }
+
+    .breadcrumb {
+        margin-top: rem(3);
+        margin-left: rem(13);
+        &:after {
+            display: none;
+        }
+        &__ul {
+            justify-content: flex-start;
+            margin-top: 0;
+        }
+        &__item {
+            margin-right: rem(19);
+            &:before {
+                bottom: rem(0);
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        &__link {
+            line-height: 1;
+        }
+        &__item_active a {
+            color: $enter;
         }
     }
 

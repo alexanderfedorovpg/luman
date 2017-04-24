@@ -4,6 +4,7 @@
 namespace App\Http\Transformers\v1;
 
 use App\Http\Transformers\Transformer;
+use App\Http\Transformers\v1\AirRecordTransformer;
 use App\Models\AirRecord;
 
 class TvProgramTransformer extends Transformer
@@ -20,7 +21,8 @@ class TvProgramTransformer extends Transformer
         $transform = $this->transform($program);
 
         $records = AirRecord::where('program_id', '=', $program['id'])->get()->toArray();
-        $transform['records'] = $records;
+        $transform['records'] = (new AirRecordTransformer())
+            ->transformCollection($records);
 
         return $transform;
     }

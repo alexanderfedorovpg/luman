@@ -1,9 +1,14 @@
 mixin social-links(data)
-    +b.NAV.social-links()&attributes(attributes)
+    +b.social-links()&attributes(attributes)
 
-        +e.list
-            each item in data.items
-                +e.A(href=jv0).ico-link
-                    +e.IMG(src=item.icon alt="").ico-image
+        if data == 'share'
+            +e.A(href=jv0).ico-link
+                +e.IMG(src='%=static=%img/general/social/share.png' alt='').ico-image
+
+        else
+            +e.list
+                each item in data.items
+                    +e.A(href=jv0).ico-link
+                        +e.IMG(src=item.icon alt="").ico-image
 
         block

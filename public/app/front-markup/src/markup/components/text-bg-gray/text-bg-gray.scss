@@ -31,6 +31,11 @@
         color: $white;
     }
 
+    &__text-lite {
+        font: #{rem(15)}/ #{rem(24)} $stemBold;
+        color: $white;
+    }
+
     &__title {
         margin-bottom: 24px;
 
@@ -38,6 +43,29 @@
         font-size: 24px;
         line-height: 21px;
         color: $purple;
+    }
+
+    &__update {
+        position: absolute;
+        right: rem(-32);
+        bottom: rem(-22);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: rem(155);
+        height: rem(75);
+        padding-top: rem(8);
+
+        font-family: $stemBold;
+        font-size: 16px;
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        background: url('%=static=%general/geometry/ice-cube.png');
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
 }
@@ -49,6 +77,7 @@
     justify-content: flex-end;
     height: rem(573);
     margin-top: rem(7);
+    margin-bottom: 0;
 
     &.text-bg-gray .text-bg-gray {
 
@@ -58,6 +87,7 @@
             bottom: auto;
 
             width: rem(317);
+            min-height: rem(220);
             padding: rem(23) rem(29) rem(33) rem(24);
 
             text-align: left;
@@ -157,7 +187,7 @@
 
 .text-bg-gray--primary {
     height: auto;
-    padding-top: rem(28);
-    padding-bottom: rem(50);
-    padding-left: rem(198);
+    padding-top: rem(26);
+    padding-bottom: rem(68);
+    padding-left: rem(195);
 }

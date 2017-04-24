@@ -1,8 +1,18 @@
 include ../from-enter/from-enter
 
-mixin enter-one(data)
+mixin enter-one(data, type)
     +b.enter-one()&attributes(attributes)
         block
-        +e.P.title.section-title.section-title_no-border Из эфира
+        if type == 'Инфошум'
+            +e.P.title.section-title.section-title_no-border Инфошум
+
+        else if type == 'Новости на RTVi'
+            +e.P.title.section-title.section-title_no-border Новости на RTVi
+
+        else if type == 'Из Эфира'
+            +e.P.title.section-title.section-title_no-border Из Эфира
+
+        else
+            +e.P.title.section-title.section-title_no-border Из эфира
 
         +from-enter(data)(class="general-news__from-enter")

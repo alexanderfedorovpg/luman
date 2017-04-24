@@ -136,6 +136,16 @@ export const finishArticle = data => {
     })
 }
 
+export const publishArticle = data => {
+    let formData = xwwwfurlenc(data)
+
+    return axios.post(`${baseUrl}/newseditor`, formData, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
+
 
 // TODO: найти нормальный npm пакет для конвертации
 //       json -> x-www-form-urlencoded
@@ -154,10 +164,6 @@ export const acceptArticle = id => {
     return axios.post(`${baseUrl}/newseditor/work`, {
         id
     })
-}
-
-export const publishArticle = () => {
-    return axios.post(`${baseUrl}/`)
 }
 
 export const getChatMessages = room => {

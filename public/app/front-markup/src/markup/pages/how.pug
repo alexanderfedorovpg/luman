@@ -1,0 +1,11 @@
+extends ../layouts/default
+include ../components/p-how/p-how
+
+block vars
+    -pageSettings.title = 'Как смотреть RTVi';
+    -pageSettings.headerClass = 'header_margin';
+
+block content
+    // Контент здесь
+    main
+        +p-how

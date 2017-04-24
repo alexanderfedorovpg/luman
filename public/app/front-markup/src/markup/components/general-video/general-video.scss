@@ -104,3 +104,24 @@
     }
 
 }
+
+.general-video.general-video--sm {
+    height: rem(376);
+    .general-video__link,
+    &:before {
+        right: 0;
+        bottom: 0;
+
+        height: auto;
+    }
+    .general-video__date_position {
+        margin-bottom: rem(21);
+    }
+    .general-video__img {
+        height: 100%;
+        object-fit: cover;
+    }
+    .general-video__link {
+        height: rem(376);
+    }
+}

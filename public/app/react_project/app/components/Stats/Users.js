@@ -39,7 +39,7 @@ const Tr = styled.tr`
 
 `
 
-function Users() {
+function Users({rowClickCallback}) {
     return (
         <CustomRight>
             <Table>
@@ -51,10 +51,10 @@ function Users() {
                     </tr>
                 </thead>
                 <tbody>
-                    <Tr>
+                    <Tr onClick={()=>rowClickCallback(1)}>
                         <td>
                             <User data={{ pic: '/img/user1.png' }}>
-                                <UserName href="#" className={userClassName}>
+                                <UserName className={userClassName}>
                                     Ковалев Максим
                                 </UserName>
                             </User>
@@ -62,10 +62,10 @@ function Users() {
                         <td>4</td>
                         <td>12 мин</td>
                     </Tr>
-                    <Tr>
+                    <Tr onClick={()=>rowClickCallback(2)}>
                         <td>
                             <User data={{ pic: '/img/user2.png' }}>
-                                <UserName href="#" className={userClassName}>
+                                <UserName className={userClassName}>
                                     Короленко Анастасия
                                 </UserName>
                             </User>
@@ -73,10 +73,10 @@ function Users() {
                         <td>5</td>
                         <td>17 мин</td>
                     </Tr>
-                    <Tr>
+                    <Tr onClick={()=>rowClickCallback(3)}>
                         <td>
                             <User data={{ pic: '/img/user3.png' }}>
-                                <UserName href="#" className={userClassName}>
+                                <UserName className={userClassName}>
                                     Поликарпов Анатолий
                                 </UserName>
                             </User>
@@ -84,10 +84,10 @@ function Users() {
                         <td>22</td>
                         <td>16 мин</td>
                     </Tr>
-                    <Tr>
+                    <Tr onClick={()=>rowClickCallback(4)}>
                         <td>
                             <User data={{ pic: '/img/user4.png' }}>
-                                <UserName href="#" className={userClassName}>
+                                <UserName className={userClassName}>
                                     Марышева Елена
                                 </UserName>
                             </User>
@@ -95,10 +95,10 @@ function Users() {
                         <td>56</td>
                         <td>15 мин</td>
                     </Tr>
-                    <Tr>
+                    <Tr onClick={()=>rowClickCallback(5)}>
                         <td>
                             <User data={{ pic: '/img/user5.png' }}>
-                                <UserName href="#" className={userClassName}>
+                                <UserName className={userClassName}>
                                     Санченков Роман
                                 </UserName>
                             </User>

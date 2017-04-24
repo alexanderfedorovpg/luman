@@ -9,8 +9,9 @@
     }
 
     &__ico-link {
+        display: block;
         width: rem(32);
-        height: rem(32);        
+        height: rem(32);
         margin-right: rem(8);
         &:last-child {
             margin-right: 0;
