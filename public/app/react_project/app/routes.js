@@ -261,39 +261,6 @@ export default function createRoutes(store) {
                 }
             ]
         },
-
-
-        {
-            path: '/categoriesStatsPage',
-            name: 'categoriesStatsPage',
-            getComponent(nextState, cb) {
-                const importModules = Promise.all([
-                    //import('containers/CategoriesStatsPage/reducer'),
-                    //import('containers/CategoriesStatsPage/sagas'),
-                    import('containers/CategoriesStatsPage'),
-                ]);
-
-                const renderRoute = loadModule(cb);
-
-                importModules.then(([reducer, sagas, component]) => {
-                    injectReducer('categoriesStatsPage', reducer.default);
-                    injectSagas(sagas.default);
-                    renderRoute(component);
-                });
-
-                importModules.catch(errorLoading);
-            },
-            childRoutes: [
-                {
-                    path: '/categoriesStatsPage/:id',
-                    name: 'categoriesStatsPage'
-                }
-            ]
-        },
-
-
-
-
         {
             path: '*',
             name: 'notfound',

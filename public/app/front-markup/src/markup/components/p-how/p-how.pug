@@ -76,7 +76,7 @@ mixin p-how(data)
                         +e.FORM.form
                             .col-l
                                 .form-group
-                                    input.input.input-block(type="text" placeholder='Ваше Имя')
+                                    input.input.input-block(type="text" placeholder='Ваше имя')
 
                                 .form-group
                                     input.input.input-block(type="email" placeholder='Электронная почта')
@@ -100,12 +100,12 @@ mixin p-how(data)
 
             +e.right.right-col
 
-                +general-video(general_video.mini_photo)(class="inner-about__general-video")
+                +general-video(general_video.mini_photo)(class="inner-about__general-video general-video--sm")
 
                 //- +info-noize(info_noize)(class="inner-about__info-noize")
 
-                +enter-one(from_enter.one, 'Новости на RTVi')(class="inner-about__enter-one inner-about__enter-one--border")
+                +enter-one(from_enter.one, 'Новости на RTVi')(class="inner-about__enter-one inner-about__enter-one--border inner-about__enter-one--no-category")
 
                 +enter-one(from_enter.two, 'Из Эфира')(class="inner-about__enter-one inner-about__enter-one--border")
 
-                +enter-one(from_enter.three, 'Инфошум')(class="inner-about__enter-one inner-about__enter-one--nopad")
+                +enter-one(from_enter.three, 'Инфошум')(class="inner-about__enter-one inner-about__enter-one--nopad inner-about__enter-one--no-category")

@@ -101,6 +101,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 	$group->get('/newsstatistics/editor/dynamics/','NewsStatisticsController@getTimeDynamicsEditor');
 	$group->get('/newsstatistics/editor/counters/','NewsStatisticsController@getCountersEditor');
 
+    $group->get('/statistics','StatisticsController@getCountersAll');
+
     //Телепередачи
     $group->get('/tv-program','TvProgramController@index');
     $group->get('/tv-program/{id}','TvProgramController@show');
