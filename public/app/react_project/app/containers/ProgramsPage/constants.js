@@ -14,6 +14,7 @@ export const DELETE_RECORD = 'app/ProgramsPage/DELETE_RECORD';
 export const DELETE_RECORD_SUCCESS = 'app/ProgramsPage/DELETE_RECORD_SUCCESS';
 export const DELETE_RECORD_FAILURE = 'app/ProgramsPage/DELETE_RECORD_FAILURE';
 export const LOAD_RECORDS = 'app/ProgramsPage/LOAD_RECORDS';
+export const PENDING_RECORDS = 'app/ProgramsPage/PENDING_RECORDS';
 export const LOAD_RECORDS_SUCCESS = 'app/ProgramsPage/LOAD_RECORDS_SUCCESS';
 export const LOAD_RECORDS_FAILURE = 'app/ProgramsPage/LOAD_RECORDS_FAILURE';
 

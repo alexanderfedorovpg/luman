@@ -25,6 +25,7 @@ import {
     LOAD_PROGRAMS,
     DELETE_RECORD,
     LOAD_RECORDS,
+    PENDING_RECORDS,
     RECORDS_LIMIT,
 } from './constants';
 
@@ -66,6 +67,8 @@ export function* deleteRecord({ payload }) {
 
 export function* getRecords(action = { payload: {} }) {
     try {
+        yield put({ type: PENDING_RECORDS });
+
         const params = {};
         const { payload } = action;
         const replace = typeof payload.replace === 'undefined' ? true : payload.replace;
@@ -118,8 +121,8 @@ export function* programsData() {
     yield takeLatest(LOAD_PROGRAMS, getPrograms);
     yield takeEvery(DELETE_RECORD, deleteRecord);
     yield takeLatest(LOAD_RECORDS, getRecords);
-    yield takeEvery(SET_RECORDS_TYPE, getRecords);
-    yield takeEvery(CHANGE_RUBRIC, getRecords);
+    yield takeLatest(SET_RECORDS_TYPE, getRecords);
+    yield takeLatest(CHANGE_RUBRIC, getRecords);
 }
 
 // All sagas to be loaded

@@ -32,30 +32,20 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
     constructor(props) {
         super(props);
 
-        this.onWaypointChange = this.onWaypointChange.bind(this);
+        this.uploadRecords = this.uploadRecords.bind(this);
     }
 
     componentDidMount() {
         this.props.openPage();
     }
 
-    onWaypointChange(waypoint) {
-        const { allRecordsUploaded } = this.props.ProgramsPage;
-
-        if (allRecordsUploaded) {
-            return;
-        }
-
-        if (waypoint.currentPosition !== 'below') {
-            return;
-        }
-
+    uploadRecords() {
         this.props.loadRecords(false);
     }
 
     render() {
         const { menuOpen, rubrics, records } = this.props;
-        const { recordsType, rubric } = this.props.ProgramsPage;
+        const { recordsType, rubric, loading, allRecordsUploaded } = this.props.ProgramsPage;
 
         return (
             <Wrapper>
@@ -76,14 +66,20 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                     }
                     {
                         !!records &&
-                        <Waypoint onPositionChange={this.onWaypointChange}>
-                            <div>
-                                <Records
-                                    onRecordDelete={this.props.deleteRecord}
-                                    items={records}
-                                />
-                            </div>
-                        </Waypoint>
+                        <Records
+                            onRecordDelete={this.props.deleteRecord}
+                            items={records}
+                        />
+                    }
+                    {
+                        loading ?
+                        'Загрузка...' :
+                        !allRecordsUploaded &&
+                        <Waypoint
+                            bottomOffset="-50%"
+                            scrollableAncestor={window}
+                            onEnter={this.uploadRecords}
+                        />
                     }
                 </Content>
             </Wrapper>
@@ -117,7 +113,7 @@ function mapDispatchToProps(dispatch) {
         deleteRecord: (id) => dispatch(deleteRecord(id)),
         loadRubrics: () => dispatch(loadRubrics()),
         changeRubric: (id) => dispatch(changeRubric(id[0])),
-        loadRecords: () => dispatch(loadRecords()),
+        loadRecords: (replace) => dispatch(loadRecords(replace)),
     };
 }
 

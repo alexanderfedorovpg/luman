@@ -36,7 +36,7 @@ const makeGetRecords = () => createSelector(
             date: record.updated_at ? record.updated_at : record.created_at,
             title: record.title,
             preview: record.image_preview,
-            program: programs.byId[record.id].name,
+            program: programs.byId[record.program_id].name,
         }
     ))
 );
