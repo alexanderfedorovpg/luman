@@ -28,7 +28,7 @@
 		 *
 		 * @return string
 		 */
-		private function setInterval( $type_interval, $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
+		private function setInterval( $type_interval='today', $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
 
 			$period = 'true';
 			switch ( $type_interval ) {
@@ -52,6 +52,8 @@
 					$period = "$param[1] >= '$this->start_date 00:00:00' AND $param[2] <= '$this->end_date 23:59:59'";
 					break;
 
+                default:
+                    $period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
 			}
 
 			return $period;
@@ -66,7 +68,7 @@
 
 			try {
 				$this->validate( $request, [
-					'type_interval' => 'required',
+				    'type_interval'=> 'in:today,week,month,year,custom',
 					'start_date'    => 'date_format:Y-m-d',
 					'end_date'      => 'date_format:Y-m-d',
 				] );
@@ -129,7 +131,7 @@
 
 			try {
 				$this->validate( $request, [
-					'type_interval' => 'required',
+                    'type_interval'=> 'in:today,week,month,year,custom',
                     'editor_id' => 'required|exists:users,id',
 					'start_date'    => 'date_format:Y-m-d',
 					'end_date'      => 'date_format:Y-m-d',
@@ -187,7 +189,7 @@
 			try {
 
 				$this->validate( $request, [
-					'editor_id'     => 'required|numeric',
+					'editor_id'     => 'required|exists:users,id',
 					'start_date'    => 'required|date_format:Y-m-d',
 					'end_date'      => 'required|date_format:Y-m-d',
 					'type_dynamics' => 'required',

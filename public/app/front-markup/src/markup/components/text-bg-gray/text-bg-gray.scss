@@ -7,6 +7,19 @@
 
     background-color: $bg-text;
 
+    &:before {
+        content: ' ';
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: rem(-900);
+
+        width: rem(900);
+
+        background: $bg-text;
+    }
+
     &__block-text {
         position: absolute;
         bottom: rem(-72);
