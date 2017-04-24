@@ -30,8 +30,8 @@ module.exports = () => {
             }))
             .pipe(gulpif(
                 tars.config.minifyHtml,
-                tars.require('gulp-htmlmin')(minifyOpts),
-                tars.require('gulp-html-prettify')(prettifyOpts)
+                tars.require('gulp-htmlmin')(minifyOpts)
+                // tars.require('gulp-html-prettify')(prettifyOpts)
             ))
             .pipe(gulp.dest('./dev/'))
             .pipe(
