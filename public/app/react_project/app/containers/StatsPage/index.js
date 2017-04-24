@@ -21,8 +21,8 @@ class StatsPage extends Component {
 
                 <Header />
                 <Wrap>
-                    <Content rowClickCallback={this.props.setFilter}/>
-                    <Users />
+                    <Content rowClickCallback={this.props.categoryRowClickCallback} />
+                    <Users rowClickCallback={this.props.userRowClickCallback}/>
                 </Wrap>
                 <Dynamic />
             </div>
@@ -36,11 +36,11 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
     return {
-        setFilter(filter) {
-            alert(`GOTO: ${filter}`)
-            console.log(arguments, dispatch)
-            //dispatch(push('/some/page'));
-         //   dispatch(setFilter(filter.value));
+        categoryRowClickCallback(categoryName) {
+            dispatch(push(`categoriesStatsPage/${categoryName}`));
+        },
+        userRowClickCallback(userId) {
+            dispatch(push(`articleUserStatsPage/${userId}`));
         },
 
     };

@@ -239,9 +239,9 @@ export default function createRoutes(store) {
             name: 'articlesUserStatsPage',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                   import('containers/ArticlesUserStatsPage/reducer'),
-                   import('containers/LivePage/sagas'),
-                   import('containers/ArticlesUserStatsPage'),
+                    //import('containers/ArticlesUserStatsPage/reducer'),
+                    //import('containers/LivePage/sagas'),
+                    import('containers/ArticlesUserStatsPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
@@ -254,10 +254,39 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
-                childRoutes: [
+            childRoutes: [
                 {
                     path: '/articleUserStatsPage/:id',
                     name: 'articleUserStatsPage'
+                }
+            ]
+        },
+
+
+        {
+            path: '/categoriesStatsPage',
+            name: 'categoriesStatsPage',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    //import('containers/CategoriesStatsPage/reducer'),
+                    //import('containers/CategoriesStatsPage/sagas'),
+                    import('containers/CategoriesStatsPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([reducer, sagas, component]) => {
+                    injectReducer('categoriesStatsPage', reducer.default);
+                    injectSagas(sagas.default);
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
+            childRoutes: [
+                {
+                    path: '/categoriesStatsPage/:id',
+                    name: 'categoriesStatsPage'
                 }
             ]
         },
