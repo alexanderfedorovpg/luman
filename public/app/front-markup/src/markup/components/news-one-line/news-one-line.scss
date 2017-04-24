@@ -32,5 +32,13 @@
         .block-square__link {
             width: rem(300);
         }
+
+        .block-square__title {
+            letter-spacing: rem(-.2);
+        }
+
+        .block-square__info {
+            bottom: rem(8);
+        }
     }
 }

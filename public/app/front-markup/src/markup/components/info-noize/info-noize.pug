@@ -9,7 +9,7 @@ mixin info-noize(data)
             +e.P.title.section-title #{params.section_title}
         //- если война
         if (params.view)
-            +block-square(info_noize.idx)(class="info-noize__block-square_war")
+            +block-square(info_noize.idx)(class="info-noize__block-square_war block-square_war")
         +e.wrapper
             if (params.list)
                 each item in params.list

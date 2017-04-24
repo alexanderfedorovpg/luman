@@ -18,10 +18,12 @@
     }
 
     &__mini-news {
+        padding-top: rem(21) !important;
+        padding-bottom: rem(19) !important;
 
         &:first-child {
             padding-top: 0 !important;
-            padding-bottom: rem(13) !important;
+            padding-bottom: rem(11) !important;
         }
 
         &:hover .mini-news__img {
