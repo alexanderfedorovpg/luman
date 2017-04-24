@@ -2,7 +2,7 @@
 
 	namespace App\Http\Controllers\v1;
 
-	use App\Models\NewsCounters;
+	use App\Models\Counters;
 	use App\Models\News;
 	use App\Models\NewsModerationLog;
 	use Illuminate\Http\Request;
@@ -256,8 +256,9 @@
 
 				$period = $this->setInterval( $type_interval, array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
-				$results = NewsCounters::select( 'news_id', 'count_click', 'count_views' )
+				$results = Counters::select( 'news_id', 'count_click', 'count_views' )
 				                       ->join( 'news', 'news.id', '=', 'news_id' )
+                                        ->where( 'type', '=', 1 )
 				                       ->whereRaw( $period )
 				                       ->get();
 
@@ -272,7 +273,7 @@
 					);
 
 				}
-				var_dump( $respond );
+
 
 				return $this->respond( $respond );
 			} catch ( \Exception $e ) {
@@ -306,9 +307,10 @@
 				$period = $this->setInterval( $type_interval,
 					array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
-				$results = NewsCounters::select( 'news_id', 'count_click', 'count_views' )
+				$results = Counters::select( 'news_id', 'count_click', 'count_views' )
 				                       ->join( 'news', 'news.id', '=', 'news_id' )
 				                       ->where( 'news.editor_id', '=', $editor_id )
+                                       ->where( 'type', '=', 1 )
 				                       ->whereRaw( $period )
 				                       ->get();
 

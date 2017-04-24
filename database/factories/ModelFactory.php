@@ -11,7 +11,8 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'login'=> strtolower($faker->firstName),
@@ -23,7 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\News::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\News::class, function (Faker\Generator $faker) {
     return [
         'publish_date' => $faker->dateTime(),
         'is_publish'=> 1,
@@ -42,5 +43,15 @@ $factory->define(App\News::class, function (Faker\Generator $faker) {
         'is_war_mode'=>$faker->randomElement([0,1]),
 
 
+    ];
+});
+
+$factory->define(App\Models\Counters::class, function (Faker\Generator $faker) {
+
+    return [
+        'type' => $faker->randomElement([1,2,3,4,5]),
+        'news_id'=>  $faker->randomElement( array_pluck(App\Models\News::all()->toArray(),'id')),
+        'count_click'=> $faker->randomDigit,
+        'count_views' => $faker->randomDigit,
     ];
 });
