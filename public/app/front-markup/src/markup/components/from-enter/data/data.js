@@ -13,7 +13,7 @@ var data = {from_enter: {
         alt: '',
         title: 'Почему бездомных в Нью-Йорке селят в отелях, и кто за это платит?',
         time_add: '2 часа назад',
-        category: 'Тайм код',
+        category: 'Тайм-код',
         time_keeping: '03:40',
         time_keeping_img: '%=static=%img/content/video-ico/video-ico.png'
     },
