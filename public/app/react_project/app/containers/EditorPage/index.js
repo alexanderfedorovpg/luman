@@ -106,7 +106,7 @@ class EditorPage extends Component {
 
                     <HeaderSupervisor
                         {...headerProps}
-                        publish={() => publishArticle(this.props.article)} />
+                        publish={publishArticle} />
                 </Content>
             )
         }

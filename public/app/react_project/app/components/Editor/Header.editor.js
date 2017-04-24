@@ -60,7 +60,12 @@ function Header({ moved, del, delegate, preview, finish, getFormData }) {
 
                             Предпросмотр
                         </CustomButton>
-                        <CustomButton xs success onClick={e=>finish(getFormData())}>
+                        <CustomButton xs success onClick={e=> {
+                                const data = getFormData()
+
+                                if (data) finish(data)
+                            }}>
+
                             <Icon type="okay" />
                             Готово
                         </CustomButton>
