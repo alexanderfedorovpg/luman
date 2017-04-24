@@ -28,7 +28,7 @@
 		 *
 		 * @return string
 		 */
-		private function setInterval( $type_interval=false, $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
+		private function setInterval( $type_interval='today', $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
 
 			$period = 'true';
 			switch ( $type_interval ) {
@@ -68,6 +68,7 @@
 
 			try {
 				$this->validate( $request, [
+				    'type_interval'=> 'in:today,week,month,year,custom',
 					'start_date'    => 'date_format:Y-m-d',
 					'end_date'      => 'date_format:Y-m-d',
 				] );
@@ -130,6 +131,7 @@
 
 			try {
 				$this->validate( $request, [
+                    'type_interval'=> 'in:today,week,month,year,custom',
                     'editor_id' => 'required|exists:users,id',
 					'start_date'    => 'date_format:Y-m-d',
 					'end_date'      => 'date_format:Y-m-d',
