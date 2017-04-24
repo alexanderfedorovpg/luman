@@ -49,7 +49,7 @@
 					break;
 
 				case 'custom':
-					$period = "$param[1] >= '$this->start_date 00:00:00' AND $param[2] <= '$this->end_date 23:59:59'";
+					$period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
 					break;
 
                 default:
@@ -69,8 +69,8 @@
 			try {
 				$this->validate( $request, [
 				    'type_interval'=> 'in:today,week,month,year,custom',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
+					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
+					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
 				] );
 				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
@@ -133,8 +133,8 @@
 				$this->validate( $request, [
                     'type_interval'=> 'in:today,week,month,year,custom',
                     'editor_id' => 'required|exists:users,id',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
+					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
+					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
 				] );
 				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
@@ -190,8 +190,8 @@
 
 				$this->validate( $request, [
 					'editor_id'     => 'required|exists:users,id',
-					'start_date'    => 'required|date_format:Y-m-d',
-					'end_date'      => 'required|date_format:Y-m-d',
+					'start_date'    => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'      => 'required|date|date_format:Y-m-d H:i:s',
 					'type_dynamics' => 'required',
 				] );
 
@@ -211,7 +211,7 @@
 				}
 
 
-				if ( $type_dynamics == 'counts_news' ) {
+				if ( $type_dynamics == 'countsNews' ) {
 					$results = DB::select( " SELECT  DATE_FORMAT(publish_date,'%d-%m-%Y') as pdate, COUNT(*) as ncount
 									FROM news
 									WHERE publish_date >='$this->start_date 00:00:00' AND publish_date <='$this->end_date 23:59:59'
@@ -244,9 +244,9 @@
 			try {
 
 				$this->validate( $request, [
-					'type_interval' => 'required',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
+                    'type_interval'=> 'in:today,week,month,year,custom',
+					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
+					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
 				] );
 
 				$type_interval    = $request->input( 'type_interval' );
@@ -291,10 +291,10 @@
 			try {
 
 				$this->validate( $request, [
-					'type_interval' => 'required',
-					'start_date'    => 'date_format:Y-m-d',
-					'end_date'      => 'date_format:Y-m-d',
-					'editor_id'     => 'integer',
+                    'type_interval'=> 'in:today,week,month,year,custom',
+					'start_date'    => 'date|date_format:Y-m-d H:i:s',
+					'end_date'      => 'date|date_format:Y-m-d H:i:s',
+                    'editor_id'     => 'required|exists:users,id',
 				] );
 
 				$type_interval    = $request->input( 'type_interval' );
