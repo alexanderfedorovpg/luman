@@ -156,7 +156,8 @@ class Content extends Component {
         super(props);
 
         this.state = {
-            data: this.propsToData(props)
+            data: this.propsToData(props),
+            error: {}
         };
 
         this.changeHandlerTarget = this.changeHandlerTarget.bind(this);
@@ -168,6 +169,16 @@ class Content extends Component {
                 data: this.propsToData(nextProps)
             })
         }
+    }
+
+    setError(prop, value) {
+
+        this.setState({
+            error: {
+                ...this.state.error,
+                [prop]: value
+            }
+        })
     }
 
     propsToData(props) {
@@ -329,7 +340,11 @@ class Content extends Component {
                             </Label>
                             <TitleField
                                 value={this.state.data.title}
-                                onChange={this.changeHandlerTarget('title')}
+                                error={this.state.error.title}
+                                onChange={e => {
+                                    this.changeHandlerTarget('title')(e)
+                                    this.setError('title', !e.target.value || e.target.value.length > titleMax)
+                                }}
                                 block />
                         </Group>
                         <Group>
