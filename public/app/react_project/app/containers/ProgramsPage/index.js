@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
 import { loadRubrics } from 'containers/App/actions';
 import Records from 'components/Records';
+import Waypoint from 'react-waypoint';
 
 import makeSelectProgramsPage, {
     makeSelectRubricsNames,
@@ -19,18 +20,37 @@ import makeSelectProgramsPage, {
 import {
     openPage,
     setRecordsType,
-    deleteProgram,
+    deleteRecord,
     changeRubric,
     loadRecords,
 } from './actions';
 import Header from './Header';
-import Wrapper from './Wrapper';
-import Content from './Content';
+import { Wrapper, Content } from './style';
 import Rubrics from './Rubrics';
 
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props) {
+        super(props);
+
+        this.onWaypointChange = this.onWaypointChange.bind(this);
+    }
+
     componentDidMount() {
         this.props.openPage();
+    }
+
+    onWaypointChange(waypoint) {
+        const { allRecordsUploaded } = this.props.ProgramsPage;
+
+        if (allRecordsUploaded) {
+            return;
+        }
+
+        if (waypoint.currentPosition !== 'below') {
+            return;
+        }
+
+        this.props.loadRecords(false);
     }
 
     render() {
@@ -43,7 +63,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                 <Header
                     moved={menuOpen}
                     type={recordsType}
-                    setRecor={this.props.setRecordsType}
+                    setRecordsType={this.props.setRecordsType}
                 />
                 <Content>
                     {
@@ -56,10 +76,14 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                     }
                     {
                         !!records &&
-                        <Records
-                            onProgramDelete={this.props.deleteProgram}
-                            items={records}
-                        />
+                        <Waypoint onPositionChange={this.onWaypointChange}>
+                            <div>
+                                <Records
+                                    onRecordDelete={this.props.deleteRecord}
+                                    items={records}
+                                />
+                            </div>
+                        </Waypoint>
                     }
                 </Content>
             </Wrapper>
@@ -75,7 +99,7 @@ ProgramsPage.propTypes = {
     openPage: PropTypes.func,
     loadRecords: PropTypes.func,
     changeRubric: PropTypes.func,
-    deleteProgram: PropTypes.func,
+    deleteRecord: PropTypes.func,
     ProgramsPage: PropTypes.object,
 };
 
@@ -88,9 +112,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
     return {
-        setRecordsType: (filter) => dispatch(setRecordsType(filter.value)),
+        setRecordsType: (type) => dispatch(setRecordsType(type.value)),
         openPage: () => dispatch(openPage()),
-        deleteProgram: (id) => dispatch(deleteProgram(id)),
+        deleteRecord: (id) => dispatch(deleteRecord(id)),
         loadRubrics: () => dispatch(loadRubrics()),
         changeRubric: (id) => dispatch(changeRubric(id[0])),
         loadRecords: () => dispatch(loadRecords()),

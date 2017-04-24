@@ -11,9 +11,9 @@ import {
     LOAD_PROGRAMS,
     LOAD_PROGRAMS_SUCCESS,
     LOAD_PROGRAMS_FAILURE,
-    DELETE_PROGRAM,
-    DELETE_PROGRAM_SUCCESS,
-    DELETE_PROGRAM_FAILURE,
+    DELETE_RECORD,
+    DELETE_RECORD_SUCCESS,
+    DELETE_RECORD_FAILURE,
     LOAD_RECORDS,
     LOAD_RECORDS_SUCCESS,
     LOAD_RECORDS_FAILURE,
@@ -59,37 +59,39 @@ export function failureLoadPrograms(error) {
     };
 }
 
-export function deleteProgram(id) {
+export function deleteRecord(id) {
     return {
-        type: DELETE_PROGRAM,
+        type: DELETE_RECORD,
         payload: { id },
     };
 }
 
-export function successDeleteProgram(id) {
+export function successDeleteRecord(id) {
+    console.log(id);
     return {
-        type: DELETE_PROGRAM_SUCCESS,
+        type: DELETE_RECORD_SUCCESS,
         payload: { id },
     };
 }
 
-export function failureDeleteProgram(error) {
+export function failureDeleteRecord(error) {
     return {
-        type: DELETE_PROGRAM_FAILURE,
+        type: DELETE_RECORD_FAILURE,
         error,
     };
 }
 
-export function loadRecords() {
+export function loadRecords(replace) {
     return {
         type: LOAD_RECORDS,
+        payload: { replace },
     };
 }
 
-export function successLoadRecords(records) {
+export function successLoadRecords(payload) {
     return {
         type: LOAD_RECORDS_SUCCESS,
-        payload: { records },
+        payload,
     };
 }
 

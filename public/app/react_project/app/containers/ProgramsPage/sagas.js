@@ -13,15 +13,17 @@ import { fetchRubrics } from 'containers/App/sagas';
 import {
     successLoadPrograms,
     failureLoadPrograms,
-    successDeleteProgram,
-    failureDeleteProgram,
+    successDeleteRecord,
+    failureDeleteRecord,
     successLoadRecords,
     failureLoadRecords,
 } from './actions';
 import {
+    SET_RECORDS_TYPE,
+    CHANGE_RUBRIC,
     OPEN_PAGE,
     LOAD_PROGRAMS,
-    DELETE_PROGRAM,
+    DELETE_RECORD,
     LOAD_RECORDS,
     RECORDS_LIMIT,
 } from './constants';
@@ -49,18 +51,24 @@ export function* getPrograms() {
     }
 }
 
-export function* deleteProgram({ payload }) {
+export function* deleteRecord({ payload }) {
     try {
-        yield call(api.deleteProgram, payload.id);
-        yield put(successDeleteProgram(payload.id));
+        const response = yield call(api.deleteRecord, payload.id);
+        if (response.data.success) {
+            yield put(successDeleteRecord(payload.id));
+        } else {
+            throw new Error(response.statusText);
+        }
     } catch (err) {
-        yield put(failureDeleteProgram(err));
+        yield put(failureDeleteRecord(err));
     }
 }
 
-export function* getRecords() {
+export function* getRecords(action = { payload: {} }) {
     try {
         const params = {};
+        const { payload } = action;
+        const replace = typeof payload.replace === 'undefined' ? true : payload.replace;
 
         const [type, rubricId, offset] = yield [
             select(getRecordsType),
@@ -73,11 +81,17 @@ export function* getRecords() {
         }
 
         params.fullVideo = type === 'FULL';
-        params.offset = offset;
+        // Если нужно заменить текущие записи на новые, то offset равен 0
+        // если добавить, то offset равен количеству уже загруженных записей
+        params.offset = replace ? 0 : offset;
         params.limit = RECORDS_LIMIT;
 
         const response = yield call(api.getRecords, params);
-        yield put(successLoadRecords(response.data));
+        yield put(successLoadRecords({
+            records: response.data,
+            allUploaded: response.data.length < RECORDS_LIMIT,
+            replace,
+        }));
     } catch (err) {
         yield put(failureLoadRecords(err));
     }
@@ -89,7 +103,7 @@ export function* initPage() {
         call(getPrograms),
     ];
 
-    yield call(getRecords);
+    yield call(getRecords, { payload: { replace: true } });
 }
 
 export function* initData() {
@@ -102,8 +116,10 @@ export function* initData() {
 // Individual exports for testing
 export function* programsData() {
     yield takeLatest(LOAD_PROGRAMS, getPrograms);
-    yield takeEvery(DELETE_PROGRAM, deleteProgram);
+    yield takeEvery(DELETE_RECORD, deleteRecord);
     yield takeLatest(LOAD_RECORDS, getRecords);
+    yield takeEvery(SET_RECORDS_TYPE, getRecords);
+    yield takeEvery(CHANGE_RUBRIC, getRecords);
 }
 
 // All sagas to be loaded
