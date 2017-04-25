@@ -215,4 +215,7 @@ export const deleteRecord = (id) => axios.delete(`${baseUrl}/air/record/${id}`);
 
 // =============================================================================
 
+export const getCategoryStats = (from_date, to_date) => axios.get(`${baseUrl}/statistics`);
+
+
 export default axios;

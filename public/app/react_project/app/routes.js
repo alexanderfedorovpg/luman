@@ -61,7 +61,7 @@ export default function createRoutes(store) {
         {
             path: '/feed',
             name: 'feed',
-            
+
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/Help/reducer'),
@@ -99,12 +99,16 @@ export default function createRoutes(store) {
             name: 'stats',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
+                    import('containers/StatsPage/reducer'),
+                    import('containers/StatsPage/sagas'),
                     import('containers/StatsPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([component]) => {
+                importModules.then(([reducer, sagas, component]) => {
+                    injectReducer('statsPage', reducer.default);
+                    injectSagas(sagas.default);
                     renderRoute(component);
                 });
 
