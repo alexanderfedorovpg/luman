@@ -1,7 +1,7 @@
 .info-noize {
 
     &__wrapper {
-       margin-top: rem(15);
+       margin-top: rem(17);
 
         &_about {
             margin-top: rem(18);
@@ -21,7 +21,7 @@
         border-bottom: none !important;
 
         &:not(:first-child) {
-            margin-top: rem(10);
+            margin-top: rem(11);
         }
 
         &:first-child {
@@ -29,7 +29,8 @@
             .mini-news__title {
                 font-family: $stemBold;
                 font-size: rem(21);
-                line-height: rem(26);
+                line-height: rem(21);
+                letter-spacing: rem(-0.2);
             }
         }
 

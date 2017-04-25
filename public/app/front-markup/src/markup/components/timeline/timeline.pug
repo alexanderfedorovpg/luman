@@ -1,11 +1,11 @@
 mixin timeline(data)
     +b.timeline()&attributes(attributes)
         each item in data.items
-            +e.item
+            +e.item(class= item.class)
                 +e.date
                     +e.TIME.time= item.time
                 +e.cnt
-                    +e.SPAN.title(class= item.class)= item.text
+                    +e.P.title= item.text
                     if item.img
                         +e.img
                             img(src= item.img, alt="")

@@ -133,12 +133,10 @@
         + label:before {
           content: '';
           background-image: url('%=static=%general/round-unchecked.svg');
-          background-size: cover;
         }
         &:checked + label:before {
           content: '';
           background-image: url('%=static=%general/round-checked.svg');
-          background-size: cover;
         }
       }
 
