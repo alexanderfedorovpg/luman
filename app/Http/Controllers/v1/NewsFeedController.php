@@ -7,6 +7,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Transformers\v1\NewsFeedTransformer;
+use App\Jobs\NewsFeedParserJob;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\NewsFeed;
@@ -218,4 +219,9 @@ class NewsFeedController extends CmsController
         }
     }
 
+    public function reload() {
+        $job = (new NewsFeedParserJob())->onQueue('parser');
+        dispatch($job);
+        return $this->respondAccepted('Задание на обновление информации из новостных источников принято!');
+    }
 }

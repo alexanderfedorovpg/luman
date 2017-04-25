@@ -24,6 +24,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
         return response()->json([] ,200 , $headers);
     });
     $group->get('/newsfeed', 'NewsFeedController@getNewsFeed');
+    $group->get('/newsfeed/reload', 'NewsFeedController@reload');
     $group->post('/newsfeed', 'NewsFeedController@update');
     $group->post('/newsfeed/work', 'NewsFeedController@create');
     $group->get('/newslist','NewsListController@get');
@@ -117,7 +118,10 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->put('/air/record/{id}','AirRecordController@update');
     $group->delete('/air/record/{id}','AirRecordController@destroy');
 
+
+
 });
+
 
 
 $app->get('/{any:.*}',function (){
