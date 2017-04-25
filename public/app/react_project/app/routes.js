@@ -153,6 +153,23 @@ export default function createRoutes(store) {
             },
         },
         {
+            path: '/ready',
+            name: 'ready',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/ReadyPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([component]) => {
+                    renderRoute(component)
+                });
+
+                importModules.catch(errorLoading);
+            },
+        },
+        {
             path: '/editor',
             name: 'editor',
             onEnter(nextState, replace, callback) {
