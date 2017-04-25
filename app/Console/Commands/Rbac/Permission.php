@@ -277,4 +277,22 @@ class Permission extends Command
             ],
         ];
     }
+
+    public function permissHomepage()
+    {
+        return [
+            [
+                'name' => 'v1.homepage-index',
+                'description' => 'Данные для формирование домашней страницы'
+            ],
+            [
+                'name' => 'v1.homepage-update',
+                'description' => 'Редактирование домашней страницы'
+            ],
+            [
+                'name' => 'v1.homepage-getNewsCategories',
+                'description' => 'Список категория новостей домашней страницы '
+            ],
+        ];
+    }
 }

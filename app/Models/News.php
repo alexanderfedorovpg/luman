@@ -35,6 +35,11 @@ class News extends Model
         'theses',
     ];
 
+    public static $rules = [
+        'id' => 'integer|exists:news,id',
+
+    ];
+
     /**
      * Возвращает связь с комментарими
      *
@@ -151,10 +156,9 @@ class News extends Model
     }
 
     /**
-     * Получаем текущую новость
+     *
      *
      * @param $query
-     * @param $viewMode
      * @return mixed
      */
     public function scopeModerationMode($query)

@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { injectGlobal } from 'styled-components'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import randomString from 'random-string'
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 
 import Item from './Item'
 import Detail from './Detail'
 import Modal from 'components/Modal'
 import Paginator from 'components/Paginator'
-
 
 const animationClassName = randomString()
 
@@ -23,8 +24,8 @@ injectGlobal`
         transition: all .5s;
     }
 `
-
-class News extends Component {
+@DragDropContext(HTML5Backend)
+export default class News extends Component {
 
     constructor(props) {
         super(props);
@@ -96,4 +97,4 @@ News.PropTypes = {
     data: React.PropTypes.array.isRequired
 }
 
-export default News
+// export default News
