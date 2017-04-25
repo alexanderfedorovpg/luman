@@ -1,3 +1,129 @@
 .programm {
 
+    .breadcrumb-named {
+        margin-top: rem(15);
+        // margin-right: rem(34);
+        // margin-left: rem(80);
+        &__sort-by {
+            margin-top: rem(3);
+            margin-right: rem(10);
+
+            font-size: rem(15);
+            letter-spacing: rem(-0.4);
+        }
+        &__sort {
+            margin-top: 0;
+        }
+    }
+
+    .breadcrumb__link {
+        letter-spacing: rem(-0.7);
+    }
+
+
+    .dateline {
+        margin-top: rem(24);
+    }
+
+    &__list {
+        padding-bottom: rem(18);
+        
+        padding-left: rem(21);
+        margin-top: rem(47);
+        margin-left: rem(61);
+
+        border-left: 1px solid #e9ebed;
+    }
+
+    &__list-item {
+        border-bottom: 1px solid #e9ebed;
+        &:first-child {
+            margin-top: rem(-5);
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+        &__link {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: rem(12);
+            padding-bottom: rem(14);
+
+            cursor: pointer;
+            &:hover {
+                .programm__list-item__title {
+                    color: $blue;
+                }
+            }
+        }
+
+        &__time {
+            width: rem(71);
+            padding-right: rem(5);
+            span {
+                font-family: $stemReg;
+                font-size: rem(15);
+                color: $enter;
+                letter-spacing: rem(-0.35);
+            }
+        }
+
+        &__title {
+            font-family: $stemBold;
+            font-size: rem(15);
+            color: $enter;
+            letter-spacing: rem(-0.35);
+        }
+
+        &__content {
+            display: none;
+            padding-right: rem(35);
+            padding-bottom: rem(14);
+            padding-left: rem(71);
+            p {
+                font-family: $stemReg;
+                font-size: rem(14);
+                line-height: rem(24);
+                color: $enter;
+                letter-spacing: rem(-0.35);
+            }
+        }
+
+        &.is-live {
+            position: relative;
+            .programm__list-item__time span {
+                padding-bottom: rem(3);
+
+                border-bottom: rem(4) solid #a03761;
+            }
+            .programm__list-item__link {
+                &:before {
+                    content: attr(data-live);
+
+                    position: absolute;
+                    top: 50%;
+                    left: rem(-83);
+
+                    font-family: $stemBold;
+                    font-size: rem(12);
+                    color: $purple;
+
+                    transform: translateY(-50%);
+                }
+            }
+        }
+
+    }
+
+    .banner__where-view {
+        width: rem(916);
+        padding-top: rem(29);
+        margin-top: rem(66);
+    }
+
+}
+
+.general-news__subscribe--programm {
+    margin-top: rem(34);
 }

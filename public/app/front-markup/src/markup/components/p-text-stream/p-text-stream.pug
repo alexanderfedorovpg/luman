@@ -8,6 +8,7 @@ include ../top-button/top-button
 include ../timeline/timeline
 include ../icon/icon
 include ../more-goods/more-goods
+include ../dateline/dateline
 
 mixin p-text-stream(data)
 
@@ -43,10 +44,9 @@ mixin p-text-stream(data)
 
                     +e.content
 
-                        +e.text-stream__head
-
-                            +e.sort
-                                +e.sort-by Сначала
+                        .breadcrumb-named
+                            .breadcrumb-named__sort
+                                .breadcrumb-named__sort-by Сначала
                                 +breadcrumb(breadcrumb.textStream)
 
                             +e.new-content

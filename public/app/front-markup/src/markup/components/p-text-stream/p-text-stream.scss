@@ -29,31 +29,9 @@
         padding-left: 0;
     }
 
-    .breadcrumb {
-        margin-top: rem(3);
-        margin-left: rem(13);
-        &:after {
-            display: none;
-        }
-        &__ul {
-            justify-content: flex-start;
-            margin-top: 0;
-        }
-        &__item {
-            margin-right: rem(19);
-            &:before {
-                bottom: rem(0);
-            }
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-        &__link {
-            line-height: 1;
-        }
-        &__item_active a {
-            color: $enter;
-        }
+    .breadcrumb-named {
+        margin-right: rem(34);
+        margin-left: rem(80);
     }
 
     .more-goods {

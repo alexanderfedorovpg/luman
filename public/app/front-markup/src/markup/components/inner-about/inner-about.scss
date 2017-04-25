@@ -111,29 +111,6 @@
         text-decoration: none;
     }
 
-    &__sort {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-top: rem(14);
-
-        &-by {
-            font-family: $stemReg;
-            font-size: rem(16);
-            color: $enter;
-        }
-    }
-
-    &__text-stream__head {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        margin-right: rem(34);
-        margin-left: rem(80);
-
-        border-bottom: 1px solid #cccccc;
-    }
-
     &__new-content {
         display: flex;
         align-items: center;
