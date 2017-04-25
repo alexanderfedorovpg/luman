@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
 import { loadRubrics } from 'containers/App/actions';
 import Records from 'components/Records';
+import ContentModal from 'components/Modal/ContentModal';
 import Waypoint from 'react-waypoint';
 
 import makeSelectProgramsPage, {
@@ -27,20 +28,43 @@ import {
 import Header from './Header';
 import { Wrapper, Content } from './style';
 import Rubrics from './Rubrics';
+import RecordForm from './RecordForm';
 
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    static modals = {
+        record: 'record',
+    }
+
     constructor(props) {
         super(props);
 
-        this.uploadRecords = this.uploadRecords.bind(this);
+        this.loadMoreRecords = this.loadMoreRecords.bind(this);
+        this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+
+        this.state = {
+            openedModal: null,
+        };
     }
 
     componentDidMount() {
         this.props.openPage();
     }
 
-    uploadRecords() {
+    loadMoreRecords() {
         this.props.loadRecords(false);
+    }
+
+    openModal(name) {
+        this.setState({
+            openedModal: name,
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            openedModal: null,
+        });
     }
 
     render() {
@@ -53,6 +77,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                 <Header
                     moved={menuOpen}
                     type={recordsType}
+                    onUpload={() => this.openModal(ProgramsPage.modals.record)}
                     setRecordsType={this.props.setRecordsType}
                 />
                 <Content>
@@ -78,10 +103,20 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                         <Waypoint
                             bottomOffset="-50%"
                             scrollableAncestor={window}
-                            onEnter={this.uploadRecords}
+                            onEnter={this.loadMoreRecords}
                         />
                     }
                 </Content>
+                <ContentModal
+                    title="Загрузка программы"
+                    contentLabel="Добавить или отредактировать выпуск"
+                    onRequestClose={this.closeModal}
+                    isOpen={this.state.openedModal === ProgramsPage.modals.record}
+                >
+                    <RecordForm
+                        onCancel={this.closeModal}
+                    />
+                </ContentModal>
             </Wrapper>
         );
     }
