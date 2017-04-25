@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { FormattedTime, FormattedRelative } from 'react-intl'
 
 import H2 from 'components/H2'
 import Button from 'components/Button'
@@ -17,6 +18,13 @@ const Root = styled.div`
 
     height: 100%;
     overflow-y: auto;
+`
+
+const Header = styled.header`
+    font-family: ${font.opensans};
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
 `
 
 const Title = styled.h1`
@@ -111,9 +119,22 @@ const CustomButton = styled(Button)`
 `
 
 function Preview({ data, onClose, delegate, done }) {
+    const createDate = data.created_at
 
     return (
         <Root>
+            <Header>
+                {createDate
+                    ? (
+                        <time>
+                            <FormattedRelative value={createDate} units="day" />
+                            {', '}
+                            <FormattedTime value={createDate} />
+                        </time>
+                    )
+                    : null
+                }
+            </Header>
             <Title>
                 {data.title}
             </Title>

@@ -94,11 +94,16 @@ function Detail({ data, onClose, toWork, ignore }) {
         <Root>
             <ScrollWrapper>
                 <Header>
-                    <time dateTime={date}>
-                        <FormattedRelative value={date} units="day" />
-                        {', '}
-                        <FormattedTime value={date} />
-                    </time>
+                    {date
+                        ? (
+                            <time dateTime={date}>
+                                <FormattedRelative value={date} units="day" />
+                                {', '}
+                                <FormattedTime value={date} />
+                            </time>
+                        )
+                        : null
+                    }
                     <Source href="#">Источник: {data.source_feed}</Source>
                 </Header>
                 <Title>{data.header}</Title>

@@ -1,7 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+import { css } from 'styled-components'
 
-export default styled.p`
+export const titleWrapper = props => css`
     margin: 0;
 
     line-height: 1.35;
