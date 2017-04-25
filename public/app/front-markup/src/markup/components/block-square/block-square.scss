@@ -18,6 +18,12 @@
         background-color: rgba(0, 0, 0, .5);
     }
 
+    &:hover {
+        .block-square__title {
+            color: $blue;
+        }
+    }
+
     &__img {
         width: inherit;
         height: inherit;
@@ -45,11 +51,10 @@
     }
 
     &__title {
-        margin-bottom: rem(3);
+        margin-bottom: rem(5);
 
         font: #{rem(18)}/#{rem(21)} $stemBold;
         color: $white;
-        letter-spacing: rem(-.9);
         letter-spacing: rem(-.9);
     }
 
@@ -87,5 +92,21 @@
         font-size: rem(12);
         line-height: rem(18);
         color: $white;
+    }
+
+    &_war {
+        height: rem(223) !important;
+        overflow: hidden;
+
+        .block-square__title {
+            margin-bottom: rem(42) !important;
+
+            font-size: rem(16);
+            line-height: rem(21);
+        }
+
+        .block-square__info {
+            bottom: rem(16);
+        }
     }
 }

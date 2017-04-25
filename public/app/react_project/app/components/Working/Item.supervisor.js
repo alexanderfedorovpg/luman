@@ -150,7 +150,7 @@ const NavItem = styled.a`${navItemStyles}`
 const CustomLink = styled(Link)`${navItemStyles}`
 const CustomPush = styled(PushNotification)`${navItemStyles}`
 
-function Item({ data, newItem }) {
+function Item({ data, newItem, clearTask, postMessage }) {
     let editor = data.editor
         ? data.editor
         : null
@@ -192,28 +192,35 @@ function Item({ data, newItem }) {
                     </UserWrapper>
                     <Time is-out={!!data.timeClass}>
                         {data.time_edit
-                            ? `${data.time_edit.hh} ч ${data.time_edit.mm} мин`
+                            ? formatTimeHelper(data.time_edit)
                             : null
                         }
                     </Time>
                     <Status active={data.is_online} />
-                    <Nav className={navClassName}>
-                        {editor
-                            ? <CustomPush user={editor}>
-                                Пуш-уведомление
-                            </CustomPush>
-                            : null}
-                        <CustomLink to={`/editor/${data.id}`}>
-                            {editor
-                                ? 'Сменить редактора'
-                                : 'Назначить редактора'
-                            }
-                        </CustomLink>
-                        {editor
-                            ? <NavItem href="#">Снять задание</NavItem>
-                            : null
-                        }
-                    </Nav>
+                    {editor
+                        ? (
+                            <Nav className={navClassName}>
+                                <CustomPush
+                                    user={editor}
+                                    send={postMessage.bind(this, data.id)}>
+                                    Пуш-уведомление
+                                </CustomPush>
+                                <CustomLink to={`/editor/${data.id}`}>
+                                    Сменить редактора
+                                </CustomLink>
+                                <NavItem onClick={()=>clearTask(data.id)}>
+                                    Снять задание
+                                </NavItem>
+                            </Nav>
+                        )
+                        : (
+                            <Nav className={navClassName}>
+                                <CustomLink to={`/editor/${data.id}`}>
+                                    Назначить редактора
+                                </CustomLink>
+                            </Nav>
+                        )
+                    }
                 </Right>
             </Wrapper>
         </Root>
@@ -221,3 +228,26 @@ function Item({ data, newItem }) {
 }
 
 export default Item
+
+function formatTimeHelper(str) {
+    let [day, hour, min, sec] = str.split(':')
+    const nbsp = '\u00a0'
+
+    if (parseInt(day, 10)) {
+        return `${day}${nbsp}д ${hour}${nbsp}ч ${min}${nbsp}мин ${sec}${nbsp}сек`
+    }
+
+    if (parseInt(hour, 10)) {
+        return `${hour}${nbsp}ч ${min}${nbsp}мин ${sec}${nbsp}сек`
+    }
+
+    if (parseInt(min, 10)) {
+        return `${min}${nbsp}мин ${sec}${nbsp}сек`
+    }
+
+    if (parseInt(sec, 10)) {
+        return `${sec}${nbsp}сек`
+    }
+
+    return ``
+}

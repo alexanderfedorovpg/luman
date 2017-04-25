@@ -44,3 +44,13 @@
         background-color: $white;
     }
 }
+
+.more-goods--left {
+    text-align: left;
+    .more-goods__link {
+        position: relative;
+        top: rem(3);
+
+        margin-left: rem(11);
+    }
+}

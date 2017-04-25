@@ -11,9 +11,9 @@
         margin-left: rem(-83);
     }
     h2 {
-        padding-bottom: 10px;
-        padding-left: 2px;
-        margin-top: rem(28);
+        padding-bottom: 0;
+        padding-left: rem(2);
+        margin-top: rem(19);
         margin-bottom: rem(15);
         margin-left: rem(-63);
 
@@ -55,14 +55,14 @@
     }
 
     &__distribution {
-        margin-top: rem(47);
+        margin-top: rem(38);
         .text-cols {
             margin-top: rem(20);
         }
     }
     &__hotel {
         padding-right: rem(5);
-        margin-top: rem(50);
+        margin-top: rem(41);
         h4 {
             margin-top: rem(19);
 
@@ -83,7 +83,7 @@
     }
 
     &__region {
-        margin-top: rem(59);
+        margin-top: rem(50);
         h2 {
             margin-bottom: rem(16);
         }

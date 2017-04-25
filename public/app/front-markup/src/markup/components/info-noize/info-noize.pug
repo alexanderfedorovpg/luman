@@ -6,10 +6,10 @@ mixin info-noize(data)
     +b.info-noize()&attributes(attributes)
         block
         if (params.section_title)
-            +e.P.title.section-title #{params.section_title}
+            +e.A.title.section-title(href=jv0) #{params.section_title}
         //- если война
         if (params.view)
-            +block-square(info_noize.idx)(class="info-noize__block-square_war")
+            +block-square(info_noize.idx)(class="info-noize__block-square_war block-square_war")
         +e.wrapper
             if (params.list)
                 each item in params.list

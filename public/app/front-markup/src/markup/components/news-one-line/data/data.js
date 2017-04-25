@@ -9,26 +9,33 @@ var data = {
             time_keeping: ''
         },
         news_two: {
-            title: 'Как следователи ФБР нашли доказательства вины России',
+            title: 'КНДР пообещала «жестко ответить» на провокации США',
             img: '%=static=%img/content/per-day/per-two.png',
-            time_add: 'час назад',
+            time_add: '40 минут назад',
             alt: '',
             time_keeping: '03:40'
         },
         news_three: {
-            title: 'Нацгвардию Украины боятся взрослые российские мужчины',
+            title: 'Gallup: рейтинг Трампа упал до минимума с инаугурации',
             img: '%=static=%img/content/per-day/per-two.png',
             time_add: 'час назад',
             alt: '',
             time_keeping: '03:40'
         },
         news_four: {
-            title: 'Нацгвардию Украины боятся взрослые российские мужчины',
+            title: 'Кинопремия MTV отказалась от разделения номинаций на мужские и женские',
             img: '%=static=%img/content/per-day/per-three.png',
-            time_add: 'час назад',
+            time_add: '2 часа назад',
             alt: '',
             //time_keeping: '03:40'
         },
+        news_five: {
+            title: 'Мария Гайдар стала советником Порошенко',
+            img: '%=static=%img/content/per-day/per-three.png',
+            time_add: '2 часа назад',
+            alt: '',
+            time_keeping: '03:40'
+        }
     },
     news_one_line_two: {
 

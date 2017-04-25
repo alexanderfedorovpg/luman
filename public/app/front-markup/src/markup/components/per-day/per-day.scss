@@ -31,21 +31,8 @@
 
     &__block-square {
 
-        &_war {
-            height: rem(223) !important;
-            overflow: hidden;
-
-            .block-square__title {
-                margin-bottom: rem(42) !important;
-
-                font-size: rem(16);
-                line-height: rem(21);
-
-            }
-        }
-
         .block-square__info {
-            bottom: rem(17);
+            bottom: rem(19);
         }
 
         .block-square__title {
@@ -81,64 +68,6 @@
 
     &__block-rectangle {
 
-        &_war {
-            height: rem(358) !important;
-            overflow: hidden;
-
-            .block-rectangle__info {
-                bottom: rem(19);
-            }
-
-            .block-rectangle__live-tag {
-                display: block;
-            }
-
-            .block-rectangle__title {
-                position: relative;
-
-                display: inline-block;
-
-                font: #{rem(12)}/#{rem(24)} $stemReg;
-                text-transform: uppercase;
-
-                &::before {
-                    content: '';
-
-                    position: absolute;
-                    z-index: -1;
-                    top: 0;
-                    left: rem(-25);
-
-                    display: block;
-                    width: calc(100% + #{rem(48)});
-                    height: 100%;
-
-                    background-color: $war;
-                    transform: skew(-30deg);
-                }
-            }
-
-            .block-rectangle__title-live {
-                margin-bottom: rem(20);
-            }
-
-            .block-rectangle__video-ico {
-                display: inline-block;
-
-                vertical-align: middle;
-            }
-
-            .block-rectangle__text {
-                position: relative;
-
-                display: inline-block;
-                margin-left: rem(9);
-
-                font: #{rem(24)}/#{rem(26)} $stemBold;
-                color: $white;
-                vertical-align: middle;
-            }
-        }
     }
 
 }

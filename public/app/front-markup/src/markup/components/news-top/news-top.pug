@@ -32,7 +32,7 @@ mixin news-top(data)
 
                 +plots-week(plots_week.news)(class="news-top__plots-week")
 
-                +per-day(per_day.news)(class="news-top__per-day")
+                +per-day(per_day.news_top)(class="news-top__per-day")
 
             +e.right.right-col
                 //- ключевое видео
@@ -54,4 +54,4 @@ mixin news-top(data)
                 //- подписка
                 +subscribe(class="news-top__subscribe")
                 //- новости под подпиской
-                +more-news(more_news)(class="news-top__more-news")
+                +more-news(more_news.two)(class="news-top__more-news")

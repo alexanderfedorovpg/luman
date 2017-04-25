@@ -5,9 +5,11 @@
     }
 
     &__title {
+        display: block;
         padding-left: rem(28);
 
         line-height: rem(34);
+        text-decoration: none;
     }
 
     &__mini-news {
@@ -49,7 +51,12 @@
 
             .mini-news__title {
                 font-size: rem(18);
+                line-height: rem(22);
             }
+        }
+
+        &_right-war {
+
         }
     }
 
@@ -61,6 +68,8 @@
             overflow: hidden;
 
             .block-square__title {
+                margin-bottom: rem(36) !important;
+
                 font-size: rem(16);
                 line-height: rem(21);
             }
@@ -71,7 +80,7 @@
         }
 
         .block-square__title {
-            margin-bottom: rem(42);
+            margin-bottom: rem(16);
         }
 
         .block-square__title-war {

@@ -71,6 +71,31 @@ var data = {per_day: {
             alt: '',
             time_keeping: '03:40'
         }
+    },
+    news_top: {
+        one: {
+            title: 'Киев в программе сотрудничества с НАТО назвал стратегическую задачу страны',
+            img: '%=static=%img/content/per-day/per-two.png',
+            time_add: 'Час назад',
+            alt: '',
+            //time_update: 'Обновлено 15 минут назад',
+            time_keeping: ''
+        },
+        two: {
+            title: 'В Хомсе при взрыве в автобусе погиб один человек, 25 ранены',
+            img: '%=static=%img/content/per-day/per-two.png',
+            time_add: 'Час назад',
+            alt: '',
+            //time_update: 'Обновлено 15 минут назад',
+            time_keeping: '03:40'
+        },
+        three: {
+            title: 'В метро Петербурга найдена граната',
+            img: '%=static=%img/content/per-day/per-two.png',
+            time_add: 'Час назад',
+            alt: '',
+            //time_update: 'Обновлено 15 минут назад',
+            time_keeping: '03:40'
+        }
     }
-
 }};

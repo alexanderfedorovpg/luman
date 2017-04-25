@@ -13,6 +13,7 @@ import {
     rejectArticle,
     acceptArticle
 } from './actions'
+import { postMessage } from 'containers/App/actions'
 
 import {
     selectNewsList,
@@ -55,10 +56,10 @@ class NewslistPage extends Component {
                 return news.filter(item => item.editor_id === user.id)
 
             case 'FREE':
-                return news.filter(item => item.editor_id === 0)
+                return news.filter(item => !item.editor_id)
 
             case 'ASSIGNED':
-                return news.filter(item => item.editor_id !== 0)
+                return news.filter(item => !!item.editor_id)
 
             default:
                 return news
@@ -72,6 +73,7 @@ class NewslistPage extends Component {
             setFilter,
             rejectArticle,
             acceptArticle,
+            postMessage,
             oldNews,
             user
         } = this.props
@@ -95,7 +97,10 @@ class NewslistPage extends Component {
                     <Header {...headerProps} />
 
                     <Wrap>
-                        <ContentSupervisor {...contentProps} />
+                        <ContentSupervisor
+                            {...contentProps}
+                            clearTask={rejectArticle}
+                            postMessage={postMessage} />
                     </Wrap>
                 </div>
             )
@@ -151,6 +156,9 @@ const mapDispatchToProps = dispatch => ({
     },
     acceptArticle(id) {
         dispatch(acceptArticle(id))
+    },
+    postMessage(room, message) {
+        dispatch(postMessage(room, message))
     }
 })
 

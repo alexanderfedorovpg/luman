@@ -1,14 +1,12 @@
 mixin social-links(data)
     +b.social-links()&attributes(attributes)
 
-        if data == 'share'
-            +e.A(href=jv0).ico-link
-                +e.IMG(src='%=static=%img/general/social/share.png' alt='').ico-image
+        +e.A(href=jv0).ico-link.social-links__share
+            +e.IMG(src='%=static=%img/general/social/share.png' alt='').ico-image
 
-        else
-            +e.list
-                each item in data.items
-                    +e.A(href=jv0).ico-link
-                        +e.IMG(src=item.icon alt="").ico-image
+        +e.list
+            each item in data.items
+                +e.A(href=jv0).ico-link
+                    +e.IMG(src=item.icon alt="").ico-image
 
         block

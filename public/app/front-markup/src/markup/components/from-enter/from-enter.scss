@@ -3,7 +3,7 @@
 
     &__info {
         width: rem(275);
-        padding-top: rem(15);
+        padding-top: rem(12);
         padding-left: rem(17);
     }
 
@@ -48,7 +48,7 @@
 
     &__time-keeping {
         position: absolute;
-        bottom: rem(15);
+        bottom: rem(11);
         left: rem(21);
     }
 
@@ -57,10 +57,12 @@
         height: rem(30);
     }
 
-    &__category {
+    &__category,
+    &__category-link {
         font-size: rem(12);
         line-height: rem(42);
         color: $blue;
+        text-decoration: none;
         text-transform: uppercase;
     }
 

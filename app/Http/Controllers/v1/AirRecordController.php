@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Http\Transformers\v1\AirRecordTransformer;
 use App\Models\AirRecord;
-use App\Models\TvProgram;
+use App\Http\Traits\AirRecordFilter;
 
 /**
  * Контроллер записей эфиров
@@ -15,6 +15,8 @@ use App\Models\TvProgram;
  */
 class AirRecordController extends CmsController
 {
+
+    use AirRecordFilter;
 
     /**
      * @var AirRecordTransformer
@@ -36,9 +38,9 @@ class AirRecordController extends CmsController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $records = AirRecord::all();
+        $records = $this->filter($request, AirRecord::query())->get();
 
         return $this->respond(
             $this->recordTransformer->transformCollection($records->toArray())
@@ -76,7 +78,7 @@ class AirRecordController extends CmsController
         try {
             $this->validate($request, AirRecord::$rules);
         } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+            return $this->respondFail422x($e->response->original);
         }
 
         $record = new AirRecord($request->all());
@@ -100,13 +102,15 @@ class AirRecordController extends CmsController
             $record = AirRecord::findOrFail($id);
             $this->validate($request, AirRecord::$rules);
 
+            return $this->respondCreated([
+                'success' => $record->update($request->all())
+            ]);
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('Air record not found');
-        } catch (\Exception $e) {
-            return $this->respondFail422x($e->getMessage());
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
         }
 
-        return $this->respondCreated(['success' => $record->update($request->all())]);
     }
 
     /**

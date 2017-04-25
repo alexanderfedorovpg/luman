@@ -146,6 +146,16 @@ export const publishArticle = data => {
     })
 }
 
+export const toFixArticle = id => {
+    let formData = xwwwfurlenc({ id })
+
+    return axios.post(`${baseUrl}/newseditor/tofix`, formData, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
+
 
 // TODO: найти нормальный npm пакет для конвертации
 //       json -> x-www-form-urlencoded
@@ -195,6 +205,14 @@ export const uploadFile = (file) => {
     });
 };
 
+// =============================================================================
+// RECORDS AND PROGRAMS API
+// =============================================================================
+
 export const getPrograms = () => axios.get(`${baseUrl}/tv-program`);
+export const getRecords = (params) => axios.get(`${baseUrl}/air/record`, { params });
+export const deleteRecord = (id) => axios.delete(`${baseUrl}/air/record/${id}`);
+
+// =============================================================================
 
 export default axios;

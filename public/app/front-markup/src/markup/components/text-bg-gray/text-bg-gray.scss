@@ -7,6 +7,19 @@
 
     background-color: $bg-text;
 
+    &:before {
+        content: ' ';
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: rem(-900);
+
+        width: rem(900);
+
+        background: $bg-text;
+    }
+
     &__block-text {
         position: absolute;
         bottom: rem(-72);
@@ -28,6 +41,11 @@
     &__text {
         font: #{rem(18)}/ #{rem(24)} $stemBold;
 
+        color: $white;
+    }
+
+    &__text-lite {
+        font: #{rem(15)}/ #{rem(24)} $stemBold;
         color: $white;
     }
 
@@ -61,6 +79,9 @@
         background: url('%=static=%general/geometry/ice-cube.png');
         background-repeat: no-repeat;
         background-size: cover;
+        &:hover {
+            color: $white;
+        }
     }
 
 }
@@ -72,6 +93,7 @@
     justify-content: flex-end;
     height: rem(573);
     margin-top: rem(7);
+    margin-bottom: 0;
 
     &.text-bg-gray .text-bg-gray {
 
@@ -81,6 +103,7 @@
             bottom: auto;
 
             width: rem(317);
+            min-height: rem(220);
             padding: rem(23) rem(29) rem(33) rem(24);
 
             text-align: left;
@@ -180,7 +203,9 @@
 
 .text-bg-gray--primary {
     height: auto;
+    min-height: unset;
     padding-top: rem(26);
     padding-bottom: rem(68);
     padding-left: rem(195);
+    margin-bottom: rem(30);
 }

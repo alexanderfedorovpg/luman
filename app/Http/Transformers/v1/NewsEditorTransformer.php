@@ -34,6 +34,11 @@ class NewsEditorTransformer extends Transformer
         $transform['image_preview'] = $imagePreview['url'];
         $transform['image_preview_id'] = $imagePreview['id'];
 
+        $datetime_now = new \DateTime($news['is_publish']?$news['publish_date']:"now");
+        $time_edit = new \DateTime($news['created_at']);
+        $interval = $time_edit->diff($datetime_now);
+        $transform['time_edit']=$interval->format('%D:%H:%I:%S');
+
         unset($transform['rubrics_id']);
         
         return $transform;
@@ -43,6 +48,12 @@ class NewsEditorTransformer extends Transformer
     {
         $transform = $this->transform($news);
         $transform['editorComments'] = $this->transformEditorComments($news['id']);
+
+        $datetime_now = new \DateTime($news['is_publish']?$news['publish_date']:"now");
+        $time_edit = new \DateTime($news['created_at']);
+        $interval = $time_edit->diff($datetime_now);
+        $transform['time_edit']=$interval->format('%D:%H:%I:%S');
+
         unset($transform['lastEditorComment']);
 
         return $transform;

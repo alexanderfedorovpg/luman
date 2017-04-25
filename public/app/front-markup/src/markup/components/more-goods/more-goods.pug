@@ -6,4 +6,7 @@ mixin more-goods(data)
                 icon: 'more',
                 class: 'icon more-goods__icon'
             })
-            +e.SPAN.more-text.more-text Больше новостей
+            if data == 'предыдущие записи'
+                +e.SPAN.more-text.more-text предыдущие записи
+            else
+                +e.SPAN.more-text.more-text Больше новостей

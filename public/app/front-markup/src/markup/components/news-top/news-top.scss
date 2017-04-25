@@ -11,6 +11,10 @@
 
     &__news-one-line {
         margin-top: rem(25);
+
+        .block-square__info {
+            bottom: rem(3) !important;
+        }
     }
 
     &__left {
@@ -19,10 +23,28 @@
 
     &__info-noize {
         margin-top: rem(23);
+
+        .info-noize__wrapper {
+            margin-top: rem(19);
+        }
+
+        .info-noize__mini-news {
+
+            &:first-child {
+
+                .mini-news__title {
+                    line-height: rem(22) !important;
+                }
+            }
+        }
+
+        .mini-news__title {
+            letter-spacing: rem(-.5);
+        }
     }
 
     &__enter-one {
-        margin-top: rem(26);
+        margin-top: rem(30);
     }
 
     &__banner {
@@ -34,23 +56,34 @@
     }
 
     &__per-day {
-        margin-top: rem(35);
+        margin-top: rem(37);
     }
 
     &__banner-preview {
         height: rem(142);
-        margin-top: rem(10);
+        margin-top: rem(14);
     }
 
     &__random-news {
-        margin-top: rem(64);
+        margin-top: rem(57);
     }
 
     &__subscribe {
-        margin-top: rem(46);
+        margin-top: rem(42);
     }
 
     &__more-news {
         margin-top: rem(17);
+
+        .mini-news {
+
+            &:not(:first-child) {
+                margin-top: rem(17);
+
+                .mini-news__title {
+                    line-height: rem(18);
+                }
+            }
+        }
     }
 }

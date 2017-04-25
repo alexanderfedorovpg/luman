@@ -1,5 +1,5 @@
 .inner-default {
-
+    // margin-top: rem(11);
     h1 {
         margin-top: rem(4);
 
@@ -19,11 +19,13 @@
 
     .social-links {
         position: absolute;
-        bottom: rem(-200);
-        left: rem(196);
+        top: 100%;
+        left: rem(180);
+
+        margin-top: rem(-32);
     }
     .social-links--pad {
-        // left: rem(214);
+        left: rem(196);
     }
 
     .inner-about__date {
@@ -34,6 +36,7 @@
 
         color: $gray-date;
     }
+
 
 }
 

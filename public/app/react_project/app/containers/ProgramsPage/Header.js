@@ -17,7 +17,7 @@ import {
 } from 'components/Icon/svg';
 import Button from 'components/Button';
 import { rem } from 'utils/style';
-import { filters } from './constants';
+import { recordsTypes } from './constants';
 
 const Buttons = styled.div`
     margin-left: auto;
@@ -33,13 +33,13 @@ const Search = styled(InputIcon)`
     width: ${rem(465)};
 `;
 
-const Header = ({ filter, setFilter, moved, onUpload, onSave }) => {
-    const active = (filters.find((item) => item.value === filter) || {}).title;
+const Header = ({ type, setRecordsType, moved, onUpload, onSave }) => {
+    const active = (recordsTypes.find((item) => item.value === type) || {}).title;
 
     return (
         <Bot moved={moved}>
             <Left>
-                <Tabs data={filters} onClick={setFilter} active={active} />
+                <Tabs data={recordsTypes} onClick={setRecordsType} active={active} />
                 <Buttons>
                     <StyledBtn md primary onClick={onUpload}>
                         <ArrowDown className="programs-icon" width="12px" height="14px" /> Загрузить
@@ -65,8 +65,8 @@ const Header = ({ filter, setFilter, moved, onUpload, onSave }) => {
 Header.propTypes = {
     onUpload: PropTypes.func,
     onSave: PropTypes.func,
-    filter: PropTypes.string,
-    setFilter: PropTypes.func,
+    type: PropTypes.string,
+    setRecordsType: PropTypes.func,
     moved: PropTypes.bool,
 };
 

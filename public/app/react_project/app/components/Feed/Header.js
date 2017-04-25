@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import {
     Left as HeaderLeft,
     Right as HeaderRight,
-    Link as HeaderLink,
     Bot as HeaderBot
 } from 'components/Header'
 
@@ -13,7 +12,6 @@ import {
     InputIcon
 } from 'components/Form'
 
-import Modal from 'components/Modal'
 import Help from 'containers/Help'
 import Button from 'components/Button'
 
@@ -51,31 +49,11 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            modalOpen: false,
             form: {
 
             }
         }
-
-        this.openModal = this.openModal.bind(this)
-        this.closeModal = this.closeModal.bind(this)
         this.onChangeValue = this.onChangeValue.bind(this)
-    }
-
-    openModal() {
-        if (!this.state.modalOpen) {
-            this.setState({
-                modalOpen: true
-            })
-        }
-    }
-
-    closeModal() {
-        if (this.state.modalOpen) {
-            this.setState({
-                modalOpen: false
-            })
-        }
     }
 
     onChangeValue(prop) {
@@ -121,16 +99,7 @@ class Header extends Component {
                     </form>
                 </HeaderLeft>
                 <HeaderRight>
-                    <HeaderLink onClick={this.openModal}>
-                        <span>?</span>
-                        Справка
-                    </HeaderLink>
-                    <Modal
-                        isOpen={this.state.modalOpen}
-                        contentLabel="Справка"
-                        onRequestClose={this.closeModal}>
-                        <Help onClose={this.closeModal} />
-                    </Modal>
+                    <Help />
                 </HeaderRight>
             </HeaderBot>
         )

@@ -16,7 +16,10 @@
 
             background-color: #f0f1f2;
             .social-links {
-                display: block;
+
+                display: flex;
+                margin-top: 0;
+                
             }
         }
         .social-links {

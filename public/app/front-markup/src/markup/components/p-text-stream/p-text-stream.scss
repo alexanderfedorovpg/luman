@@ -56,4 +56,12 @@
         }
     }
 
+    .more-goods {
+        padding-left: rem(80);
+        margin-top: rem(-11);
+        &__more-text {
+            padding-left: rem(1);
+        }
+    }
+
 }

@@ -8,15 +8,15 @@ import Content from 'components/Editor/Content'
 
 import {
     loadChatMessages,
-    postMessage,
     loadArticle,
     deleteArticle,
     finishArticle,
+    toFixArticle,
     publishArticle,
     delegateArticle
 } from './actions'
 
-import { loadEditors } from 'containers/App/actions'
+import { loadEditors, postMessage } from 'containers/App/actions'
 
 import {
     selectChat,
@@ -77,6 +77,7 @@ class EditorPage extends Component {
             delegateArticle,
             finishArticle,
             publishArticle,
+            toFixArticle,
             params,
             usersMap,
             user
@@ -106,6 +107,7 @@ class EditorPage extends Component {
 
                     <HeaderSupervisor
                         {...headerProps}
+                        ret={toFixArticle.bind(this, article.id)}
                         publish={publishArticle} />
                 </Content>
             )
@@ -183,6 +185,9 @@ const mapDispatchToProps = dispatch => ({
     },
     postMessage(room, message) {
         dispatch(postMessage(room, message))
+    },
+    toFixArticle(id) {
+        dispatch(toFixArticle(id))
     }
 })
 

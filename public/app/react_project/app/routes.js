@@ -221,26 +221,54 @@ export default function createRoutes(store) {
                 },
         },
         {
-      path: '/live',
-      name: 'livePage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/LivePage/reducer'),
-          import('containers/LivePage/sagas'),
-          import('containers/LivePage'),
-        ]);
+            path: '/live',
+            name: 'livePage',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/LivePage/reducer'),
+                    import('containers/LivePage/sagas'),
+                    import('containers/LivePage'),
+                ]);
 
-        const renderRoute = loadModule(cb);
+                const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('livePage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
+                importModules.then(([reducer, sagas, component]) => {
+                    injectReducer('livePage', reducer.default);
+                    injectSagas(sagas.default);
+                    renderRoute(component);
+                });
 
-        importModules.catch(errorLoading);
-      },
-    }, {
+                importModules.catch(errorLoading);
+            },
+        },
+        {
+            path: '/articlesUserStatsPage',
+            name: 'articlesUserStatsPage',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    //import('containers/ArticlesUserStatsPage/reducer'),
+                    //import('containers/LivePage/sagas'),
+                    import('containers/ArticlesUserStatsPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([reducer, sagas, component]) => {
+                    injectReducer('articlesUserStatsPage', reducer.default);
+                    injectSagas(sagas.default);
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
+            childRoutes: [
+                {
+                    path: '/articleUserStatsPage/:id',
+                    name: 'articleUserStatsPage'
+                }
+            ]
+        },
+        {
             path: '*',
             name: 'notfound',
             getComponent(nextState, cb) {
