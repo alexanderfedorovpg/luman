@@ -35,10 +35,11 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/auth/login','AuthController@login');
 
     //Редакторы новостей
+    $group->get('/newseditor/moderated','NewsListEditorController@getModerated');
     $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
     $group->post('/newseditor','NewsListEditorController@create');
-    $group->get('/newseditor/moderated','NewsListEditorController@getModerated');
+
     $group->put('/newseditor/edit','NewsListEditorController@edit');
     $group->delete('/newseditor/{id}','NewsListEditorController@delete');
     $group->post('/newseditor/delegate','NewsListEditorController@delegate');
