@@ -167,7 +167,7 @@ class NewsListEditorController extends CmsController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(Request $request)
+    public function edit(Request $request, $id)
     {
         try {
 
@@ -541,6 +541,37 @@ class NewsListEditorController extends CmsController
                 return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('IN_WORK', $this->user_id, "Error 500 news id=".$id);
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    /*
+     * Опубликовать новость
+     */
+    public function publish(Request $request,$id )
+    {
+        try {
+
+            $this->validate($request, News::$rules);
+
+            $news = News::find($id);
+            $log_moderation = new NewsModerationLogHelper($news);
+
+            if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
+                return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
+            }
+
+
+            $news->is_publish = 1;
+            $news->save();
+//            if ( $log_moderation->setPublish() && $news->save() ) {
+//                $this->log->setLog('DELEGATE', $this->user_id, "Successful, news id=".$id." delegate [".$this->user_id.">".$new_editor_id."]");
+                return $this->respondCreated('publish');
+//            }
+            $this->log->setLog('PUBLISH', $this->user_id, "Error, news id=".$id." don't publish  [".$this->user_id. "]");
+            throw new \Exception('Error, news don\'t publish');
+        } catch (\Exception $e) {
+
             return $this->respondFail500x($e->getMessage());
         }
     }
