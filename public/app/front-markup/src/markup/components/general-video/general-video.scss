@@ -72,7 +72,7 @@
     &__span {
         position: absolute;
         top: calc(50% - #{rem(9)});
-        left: 31px;
+        left: rem(31);
     }
 
     &__ico {
