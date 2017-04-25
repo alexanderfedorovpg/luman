@@ -151,10 +151,9 @@ class News extends Model
     }
 
     /**
-     * Получаем текущую новость
+     *
      *
      * @param $query
-     * @param $viewMode
      * @return mixed
      */
     public function scopeModerationMode($query)

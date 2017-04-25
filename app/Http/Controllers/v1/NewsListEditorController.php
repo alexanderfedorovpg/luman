@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth,
     Illuminate\Database\Eloquent\ModelNotFoundException,
     Illuminate\Validation\ValidationException;
 
-
+define('DEFAULT_VALUE', '50');
 /**
  * Class NewsListController
  * @package App\Http\Controllers\v1\Client
@@ -95,6 +95,52 @@ class NewsListEditorController extends CmsController
          }
 
     }
+
+    public function getModerated(Request $request)
+    {
+
+        try {
+
+            $news = News::ModerationMode();
+
+            $searchString = $request->input('searchString');
+            $orderBy = $request->input('orderBy');
+
+            if ($searchString) {
+                $substrings = explode(',', $searchString);
+                $news->substring($substrings);
+            }
+
+            switch ($orderBy)  {
+                case 'datetime':
+                    $news->orderBy('created_at','asc');
+                    break;
+                case 'top':
+                    $news->orderBy('top','desc');
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
+            $news = $news->paginate(DEFAULT_VALUE);
+
+            $news=$news->toArray();
+            $result=$this->newsEditorTransformer->transformCollection($news['data']);
+            return $this->respond(
+                $result
+            );
+
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound($e->getMessage());
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+
+    }
+
 
     /**
      * Получить новость по ID
