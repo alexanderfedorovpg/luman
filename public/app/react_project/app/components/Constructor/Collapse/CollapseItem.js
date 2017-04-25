@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { DropTarget } from 'react-dnd';
 import Icon from 'components/Icon'
 
 import { font } from 'constants/style';
@@ -50,8 +50,25 @@ const DropdownIcon = styled(Icon)`
     }
 `
 
+const dropTarget = {
+    drop(props) {
+        console.log(props);
+        return {}
+    }
+}
+
+function collect(connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    }
+}
 
 class CollapseItem extends React.Component {
+
+    static propTypes = {
+        isOver: React.PropTypes.bool.isRequired
+    }
 
     constructor(props) {
         super(props);
@@ -80,7 +97,7 @@ class CollapseItem extends React.Component {
     }
 
     render() {
-        return (
+        return this.props.connectDropTarget(
             <Root className={this.state.class}>
                 <Header onClick={this.toggle}>
                     <Title>{this.props.title}</Title>
@@ -97,4 +114,13 @@ class CollapseItem extends React.Component {
 
 }
 
-export default CollapseItem;
+
+
+const DropDecarator = DropTarget('newsItem', dropTarget, function (connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    }
+});
+
+export default DropDecarator(CollapseItem);
