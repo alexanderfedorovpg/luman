@@ -99,8 +99,10 @@ var SimpleCollapse = function () {
         if (!elem.hasClass('is-active')) {
             parentCollapse.find('.is-open').removeClass('is-open').slideUp(400);
             parentCollapse.find('.is-active').removeClass('is-active');
+            elem.parent().removeClass('is-active');
         }
 
+        elem.parent().addClass('is-active');
         elem.next().addClass('is-open').slideDown(400);
         elem.addClass('is-active');
 

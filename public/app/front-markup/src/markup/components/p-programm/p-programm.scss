@@ -114,6 +114,12 @@
             }
         }
 
+        &.is-active {
+            + .programm__list-item {
+                padding-top: rem(10);
+            }
+        }
+
     }
 
     .banner__where-view {

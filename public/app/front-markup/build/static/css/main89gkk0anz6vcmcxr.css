@@ -416,7 +416,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 /* Vars, which are specific for current project */
 /* Styles for UI-elements */
 .icon-play {
-  background-image: url(../img/png-sprite/96dpi/spritemaqqvsypewvtnj18j8aor.png);
+  background-image: url(../img/png-sprite/96dpi/sprite89gkk0anz6vcmcxr.png);
   background-position: 0px 0px;
   width: 40px;
   height: 40px;
@@ -497,7 +497,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 .subtitle-order .dig {
   position: relative;
   margin-right: 0.6875rem;
-  background-image: url(../img/png-sprite/96dpi/spritemaqqvsypewvtnj18j8aor.png);
+  background-image: url(../img/png-sprite/96dpi/sprite89gkk0anz6vcmcxr.png);
   background-position: -44px 0px;
   width: 36px;
   height: 38px;
@@ -1185,7 +1185,7 @@ main {
 }
 
 .top-button__btn {
-  background-image: url(../img/png-sprite/96dpi/spritemaqqvsypewvtnj18j8aor.png);
+  background-image: url(../img/png-sprite/96dpi/sprite89gkk0anz6vcmcxr.png);
   background-position: 0px -44px;
   width: 32px;
   height: 32px;
@@ -2895,7 +2895,7 @@ main {
 }
 
 .blockquote:before {
-  background-image: url(../img/png-sprite/96dpi/spritemaqqvsypewvtnj18j8aor.png);
+  background-image: url(../img/png-sprite/96dpi/sprite89gkk0anz6vcmcxr.png);
   background-position: -36px -44px;
   width: 25px;
   height: 18px;
@@ -3830,6 +3830,10 @@ main {
           transform: translateY(-50%);
 }
 
+.programm__list-item.is-active + .programm__list-item {
+  padding-top: 0.625rem;
+}
+
 .programm .banner__where-view {
   width: 57.25rem;
   padding-top: 1.8125rem;
@@ -3859,6 +3863,8 @@ main {
   margin-bottom: -0.625rem;
   color: #243746;
   cursor: pointer;
+  -webkit-transition: margin 0.8s ease;
+  transition: margin 0.8s ease;
 }
 
 .timeline__item:hover {
