@@ -1,10 +1,10 @@
-import { take, call, put, select, cancel, takeLatest, takeEvery, fork } from 'redux-saga/effects';
+import { take, call, put, push, select, cancel, takeLatest, takeEvery, fork } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {
-    LOAD_FEED,
-    HIDE_FEED_ITEM,
-    FEED_TO_WORK
+    LOAD_NEWSLIST,
+    REJECT_ARTICLE,
+    ACCEPT_ARTICLE
 } from './constants';
 
 import {
@@ -13,69 +13,71 @@ import {
     feedItemHidden,
     feedItemHidingError,
     feedInWork,
-    feedToWorkError
+    feedToWorkError,
+    loadNewslist,
+    newslistLoadingError,
+    newslistLoaded,
+
+    articleRejected,
+    articleRejectionError,
+
+    articleAccepted,
+    articleAcceptionError
 } from './actions';
 
-import { selectFeedParams } from './selectors'
 
 import * as api from 'api'
 
-export function* getFeed({ payload }) {
 
-    const stateParams = yield select(selectFeedParams)
+
+export function* getList() {
 
     try {
-        const feed = yield call(api.getFeed, {
-            ...stateParams,
-            ...payload
-        });
-        yield put(feedLoaded(feed));
+        const data = yield call(api.getNewslist)
+
+        yield put(newslistLoaded(data))
     } catch (err) {
-        yield put(feedLoadingError(err));
+        yield put(newslistLoadingError(err))
     }
 }
 
-export function* feedData() {
-    const watcher = yield takeLatest(LOAD_FEED, getFeed);
-
-    // Suspend execution until location changes
-    yield take(LOCATION_CHANGE);
-    yield cancel(watcher);
-}
-
-export function* hideItem({ payload }) {
+export function* rejectArticle({ payload }) {
 
     try {
-        yield call(api.hideFeedItem, payload);
-        yield put(feedItemHidden(payload));
+        yield call(api.rejectArticle, payload)
 
-        yield fork(getFeed, {})
+        yield put(articleRejected(payload))
+
+        yield fork(getList)
     } catch (err) {
-        yield put(feedItemHidingError(err));
+        yield put(articleRejectionError(err))
     }
 }
 
-export function* hideData() {
-    yield takeLatest(HIDE_FEED_ITEM, hideItem);
-}
-
-export function* feedToWork({ payload }) {
+export function* acceptArticle({ payload }) {
 
     try {
-        yield call(api.feedToWork, payload);
+        yield call(api.acceptArticle, payload)
 
-        yield put(feedInWork());
+        yield put(push(`/editor/${payload}`))
+
+        yield put(articleAccepted(payload))
+
+        yield fork(getList)
     } catch (err) {
-        yield put(feedToWorkError(err));
+        yield put(articleAcceptionError(err))
     }
 }
 
-export function* toWork() {
-    yield takeEvery(FEED_TO_WORK, feedToWork);
+export function* newslistData() {
+    yield takeLatest(LOAD_NEWSLIST, getList)
+
+    yield takeEvery(REJECT_ARTICLE, rejectArticle)
+
+    yield takeEvery(ACCEPT_ARTICLE, acceptArticle)
 }
+
 
 export default [
-    feedData,
-    hideData,
-    toWork
+    newslistData
 ]

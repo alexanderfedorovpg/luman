@@ -65,6 +65,10 @@ const Icon = styled.i`
             `
             : ''
     )}
+
+    ${equalProp('type', 'dropdown-arrow')(css`
+        background-image: url(${icons['dropdown-arrow'].data})
+    `)}
 `;
 
 const Render = (props) => {

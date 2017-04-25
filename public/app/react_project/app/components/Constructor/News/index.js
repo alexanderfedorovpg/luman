@@ -72,34 +72,20 @@ class News extends Component {
     render() {
         let { data, hide, toWork, pagination, loading } = this.props
 
-        let selected = this.getItemById(this.state.selected)
+        // let selected = this.getItemById(this.state.selected)
 
         return (
-            <div style={{ opacity: loading ? .3 : 1}}>
+            <div>
                 <ReactCSSTransitionGroup
                     transitionName={animationClassName}
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}>
-                    {data.toJS().map(value => (
+                    {data.map(value => (
                         <Item
                             key={value.id}
-                            data={value}
-                            hide={hide}
-                            toWork={toWork}
-                            open={this.selectItem} />
+                            data={value}/>
                     ))}
-
                 </ReactCSSTransitionGroup>
-                <Modal
-                    isOpen={this.state.modalOpen}
-                    contentLabel="Новость"
-                    onRequestClose={this.closeModal}>
-                    <Detail
-                        onClose={this.closeModal}
-                        data={selected}
-                        toWork={toWork}
-                        ignore={hide} />
-                </Modal>
                 <Paginator {...pagination} />
             </div>
         )

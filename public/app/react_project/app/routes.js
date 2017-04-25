@@ -20,33 +20,39 @@ export default function createRoutes(store) {
         {
             path: '/constructor',
             name: 'constructor',
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/ConstructorPage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    import('containers/Help/reducer'),
-                    import('containers/Help/sagas'),
-
                     import('containers/ConstructorPage/reducer'),
-                    import('containers/ConstructorPage/sagas'),
                     import('containers/ConstructorPage'),
-                ])
+                ]);
 
-                const renderRoute = loadModule(cb)
+                const renderRoute = loadModule(cb);
 
-                importModules.then(results => {
-                    let [
-                        helpReducer,
-                        helpSagas,
-                        reducer,
-                        sagas,
-                        component
-                    ] = results
-
-                    injectReducer('help', helpReducer.default)
+                importModules.then(([reducer, component]) => {
                     injectReducer('constructorPage', reducer.default)
-                    injectSagas(sagas.default)
-                    injectSagas(helpSagas.default)
 
-                    renderRoute(component);
+                    renderRoute(component)
                 });
 
                 importModules.catch(errorLoading);
@@ -55,6 +61,7 @@ export default function createRoutes(store) {
         {
             path: '/feed',
             name: 'feed',
+            
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/Help/reducer'),
