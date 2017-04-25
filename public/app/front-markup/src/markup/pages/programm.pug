@@ -2,8 +2,11 @@ extends ../layouts/default
 include ../components/p-programm/p-programm
 
 block vars
-    -pageSettings.title = 'Главная';
+    -pageSettings.title = 'Телепрограмма';
+    -pageSettings.headerClass = 'header_margin';
 
 block content
     // Контент здесь
-    +p-programm
+    main
+        .inner-wrapper
+            +p-programm
