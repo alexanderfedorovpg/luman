@@ -1,3 +1,51 @@
+include ../breadcrumb/breadcrumb
+include ../general-video/general-video
+include ../enter-one/enter-one
+include ../subscribe/subscribe
+include ../banner/banner
+include ../dateline/dateline
+
 mixin p-programm(data)
-    +b.programm()&attributes(attributes)
-        block
+    
+    +b.inner-about.inner-wrapper.inner-default
+
+        //- block
+        +e.container.container
+
+            +e.left.left-col.left-col_position_relative
+
+                h1 Телепрограмма
+
+                +b.programm()&attributes(attributes)
+
+                    .breadcrumb-named
+                        .breadcrumb-named__sort
+                            .breadcrumb-named__sort-by Регион:
+                            +breadcrumb(breadcrumb.programm)
+
+                    +dateline(dateline.programm)
+
+                    +e.list.collapse-content.js-collap-wrap
+
+                        each item in programm.list.items
+
+                            +e.list-item(class= item.class)
+                                +e.list-item__link.js-collap-ln(data-live='Сейчас')
+                                    +e.list-item__time
+                                        span= item.time
+                                    +e.list-item__title= item.title
+                                +e.list-item__content.js-collap-content
+                                    p= item.content
+
+
+                    +banner(class="general-news__banner banner__where-view")
+
+
+            +e.right.right-col
+
+                +general-video(general_video.mini_photo)(class="inner-about__general-video")
+
+                +enter-one(from_enter.one)(class="inner-about__enter-one")
+
+                +subscribe(class="general-news__subscribe general-news__subscribe--programm")
+    block

@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import randomString from 'random-string'
+import { Link } from 'react-router'
+import { FormattedTime, FormattedDate, injectIntl } from 'react-intl'
 
 import Rating from 'components/Rating/Item'
-import TitleWrapper from 'components/Working/TitleWrapper'
+import { titleWrapper } from 'components/Working/style'
 import Icon from 'components/Icon'
 import Button from 'components/Button'
 
@@ -48,21 +50,25 @@ const Left = styled.div`
     align-items: flex-start;
     justify-content: flex-end;
     flex-basis: 16.85%;
-
-    border-right: 0;
+    flex-shrink: 0;
+    width: 49.35%;
+    padding-top: 0;
+    padding-right: 20px;
 `
 
-const Time = styled.time`
+const Update = styled.time`
     font-family: ${font.opensans};
     font-size: 12px;
     font-weight: 400;
     text-align: right;
+`
 
+const UpdateDate = styled.span`
     color: #666;
+`
 
-    span {
+const UpdateTime = styled.span`
         color: #999;
-    }
 `
 
 const UserName = styled.div`
@@ -80,9 +86,12 @@ const UserName = styled.div`
 const Right = styled.div`
     display: flex;
     align-items: center;
+    flex-grow: 1;
+    width: 50.75%;
     justify-content: flex-start;
     margin-top: 2px;
     margin-left: 5px;
+    padding-top: 0;
 `
 
 const Content = styled.div`
@@ -118,6 +127,13 @@ const Title = styled.div`
     ${ifProp('new')`
         font-weight: 700;
     `}
+`
+
+const TitleWrapper = styled(({rating, ...rest}) => <Link {...rest} />)`
+    ${titleWrapper}
+
+    color: inherit;
+    text-decoration: none;
 `
 
 const Tags = styled.div`
@@ -170,40 +186,76 @@ const CloseIcon = styled(Icon)`
     display: none;
 `
 
-function Item() {
+function Item({ data, intl, newItem, open, publish }) {
+    let updateDate = data.updated_at
+
+        ? intl.formatDate(
+            data.updated_at,
+            {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }
+        ).replace(/ г.$/, '')
+
+        : null;
 
     return (
         <Root>
             <Wrapper>
                 <Left>
-                    <Time>
-                        15 января 2017, <span>15:18</span>
-                    </Time>
+                    {data.updated_at
+                        ? (
+                            <Update>
+                                <UpdateDate>
+                                    {updateDate}
+                                </UpdateDate>
+                                , <UpdateTime>
+                                    <FormattedTime value={data.updated_at} />
+                                </UpdateTime>
+                            </Update>
+                        )
+                        : null
+                    }
                     <UserName>
-                        Ковалев Максим
+                        {data.editor && data.editor.name}
                     </UserName>
                 </Left>
                 <Right>
                     <Content>
                         <Header>
-                            <CustomRating rating={6} checked={6} />
+                            <CustomRating rating={data.top} checked={data.top} />
                             <Rubric>
-                                Политика
+                                {data.rubrics[0] && data.rubrics[0].name}
                             </Rubric>
                         </Header>
-                        <Title new={true}>
-                            <TitleWrapper rating={6}>
-                                Петагон: США готовы сбить ракеты КНДР при наличии угрозы
+                        <Title new={newItem}>
+                            <TitleWrapper
+                                to={`/editor/${data.id}`}
+                                rating={data.top}>
+
+                                {data.title}
                             </TitleWrapper>
                         </Title>
                         <Tags>
-                            <span>#Внешняя политика</span>
-                            <span>#США</span>
+                            {data.tags
+                                .filter(tag=>tag.trim())
+                                .map(tag => (
+                                    <span key={tag}>#{tag}</span>
+                                ))
+                            }
                         </Tags>
                     </Content>
                     <ButtonContainer className={secretClassName}>
-                        <PreviewButton md primary>Предпросмотр</PreviewButton>
-                        <PublishButton md success>
+                        <PreviewButton
+                            md primary
+                            onClick={()=>open(data)}>
+                            Предпросмотр
+                        </PreviewButton>
+                        <PublishButton
+                            md success
+                            onClick={e=>publish(data.id)}>
+
                             <Icon type="arrow-right" />
                             Опубликовать
                         </PublishButton>
@@ -215,4 +267,4 @@ function Item() {
     )
 }
 
-export default Item
+export default injectIntl(Item)

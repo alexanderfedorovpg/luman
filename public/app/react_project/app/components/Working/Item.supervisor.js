@@ -7,7 +7,7 @@ import Rating from 'components/Rating/Item'
 import User from 'components/User'
 import Status from 'components/Status'
 import PushNotification from 'components/PushNotification'
-import TitleWrapper from './TitleWrapper'
+import { titleWrapper } from './style'
 
 import { padding, font } from 'constants/style'
 import { ifProp } from 'utils/style'
@@ -87,6 +87,10 @@ const Title = styled.div`
     ${ifProp('new')`
         font-weight: 700;
     `}
+`
+
+const TitleWrapper = styled.p`
+    ${titleWrapper}
 `
 
 const Tags = styled.div`

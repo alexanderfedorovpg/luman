@@ -20,7 +20,7 @@ const CustomButton = styled(Button)`
 `
 
 function Paginator({ current, max, goPrev, goNext }) {
-    return current === max
+    return max < 2
         ? null
 
         : <Root>

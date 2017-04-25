@@ -10,12 +10,7 @@ namespace App\Filespot;
  */
 class Configuration
 {
-    /**
-     * Базовый URL API
-     *
-     * @var string
-     */
-    private $apiUrl = 'api.platformcraft.ru';
+
 
     /**
      * Версия API
@@ -51,9 +46,9 @@ class Configuration
      */
     public function __construct()
     {
-        $this->userId = env('FILESPOT_USER_ID');
+        $this->userId = config('cdn.filespot.user_id');
         $this->timestamp = time();
-        $this->userKey = env('FILESPOT_USER_KEY');
+        $this->userKey = config('cdn.filespot.user_key');
     }
 
     /**
@@ -63,7 +58,7 @@ class Configuration
      */
     public function getApiUrl()
     {
-        return "{$this->apiUrl}/{$this->apiVersion}/";
+        return config('cdn.filespot.api_url').'/'. config('cdn.filespot.api_version').'/';
     }
 
     /**

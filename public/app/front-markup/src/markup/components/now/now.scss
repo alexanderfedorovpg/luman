@@ -15,6 +15,9 @@
 
     &__mini-news {
         padding-right: rem(20);
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &__mini-news {

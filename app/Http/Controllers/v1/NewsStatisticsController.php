@@ -28,33 +28,9 @@
 		 *
 		 * @return string
 		 */
-		private function setInterval( $type_interval='today', $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
+		private function setInterval( $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
 
-			$period = 'true';
-			switch ( $type_interval ) {
-				case 'today':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( 'today' ) ) . '"';
-					break;
-				case  'week':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( '-1 week' ) ) . '"';
-					break;
-
-				case 'month':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( '-1 month' ) ) . '"';
-					break;
-
-
-				case 'year':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( '-1 year' ) ) . '"';
-					break;
-
-				case 'custom':
-					$period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
-					break;
-
-                default:
-                    $period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
-			}
+			$period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
 
 			return $period;
 		}
@@ -68,22 +44,20 @@
 
 			try {
 				$this->validate( $request, [
-				    'type_interval'=> 'in:today,week,month,year,custom',
-					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
-					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
+					'start_date' => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'   => 'required|date|date_format:Y-m-d H:i:s',
 				] );
-				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
 				$this->end_date   = $request->input( 'end_date' );
-
-				$period = $this->setInterval( $type_interval );
+				$period           = $this->setInterval();
 
 				$respond = array();
 
 				$results = NewsModerationLog::  select( 'users.id', 'users.name',
 					DB::raw( ' AVG(TIMESTAMPDIFF (SECOND ,start_date,end_date )) as time_work' ),
-					'count_news' )
+					'count_news','cdn_files.url' )
 				                            ->join( 'users', 'users.id', '=', 'editor_id' )
+											->Leftjoin('cdn_files','cdn_files.id', '=', 'users.avatar_id'  )
 				                            ->Leftjoin(
 					                            DB::raw( '
 																(SELECT editor_id, COUNT(*) as count_news 
@@ -102,11 +76,13 @@
 				foreach ( $results as $result ) {
 
 					$hours   = floor( $result->time_work / 3600 );
+					$hours   = ( $hours > 0 ) ? $hours : 0;
 					$minutes = floor( ( $result->time_work / 3600 - $hours ) * 60 );
 					array_push( $respond,
 						array(
 							'id'            => $result->id,
 							'editor_name'   => $result->name,
+							'avatar_img'    => $result->url,
 							'count_news'    => $result->count_news,
 							'avg_time_work' => array(
 								'hours'   => $hours,
@@ -131,32 +107,35 @@
 
 			try {
 				$this->validate( $request, [
-                    'type_interval'=> 'in:today,week,month,year,custom',
-                    'editor_id' => 'required|exists:users,id',
-					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
-					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
+					'editor_id'  => 'required|exists:users,id',
+					'start_date' => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'   => 'required|date|date_format:Y-m-d H:i:s',
 				] );
-				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
-				$this->start_date = $request->input( 'end_date' );
+				$this->end_date   = $request->input( 'end_date' );
 				$editor_id        = $request->input( 'editor_id' );
-				$period           = $this->setInterval( $type_interval );
+				$period           = $this->setInterval();
 				$respond          = array();
 
 				$results = NewsModerationLog:: select( 'users.id', 'users.name',
 					DB::raw( ' TIMESTAMPDIFF (SECOND ,start_date,end_date ) as time_work' ),
-					'news.publish_date', 'news.title',  'news.is_publish' )
+					'news.publish_date', 'news.title', 'news.is_publish', 'count_click', 'count_views' )
 				                            ->join( 'users', 'users.id', '=', 'editor_id' )
 				                            ->join( 'news', 'news.id', '=', 'news_id' )
-				                             ->where( 'end_date', '<>', 'NULL' )
-				                             ->where( 'users.id', '=', $editor_id )
- 				                             ->where( 'news.is_publish', '=', 1 )
- 				                            ->whereRaw( $period )
+				                            ->Leftjoin( 'counters', function ( $join ) {
+					                            $join->on( 'counters.news_id', '=', 'news.id' )
+					                                 ->where( 'counters.type', '=', 'news' );
+				                            } )
+				                            ->where( 'end_date', '<>', 'NULL' )
+				                            ->where( 'users.id', '=', $editor_id )
+				                            ->where( 'news.is_publish', '=', 1 )
+				                            ->whereRaw( $period )
 				                            ->get();
 
 				foreach ( $results as $result ) {
 
 					$hours   = floor( $result->time_work / 3600 );
+					$hours   = ( $hours > 0 ) ? $hours : 0;
 					$minutes = floor( ( $result->time_work / 3600 - $hours ) * 60 );
 					array_push( $respond,
 						array(
@@ -164,7 +143,9 @@
 							'editor_name'   => $result->name,
 							'publish_date'  => $result->publish_date,
 							'news_title'    => $result->title,
-							'is_publish' => $result->is_publish,
+							'is_publish'    => $result->is_publish,
+							'count_click'   => $result->count_click,
+							'count_views'   => $result->count_views,
 							'avg_time_work' => array(
 								'hours'   => $hours,
 								'minutes' => $minutes
@@ -214,7 +195,7 @@
 				if ( $type_dynamics == 'countsNews' ) {
 					$results = DB::select( " SELECT  DATE_FORMAT(publish_date,'%d-%m-%Y') as pdate, COUNT(*) as ncount
 									FROM news
-									WHERE publish_date >='$this->start_date 00:00:00' AND publish_date <='$this->end_date 23:59:59'
+									WHERE publish_date >='$this->start_date' AND publish_date <='$this->end_date'
 									 AND editor_id = $editor_id
 									GROUP BY pdate
 									ORDER BY pdate" );
@@ -244,23 +225,21 @@
 			try {
 
 				$this->validate( $request, [
-                    'type_interval'=> 'in:today,week,month,year,custom',
-					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
-					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
+					'start_date' => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'   => 'required|date|date_format:Y-m-d H:i:s',
 				] );
 
-				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
 				$this->end_date   = $request->input( 'end_date' );
 				$respond          = array();
 
-				$period = $this->setInterval( $type_interval, array( 1 => 'publish_date', 2 => ' publish_date' ) );
+				$period = $this->setInterval( array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
 				$results = Counters::select( 'news_id', 'count_click', 'count_views' )
-				                       ->join( 'news', 'news.id', '=', 'news_id' )
-                                        ->where( 'type', '=', 1 )
-				                       ->whereRaw( $period )
-				                       ->get();
+				                   ->join( 'news', 'news.id', '=', 'news_id' )
+				                   ->where( 'type', '=', 1 )
+				                   ->whereRaw( $period )
+				                   ->get();
 
 
 				foreach ( $results as $result ) {
@@ -292,27 +271,24 @@
 			try {
 
 				$this->validate( $request, [
-                    'type_interval'=> 'in:today,week,month,year,custom',
-					'start_date'    => 'date|date_format:Y-m-d H:i:s',
-					'end_date'      => 'date|date_format:Y-m-d H:i:s',
-                    'editor_id'     => 'required|exists:users,id',
+					'start_date' => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'   => 'required|date|date_format:Y-m-d H:i:s',
+					'editor_id'  => 'required|exists:users,id',
 				] );
 
-				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
 				$this->end_date   = $request->input( 'end_date' );
 				$editor_id        = $request->input( 'editor_id' );
 				$respond          = array();
 
-				$period = $this->setInterval( $type_interval,
-					array( 1 => 'publish_date', 2 => ' publish_date' ) );
+				$period = $this->setInterval( array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
 				$results = Counters::select( 'news_id', 'count_click', 'count_views' )
-				                       ->join( 'news', 'news.id', '=', 'news_id' )
-				                       ->where( 'news.editor_id', '=', $editor_id )
-                                       ->where( 'type', '=', 1 )
-				                       ->whereRaw( $period )
-				                       ->get();
+				                   ->join( 'news', 'news.id', '=', 'news_id' )
+				                   ->where( 'news.editor_id', '=', $editor_id )
+				                   ->where( 'type', '=', 1 )
+				                   ->whereRaw( $period )
+				                   ->get();
 
 				foreach ( $results as $result ) {
 					array_push( $respond,
