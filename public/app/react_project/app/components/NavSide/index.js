@@ -113,8 +113,8 @@ function NavSide({ expanded, isActive, location }) {
                     В работе
                 </Name>
             </NavItem>
-            <NavItem to="#" expanded={expanded}>
-                <Icon type="ready" active={isActive('/randomurl')} />
+            <NavItem to="/ready" expanded={expanded}>
+                <Icon type="ready" active={isActive('/ready')} />
                 <Name expanded={expanded}>
                     Готово
                 </Name>

@@ -13,7 +13,11 @@
         margin-top: rem(25);
 
         .block-square__info {
-            bottom: rem(3) !important;
+            bottom: rem(10) !important;
+        }
+
+        .block-square__title {
+            margin-bottom: 0 !important;
         }
     }
 
@@ -44,6 +48,8 @@
     }
 
     &__enter-one {
+        position: relative;
+
         margin-top: rem(30);
     }
 
@@ -53,10 +59,18 @@
 
     &__plots-week {
         margin-top: rem(24);
+
+        .block-rectangle-mini__points {
+            margin-right: rem(10);
+        }
     }
 
     &__per-day {
         margin-top: rem(37);
+
+        .block-square__title {
+            margin-bottom: rem(3) !important;
+        }
     }
 
     &__banner-preview {
@@ -85,5 +99,9 @@
                 }
             }
         }
+    }
+
+    &_margin {
+        margin-top: rem(51);
     }
 }

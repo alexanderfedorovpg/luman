@@ -6,4 +6,7 @@ mixin more-video(data)
         +e.title.section-title Из эфира
         +e.list
             each item in params
-                +from-enter(item)(class="more-video__from-enter")
+                if (pageSettings.htmlClass == 'war')
+                    +from-enter(item)(class="from-enter_border more-video__from-enter")
+                else
+                    +from-enter(item)(class="more-video__from-enter")
