@@ -37,7 +37,7 @@ mixin general-news(data)
                         +now(now)(class="general-news__now")
 
 
-                +e.left-wrapper.two-wrapper.two-wrapper_war
+                +e.left-wrapper.two-wrapper(class={'__item_active': pageSettings.htmlClass == 'war'})
                     //- если война
                     if (pageSettings.htmlClass == 'war')
                         //- главное война

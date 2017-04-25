@@ -5,12 +5,13 @@ include ../components/inner-about/inner-about
 block vars
     -pageSettings.title = 'О компании';
     -pageSettings.headerClass = 'header_margin';
+    -pageSettings.pageTitle = 'about';
 
 block content
     // Контент здесь
     main
         .inner-wrapper
-            +inner-about
+            +inner-about(class="inner-about_margin")
 
 
 

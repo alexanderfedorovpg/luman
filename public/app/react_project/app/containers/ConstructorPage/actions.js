@@ -1,21 +1,34 @@
 
 import {
-        LOAD_FEED,
-        LOAD_FEED_SUCCESS,
-        LOAD_FEED_FAILURE,
 
-        HIDE_FEED_ITEM,
-        HIDE_FEED_ITEM_SUCCESS,
-        HIDE_FEED_ITEM_FAILURE,
+    LOAD_NEWSLIST,
+    LOAD_NEWSLIST_FAILURE,
+    LOAD_NEWSLIST_SUCCESS,
 
-        FEED_TO_WORK,
-        FEED_TO_WORK_SUCCESS,
-        FEED_TO_WORK_FAILURE,
+    REJECT_ARTICLE,
+    REJECT_ARTICLE_SUCCESS,
+    REJECT_ARTICLE_FAILURE,
 
-        SELECT_FEED,
+    ACCEPT_ARTICLE,
+    ACCEPT_ARTICLE_SUCCESS,
+    ACCEPT_ARTICLE_FAILURE,
 
-        SET_FILTERS,
-        SET_FILTER
+    LOAD_FEED,
+    LOAD_FEED_SUCCESS,
+    LOAD_FEED_FAILURE,
+
+    HIDE_FEED_ITEM,
+    HIDE_FEED_ITEM_SUCCESS,
+    HIDE_FEED_ITEM_FAILURE,
+
+    FEED_TO_WORK,
+    FEED_TO_WORK_SUCCESS,
+    FEED_TO_WORK_FAILURE,
+
+    SELECT_FEED,
+
+    SET_FILTERS,
+    SET_FILTER
 
 } from './constants';
 
@@ -101,3 +114,47 @@ export function selectFeed(id) {
         payload: id
     };
 }
+
+export const loadNewslist = () => ({
+    type: LOAD_NEWSLIST
+})
+
+export const newslistLoaded = payload => ({
+    type: LOAD_NEWSLIST_SUCCESS,
+    payload
+})
+
+export const newslistLoadingError = error => ({
+    type: LOAD_NEWSLIST_FAILURE,
+    error
+})
+
+export const rejectArticle = id => ({
+    type: REJECT_ARTICLE,
+    payload: id
+})
+
+export const articleRejected = id => ({
+    type: REJECT_ARTICLE_SUCCESS,
+    payload: id
+})
+
+export const articleRejectionError = error => ({
+    type: REJECT_ARTICLE_FAILURE,
+    error
+})
+
+export const acceptArticle = id => ({
+    type: ACCEPT_ARTICLE,
+    payload: id
+})
+
+export const articleAccepted = id => ({
+    type: ACCEPT_ARTICLE_SUCCESS,
+    payload: id
+})
+
+export const articleAcceptionError = error => ({
+    type: ACCEPT_ARTICLE_FAILURE,
+    error
+})

@@ -13,18 +13,18 @@ import {
     selectFeed,
     setFilters,
     feedToWork,
-    setFilter
+    setFilter,
+    loadNewslist
 } from './actions'
 
 import { filters } from './constants';
 
 import {
-    selectFeedList,
-    selectedFeed,
     selectedPagination,
     selectedLoading,
     selectSearchVars,
-    selectedFilter
+    selectedFilter,
+    selectNewsList
 } from './selectors';
 
 import {
@@ -35,6 +35,7 @@ import {
 import Header from 'components/Constructor/Header';
 import News from 'components/Constructor/News';
 import Tabs from 'components/Constructor/News/Tabs';
+import Collapse from 'components/Constructor/Collapse';
 
 
 const CustomLeft = styled(Left) `
@@ -46,6 +47,24 @@ const CustomLeft = styled(Left) `
     -ms-flex-preferred-size: 41.8%;
     flex-basis: 41.8%;
     width: 41.8%;
+`
+
+const RightTabs = styled(Tabs)`
+    margin-left: 0.5625rem;
+    padding: 0px;
+    border-bottom: transparent; 
+`
+
+const CustomRight = styled(Right)`
+    width: 41.584%;
+    -ms-flex-preferred-size: 41.584%;
+    flex-basis: 41.584%;
+    margin-top: -11px;
+    padding-left: 1.5rem;   
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding-left: 1.1875rem;
 `
 
 export class ConstructorPage extends React.Component {
@@ -60,7 +79,7 @@ export class ConstructorPage extends React.Component {
     }
 
     componentDidMount() {
-        this.loadFeed()
+        this.props.loadNewslist()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -68,7 +87,7 @@ export class ConstructorPage extends React.Component {
         let nextPage = nextProps.location.query.page || 1
 
         if (+page !== +nextPage) {
-            this.loadFeed({ page: nextPage })
+            this.loadNewslist({ page: nextPage })
         }
     }
 
@@ -119,12 +138,12 @@ export class ConstructorPage extends React.Component {
                         <Tabs data={filters} active={active} onClick={this.props.setFilter} />
                         <News
                             data={news}
-                            loading={loading}
                         />
                     </CustomLeft>
-                    <Right>
-
-                    </Right>
+                    <CustomRight>
+                        {/*<RightTabs data={filters} active={active} onClick={this.props.setFilter} />*/}
+                        <Collapse tabs={filters} />
+                    </CustomRight>
                 </Wrap>
             </div>
         )
@@ -139,9 +158,8 @@ ConstructorPage.propTypes = {
 
 const mapStateToProps = state => ({
     menuOpen: state.get('app').get('menuOpen'),
-    news: selectFeedList(state),
+    news: selectNewsList(state),
     search: selectSearchVars(state).toJS(),
-    selectedFeed: selectedFeed(state),
     pagination: selectedPagination(state),
     loading: selectedLoading(state),
     editors: selectEditors(state),
@@ -150,6 +168,9 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
     return {
+        loadNewslist() {
+            dispatch(loadNewslist())
+        },
         setFilter(filter) {
             dispatch(setFilter(filter));
         },

@@ -2,12 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import Tooltip from 'react-aria-tooltip'
 import randomString from 'random-string'
-
+import Rating from 'components/Rating/Item'
 import Icon from 'components/Icon'
 
 import { font, padding } from 'constants/style'
 
 const titleClassName = randomString()
+
+const CustomRating = styled(Rating) `
+    margin-right: .4rem;
+    margin-bottom: 0;
+`
 
 const Root = styled.a`
     position: relative;
@@ -67,28 +72,28 @@ const Header = styled.div`
     height: 30px;
 `
 
-const Rating = styled.div`
-    position: relative;
-    z-index: 5;
-    display: block;
-    width: 28px;
-    height: 28px;
-    font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.75rem;
-    color: #ffffff;
-    text-align: center;
-    cursor: pointer;
-    width: 28px;
-    height: 28px;
-    margin-bottom: 28px;
-        margin-right: 7px;
-    margin-bottom: 0;
-    background-color: #ff4e00;
-`
+// const Rating = styled.div`
+//     position: relative;
+//     z-index: 5;
+//     display: block;
+//     width: 28px;
+//     height: 28px;
+//     font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
+//     font-size: 0.875rem;
+//     font-weight: 700;
+//     line-height: 1.75rem;
+//     color: #ffffff;
+//     text-align: center;
+//     cursor: pointer;
+//     width: 28px;
+//     height: 28px;
+//     margin-bottom: 28px;
+//         margin-right: 7px;
+//     margin-bottom: 0;
+//     background-color: #ff4e00;
+// `
 
-const ItemIcon = styled(Icon)`
+const ItemIcon = styled(Icon) `
     flex-shrink: 0;
 `
 
@@ -105,7 +110,7 @@ const Title = styled.span`
     letter-spacing: -0.15px;
 `
 
-const Work = styled(Tooltip)`
+const Work = styled(Tooltip) `
     position: absolute;
     top: 50%;
     right: -11px;
@@ -136,7 +141,7 @@ const Work = styled(Tooltip)`
     }
 `
 
-const Ignore = styled(Work)`
+const Ignore = styled(Work) `
     right: 24px;
 `
 
@@ -149,21 +154,41 @@ const TagName = styled.p`
     text-transform: uppercase;
 `
 
+const Attachment = styled.p`
+    margin-top: 7px;
+    margin-bottom: 3px;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+    letter-spacing: -0.7px;
+    text-transform: uppercase;
+`
+
 function Item({ data, toWork, hide, open, style }) {
-    console.log(data);
     return (
         <Root onClick={() => open(data.id)} style={style}>
             <Wrapper>
                 {/*<ItemIcon type="tass" />*/}
                 <Header>
-                    <Rating>6</Rating>
+                    <CustomRating rating={data.top} checked={data.top} />
                     <TagName>
-                        {data.tags}
+                        {data.tags
+                            .filter(value => !!value.trim())
+                            .map(tag => (
+                                <span key={tag}>
+                                    {`${tag} `}
+                                </span>
+                            ))
+                        }
                     </TagName>
                 </Header>
                 <Title className={titleClassName}>
-                    {data.header}
+                    {data.title}
                 </Title>
+                <Attachment>
+                    1 Фото + 1 Видео
+                </Attachment>
                 <Ignore message="Не для главной" eventType="hover" direction="bottom">
                     <Icon
                         type="delete"

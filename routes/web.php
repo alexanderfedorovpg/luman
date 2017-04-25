@@ -24,6 +24,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
         return response()->json([] ,200 , $headers);
     });
     $group->get('/newsfeed', 'NewsFeedController@getNewsFeed');
+    $group->get('/newsfeed/reload', 'NewsFeedController@reload');
     $group->post('/newsfeed', 'NewsFeedController@update');
     $group->post('/newsfeed/work', 'NewsFeedController@create');
     $group->get('/newslist','NewsListController@get');
@@ -34,10 +35,14 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/auth/login','AuthController@login');
 
     //Редакторы новостей
+    $group->get('/newseditor/moderated','NewsListEditorController@getModerated');
     $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
     $group->post('/newseditor','NewsListEditorController@create');
+
     $group->put('/newseditor/edit','NewsListEditorController@edit');
+    $group->put('/newseditor/publish/{id}','NewsListEditorController@publish');
+
     $group->delete('/newseditor/{id}','NewsListEditorController@delete');
     $group->post('/newseditor/delegate','NewsListEditorController@delegate');
     $group->post('/newseditor/rejection','NewsListEditorController@rejection');
@@ -117,4 +122,12 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->put('/air/record/{id}','AirRecordController@update');
     $group->delete('/air/record/{id}','AirRecordController@destroy');
 
+
+
+});
+
+
+
+$app->get('/{any:.*}',function (){
+    return response()->json('404 Not found!' , 404);
 });
