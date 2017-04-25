@@ -75,7 +75,7 @@ class HomepageController extends CmsController
                 'from_air.*.record_id' => 'required|integer|exists:air_records,id',
                 'from_air.*.top' => 'required|integer',
 
-                //'is_war_mode' => 'in:0,1'
+                'is_war_mode' => 'in:0,1'
             ]);
 
             $news = $request->input('news');
@@ -113,7 +113,7 @@ class HomepageController extends CmsController
     }
 
     /**
-     * Категрия новостей
+     * Категрии новостей
      *
      * @return \Illuminate\Http\JsonResponse
      */
