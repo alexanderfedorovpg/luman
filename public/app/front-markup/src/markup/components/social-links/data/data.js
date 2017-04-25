@@ -3,10 +3,6 @@ var data = {socialLinks: {
         items: [
 
             {
-                icon: '%=static=%img/general/social/share.png'
-            },
-
-            {
                 icon: '%=static=%img/general/social/facebook.png'
             },
 

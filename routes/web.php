@@ -118,3 +118,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->delete('/air/record/{id}','AirRecordController@destroy');
 
 });
+
+
+$app->get('/{any:.*}',function (){
+    return response()->json('404 Not found!' , 404);
+});

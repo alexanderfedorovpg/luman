@@ -127,14 +127,14 @@ function NavSide({ expanded, isActive, location }) {
                 </Name>
             </NavItem>
             <NavItem to="/programs" expanded={expanded}>
-                <Icon type="tv" active={isActive('/randomurl')} />
+                <Icon type="tv" active={isActive('/programs')} />
                 <Name expanded={expanded}>
                     Программы
                 </Name>
                 <NavBadge success expanded={expanded}>2</NavBadge>
             </NavItem>
             <NavItem to="/live" expanded={expanded}>
-                <Icon type="live" active={isActive('/randomurl')} />
+                <Icon type="live" active={isActive('/live')} />
                 <Name expanded={expanded}>
                     Прямой эфир
                 </Name>

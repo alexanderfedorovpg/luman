@@ -7,7 +7,11 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Prophecy\Exception\Doubler\MethodNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+
+use App\Http\Controllers\ApiController;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +49,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        $api=new ApiController();
+
+        if($e instanceof NotFoundHttpException){
+            return $api->respondNotFound();
+        }
+        if($e instanceof MethodNotAllowedHttpException){
+            return $api->respondMethodNotAllowed();
+
+        }
+        if($e instanceof MethodNotFoundException){
+            return $api->respondMethodNotAllowed();
+        }
         return parent::render($request, $e);
     }
 }

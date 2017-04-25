@@ -1,11 +1,16 @@
 .top-menu {
-
+    &__nav {
+        height: 100%;
+    }
     &__ul {
-        font-size: 0;
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        list-style-type: none;
     }
 
     &__item {
-        display: inline-block;
 
         &:not(:last-child) {
             margin-right: rem(23);

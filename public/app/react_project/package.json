@@ -147,8 +147,14 @@
         2,
         "multiline"
       ],
-      "react/jsx-indent": [2, 4],
-      "react/jsx-indent-props": [2, 4],
+      "react/jsx-indent": [
+        2,
+        4
+      ],
+      "react/jsx-indent-props": [
+        2,
+        4
+      ],
       "react/jsx-filename-extension": 0,
       "react/jsx-no-target-blank": 0,
       "react/require-extension": 0,
@@ -251,6 +257,7 @@
     "react-router": "3.0.0",
     "react-router-redux": "4.0.8",
     "react-router-scroll": "0.4.1",
+    "react-waypoint": "^6.0.0",
     "redux": "3.6.0",
     "redux-immutable": "3.0.8",
     "redux-saga": "0.14.0",

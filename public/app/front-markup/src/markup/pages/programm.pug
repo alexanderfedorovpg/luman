@@ -1,0 +1,9 @@
+extends ../layouts/default
+include ../components/p-programm/p-programm
+
+block vars
+    -pageSettings.title = 'Главная';
+
+block content
+    // Контент здесь
+    +p-programm

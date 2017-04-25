@@ -3,7 +3,6 @@
 
     width: rem(1039);
     min-height: rem(386);
-    margin-bottom: rem(98);
 
     background-color: $bg-text;
 
@@ -79,6 +78,9 @@
         background: url('%=static=%general/geometry/ice-cube.png');
         background-repeat: no-repeat;
         background-size: cover;
+        &:hover {
+            color: $white;
+        }
     }
 
 }
@@ -200,7 +202,9 @@
 
 .text-bg-gray--primary {
     height: auto;
+    min-height: unset;
     padding-top: rem(26);
     padding-bottom: rem(68);
     padding-left: rem(195);
+    margin-bottom: rem(30);
 }

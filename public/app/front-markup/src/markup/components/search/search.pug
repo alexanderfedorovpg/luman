@@ -2,9 +2,14 @@ mixin search(data)
     +b.search()&attributes(attributes)
         block
         +e.FORM.form
-            +e.INPUT(type="text"
-                     placeholder="Поиск по сайту").input-text
+            +e.INPUT(type="search" placeholder="Поиск по сайту" name="search" required).input-text
             +e.wrapper
-                +e.INPUT(type="submit"
-                     value="").input-submit
+                +e.INPUT(type="submit").input-submit
                 != pugHelpers.Icon.call(locals, { iconName: 'search', className: 'search__ico',  iconWidth: '17', iconHeight: '17' })
+
+        //- form.searchbox
+        //-     input.searchbox-input(type='search', placeholder='Поиск по сайту', name='search', required='')
+        //-     input.searchbox-submit(type='submit', value='GO')
+        //-     span.searchbox-icon
+        //-         != pugHelpers.Icon.call(locals, { iconName: 'search', className: 'search__ico',  iconWidth: '17', iconHeight: '17' })
+

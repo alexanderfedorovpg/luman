@@ -4,15 +4,15 @@ mixin enter-one(data, type)
     +b.enter-one()&attributes(attributes)
         block
         if type == 'Инфошум'
-            +e.P.title.section-title.section-title_no-border Инфошум
+            +e.A.title.section-title.section-title_no-border(href=jv0) Инфошум
 
         else if type == 'Новости на RTVi'
-            +e.P.title.section-title.section-title_no-border Новости на RTVi
+            +e.A.title.section-title.section-title_no-border(href=jv0) Новости на RTVi
 
         else if type == 'Из Эфира'
-            +e.P.title.section-title.section-title_no-border Из Эфира
+            +e.A.title.section-title.section-title_no-border(href=jv0) Из Эфира
 
         else
-            +e.P.title.section-title.section-title_no-border Из эфира
+            +e.A.title.section-title.section-title_no-border(href=jv0) Из эфира
 
-        +from-enter(data)(class="general-news__from-enter")
+        +from-enter(data)(class="general-news__from-enter from-enter_border")

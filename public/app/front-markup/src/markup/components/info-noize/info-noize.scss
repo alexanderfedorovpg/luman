@@ -2,12 +2,18 @@
 
     &__wrapper {
        margin-top: rem(15);
+
+        &_about {
+            margin-top: rem(18);
+        }
     }
 
     &__title {
+        display: block;
         padding-left: rem(28);
 
         line-height: rem(34);
+        text-decoration: none;
     }
 
     &__mini-news {

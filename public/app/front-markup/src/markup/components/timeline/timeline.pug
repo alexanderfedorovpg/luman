@@ -14,5 +14,5 @@ mixin timeline(data)
                             img(src= item.video, alt="")
                             +e.video-mask
                             i.icon.icon-play
-                +social-links('share')
+                +social-links(socialLinks.side)(class='social-links--vertical')
         block
