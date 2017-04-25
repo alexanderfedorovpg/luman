@@ -42,16 +42,37 @@ const Item = styled.span`
 
 class Toggle extends PureComponent {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            checked: (props.value || props.data[0] || {}).id
+        }
+    }
+
+    handleClick(value) {
+        return e => {
+            this.setState({
+                checked: value.id
+            }, ()=>this.props.onChange(value))
+        }
+    }
+
     render() {
+        let { data } = this.props
+        let { checked } = this.state
 
         return (
             <Root>
-                <Item active>
-                    По времени
-                </Item>
-                <Item>
-                    По важности
-                </Item>
+                {data.map(value => (
+                    <Item
+                        onClick={this.handleClick(value)}
+                        active={value.id == checked}
+                        key={value.id}>
+
+                        {value.title}
+                    </Item>
+                ))}
             </Root>
         )
     }

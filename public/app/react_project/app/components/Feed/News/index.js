@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { injectGlobal } from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import randomString from 'random-string'
 
@@ -21,6 +21,11 @@ injectGlobal`
         max-height: 0px;
         transition: all .5s;
     }
+`
+
+const LoadingStatus = styled.div`
+    padding-top: 20px;
+    text-align: center;
 `
 
 class News extends Component {
@@ -75,6 +80,13 @@ class News extends Component {
 
         return (
             <div style={{ opacity: loading ? .3 : 1}}>
+                {
+                    !data.count() &&
+                    (loading
+                        ? <LoadingStatus>Загрузка</LoadingStatus>
+                        : <LoadingStatus>Ничего не найдено</LoadingStatus>
+                    )
+                }
                 <ReactCSSTransitionGroup
                     transitionName={animationClassName}
                     transitionEnterTimeout={500}

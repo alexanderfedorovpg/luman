@@ -40,7 +40,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
     $group->post('/newseditor','NewsListEditorController@create');
 
-    $group->put('/newseditor/edit/{id}','NewsListEditorController@edit');
+    $group->put('/newseditor/edit','NewsListEditorController@edit');
     $group->put('/newseditor/publish/{id}','NewsListEditorController@publish');
 
     $group->delete('/newseditor/{id}','NewsListEditorController@delete');
@@ -122,8 +122,10 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->put('/air/record/{id}','AirRecordController@update');
     $group->delete('/air/record/{id}','AirRecordController@destroy');
 
-
-
+    //Конструктор главной страницы
+    $group->get('/homepage','HomepageController@index');
+    $group->put('/homepage','HomepageController@update');
+    $group->get('/homepage/newscategory','HomepageController@getNewsCategories');
 });
 
 
