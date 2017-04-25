@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
+import Modal from 'components/Modal'
 import Icon from 'components/Icon'
 import Button from 'components/Button'
 import Gallery from './Gallery'
@@ -14,6 +15,9 @@ import {
     Input,
     Checkbox
 } from 'components/Form'
+import {
+    Link as HeaderLink,
+} from 'components/Header'
 
 import { padding, font } from 'constants/style'
 
@@ -107,40 +111,83 @@ let dataGallery = [
     '/img/help5.png'
 ]
 
-function Help({ onClose, getPage, getLinks }) {
+class Help extends PureComponent {
 
-    return (
-        <Root>
-            <Header>
-                <Link>
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            open: false
+        }
+
+        this.open = this.open.bind(this)
+        this.close = this.close.bind(this)
+    }
+
+    handleSubmit(e) {
+        return e => {
+            e.preventDefault()
+
+            if (e.target.query.value) {
+
+                cb(e.target.query.value)
+            }
+        }
+    }
+
+    open() {
+        if (!this.state.open) {
+            this.setState({
+                open: true
+            })
+        }
+    }
+
+    close() {
+        if (this.state.open) {
+            this.setState({
+                open: false
+            })
+        }
+    }
+
+    render() {
+        let { getPage, getLinks } = this.props
+
+        return (
+            <div>
+                <HeaderLink onClick={this.open}>
                     <span>?</span>
                     Справка
-                </Link>
-                <Icon type="delete-lg" onClick={onClose} />
-            </Header>
-            <form onSubmit={submitHandler(getLinks)}>
-                <Group>
-                    <CustomTextarea
-                        name="query"
-                        placeholder="Поисковый запрос"
-                        light block />
-                </Group>
-                <Group>
-                    <Button block success>Поиск</Button>
-                </Group>
-            </form>
-        </Root>
-    )
-}
+                </HeaderLink>
+                <Modal
+                    isOpen={this.state.open}
+                    contentLabel="Справка"
+                    onRequestClose={this.close}>
 
-function submitHandler(cb) {
-    return e => {
-        e.preventDefault()
-
-        if (e.target.query.value) {
-
-            cb(e.target.query.value)
-        }
+                    <Root>
+                        <Header>
+                            <Link>
+                                <span>?</span>
+                                Справка
+                            </Link>
+                            <Icon type="delete-lg" onClick={this.close} />
+                        </Header>
+                        <form onSubmit={this.handleSubmit(getLinks)}>
+                            <Group>
+                                <CustomTextarea
+                                    name="query"
+                                    placeholder="Поисковый запрос"
+                                    light block />
+                            </Group>
+                            <Group>
+                                <Button block success>Поиск</Button>
+                            </Group>
+                        </form>
+                    </Root>
+                </Modal>
+            </div>
+        )
     }
 }
 

@@ -9,7 +9,8 @@ mixin from-enter(data)
                 +e.keeping #{params.time_keeping}
         +e.info
             +e.A(href=jv0).link #{params.title}
-            +e.P.category #{params.category}
+            +e.P.category 
+                +e.A.category-link(href=jv0) #{params.category}
                 = ' '
                 +e.SPAN.time-add #{params.time_add}
 

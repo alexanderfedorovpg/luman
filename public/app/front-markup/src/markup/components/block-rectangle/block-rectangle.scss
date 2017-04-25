@@ -19,6 +19,12 @@
         background-image: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, .1));
     }
 
+    &:hover {
+        .block-rectangle__title {
+            color: $blue;
+        }
+    }
+
     &__time-keeping {
         position: relative;
 

@@ -18,6 +18,12 @@
         background-color: rgba(0, 0, 0, .5);
     }
 
+    &:hover {
+        .block-square__title {
+            color: $blue;
+        }
+    }
+
     &__img {
         width: inherit;
         height: inherit;

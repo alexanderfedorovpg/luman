@@ -156,18 +156,29 @@ class Content extends Component {
         super(props);
 
         this.state = {
-            data: this.propsToData(props)
+            data: this.propsToData(props),
+            error: {}
         };
 
         this.changeHandlerTarget = this.changeHandlerTarget.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.article !== nextProps.article) {
+        if (this.props.article.id !== nextProps.article.id) {
             this.setState({
                 data: this.propsToData(nextProps)
             })
         }
+    }
+
+    setError(prop, value) {
+
+        this.setState({
+            error: {
+                ...this.state.error,
+                [prop]: value
+            }
+        })
     }
 
     propsToData(props) {
@@ -189,15 +200,53 @@ class Content extends Component {
         return `осталось ${max - string.length} символов`
     }
 
+    validate() {
+        let { data, error } = this.state
+        let { article } = this.props
+
+        if (!data.rubrics.length) {
+            alert('Выберите рубрику!')
+            return
+        }
+        if (!data.image_main_temp && !article.image_main_id) {
+            alert('Выберите основное изображение!')
+            return
+        }
+        if (!data.image_preview_temp && !article.image_preview_id) {
+            alert('Выберите превью!')
+            return
+        }
+        if (!data.top) {
+            alert('Выберите рейтинг!')
+            return
+        }
+        let newError = {
+            ...error,
+            title: !data.title || data.title.length > titleMax,
+            subtitle: !data.subtitle || data.subtitle.length > subtitleMax,
+            theses: !data.theses,
+            keywords: !data.keywords,
+        }
+
+        if (Object.values(newError).reduce((a,b) => a || b, false)) {
+            this.setState({
+                error: newError
+            })
+            return
+        }
+
+        return true
+    }
+
     dataToSubmit() {
-        let { data } = this.state
+        let { data, error } = this.state
         let { article, rubrics } = this.props
 
         let r = data.rubrics.map(name => (
             rubrics.find(r=>r.name==name).id
         ))[0]
 
-        if (!r) return;
+        if (!this.validate()) return
 
         return {
             id: article.id,
@@ -219,12 +268,21 @@ class Content extends Component {
     onDrop(prop) {
         return acceptedFiles => {
             if (acceptedFiles[0]) {
-                this.setState({
-                    data: {
-                        ...this.state.data,
-                        [prop]: acceptedFiles[0]
-                    }
-                })
+                let reader  = new FileReader()
+
+                reader.onload = () => {
+
+                    this.setState({
+                        data: {
+                            ...this.state.data,
+                            [prop]: reader.result,
+                            [`${prop}_temp`]: acceptedFiles[0]
+                        }
+                    })
+                }
+
+                reader.readAsDataURL(acceptedFiles[0])
+
             }
         }
     }
@@ -320,7 +378,11 @@ class Content extends Component {
                             </Label>
                             <TitleField
                                 value={this.state.data.title}
-                                onChange={this.changeHandlerTarget('title')}
+                                error={this.state.error.title}
+                                onChange={e => {
+                                    this.changeHandlerTarget('title')(e)
+                                    this.setError('title', !e.target.value || e.target.value.length > titleMax)
+                                }}
                                 block />
                         </Group>
                         <Group>
@@ -329,7 +391,11 @@ class Content extends Component {
                             </Label>
                             <SubtitleField
                                 value={this.state.data.subtitle}
-                                onChange={this.changeHandlerTarget('subtitle')}
+                                error={this.state.error.subtitle}
+                                onChange={e => {
+                                    this.changeHandlerTarget('subtitle')(e)
+                                    this.setError('subtitle', !e.target.value || e.target.value.length > subtitleMax)
+                                }}
                                 block />
                         </Group>
                         <Group>
@@ -338,7 +404,11 @@ class Content extends Component {
                             </Label>
                             <ThesesField
                                 value={this.state.data.theses}
-                                onChange={this.changeHandlerTarget('theses')}
+                                error={this.state.error.theses}
+                                onChange={e => {
+                                    this.changeHandlerTarget('theses')(e)
+                                    this.setError('theses', !e.target.value)
+                                }}
                                 block />
                         </Group>
                         <Group>
@@ -348,13 +418,13 @@ class Content extends Component {
                         <Group>
                             <ImageContainer>
                                 <StyledDropzone
-                                    onDrop={this.onDrop('image_main_temp')}
+                                    onDrop={this.onDrop('image_main')}
                                     multiple={false}
                                     filled={!!this.state.data.image_main}
                                     title="Нажмите чтобы выбрать другое изображение">
 
                                     {this.state.data.image_main
-                                        ? <img src={this.state.data.image_main_temp ? this.state.data.image_main_temp.preview : `//${this.state.data.image_main}`} />
+                                        ? <img src={urlHelper(this.state.data.image_main)} />
                                         : (
                                             <span>
                                                 Переместите изображение<br />
@@ -365,13 +435,13 @@ class Content extends Component {
                                 </StyledDropzone>
                             </ImageContainer>
                             <StyledDropzone
-                                onDrop={this.onDrop('image_preview_temp')}
+                                onDrop={this.onDrop('image_preview')}
                                 multiple={false}
                                 filled={!!this.state.data.image_preview}
                                 title="Нажмите чтобы выбрать другое изображение">
 
                                 {this.state.data.image_preview
-                                    ? <img src={this.state.data.image_preview_temp ? this.state.data.image_preview_temp.preview : `//${this.state.data.image_preview}`} />
+                                    ? <img src={urlHelper(this.state.data.image_preview)} />
                                     : (
                                         <span>
                                             Переместите изображение<br />
@@ -388,7 +458,11 @@ class Content extends Component {
                             </Label>
                             <Input
                                 value={this.state.data.keywords}
-                                onChange={this.changeHandlerTarget('keywords')}
+                                error={this.state.error.keywords}
+                                onChange={e => {
+                                    this.changeHandlerTarget('keywords')(e)
+                                    this.setError('keywords', !e.target.value)
+                                }}
                                 placeholder="Ключевые слова"
                                 block />
                         </Group>
@@ -398,7 +472,11 @@ class Content extends Component {
                             ? <User data={editor} />
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
-
+                        <Chat
+                            {...chat}
+                            postMessage={postMessage}
+                            loadMessages={loadMessages}
+                            room={chatRoom} />
                     </CustomRight>
                 </Wrap>
                 <Modal
@@ -434,9 +512,10 @@ Content.propTypes = {
 
 export default Content
 
-/*
-                        <Chat
-                            {...chat}
-                            postMessage={postMessage}
-                            loadMessages={loadMessages}
-                            room={chatRoom} />*/
+// если url не base64 - префиксит его с "//" чтобы он был абсолютным
+function urlHelper(url) {
+    return url.trim().search(/^data:/) > -1
+        ? url
+        : `//${url}`
+}
+

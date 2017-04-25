@@ -57,10 +57,12 @@
         height: rem(30);
     }
 
-    &__category {
+    &__category,
+    &__category-link {
         font-size: rem(12);
         line-height: rem(42);
         color: $blue;
+        text-decoration: none;
         text-transform: uppercase;
     }
 

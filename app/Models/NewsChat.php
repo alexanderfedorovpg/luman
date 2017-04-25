@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CdnFile;
 
 /**
  * Class NewsChat
@@ -66,10 +67,12 @@ class NewsChat extends Model
 
         $files = [];
         foreach ($fileIds as $fileId) {
-            $files[] = [
-                'message_id' => $chatMessage->id,
-                'file_id' => $fileId
-            ];
+            if (CdnFile::find($fileId)) {
+                $files[] = [
+                    'message_id' => $chatMessage->id,
+                    'file_id' => $fileId
+                ];
+            }
         }
 
         return NewsChatFile::insert($files);

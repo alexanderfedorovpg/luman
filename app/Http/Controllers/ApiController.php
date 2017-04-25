@@ -61,6 +61,14 @@ class ApiController extends Controller
      * @param string $message
      * @return \Illuminate\Http\JsonResponse
      */
+    public function respondMethodNotAllowed($message="405 method not allowed") {
+        return $this->setStatusCode('405')->respondWithError($message);
+    }
+
+    /**
+     * @param string $message
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function respondFail500x($message="Internal Error") {
         return $this->setStatusCode('500')->respondWithError($message);
     }

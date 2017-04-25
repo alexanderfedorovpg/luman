@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Текстовая трансляция</title>
@@ -10,488 +9,330 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="telephone=no" name="format-detection">
     <meta name="HandheldFriendly" content="true">
-
-
-    <!--[if (gt IE 9)|!(IE)]><!-->
-    <link href="static/css/main.min.css" rel="stylesheet" type="text/css">
-    <!--<![endif]-->
+    
+    
+    <!--[if (gt IE 9)|!(IE)]><!--><link href="static/css/main.min.css" rel="stylesheet" type="text/css"><!--<![endif]-->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script>
-        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
-    </script>
-</head>
-
-<body>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  </head>
+  <body>
     <header class="header header header_margin position">
-        <div class="header__container container">
-            <div class="header__left-part">
-                <div class="header__part-wrapper">
-                    <div class="burger header__burger">
-                        <div class="burger__element">
-                        </div>
-                    </div>
-                    <div class="logo header__logo">
-                        <a href="javascript:void(0)">
-                            <img class="logo__img" src="static/img/general/logo/logo.png" alt="" role="presentation" />
-                        </a>
-                    </div>
-                    <div class="top-menu header__top-menu">
-                        <nav class="top-menu__nav">
-                            <ul class="top-menu__ul">
-                                <li class="top-menu__item">
-                                    <a class="top-menu__link" href="javascript:void(0)">Главное</a>
-                                </li>
-                                <li class="top-menu__item">
-                                    <a class="top-menu__link" href="javascript:void(0)">Новости</a>
-                                </li>
-                                <li class="top-menu__item">
-                                    <a class="top-menu__link" href="javascript:void(0)">Инфошум</a>
-                                </li>
-                                <li class="top-menu__item">
-                                    <a class="top-menu__link" href="javascript:void(0)">Из эфира</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+      <div class="header__container container">
+        <div class="header__left-part">
+          <div class="header__part-wrapper">
+            <div class="burger header__burger">
+              <div class="burger__element">
+              </div>
             </div>
-            <div class="header__right-part">
-                <div class="rss header__rss">
-                    <a class="rss__link" href="javascript:void(0)">
-                        <span class="rss__text rss__float rss__float_left">RSS</span>
-                        <svg class="rss__img rss__float_right" width="0" height="0">
-                            <use xlink:href="svg-symbols.svg#rss"></use>
-                        </svg>
-                    </a>
-                </div>
-                <div class="search header__search">
-                    <form class="search__form">
-                        <input class="search__input-text" type="text" placeholder="Поиск по сайту" />
-                        <div class="search__wrapper">
-                            <input class="search__input-submit" type="submit" value="" />
-                            <svg class="search__ico" width="17" height="17">
-                                <use xlink:href="svg-symbols.svg#search"></use>
-                            </svg>
-
-                        </div>
-                    </form>
-                </div>
+            <div class="logo header__logo"><a href="javascript:void(0)"><img class="logo__img" src="static/img/general/logo/logo.png" alt="" role="presentation"/></a>
             </div>
+            <div class="top-menu header__top-menu">
+              <nav class="top-menu__nav">
+                <ul class="top-menu__ul">
+                  <li class="top-menu__item"><a class="top-menu__link" href="javascript:void(0)">Главное</a>
+                  </li>
+                  <li class="top-menu__item"><a class="top-menu__link" href="javascript:void(0)">Новости</a>
+                  </li>
+                  <li class="top-menu__item"><a class="top-menu__link" href="javascript:void(0)">Инфошум</a>
+                  </li>
+                  <li class="top-menu__item"><a class="top-menu__link" href="javascript:void(0)">Из эфира</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
         </div>
+        <div class="header__right-part">
+          <div class="rss header__rss"><a class="rss__link" href="javascript:void(0)"><span class="rss__text rss__float rss__float_left">RSS</span>
+            <svg class="rss__img rss__float_right" width="0" height="0">
+                <use xlink:href="svg-symbols.svg#rss"></use>
+            </svg>
+        </a>
+          </div>
+          <div class="search header__search">
+            <form class="search__form"><input class="search__input-text" type="search" placeholder="Поиск по сайту" name="search" required="required"/>
+              <div class="search__wrapper"><input class="search__input-submit" type="submit"/>
+            <svg class="search__ico" width="17" height="17">
+                <use xlink:href="svg-symbols.svg#search"></use>
+            </svg>
+        
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </header>
     <!-- Контент здесь-->
-    <div class="inner-about inner-wrapper inner-default text-stream">
+    <main>
+      <div class="inner-about inner-wrapper inner-default text-stream">
         <div class="inner-about__container container">
-            <div class="inner-about__left left-col left-col_position_relative">
-                <div class="inner-about__title">
-                    <h1>Происшествие обычного режима</h1>
-                    <a class="inner-about__copy" href="javascript:void(0)">Скопировать ссылку</a>
+          <div class="inner-about__left left-col left-col_position_relative">
+            <div class="inner-about__title">
+              <h1>Происшествие обычного режима</h1><a class="inner-about__copy" href="javascript:void(0)">Скопировать ссылку</a>
+            </div>
+            <div class="text-bg-gray text-bg-gray--primary inner-about__text-bg-gray">
+              <h2 class="text-bg-gray__title">Главное
+              </h2>
+              <ul class="list-default list">
+                <li class="list-default__item">
+                  <p>Он был застрелен сегодня утром во время своего визита в военную часть.</p>
+                </li>
+                <li class="list-default__item">
+                  <p>Марксизм практически начинает экспериментальный кризис легитимности.</p>
+                </li>
+                <li class="list-default__item">
+                  <p>Онтогенез речи важно начинает культ личности. Толпа отражает эгоцентризм. Гештальт противоречиво интегрирует контраст.</p>
+                </li>
+                <li class="list-default__item">
+                  <p>Политическая модернизация иллюстрирует механизм власти.</p>
+                </li>
+              </ul><a class="text-bg-gray__update" href="javascript:void(0)">Обновить</a>
+              <div class="social-links social-links--vertical social-links--pad"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
                 </div>
-                <div class="text-bg-gray text-bg-gray--primary inner-about__text-bg-gray">
-                    <h2 class="text-bg-gray__title">Главное
-                    </h2>
-                    <ul class="list-default list">
-                        <li class="list-default__item">
-                            <p>Он был застрелен сегодня утром во время своего визита в военную часть.</p>
-                        </li>
-                        <li class="list-default__item">
-                            <p>Марксизм практически начинает экспериментальный кризис легитимности.</p>
-                        </li>
-                        <li class="list-default__item">
-                            <p>Онтогенез речи важно начинает культ личности. Толпа отражает эгоцентризм. Гештальт противоречиво
-                                интегрирует контраст.</p>
-                        </li>
-                        <li class="list-default__item">
-                            <p>Политическая модернизация иллюстрирует механизм власти.</p>
-                        </li>
+              </div>
+            </div>
+            <div class="inner-about__content">
+              <div class="inner-about__text-stream__head">
+                <div class="inner-about__sort">
+                  <div class="inner-about__sort-by">Сначала
+                  </div>
+                  <div class="breadcrumb">
+                    <ul class="breadcrumb__ul">
+                      <li class="breadcrumb__item breadcrumb__item breadcrumb__item_active"><a class="breadcrumb__link" href="javascript:void(0)">Самые новые</a>
+                      </li>
+                      <li class="breadcrumb__item"><a class="breadcrumb__link" href="javascript:void(0)">Самые первые</a>
+                      </li>
                     </ul>
-                    <a class="text-bg-gray__update" href="javascript:void(0)">Обновить</a>
-                    <div class="social-links social-links--vertical">
-                        <div class="social-links__list">
-                            <a class="social-links__ico-link" href="javascript:void(0)">
-                                <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                />
-                            </a>
-                            <a class="social-links__ico-link" href="javascript:void(0)">
-                                <img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"
-                                />
-                            </a>
-                            <a class="social-links__ico-link" href="javascript:void(0)">
-                                <img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"
-                                />
-                            </a>
-                            <a class="social-links__ico-link" href="javascript:void(0)">
-                                <img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt=""
-                                role="presentation" />
-                            </a>
-                            <a class="social-links__ico-link" href="javascript:void(0)">
-                                <img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"
-                                />
-                            </a>
-                            <a class="social-links__ico-link" href="javascript:void(0)">
-                                <img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"
-                                />
-                            </a>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-                <div class="inner-about__content">
-                    <div class="inner-about__text-stream__head">
-                        <div class="inner-about__sort">
-                            <div class="inner-about__sort-by">Сначала
-                            </div>
-                            <div class="breadcrumb">
-                                <ul class="breadcrumb__ul">
-                                    <li class="breadcrumb__item breadcrumb__item breadcrumb__item_active">
-                                        <a class="breadcrumb__link" href="javascript:void(0)">Самые новые</a>
-                                    </li>
-                                    <li class="breadcrumb__item">
-                                        <a class="breadcrumb__link" href="javascript:void(0)">Самые первые</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="inner-about__new-content">
-                            <div class="inner-about__new-content__message">2 новых сообщения
-                            </div>
-                            <div class="checkbox checkbox-circle">
-                                <input id="ko1" type="checkbox" />
-                                <label for="ko1">Обновлять автоматически</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline">
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:23</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title">Еще одна новость по поводу совершенного покушения</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:18</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title is-important">Более важные посты выделены крупнее и болдом</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:14</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title">Согласно результатам генетической экспертизы и записям с камер наблюдения, бомбу на станции
-                                    &quot;Площадь Восстания&quot; петербургском метро оставил тот же человек, который позже
-                                    подовал себя в вагоне на перегоне между станциями &quot;Сенная площадь&quot; и &quot;Технологический
-                                    парк&quot;. Кризис интуитивно понятен. Анализ рыночных цен слабопроницаем. Создание приверженного
-                                    покупателя, как бы это ни казалось парадоксальным, однократно. Нестандартный подход,
-                                    например, слабо оправдывает закон.</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:12</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title is-important">Сновидение отталкивает позитивистский стимул. Бессознательное, суммируя приведенные примеры,
-                                    притягивает ролевой гештальт. Контекстная реклама притягивает страх. Итак, ясно, что
-                                    SWOT-анализ изменяем.</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:12</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title">Рекламное сообщество, как бы это ни казалось парадоксальным, вполне выполнимо. Репрезентативная
-                                    система требовальна к креативу</span>
-                                <div class="timeline__img">
-                                    <img src="https://source.unsplash.com/random/300x200" alt="" />
-                                </div>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:12</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title">Эффективность действий существенно отчуждает из ряда вон выходящий генезис. Скиннер, однако,
-                                    настаивал, что компульсивность начинает медиавес</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:12</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title is-important">Точечное воздействие искажает институциональный стимул. Душа специфицирует креативный гендер,
-                                    не считаясь с затратами. Ценовая стратегия отчуждает автоматизм. Согласно предыдущему,
-                                    мышление устойчиво представляет собой креативный контраст.</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:12</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title">Организация службы маркетинга, конечно, конфронтально вызывает обществвенный принцип восприятия.</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:12</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title is-important fs-24">Стимулирование коммьюнити, по определению, дает комплексный формат события. Восприятие марки,
-                                    как принято считать, вполне выполнимо</span>
-                                <div class="timeline__video">
-                                    <img src="https://source.unsplash.com/random/490x265" alt="" />
-                                    <div class="timeline__video-mask">
-                                    </div>
-                                    <i class="icon icon-play"></i>
-                                </div>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__date">
-                                <time class="timeline__time">08:12</time>
-                            </div>
-                            <div class="timeline__cnt">
-                                <span class="timeline__title">Как отмечает Майкл Мескон, воспитание важно ускоряет оппортунический бизнес-план. Рекламная
-                                    заставка изоморфна времени.</span>
-                            </div>
-                            <div class="social-links">
-                                <a class="social-links__ico-link" href="javascript:void(0)">
-                                    <img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="inner-about__new-content">
+                  <div class="inner-about__new-content__message">2 новых сообщения
+                  </div>
+                  <div class="checkbox-round">
+                    <input id="ko2" type="checkbox"/>
+                    <label for="ko2">Обновлять автоматически</label>
+                  </div>
                 </div>
-                <div class="top-button">
-                    <a class="top-button__btn" href="javascript:void(0)"></a>
-                    <span>наверх</span>
+              </div>
+              <div class="timeline">
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:23</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title">Еще одна новость по поводу совершенного покушения</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
                 </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:18</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title is-important">Более важные посты выделены крупнее и болдом</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:14</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title">Согласно результатам генетической экспертизы и записям с камер наблюдения, бомбу на станции &quot;Площадь Восстания&quot; петербургском метро оставил тот же человек, который позже подовал себя в вагоне на перегоне между станциями &quot;Сенная площадь&quot; и &quot;Технологический парк&quot;.
+                Кризис интуитивно понятен. Анализ рыночных цен слабопроницаем. Создание приверженного покупателя, как бы это ни казалось парадоксальным, однократно. Нестандартный подход, например, слабо оправдывает закон.</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:12</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title is-important">Сновидение отталкивает позитивистский стимул. Бессознательное, суммируя приведенные примеры, притягивает ролевой гештальт. Контекстная реклама притягивает страх. Итак, ясно, что SWOT-анализ изменяем.</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:12</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title">Рекламное сообщество, как бы это ни казалось парадоксальным, вполне выполнимо. Репрезентативная система требовальна к креативу</span>
+                    <div class="timeline__img"><img src="https://source.unsplash.com/random/300x200" alt=""/>
+                    </div>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:12</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title">Эффективность действий существенно отчуждает из ряда вон выходящий генезис. Скиннер, однако, настаивал, что компульсивность начинает медиавес</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:12</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title is-important">Точечное воздействие искажает институциональный стимул. Душа специфицирует креативный гендер, не считаясь с затратами. Ценовая стратегия отчуждает автоматизм. Согласно предыдущему, мышление устойчиво представляет собой креативный контраст.</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:12</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title">Организация службы маркетинга, конечно, конфронтально вызывает обществвенный принцип восприятия.</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:12</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title is-important fs-24">Стимулирование коммьюнити, по определению, дает комплексный формат события. Восприятие марки, как принято считать, вполне выполнимо</span>
+                    <div class="timeline__video"><img src="https://source.unsplash.com/random/490x265" alt=""/>
+                      <div class="timeline__video-mask">
+                      </div><i class="icon icon-play"></i>
+                    </div>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline__item">
+                  <div class="timeline__date"><time class="timeline__time">08:12</time>
+                  </div>
+                  <div class="timeline__cnt"><span class="timeline__title">Как отмечает Майкл Мескон, воспитание важно ускоряет оппортунический бизнес-план. Рекламная заставка изоморфна времени.</span>
+                  </div>
+                  <div class="social-links social-links--vertical"><a class="social-links__ico-link social-links__share" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/share.png" alt="" role="presentation"/></a>
+                    <div class="social-links__list"><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/facebook.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/twitter.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/odnoklassniki.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/vkontakte.png" alt="" role="presentation"/></a><a class="social-links__ico-link" href="javascript:void(0)"><img class="social-links__ico-image" src="static/img/general/social/viber.png" alt="" role="presentation"/></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="more-goods more-goods--left"><a class="more-goods__link" href="javascript:void(0)">
+            <svg class="icon icon_more icon more-goods__icon" width="35px" height="33px">
+                <use xlink:href="svg-symbols.svg#more"></use>
+            </svg>
+        <span class="more-goods__more-text more-text">предыдущие записи</span></a>
+              </div>
             </div>
-            <div class="inner-about__right right-col">
-                <div class="general-video inner-about__general-video">
-                    <a class="general-video__link" href="javascript:void(0)"></a>
-                    <img class="general-video__img" src="static/img/content/general-video/general-mini.jpg" alt="" role="presentation"
-                    />
-                    <div class="general-video__info">
-                        <div class="general-video__date general-video__date general-video__date_position">
-                            <img class="general-video__ico" src="static/img/content/video-ico/video-ico.png" alt="" role="presentation"
-                            />
-                            <span class="general-video__span">27 марта</span>
-                        </div>
-                        <div class="general-video__title">Все ключевые события этого дня
-                        </div>
-                        <div class="general-video__logo">
-                            <span class="general-video__logo-title">Today</span>
-                            <img class="general-video__logo" src="static/img/content/rtvi/purple-rtvi.png" alt=""
-                            role="presentation" />
-                        </div>
-                    </div>
-                </div>
-                <div class="info-noize inner-about__info-noize">
-                    <p class="info-noize__title section-title">Инфошум
-                    </p>
-                    <div class="info-noize__wrapper">
-                        <div class="mini-news info-noize__mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">Палестинец на машине врезался в группу израильских солдат</a>
-                                <p class="mini-news__date">10 часов назад
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mini-news info-noize__mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">Марин Ле Пен пообещала бороться за отмену санкций против россиян</a>
-                                <p class="mini-news__date">Вчера, 14:44
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mini-news info-noize__mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">Зюганов назвал Навального трезвым Ельциным</a>
-                                <p class="mini-news__date">Вчера, 09:18
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mini-news info-noize__mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">У Лондонского террориста оказалось другое имя</a>
-                                <p class="mini-news__date">6 апреля, 07:12
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mini-news info-noize__mini-news">
-                            <div class="mini-news__info">
-                                <a class="mini-news__title" href="javascript:void(0)">Медведев: Навальный подставляет молодых людей для достижения шкурных целей</a>
-                                <p class="mini-news__date">5 апреля, 16:10
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="enter-one inner-about__enter-one inner-about__enter-one--border">
-                    <p class="enter-one__title section-title section-title section-title_no-border">Из эфира
-                    </p>
-                    <div class="from-enter general-news__from-enter from-enter from-enter_border">
-                        <a class="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
-                            <img class="from-enter__img" src="static/img/content/from-enter/from-enter.png" atl="" alt="" role="presentation"
-                            />
-                            <span class="from-enter__time-keeping">
-                                <img class="from-enter__ico" src="static/img/content/video-ico/video-ico.png" alt="" role="presentation"
-                                />
-                                <span class="from-enter__keeping">03:40</span>
-                            </span>
-                        </a>
-                        <div class="from-enter__info">
-                            <a class="from-enter__link" href="javascript:void(0)">Подробности атаки на Вестминстер: кем был лондонский террорист?</a>
-                            <p class="from-enter__category">Новости
-                                <span class="from-enter__time-add">2 часа назад</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="top-button"><a class="top-button__btn" href="javascript:void(0)"></a><span>наверх</span>
             </div>
+          </div>
+          <div class="inner-about__right right-col">
+            <div class="general-video inner-about__general-video"><a class="general-video__link" href="javascript:void(0)"></a><img class="general-video__img" src="static/img/content/general-video/general-mini.jpg" alt="" role="presentation"/>
+              <div class="general-video__info">
+                <div class="general-video__date general-video__date general-video__date_position"><img class="general-video__ico" src="static/img/content/video-ico/video-ico.png" alt="" role="presentation"/><span class="general-video__span">27 марта</span>
+                </div>
+                <div class="general-video__title">Все ключевые события этого дня
+                </div>
+                <div class="general-video__logo"><span class="general-video__logo-title">Today</span><img class="general-video__logo" src="static/img/content/rtvi/purple-rtvi.png" alt="" role="presentation"/>
+                </div>
+              </div>
+            </div>
+            <div class="info-noize inner-about__info-noize"><a class="info-noize__title section-title" href="javascript:void(0)">Инфошум</a>
+              <div class="info-noize__wrapper">
+                <div class="mini-news info-noize__mini-news">
+                  <div class="mini-news__info"><a class="mini-news__title" href="javascript:void(0)">Палестинец на машине врезался в группу израильских солдат</a>
+                    <p class="mini-news__date">10 часов назад
+                    </p>
+                  </div>
+                </div>
+                <div class="mini-news info-noize__mini-news">
+                  <div class="mini-news__info"><a class="mini-news__title" href="javascript:void(0)">Марин Ле Пен пообещала бороться за отмену санкций против россиян</a>
+                    <p class="mini-news__date">Вчера, 14:44
+                    </p>
+                  </div>
+                </div>
+                <div class="mini-news info-noize__mini-news">
+                  <div class="mini-news__info"><a class="mini-news__title" href="javascript:void(0)">Зюганов назвал Навального трезвым Ельциным</a>
+                    <p class="mini-news__date">Вчера, 09:18
+                    </p>
+                  </div>
+                </div>
+                <div class="mini-news info-noize__mini-news">
+                  <div class="mini-news__info"><a class="mini-news__title" href="javascript:void(0)">У Лондонского террориста оказалось другое имя</a>
+                    <p class="mini-news__date">6 апреля, 07:12
+                    </p>
+                  </div>
+                </div>
+                <div class="mini-news info-noize__mini-news">
+                  <div class="mini-news__info"><a class="mini-news__title" href="javascript:void(0)">Медведев: Навальный подставляет молодых людей для достижения шкурных целей</a>
+                    <p class="mini-news__date">5 апреля, 16:10
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enter-one inner-about__enter-one inner-about__enter-one--border"><a class="enter-one__title section-title section-title section-title_no-border" href="javascript:void(0)">Из эфира</a>
+              <div class="from-enter general-news__from-enter from-enter from-enter_border"><a class="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)"><img class="from-enter__img" src="static/img/content/from-enter/from-enter.png" atl="" alt="" role="presentation"/><span class="from-enter__time-keeping"><img class="from-enter__ico" src="static/img/content/video-ico/video-ico.png" alt="" role="presentation"/><span class="from-enter__keeping">03:40</span></span></a>
+                <div class="from-enter__info"><a class="from-enter__link" href="javascript:void(0)">Подробности атаки на Вестминстер: кем был лондонский террорист?</a>
+                  <p class="from-enter__category"> <a class="from-enter__category-link" href="javascript:void(0)">Новости</a> <span class="from-enter__time-add">2 часа назад</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </main>
     <footer class="footer">
-        <div class="footer__container container">
-            <div class="footer__left-part">
-                <div class="logo-footer footer__logo-footer">
-                    <img class="logo-footer__img" src="static/img/content/logo-footer/logo-footer.png" alt="" role="presentation"
-                    />
-                </div>
-                <div class="copyright footer__copyright">
-                    <p class="copyright__text">&#169; Overseas Media,
-                        <br/>2002–2017
-                    </p>
-                </div>
-            </div>
-            <div class="footer__middle-part">
-                <div class="col-menu footer__col-menu">
-                    <nav class="col-menu__nav">
-                        <ul class="col-menu__ul">
-                            <li class="col-menu__li">
-                                <a class="col-menu__link" href="javascript:void(0)">Телепрограмма</a>
-                            </li>
-                            <li class="col-menu__li">
-                                <a class="col-menu__link" href="javascript:void(0)">Лицензии</a>
-                            </li>
-                            <li class="col-menu__li">
-                                <a class="col-menu__link" href="javascript:void(0)">Как смотреть</a>
-                            </li>
-                            <li class="col-menu__li">
-                                <a class="col-menu__link" href="javascript:void(0)">Карьера</a>
-                            </li>
-                            <li class="col-menu__li">
-                                <a class="col-menu__link" href="javascript:void(0)">Размещение рекламы</a>
-                            </li>
-                            <li class="col-menu__li">
-                                <a class="col-menu__link" href="javascript:void(0)">Правила пользования</a>
-                            </li>
-                            <li class="col-menu__li">
-                                <a class="col-menu__link" href="javascript:void(0)">Контакты</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="footer__right-part">
-                <div class="subscribe-networks footer__subscribe-networks">
-                    <p class="subscribe-networks__title">Подпишитесь на нас
-                    </p>
-                    <div class="subscribe-networks__list-network">
-                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
-                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/facebook.png"
-                            alt="" role="presentation" />
-                        </a>
-                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
-                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/twitter.png"
-                            alt="" role="presentation" />
-                        </a>
-                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
-                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/youtube.png"
-                            alt="" role="presentation" />
-                        </a>
-                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
-                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/viber.png"
-                            alt="" role="presentation" />
-                        </a>
-                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
-                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/ok.png" alt=""
-                            role="presentation" />
-                        </a>
-                        <a class="subscribe-networks__ico-link" href="javascript:void(0)">
-                            <img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/rss.png" alt=""
-                            role="presentation" />
-                        </a>
-                    </div>
-                </div>
-            </div>
+      <div class="footer__container container">
+        <div class="footer__left-part">
+          <div class="logo-footer footer__logo-footer"><img class="logo-footer__img" src="static/img/content/logo-footer/logo-footer.png" alt="" role="presentation"/>
+          </div>
+          <div class="copyright footer__copyright">
+            <p class="copyright__text">&#169; Overseas Media,<br/>2002–2017
+            </p>
+          </div>
         </div>
+        <div class="footer__middle-part">
+          <div class="col-menu footer__col-menu">
+            <nav class="col-menu__nav">
+              <ul class="col-menu__ul">
+                <li class="col-menu__li"><a class="col-menu__link" href="javascript:void(0)">Телепрограмма</a>
+                </li>
+                <li class="col-menu__li"><a class="col-menu__link" href="javascript:void(0)">Лицензии</a>
+                </li>
+                <li class="col-menu__li"><a class="col-menu__link" href="javascript:void(0)">Как смотреть</a>
+                </li>
+                <li class="col-menu__li"><a class="col-menu__link" href="javascript:void(0)">Карьера</a>
+                </li>
+                <li class="col-menu__li"><a class="col-menu__link" href="javascript:void(0)">Размещение рекламы</a>
+                </li>
+                <li class="col-menu__li"><a class="col-menu__link" href="javascript:void(0)">Правила пользования</a>
+                </li>
+                <li class="col-menu__li"><a class="col-menu__link" href="javascript:void(0)">Контакты</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="footer__right-part">
+          <div class="subscribe-networks footer__subscribe-networks">
+            <p class="subscribe-networks__title">Подпишитесь на нас
+            </p>
+            <div class="subscribe-networks__list-network"><a class="subscribe-networks__ico-link" href="javascript:void(0)"><img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/facebook.png" alt="" role="presentation"/></a><a class="subscribe-networks__ico-link" href="javascript:void(0)"><img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/twitter.png" alt="" role="presentation"/></a><a class="subscribe-networks__ico-link" href="javascript:void(0)"><img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/youtube.png" alt="" role="presentation"/></a><a class="subscribe-networks__ico-link" href="javascript:void(0)"><img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/viber.png" alt="" role="presentation"/></a><a class="subscribe-networks__ico-link" href="javascript:void(0)"><img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/ok.png" alt="" role="presentation"/></a><a class="subscribe-networks__ico-link" href="javascript:void(0)"><img class="subscribe-networks__ico-image" src="static/img/content/subscribe-networks/rss.png" alt="" role="presentation"/></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
     <script src="static/js/main.min.js"></script>
-</body>
-
+  </body>
 </html>
