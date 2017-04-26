@@ -13,6 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'administrator',
+            'login'=>'admin',
             'email' => 'admin@example.com',
             'password' =>  app('hash')->make('admin'),
             'need_change_password'=>'0',
