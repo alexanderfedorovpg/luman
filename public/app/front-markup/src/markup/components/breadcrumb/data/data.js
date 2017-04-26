@@ -13,5 +13,9 @@ var data = {breadcrumb: {
     textStream: {
         1: 'Самые новые',
         2: 'Самые первые'
+    },
+    programm: {
+        1: 'Европа',
+        2: 'США'
     }
 }};

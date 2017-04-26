@@ -205,6 +205,16 @@ export const uploadFile = (file) => {
     });
 };
 
+//?searchString=two&orderBy=top
+export const getReadyNews = params => axios.get(`${baseUrl}/newseditor/moderated`, {
+    params: {
+        ...params,
+    },
+});
+
+export const publishModeratedArticle = id => axios.put(`${baseUrl}/newseditor/publish/${id}`)
+
+
 // =============================================================================
 // RECORDS AND PROGRAMS API
 // =============================================================================

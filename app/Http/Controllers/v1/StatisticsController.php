@@ -3,7 +3,7 @@
 	namespace App\Http\Controllers\v1;
 
 	use App\Http\Transformers\v1\StatisticsTransformer;
-    use App\Models\Counters;
+	use App\Models\Counters;
 	use App\Models\News;
 	use App\Models\NewsModerationLog;
 	use Illuminate\Http\Request;
@@ -13,29 +13,29 @@
 	use \DateInterval;
 
 
-    /**
-     * Class StatisticsController
-     * @package App\Http\Controllers\v1
-     */
+	/**
+	 * Class StatisticsController
+	 * @package App\Http\Controllers\v1
+	 */
 	class StatisticsController extends CmsController {
 
 		private $start_date;
 		private $end_date;
 
-        /**
-         * @var StatisticsTransformer
-         */
-        protected $statisticsTransformer;
+		/**
+		 * @var StatisticsTransformer
+		 */
+		protected $statisticsTransformer;
 
-        /**
-         * StatisticsController constructor.
-         * @param StatisticsTransformer $transformer
-         */
-        public function __construct(StatisticsTransformer $transformer)
-        {
-            parent::__construct();
-            $this->statisticsTransformer = $transformer;
-        }
+		/**
+		 * StatisticsController constructor.
+		 *
+		 * @param StatisticsTransformer $transformer
+		 */
+		public function __construct( StatisticsTransformer $transformer ) {
+			parent::__construct();
+			$this->statisticsTransformer = $transformer;
+		}
 
 		/**
 		 * @param $type_interval
@@ -43,33 +43,10 @@
 		 *
 		 * @return string
 		 */
-		private function setInterval( $type_interval='today', $param = array( 1 => 'start_date', 2 => 'start_date' ) ) {
-
-			$period = 'true';
-			switch ( $type_interval ) {
-				case 'today':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( 'today' ) ) . '"';
-					break;
-				case  'week':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( '-1 week' ) ) . '"';
-					break;
-
-				case 'month':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( '-1 month' ) ) . '"';
-					break;
-
-
-				case 'year':
-					$period = $param[1] . '>="' . date( 'Y-m-d H:i:s', strtotime( '-1 year' ) ) . '"';
-					break;
-
-				case 'custom':
-					$period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
-					break;
-
-                default:
-                    $period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
-			}
+		private function setInterval(
+			$param = array( 1 => 'start_date', 2 => 'start_date' )
+		) {
+			$period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
 
 			return $period;
 		}
@@ -80,40 +57,38 @@
 		 *
 		 * @return \Illuminate\Http\JsonResponse
 		 */
-		public function getCountersAll ( Request $request ) {
+		public function getCountersAll( Request $request ) {
 
 			try {
 
 				$this->validate( $request, [
-                    'type_interval'=> 'in:today,week,month,year,custom',
-					'start_date'    =>  'date|date_format:Y-m-d H:i:s',
-					'end_date'      =>  'date|date_format:Y-m-d H:i:s',
+					'start_date' => 'date|date_format:Y-m-d H:i:s',
+					'end_date'   => 'date|date_format:Y-m-d H:i:s',
 				] );
 
-				$type_interval    = $request->input( 'type_interval' );
 				$this->start_date = $request->input( 'start_date' );
 				$this->end_date   = $request->input( 'end_date' );
 
-				$period = $this->setInterval( $type_interval, array( 1 => 'publish_date', 2 => ' publish_date' ) );
+				$period = 'true';
+				if ($this->start_date && $this->end_date )
+					$period = $this->setInterval( array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
-				$results = Counters::selectRaw( 'type ,  sum(count_click) as count_click  ,   sum(count_views) as count_views' )
-                                       ->join( 'news', 'news.id', '=', 'news_id' )
-                                        ->groupBy('type' )
-				                  //     ->whereRaw( $period )
-				                       ->get();
+				$results = Counters::selectRaw( 'type ,  sum(count_click) as count_click  ,   sum(count_views) as count_views, count(news.id) as count_publish' )
+				                   ->join( 'news','news.id', '=', 'news_id' )
+				                   ->whereRaw( $period )
+				                   ->groupBy( 'type' )
+				                   ->get();
 
 
-                return $this->respond(
-                    $this->statisticsTransformer->transformCollection($results->toArray())
-                );
+				return $this->respond(
+					$results->toArray()
+				);
 
 			} catch ( \Exception $e ) {
 				return $this->respondFail500x( $e );
 			}
 
 		}
-
-
 
 
 	}

@@ -17,12 +17,6 @@
         margin-top: rem(22);
     }
 
-    &__enter-one--border .from-enter {
-        width: 18.75rem;
-
-        border: 1px solid #ccc;
-    }
-
     &__enter-one--nopad .from-enter__info {
         width: 100%;
         padding-right: 6.7%;
@@ -115,29 +109,6 @@
         font-size: rem(12);
         color: $blue;
         text-decoration: none;
-    }
-
-    &__sort {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-top: rem(14);
-
-        &-by {
-            font-family: $stemReg;
-            font-size: rem(16);
-            color: $enter;
-        }
-    }
-
-    &__text-stream__head {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        margin-right: rem(34);
-        margin-left: rem(80);
-
-        border-bottom: 1px solid #cccccc;
     }
 
     &__new-content {

@@ -35,11 +35,14 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/auth/login','AuthController@login');
 
     //Редакторы новостей
+    $group->get('/newseditor/moderated','NewsListEditorController@getModerated');
     $group->get('/newslisteditor[/{assigned}]','NewsListEditorController@get');
     $group->get('/newseditor/{id}','NewsListEditorController@getOne');
     $group->post('/newseditor','NewsListEditorController@create');
-    $group->get('/newseditor/moderated','NewsListEditorController@getModerated');
+
     $group->put('/newseditor/edit','NewsListEditorController@edit');
+    $group->put('/newseditor/publish/{id}','NewsListEditorController@publish');
+
     $group->delete('/newseditor/{id}','NewsListEditorController@delete');
     $group->post('/newseditor/delegate','NewsListEditorController@delegate');
     $group->post('/newseditor/rejection','NewsListEditorController@rejection');
@@ -119,8 +122,10 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->put('/air/record/{id}','AirRecordController@update');
     $group->delete('/air/record/{id}','AirRecordController@destroy');
 
-
-
+    //Конструктор главной страницы
+    $group->get('/homepage','HomepageController@index');
+    $group->put('/homepage','HomepageController@update');
+    $group->get('/homepage/newscategory','HomepageController@getNewsCategories');
 });
 
 

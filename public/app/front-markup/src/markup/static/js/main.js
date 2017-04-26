@@ -77,3 +77,37 @@ $('.search__input-text').on('keyup', function () {
 
 });
 
+var SimpleCollapse = function () {
+    var self = this,
+        collapse = $('.js-collap-wrap');
+
+    collapse.each(function () {
+        var $index = $(this).find('.js-collap-ln.is-active');
+        $index.next().addClass('is-open').slideDown(400);
+    });
+
+    collapse.on('click', '.js-collap-ln', function (event) {
+        self.open($(this), event);
+        // return false;
+    });
+
+    self.open = function (elem, event) {
+
+        event.preventDefault();
+        var parentCollapse = elem.closest(collapse);
+
+        if (!elem.hasClass('is-active')) {
+            parentCollapse.find('.is-open').removeClass('is-open').slideUp(400);
+            parentCollapse.find('.is-active').removeClass('is-active');
+            elem.parent().removeClass('is-active');
+        }
+
+        elem.parent().addClass('is-active');
+        elem.next().addClass('is-open').slideDown(400);
+        elem.addClass('is-active');
+
+    };
+
+};
+
+var simpleCollapse = new SimpleCollapse();

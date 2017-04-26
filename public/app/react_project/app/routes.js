@@ -20,6 +20,31 @@ export default function createRoutes(store) {
         {
             path: '/constructor',
             name: 'constructor',
+            childRoutes: [
+                {
+                    path: '/constructor/news',
+                    name: 'constructor-news',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/ConstructorPage/News'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component)
+                        });
+
+                        importModules.catch(errorLoading);
+                    }
+                }
+            ],
+            indexRoute: {
+                onEnter(nextState, replace, callback) {
+                    replace('/constructor/news')
+                    callback()
+                }
+            },
             onEnter(nextState, replace, callback) {
                 if (this.loadedSagas) {
                     callback();
@@ -159,14 +184,38 @@ export default function createRoutes(store) {
         {
             path: '/ready',
             name: 'ready',
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/ReadyPage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
+                    import('containers/ReadyPage/reducer'),
                     import('containers/ReadyPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([component]) => {
+                importModules.then(([reducer, component]) => {
+                    injectReducer('readyPage', reducer.default)
+
                     renderRoute(component)
                 });
 

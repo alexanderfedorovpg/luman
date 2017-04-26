@@ -1,0 +1,17 @@
+mixin dateline(data)
+    +b.dateline()&attributes(attributes)
+
+        +e.A.prev(href=jv0)
+            != pugHelpers.Icon.call(locals, {iconName: 'arrow-left', className: '', iconWidth: '', iconHeight: ''})
+        +e.list
+
+            each item in data.items
+
+                +e.A.item(href=jv0, class= item.class)
+                    +e.SPAN.day= item.day
+                    +e.SPAN.date= item.date
+
+
+        +e.A.next(href=jv0)
+            != pugHelpers.Icon.call(locals, {iconName: 'arrow-right', className: '', iconWidth: '', iconHeight: ''})
+        block

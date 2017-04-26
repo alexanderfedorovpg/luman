@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import debounce from 'lodash/debounce'
 
 import {
     Left,
@@ -22,21 +23,75 @@ const CustomInput = styled(InputIcon)`
     margin-right: 28px;
 `
 
-function Header() {
+class Header extends PureComponent {
 
-    return (
-        <Bot>
-            <Left>
-                <Form>
-                    <CustomInput icon="search" placeholder="Поиск по готовым материалам" />
-                    <Toggle />
-                </Form>
-            </Left>
-            <Right>
-                <Help />
-            </Right>
-        </Bot>
-    )
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: {
+                search: '',
+                order: props.filters[0].id
+            }
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleOrderChange = this.handleOrderChange.bind(this)
+        this.setFilters = debounce(() => {
+            props.setFilters({
+                searchString: this.state.data.search,
+                orderBy: props.filters.find(v=>v.id == this.state.data.order).value
+            })
+        }, 500)
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+    }
+
+    handleChange(e) {
+        this.setState({
+            data: {
+                ...this.state.data,
+                search: e.target.value
+            }
+        }, this.setFilters)
+    }
+
+    handleOrderChange(item) {
+        this.setState({
+            data: {
+                ...this.state.data,
+                order: item.id
+            }
+        }, this.setFilters)
+    }
+
+    render() {
+        let { filters } = this.props
+
+        return (
+            <Bot>
+                <Left>
+                    <Form onSubmit={this.handleSubmit}>
+                        <CustomInput
+                            icon="search"
+                            value={this.state.data.search}
+                            onChange={this.handleChange}
+                            placeholder="Поиск по готовым материалам" />
+                        <Toggle
+                            data={filters}
+                            value={this.state.order}
+                            onChange={this.handleOrderChange} />
+                    </Form>
+                </Left>
+                <Right>
+                    <Help />
+                </Right>
+            </Bot>
+        )
+    }
 }
 
 export default Header

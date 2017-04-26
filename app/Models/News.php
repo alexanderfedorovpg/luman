@@ -35,6 +35,11 @@ class News extends Model
         'theses',
     ];
 
+    public static $rules = [
+        'id' => 'integer|exists:news,id',
+
+    ];
+
     /**
      * Возвращает связь с комментарими
      *

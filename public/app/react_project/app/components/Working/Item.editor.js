@@ -7,7 +7,7 @@ import randomString from 'random-string'
 import Rating from 'components/Rating/Item'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
-import TitleWrapper from './TitleWrapper'
+import { titleWrapper } from './style'
 
 import { font } from 'constants/style'
 import { ifProp } from 'utils/style'
@@ -106,6 +106,10 @@ const Title = styled.div`
     ${ifProp('new')`
         font-weight: 700;
     `}
+`
+
+const TitleWrapper = styled.p`
+    ${titleWrapper}
 `
 
 const Tags = styled.div`
