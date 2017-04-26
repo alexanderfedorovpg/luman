@@ -71,7 +71,9 @@
 
 				$period = $this->setInterval( array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
-				$results = Counters::selectRaw( 'type ,  sum(count_click) as count_click  ,   sum(count_views) as count_views, count(id) as count_publish' )
+				$results = Counters::selectRaw( 'type ,  sum(count_click) as count_click  ,   sum(count_views) as count_views, count(news.id) as count_publish' )
+				                   ->join( 'news','news.id', '=', 'news_id' )
+				                   ->whereRaw( $period )
 				                   ->groupBy( 'type' )
 				                   ->get();
 
