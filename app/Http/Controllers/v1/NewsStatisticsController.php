@@ -55,9 +55,9 @@
 
 				$results = NewsModerationLog::  select( 'users.id', 'users.name',
 					DB::raw( ' AVG(TIMESTAMPDIFF (SECOND ,start_date,end_date )) as time_work' ),
-					'count_news','cdn_files.url' )
+					'count_news', 'cdn_files.url' )
 				                            ->join( 'users', 'users.id', '=', 'editor_id' )
-											->Leftjoin('cdn_files','cdn_files.id', '=', 'users.avatar_id'  )
+				                            ->Leftjoin( 'cdn_files', 'cdn_files.id', '=', 'users.avatar_id' )
 				                            ->Leftjoin(
 					                            DB::raw( '
 																(SELECT editor_id, COUNT(*) as count_news 
@@ -88,6 +88,62 @@
 								'hours'   => $hours,
 								'minutes' => $minutes
 							)
+						)
+					);
+				}
+
+				return $this->respond( $respond );
+			} catch ( \Exception $e ) {
+				return $this->respondFail500x( $e );
+			}
+		}
+
+		/**
+		 * @param Request $request
+		 *
+		 * @return \Illuminate\Http\JsonResponse
+		 */
+		public function getTimeAllEditorsExtended( Request $request ) {
+
+			try {
+				$this->validate( $request, [
+					'start_date' => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'   => 'required|date|date_format:Y-m-d H:i:s',
+				] );
+				$this->start_date = $request->input( 'start_date' );
+				$this->end_date   = $request->input( 'end_date' );
+				$period           = $this->setInterval( array( 1 => 'publish_date', 2 => 'publish_date' ) );
+
+				$respond = array();
+
+				$results = News:: select( 'users.id', 'users.name', 'publish_date', 'cdn_files.url', 'count_click',
+					'count_views','title' )
+				               ->join( 'users', 'users.id', '=', 'editor_id' )
+				               ->Leftjoin( 'cdn_files', 'cdn_files.id', '=', 'users.avatar_id' )
+				               ->Leftjoin( 'counters', function ( $join ) {
+					               $join->on( 'counters.news_id', '=', 'news.id' )
+					                    ->where( 'counters.type', '=', 'news' );
+				               } )
+				               ->where( 'is_publish', '=', '1' )
+				               ->whereRaw( $period )
+				               ->groupBy( 'users.id' )
+				               ->get();
+
+				foreach ( $results as $result ) {
+					$hours   = floor( $result->time_work / 3600 );
+					$hours   = ( $hours > 0 ) ? $hours : 0;
+					$minutes = floor( ( $result->time_work / 3600 - $hours ) * 60 );
+					array_push( $respond,
+						array(
+							'id'           => $result->id,
+							'editor_name'  => $result->name,
+							'news_name'    => $result->title,
+							'publish_date' => $result->publish_date,
+							'avatar_img'   => $result->url,
+							'count_news'   => $result->count_news,
+							'count_click'  => $result->count_click,
+							'count_views'  => $result->count_views,
+
 						)
 					);
 				}
