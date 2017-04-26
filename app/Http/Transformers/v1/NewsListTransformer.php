@@ -21,38 +21,34 @@ class NewsListTransformer extends Transformer
     public function transform($news)
     {
         $transform = [
-            'Id' => $news['id']
+            'id' => $news['id']
         ];
 
         if ($news['publish_date']) {
-            $transform['PublishDate'] = implode('T', explode(' ', $news['publish_date']));
+            $transform['publish_date'] = implode('T', explode(' ', $news['publish_date']));
         } else {
-            $transform['PublishDate'] = '';
+            $transform['publish_date'] = '';
         }
 
-        $transform['Top'] = $news['top'];
-        $transform['Title'] = $news['title'];
-        $transform['Subtitle'] = $news['sub_title'];
-        $transform['Tags'] =  explode(',', $news['tags']);
+        $transform['top'] = $news['top'];
+        $transform['title'] = $news['title'];
+        $transform['subtitle'] = $news['sub_title'];
+        $transform['tags'] =  explode(',', $news['tags']);
 
         $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->pluck('url')->first();
-        $transform['ImagePreview'] = $imagePreview;
+        $transform['image_preview'] = $imagePreview;
 
 	    $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
-	    $transform['ImageMain'] = $imageMain;
+	    $transform['image_main'] = $imageMain;
 
-        $transform['ExistVideo'] = (bool) $news['video_stream'];
-
-        if ($news['video_stream']) {
-            $transform['VideoStream'] = $news['video_stream'];
-        }
+        $transform['video_stream'] = $news['video_stream'];
 
         $transHelper = new UrlReplaceHelper();
 	    $url_title = $transHelper->translate($news['title']);
 
-        $transform['ShareLink'] = 'http://rtvi.com/news/'. $news['id'].'-'.$url_title;
+        $transform['share_link'] = 'http://rtvi.com/news/'. $news['id'].'-'.$url_title;
 
-        $transform['EditorId'] = $news['editor_id'];
+        $transform['editor_id'] = $news['editor_id'];
 
         $hh = 0;
         $mm = 0;
@@ -67,17 +63,14 @@ class NewsListTransformer extends Transformer
         }
 
         if(is_string($news['original_source_link'])) {
-            $transform['OriginalLink'] = $news['original_source_link'];
+            $transform['original_link'] = $news['original_source_link'];
         } else {
-            $transform['OriginalLink'] = false;
+            $transform['original_link'] = false;
         }
 
-        if(!empty($news["lostComment"])) {
-            $transform['lostComment'] = $news["lostComment"];
-        }
 
-        $transform['Keywords'] = explode(',', $news['keywords']);
-        $transform['Rubrics'] = Rubrics::where('id', '=', $news['rubrics_id'])->get();
+        $transform['keywords'] = explode(',', $news['keywords']);
+        $transform['rubrics_id'] = Rubrics::where('id', '=', $news['rubrics_id'])->get();
 
         return $transform;
     }
@@ -91,9 +84,9 @@ class NewsListTransformer extends Transformer
     public function transformOneNews($news, $comments)
     {
         $transform = $this->transform($news);
-        $transform['Note'] = $news['note'];
-        $transform['Body'] = $news['body'];
-        $transform['Comments'] = $this->transformComments($comments);
+        $transform['note'] = $news['note'];
+        $transform['body'] = $news['body'];
+        $transform['comments'] = $this->transformComments($comments);
 
 
         return $transform;
@@ -107,14 +100,14 @@ class NewsListTransformer extends Transformer
     {
         $transform = [];
         foreach ($comments as $key => $comment) {
-            $transform[$key]['IdEditor'] = $comment->id;
-            $transform[$key]['Editor'] = $comment->editor->name;
+            $transform[$key]['id_editor'] = $comment->id;
+            $transform[$key]['editor'] = $comment->editor->name;
             if ($comment->publish_date) {
-                $transform[$key]['PublishDate'] = implode('T', explode(' ', $comment->publish_date));
+                $transform[$key]['publish_date'] = implode('T', explode(' ', $comment->publish_date));
             } else {
-                $transform[$key]['PublishDate'] = '';
+                $transform[$key]['publish_date'] = '';
             }
-            $transform[$key]['Body'] = $comment->body;
+            $transform[$key]['body'] = $comment->body;
         }
 
         return $transform;

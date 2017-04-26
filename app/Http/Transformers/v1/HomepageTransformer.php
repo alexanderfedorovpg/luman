@@ -33,9 +33,12 @@ class HomepageTransformer extends Transformer
     {
         $transform = [];
         foreach ($newsCollection as $news) {
+            $arrNews = $news->news->toArray();
+            $arrNews['image_main'] = $news->news->imageMain ? $news->news->imageMain->url : null;
+            $arrNews['image_preview'] = $news->news->imagePreview ? $news->news->imagePreview->url : null;
             $transform[] = [
                 'category' => $news->category,
-                'news' => $news->news,
+                'news' => $arrNews,
                 'top' => $news->top,
             ];
         }
