@@ -11,6 +11,7 @@
 	use \DateTime;
 	use \DatePeriod;
 	use \DateInterval;
+    use Illuminate\Validation\ValidationException;
 
 
 	/**
@@ -46,7 +47,14 @@
 		private function setInterval(
 			$param = array( 1 => 'start_date', 2 => 'start_date' )
 		) {
-			$period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
+            $period = '';
+            if ($this->start_date && $this->end_date) {
+                $period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
+            } elseif ($this->start_date) {
+                $period = "$param[1] >= '$this->start_date'";
+            } elseif ($this->end_date) {
+                $period = "$param[2] <= '$this->end_date'";
+            }
 
 			return $period;
 		}
@@ -70,7 +78,7 @@
 				$this->end_date   = $request->input( 'end_date' );
 
 				$period = 'true';
-				if ($this->start_date && $this->end_date )
+				if ($this->start_date || $this->end_date )
 					$period = $this->setInterval( array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
 				$results = Counters::selectRaw( 'type ,  sum(count_click) as count_click  ,   sum(count_views) as count_views, count(news.id) as count_publish' )
@@ -78,12 +86,14 @@
 				                   ->whereRaw( $period )
 				                   ->groupBy( 'type' )
 				                   ->get();
-                
+
 				return $this->respond(
                     $this->statisticsTransformer->transform($results->toArray())
 				);
 
-			} catch ( \Exception $e ) {
+			} catch (ValidationException $e) {
+                return $this->respondFail422x($e->response->original);
+            } catch ( \Exception $e ) {
 				return $this->respondFail500x( $e );
 			}
 
