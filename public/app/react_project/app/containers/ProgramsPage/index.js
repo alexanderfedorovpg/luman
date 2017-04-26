@@ -8,42 +8,45 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+import debounce from 'lodash/debounce';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
 import { loadRubrics } from 'containers/App/actions';
 import Records from 'components/Records';
 import ContentModal from 'components/Modal/ContentModal';
 import Waypoint from 'react-waypoint';
-
+import { Group } from 'components/Form';
 import makeSelectProgramsPage, {
     makeSelectRubricsNames,
     makeGetRecords,
 } from './selectors';
+import { MODALS } from './constants';
 import {
     openPage,
     setRecordsType,
     deleteRecord,
     changeRubric,
     loadRecords,
+    loadRecord,
+    openModal,
+    closeModal,
+    startEditRecord,
+    searchRecord,
 } from './actions';
 import Header from './Header';
-import { Wrapper, Content } from './style';
+import { StyledBtn, Wrapper, Content } from './style';
 import Rubrics from './Rubrics';
 import RecordForm from './RecordForm';
 
 export class ProgramsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    static modals = {
-        record: 'record',
-    }
-
     constructor(props) {
         super(props);
 
         this.loadMoreRecords = this.loadMoreRecords.bind(this);
-        this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.onDeleteClick = this.onDeleteClick.bind(this);
+        this.searchRecords = debounce(props.search, 300);
 
         this.state = {
-            openedModal: null,
+            pendingDelete: null,
         };
     }
 
@@ -51,25 +54,21 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
         this.props.openPage();
     }
 
+    onDeleteClick(id) {
+        this.setState({
+            pendingDelete: id,
+        });
+
+        this.props.openModal(MODALS.confirmRecordDelete);
+    }
+
     loadMoreRecords() {
         this.props.loadRecords(false);
     }
 
-    openModal(name) {
-        this.setState({
-            openedModal: name,
-        });
-    }
-
-    closeModal() {
-        this.setState({
-            openedModal: null,
-        });
-    }
-
     render() {
         const { menuOpen, rubrics, records } = this.props;
-        const { recordsType, rubric, loading, allRecordsUploaded } = this.props.ProgramsPage;
+        const { recordsType, rubric, loading, allRecordsUploaded, modal } = this.props.ProgramsPage;
 
         return (
             <Wrapper>
@@ -77,7 +76,8 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                 <Header
                     moved={menuOpen}
                     type={recordsType}
-                    onUpload={() => this.openModal(ProgramsPage.modals.record)}
+                    onSearch={this.searchRecords}
+                    onUpload={() => this.props.openModal(MODALS.record)}
                     setRecordsType={this.props.setRecordsType}
                 />
                 <Content>
@@ -92,7 +92,8 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                     {
                         !!records &&
                         <Records
-                            onRecordDelete={this.props.deleteRecord}
+                            onRecordEdit={this.props.startEditRecord}
+                            onRecordDelete={this.onDeleteClick}
                             items={records}
                         />
                     }
@@ -107,15 +108,33 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                         />
                     }
                 </Content>
+
                 <ContentModal
                     title="Загрузка программы"
                     contentLabel="Добавить или отредактировать выпуск"
-                    onRequestClose={this.closeModal}
-                    isOpen={this.state.openedModal === ProgramsPage.modals.record}
+                    onRequestClose={this.props.closeModal}
+                    isOpen={modal === MODALS.record}
                 >
-                    <RecordForm
-                        onCancel={this.closeModal}
-                    />
+                    <RecordForm onCancel={this.props.closeModal} />
+                </ContentModal>
+
+                <ContentModal
+                    title="Вы уверены, что хотите удалить этот выпуск?"
+                    contentLabel="Подтверждение удаления выпуска"
+                    isOpen={modal === MODALS.confirmRecordDelete}
+                    onRequestClose={this.props.closeModal}
+                >
+                    <Group horizontal>
+                        <StyledBtn onClick={this.props.closeModal} primary>
+                            Отменить
+                        </StyledBtn>
+                        <StyledBtn
+                            onClick={() => this.props.deleteRecord(this.state.pendingDelete)}
+                            danger
+                        >
+                            Удалить
+                        </StyledBtn>
+                    </Group>
                 </ContentModal>
             </Wrapper>
         );
@@ -131,6 +150,10 @@ ProgramsPage.propTypes = {
     loadRecords: PropTypes.func,
     changeRubric: PropTypes.func,
     deleteRecord: PropTypes.func,
+    openModal: PropTypes.func,
+    closeModal: PropTypes.func,
+    startEditRecord: PropTypes.func,
+    search: PropTypes.func,
     ProgramsPage: PropTypes.object,
 };
 
@@ -149,6 +172,11 @@ function mapDispatchToProps(dispatch) {
         loadRubrics: () => dispatch(loadRubrics()),
         changeRubric: (id) => dispatch(changeRubric(id[0])),
         loadRecords: (replace) => dispatch(loadRecords(replace)),
+        loadRecord: (id) => dispatch(loadRecord(id)),
+        openModal: (modal) => dispatch(openModal(modal)),
+        closeModal: () => dispatch(closeModal()),
+        startEditRecord: (id) => dispatch(startEditRecord(id)),
+        search: (query) => dispatch(searchRecord(query)),
     };
 }
 

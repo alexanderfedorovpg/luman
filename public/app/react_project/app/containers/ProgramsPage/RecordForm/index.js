@@ -7,8 +7,9 @@ import { Group, Select, Input, FileInput } from 'components/Form';
 import { Close, ArrowDown } from 'components/Icon/svg';
 import {
     StyledBtn,
-} from './style';
-import { makeGetProgramsAsOptions } from '../selectors';
+} from '../style';
+import { makeGetProgramsAsOptions, makeGetSelectedRecord } from '../selectors';
+import { postRecord, editRecord } from '../actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RecordForm extends React.PureComponent {
@@ -16,10 +17,17 @@ class RecordForm extends React.PureComponent {
         super(props);
 
         this.onCancelClick = this.onCancelClick.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(data) {
-        console.log(data);
+    onSubmit(immutableData) {
+        const data = immutableData.toJS();
+
+        if (!data.id) {
+            this.props.postRecord(data);
+        } else {
+            this.props.editRecord(data);
+        }
     }
 
     onCancelClick(e) {
@@ -32,11 +40,11 @@ class RecordForm extends React.PureComponent {
         }
     }
 
-    renderInput({ input, meta: { touched, invalid }, ...props }) {
+    renderInput({ input, meta: { touched, invalid, valid }, ...props }) {
         return (
             <Input
                 {...props}
-                success={touched && !invalid}
+                success={touched && valid}
                 error={touched && invalid}
                 value={input.value}
                 onChange={(e) => input.onChange(e)}
@@ -44,11 +52,11 @@ class RecordForm extends React.PureComponent {
         );
     }
 
-    renderFileInput({ input, meta: { touched, invalid }, ...props }) {
+    renderFileInput({ input, meta: { touched, invalid, valid }, ...props }) {
         return (
             <FileInput
                 {...props}
-                success={touched && !invalid}
+                success={touched && valid}
                 error={touched && invalid}
                 value={input.value}
                 onChange={(e) => input.onChange(e.target.files)}
@@ -56,11 +64,11 @@ class RecordForm extends React.PureComponent {
         );
     }
 
-    renderSelect({ input, meta: { touched, invalid }, ...props }) {
+    renderSelect({ input, meta: { touched, invalid, valid }, ...props }) {
         return (
             <Select
                 {...props}
-                success={touched && !invalid}
+                success={touched && valid}
                 error={touched && invalid}
                 value={input.value}
                 onChange={(option) => input.onChange(option.value)}
@@ -74,6 +82,7 @@ class RecordForm extends React.PureComponent {
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
+                <Field type="hidden" component="input" name="id" />
                 <Group md>
                     <Field
                         placeholder="Программа"
@@ -143,10 +152,13 @@ RecordForm.propTypes = {
     reset: PropTypes.func,
     onCancel: PropTypes.func,
     handleSubmit: PropTypes.func,
+    postRecord: PropTypes.func,
+    editRecord: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
     programs: makeGetProgramsAsOptions(),
+    initialValues: makeGetSelectedRecord(),
 });
 
-export default connect(mapStateToProps)(RecordForm);
+export default connect(mapStateToProps, { postRecord, editRecord })(RecordForm);

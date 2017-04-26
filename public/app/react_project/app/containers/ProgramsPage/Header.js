@@ -33,7 +33,7 @@ const Search = styled(InputIcon)`
     width: ${rem(465)};
 `;
 
-const Header = ({ type, setRecordsType, moved, onUpload, onSave }) => {
+const Header = ({ type, setRecordsType, moved, onUpload, onSave, onSearch }) => {
     const active = (recordsTypes.find((item) => item.value === type) || {}).title;
 
     return (
@@ -54,6 +54,7 @@ const Header = ({ type, setRecordsType, moved, onUpload, onSave }) => {
                     <Search
                         placeholder="Поиск по программам"
                         block
+                        onChange={(e) => onSearch(e.target.value)}
                         icon="search"
                     />
                 </FormHorizontal>
@@ -67,6 +68,7 @@ Header.propTypes = {
     onSave: PropTypes.func,
     type: PropTypes.string,
     setRecordsType: PropTypes.func,
+    onSearch: PropTypes.func,
     moved: PropTypes.bool,
 };
 

@@ -236,7 +236,7 @@
     "ip": "1.1.4",
     "konva": "^1.5.0",
     "localforage": "^1.5.0",
-    "lodash": "4.17.2",
+    "lodash": "^4.17.2",
     "minimist": "1.2.0",
     "normalize.css": "^3.0.3",
     "prop-types": "^15.5.8",

@@ -17,6 +17,20 @@ import {
     LOAD_RECORDS,
     LOAD_RECORDS_SUCCESS,
     LOAD_RECORDS_FAILURE,
+    LOAD_RECORD,
+    PENDING_RECORD,
+    LOAD_RECORD_SUCCESS,
+    LOAD_RECORD_FAILURE,
+    POST_RECORD,
+    POST_RECORD_SUCCESS,
+    POST_RECORD_FAILURE,
+    EDIT_RECORD,
+    EDIT_RECORD_SUCCESS,
+    EDIT_RECORD_FAILURE,
+    OPEN_MODAL,
+    CLOSE_MODAL,
+    START_EDIT_RECORD,
+    SEARCH_RECORD,
 } from './constants';
 
 export function openPage() {
@@ -67,7 +81,6 @@ export function deleteRecord(id) {
 }
 
 export function successDeleteRecord(id) {
-    console.log(id);
     return {
         type: DELETE_RECORD_SUCCESS,
         payload: { id },
@@ -102,3 +115,99 @@ export function failureLoadRecords(error) {
     };
 }
 
+export function loadRecord(id) {
+    return {
+        type: LOAD_RECORD,
+        payload: { id },
+    };
+}
+
+export function pendingRecord(id) {
+    return {
+        type: PENDING_RECORD,
+        payload: { id },
+    };
+}
+
+export function successLoadRecord(payload) {
+    return {
+        type: LOAD_RECORD_SUCCESS,
+        payload,
+    };
+}
+
+export function failureLoadRecord(error) {
+    return {
+        type: LOAD_RECORD_FAILURE,
+        error,
+    };
+}
+
+export function postRecord(payload) {
+    return {
+        type: POST_RECORD,
+        payload,
+    };
+}
+
+export function successPostRecord(payload) {
+    return {
+        type: POST_RECORD_SUCCESS,
+        payload,
+    };
+}
+
+export function failurePostRecord(error) {
+    return {
+        type: POST_RECORD_FAILURE,
+        error,
+    };
+}
+
+export function editRecord(payload) {
+    return {
+        type: EDIT_RECORD,
+        payload,
+    };
+}
+
+export function successEditRecord(payload) {
+    return {
+        type: EDIT_RECORD_SUCCESS,
+        payload,
+    };
+}
+
+export function failureEditRecord(error) {
+    return {
+        type: EDIT_RECORD_FAILURE,
+        error,
+    };
+}
+
+export function openModal(modal) {
+    return {
+        type: OPEN_MODAL,
+        payload: { modal },
+    };
+}
+
+export function closeModal() {
+    return {
+        type: CLOSE_MODAL,
+    };
+}
+
+export function startEditRecord(id) {
+    return {
+        type: START_EDIT_RECORD,
+        payload: { id },
+    };
+}
+
+export function searchRecord(query) {
+    return {
+        type: SEARCH_RECORD,
+        payload: { query },
+    };
+}

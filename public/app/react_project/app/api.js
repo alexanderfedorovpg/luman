@@ -221,7 +221,10 @@ export const publishModeratedArticle = id => axios.put(`${baseUrl}/newseditor/pu
 
 export const getPrograms = () => axios.get(`${baseUrl}/tv-program`);
 export const getRecords = (params) => axios.get(`${baseUrl}/air/record`, { params });
+export const getRecord = (id) => axios.get(`${baseUrl}/air/record/${id}`);
 export const deleteRecord = (id) => axios.delete(`${baseUrl}/air/record/${id}`);
+export const postRecord = (data) => axios.post(`${baseUrl}/air/record`, data);
+export const editRecord = (id, data) => axios.put(`${baseUrl}/air/record/${id}`, data);
 
 // =============================================================================
 
