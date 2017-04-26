@@ -18,6 +18,11 @@ trait NewsListTrait {
             $news->tags($tags);
         }
 
+        $infoNoise = $request->input('infoNoise');
+        if ($infoNoise === 'true') {
+            $news->infoNoise();
+        }
+
         $video = $request->input('video');
         if ($video !== null) {
             if ($video === 'true') {
