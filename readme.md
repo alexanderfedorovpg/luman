@@ -1,21 +1,110 @@
-# Lumen PHP Framework
+# RTVI - CMS
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+## Требования
+    
+- PHP >= 5.6.4;
+- OpenSSL PHP Extension;
+- Composer;
+- MySQL server;
+- PDO PHP Extension;
+- Mbstring PHP Extension;
+- CURL PHP Extension;
+- Nginx/Apache.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Установка
 
-## Official Documentation
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+##### 1. Развертывание файлов проекта, конфигурирование веб-вервера и СУБД
+Создайте базу данных MySQL для проекта. Затем склонируйте репозитарий проекта [librorum](https://gitlab.ddemo.ru/a.volkov/librorum) в директорию веб сервера.
 
-## Security Vulnerabilities
+- `` git clone git@gitlab.ddemo.ru:a.volkov/librorum.git``
+- `` cd ./librorum ``
+- `` composer update ``
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Произведите необходимые настройки в конфигурационном файле веб-сервера, путь до **document root** должен включать папку _public_ относительно проекта librorum.
 
-## License
+Скопируйте и заполните конфигурационный файл _.env_
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+```cp ./env.example ./env```
+ 
+Обязательные к заполнению константы:
+- DB_*;
+- PARSER_TASS_*;
+- FILESPOT_*.
+
+##### 2. Установка миграций.
+
+Перейдите в каталог проекта и выполните команду:
+
+```bash
+./artisan migrate
+```
+
+##### 3. Создание базовых групп и учетной записи администратора.
+
+Выполните команду:
+
+```bash
+./artisan db:seed 
+```
+Будет создан пользователь _admin_ c паролем _admin_, а также базовые группы:
+
+- Администраторы;
+- Редакторы;
+- Выпускающий;
+- Практикант.
+
+##### 4. Настройка и запуск слушателя заданий.
+
+В файле .env 
+
+``` 
+QUEUE_DRIVER=database
+```
+ 
+
+#####Пример:
+ - Создать конфигурационный файл /etc/supervisor/conf.d/email.conf для listener
+ - Отредактировать, указав свои пути
+ 
+```
+[program:email-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /home/ubuntu/test/artisan queue:work --queue=parser --sleep=2 --tries=1 --timeout 30 --daemon
+autostart=true
+autorestart=true
+user=www-data
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/var/log/creditgateway/worker.log
+```
+
+- Сохранить и перезапустить supervisor 
+
+```bash
+sudo service supervisor restart
+```
+
+#####Вручную для теста:
+```bash
+ ./artisan queue:work --queue=parser --sleep=2 --tries=1 --timeout 30 --daemon
+ ```
+## Настройка почты
+ 
+ В файле .env 
+
+```bash
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=25
+MAIL_USERNAME=286dw1sa848e0e7
+MAIL_PASSWORD=cbf625b2365238e11f
+MAIL_ENCRYPTION=tls
+```
+
+в файле config/mail.php найти и прописать свои настройки
+```
+'from' => ['address' => "noreplay@rtvi.ru", 'name' => null],
+
+'notification' => ['address' => "notification@rtvi.ru", 'name' => "Сообщение от Client API"],
+```
