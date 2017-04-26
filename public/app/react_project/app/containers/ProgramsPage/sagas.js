@@ -17,13 +17,11 @@ import {
     failureDeleteRecord,
     successLoadRecords,
     failureLoadRecords,
-    successLoadRecord,
-    failureLoadRecord,
-    pendingRecord,
     successPostRecord,
     failurePostRecord,
     successEditRecord,
     failureEditRecord,
+    selectRecord,
     openModal,
     closeModal,
 } from './actions';
@@ -38,10 +36,10 @@ import {
     POST_RECORD,
     EDIT_RECORD,
     RECORDS_LIMIT,
-    LOAD_RECORD,
     START_EDIT_RECORD,
     MODALS,
     SEARCH_RECORD,
+    PLAY_VIDEO,
 } from './constants';
 
 const getRecordsType = (state) => state.getIn(['programsPage', 'recordsType']);
@@ -124,17 +122,6 @@ export function* getRecords(action = { payload: {} }) {
     }
 }
 
-export function* getRecord({ payload: { id } }) {
-    try {
-        yield put(pendingRecord(id));
-
-        const response = yield call(api.getRecord, id);
-        yield put(successLoadRecord(response.data));
-    } catch (err) {
-        yield put(failureLoadRecord(err));
-    }
-}
-
 export function* postRecord({ payload }) {
     try {
         const uploadFileResponse = yield call(api.uploadFile, payload.video_url[0]);
@@ -183,8 +170,14 @@ export function* editRecord({ payload }) {
 
 export function* startEditRecord({ payload }) {
     yield put(closeModal());
-    yield call(getRecord, { payload });
+    yield put(selectRecord(payload.id));
     yield put(openModal(MODALS.record));
+}
+
+export function* playVideo({ payload }) {
+    yield put(closeModal());
+    yield put(selectRecord(payload.id));
+    yield put(openModal(MODALS.video));
 }
 
 export function* initPage() {
@@ -212,9 +205,9 @@ export function* programsData() {
     yield takeLatest(CHANGE_RUBRIC, getRecords);
     yield takeEvery(POST_RECORD, postRecord);
     yield takeEvery(EDIT_RECORD, editRecord);
-    yield takeEvery(LOAD_RECORD, getRecord);
     yield takeLatest(START_EDIT_RECORD, startEditRecord);
     yield takeLatest(SEARCH_RECORD, getRecords, { payload: { replace: true } });
+    yield takeLatest(PLAY_VIDEO, playVideo);
 }
 
 // All sagas to be loaded

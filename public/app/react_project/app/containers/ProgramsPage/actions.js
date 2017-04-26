@@ -17,10 +17,6 @@ import {
     LOAD_RECORDS,
     LOAD_RECORDS_SUCCESS,
     LOAD_RECORDS_FAILURE,
-    LOAD_RECORD,
-    PENDING_RECORD,
-    LOAD_RECORD_SUCCESS,
-    LOAD_RECORD_FAILURE,
     POST_RECORD,
     POST_RECORD_SUCCESS,
     POST_RECORD_FAILURE,
@@ -31,11 +27,20 @@ import {
     CLOSE_MODAL,
     START_EDIT_RECORD,
     SEARCH_RECORD,
+    SELECT_RECORD,
+    PLAY_VIDEO,
 } from './constants';
 
 export function openPage() {
     return {
         type: OPEN_PAGE,
+    };
+}
+
+export function selectRecord(id) {
+    return {
+        type: SELECT_RECORD,
+        payload: { id },
     };
 }
 
@@ -115,34 +120,6 @@ export function failureLoadRecords(error) {
     };
 }
 
-export function loadRecord(id) {
-    return {
-        type: LOAD_RECORD,
-        payload: { id },
-    };
-}
-
-export function pendingRecord(id) {
-    return {
-        type: PENDING_RECORD,
-        payload: { id },
-    };
-}
-
-export function successLoadRecord(payload) {
-    return {
-        type: LOAD_RECORD_SUCCESS,
-        payload,
-    };
-}
-
-export function failureLoadRecord(error) {
-    return {
-        type: LOAD_RECORD_FAILURE,
-        error,
-    };
-}
-
 export function postRecord(payload) {
     return {
         type: POST_RECORD,
@@ -209,5 +186,12 @@ export function searchRecord(query) {
     return {
         type: SEARCH_RECORD,
         payload: { query },
+    };
+}
+
+export function playVideo(id) {
+    return {
+        type: PLAY_VIDEO,
+        payload: { id },
     };
 }

@@ -12,12 +12,12 @@ import {
     LOAD_RECORDS_SUCCESS,
     PENDING_RECORDS,
     DELETE_RECORD_SUCCESS,
-    LOAD_RECORD_SUCCESS,
     EDIT_RECORD_SUCCESS,
     POST_RECORD_SUCCESS,
     SEARCH_RECORD,
     OPEN_MODAL,
     CLOSE_MODAL,
+    SELECT_RECORD,
     MODALS,
     recordsTypes,
 } from './constants';
@@ -68,9 +68,6 @@ function programsPageReducer(state = initialState, action) {
                 .set('allRecordsUploaded', action.payload.allUploaded)
                 .set('loading', false);
 
-        case LOAD_RECORD_SUCCESS:
-            return state.set('selectedRecord', fromJS(action.payload));
-
         case DELETE_RECORD_SUCCESS:
             return state.update(
                 'records',
@@ -94,6 +91,9 @@ function programsPageReducer(state = initialState, action) {
                     ['records', recordInd],
                     fromJS(action.payload)
                 );
+
+        case SELECT_RECORD:
+            return state.set('selectedRecord', action.payload.id);
 
         case OPEN_MODAL:
             return state.set('modal', MODALS[action.payload.modal]);

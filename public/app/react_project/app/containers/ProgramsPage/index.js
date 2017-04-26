@@ -9,15 +9,19 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import debounce from 'lodash/debounce';
+import getYouTubeID from 'get-youtube-id';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
 import { loadRubrics } from 'containers/App/actions';
 import Records from 'components/Records';
+import Modal from 'components/Modal';
 import ContentModal from 'components/Modal/ContentModal';
 import Waypoint from 'react-waypoint';
+import Youtube from 'react-youtube';
 import { Group } from 'components/Form';
 import makeSelectProgramsPage, {
     makeSelectRubricsNames,
     makeGetRecords,
+    makeGetSelectedRecord,
 } from './selectors';
 import { MODALS } from './constants';
 import {
@@ -26,11 +30,11 @@ import {
     deleteRecord,
     changeRubric,
     loadRecords,
-    loadRecord,
     openModal,
     closeModal,
     startEditRecord,
     searchRecord,
+    playVideo,
 } from './actions';
 import Header from './Header';
 import { StyledBtn, Wrapper, Content } from './style';
@@ -67,7 +71,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
     }
 
     render() {
-        const { menuOpen, rubrics, records } = this.props;
+        const { menuOpen, rubrics, records, selectedRecord } = this.props;
         const { recordsType, rubric, loading, allRecordsUploaded, modal } = this.props.ProgramsPage;
 
         return (
@@ -92,6 +96,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                     {
                         !!records &&
                         <Records
+                            onPreviewClick={this.props.playVideo}
                             onRecordEdit={this.props.startEditRecord}
                             onRecordDelete={this.onDeleteClick}
                             items={records}
@@ -136,6 +141,20 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                         </StyledBtn>
                     </Group>
                 </ContentModal>
+
+                <Modal
+                    contentLabel="Просмотр выпуска"
+                    isOpen={modal === MODALS.video}
+                    onRequestClose={this.props.closeModal}
+                >
+                    {
+                        !!selectedRecord &&
+                        <Youtube
+                            videoId={getYouTubeID(selectedRecord.video_url)}
+                            onReady={(e) => e.target.playVideo()}
+                        />
+                    }
+                </Modal>
             </Wrapper>
         );
     }
@@ -154,6 +173,8 @@ ProgramsPage.propTypes = {
     closeModal: PropTypes.func,
     startEditRecord: PropTypes.func,
     search: PropTypes.func,
+    playVideo: PropTypes.func,
+    selectedRecord: PropTypes.object,
     ProgramsPage: PropTypes.object,
 };
 
@@ -162,6 +183,7 @@ const mapStateToProps = createStructuredSelector({
     menuOpen: selectMenuExpandedStatus,
     rubrics: makeSelectRubricsNames(),
     records: makeGetRecords(),
+    selectedRecord: makeGetSelectedRecord(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -172,11 +194,11 @@ function mapDispatchToProps(dispatch) {
         loadRubrics: () => dispatch(loadRubrics()),
         changeRubric: (id) => dispatch(changeRubric(id[0])),
         loadRecords: (replace) => dispatch(loadRecords(replace)),
-        loadRecord: (id) => dispatch(loadRecord(id)),
         openModal: (modal) => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal()),
         startEditRecord: (id) => dispatch(startEditRecord(id)),
         search: (query) => dispatch(searchRecord(query)),
+        playVideo: (id) => dispatch(playVideo(id)),
     };
 }
 

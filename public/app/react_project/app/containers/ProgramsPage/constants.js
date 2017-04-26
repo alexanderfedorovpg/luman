@@ -31,6 +31,8 @@ export const OPEN_MODAL = 'app/ProgramsPage/OPEN_MODAL';
 export const CLOSE_MODAL = 'app/ProgramsPage/CLOSE_MODAL';
 export const START_EDIT_RECORD = 'app/ProgramsPage/START_EDIT_RECORD';
 export const SEARCH_RECORD = 'app/ProgramsPage/SEARCH_RECORD';
+export const SELECT_RECORD = 'app/ProgramsPage/SELECT_RECORD';
+export const PLAY_VIDEO = 'app/ProgramsPage/PLAY_VIDEO';
 
 export const MODALS = {
     record: 'record',

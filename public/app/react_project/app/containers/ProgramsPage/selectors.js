@@ -20,6 +20,11 @@ const selectPrograms = createSelector(
     (substate) => substate.get('programs').toJS()
 );
 
+const selectSelectedRecord = createSelector(
+    selectProgramsPageDomain(),
+    (substate) => substate.get('selectedRecord')
+);
+
 const makeSelectRubricsNames = () => createSelector(
     selectRubrics,
     (rubrics) => [
@@ -60,8 +65,8 @@ const makeGetRecords = () => createSelector(
 );
 
 const makeGetSelectedRecord = () => createSelector(
-    selectProgramsPageDomain(),
-    (substate) => substate.get('selectedRecord').toJS()
+    [selectRecords, selectSelectedRecord],
+    (records, selected) => records.find((record) => record.id === selected)
 );
 
 /**
