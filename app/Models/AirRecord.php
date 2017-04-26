@@ -29,9 +29,8 @@ class AirRecord extends Model
         'program_id' => 'required|integer|exists:tv_programs,id',
         'title' => 'required|max:255',
         'video_url' => 'required',
-        'is_full_video' => 'required|boolean',
-        'rubric_id' => 'required|integer|exists:rubrics,id',
-        'image_preview' => 'required'
+        'is_full_video' => 'boolean',
+        'rubric_id' => 'integer|exists:rubrics,id',
     ];
 
     /**

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { Link, withRouter } from 'react-router'
 
 import { font } from 'constants/style';
 import { rem, ifProp } from 'utils/style';
@@ -13,7 +13,7 @@ const Root = styled.div`
     border-bottom: 1px solid #e8e8e8;
 `;
 
-const Item = styled.a`
+const Item = styled(({ active, ...rest }) => <Link {...rest} />)`
     margin-right: 20px;
     font-size: 14px;
     font-weight: 700;
@@ -31,28 +31,27 @@ const Item = styled.a`
     `}
 `;
 
-function Tabs({ data, onClick, active }) {
-    const idle = () => {};
-
-    const clickHandler = (value) => () => {
-        if (value.title !== active) {
-            (onClick || idle)(value);
-        }
-    };
+function Tabs({ router }) {
 
     return (
         <Root>
-            {data.map((value) => (
-                <Item
-                    key={value.title}
-                    active={value.title === active}
-                    onClick={clickHandler(value)}
-                >
-                    {value.title}
-                </Item>
-            ))}
+            <Item
+                to="/constructor/news"
+                active={router.isActive('/constructor/news')}>
+                Новости
+            </Item>
+            <Item
+                to="/constructor/noise"
+                active={router.isActive('/constructor/noise')}>
+                Инфошум
+            </Item>
+            <Item
+                to="/constructor/broadcast"
+                active={router.isActive('/constructor/broadcast')}>
+                Из эфира
+            </Item>
         </Root>
-    );
+    )
 }
 
-export default Tabs;
+export default withRouter(Tabs)

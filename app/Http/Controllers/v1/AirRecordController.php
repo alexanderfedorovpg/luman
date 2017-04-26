@@ -83,7 +83,12 @@ class AirRecordController extends CmsController
 
         $record = new AirRecord($request->all());
         if ($record->save()) {
-            return $this->respondCreated(['success' => true]);
+            return $this->respondCreated([
+                'success' => true,
+                'data' => [
+                    'id' => $record->id
+                ]
+            ]);
         }
 
         return $this->respondFail500x();

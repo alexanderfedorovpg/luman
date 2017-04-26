@@ -20,6 +20,31 @@ export default function createRoutes(store) {
         {
             path: '/constructor',
             name: 'constructor',
+            childRoutes: [
+                {
+                    path: '/constructor/news',
+                    name: 'constructor-news',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/ConstructorPage/News'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component)
+                        });
+
+                        importModules.catch(errorLoading);
+                    }
+                }
+            ],
+            indexRoute: {
+                onEnter(nextState, replace, callback) {
+                    replace('/constructor/news')
+                    callback()
+                }
+            },
             onEnter(nextState, replace, callback) {
                 if (this.loadedSagas) {
                     callback();

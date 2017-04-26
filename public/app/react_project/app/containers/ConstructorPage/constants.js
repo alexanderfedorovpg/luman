@@ -31,14 +31,17 @@ export const SET_FILTER = 'app/ConstructorPage/SET_FILTER';
 
 export const filters = [
     {
+        id: 1,
         title: 'Новости',
         value: 'news',
     },
     {
+        id: 2,
         title: 'ИНФОШУМ',
         value: 'infoshoom',
     },
     {
+        id: 3,
         title: 'Из эфира',
         value: 'BROADCAST',
     },

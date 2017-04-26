@@ -14,7 +14,7 @@ class HasGroupsTableSeeder extends Seeder
         $user=App\Models\User::firstOrFail();
         $group=App\Models\Groups::firstOrFail();
 
-        DB::table('groups')->insert([
+        DB::table('has_groups')->insert([
             'user_id' => $user->id,
             'group_id'=> $group->id,
         ]);
