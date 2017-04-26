@@ -67,7 +67,7 @@ function collect(connect, monitor) {
 class CollapseItem extends React.Component {
 
     static propTypes = {
-        isOver: React.PropTypes.bool.isRequired
+        // isOver: React.PropTypes.bool.isRequired
     }
 
     constructor(props) {
@@ -97,7 +97,9 @@ class CollapseItem extends React.Component {
     }
 
     render() {
-        return this.props.connectDropTarget(
+
+        return (
+        // return this.props.connectDropTarget(
             <Root className={this.state.class}>
                 <Header onClick={this.toggle}>
                     <Title>{this.props.title}</Title>
@@ -123,4 +125,4 @@ const DropDecarator = DropTarget('newsItem', dropTarget, function (connect, moni
     }
 });
 
-export default DropDecarator(CollapseItem);
+export default CollapseItem;

@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import {
-    Left as HeaderLeft,
-    Right as HeaderRight,
-    Link as HeaderLink,
-    Bot as HeaderBot
-} from 'components/Header'
+import { Left, Right, Bot } from 'components/Header'
 
 import {
     Horizontal as FormHorizontal,
@@ -19,12 +14,12 @@ import Button from 'components/Button'
 
 import { padding, font } from 'constants/style'
 
-const ConstrutorHeaderLeft = styled(HeaderLeft)`
+const ConstrutorLeft = styled(Left)`
     flex-grow: 0;
     width: 41.8%;
     padding-right: 0.5625rem;
 `
-const ConstrutorHeaderRight = styled(HeaderRight)`
+const ConstrutorRight = styled(Right)`
     flex-basis: 41.584%;
     width: 41.584%;
     -webkit-box-flex: 1;
@@ -112,8 +107,8 @@ class Header extends Component {
         let { moved, onSearchChange } = this.props
 
         return (
-            <HeaderBot>
-                <ConstrutorHeaderLeft>
+            <Bot moved={moved}>
+                <ConstrutorLeft>
                     <Form>
                         <FormHorizontal>
                             <FormInput
@@ -132,8 +127,8 @@ class Header extends Component {
                             </FormButton>*/}
                         </FormHorizontal>
                     </Form>
-                </ConstrutorHeaderLeft>
-                <ConstrutorHeaderRight>
+                </ConstrutorLeft>
+                <ConstrutorRight>
                     <CustomButton xs danger >
                         <Icon type="arrow-left" />
                         Отменить изменения
@@ -146,8 +141,8 @@ class Header extends Component {
                         <Icon type="okay" />
                         Сохранить
                             </CustomButton>
-                </ConstrutorHeaderRight>
-            </HeaderBot>
+                </ConstrutorRight>
+            </Bot>
         )
     }
 }

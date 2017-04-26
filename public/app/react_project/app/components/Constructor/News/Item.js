@@ -2,12 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { DragSource } from 'react-dnd'
 import styled from 'styled-components'
 import Tooltip from 'react-aria-tooltip'
-import randomString from 'random-string'
 import Rating from 'components/Rating/Item'
 import Icon from 'components/Icon'
 import { font, padding } from 'constants/style'
-
-const titleClassName = randomString()
 
 const CustomRating = styled(Rating) `
     margin-right: .4rem;
@@ -98,7 +95,7 @@ const ItemIcon = styled(Icon) `
 `
 
 const Title = styled.span`
-  
+
     font-family: ${font.opensans};
     font-size: 14px;
     font-weight: 400;
@@ -189,13 +186,15 @@ class Item extends React.Component{
     }
     static propTypes = {
         data: React.PropTypes.object.isRequired,
-        connectDragSource: React.PropTypes.func.isRequired,
-        isDragging: React.PropTypes.bool.isRequired
+        // connectDragSource: React.PropTypes.func.isRequired,
+        // isDragging: React.PropTypes.bool.isRequired
     }
 
     render() {
         const { data, toWork, hide, open, style, isDragging, connectDragSource } = this.props;
-        return connectDragSource(
+
+        return (
+        // return connectDragSource(
             <div style={{opacity: isDragging ? 0.5:1}}>
                 <Root onClick={() => open(data.id)} style={style}>
                     <Wrapper>
@@ -213,12 +212,12 @@ class Item extends React.Component{
                                 }
                             </TagName>
                         </Header>
-                        <Title className={titleClassName}>
+                        <Title>
                             {data.title}
                         </Title>
                         <Attachment>
                             1 Фото + 1 Видео
-                    </Attachment>
+                        </Attachment>
                         <Ignore message="Не для главной" eventType="hover" direction="bottom">
                             <Icon
                                 type="delete"
@@ -249,4 +248,5 @@ const DragDecorator = DragSource(itemType, itemSource, function(connect, monitor
     }
 });
 
-export default DragDecorator(Item);
+// @DragDecorator
+export default Item;
