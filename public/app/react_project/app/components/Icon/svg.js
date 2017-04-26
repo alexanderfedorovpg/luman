@@ -8,7 +8,7 @@ const Svg = styled.svg`
 
     vertical-align: middle;
 
-    fill: currentColor;
+    fill: ${({ color }) => color || 'currentColor'};
 `;
 
 export const ArrowRight = (props) => (
@@ -31,14 +31,14 @@ export const ArrowLeft = (props) => (
 );
 
 export const ArrowDown = (props) => (
-    <Svg xmlns="http://www.w3.org/2000/svg" width="" viewBox="0 0 10.812 12.594" {...props}>
+    <Svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 10.812 12.594" {...props}>
         <path fillRule="evenodd" d="M10.534 8a.815.815 0 0 0 0-1.187.9.9 0 0 0-1.238 0L6.258 9.73V.836a.877.877 0 0 0-1.753 0V9.73L1.472 6.812a.9.9 0 0 0-1.237 0A.815.815 0 0 0 .235 8l4.53 4.35a.9.9 0 0 0 .62.246.883.883 0 0 0 .618-.247z" />
     </Svg>
 );
 
 export const ArrowUp = (props) => (
-    <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.82 12.594" {...props}>
-        <path fillRule="evenodd" d="M10.54 4.592a.82.82 0 0 1 0 1.188.9.9 0 0 1-.62.247.88.88 0 0 1-.62-.247L6.26 2.864v8.892a.876.876 0 0 1-1.75 0V2.864L1.48 5.78a.9.9 0 0 1-1.24 0 .82.82 0 0 1 0-1.188L4.77.244a.9.9 0 0 1 1.24 0z"/>
+    <Svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 10.82 12.594" {...props}>
+        <path fillRule="evenodd" d="M10.54 4.592a.82.82 0 0 1 0 1.188.9.9 0 0 1-.62.247.88.88 0 0 1-.62-.247L6.26 2.864v8.892a.876.876 0 0 1-1.75 0V2.864L1.48 5.78a.9.9 0 0 1-1.24 0 .82.82 0 0 1 0-1.188L4.77.244a.9.9 0 0 1 1.24 0z" />
     </Svg>
 );
 

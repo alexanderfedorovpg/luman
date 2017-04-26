@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components';
 import { rem, ifProp } from '../../utils/style';
-import { font, color, height } from '../../constants/style';
+import { font, color, height as HEIGHT } from '../../constants/style';
 
 const Button = styled.button`
     display: inline-block;
-    height: ${height};
+    height: ${({ height }) => height || HEIGHT};
     border: 1px solid #cccccc;
 
     font-family: ${font.helvetica};
     font-size: ${rem(14)};
-    line-height: ${height};
+    line-height: ${({ height }) => height || HEIGHT};
     font-weight: 700;
     color: #333333;
 

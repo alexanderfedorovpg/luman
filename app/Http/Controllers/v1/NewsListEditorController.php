@@ -563,11 +563,11 @@ class NewsListEditorController extends CmsController
 
 
             $news->is_publish = 1;
-            $news->save();
-//            if ( $log_moderation->setPublish() && $news->save() ) {
+
+           if (/* $log_moderation->setPublish() &&*/ $news->save() ) {
 //                $this->log->setLog('DELEGATE', $this->user_id, "Successful, news id=".$id." delegate [".$this->user_id.">".$new_editor_id."]");
                 return $this->respondCreated('publish');
-//            }
+            }
             $this->log->setLog('PUBLISH', $this->user_id, "Error, news id=".$id." don't publish  [".$this->user_id. "]");
             throw new \Exception('Error, news don\'t publish');
         } catch (\Exception $e) {

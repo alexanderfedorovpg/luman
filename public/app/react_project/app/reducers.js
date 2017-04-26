@@ -6,10 +6,10 @@
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { reducer as FormReducer } from 'redux-form/immutable';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import appReducer from 'containers/App/reducer';
-import feedPageReducer from 'containers/FeedPage/reducer';
 
 /*
  * routeReducer
@@ -48,5 +48,6 @@ export default function createReducer(asyncReducers) {
     language: languageProviderReducer,
     app: appReducer,
     ...asyncReducers,
+    form: FormReducer,
   });
 }

@@ -10,8 +10,8 @@ import {
     Group,
     Textarea,
     Label,
-    Select
-} from './../Form'
+} from './../Form';
+import Select from './Select';
 
 class Form extends Component {
 
@@ -47,7 +47,7 @@ class Form extends Component {
 
     componentDidMount() {
         if (!this.props.data.tags) {
-            this.setError('tags', false);   
+            this.setError('tags', false);
         }
     }
 

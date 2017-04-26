@@ -3,11 +3,12 @@ import styled, { css } from 'styled-components'
 
 import Select from './Select'
 import Input, { InputIcon, Checkbox } from './Input'
+import FileInput from './FileInput';
 
 import { ifProp, rem } from './../../utils/style'
 import { color, height, font } from './../../constants/style'
 
-export { Select, Input, InputIcon, Checkbox }
+export { Select, Input, InputIcon, Checkbox, FileInput }
 
 export const Horizontal = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ export const Horizontal = styled.div`
 `
 
 export const Group = styled.div`
-    margin-bottom: 24px;
+    margin-bottom: ${({ marginBottom }) => marginBottom || '24px'};
 
     &:last-child {
         margin-bottom: 0;
@@ -24,6 +25,10 @@ export const Group = styled.div`
 
     ${ifProp('sm')`
         margin-bottom: 15px;
+    `}
+
+    ${ifProp('md')`
+        margin-bottom: 20px;
     `}
 
     ${ifProp('horizontal')`
