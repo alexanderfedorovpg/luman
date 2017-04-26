@@ -8,11 +8,13 @@ import Dynamic from '../../components/Dynamic'
 import categoriesStatsLoaded from "./actions"
 import { List } from 'immutable'
 
-
 import {
     loadCategoriesStatslist
 } from './actions'
 
+import {
+    selectStatsData
+} from './selectors'
 
 class StatsPage extends Component {
 
@@ -21,7 +23,6 @@ class StatsPage extends Component {
     }
     componentDidMount() {
       this.props.loadList()
-      setInterval(() => {console.log(this.props)}, 1000);
     }
 
     render() {
@@ -41,8 +42,8 @@ class StatsPage extends Component {
     }
 }
 
-const mapStateToProps = createStructuredSelector({
-
+const mapStateToProps = state => ({
+    stats: selectStatsData(state)
 });
 
 function mapDispatchToProps(dispatch) {

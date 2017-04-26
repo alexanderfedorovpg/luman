@@ -19,7 +19,7 @@ import * as api from 'api'
 export function* getList() {
 
     try {
-        const data = yield call(api.getCategoryStats)
+        const { data } = yield call(api.getCategoryStats)
 
         yield put(categoriesStatsLoaded(data))
     } catch (err) {

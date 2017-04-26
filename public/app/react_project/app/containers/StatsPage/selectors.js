@@ -6,6 +6,12 @@ import {
     selectRubrics
 } from 'containers/App/selectors'
 
+const selectStatsPageDomain = (state) => state.get('statsPage')
+
+const selectStatsData = createSelector(
+    selectStatsPageDomain,
+    root => root.get('statsdata').toJS()
+)
 
 //
 // const selectData = createSelector()(
@@ -15,3 +21,7 @@ import {
 // export {
 //     selectData,
 // }
+
+export {
+    selectStatsData
+}
