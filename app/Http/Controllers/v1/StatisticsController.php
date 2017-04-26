@@ -62,14 +62,16 @@
 			try {
 
 				$this->validate( $request, [
-					'start_date' => 'required|date|date_format:Y-m-d H:i:s',
-					'end_date'   => 'required|date|date_format:Y-m-d H:i:s',
+					'start_date' => 'date|date_format:Y-m-d H:i:s',
+					'end_date'   => 'date|date_format:Y-m-d H:i:s',
 				] );
 
 				$this->start_date = $request->input( 'start_date' );
 				$this->end_date   = $request->input( 'end_date' );
 
-				$period = $this->setInterval( array( 1 => 'publish_date', 2 => ' publish_date' ) );
+				$period = 'true';
+				if ($this->start_date && $this->end_date )
+					$period = $this->setInterval( array( 1 => 'publish_date', 2 => ' publish_date' ) );
 
 				$results = Counters::selectRaw( 'type ,  sum(count_click) as count_click  ,   sum(count_views) as count_views, count(news.id) as count_publish' )
 				                   ->join( 'news','news.id', '=', 'news_id' )
