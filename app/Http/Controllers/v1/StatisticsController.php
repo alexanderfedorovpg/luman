@@ -78,10 +78,9 @@
 				                   ->whereRaw( $period )
 				                   ->groupBy( 'type' )
 				                   ->get();
-
-
+                
 				return $this->respond(
-					$results->toArray()
+                    $this->statisticsTransformer->transform($results->toArray())
 				);
 
 			} catch ( \Exception $e ) {

@@ -8,10 +8,13 @@ use App\Models\Counters;
 
 class StatisticsTransformer extends Transformer
 {
-    public function transform($counter)
+    public function transform($counters)
     {
-        $transform = $counter;
-        $transform['type']=Counters::$_type_counters[$transform['type']];
+        $transform = [];
+        foreach ($counters as $counter) {
+            $counter['type'] = Counters::$_type_counters[$counter['type']];
+            $transform[] = $counter;
+        }
 
         return $transform;
     }
