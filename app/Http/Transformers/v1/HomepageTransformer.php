@@ -38,7 +38,7 @@ class HomepageTransformer extends Transformer
             $arrNews['image_preview'] = $news->news->imagePreview ? $news->news->imagePreview->url : null;
             $transform[] = [
                 'category' => $news->category,
-                'news' => $arrNews,
+                'data' => $arrNews,
                 'top' => $news->top,
             ];
         }
@@ -59,7 +59,7 @@ class HomepageTransformer extends Transformer
             $news['image_main'] = $infoNoise->news->imageMain ? $infoNoise->news->imageMain->url : null;
             $news['image_preview'] = $infoNoise->news->imagePreview ? $infoNoise->news->imagePreview->url : null;
             $transform[] = [
-                'news' => $news,
+                'data' => $news,
                 'top' => $infoNoise->top,
             ];
         }
@@ -78,7 +78,7 @@ class HomepageTransformer extends Transformer
         $transform = [];
         foreach ($records as $record) {
             $transform[] = [
-                'record' => $record->record,
+                'data' => $record->record,
                 'top' => $record->top,
             ];
         }
