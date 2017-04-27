@@ -1,14 +1,15 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled, {css} from 'styled-components'
 
 import Icon from '../Icon'
 import User from '../User'
-import { Left } from '../Content'
+import {Left} from '../Content'
 import Table from '../Table'
 
-import { padding } from 'constants/style'
-import { below } from 'utils/style'
-import { Link } from 'react-router'
+import {padding} from 'constants/style'
+import {below} from 'utils/style'
+import {Link} from 'react-router'
+import {namesMap} from '../../containers/StatsPage/constants'
 
 
 const CustomLeft = styled(Left)`
@@ -39,78 +40,61 @@ const CustomIcon = styled(Icon)`
     margin-right: 11px;
 `
 
-const navItemStyles =   css(`
+const navItemStyles = css(`
 
 `)
 
 
-function Content({rowClickCallback}) {
+function Content({rowClickCallback, data}) {
+
+    // Itterate over the data to result a rendered list with data included
+    const dataSet = data.map((item) => {
+        return <tr key={item.type} onClick={() => rowClickCallback(item.type)}>
+            <td>
+                <CustomIcon type={item.type}/>
+                {namesMap[item.type]}
+            </td>
+            <td>{item.count_publish}</td>
+            <td>{item.count_views}</td>
+            <td>{item.count_click}</td>
+        </tr>
+
+    });
+
+    // Count the sums of each required  col
+    const sums = (category) => {
+        let val = 0;
+        data.forEach((item) => {
+            val += item[category];
+        });
+        return val;
+    };
+
     return (
         <CustomLeft>
+
             <Table>
                 <thead>
-                    <tr>
-                        <th style={{ width: '33.13%' }}></th>
-                        <th style={{ width: '25.6%' }}>Опубликовано</th>
-                        <th style={{ width: '21.1%' }}>Просмотры</th>
-                        <th>Клики</th>
-                    </tr>
+                <tr>
+                    <th style={{width: '33.13%'}}></th>
+                    <th style={{width: '25.6%'}}>Опубликовано</th>
+                    <th style={{width: '21.1%'}}>Просмотры</th>
+                    <th>Клики</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr onClick={()=>rowClickCallback('article')}>
-                        <td>
-                            <CustomIcon type="article" />
-                            Статьи
-                        </td>
-                        <td>8</td>
-                        <td>6 780</td>
-                        <td>4 500</td>
-                    </tr>
-                    <tr onClick={()=>rowClickCallback('video')}>
-                        <td>
-                            <CustomIcon type="video" />
-                            Видео
-                        </td>
-                        <td>8</td>
-                        <td>6 780</td>
-                        <td>4 500</td>
-                    </tr>
-                    <tr onClick={()=>rowClickCallback('programms')}>
-                        <td>
-                            <CustomIcon type="programms" />
-                            Программы
-                        </td>
-                        <td>8</td>
-                        <td>6 780</td>
-                        <td>4 500</td>
-                    </tr>
-                    <tr onClick={()=>rowClickCallback('facebook')}>
-                        <td>
-                            <CustomIcon type="facebook" />
-                            Facebook
-                        </td>
-                        <td>8</td>
-                        <td>6 780</td>
-                        <td>4 500</td>
-                    </tr>
-                    <tr onClick={()=>rowClickCallback('twitter')}>
-                        <td>
-                            <CustomIcon type="twitter" />
-                            Twitter
-                        </td>
-                        <td>8</td>
-                        <td>6 780</td>
-                        <td>4 500</td>
-                    </tr>
-                    <Summary onClick={()=>rowClickCallback('summary')}>
-                        <td>
-                            <CustomIcon type="summary" />
-                            Всего
-                        </td>
-                        <td>40</td>
-                        <td>6 780</td>
-                        <td>4 500</td>
-                    </Summary>
+
+                {dataSet}
+
+                <Summary>
+                    <td>
+                        <CustomIcon type="summary"/>
+                        Всего
+                    </td>
+                    <td>{sums('count_publish')}</td>
+                    <td>{sums('count_views')}</td>
+                    <td>{sums('count_click')}</td>
+                </Summary>
                 </tbody>
             </Table>
         </CustomLeft>
