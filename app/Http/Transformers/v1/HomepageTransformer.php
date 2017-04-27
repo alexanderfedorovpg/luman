@@ -55,8 +55,11 @@ class HomepageTransformer extends Transformer
     {
         $transform = [];
         foreach ($infoNoises as $infoNoise) {
+            $news = $infoNoise->news->toArray();
+            $news['image_main'] = $infoNoise->news->imageMain ? $infoNoise->news->imageMain->url : null;
+            $news['image_preview'] = $infoNoise->news->imagePreview ? $infoNoise->news->imagePreview->url : null;
             $transform[] = [
-                'news' => $infoNoise->news,
+                'news' => $news,
                 'top' => $infoNoise->top,
             ];
         }
