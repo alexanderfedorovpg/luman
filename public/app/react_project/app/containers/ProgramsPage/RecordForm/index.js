@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Group, Select, Input, FileInput } from 'components/Form';
+import { Group, Select, Input } from 'components/Form';
 import { Close, ArrowDown } from 'components/Icon/svg';
-import {
-    StyledBtn,
-} from '../style';
+import { StyledBtn } from '../style';
 import { makeGetProgramsAsOptions, makeGetSelectedRecord } from '../selectors';
 import { postRecord, editRecord } from '../actions';
+import {
+    StyledFileInput as FileInput,
+    StyledDatepicker as Datepicker,
+} from './style';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RecordForm extends React.PureComponent {
@@ -77,6 +79,18 @@ class RecordForm extends React.PureComponent {
         );
     }
 
+    renderDatepicker({ input, meta: { touched, invalid, valid }, ...props }) {
+        return (
+            <Datepicker
+                {...props}
+                success={touched && valid}
+                error={touched && invalid}
+                selected={input.value}
+                onChange={(value) => input.onChange(value)}
+            />
+        );
+    }
+
     render() {
         const { programs, handleSubmit } = this.props;
 
@@ -102,6 +116,10 @@ class RecordForm extends React.PureComponent {
                     />
                 </Group>
                 <Group marginBottom="40px" horizontal>
+                    <Field
+                        name="date"
+                        component={this.renderDatepicker}
+                    />
                     <Field
                         name="video_url"
                         accept="video/*"
