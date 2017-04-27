@@ -65,7 +65,7 @@ function Content({rowClickCallback, data}) {
     const sums = (category) => {
         let val = 0;
         data.forEach((item) => {
-            val += item[category];
+            val += parseInt(item[category]);
         });
         return val;
     };
