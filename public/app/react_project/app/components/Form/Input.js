@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import Icon, { icons } from 'components/Icon';
+import Icon from 'components/Icon';
 
 import { ifProp, rem } from 'utils/style';
 import { color, height, font } from 'constants/style';
@@ -87,53 +87,6 @@ export const InputIcon = (props) => {
             <Input {...inputProps} block />
             <StyledIcon type={props.icon} right={props.right} />
         </InputIconWrapper>
-    );
-};
-
-const StyledCheckbox = styled.input`
-    display: none;
-
-    + span {
-        display: inline-block;
-        width: ${icons.checkbox.width}px;
-        height: ${icons.checkbox.height}px;
-
-        margin-right: 5px;
-
-        background-image: url(${icons.checkbox.data});
-    }
-
-    &:checked {
-        + span {
-            background-image: url(${icons['checkbox-active'].data}) !important;
-            width: ${icons['checkbox-active'].width}px;
-            height: ${icons['checkbox-active'].height}px;
-        }
-    }
-
-    &[disabled] {
-        + span {
-            background-image: url(${icons['checkbox-disabled'].data}) !important;
-        }
-    }
-`;
-
-const CheckboxWrapper = styled.label`
-    &:hover {
-        span {
-            background-image: url(${icons['checkbox-hover'].data});
-        }
-    }
-`;
-
-export const Checkbox = (props) => {
-    const innerProps = Object.assign({}, props, { children: null, className: null });
-    return (
-        <CheckboxWrapper className={props.className}>
-            <StyledCheckbox type="checkbox" {...innerProps} />
-            <span />
-            {props.children}
-        </CheckboxWrapper>
     );
 };
 
