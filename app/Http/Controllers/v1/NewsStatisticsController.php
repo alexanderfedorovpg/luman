@@ -32,7 +32,7 @@ class NewsStatisticsController extends CmsController
     private function setInterval($param = array(1 => 'start_date', 2 => 'start_date'))
     {
 
-        $period = '';
+        $period = 'true';
         if ($this->start_date && $this->end_date) {
             $period = "$param[1] >= '$this->start_date' AND $param[2] <= '$this->end_date'";
         } elseif ($this->start_date) {
@@ -53,8 +53,8 @@ class NewsStatisticsController extends CmsController
 
         try {
             $this->validate($request, [
-                'start_date' => 'required|date|date_format:Y-m-d H:i:s',
-                'end_date' => 'required|date|date_format:Y-m-d H:i:s',
+                'start_date' => 'date|date_format:Y-m-d H:i:s',
+                'end_date' => 'date|date_format:Y-m-d H:i:s',
             ]);
             $this->start_date = $request->input('start_date');
             $this->end_date = $request->input('end_date');
@@ -117,8 +117,8 @@ class NewsStatisticsController extends CmsController
 
         try {
             $this->validate($request, [
-                'start_date' => 'required|date|date_format:Y-m-d H:i:s',
-                'end_date' => 'required|date|date_format:Y-m-d H:i:s',
+                'start_date' => 'date|date_format:Y-m-d H:i:s',
+                'end_date' => 'date|date_format:Y-m-d H:i:s',
             ]);
             $this->start_date = $request->input('start_date');
             $this->end_date = $request->input('end_date');
@@ -175,8 +175,8 @@ class NewsStatisticsController extends CmsController
         try {
             $this->validate($request, [
                 'editor_id' => 'required|exists:users,id',
-                'start_date' => 'required|date|date_format:Y-m-d H:i:s',
-                'end_date' => 'required|date|date_format:Y-m-d H:i:s',
+                'start_date' => 'date|date_format:Y-m-d H:i:s',
+                'end_date' => 'date|date_format:Y-m-d H:i:s',
             ]);
             $this->start_date = $request->input('start_date');
             $this->end_date = $request->input('end_date');
@@ -239,8 +239,8 @@ class NewsStatisticsController extends CmsController
 
             $this->validate($request, [
                 'editor_id' => 'required|exists:users,id',
-                'start_date' => 'required|date|date_format:Y-m-d H:i:s',
-                'end_date' => 'required|date|date_format:Y-m-d H:i:s',
+                'start_date' => 'date|date_format:Y-m-d H:i:s',
+                'end_date' => 'date|date_format:Y-m-d H:i:s',
                 'type_dynamics' => 'required',
             ]);
 
@@ -294,8 +294,8 @@ class NewsStatisticsController extends CmsController
         try {
 
             $this->validate($request, [
-                'start_date' => 'required|date|date_format:Y-m-d H:i:s',
-                'end_date' => 'required|date|date_format:Y-m-d H:i:s',
+                'start_date' => 'date|date_format:Y-m-d H:i:s',
+                'end_date' => 'date|date_format:Y-m-d H:i:s',
             ]);
 
             $this->start_date = $request->input('start_date');
@@ -341,8 +341,8 @@ class NewsStatisticsController extends CmsController
         try {
 
             $this->validate($request, [
-                'start_date' => 'required|date|date_format:Y-m-d H:i:s',
-                'end_date' => 'required|date|date_format:Y-m-d H:i:s',
+                'start_date' => 'date|date_format:Y-m-d H:i:s',
+                'end_date' => 'date|date_format:Y-m-d H:i:s',
                 'editor_id' => 'required|exists:users,id',
             ]);
 

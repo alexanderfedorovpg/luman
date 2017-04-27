@@ -4,11 +4,12 @@ import Select from './Select';
 import Input, { InputIcon } from './Input';
 import FileInput from './FileInput';
 import Checkbox from './Checkbox';
+import Datepicker from './Datepicker';
 
 import { ifProp, rem } from './../../utils/style';
 import { color, font } from './../../constants/style';
 
-export { Select, Input, InputIcon, Checkbox, FileInput };
+export { Select, Input, InputIcon, Checkbox, FileInput, Datepicker };
 
 export const Horizontal = styled.div`
     display: flex;
