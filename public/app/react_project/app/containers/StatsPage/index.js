@@ -26,14 +26,13 @@ class StatsPage extends Component {
     }
 
     render() {
-
         return (
             <div>
                 <Helmet
                     title="Cтатистика"/>
                 <Header />
                 <Wrap>
-                    <Content rowClickCallback={this.props.categoryRowClickCallback}/>
+                    <Content rowClickCallback={this.props.categoryRowClickCallback} data={this.props.stats}/>
                     <Users rowClickCallback={this.props.userRowClickCallback}/>
                 </Wrap>
                 <Dynamic />
