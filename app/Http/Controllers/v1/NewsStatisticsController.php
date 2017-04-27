@@ -394,11 +394,15 @@ class NewsStatisticsController extends CmsController
             ]);
 
 
+            $this->start_date = $request->input( 'start_date' );
+            $this->end_date   = $request->input( 'end_date' );
 
             $period='true';
             if ($this->start_date || $this->end_date ) {
                 $period = $this->setInterval([  1 => 'start_date', 2 => ' end_date'] );
             }
+ 
+
           $results = NewsModerationLog::selectRaw('users.id, users.name,  
           AVG(TIMESTAMPDIFF (SECOND ,start_date, end_date )) as time_work , 
           count_news ,  cdn_files.url    ')
