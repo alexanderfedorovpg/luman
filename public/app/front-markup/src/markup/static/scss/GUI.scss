@@ -122,8 +122,8 @@
         cursor: pointer;
       }
       &[type='checkbox'] + label:before, &[type='radio'] + label:before {
-        width: rem(18);
-        height: rem(18);
+        width: rem(20);
+        height: rem(20);
         position: absolute;
         top: 0;
         left: 0;
@@ -133,10 +133,12 @@
         + label:before {
           content: '';
           background-image: url('%=static=%general/round-unchecked.svg');
+          background-size: 100%;
         }
         &:checked + label:before {
           content: '';
           background-image: url('%=static=%general/round-checked.svg');
+          background-size: 100%;
         }
       }
 

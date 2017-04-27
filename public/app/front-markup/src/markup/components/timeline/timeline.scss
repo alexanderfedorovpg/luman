@@ -15,17 +15,10 @@
 
         cursor: pointer;
 
-        transition: margin 0.8s ease;
         &:hover {
-            margin-top: rem(21);
-            margin-bottom: rem(6);
-
             color: $purple;
 
             background-color: #f0f1f2;
-
-            transition: margin 0.8s ease;
-            
             .social-links {
 
                 display: flex;

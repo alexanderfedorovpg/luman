@@ -192,9 +192,13 @@ class News extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeInfoNoise($query)
+    public function scopeInfoNoise($query, $infoNoise = true)
     {
-        $query->where('top', '<=', 3);
+        if ($infoNoise) {
+            return $query->where('top', '<=', 3);
+        } else {
+            return $query->where('top', '>', 3);
+        }
     }
 
 }

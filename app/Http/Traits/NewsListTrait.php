@@ -20,7 +20,9 @@ trait NewsListTrait {
 
         $infoNoise = $request->input('infoNoise');
         if ($infoNoise === 'true') {
-            $news->infoNoise();
+            $news->infoNoise(true);
+        } elseif ($infoNoise === 'false') {
+            $news->infoNoise(false);
         }
 
         $video = $request->input('video');
