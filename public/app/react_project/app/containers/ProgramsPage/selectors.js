@@ -56,7 +56,7 @@ const makeGetRecords = () => createSelector(
     (records, programs) => records.map((record) => (
         {
             id: record.id,
-            date: record.updated_at ? record.updated_at : record.created_at,
+            date: record.publish_date,
             title: record.title,
             preview: record.image_preview,
             program: programs.byId[record.program_id].name,
