@@ -143,6 +143,9 @@ export function* postRecord({ payload }) {
 
         if (response.data.success) {
             data.id = response.data.data.id;
+            data.created_at = data.publish_date;
+
+            delete data.publish_date;
 
             yield put(successPostRecord(data));
             yield put(closeModal());
@@ -166,6 +169,9 @@ export function* editRecord({ payload }) {
         const response = yield call(api.editRecord, data.id, data);
 
         if (response.data.success) {
+            data.updated_at = data.publish_date;
+            delete data.publish_date;
+
             yield put(successEditRecord(data));
             yield put(closeModal());
         }

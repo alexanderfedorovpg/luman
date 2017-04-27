@@ -66,7 +66,21 @@ const makeGetRecords = () => createSelector(
 
 const makeGetSelectedRecord = () => createSelector(
     [selectRecords, selectSelectedRecord],
-    (records, selected) => records.find((record) => record.id === selected)
+    (records, selected) => {
+        const target = records.find((record) => record.id === selected);
+
+        if (!target) {
+            return null;
+        }
+
+        return {
+            id: target.id,
+            video_url: target.video_url,
+            program_id: target.program_id,
+            publish_date: target.updated_at ? target.updated_at : target.created_at,
+            title: target.title,
+        };
+    }
 );
 
 /**

@@ -37,6 +37,7 @@ const initialState = fromJS({
         id: null,
         video_url: null,
         program_id: null,
+        publish_date: null,
         title: null,
     },
 });

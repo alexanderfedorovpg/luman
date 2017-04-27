@@ -117,7 +117,7 @@ class RecordForm extends React.PureComponent {
                 </Group>
                 <Group marginBottom="40px" horizontal>
                     <Field
-                        name="date"
+                        name="publish_date"
                         component={this.renderDatepicker}
                     />
                     <Field
