@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import proschet from 'proschet';
-import { ArrowUp } from 'components/Icon/svg';
+import { ArrowUp, Clip } from 'components/Icon/svg';
 import { rem, hidden } from 'utils/style';
 import { inputCSS } from './Input';
 
@@ -22,18 +22,24 @@ const Wrapper = styled.label`
     }
 `;
 
-const Icon = styled(ArrowUp)`
+const iconStyle = `
     position: absolute;
     top: 50%;
     left: ${rem(13)};
+
+    transform: translateY(-50%);
+`;
+
+const ArrowIcon = styled(ArrowUp)`
+    ${iconStyle}
 
     width: ${rem(12)};
     height: ${rem(14)};
 
     color: #b6b6b6;
-
-    transform: translateY(-50%);
 `;
+
+const ClipIcon = styled(Clip)`${iconStyle}`;
 
 const Input = styled.input`
     ${hidden()}
@@ -42,6 +48,19 @@ const Input = styled.input`
 const fileCases = ['файл', 'файла', 'файлов'];
 const getFileCase = proschet(fileCases);
 
+const renderIcon = (iconName) => {
+    switch (iconName) {
+        case 'arrow':
+            return <ArrowIcon />;
+
+        case 'clip':
+            return <ClipIcon color="#4f4f4f" />;
+
+        default:
+            return '';
+    }
+};
+
 // eslint-disable-next-line react/prefer-stateless-function
 const FileInput = ({
     value,
@@ -49,23 +68,27 @@ const FileInput = ({
     disabled,
     error,
     success,
+    icon,
     accept,
     inputName,
     onChange,
     placeholder,
+    ...rest
 }) => {
     let fileName = null;
 
-    if (typeof value === 'string') {
-        fileName = value;
-    } else {
-        fileName = value.length > 1 ?
-            `Выбрано ${value.length} ${getFileCase(value.length)}` :
-            value[0].name;
+    if (value) {
+        if (typeof value === 'string') {
+            fileName = value;
+        } else {
+            fileName = value.length > 1 ?
+                `Выбрано ${value.length} ${getFileCase(value.length)}` :
+                value[0].name;
+        }
     }
 
     return (
-        <Wrapper success={success} error={error} hasVal={!!value}>
+        <Wrapper {...rest} icon={icon} success={success} error={error} hasVal={!!value}>
             <Input
                 type="file"
                 name={inputName}
@@ -74,7 +97,10 @@ const FileInput = ({
                 disabled={disabled}
                 onChange={onChange}
             />
-            <Icon />
+            {
+                !!icon &&
+                renderIcon(icon)
+            }
             {
                 fileName || placeholder
             }
@@ -88,6 +114,7 @@ FileInput.defaultProps = {
 
 FileInput.propTypes = {
     value: PropTypes.any,
+    icon: PropTypes.string,
     placeholder: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,

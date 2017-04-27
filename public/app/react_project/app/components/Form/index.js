@@ -1,20 +1,20 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-import Select from './Select'
-import Input, { InputIcon, Checkbox } from './Input'
+import Select from './Select';
+import Input, { InputIcon } from './Input';
 import FileInput from './FileInput';
+import Checkbox from './Checkbox';
 
-import { ifProp, rem } from './../../utils/style'
-import { color, height, font } from './../../constants/style'
+import { ifProp, rem } from './../../utils/style';
+import { color, font } from './../../constants/style';
 
-export { Select, Input, InputIcon, Checkbox, FileInput }
+export { Select, Input, InputIcon, Checkbox, FileInput };
 
 export const Horizontal = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-`
+`;
 
 export const Group = styled.div`
     margin-bottom: ${({ marginBottom }) => marginBottom || '24px'};
@@ -36,7 +36,7 @@ export const Group = styled.div`
         align-items: center;
         justify-content: flex-start;
     `}
-`
+`;
 
 export const Label = styled.label`
     display: block;
@@ -66,7 +66,7 @@ export const Label = styled.label`
     ${ifProp('right')`
         float: right;
     `}
-`
+`;
 
 export const Textarea = styled.textarea`
     padding: 13px 16px;
@@ -99,4 +99,4 @@ export const Textarea = styled.textarea`
     ${ifProp('error')(css`
         border-color: ${color.danger};
     `)}
-`
+`;

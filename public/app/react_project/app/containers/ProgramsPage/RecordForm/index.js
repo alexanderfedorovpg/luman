@@ -105,6 +105,7 @@ class RecordForm extends React.PureComponent {
                     <Field
                         name="video_url"
                         accept="video/*"
+                        icon="arrow"
                         component={this.renderFileInput}
                     />
                 </Group>
