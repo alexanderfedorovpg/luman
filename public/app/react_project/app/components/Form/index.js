@@ -81,6 +81,11 @@ export const Textarea = styled.textarea`
 
     resize: none;
 
+    &::placeholder {
+        color: #ccc;
+        opacity: 1;
+    }
+
     ${ifProp('block')`
         display: block;
         width: 100%;

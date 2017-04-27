@@ -56,7 +56,7 @@ const makeGetRecords = () => createSelector(
     (records, programs) => records.map((record) => (
         {
             id: record.id,
-            date: record.updated_at ? record.updated_at : record.created_at,
+            date: record.publish_date,
             title: record.title,
             preview: record.image_preview,
             program: programs.byId[record.program_id].name,
@@ -66,21 +66,7 @@ const makeGetRecords = () => createSelector(
 
 const makeGetSelectedRecord = () => createSelector(
     [selectRecords, selectSelectedRecord],
-    (records, selected) => {
-        const target = records.find((record) => record.id === selected);
-
-        if (!target) {
-            return null;
-        }
-
-        return {
-            id: target.id,
-            video_url: target.video_url,
-            program_id: target.program_id,
-            publish_date: target.updated_at ? target.updated_at : target.created_at,
-            title: target.title,
-        };
-    }
+    (records, selected) => records.find((record) => record.id === selected)
 );
 
 /**

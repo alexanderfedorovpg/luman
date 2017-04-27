@@ -45,7 +45,6 @@ injectGlobal`
     }
 
     .ReactModal__Body--open {
-        overflow-y: scroll;
-        position: fixed;
+        overflow: hidden;
     }
 `;

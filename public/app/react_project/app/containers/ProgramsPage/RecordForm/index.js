@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Group, Select, Input } from 'components/Form';
+import { Group, Label } from 'components/Form';
+import { SelectRedux, InputRedux } from 'components/Form/ReduxForm';
 import { Close, ArrowDown } from 'components/Icon/svg';
+
 import { StyledBtn } from '../style';
 import { makeGetProgramsAsOptions, makeGetSelectedRecord } from '../selectors';
 import { postRecord, editRecord } from '../actions';
 import {
-    StyledFileInput as FileInput,
-    StyledDatepicker as Datepicker,
+    StyledFileInput as FileInputRedux,
+    StyledDatepicker as DatepickerRedux,
+    StyledTextarea as TextareaRedux,
 } from './style';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -42,55 +45,6 @@ class RecordForm extends React.PureComponent {
         }
     }
 
-    renderInput({ input, meta: { touched, invalid, valid }, ...props }) {
-        return (
-            <Input
-                {...props}
-                success={touched && valid}
-                error={touched && invalid}
-                value={input.value}
-                onChange={(e) => input.onChange(e)}
-            />
-        );
-    }
-
-    renderFileInput({ input, meta: { touched, invalid, valid }, ...props }) {
-        return (
-            <FileInput
-                {...props}
-                success={touched && valid}
-                error={touched && invalid}
-                value={input.value}
-                onChange={(e) => input.onChange(e.target.files)}
-            />
-        );
-    }
-
-    renderSelect({ input, meta: { touched, invalid, valid }, ...props }) {
-        return (
-            <Select
-                {...props}
-                success={touched && valid}
-                error={touched && invalid}
-                value={input.value}
-                onChange={(option) => input.onChange(option.value)}
-                onBlur={() => input.onBlur(input.value)}
-            />
-        );
-    }
-
-    renderDatepicker({ input, meta: { touched, invalid, valid }, ...props }) {
-        return (
-            <Datepicker
-                {...props}
-                success={touched && valid}
-                error={touched && invalid}
-                selected={input.value}
-                onChange={(value) => input.onChange(value)}
-            />
-        );
-    }
-
     render() {
         const { programs, handleSubmit } = this.props;
 
@@ -104,7 +58,7 @@ class RecordForm extends React.PureComponent {
                         clearable={false}
                         name="program_id"
                         options={programs}
-                        component={this.renderSelect}
+                        component={SelectRedux}
                     />
                 </Group>
                 <Group md>
@@ -112,19 +66,29 @@ class RecordForm extends React.PureComponent {
                         block
                         placeholder="Название выпуска"
                         name="title"
-                        component={this.renderInput}
+                        component={InputRedux}
                     />
                 </Group>
-                <Group marginBottom="40px" horizontal>
+                <Group md horizontal>
                     <Field
                         name="publish_date"
-                        component={this.renderDatepicker}
+                        component={DatepickerRedux}
                     />
                     <Field
                         name="video_url"
                         accept="video/*"
                         icon="arrow"
-                        component={this.renderFileInput}
+                        component={FileInputRedux}
+                    />
+                </Group>
+                <Group marginBottom="40px">
+                    <Label light>Разделяйте тезисы с помощью //</Label>
+                    <Field
+                        block
+                        light
+                        placeholder="Тезисы"
+                        name="theses"
+                        component={TextareaRedux}
                     />
                 </Group>
                 <Group horizontal>
