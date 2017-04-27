@@ -5,28 +5,15 @@ import {createStructuredSelector} from 'reselect';
 import {push} from 'react-router-redux';
 import {Content, Users, Wrap, Header} from '../../components/Stats'
 import Dynamic from '../../components/Dynamic'
-import categoriesStatsLoaded from "./actions"
-import { List } from 'immutable'
 
-import {
-    loadCategoriesStatslist
-} from './actions'
 
-import {
-    selectStatsData
-} from './selectors'
-
-class StatsPage extends Component {
+class CategoriesStatsPage extends Component {
 
     constructor(props) {
         super(props);
     }
-    componentDidMount() {
-      this.props.loadList()
-    }
 
     render() {
-
         return (
             <div>
                 <Helmet
@@ -42,9 +29,7 @@ class StatsPage extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    stats: selectStatsData(state)
-});
+const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -54,12 +39,8 @@ function mapDispatchToProps(dispatch) {
         userRowClickCallback(userId) {
             dispatch(push(`articleUserStatsPage/${userId}`));
         },
-        loadList() {
-            dispatch(loadCategoriesStatslist())
-        },
-
 
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StatsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesStatsPage);
