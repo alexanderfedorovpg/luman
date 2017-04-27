@@ -9,12 +9,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import ContentModal from 'components/Modal/ContentModal';
 
 import makeSelectProgramsPage, {
     makeGetSelectedRecord,
 } from './selectors';
-import { MODALS } from './constants';
 import {
     openPage,
     deleteRecord,
@@ -24,8 +22,8 @@ import {
 import Header from './Header';
 import Rubrics from './Rubrics';
 import Records from './Records';
-import RecordForm from './RecordForm';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
+import RecordFormModal from './RecordFormModal';
 import VideoModal from './VideoModal';
 import { Wrapper, Content } from './style';
 
@@ -47,14 +45,10 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                     <Records />
                 </Content>
 
-                <ContentModal
-                    title="Загрузка программы"
-                    contentLabel="Добавить или отредактировать выпуск"
-                    onRequestClose={this.props.closeModal}
-                    isOpen={modal === MODALS.record}
-                >
-                    <RecordForm onCancel={this.props.closeModal} />
-                </ContentModal>
+                <RecordFormModal
+                    currentModal={modal}
+                    close={this.props.closeModal}
+                />
 
                 <ConfirmDeleteModal
                     currentModal={modal}
