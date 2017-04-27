@@ -22,6 +22,7 @@
 				'notification' => array(
 					'title' => $message['title'],
 					'body'  => $message['body'],
+					'icon'  =>'ic_notif'
 
 				),
 				'data'  => $message['data']
