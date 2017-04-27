@@ -18,6 +18,7 @@ import {
     OPEN_MODAL,
     CLOSE_MODAL,
     SELECT_RECORD,
+    WANT_DELETE_RECORD,
     MODALS,
     recordsTypes,
 } from './constants';
@@ -31,6 +32,7 @@ const initialState = fromJS({
     loading: true,
     modal: null,
     searchQuery: null,
+    pendingToDelete: null,
     selectedRecord: {
         id: null,
         video_url: null,
@@ -68,11 +70,16 @@ function programsPageReducer(state = initialState, action) {
                 .set('allRecordsUploaded', action.payload.allUploaded)
                 .set('loading', false);
 
+        case WANT_DELETE_RECORD:
+            return state.set('pendingToDelete', action.payload.id);
+
         case DELETE_RECORD_SUCCESS:
-            return state.update(
-                'records',
-                (records) => records.filter((record) => record.get('id') !== action.payload.id)
-            );
+            return state
+                .update(
+                    'records',
+                    (records) => records.filter((record) => record.get('id') !== action.payload.id)
+                )
+                .set('pendingToDelete', null);
 
         case POST_RECORD_SUCCESS:
             return state

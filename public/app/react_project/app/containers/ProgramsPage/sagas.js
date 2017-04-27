@@ -40,6 +40,7 @@ import {
     MODALS,
     SEARCH_RECORD,
     PLAY_VIDEO,
+    WANT_DELETE_RECORD,
 } from './constants';
 
 const getRecordsType = (state) => state.getIn(['programsPage', 'recordsType']);
@@ -64,6 +65,11 @@ export function* getPrograms() {
     } catch (err) {
         yield put(failureLoadPrograms(err));
     }
+}
+
+export function* wantDeleteRecord() {
+    yield put(closeModal());
+    yield put(openModal(MODALS.confirmRecordDelete));
 }
 
 export function* deleteRecord({ payload }) {
@@ -208,6 +214,7 @@ export function* programsData() {
     yield takeLatest(START_EDIT_RECORD, startEditRecord);
     yield takeLatest(SEARCH_RECORD, getRecords, { payload: { replace: true } });
     yield takeLatest(PLAY_VIDEO, playVideo);
+    yield takeLatest(WANT_DELETE_RECORD, wantDeleteRecord);
 }
 
 // All sagas to be loaded

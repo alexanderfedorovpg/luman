@@ -11,6 +11,7 @@ import {
     LOAD_PROGRAMS,
     LOAD_PROGRAMS_SUCCESS,
     LOAD_PROGRAMS_FAILURE,
+    WANT_DELETE_RECORD,
     DELETE_RECORD,
     DELETE_RECORD_SUCCESS,
     DELETE_RECORD_FAILURE,
@@ -75,6 +76,13 @@ export function failureLoadPrograms(error) {
     return {
         type: LOAD_PROGRAMS_FAILURE,
         error,
+    };
+}
+
+export function wantDeleteRecord(id) {
+    return {
+        type: WANT_DELETE_RECORD,
+        payload: { id },
     };
 }
 

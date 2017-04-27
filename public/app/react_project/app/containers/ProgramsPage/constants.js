@@ -10,6 +10,7 @@ export const CHANGE_RUBRIC = 'app/ProgramsPage/CHANGE_RUBRIC';
 export const LOAD_PROGRAMS = 'app/ProgramsPage/LOAD_PROGRAMS';
 export const LOAD_PROGRAMS_SUCCESS = 'app/ProgramsPage/LOAD_PROGRAMS_SUCCESS';
 export const LOAD_PROGRAMS_FAILURE = 'app/ProgramsPage/LOAD_PROGRAMS_FAILURE';
+export const WANT_DELETE_RECORD = 'app/ProgramsPage/WANT_DELETE_RECORD';
 export const DELETE_RECORD = 'app/ProgramsPage/DELETE_RECORD';
 export const DELETE_RECORD_SUCCESS = 'app/ProgramsPage/DELETE_RECORD_SUCCESS';
 export const DELETE_RECORD_FAILURE = 'app/ProgramsPage/DELETE_RECORD_FAILURE';
