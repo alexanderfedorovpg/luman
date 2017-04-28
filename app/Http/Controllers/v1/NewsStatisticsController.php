@@ -115,7 +115,7 @@ class NewsStatisticsController extends CmsController
     public function getTimeAllEditorsExtended(Request $request)
     {
 
-//        try {
+        try {
             $this->validate($request, [
                 'start_date' => 'date|date_format:Y-m-d H:i:s',
                 'end_date' => 'date|date_format:Y-m-d H:i:s',
@@ -156,12 +156,11 @@ class NewsStatisticsController extends CmsController
                     )
                 );
             }
-var_dump($respond);
-//
-//            return $this->respond($respond);
-//        } catch (\Exception $e) {
-//            return $this->respondFail500x($e);
-//        }
+
+            return $this->respond($respond);
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e);
+        }
     }
 
     /**
