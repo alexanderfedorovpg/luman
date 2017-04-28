@@ -116,7 +116,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 	$group->get('/newsstatistics','NewsStatisticsController@getTimeAllEditors');
 	$group->get('/newsstatistics/editor','NewsStatisticsController@getTimeEditor');
 	$group->get('/newsstatistics/counters/','NewsStatisticsController@getCountersAll');
-	$group->get('/newsstatistics/editor/dynamics/','NewsStatisticsController@getTimeDynamicsEditor');
+	$group->get('/newsstatistics/editor/dynamics/','NewsStatisticsController@getTimeDynamics');
 	$group->get('/newsstatistics/editor/counters/','NewsStatisticsController@getCountersEditor');
 	$group->get('/newsstatistics/editor/extended/','NewsStatisticsController@getTimeAllEditorsExtended');
     $group->get('/newsstatistics/editor/top/','NewsStatisticsController@getTopAuthors');
