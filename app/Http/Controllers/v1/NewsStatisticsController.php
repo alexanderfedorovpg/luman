@@ -229,10 +229,11 @@
 		 */
 		public function getTimeDynamics( Request $request ) {
 
-			try {
+//			try {
 
 				$this->validate( $request, [
 					'editor_id'     => 'exists:users,id',
+					'$rubrics_id'   => 'exists:rubrics,id',
 					'start_date'    => 'required|date|date_format:Y-m-d H:i:s',
 					'end_date'      => 'required|date|date_format:Y-m-d H:i:s',
 					'type_dynamics' => 'required|in:countsNews',
@@ -247,7 +248,7 @@
 				$filter           = "";
 
 				if ( $rubrics_id ) {
-					$filter .= "AND rubrics_id  = $editor_id";
+					$filter .= "AND rubrics_id = $rubrics_id";
 				}
 				if ( $editor_id ) {
 					$filter .= "AND editor_id = $editor_id";
@@ -279,10 +280,10 @@
 
 				$respond = array_merge( $arrayOfDates, $respond );
 
-				return $this->respond( $respond );
-			} catch ( \Exception $e ) {
-				return $this->respondFail500x( $e );
-			}
+//				return $this->respond( $respond );
+//			} catch ( \Exception $e ) {
+//				return $this->respondFail500x( $e );
+//			}
 
 		}
 
