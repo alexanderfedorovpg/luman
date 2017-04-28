@@ -44,7 +44,7 @@ const Datepicker = ({ startDate, selected, className, onChange, ...props }) => (
             startDate={startDate ? moment(startDate) : null}
             dateFormat="DD.MM.YYYY"
             selected={selected ? moment(selected) : null}
-            onChange={(date) => onChange(date.format('YYYY-MM-DD h:mm:ss'))}
+            onChange={(date) => onChange(date.format('YYYY-MM-DD hh:mm:ss'))}
             {...props}
         />
         <Icon />
