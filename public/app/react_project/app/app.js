@@ -16,6 +16,8 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
 import localforage from 'localforage'
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContextProvider } from 'react-dnd';
 import { fromJS } from 'immutable'
 import 'normalize.css';
 
@@ -86,17 +88,19 @@ function init(_, state) {
     const render = (messages) => {
       ReactDOM.render(
         <Provider store={store}>
-          <LanguageProvider messages={messages}>
-            <Router
-              history={history}
-              routes={rootRoute}
-              render={
-                // Scroll to top when going to a new page, imitating default browser
-                // behaviour
-                applyRouterMiddleware(useScroll())
-              }
-            />
-          </LanguageProvider>
+          <DragDropContextProvider backend={HTML5Backend}>
+            <LanguageProvider messages={messages}>
+              <Router
+                history={history}
+                routes={rootRoute}
+                render={
+                  // Scroll to top when going to a new page, imitating default browser
+                  // behaviour
+                  applyRouterMiddleware(useScroll())
+                }
+              />
+            </LanguageProvider>
+          </DragDropContextProvider>
         </Provider>,
         document.getElementById('app')
       );

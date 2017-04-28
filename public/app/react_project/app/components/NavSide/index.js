@@ -120,8 +120,8 @@ function NavSide({ expanded, isActive, location }) {
                 </Name>
                 <NavBadge success expanded={expanded}>8</NavBadge>
             </NavItem>
-            <NavItem to="#" expanded={expanded}>
-                <Icon type="main" active={isActive('/randomurl')} />
+            <NavItem to="/constructor" expanded={expanded}>
+                <Icon type="main" active={isActive('/constructor')} />
                 <Name expanded={expanded}>
                     Главная страница
                 </Name>

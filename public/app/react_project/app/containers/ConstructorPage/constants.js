@@ -1,48 +1,24 @@
-export const LOAD_FEED = 'app/ConstructorPage/LOAD_FEED';
-export const LOAD_FEED_SUCCESS = 'app/ConstructorPage/LOAD_FEED_SUCCESS';
-export const LOAD_FEED_FAILURE = 'app/ConstructorPage/LOAD_FEED_FAILURE';
+export const LOAD_CATEGORIES = 'app/ConstructorPage/LOAD_CATEGORIES';
+export const LOAD_CATEGORIES_SUCCESS = 'app/ConstructorPage/LOAD_CATEGORIES_SUCCESS';
+export const LOAD_CATEGORIES_FAILURE = 'app/ConstructorPage/LOAD_CATEGORIES_FAILURE';
 
-export const LOAD_NEWSLIST = 'app/ConstructorPage/LOAD_NEWSLIST';
-export const LOAD_NEWSLIST_SUCCESS = 'app/ConstructorPage/LOAD_NEWSLIST_SUCCESS';
-export const LOAD_NEWSLIST_FAILURE = 'app/ConstructorPage/LOAD_NEWSLIST_FAILURE';
+export const LOAD_HOME_NEWS = 'app/ConstructorPage/LOAD_HOME_NEWS';
+export const LOAD_HOME_NEWS_SUCCESS = 'app/ConstructorPage/LOAD_HOME_NEWS_SUCCESS';
+export const LOAD_HOME_NEWS_FAILURE = 'app/ConstructorPage/LOAD_HOME_NEWS_FAILURE';
 
+export const LOAD_NEWS = 'app/ConstructorPage/LOAD_NEWS';
+export const LOAD_NEWS_SUCCESS = 'app/ConstructorPage/LOAD_NEWS_SUCCESS';
+export const LOAD_NEWS_FAILURE = 'app/ConstructorPage/LOAD_NEWS_FAILURE';
 
-export const REJECT_ARTICLE = 'app/ConstructorPage/REJECT_ARTICLE';
-export const REJECT_ARTICLE_SUCCESS = 'app/ConstructorPage/REJECT_ARTICLE_SUCCESS';
-export const REJECT_ARTICLE_FAILURE = 'app/ConstructorPage/REJECT_ARTICLE_FAILURE';
+export const SAVE_CHANGES = 'app/ConstructorPage/SAVE_CHANGES';
+export const SAVE_CHANGES_SUCCESS = 'app/ConstructorPage/SAVE_CHANGES_SUCCESS';
+export const SAVE_CHANGES_FAILURE = 'app/ConstructorPage/SAVE_CHANGES_FAILURE';
 
-export const ACCEPT_ARTICLE = 'app/ConstructorPage/ACCEPT_ARTICLE';
-export const ACCEPT_ARTICLE_SUCCESS = 'app/ConstructorPage/ACCEPT_ARTICLE_SUCCESS';
-export const ACCEPT_ARTICLE_FAILURE = 'app/ConstructorPage/ACCEPT_ARTICLE_FAILURE';
+export const ITEM_TO_MAIN = 'app/ConstructorPage/ITEM_TO_MAIN';
+export const CHOOSE_CATEGORY = 'app/ConstructorPage/CHOOSE_CATEGORY';
+export const REMOVE_FROM_MAIN = 'app/ConstructorPage/REMOVE_FROM_MAIN';
+export const CANCEL_CHANGES = 'app/ConstructorPage/CANCEL_CHANGES';
 
-export const HIDE_FEED_ITEM = 'app/ConstructorPage/HIDE_FEED_ITEM';
-export const HIDE_FEED_ITEM_SUCCESS = 'app/ConstructorPage/HIDE_FEED_ITEM_SUCCESS';
-export const HIDE_FEED_ITEM_FAILURE = 'app/ConstructorPage/HIDE_FEED_ITEM_FAILURE';
-
-export const FEED_TO_WORK = 'app/ConstructorPage/FEED_TO_WORK';
-export const FEED_TO_WORK_SUCCESS = 'app/ConstructorPage/FEED_TO_WORK_SUCCESS';
-export const FEED_TO_WORK_FAILURE = 'app/ConstructorPage/FEED_TO_WORK_FAILURE';
-
-export const SELECT_FEED = 'app/ConstructorPage/SELECT_FEED';
-
-export const SET_FILTERS = 'app/ConstructorPage/SET_FILTERS';
 export const SET_FILTER = 'app/ConstructorPage/SET_FILTER';
 
-
-export const filters = [
-    {
-        id: 1,
-        title: 'Новости',
-        value: 'news',
-    },
-    {
-        id: 2,
-        title: 'ИНФОШУМ',
-        value: 'infoshoom',
-    },
-    {
-        id: 3,
-        title: 'Из эфира',
-        value: 'BROADCAST',
-    },
-];
+export const SET_WAR_MODE = 'app/ConstructorPage/SET_WAR_MODE';

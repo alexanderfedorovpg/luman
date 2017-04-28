@@ -1,25 +1,24 @@
-import React from 'react'
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import React, { PropTypes } from 'react'
 
 import Item from './Item'
 
-function News({ data }) {
+function News({ data, toMain }) {
 
     return (
         <div>
             {data.map(value => (
                 <Item
                     key={value.id}
-                    data={value}/>
+                    toMain={toMain}
+                    data={value} />
             ))}
         </div>
     )
 }
 
 News.propTypes = {
-    data: React.PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    toMain: PropTypes.func.isRequired
 }
 
-// @DragDropContext(HTML5Backend)
 export default News
