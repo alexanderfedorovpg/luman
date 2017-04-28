@@ -233,15 +233,15 @@
 
 				$this->validate( $request, [
 					'editor_id'     => 'exists:users,id',
-					'start_date'    => 'date|date_format:Y-m-d H:i:s',
-					'end_date'      => 'date|date_format:Y-m-d H:i:s',
+					'start_date'    => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'      => 'required|date|date_format:Y-m-d H:i:s',
 					'type_dynamics' => 'required|in:countsNews',
 				] );
 
 				$respond          = array();
 				$editor_id        = $request->input( 'editor_id' );
-				$this->start_date = $request->input( 'start_date' ) ? $request->input( 'start_date' ) : time();
-				$this->end_date   = $request->input( 'end_date' ) ? $request->input( 'end_date' ) : strtotime( '+1 month' );
+				$this->start_date = $request->input( 'start_date' );
+				$this->end_date   = $request->input( 'end_date' ) ;
 				$type_dynamics    = $request->input( 'type_dynamics' );
 				$rubrics_id       = $request->input( 'rubrics_id' );
 				$filter           = "";
