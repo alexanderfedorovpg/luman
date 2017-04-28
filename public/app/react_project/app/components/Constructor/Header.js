@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import debounce from 'lodash/debounce'
 
 import { Left, Right, Bot } from 'components/Header'
 
@@ -14,6 +15,12 @@ import Button from 'components/Button'
 
 import { padding, font } from 'constants/style'
 
+const ConstructorBot = styled(Bot)`
+    .war-mode & {
+        background: #c00;
+    }
+`
+
 const ConstrutorLeft = styled(Left)`
     flex-grow: 0;
     width: 41.8%;
@@ -22,12 +29,9 @@ const ConstrutorLeft = styled(Left)`
 const ConstrutorRight = styled(Right)`
     flex-basis: 41.584%;
     width: 41.584%;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
     flex-grow: 1;
     padding-left: 0;
 `
-
 
 const Form = styled.form`
     width: 100%;
@@ -62,7 +66,7 @@ const CustomButton = styled(Button) `
     font-weight: 400;
     line-height: 34px;
 
-    color: #666666;
+    color: #666;
     text-align: center;
 
     background-color: #fff;
@@ -88,26 +92,24 @@ class Header extends Component {
             }
         }
 
-        this.onChangeValue = this.onChangeValue.bind(this)
+        this.handleSearchChange = ::this.handleSearchChange
+        this.onFilterChange = debounce(this.props.onFilterChange, 500)
     }
 
-
-    onChangeValue(prop) {
-        return e => {
-            this.setState({
-                form: {
-                    ...this.state.form,
-                    [prop]: e.target.value
-                }
-            })
-        }
+    handleSearchChange(e) {
+        this.setState({
+            form: {
+                ...this.state.form,
+                search: e.target.value
+            }
+        }, ()=>this.onFilterChange(this.state.form))
     }
 
     render() {
-        let { moved, onSearchChange } = this.props
+        let { moved, onSearchChange, onSave, onCancel, onFilterChange } = this.props
 
         return (
-            <Bot moved={moved}>
+            <ConstructorBot moved={moved}>
                 <ConstrutorLeft>
                     <Form>
                         <FormHorizontal>
@@ -115,34 +117,26 @@ class Header extends Component {
                                 placeholder="Ключевые слова"
                                 block
                                 icon="search"
-                                onChange={this.onChangeValue('keywords')}
-                                value={this.state.form.keywords || ''} />
-                            {/*<FormButton
-                                success xs
-                                onClick={e => {
-                                    e.preventDefault()
-                                    onSearchChange(this.state.form)
-                                }}>
-                                OK
-                            </FormButton>*/}
+                                onChange={this.handleSearchChange}
+                                value={this.state.form.search || ''} />
                         </FormHorizontal>
                     </Form>
                 </ConstrutorLeft>
                 <ConstrutorRight>
-                    <CustomButton xs danger >
+                    <CustomButton xs danger onClick={e=>onCancel()}>
                         <Icon type="arrow-left" />
                         Отменить изменения
-                            </CustomButton>
+                    </CustomButton>
                     <CustomButton xs primary>
 
                         Предпросмотр
-                            </CustomButton>
-                    <CustomButton xs success>
+                    </CustomButton>
+                    <CustomButton xs success onClick={e=>onSave()}>
                         <Icon type="okay" />
                         Сохранить
-                            </CustomButton>
+                    </CustomButton>
                 </ConstrutorRight>
-            </Bot>
+            </ConstructorBot>
         )
     }
 }

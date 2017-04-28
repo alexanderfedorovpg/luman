@@ -1,5 +1,5 @@
 import { injectGlobal } from 'styled-components';
-import { font } from './constants/style'
+import { font, color } from './constants/style'
 import fontFace from './fonts'
 
 /* eslint no-unused-expressions: 0 */
@@ -37,6 +37,10 @@ injectGlobal`
         margin: 0;
 
         overflow-x: hidden;
+    }
+    a {
+        color: ${color.primary};
+        font-weight: 400;
     }
 
     .icon {

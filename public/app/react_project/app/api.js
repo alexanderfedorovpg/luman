@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs'
 
 const baseUrl = 'http://librorum.rtvi.ddemo.ru/api/v1';
 
@@ -205,7 +206,6 @@ export const uploadFile = (file) => {
     });
 };
 
-//?searchString=two&orderBy=top
 export const getReadyNews = params => axios.get(`${baseUrl}/newseditor/moderated`, {
     params: {
         ...params,
@@ -214,6 +214,21 @@ export const getReadyNews = params => axios.get(`${baseUrl}/newseditor/moderated
 
 export const publishModeratedArticle = id => axios.put(`${baseUrl}/newseditor/publish/${id}`)
 
+// =============================================================================
+// Constructor API
+// =============================================================================
+
+export const getConstructorCategories = () => axios.get(`${baseUrl}/homepage/newscategory`)
+export const getHomepageNews = () => axios.get(`${baseUrl}/homepage`)
+export const getConstructorNews = params => axios.get(`${baseUrl}/newslist`, { params })
+export const saveHomepageNews = data => axios.put(`${baseUrl}/homepage`, qs.stringify(data), {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+})
+
+
+// =============================================================================
 
 // =============================================================================
 // RECORDS AND PROGRAMS API

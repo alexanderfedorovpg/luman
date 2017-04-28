@@ -107,10 +107,10 @@ export function failureDeleteRecord(error) {
     };
 }
 
-export function loadRecords(replace) {
+export function loadRecords(params) {
     return {
         type: LOAD_RECORDS,
-        payload: { replace },
+        payload: params,
     };
 }
 

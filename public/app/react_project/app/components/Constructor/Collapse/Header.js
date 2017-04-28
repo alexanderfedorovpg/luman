@@ -1,54 +1,123 @@
 import React, { Component } from 'react'
-import { injectGlobal } from 'styled-components'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import randomString from 'random-string'
+import styled, { css } from 'styled-components';
+import { Link, withRouter } from 'react-router';
 
-import styled from 'styled-components';
-
-import Tabs from './Tabs';
 import Tumbler from './Tumbler';
 
+import { padding } from 'constants/style'
+import { below, rem, ifProp } from 'utils/style'
+
 const Root = styled.div`
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
+
+    ${below('1100px')(css`
+        margin-left: rem(-18);
+    `)}
 `
 
 const Left = styled.div`
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
     justify-content: flex-start;
     padding-top: 1px;
 `
 
-class Collapse extends React.Component {
+const Nav = styled.div`
+    margin-left: ${rem(9)};
+
+    .war-mode & {
+        color: #c00;
+    }
+`;
+
+const NavItem = styled(({active, ...rest})=> <Link {...rest} />)`
+    margin-right: ${rem(21)};
+
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ccc;
+    text-decoration: none;
+    text-transform: uppercase;
+    span {
+        font-weight: 400;
+    }
+    &:hover {
+        color: #000;
+        span {
+            color: #666;
+        }
+    }
+    &:last-child {
+        margin-right: 0;
+    }
+    .war-mode & {
+        color: #c00;
+    }
+
+    ${ifProp('active')`
+        color: #000;
+        span {
+            color: #666;
+        }
+    `}
+`;
+
+const Summary = styled.span`
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+`
+
+class Header extends Component {
     constructor (props) {
         super(props);
     }
 
     render() {
-        // console.log(this.props);
+        let { data, router, war, onWarModeChange } = this.props
+
+        const newsCount = (data.news||[]).length
+        const noiseCount = (data.noise||[]).length
+        const broadcastCount = (data.broadcast||[]).length
+
+        const total = newsCount + noiseCount + broadcastCount
+
         return (
             <Root>
                 <Left>
-                    <Tumbler />
-                    <Tabs data={this.props.tabs} />
+                    <Tumbler war={war} onWarModeChange={onWarModeChange} />
+                    <Nav>
+                        <NavItem
+                            to="/constructor/news"
+                            active={router.isActive('/constructor/news')}>
+
+                            Новости <span>{newsCount}</span>
+                        </NavItem>
+                        <NavItem
+                            to="/constructor/noise"
+                            active={router.isActive('/constructor/noise')}>
+
+                            Инфошум <span>{noiseCount}</span>
+                        </NavItem>
+                        <NavItem
+                            to="/constructor/broadcast"
+                            active={router.isActive('/constructor/broadcast')}>
+
+                            Из эфира <span>{broadcastCount}</span>
+                        </NavItem>
+                    </Nav>
                 </Left>
+                <div>
+                    <Summary>
+                        Итого: {total}
+                    </Summary>
+                </div>
             </Root>
         )
     }
 }
 
-export default Collapse;
+export default withRouter(Header);

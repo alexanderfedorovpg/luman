@@ -12,12 +12,6 @@ export const Left = styled(Content.Left) `
     width: 41.8%;
 `
 
-// export const RightTabs = styled(Tabs)`
-//     margin-left: 0.5625rem;
-//     padding: 0px;
-//     border-bottom: transparent;
-// `
-
 export const Right = styled(Content.Right)`
     width: 41.584%;
     flex-basis: 41.584%;

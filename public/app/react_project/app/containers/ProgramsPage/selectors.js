@@ -33,10 +33,21 @@ const makeSelectRubricsNames = () => createSelector(
     ]
 );
 
+const makeGetPrograms = () => createSelector(
+    selectPrograms,
+    (programs) => {
+        if (!programs || !programs.ids || !programs.byId) {
+            return [];
+        }
+
+        return programs.ids.map((id) => programs.byId[id])
+    }
+);
+
 const makeGetProgramsAsOptions = () => createSelector(
     selectPrograms,
     (programs) => {
-        if (!programs || !programs.ids) {
+        if (!programs || !programs.ids || !programs.byId) {
             return [];
         }
 
@@ -81,8 +92,10 @@ const makeSelectProgramsPage = () => createSelector(
 export default makeSelectProgramsPage;
 export {
     selectProgramsPageDomain,
+    selectRecords,
     makeSelectRubricsNames,
     makeGetRecords,
     makeGetProgramsAsOptions,
     makeGetSelectedRecord,
+    makeGetPrograms,
 };

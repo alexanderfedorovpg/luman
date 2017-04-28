@@ -1,10 +1,5 @@
 import { createSelector } from 'reselect';
 import { Map, List } from 'immutable';
-import {
-    selectUsersMap,
-    selectRubrics
-} from 'containers/App/selectors'
-
 
 const selectConstructorPageDomain = (state) => state.get('constructorPage');
 
@@ -18,26 +13,44 @@ const selectSearchVars = createSelector(
     root => root.getIn(['news', 'search'])
 )
 
-const selectNewsList = createSelector(
+const selectHomeNews = createSelector(
     selectConstructorPageDomain,
-    selectUsersMap,
-    selectRubrics,
-    (root, users, rubrics) => {
-        return root.getIn(['news', 'data'], List())
-            .map(value => {
-                let result = value
-                if (value.get('editor_id')) {
-                    result = result.set('editor', users[value.get('editor_id')])
-                }
-
-                return result
-                    .set('rubrics', rubrics.find(rub => rub.id === value.get('rubrics_id')))
-            }).toJS()
-    }
+    root => root.getIn(['temporary', 'home'], List()).toJS()
 )
 
+const selectCategories = createSelector(
+    selectConstructorPageDomain,
+    root => root
+        .getIn(['categories', 'ids'], List())
+        .map(value => root.getIn(['categories', 'data', `${value}`])).toJS()
+)
+
+const selectNoise = createSelector(
+    selectConstructorPageDomain,
+    root => root.getIn(['news', 'data'], List()).toJS().filter(value => value.top <= 3)
+)
+
+const selectNews = createSelector(
+    selectConstructorPageDomain,
+    root => root.getIn(['news', 'data'], List()).toJS().filter(value => value.top > 3)
+)
+
+const selectFilters = createSelector(
+    selectConstructorPageDomain,
+    root => root.get('filters').toJS()
+)
+
+const selectWarMode = createSelector(
+    selectConstructorPageDomain,
+    root => root.getIn(['temporary', 'home', 'war'])
+)
 
 export {
     selectConstructorPageDomain,
-    selectNewsList
-};
+    selectCategories,
+    selectNoise,
+    selectNews,
+    selectHomeNews,
+    selectFilters,
+    selectWarMode
+}
