@@ -2,11 +2,16 @@ import { createSelector } from 'reselect'
 
 const selectStatsPageDomain = (state) => state.get('statsPage');
 
-const selectStatsData = createSelector(
+const selectCategoryStatsData = createSelector(
     selectStatsPageDomain,
-    root => root.get('statsdata').toJS()
+    root => root.get('catstatsdata').toJS()
+);
+const selectAuthorsStatsData = createSelector(
+    selectStatsPageDomain,
+    root => root.get('autstatsdata').toJS()
 );
 
 export {
-    selectStatsData
+    selectCategoryStatsData,
+    selectAuthorsStatsData
 }

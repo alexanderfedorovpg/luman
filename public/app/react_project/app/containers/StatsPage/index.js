@@ -9,11 +9,13 @@ import categoriesStatsLoaded from "./actions"
 import { List } from 'immutable'
 
 import {
-    loadCategoriesStatslist
+    loadCategoriesStatslist,
+    loadAuthorsList
 } from './actions'
 
 import {
-    selectStatsData
+    selectCategoryStatsData,
+    selectAuthorsStatsData
 } from './selectors'
 
 class StatsPage extends Component {
@@ -22,7 +24,8 @@ class StatsPage extends Component {
         super(props);
     }
     componentDidMount() {
-      this.props.loadList()
+      this.props.loadCatsList();
+      this.props.loadAuthorsList();
     }
 
     render() {
@@ -32,8 +35,8 @@ class StatsPage extends Component {
                     title="Cтатистика"/>
                 <Header />
                 <Wrap>
-                    <Content rowClickCallback={this.props.categoryRowClickCallback} data={this.props.stats}/>
-                    <Users rowClickCallback={this.props.userRowClickCallback}/>
+                    <Content rowClickCallback={this.props.categoryRowClickCallback} data={this.props.categoriesStats}/>
+                    <Users rowClickCallback={this.props.userRowClickCallback}б data={this.props.authorsStats}/>
                 </Wrap>
                 <Dynamic />
             </div>
@@ -42,7 +45,8 @@ class StatsPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    stats: selectStatsData(state)
+    categoriesStats: selectCategoryStatsData(state),
+    authorsStats: selectAuthorsStatsData(state),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -53,9 +57,12 @@ function mapDispatchToProps(dispatch) {
         userRowClickCallback(userId) {
             dispatch(push(`articleUserStatsPage/${userId}`));
         },
-        loadList() {
+        loadCatsList() {
             dispatch(loadCategoriesStatslist())
         },
+        loadAuthorsList(){
+            dispatch(loadAuthorsList())
+        }
 
 
     };

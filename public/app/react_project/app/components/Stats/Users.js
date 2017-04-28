@@ -28,18 +28,25 @@ const CustomRight = styled(Right)`
     `}
 `
 
-const Tr = styled.tr`
-    &:hover {
 
-        .${userClassName} {
-            font-weight: 600 !important;
-            color: #333 !important;
-        }
-    }
+function Users({rowClickCallback, data}) {
 
-`
+    // Itterate over the data to result a rendered list with data included
+    const dataSet = data.map((item) => {
+        return <tr key={item.editor_id} onClick={()=>rowClickCallback(1)}>
+            <td >
+                <User data={{ pic: '/img/user1.png' }}>
+                    <UserName className={userClassName}>
+                        {item.editor_name}
+                    </UserName>
+                </User>
+            </td>
+            <td>{item.count}</td>
+            <td>{item.avg_time_work.hours} часов {item.avg_time_work.minutes} мин</td>
+        </tr>
 
-function Users({rowClickCallback}) {
+    });
+
     return (
         <CustomRight>
             <Table>
@@ -51,62 +58,10 @@ function Users({rowClickCallback}) {
                     </tr>
                 </thead>
                 <tbody>
-                    <Tr onClick={()=>rowClickCallback(1)}>
-                        <td>
-                            <User data={{ pic: '/img/user1.png' }}>
-                                <UserName className={userClassName}>
-                                    Ковалев Максим
-                                </UserName>
-                            </User>
-                        </td>
-                        <td>4</td>
-                        <td>12 мин</td>
-                    </Tr>
-                    <Tr onClick={()=>rowClickCallback(2)}>
-                        <td>
-                            <User data={{ pic: '/img/user2.png' }}>
-                                <UserName className={userClassName}>
-                                    Короленко Анастасия
-                                </UserName>
-                            </User>
-                        </td>
-                        <td>5</td>
-                        <td>17 мин</td>
-                    </Tr>
-                    <Tr onClick={()=>rowClickCallback(3)}>
-                        <td>
-                            <User data={{ pic: '/img/user3.png' }}>
-                                <UserName className={userClassName}>
-                                    Поликарпов Анатолий
-                                </UserName>
-                            </User>
-                        </td>
-                        <td>22</td>
-                        <td>16 мин</td>
-                    </Tr>
-                    <Tr onClick={()=>rowClickCallback(4)}>
-                        <td>
-                            <User data={{ pic: '/img/user4.png' }}>
-                                <UserName className={userClassName}>
-                                    Марышева Елена
-                                </UserName>
-                            </User>
-                        </td>
-                        <td>56</td>
-                        <td>15 мин</td>
-                    </Tr>
-                    <Tr onClick={()=>rowClickCallback(5)}>
-                        <td>
-                            <User data={{ pic: '/img/user5.png' }}>
-                                <UserName className={userClassName}>
-                                    Санченков Роман
-                                </UserName>
-                            </User>
-                        </td>
-                        <td>3</td>
-                        <td>1ч 10 мин</td>
-                    </Tr>
+
+                {dataSet}
                 </tbody>
+
             </Table>
         </CustomRight>
     )
