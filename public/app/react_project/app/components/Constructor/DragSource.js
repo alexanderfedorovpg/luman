@@ -126,11 +126,11 @@ const spec = {
             data: props.data
         }
     },
-    endDrag(props, monitor) {
+    endDrag(props, monitor, component) {
         const result = monitor.getDropResult()
 
         if (result) {
-            props.toMain(props.data, result.category)
+            props.toMain(props.data, result.category, result.id)
         }
 
         return {

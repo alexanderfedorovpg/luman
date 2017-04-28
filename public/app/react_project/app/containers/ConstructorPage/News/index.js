@@ -1,17 +1,21 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
+import { Wrap, Left, Right } from 'components/Constructor/Content'
 import NewsComponent from 'components/Constructor/News'
+import Tabs from 'components/Constructor/Tabs'
+import Collapse from '../Collapse'
 
 import {
     loadNews,
-    itemToMain
-} from './../actions'
+    itemToMain,
+    removeFromMain,
+} from '../actions'
 
 import {
-    selectNews
-} from './../selectors';
+    selectNews,
+    selectCategories,
+} from '../selectors';
 
 import {
     selectFilters
@@ -36,11 +40,24 @@ export class News extends PureComponent {
     render() {
         let {
             news,
-            toMain
-        } = this.props;
+            categories,
+            removeFromMain,
+            toMain,
+        } = this.props
 
         return (
-            <NewsComponent data={news} toMain={toMain} />
+            <Wrap>
+                <Left>
+                    <Tabs />
+                    <NewsComponent data={news} toMain={toMain} />
+                </Left>
+                <Right>
+                    <Collapse
+                        type={'news'}
+                        onRemove={removeFromMain}
+                        categories={categories} />
+                </Right>
+            </Wrap>
         )
     }
 
@@ -51,16 +68,20 @@ News.propTypes = {
 
 const mapStateToProps = state => ({
     news: selectNews(state),
-    filters: selectFilters(state)
+    filters: selectFilters(state),
+    categories: selectCategories(state),
 })
 
 const mapDispatchToProps = dispatch => ({
     loadNewslist() {
         dispatch(loadNews())
     },
-    toMain(item, category) {
-        dispatch(itemToMain(item, 'news', category))
-    }
+    toMain(item, category, before) {
+        dispatch(itemToMain(item, 'news', category, before))
+    },
+    removeFromMain(item) {
+        dispatch(removeFromMain(item, 'news'))
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

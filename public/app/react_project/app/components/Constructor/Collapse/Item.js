@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DropTarget } from 'react-dnd';
 
 import Icon from 'components/Icon'
 import Article from './Article'
 
-import { font } from 'constants/style';
+import { font, padding } from 'constants/style';
 import { rem, ifProp } from 'utils/style';
 
 const Root = styled.div`
@@ -46,8 +45,15 @@ const Wrap = styled.div`
 const Content = styled.div``
 
 const NotFound = styled.div`
+    padding-top: ${padding};
+    padding-bottom: ${padding};
     padding-right: ${rem(35)};
     padding-left: ${rem(18)};
+`
+
+const Placeholder = styled.div`
+    width: 100%;
+    border: 1px solid;
 `
 
 const DropdownIcon = styled(Icon)`
@@ -64,7 +70,6 @@ const DropdownIcon = styled(Icon)`
 class CollapseItem extends React.Component {
 
     static propTypes = {
-        isOver: React.PropTypes.bool.isRequired
     }
 
     constructor(props) {
@@ -72,9 +77,15 @@ class CollapseItem extends React.Component {
 
         this.state = {
             open: false,
+
+            // placeholder index
+            placeholder: -1
         }
 
         this.toggle = ::this.toggle
+        this.setPlaceholder = ::this.setPlaceholder
+        this.onMove = ::this.onMove
+        this.byIndex = ::this.byIndex
     }
 
     componentDidMount() {
@@ -91,50 +102,79 @@ class CollapseItem extends React.Component {
         })
     }
 
-    render() {
-        let { data, choose, onRemove, category, connectDropTarget, isOver } = this.props
+    setPlaceholder(index) {
+        this.setState({
+            placeholder: index
+        })
+    }
 
-        return connectDropTarget(
-            <div onClick={() => choose(category.id)}>
-                <Root className={this.state.open ? 'is-active' : ''}>
-                    <Header onClick={this.toggle}>
-                        <Title>{category.name}</Title>
-                        <DropdownIcon type="dropdown-arrow" />
-                    </Header>
-                    <Wrap>
-                        <Content>
-                            {data.map(value => (
-                                <Article
-                                    key={value.id}
-                                    onRemove={onRemove}
-                                    data={value} />
-                            ))}
-                            {data.length
-                                ? null
-                                : <NotFound>Ничего не найдено</NotFound>
-                            }
-                        </Content>
-                    </Wrap>
-                </Root>
-            </div>
+    byIndex(index) {
+        return this.props.data[index]
+    }
+
+    onMove(index) {
+        const { placeholder } = this.state
+        const { onMove, data } = this.props
+
+        if (index != placeholder && index != (placeholder-1)) {
+            onMove(data[index].id, (data[placeholder]||{}).id)
+        }
+    }
+
+    renderList() {
+        let { data, onRemove, category } = this.props
+
+        return data.map((value, index) => (
+            <Article
+                key={value.id}
+                index={index}
+                category={category.id}
+                byIndex={this.byIndex}
+                onMove={this.setPlaceholder}
+                onChange={this.onMove}
+                onRemove={onRemove}
+                data={value} />
+        ))
+    }
+
+    render() {
+        let {
+            data,
+            choose,
+            category
+        } = this.props
+
+        let items = this.renderList()
+
+        if (this.state.placeholder > -1) {
+            items.splice(
+                this.state.placeholder,
+                0,
+                <Placeholder key={null} />
+            )
+        }
+
+        return (
+            <Root
+                className={this.state.open ? 'is-active' : ''}
+                onClick={() => choose(category.id)}>
+
+                <Header onClick={this.toggle}>
+                    <Title>{category.name}</Title>
+                    <DropdownIcon type="dropdown-arrow" />
+                </Header>
+                <Wrap>
+                    <Content>
+                        {items}
+                        {data.length
+                            ? null
+                            : <NotFound>Ничего не найдено</NotFound>
+                        }
+                    </Content>
+                </Wrap>
+            </Root>
         )
     }
 }
 
-const spec = {
-    drop(props, monitor) {
-
-        return {
-            category: props.category.id
-        }
-    }
-}
-
-const DropDecarator = DropTarget('newsItem', spec, function (connect, monitor) {
-    return {
-        connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver()
-    }
-});
-
-export default DropDecarator(CollapseItem)
+export default CollapseItem

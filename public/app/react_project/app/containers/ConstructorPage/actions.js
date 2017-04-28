@@ -18,12 +18,22 @@ import {
     ITEM_TO_MAIN,
     CHOOSE_CATEGORY,
     REMOVE_FROM_MAIN,
+    MOVE_ITEM,
     CANCEL_CHANGES,
 
     SET_FILTER,
 
     SET_WAR_MODE,
 } from './constants';
+
+export const moveItem = (type, source, target) => ({
+    type: MOVE_ITEM,
+    payload: {
+        type,
+        source,
+        target
+    }
+})
 
 export const setWarMode = value => ({
     type: SET_WAR_MODE,
@@ -35,12 +45,13 @@ export const setFilter = filters => ({
     payload: filters
 })
 
-export const itemToMain = (item, type, category) => ({
+export const itemToMain = (item, type, category, before) => ({
     type: ITEM_TO_MAIN,
     payload: {
         item,
         type,
-        category
+        category,
+        before
     }
 })
 

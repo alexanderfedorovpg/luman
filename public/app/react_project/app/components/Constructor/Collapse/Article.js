@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom';
 import styled from 'styled-components'
+import { DragSource, DropTarget } from 'react-dnd'
 
 import IconTip from 'components/IconTip'
 
@@ -124,48 +126,62 @@ const Remove = styled(Edit)`
     right: 24px
 `
 
-function Article({ data, onRemove }) {
+class Article extends Component {
 
-    return (
-        <Root>
-            <Wrap>
-                <Pic>
-                    <img src={ensureAbs(data.image_preview)} />
-                </Pic>
-                <div>
-                    {data.rubrics
-                        ? (
-                            <Rubrics>
-                                {data.rubrics.map(value => (
-                                    <span>
-                                        {value}
-                                    </span>
-                                ))}
-                            </Rubrics>
-                        )
-                        : null
-                    }
-                    <Title>
-                        {data.title}
-                    </Title>
-                    <Media>
-                        1 ФОТО + 1 ВИДЕО
-                    </Media>
-                </div>
+    render() {
+        let {
+            data,
+            onRemove,
 
-                <Remove
-                    message="Убрать с главной"
-                    eventType="hover"
-                    direction="bottom"
-                    icon="delete"
-                    onClick={e => {
-                        onRemove(data)
-                        e.stopPropagation()
-                    }} />
+            style,
+            isOver,
+            connectDragSource,
+            connectDropTarget,
+        } = this.props
 
-            </Wrap>
-        </Root>
-    )
+        return connectDragSource(connectDropTarget(
+            <div style={style}>
+                <Root>
+                    <Wrap>
+                        <Pic>
+                            <img src={ensureAbs(data.image_preview)} />
+                        </Pic>
+                        <div>
+                            {data.rubrics
+                                ? (
+                                    <Rubrics>
+                                        {data.rubrics.map(value => (
+                                            <span>
+                                                {value}
+                                            </span>
+                                        ))}
+                                    </Rubrics>
+                                )
+                                : null
+                            }
+                            <Title>
+                                {data.title}
+                            </Title>
+                            <Media>
+                                1 ФОТО + 1 ВИДЕО
+                            </Media>
+                        </div>
+
+                        <Remove
+                            message="Убрать с главной"
+                            eventType="hover"
+                            direction="bottom"
+                            icon="delete"
+                            onClick={e => {
+                                onRemove(data)
+                                e.stopPropagation()
+                            }} />
+
+                    </Wrap>
+                </Root>
+            </div>
+        ))
+    }
 }
                 // <Edit
                 //     message="Редактировать"
@@ -177,4 +193,71 @@ function Article({ data, onRemove }) {
                 //         e.stopPropagation()
                 //     }} />
 
-export default Article
+const source = {
+    beginDrag(props) {
+        return {
+            index: props.index,
+            data: props.data
+        }
+    },
+    endDrag(props, monitor) {
+        props.onMove(-1)
+
+        return {
+        }
+    }
+}
+
+const target = {
+    drop(props, monitor, component) {
+        const item = monitor.getItem()
+        const index = calculateIndex(props, monitor, component)
+
+        if (Number.isInteger(item.index)) {
+            props.onChange(monitor.getItem().index)
+        }
+
+        props.onMove(-1)
+
+        return {
+            category: props.category,
+            index,
+            id: (props.byIndex(index)||{}).id
+        }
+    },
+    hover(props, monitor, component) {
+        const item = monitor.getItem()
+
+        if (item.data.id == props.data.id) return
+
+        props.onMove(calculateIndex(props, monitor, component))
+    }
+}
+
+function calculateIndex(props, monitor, component) {
+
+    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+    const parentOffsetY = monitor.getClientOffset().y - hoverBoundingRect.top;
+
+    return parentOffsetY > hoverMiddleY
+        ? props.index+1
+        : props.index
+}
+
+const DragSourceDecarator = DragSource('newsItem', source, function (connect, monitor) {
+    return {
+        connectDragSource: connect.dragSource()
+    }
+})
+
+const DropTargetDecarator = DropTarget('newsItem', target, function (connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    }
+});
+
+export default DragSourceDecarator(DropTargetDecarator(Article))

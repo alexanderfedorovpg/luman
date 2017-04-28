@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
     LOAD_HOME_NEWS,
@@ -8,6 +8,7 @@ import {
     LOAD_CATEGORIES_SUCCESS,
 
     ITEM_TO_MAIN,
+    MOVE_ITEM,
     CHOOSE_CATEGORY,
     REMOVE_FROM_MAIN,
     CANCEL_CHANGES,
@@ -82,31 +83,38 @@ function constructorPageReducer(state = initialState, action) {
             return state.setIn(['news', 'loading'], false)
 
         case ITEM_TO_MAIN:
+            // Если выбрана категория - добавляем итем,
+            // если не выбрана, то запоминаем итем для последующего выбора категории
             if (!action.payload.category) {
                 return state.setIn(['temporary', 'item'], fromJS(action.payload))
             }
             else {
                 return state
-                    ::addItemToMain({
-                        type: action.payload.type,
-                        item: action.payload.item,
-                        category: action.payload.category
-                    })
+                    ::addItemToMain(
+                        action.payload.type,
+                        action.payload.item,
+                        action.payload.category,
+                        action.payload.before
+                    )
+                    ::normalizeRating(action.payload.type)
             }
 
             return state
 
         case CHOOSE_CATEGORY:
+            // если выбран итем, то добавляем его в категорию
+            // если итема нет - ничего не делаем
             const tempItem = state.getIn(['temporary', 'item'])
             if (tempItem) {
                 const { item, type } = tempItem.toJS()
 
                 return state
-                    ::addItemToMain({
+                    ::addItemToMain(
                         type,
                         item,
-                        category: action.payload
-                    })
+                        action.payload
+                    )
+                    ::normalizeRating(type)
                     .setIn(['temporary', 'item'], null)
             }
             return state
@@ -133,39 +141,83 @@ function constructorPageReducer(state = initialState, action) {
         case SET_WAR_MODE:
             return state.setIn(['temporary', 'home', 'war'], action.payload)
 
+        case MOVE_ITEM:
+            return state.
+                updateIn(
+                    ['temporary', 'home', action.payload.type],
+                    arr => {
+                        const item = arr.find(v => v.getIn(['data', 'id']) == action.payload.source)
+                        const source = arr.indexOf(item)
+                        const target = arr.findIndex(v => v.getIn(['data', 'id']) == action.payload.target)
+                        const destination = source > target
+                            ? target
+                            : target-1
+
+                        const result = arr.delete(source)
+
+                        return target > -1
+                            ? result.insert(destination, item)
+                            : result.push(item)
+                    }
+                )
+                ::normalizeRating(action.payload.type)
+
         default:
             return state;
     }
 }
 
-function addItemToMain({ type, category, item }) {
+function normalizeRating(type) {
+    const state = this
+
+    return state
+        .updateIn(
+            ['temporary', 'home', type],
+            arr => arr.map((val, index) => val.set('top', index))
+        )
+}
+
+// добавляет итем во временный пулл главной
+function addItemToMain(type, item, category, before) {
     const state = this
 
     return state
         .updateIn(
             ['temporary', 'home', type],
             arr => {
+                let data
+                const index = arr.findIndex(v => v.getIn(['data', 'id']) == before)
+
                 switch (type) {
                     case 'news':
-                        return arr.push(fromJS({
+                        data = fromJS({
                             category: state.getIn(['categories', 'data', `${category}`]).toJS(),
                             data: item,
                             top: 1
-                        }))
+                        })
+                        break
+
                     case 'noise':
-                        return arr.push(fromJS({
+                        data = fromJS({
                             data: item,
                             top: 1
-                        }))
+                        })
+                        break
+
                     case 'broadcast':
-                        return arr.push(fromJS({
+                        data = fromJS({
                             data: {
                                 ...item,
                                 program_id: category
                             },
                             top: 1
-                        }))
+                        })
+                        break
                 }
+
+                return index > -1
+                    ? arr.insert(index, data)
+                    : arr.push(data)
             }
         )
 }

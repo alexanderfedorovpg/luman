@@ -18,6 +18,7 @@ export const ITEM_TO_MAIN = 'app/ConstructorPage/ITEM_TO_MAIN';
 export const CHOOSE_CATEGORY = 'app/ConstructorPage/CHOOSE_CATEGORY';
 export const REMOVE_FROM_MAIN = 'app/ConstructorPage/REMOVE_FROM_MAIN';
 export const CANCEL_CHANGES = 'app/ConstructorPage/CANCEL_CHANGES';
+export const MOVE_ITEM = 'app/ConstructorPage/MOVE_ITEM';
 
 export const SET_FILTER = 'app/ConstructorPage/SET_FILTER';
 

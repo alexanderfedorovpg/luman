@@ -1,11 +1,16 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+
+import { Wrap, Left, Right } from 'components/Constructor/Content'
 import News from 'components/Constructor/News'
+import Tabs from 'components/Constructor/Tabs'
+import Collapse from '../Collapse'
 
 import {
     loadNews,
-    itemToMain
+    itemToMain,
+    removeFromMain,
 } from './../actions'
 
 import {
@@ -35,11 +40,28 @@ export class Noise extends PureComponent {
     render() {
         let {
             news,
-            toMain
+            toMain,
+            removeFromMain
         } = this.props
 
+        const categories = [{
+            id: 1,
+            name: 'Инфошум'
+        }]
+
         return (
-            <News data={news} toMain={toMain} />
+            <Wrap>
+                <Left>
+                    <Tabs />
+                    <News data={news} toMain={toMain} />
+                </Left>
+                <Right>
+                    <Collapse
+                        type={'noise'}
+                        onRemove={removeFromMain}
+                        categories={categories} />
+                </Right>
+            </Wrap>
         )
     }
 
@@ -50,16 +72,19 @@ Noise.propTypes = {
 
 const mapStateToProps = state => ({
     news: selectNoise(state),
-    filters: selectFilters(state)
+    filters: selectFilters(state),
 })
 
 const mapDispatchToProps = dispatch => ({
     loadNewslist() {
         dispatch(loadNews())
     },
-    toMain(item, category) {
-        dispatch(itemToMain(item, 'noise', category))
-    }
+    toMain(item, category, before) {
+        dispatch(itemToMain(item, 'noise', category, before))
+    },
+    removeFromMain(item) {
+        dispatch(removeFromMain(item, 'noise'))
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Noise);Noise
