@@ -20,7 +20,7 @@ import {
 } from './actions';
 
 import Header from './Header';
-import Rubrics from './Rubrics';
+import ProgramsFilter from './ProgramsFilter';
 import Records from './Records';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
 import RecordFormModal from './RecordFormModal';
@@ -41,7 +41,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                 <Helmet title="Список программ" />
                 <Header />
                 <Content>
-                    <Rubrics />
+                    <ProgramsFilter />
                     <Records />
                 </Content>
 

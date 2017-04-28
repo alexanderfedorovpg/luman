@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { selectRubrics } from 'containers/App/selectors';
 
 /**
  * Direct selector to the programsPage state domain
@@ -25,13 +24,6 @@ const selectSelectedRecord = createSelector(
     (substate) => substate.get('selectedRecord')
 );
 
-const makeSelectRubricsNames = () => createSelector(
-    selectRubrics,
-    (rubrics) => [
-        { id: -1, name: 'Все' },
-        ...rubrics,
-    ]
-);
 
 const makeGetPrograms = () => createSelector(
     selectPrograms,
@@ -40,8 +32,16 @@ const makeGetPrograms = () => createSelector(
             return [];
         }
 
-        return programs.ids.map((id) => programs.byId[id])
+        return programs.ids.map((id) => programs.byId[id]);
     }
+);
+
+const makeSelectProgramsNames = () => createSelector(
+    makeGetPrograms(),
+    (programs) => [
+        { id: -1, name: 'Все' },
+        ...programs,
+    ]
 );
 
 const makeGetProgramsAsOptions = () => createSelector(
@@ -93,7 +93,7 @@ export default makeSelectProgramsPage;
 export {
     selectProgramsPageDomain,
     selectRecords,
-    makeSelectRubricsNames,
+    makeSelectProgramsNames,
     makeGetRecords,
     makeGetProgramsAsOptions,
     makeGetSelectedRecord,

@@ -27,7 +27,7 @@ import {
 } from './actions';
 import {
     SET_RECORDS_TYPE,
-    CHANGE_RUBRIC,
+    CHANGE_PROGRAM,
     OPEN_PAGE,
     LOAD_PROGRAMS,
     DELETE_RECORD,
@@ -45,7 +45,7 @@ import {
 
 const getRecordsType = (state) => state.getIn(['programsPage', 'recordsType']);
 const getRecordsOffset = (state) => state.getIn(['programsPage', 'records']).size;
-const getRubricId = (state) => state.getIn(['programsPage', 'rubric']);
+const getProgramId = (state) => state.getIn(['programsPage', 'selectedProgram']);
 const getSearchQuery = (state) => state.getIn(['programsPage', 'searchQuery']);
 
 export function* getPrograms() {
@@ -95,15 +95,15 @@ export function* getRecords(action = { payload: {} }) {
         const { payload } = action;
         const replace = typeof payload.replace === 'undefined' ? true : payload.replace;
 
-        const [type, rubricId, offset, search] = yield [
+        const [type, programId, offset, search] = yield [
             select(getRecordsType),
-            select(getRubricId),
+            select(getProgramId),
             select(getRecordsOffset),
             select(getSearchQuery),
         ];
 
-        if (rubricId >= 0) {
-            params.rubricId = rubricId;
+        if (programId >= 0) {
+            params.programId = programId;
         }
 
         if (search) {
@@ -208,7 +208,7 @@ export function* programsData() {
     yield takeEvery(DELETE_RECORD, deleteRecord);
     yield takeLatest(LOAD_RECORDS, getRecords);
     yield takeLatest(SET_RECORDS_TYPE, getRecords);
-    yield takeLatest(CHANGE_RUBRIC, getRecords);
+    yield takeLatest(CHANGE_PROGRAM, getRecords);
     yield takeEvery(POST_RECORD, postRecord);
     yield takeEvery(EDIT_RECORD, editRecord);
     yield takeLatest(START_EDIT_RECORD, startEditRecord);

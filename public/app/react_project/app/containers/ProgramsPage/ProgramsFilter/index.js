@@ -6,39 +6,39 @@ import { createStructuredSelector } from 'reselect';
 import Tags from 'components/Tags';
 import { Wrapper } from './style';
 import makeSelectProgramsPage, {
-    makeSelectRubricsNames,
+    makeSelectProgramsNames,
 } from '../selectors';
-import { changeRubric } from '../actions';
+import { changeProgram } from '../actions';
 
-const Rubrics = ({ ProgramsPage: { rubric }, rubrics, ...props }) => (
+const Programs = ({ ProgramsPage: { selectedProgram }, programs, ...props }) => (
     <Wrapper>
         {
-            !!rubrics &&
+            !!programs &&
             <Tags
                 type="radio"
-                data={rubrics}
-                value={[rubric]}
-                onChange={props.changeRubric}
+                data={programs}
+                value={[selectedProgram]}
+                onChange={props.changeProgram}
             />
         }
     </Wrapper>
 );
 
-Rubrics.propTypes = {
+Programs.propTypes = {
     ProgramsPage: PropTypes.object,
-    changeRubric: PropTypes.func,
-    rubrics: Tags.propTypes.data,
+    changeProgram: PropTypes.func,
+    programs: Tags.propTypes.data,
 };
 
 const mapStateToProps = createStructuredSelector({
     ProgramsPage: makeSelectProgramsPage(),
-    rubrics: makeSelectRubricsNames(),
+    programs: makeSelectProgramsNames(),
 });
 
 function mapDispatchToProps(dispatch) {
     return {
-        changeRubric: (id) => dispatch(changeRubric(id[0])),
+        changeProgram: (id) => dispatch(changeProgram(id[0])),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Rubrics);
+export default connect(mapStateToProps, mapDispatchToProps)(Programs);

@@ -7,7 +7,7 @@
 import { fromJS } from 'immutable';
 import {
     SET_RECORDS_TYPE,
-    CHANGE_RUBRIC,
+    CHANGE_PROGRAM,
     LOAD_PROGRAMS_SUCCESS,
     LOAD_RECORDS_SUCCESS,
     PENDING_RECORDS,
@@ -25,8 +25,8 @@ import {
 
 const initialState = fromJS({
     recordsType: recordsTypes[0].value,
-    rubric: -1,
-    programs: [],
+    selectedProgram: -1,
+    programs: {},
     records: [],
     allRecordsUploaded: false,
     loading: true,
@@ -49,8 +49,8 @@ function programsPageReducer(state = initialState, action) {
         case SET_RECORDS_TYPE:
             return state.set('recordsType', action.payload.type);
 
-        case CHANGE_RUBRIC:
-            return state.set('rubric', action.payload.id);
+        case CHANGE_PROGRAM:
+            return state.set('selectedProgram', action.payload.id);
 
         case LOAD_PROGRAMS_SUCCESS:
             return state.set('programs', fromJS(action.payload.programs));

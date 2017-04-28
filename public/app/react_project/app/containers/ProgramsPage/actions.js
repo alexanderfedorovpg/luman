@@ -7,7 +7,7 @@
 import {
     OPEN_PAGE,
     SET_RECORDS_TYPE,
-    CHANGE_RUBRIC,
+    CHANGE_PROGRAM,
     LOAD_PROGRAMS,
     LOAD_PROGRAMS_SUCCESS,
     LOAD_PROGRAMS_FAILURE,
@@ -52,9 +52,9 @@ export function setRecordsType(type) {
     };
 }
 
-export function changeRubric(id) {
+export function changeProgram(id) {
     return {
-        type: CHANGE_RUBRIC,
+        type: CHANGE_PROGRAM,
         payload: { id },
     };
 }
