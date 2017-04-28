@@ -229,7 +229,7 @@
 		 */
 		public function getTimeDynamics( Request $request ) {
 
-//			try {
+			try {
 
 				$this->validate( $request, [
 					'editor_id'     => 'exists:users,id',
@@ -280,10 +280,10 @@
 
 				$respond = array_merge( $arrayOfDates, $respond );
 
-//				return $this->respond( $respond );
-//			} catch ( \Exception $e ) {
-//				return $this->respondFail500x( $e );
-//			}
+				return $this->respond( $respond );
+			} catch ( \Exception $e ) {
+				return $this->respondFail500x( $e );
+			}
 
 		}
 
