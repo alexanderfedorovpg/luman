@@ -115,7 +115,7 @@ class NewsStatisticsController extends CmsController
     public function getTimeAllEditorsExtended(Request $request)
     {
 
-        try {
+//        try {
             $this->validate($request, [
                 'start_date' => 'date|date_format:Y-m-d H:i:s',
                 'end_date' => 'date|date_format:Y-m-d H:i:s',
@@ -132,9 +132,9 @@ class NewsStatisticsController extends CmsController
                 'count_views', 'title')
                 ->join('users', 'users.id', '=', 'editor_id')
                 ->Leftjoin('cdn_files', 'cdn_files.id', '=', 'users.avatar_id')
-                ->join('counters', function ($join, $type) {
+                ->join('counters', function ($join) use ($type) {
                     $join->on('counters.news_id', '=', 'news.id')
-                            ->where('counters.type', '=', $type);
+                            ->where('counters.type','=', $type);
                 })
                 ->where('is_publish', '=', '1')
                 ->whereRaw($period)
@@ -156,11 +156,12 @@ class NewsStatisticsController extends CmsController
                     )
                 );
             }
-
-            return $this->respond($respond);
-        } catch (\Exception $e) {
-            return $this->respondFail500x($e);
-        }
+var_dump($respond);
+//
+//            return $this->respond($respond);
+//        } catch (\Exception $e) {
+//            return $this->respondFail500x($e);
+//        }
     }
 
     /**
