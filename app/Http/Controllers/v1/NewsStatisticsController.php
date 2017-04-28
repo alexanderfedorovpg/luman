@@ -119,9 +119,11 @@ class NewsStatisticsController extends CmsController
             $this->validate($request, [
                 'start_date' => 'date|date_format:Y-m-d H:i:s',
                 'end_date' => 'date|date_format:Y-m-d H:i:s',
+	            'type' =>'required'
             ]);
             $this->start_date = $request->input('start_date');
             $this->end_date = $request->input('end_date');
+            $type = $request->input('type');
             $period = $this->setInterval(array(1 => 'publish_date', 2 => 'publish_date'));
 
             $respond = array();
@@ -130,9 +132,9 @@ class NewsStatisticsController extends CmsController
                 'count_views', 'title')
                 ->join('users', 'users.id', '=', 'editor_id')
                 ->Leftjoin('cdn_files', 'cdn_files.id', '=', 'users.avatar_id')
-                ->Leftjoin('counters', function ($join) {
+                ->join('counters', function ($join, $type) {
                     $join->on('counters.news_id', '=', 'news.id')
-                        ->where('counters.type', '=', 'news');
+                            ->where('counters.type', '=', $type);
                 })
                 ->where('is_publish', '=', '1')
                 ->whereRaw($period)
@@ -438,7 +440,6 @@ class NewsStatisticsController extends CmsController
                         'editor_id' => $result->id,
                         'editor_name' => $result->name,
                         'avatar_img' => $result->url,
-
                         'count' => $result->count_news,
                         'avg_time_work' => array(
                             'hours' => $hours,
