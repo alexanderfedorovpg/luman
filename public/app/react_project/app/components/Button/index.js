@@ -2,6 +2,17 @@ import styled, { css } from 'styled-components';
 import { rem, ifProp } from '../../utils/style';
 import { font, color, height as HEIGHT } from '../../constants/style';
 
+/* eslint-disable */
+const bgColor = css`
+    background-color: ${(props) => (
+        props.success ? color.success :
+        props.danger ? color.danger :
+        props.primary ? color.primary :
+        'transparent'
+    )}
+`;
+/* eslint-enable */
+
 const Button = styled.button`
     display: inline-block;
     height: ${({ height }) => height || HEIGHT};
@@ -16,29 +27,26 @@ const Button = styled.button`
     outline: 0;
     background: transparent;
 
-    &:hover {
-        color: #fff;
+    &[disabled] {
+        cursor: not-allowed;
     }
 
-    ${ifProp('success')(css`
-        &:not([disabled]):hover {
-            background-color: ${color.success};
+    &:not([disabled]):hover {
+        color: #fff;
+        ${bgColor}
+    }
+
+    ${ifProp('active')(css`
+        &:not([disabled]) {
+            color: #fff;
+
+            ${bgColor}
         }
     `)}
 
     ${ifProp('danger')(css`
         font-weight: 400;
         color: #666666;
-
-        &:not([disabled]):hover {
-            background-color: ${color.danger};
-        }
-    `)}
-
-    ${ifProp('primary')(css`
-        &:not([disabled]):hover {
-            background-color: ${color.primary};
-        }
     `)}
 
     i, svg {

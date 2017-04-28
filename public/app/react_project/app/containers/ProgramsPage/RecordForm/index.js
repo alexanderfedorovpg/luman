@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm, Field } from 'redux-form/immutable';
+import { reduxForm, Field, isDirty, isValid } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Group, Label } from 'components/Form';
@@ -46,7 +46,7 @@ class RecordForm extends React.PureComponent {
     }
 
     render() {
-        const { programs, handleSubmit } = this.props;
+        const { programs, handleSubmit, isFormValid, isFormDirty } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -96,7 +96,12 @@ class RecordForm extends React.PureComponent {
                         <Close opacity=".5" width="14" heiht="14" />
                         Отменить
                     </StyledBtn>
-                    <StyledBtn type="submit" success>
+                    <StyledBtn
+                        type="submit"
+                        success
+                        disabled={!isFormValid || !isFormDirty}
+                        active={isFormValid && isFormDirty}
+                    >
                         <ArrowDown opacity=".33" />
                         Загрузить
                     </StyledBtn>
@@ -137,11 +142,15 @@ RecordForm.propTypes = {
     handleSubmit: PropTypes.func,
     postRecord: PropTypes.func,
     editRecord: PropTypes.func,
+    isFormDirty: PropTypes.bool,
+    isFormValid: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
     programs: makeGetProgramsAsOptions(),
     initialValues: makeGetSelectedRecord(),
+    isFormDirty: isDirty('recordForm'),
+    isFormValid: isValid('recordForm'),
 });
 
 export default connect(mapStateToProps, { postRecord, editRecord })(RecordForm);

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import moment from 'moment';
 
 /**
  * Direct selector to the programsPage state domain
@@ -77,7 +78,17 @@ const makeGetRecords = () => createSelector(
 
 const makeGetSelectedRecord = () => createSelector(
     [selectRecords, selectSelectedRecord],
-    (records, selected) => records.find((record) => record.id === selected)
+    (records, selected) => {
+        const target = records.find((record) => record.id === selected);
+
+        if (!target) {
+            return {
+                publish_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+            };
+        }
+
+        return target;
+    }
 );
 
 /**

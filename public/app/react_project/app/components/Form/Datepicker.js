@@ -44,7 +44,7 @@ const Datepicker = ({ startDate, selected, className, onChange, ...props }) => (
             startDate={startDate ? moment(startDate) : null}
             dateFormat="DD.MM.YYYY"
             selected={selected ? moment(selected) : null}
-            onChange={(date) => onChange(date.format('YYYY-MM-DD hh:mm:ss'))}
+            onChange={(date) => onChange(date.format('YYYY-MM-DD HH:mm:ss'))}
             {...props}
         />
         <Icon />
@@ -57,8 +57,8 @@ Datepicker.defaultProps = {
 };
 
 Datepicker.propTypes = {
-    selected: PropTypes.string,
-    startDate: PropTypes.string,
+    selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    startDate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     className: PropTypes.string,
 };

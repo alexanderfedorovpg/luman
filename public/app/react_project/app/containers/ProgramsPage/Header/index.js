@@ -40,8 +40,8 @@ class Header extends React.PureComponent {
     }
 
     render() {
-        const { recordsType } = this.props.ProgramsPage;
-        const active = (recordsTypes.find((item) => item.value === recordsType) || {}).title;
+        const { recordsType, canSave } = this.props.ProgramsPage;
+        const activeType = (recordsTypes.find((item) => item.value === recordsType) || {}).title;
         const { menuOpen } = this.props;
 
         return (
@@ -50,14 +50,23 @@ class Header extends React.PureComponent {
                     <Tabs
                         data={recordsTypes}
                         onClick={this.props.setRecordsType}
-                        active={active}
+                        active={activeType}
                     />
                     <Buttons>
                         <StyledBtn md primary onClick={this.openAddRecordModal}>
-                            <ArrowDown className="programs-icon" width="12px" height="14px" /> Загрузить
+                            <ArrowDown className="programs-icon" width="12px" height="14px" />
+                            {' '}
+                            Загрузить
                         </StyledBtn>
-                        <StyledBtn md success>
-                            <Check className="programs-icon" width="12px" height="12px" /> Сохранить
+                        <StyledBtn
+                            md
+                            success
+                            active={canSave}
+                            disabled={!canSave}
+                        >
+                            <Check className="programs-icon" width="12px" height="12px" />
+                            {' '}
+                            Сохранить
                         </StyledBtn>
                     </Buttons>
                 </Left>
@@ -82,6 +91,7 @@ Header.propTypes = {
     onSave: PropTypes.func,
     setRecordsType: PropTypes.func,
     search: PropTypes.func,
+    canSave: PropTypes.bool,
     menuOpen: PropTypes.bool,
 };
 
