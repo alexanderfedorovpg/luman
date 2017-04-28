@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
-import { getNews, getVideoNews } from 'reducers'
+import { selectHome, selectHomeBroadcast } from 'selectors/news'
 
-import { fetch, fetchVideo } from 'actions/news'
+import { fetchHome } from 'actions/news'
 
 import Home from 'components/HomePage'
 
@@ -16,12 +16,11 @@ class HomePage extends PureComponent {
     }
 
     asyncBootstrap() {
-        this.props.fetchNews()
-        this.props.fetchVideoNews()
+        this.props.fetchHome()
     }
 
     render() {
-        let { news, videoNews } = this.props
+        let { broadcast, home } = this.props
 
         return (
             <div>
@@ -29,23 +28,20 @@ class HomePage extends PureComponent {
                     <title>Главная</title>
                 </Helmet>
 
-                <Home news={news} videoNews={videoNews} />
+                <Home data={home} broadcast={broadcast} />
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    news: getNews(state),
-    videoNews: getVideoNews(state)
+    home: selectHome(state),
+    broadcast: selectHomeBroadcast(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchNews() {
-        dispatch(fetch())
-    },
-    fetchVideoNews() {
-        dispatch(fetchVideo())
+    fetchHome() {
+        dispatch(fetchHome())
     }
 })
 

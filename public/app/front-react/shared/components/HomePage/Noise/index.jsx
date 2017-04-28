@@ -14,7 +14,7 @@ function Noise({ data, className }) {
             </p>
             <div className="info-noize__wrapper">
                 {data.map(value => (
-                    <MiniNews data={value} key={value.Id} className="info-noize__mini-news" />
+                    <MiniNews data={value} key={value.id} className="info-noize__mini-news" />
                 ))}
             </div>
         </div>

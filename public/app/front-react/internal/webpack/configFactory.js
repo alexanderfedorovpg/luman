@@ -176,6 +176,7 @@ export default function webpackConfigFactory(buildOptions) {
         config: path.resolve(appRootDir.get(), './config'),
         actions: path.resolve(appRootDir.get(), './shared/redux/actions'),
         reducers: path.resolve(appRootDir.get(), './shared/redux/reducers'),
+        selectors: path.resolve(appRootDir.get(), './shared/redux/selectors'),
       },
     },
 

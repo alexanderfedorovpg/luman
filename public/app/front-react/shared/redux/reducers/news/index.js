@@ -1,16 +1,11 @@
 import { combineReducers } from 'redux'
 
-import all, * as allSelectors from './all.js'
-import video, * as videoSelectors from './video.js'
-
-/*
- * Selectors
- */
-
-export const getAll = state => allSelectors.getAll(state.all)
-export const getVideo = state => videoSelectors.getAll(state.video)
+import all from './all.js'
+import video from './video.js'
+import home from './home.js'
 
 export default combineReducers({
     all,
-    video
+    video,
+    home
 })

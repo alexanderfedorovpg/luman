@@ -35,7 +35,7 @@ function renderItem(className, type, data) {
     return (
         <div className={classNames(`${type}`, className)}>
             <a className={`${type}__link`} href="javascript:void(0)"></a>
-            <img className={`${type}__img`} src={ensureAbs(data.ImagePreview)} alt=" "role="presentation" />
+            <img className={`${type}__img`} src={ensureAbs(data.image_preview)} alt=" "role="presentation" />
             <div className={`${type}__info`}>
                 {data.time_keeping
                     ? (
@@ -47,17 +47,17 @@ function renderItem(className, type, data) {
                     : null
                 }
                 <p className={`${type}__title`}>
-                    {data.Title}
+                    {data.title}
                 </p>
                 <p className={`${type}__time-add`}>
-                    {Date.parse(data.PublishDate)
-                        ? <FormattedRelative value={data.PublishDate} />
+                    {Date.parse(data.publish_date)
+                        ? <FormattedRelative value={data.publish_date} />
                         : null
                     }
-                    {data.time_update
+                    {data.updated_at
                         ? (
                             <span className={`${type}__time-upadate`}>
-                                {data.time_update}
+                                {data.updated_at}
                             </span>
                         )
                         : null

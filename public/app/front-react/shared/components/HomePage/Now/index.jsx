@@ -14,7 +14,7 @@ function Now({ data, className }) {
             </p>
             <div className="now__news">
                 {data.map(value => (
-                    <MiniNews data={value} key={value.Id} className="now__mini-news" />
+                    <MiniNews data={value} key={value.id} className="now__mini-news" />
                 ))}
             </div>
         </div>

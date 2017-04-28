@@ -14,7 +14,7 @@ function MoreVideo({ data, className }) {
             </div>
             <div className="more-video__list">
                 {data.map(value => (
-                    <FromEnter className="more-video__from-enter" key={value.Id} data={value} />
+                    <FromEnter className="more-video__from-enter" key={value.id} data={value} />
                 ))}
             </div>
         </div>
