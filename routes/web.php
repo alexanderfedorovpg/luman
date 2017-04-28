@@ -28,9 +28,22 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/newsfeed', 'NewsFeedController@update');
     $group->post('/newsfeed/work', 'NewsFeedController@create');
     $group->get('/newslist','NewsListController@get');
+
+    //Текстовый онлайн
+    $group->get('/news/onlines/','NewsListOnlineController@getListOnline');
+    $group->get('/news/online/setstatus/{id}','NewsListOnlineController@updateStatusNewsOnline');
+    $group->get('/news/online/comments/{id}','NewsListOnlineController@getListCommentsNewsOnline');
+    $group->post('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
+    $group->put('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
+    $group->delete('/news/online/comments/{id}','NewsListOnlineController@deleteCommentNewsOnline');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');
     $group->get('/news/check/{id}','NewsListController@checkNews');
+
+
+    $group->get('/news/{id}/related','NewsListController@getRelated');
+    $group->get('/news/check/{id}','NewsListController@checkNews');
+    $group->get('/news/{id}','NewsListController@getOne');
 
     $group->post('/auth/login','AuthController@login');
 
@@ -129,13 +142,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->put('/homepage','HomepageController@update');
     $group->get('/homepage/newscategory','HomepageController@getNewsCategories');
 
-    //Текстовый онлайн
-	$group->get('/news/onlines/','NewsListOnlineController@getListOnline');
-	$group->get('/news/online/setstatus/{id}','NewsListOnlineController@updateStatusNewsOnline');
-	$group->get('/news/online/comments/{id}','NewsListOnlineController@getListCommentsNewsOnline');
-	$group->post('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
-	$group->put('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
-	$group->delete('/news/online/comments/{id}','NewsListOnlineController@deleteCommentNewsOnline');
+
 
 });
 
