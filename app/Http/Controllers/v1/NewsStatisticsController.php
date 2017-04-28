@@ -130,7 +130,7 @@ class NewsStatisticsController extends CmsController
 
             $results = News:: select('users.id', 'users.name', 'publish_date', 'cdn_files.url', 'count_click',
                 'count_views', 'title')
-                ->join('users', 'users.id', '=', 'editor_id')
+                ->Leftjoin('users', 'users.id', '=', 'editor_id')
                 ->Leftjoin('cdn_files', 'cdn_files.id', '=', 'users.avatar_id')
                 ->join('counters', function ($join) use ($type) {
                     $join->on('counters.news_id', '=', 'news.id')
@@ -138,7 +138,6 @@ class NewsStatisticsController extends CmsController
                 })
                 ->where('is_publish', '=', '1')
                 ->whereRaw($period)
-                ->groupBy('users.id')
                 ->get();
 
             foreach ($results as $result) {

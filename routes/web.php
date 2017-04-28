@@ -128,6 +128,15 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/homepage','HomepageController@index');
     $group->put('/homepage','HomepageController@update');
     $group->get('/homepage/newscategory','HomepageController@getNewsCategories');
+
+    //Текстовый онлайн
+	$group->get('/news/onlines/','NewsListOnlineController@getListOnline');
+	$group->get('/news/online/setstatus/{id}','NewsListOnlineController@updateStatusNewsOnline');
+	$group->get('/news/online/comments/{id}','NewsListOnlineController@getListCommentsNewsOnline');
+	$group->post('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
+	$group->put('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
+	$group->delete('/news/online/comments/{id}','NewsListOnlineController@deleteCommentNewsOnline');
+
 });
 
 
