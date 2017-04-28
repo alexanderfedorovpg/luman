@@ -2,18 +2,20 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import NewsComponent from 'components/Constructor/News'
+
 import {
-    loadNewslist
+    loadNews,
+    itemToMain
 } from './../actions'
 
 import {
-    selectNewsList
+    selectNews
 } from './../selectors';
 
 import {
-    selectEditors
-} from 'containers/App/selectors';
-
+    selectFilters
+} from '../selectors'
 
 export class News extends PureComponent {
 
@@ -25,15 +27,20 @@ export class News extends PureComponent {
         this.props.loadNewslist()
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.filters.search !== nextProps.filters.search) {
+            this.props.loadNewslist()
+        }
+    }
+
     render() {
         let {
             news,
+            toMain
         } = this.props;
 
         return (
-            <div>
-                News
-            </div>
+            <NewsComponent data={news} toMain={toMain} />
         )
     }
 
@@ -43,13 +50,17 @@ News.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    news: selectNewsList(state)
+    news: selectNews(state),
+    filters: selectFilters(state)
 })
 
 const mapDispatchToProps = dispatch => ({
     loadNewslist() {
-        dispatch(loadNewslist())
+        dispatch(loadNews())
     },
+    toMain(item, category) {
+        dispatch(itemToMain(item, 'news', category))
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

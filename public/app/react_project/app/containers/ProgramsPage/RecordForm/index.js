@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Group, Select, Input, FileInput } from 'components/Form';
+import { Group, Label } from 'components/Form';
+import { SelectRedux, InputRedux } from 'components/Form/ReduxForm';
 import { Close, ArrowDown } from 'components/Icon/svg';
+
+import { StyledBtn } from '../style';
+import { makeGetProgramsAsOptions, makeGetSelectedRecord } from '../selectors';
+import { postRecord, editRecord } from '../actions';
 import {
-    StyledBtn,
+    StyledFileInput as FileInputRedux,
+    StyledDatepicker as DatepickerRedux,
+    StyledTextarea as TextareaRedux,
 } from './style';
-import { makeGetProgramsAsOptions } from '../selectors';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RecordForm extends React.PureComponent {
@@ -16,10 +22,17 @@ class RecordForm extends React.PureComponent {
         super(props);
 
         this.onCancelClick = this.onCancelClick.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(data) {
-        console.log(data);
+    onSubmit(immutableData) {
+        const data = immutableData.toJS();
+
+        if (!data.id) {
+            this.props.postRecord(data);
+        } else {
+            this.props.editRecord(data);
+        }
     }
 
     onCancelClick(e) {
@@ -32,48 +45,12 @@ class RecordForm extends React.PureComponent {
         }
     }
 
-    renderInput({ input, meta: { touched, invalid }, ...props }) {
-        return (
-            <Input
-                {...props}
-                success={touched && !invalid}
-                error={touched && invalid}
-                value={input.value}
-                onChange={(e) => input.onChange(e)}
-            />
-        );
-    }
-
-    renderFileInput({ input, meta: { touched, invalid }, ...props }) {
-        return (
-            <FileInput
-                {...props}
-                success={touched && !invalid}
-                error={touched && invalid}
-                value={input.value}
-                onChange={(e) => input.onChange(e.target.files)}
-            />
-        );
-    }
-
-    renderSelect({ input, meta: { touched, invalid }, ...props }) {
-        return (
-            <Select
-                {...props}
-                success={touched && !invalid}
-                error={touched && invalid}
-                value={input.value}
-                onChange={(option) => input.onChange(option.value)}
-                onBlur={() => input.onBlur(input.value)}
-            />
-        );
-    }
-
     render() {
         const { programs, handleSubmit } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
+                <Field type="hidden" component="input" name="id" />
                 <Group md>
                     <Field
                         placeholder="Программа"
@@ -81,7 +58,7 @@ class RecordForm extends React.PureComponent {
                         clearable={false}
                         name="program_id"
                         options={programs}
-                        component={this.renderSelect}
+                        component={SelectRedux}
                     />
                 </Group>
                 <Group md>
@@ -89,14 +66,29 @@ class RecordForm extends React.PureComponent {
                         block
                         placeholder="Название выпуска"
                         name="title"
-                        component={this.renderInput}
+                        component={InputRedux}
                     />
                 </Group>
-                <Group marginBottom="40px" horizontal>
+                <Group md horizontal>
+                    <Field
+                        name="publish_date"
+                        component={DatepickerRedux}
+                    />
                     <Field
                         name="video_url"
                         accept="video/*"
-                        component={this.renderFileInput}
+                        icon="arrow"
+                        component={FileInputRedux}
+                    />
+                </Group>
+                <Group marginBottom="40px">
+                    <Label light>Разделяйте тезисы с помощью //</Label>
+                    <Field
+                        block
+                        light
+                        placeholder="Тезисы"
+                        name="theses"
+                        component={TextareaRedux}
                     />
                 </Group>
                 <Group horizontal>
@@ -143,10 +135,13 @@ RecordForm.propTypes = {
     reset: PropTypes.func,
     onCancel: PropTypes.func,
     handleSubmit: PropTypes.func,
+    postRecord: PropTypes.func,
+    editRecord: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
     programs: makeGetProgramsAsOptions(),
+    initialValues: makeGetSelectedRecord(),
 });
 
-export default connect(mapStateToProps)(RecordForm);
+export default connect(mapStateToProps, { postRecord, editRecord })(RecordForm);

@@ -71,6 +71,26 @@ class News extends Model
     }
 
     /**
+     * Главное изображение
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function imageMain()
+    {
+        return $this->hasOne(CdnFile::class, 'id', 'image_main');
+    }
+
+    /**
+     * Превью
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function imagePreview()
+    {
+        return $this->hasOne(CdnFile::class, 'id', 'image_preview');
+    }
+
+    /**
      * Фильтрация по наличию подстроки в заголовке или тегах
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -156,8 +176,6 @@ class News extends Model
     }
 
     /**
-     *
-     *
      * @param $query
      * @return mixed
      */
@@ -166,6 +184,21 @@ class News extends Model
         $query->where('moderation', '=', 1);
 
         return $query;
+    }
+
+    /**
+     * Инфошум
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInfoNoise($query, $infoNoise = true)
+    {
+        if ($infoNoise) {
+            return $query->where('top', '<=', 3);
+        } else {
+            return $query->where('top', '>', 3);
+        }
     }
 
 }

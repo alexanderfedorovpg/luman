@@ -1,5 +1,5 @@
 import { injectGlobal } from 'styled-components';
-import { font } from './constants/style'
+import { font, color } from './constants/style'
 import fontFace from './fonts'
 
 /* eslint no-unused-expressions: 0 */
@@ -24,6 +24,7 @@ injectGlobal`
     }
 
     html, body {
+        width: 100%;
         height: 100%;
 
         font-family: ${font.opensans};
@@ -37,6 +38,10 @@ injectGlobal`
 
         overflow-x: hidden;
     }
+    a {
+        color: ${color.primary};
+        font-weight: 400;
+    }
 
     .icon {
         display: inline-block;
@@ -44,7 +49,6 @@ injectGlobal`
     }
 
     .ReactModal__Body--open {
-        overflow-y: scroll;
-        position: fixed;
+        overflow: hidden;
     }
 `;

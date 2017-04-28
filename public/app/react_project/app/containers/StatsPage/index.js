@@ -1,27 +1,38 @@
-import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
+import React, {PropTypes, Component} from 'react';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { createStructuredSelector } from 'reselect';
-import { push } from 'react-router-redux';
-import { Content, Users, Wrap, Header } from '../../components/Stats'
+import {createStructuredSelector} from 'reselect';
+import {push} from 'react-router-redux';
+import {Content, Users, Wrap, Header} from '../../components/Stats'
 import Dynamic from '../../components/Dynamic'
+import categoriesStatsLoaded from "./actions"
+import { List } from 'immutable'
 
+import {
+    loadCategoriesStatslist
+} from './actions'
+
+import {
+    selectStatsData
+} from './selectors'
 
 class StatsPage extends Component {
 
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+      this.props.loadList()
+    }
 
     render() {
         return (
             <div>
                 <Helmet
-                    title="Cтатистика" />
-
+                    title="Cтатистика"/>
                 <Header />
                 <Wrap>
-                    <Content rowClickCallback={this.props.categoryRowClickCallback} />
+                    <Content rowClickCallback={this.props.categoryRowClickCallback} data={this.props.stats}/>
                     <Users rowClickCallback={this.props.userRowClickCallback}/>
                 </Wrap>
                 <Dynamic />
@@ -30,8 +41,8 @@ class StatsPage extends Component {
     }
 }
 
-const mapStateToProps = createStructuredSelector({
-
+const mapStateToProps = state => ({
+    stats: selectStatsData(state)
 });
 
 function mapDispatchToProps(dispatch) {
@@ -42,6 +53,10 @@ function mapDispatchToProps(dispatch) {
         userRowClickCallback(userId) {
             dispatch(push(`articleUserStatsPage/${userId}`));
         },
+        loadList() {
+            dispatch(loadCategoriesStatslist())
+        },
+
 
     };
 }

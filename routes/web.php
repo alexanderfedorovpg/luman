@@ -105,6 +105,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 	$group->get('/newsstatistics/counters/','NewsStatisticsController@getCountersAll');
 	$group->get('/newsstatistics/editor/dynamics/','NewsStatisticsController@getTimeDynamicsEditor');
 	$group->get('/newsstatistics/editor/counters/','NewsStatisticsController@getCountersEditor');
+	$group->get('/newsstatistics/editor/extended/','NewsStatisticsController@getTimeAllEditorsExtended');
+    $group->get('/newsstatistics/editor/top/','NewsStatisticsController@getTopAuthors');
 
     $group->get('/statistics','StatisticsController@getCountersAll');
 

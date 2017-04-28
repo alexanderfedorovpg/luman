@@ -20,6 +20,11 @@ const selectPrograms = createSelector(
     (substate) => substate.get('programs').toJS()
 );
 
+const selectSelectedRecord = createSelector(
+    selectProgramsPageDomain(),
+    (substate) => substate.get('selectedRecord')
+);
+
 const makeSelectRubricsNames = () => createSelector(
     selectRubrics,
     (rubrics) => [
@@ -28,10 +33,21 @@ const makeSelectRubricsNames = () => createSelector(
     ]
 );
 
+const makeGetPrograms = () => createSelector(
+    selectPrograms,
+    (programs) => {
+        if (!programs || !programs.ids || !programs.byId) {
+            return [];
+        }
+
+        return programs.ids.map((id) => programs.byId[id])
+    }
+);
+
 const makeGetProgramsAsOptions = () => createSelector(
     selectPrograms,
     (programs) => {
-        if (!programs || !programs.ids) {
+        if (!programs || !programs.ids || !programs.byId) {
             return [];
         }
 
@@ -51,12 +67,17 @@ const makeGetRecords = () => createSelector(
     (records, programs) => records.map((record) => (
         {
             id: record.id,
-            date: record.updated_at ? record.updated_at : record.created_at,
+            date: record.publish_date,
             title: record.title,
             preview: record.image_preview,
             program: programs.byId[record.program_id].name,
         }
     ))
+);
+
+const makeGetSelectedRecord = () => createSelector(
+    [selectRecords, selectSelectedRecord],
+    (records, selected) => records.find((record) => record.id === selected)
 );
 
 /**
@@ -71,7 +92,10 @@ const makeSelectProgramsPage = () => createSelector(
 export default makeSelectProgramsPage;
 export {
     selectProgramsPageDomain,
+    selectRecords,
     makeSelectRubricsNames,
     makeGetRecords,
     makeGetProgramsAsOptions,
+    makeGetSelectedRecord,
+    makeGetPrograms,
 };

@@ -1,14 +1,16 @@
 import styled from 'styled-components';
-import Button from 'components/Button';
+import { rem } from 'utils/style';
+import { FileInputRedux, DatepickerRedux, TextareaRedux } from 'components/Form/ReduxForm';
 
-const height = 40;
+export const StyledFileInput = styled(FileInputRedux)`
+    flex-grow: 1;
+`;
 
-export const StyledBtn = styled(Button)`
-    width: 50%;
-    height: ${height}px;
-    line-height: ${height - 2}px;
+export const StyledDatepicker = styled(DatepickerRedux)`
+    flex-shrink: 0;
+    margin-right: ${rem(5)};
+`;
 
-    &:not(:last-child) {
-        margin-right: 3px;
-    }
+export const StyledTextarea = styled(TextareaRedux)`
+    padding: 10px;
 `;

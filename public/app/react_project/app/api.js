@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs'
 
 const baseUrl = 'http://librorum.rtvi.ddemo.ru/api/v1';
 
@@ -205,7 +206,6 @@ export const uploadFile = (file) => {
     });
 };
 
-//?searchString=two&orderBy=top
 export const getReadyNews = params => axios.get(`${baseUrl}/newseditor/moderated`, {
     params: {
         ...params,
@@ -214,6 +214,21 @@ export const getReadyNews = params => axios.get(`${baseUrl}/newseditor/moderated
 
 export const publishModeratedArticle = id => axios.put(`${baseUrl}/newseditor/publish/${id}`)
 
+// =============================================================================
+// Constructor API
+// =============================================================================
+
+export const getConstructorCategories = () => axios.get(`${baseUrl}/homepage/newscategory`)
+export const getHomepageNews = () => axios.get(`${baseUrl}/homepage`)
+export const getConstructorNews = params => axios.get(`${baseUrl}/newslist`, { params })
+export const saveHomepageNews = data => axios.put(`${baseUrl}/homepage`, qs.stringify(data), {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+})
+
+
+// =============================================================================
 
 // =============================================================================
 // RECORDS AND PROGRAMS API
@@ -221,8 +236,14 @@ export const publishModeratedArticle = id => axios.put(`${baseUrl}/newseditor/pu
 
 export const getPrograms = () => axios.get(`${baseUrl}/tv-program`);
 export const getRecords = (params) => axios.get(`${baseUrl}/air/record`, { params });
+export const getRecord = (id) => axios.get(`${baseUrl}/air/record/${id}`);
 export const deleteRecord = (id) => axios.delete(`${baseUrl}/air/record/${id}`);
+export const postRecord = (data) => axios.post(`${baseUrl}/air/record`, data);
+export const editRecord = (id, data) => axios.put(`${baseUrl}/air/record/${id}`, data);
 
 // =============================================================================
+
+export const getCategoryStats = (from_date, to_date) => axios.get(`${baseUrl}/statistics`);
+
 
 export default axios;

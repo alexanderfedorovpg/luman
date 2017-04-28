@@ -18,6 +18,8 @@ class AirRecord extends Model
         'is_full_video',
         'rubric_id',
         'image_preview',
+        'theses',
+        'publish_date',
     ];
 
     /**
@@ -31,6 +33,8 @@ class AirRecord extends Model
         'video_url' => 'required',
         'is_full_video' => 'boolean',
         'rubric_id' => 'integer|exists:rubrics,id',
+        'publish_date' => 'date|date_format:Y-m-d H:i:s',
+        'theses' => 'string'
     ];
 
     /**
@@ -56,4 +60,20 @@ class AirRecord extends Model
     {
         return $query->where('title', 'like', "%{$text}%");
     }
+
+    /**
+     * Save the model to the database.
+     *
+     * @param  array  $options
+     * @return bool
+     */
+    public function save(array $options = [])
+    {
+        if (!$this->publish_date) {
+            $this->publish_date = date('Y-m-d H:i:s');
+        }
+
+        return parent::save($options);
+    }
+
 }
