@@ -118,13 +118,15 @@
 					'end_date'   => 'date|date_format:Y-m-d H:i:s',
 					'type'       => 'in:news,video,tv_program,facebook,twitter'
 				] );
-				$this->start_date = $request->input( 'start_date' );
-				$this->end_date   = $request->input( 'end_date' );
+				$this->start_date = $request->input( 'start_date' ) ? $request->input( 'start_date' ) : time();
+				$this->end_date   = $request->input( 'end_date' ) ? $request->input( 'end_date' ) : strtotime( '+1 month' );
 				$type             = $request->input( 'type' );
 				$period           = $this->setInterval( array( 1 => 'publish_date', 2 => 'publish_date' ) );
 
 				$respond = array();
 				$type    = $type ? $type : 'news';
+				$type    = array_search( $type, Counters::$_type_counters );
+
 				$results = News:: select( 'users.id', 'users.name', 'publish_date', 'cdn_files.url', 'count_click',
 					'count_views', 'title' )
 				               ->Leftjoin( 'users', 'users.id', '=', 'editor_id' )
@@ -184,7 +186,7 @@
 				                            ->join( 'news', 'news.id', '=', 'news_id' )
 				                            ->Leftjoin( 'counters', function ( $join ) {
 					                            $join->on( 'counters.news_id', '=', 'news.id' )
-					                                 ->where( 'counters.type', '=', 'news' );
+					                                 ->where( 'counters.type', '=', 1 );
 				                            } )
 				                            ->where( 'end_date', '<>', 'NULL' )
 				                            ->where( 'users.id', '=', $editor_id )
@@ -230,10 +232,10 @@
 			try {
 
 				$this->validate( $request, [
-					'editor_id'     => 'required|exists:users,id',
-					'start_date'    => 'date|date_format:Y-m-d H:i:s',
-					'end_date'      => 'date|date_format:Y-m-d H:i:s',
-					'type_dynamics' => 'required',
+					'editor_id'     => 'exists:users,id',
+					'start_date'    => 'required|date|date_format:Y-m-d H:i:s',
+					'end_date'      => 'required|date|date_format:Y-m-d H:i:s',
+					'type_dynamics' => 'required|in:countsNews',
 				] );
 
 				$respond          = array();
@@ -241,6 +243,15 @@
 				$this->start_date = $request->input( 'start_date' );
 				$this->end_date   = $request->input( 'end_date' );
 				$type_dynamics    = $request->input( 'type_dynamics' );
+				$rubrics_id       = $request->input( 'rubrics_id' );
+				$filter           = "";
+
+				if ( $rubrics_id ) {
+					$filter .= "AND rubrics_id  = $editor_id";
+				}
+				if ( $editor_id ) {
+					$filter .= "AND editor_id = $editor_id";
+				}
 
 				$from = new DateTime( $this->start_date );
 				$to   = new DateTime( $this->end_date );
@@ -256,7 +267,7 @@
 					$results = DB::select( " SELECT  DATE_FORMAT(publish_date,'%d-%m-%Y') as pdate, COUNT(*) as ncount
 									FROM news
 									WHERE publish_date >='$this->start_date' AND publish_date <='$this->end_date'
-									 AND editor_id = $editor_id
+									$filter
 									GROUP BY pdate
 									ORDER BY pdate" );
 				}
