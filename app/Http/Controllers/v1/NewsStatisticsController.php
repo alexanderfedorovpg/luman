@@ -116,7 +116,7 @@
 				$this->validate( $request, [
 					'start_date' => 'date|date_format:Y-m-d H:i:s',
 					'end_date'   => 'date|date_format:Y-m-d H:i:s',
-					'type'       => 'in:news,video,tv_program,facebook, twitter'
+					'type'       => 'in:news,video,tv_program,facebook,twitter'
 				] );
 				$this->start_date = $request->input( 'start_date' );
 				$this->end_date   = $request->input( 'end_date' );
@@ -145,7 +145,6 @@
 							'news_name'    => $result->title,
 							'publish_date' => $result->publish_date,
 							'avatar_img'   => $result->url,
-							'count_news'   => $result->count_news,
 							'count_click'  => $result->count_click,
 							'count_views'  => $result->count_views,
 
