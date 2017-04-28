@@ -10,7 +10,7 @@ import "regenerator-runtime/runtime"
 import config from 'config';
 
 import ServerHTML from './ServerHTML';
-import App from 'shared/components/App';
+import App from 'shared/containers/App';
 import configureStore from 'shared/redux/configureStore';
 
 /**

@@ -25,7 +25,7 @@ const values = {
     apiEndpoint: true,
   },
 
-  apiEndpoint: 'http://librorum-client.rtvi.ddemo.ru/api/v1',
+  apiEndpoint: 'http://librorum-client.rtvi.ddemo.ru/api/v1/web',
 
   // The host on which the server should run.
   host: EnvVars.string('HOST', '0.0.0.0'),
@@ -79,7 +79,7 @@ const values = {
     connectSrc: [],
     defaultSrc: [],
     fontSrc: ['https://fonts.googleapis.com/css', 'https://fonts.gstatic.com'],
-    imgSrc: ['http://rtvi-cache.cdnvideo.ru'],
+    imgSrc: ['http://rtvi-cache.cdnvideo.ru','http://rtvi.com'],
     mediaSrc: [],
     manifestSrc: [],
     objectSrc: [],

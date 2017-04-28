@@ -11,7 +11,7 @@ function FromEnter({ data, className }) {
     return (
         <div className={classNames('from-enter', className)}>
             <a className="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
-                <img className="from-enter__img" src={ensureAbs(data.ImagePreview)} alt="" alt="" role="presentation" />
+                <img className="from-enter__img" src={ensureAbs(data.image_preview)} alt="" alt="" role="presentation" />
                 <span className="from-enter__time-keeping">
                     <img className="from-enter__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
                     <span className="from-enter__keeping">
@@ -27,13 +27,17 @@ function FromEnter({ data, className }) {
             </a>
             <div className="from-enter__info">
                 <a className="from-enter__link" href="javascript:void(0)">
-                    {data.Title}
+                    {data.title}
                 </a>
                 <p className="from-enter__category">
-                    {`${data.Rubrics} `}
+                    {data.rubric
+                        ? data.rubric.name
+                        : null
+                    }
+                    {` `}
                     <span className="from-enter__time-add">
-                        {Date.parse(data.PublishDate)
-                            ? <FormattedDate value={data.PublishDate} month="long" day="2-digit" />
+                        {Date.parse(data.publish_date)
+                            ? <FormattedDate value={data.publish_date} month="long" day="2-digit" />
                             : null
                         }
                     </span>

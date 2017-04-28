@@ -16,18 +16,31 @@ import ListVideo from './ListVideo'
 
 import './style.scss'
 
-function HomePage({ news, videoNews }) {
-    const lastNews = news.filter(isNow)
+function HomePage({ data, broadcast }) {
+    const nowNews = data.news
+        .filter(v => v.category.id == 1) // 1 - id категории "сейчас"
+        .map(v => v.news)
+        .slice(0, 5)
 
-    const nowNews = lastNews.sort(latestDate).slice(0, 5)
-    const todayNews = lastNews.sort(highestRating).slice(0, 3)
-    const noiseNews = lastNews.sort(lowestRating).slice(0, 5)
-    const randomNews = lastNews.slice(-7)
+    const todayNews = data.news
+        .filter(v => v.category.id == 2) // 2 - id категории "главное за сутки"
+        .map(v => v.news)
+        .slice(0, 3)
 
-    const videoByDate = videoNews.sort(latestDate)
-    const latestVideo = videoByDate[0] || {}
-    const moreVideo = videoByDate.slice(1, 4)
-    const listVideo = videoByDate.slice(4, 7)
+    const otherNews = data.news
+        .filter(v => v.category.id == 3) // 3 - id категории "прочее"
+        .map(v => v.news)
+
+    const noiseNews = data.noise.map(v => v.news).slice(0, 6)
+    const randomNews = otherNews.slice(0, 7)
+    const moreNews = otherNews.slice(7, 13)
+
+    const videoNews = broadcast
+        .map(v => v.record)
+    const firstVideo = videoNews[0] || {}
+
+    const moreVideo = videoNews.slice(1, 4)
+    const listVideo = videoNews.slice(4, 7)
 
     return (
         <div className="general-news">
@@ -44,7 +57,7 @@ function HomePage({ news, videoNews }) {
                 </div>
                 <div className="general-news__right">
                     <Video className="general-news__general-video" />
-                    <EnterOne className="general-news__enter-one" data={latestVideo} />
+                    <EnterOne className="general-news__enter-one" data={firstVideo} />
                 </div>
                 <div className="general-news__left general-news__left_more">
                     <div className="general-news__left-wrapper">
@@ -54,7 +67,7 @@ function HomePage({ news, videoNews }) {
                 </div>
                 <div className="general-news__right general-news__right_more">
                     <Subscribe className="general-news__subscribe"/>
-                    <MoreNews className="general-news__more-news" data={lastNews.slice(0, 6)} />
+                    <MoreNews className="general-news__more-news" data={moreNews} />
                 </div>
                 <div className="general-news__middle">
                     <BannerPreview className="general-news__banner-preview" />
@@ -69,23 +82,5 @@ function HomePage({ news, videoNews }) {
         </div>
     )
 }
-
-const millisecondsInDay = 24*60*60*1000
-
-const latestDate = (a, b) => Date.parse(b.PublishDate) - Date.parse(a.PublishDate)
-const highestRating = (a, b) => b.Top - a.Top
-const lowestRating = (a, b) =>a.Top - b.Top
-
-const isNow = value => {
-    if (!value) return false
-
-    const date = Date.parse(value.PublishDate)
-
-    if (!date) return false
-
-    if (Date.now() - date < millisecondsInDay) return true
-}
-
-const notNow = value => !isNow(value)
 
 export default HomePage

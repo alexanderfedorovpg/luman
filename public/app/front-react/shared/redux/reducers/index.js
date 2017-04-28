@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux'
 
-import news, { getAll, getVideo } from './news'
+import news from './news'
+import rubrics from './rubrics'
 
 const rootReducer = combineReducers({
-    news
+    news,
+    rubrics
 })
-
-export const getNews = state => getAll(state.news)
-export const getVideoNews = state => getVideo(state.news)
 
 export default rootReducer

@@ -9,7 +9,11 @@ import {
 
     fetchVideo,
     videoFetched,
-    videoFetchError
+    videoFetchError,
+
+    fetchHome,
+    homeFetched,
+    homeFetchError
 } from 'actions/news'
 
 const endpoint = config('apiEndpoint')
@@ -37,6 +41,22 @@ export default function* news() {
         }
         catch (e) {
             yield put(videoFetchError(e))
+        }
+    })
+
+    yield takeEvery(fetchHome.getType(), function* () {
+
+        try {
+            const { data } = yield call(axios.get, `${endpoint}/news/homepage`)
+
+            yield put(homeFetched({
+                news: data.news,
+                noise: data.info_noise,
+                broadcast: data.from_air
+            }))
+        }
+        catch (e) {
+            yield put(homeFetchError(e))
         }
     })
 }
