@@ -142,9 +142,6 @@ class NewsStatisticsController extends CmsController
                 ->get();
 
             foreach ($results as $result) {
-                $hours = floor($result->time_work / 3600);
-                $hours = ($hours > 0) ? $hours : 0;
-                $minutes = floor(($result->time_work / 3600 - $hours) * 60);
                 array_push($respond,
                     array(
                         'id' => $result->id,
