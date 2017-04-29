@@ -9,6 +9,7 @@ import Table from '../Table'
 
 import { padding } from 'constants/style'
 import { below } from 'utils/style'
+import moment from "moment"
 
 const userClassName = randomString()
 
@@ -35,14 +36,14 @@ function Users({rowClickCallback, data}) {
     const dataSet = data.map((item) => {
         return <tr key={item.editor_id} onClick={()=>rowClickCallback(1)}>
             <td >
-                <User data={{ pic: '/img/user1.png' }}>
+                <User data={{ avatar_url: item.avatar_img }}>
                     <UserName className={userClassName}>
                         {item.editor_name}
                     </UserName>
                 </User>
             </td>
-            <td>{item.count}</td>
-            <td>{item.avg_time_work.hours} часов {item.avg_time_work.minutes} мин</td>
+            <td>{item.count?item.count:'—'}</td>
+            <td>{item.avg_time_work.hours} ч. {item.avg_time_work.minutes} мин.</td>
         </tr>
 
     });
