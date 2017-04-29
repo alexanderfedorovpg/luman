@@ -165,62 +165,68 @@
 		 *
 		 * @return \Illuminate\Http\JsonResponse
 		 */
-		public function getTimeEditor( Request $request ) {
+        public function getTimeEditor( Request $request ) {
 
-			try {
-				$this->validate( $request, [
-					'editor_id'  => 'required|exists:users,id',
-					'start_date' => 'date|date_format:Y-m-d H:i:s',
-					'end_date'   => 'date|date_format:Y-m-d H:i:s',
-				] );
-				$this->start_date = $request->input( 'start_date' );
-				$this->end_date   = $request->input( 'end_date' );
-				$editor_id        = $request->input( 'editor_id' );
-				$period           = $this->setInterval();
-				$respond          = array();
+            try {
+                $this->validate( $request, [
+                    'editor_id'  => 'required|exists:users,id',
+                    'start_date' => 'date|date_format:Y-m-d H:i:s',
+                    'end_date'   => 'date|date_format:Y-m-d H:i:s',
+                ] );
+                $this->start_date = $request->input( 'start_date' );
+                $this->end_date   = $request->input( 'end_date' );
+                $editor_id        = $request->input( 'editor_id' );
+                $period           = $this->setInterval();
+                $respond          = array();
 
-				$results = NewsModerationLog:: select( 'users.id', 'users.name',
-					DB::raw( ' TIMESTAMPDIFF (SECOND ,start_date,end_date ) as time_work' ),
-					'news.publish_date', 'news.title', 'news.is_publish', 'count_click', 'count_views' )
-				                            ->join( 'users', 'users.id', '=', 'editor_id' )
-				                            ->join( 'news', 'news.id', '=', 'news_id' )
-				                            ->Leftjoin( 'counters', function ( $join ) {
-					                            $join->on( 'counters.news_id', '=', 'news.id' )
-					                                 ->where( 'counters.type', '=', 1 );
-				                            } )
-				                            ->where( 'end_date', '<>', 'NULL' )
-				                            ->where( 'users.id', '=', $editor_id )
-				                            ->where( 'news.is_publish', '=', 1 )
-				                            ->whereRaw( $period )
-				                            ->get();
+                $results = NewsModerationLog:: select( 'users.id as user_id', 'users.name',
+                    DB::raw( ' TIMESTAMPDIFF (SECOND ,start_date,end_date ) as time_work' ),
+                    'news.id as news_id', 'news.publish_date', 'news.title', 'news.is_publish',
+                    'count_click', 'count_views', 'cdn_files.url as avatar' )
+                    ->join( 'users', 'users.id', '=', 'editor_id' )
+                    ->join( 'news', 'news.id', '=', 'news_id' )
+                    ->Leftjoin( 'counters', function ( $join ) {
+                        $join->on( 'counters.news_id', '=', 'news.id' )
+                            ->where( 'counters.type', '=', 1 );
+                    } )
+                    ->join( 'cdn_files', 'cdn_files.id', '=', 'avatar_id' )
+                    ->where( 'end_date', '<>', 'NULL' )
+                    ->where( 'users.id', '=', $editor_id )
+                    //TODO: Если не ошибаюсь, статистика нужна для всех новостей. Если это не так то нужно обратно раскоментировать
+                    //->where( 'news.is_publish', '=', 1 )
+                    ->whereRaw( $period )
+                    ->get();
+                    //->toSql();
 
-				foreach ( $results as $result ) {
+                foreach ( $results as $result ) {
 
-					$hours   = floor( $result->time_work / 3600 );
-					$hours   = ( $hours > 0 ) ? $hours : 0;
-					$minutes = floor( ( $result->time_work / 3600 - $hours ) * 60 );
-					array_push( $respond,
-						array(
-							'id'            => $result->id,
-							'editor_name'   => $result->name,
-							'publish_date'  => $result->publish_date,
-							'news_title'    => $result->title,
-							'is_publish'    => $result->is_publish,
-							'count_click'   => $result->count_click,
-							'count_views'   => $result->count_views,
-							'avg_time_work' => array(
-								'hours'   => $hours,
-								'minutes' => $minutes
-							)
-						)
-					);
-				}
+                    $hours   = floor( $result->time_work / 3600 );
+                    $hours   = ( $hours > 0 ) ? $hours : 0;
+                    $minutes = floor( ( $result->time_work / 3600 - $hours ) * 60 );
+                    $respond[] = [
+                        'editor' => [
+                            'id' => (int) $editor_id,
+                            'name' => $result->name,
+                            'avatar' => $result->avatar,
+                        ],
+                        'mews' => [
+                            'id' => $result->news_id,
+                            'title' => $result->title,
+                            'count_click' => $result->count_click ? $result->count_click : 0,
+                            'count_views' => $result->count_views ? $result->count_views : 0,
+                            'avg_time_work' => [
+                                'hours' => $hours,
+                                'minutes' => $minutes
+                            ]
+                        ]
+                    ];
+                }
 
-				return $this->respond( $respond );
-			} catch ( \Exception $e ) {
-				return $this->respondFail500x( $e );
-			}
-		}
+                return $this->respond( $respond );
+            } catch ( \Exception $e ) {
+                return $this->respondFail500x( $e );
+            }
+        }
 
 		/**
 		 * @param Request $request
