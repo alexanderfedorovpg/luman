@@ -135,4 +135,32 @@ class AirRecordController extends CmsController
         return $this->respond(['success' => $record->delete()]);
     }
 
+    /**
+     * Публикует эфирные записи
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function publish(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'records' => 'array',
+                'records.*' => 'integer|exists:air_records,id'
+            ]);
+
+            $records = $request->input('records');
+            if (!$records) {
+                $records = [];
+            }
+
+            return $this->respondCreated([
+                'success' => (bool) AirRecord::publish($records)
+            ]);
+
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
+        }
+    }
+    
 }

@@ -16,10 +16,10 @@ class AirRecord extends Model
         'title',
         'video_url',
         'is_full_video',
-        'rubric_id',
         'image_preview',
         'theses',
         'publish_date',
+        'is_published',
     ];
 
     /**
@@ -32,9 +32,10 @@ class AirRecord extends Model
         'title' => 'required|max:255',
         'video_url' => 'required',
         'is_full_video' => 'boolean',
-        'rubric_id' => 'integer|exists:rubrics,id',
         'publish_date' => 'date|date_format:Y-m-d H:i:s',
-        'theses' => 'string'
+        'theses' => 'string',
+        'is_published' => 'boolean',
+        'image_preview' => 'string',
     ];
 
     /**
@@ -74,6 +75,33 @@ class AirRecord extends Model
         }
 
         return parent::save($options);
+    }
+
+    /**
+     * Публикует эфирные записи
+     *
+     * @param array $recordIds
+     * @return integer
+     */
+    public static function publish(array $recordIds = [])
+    {
+
+        if (!$recordIds) {
+            return static::query()->update(['is_published' => true]);
+        }
+
+        return static::whereIn('id', $recordIds)->update(['is_published' => true]);
+    }
+
+    /**
+     * Фильрация по опубликовоности
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query,$isPublished = true)
+    {
+        return $query->where('is_published', '=', $isPublished);
     }
 
 }

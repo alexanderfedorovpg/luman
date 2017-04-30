@@ -134,8 +134,9 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/air/record','AirRecordController@index');
     $group->get('/air/record/{id}','AirRecordController@show');
     $group->post('/air/record','AirRecordController@create');
-    $group->put('/air/record/{id}','AirRecordController@update');
+    $group->put('/air/record/{id:[0-9]+}','AirRecordController@update');
     $group->delete('/air/record/{id}','AirRecordController@destroy');
+    $group->put('/air/record/publish','AirRecordController@publish');
 
     //Конструктор главной страницы
     $group->get('/homepage','HomepageController@index');
