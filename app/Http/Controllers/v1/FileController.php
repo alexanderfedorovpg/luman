@@ -4,9 +4,8 @@
 namespace App\Http\Controllers\v1;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Validation\ValidationException;
-use App\Models\CdnFile;
-use App\Filespot\FilespotAPI;
+use Illuminate\Validation\ValidationException;
+use App\Helpers\FileHelper;
 
 /**
  * Контроллер для работы с файлами
@@ -29,47 +28,19 @@ class FileController extends CmsController
             $this->validate($request, [
                 'file' => 'file|required|max:262144',
             ]);
+
+            $cdnFile = FileHelper::uploadFilespotFile($request->file('file'));
+            if ($cdnFile) {
+                return $this->respond([
+                    'success' => true,
+                    'file' => $cdnFile->toArray()
+                ]);
+            }
         } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+            return $this->respondFail422x($e->response->original);
+        }  catch (\Exception $e) {
+            return $this->respondFail500x();
         }
-
-        $file = $request->file('file');
-
-        $newName = md5($file->getFilename() . time());
-
-        $ext = $file->extension();
-
-        $type = explode('/', $file->getMimeType());
-        if (isset($type[0]) && $type[0]) {
-            $type = $type[0];
-        } else {
-            $type = 'other';
-        }
-
-        $subPath = date('Y') . '/' . date('m') . '/' . date('d');
-
-        $fullName = "{$type}/{$subPath}/{$newName}.{$ext}";
-
-        $result = FilespotAPI::objects()
-            ->uploadFile($file->getPathname(), $fullName);
-
-        if ($result->getStatusCode() == 200) {
-            $result = $result->jsonDecode();
-            $cdnFile = new CdnFile([
-                'external_id' => $result->object->id,
-                'url' => $result->object->cdn_url,
-                'content_type' => $result->object->content_type
-            ]);
-
-            $cdnFile->save();
-
-            return $this->respond([
-                'success' => true,
-                'file' => $cdnFile->toArray()
-            ]);
-        }
-
-        return $this->respondFail500x();
     }
 
     /**
