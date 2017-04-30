@@ -354,19 +354,19 @@ export default function createRoutes(store) {
             },
         },
         {
-            path: '/articlesUserStatsPage',
-            name: 'articlesUserStatsPage',
+            path: '/categoriesStatsPage',
+            name: 'categoriesStatsPage',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    //import('containers/ArticlesUserStatsPage/reducer'),
-                    //import('containers/LivePage/sagas'),
-                    import('containers/ArticlesUserStatsPage'),
+                    import('containers/CategoriesStatsPage/reducer'),
+                    import('containers/CategoriesStatsPage/sagas'),
+                    import('containers/CategoriesStatsPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([reducer, sagas, component]) => {
-                    injectReducer('articlesUserStatsPage', reducer.default);
+                    injectReducer('categoriesStatsPage', reducer.default);
                     injectSagas(sagas.default);
                     renderRoute(component);
                 });
@@ -375,8 +375,8 @@ export default function createRoutes(store) {
             },
             childRoutes: [
                 {
-                    path: '/articleUserStatsPage/:id',
-                    name: 'articleUserStatsPage'
+                    path: '/categoriesStatsPage/:type',
+                    name: 'categoriesStatsPage'
                 }
             ]
         },
