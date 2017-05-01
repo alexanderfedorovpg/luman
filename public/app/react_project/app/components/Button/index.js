@@ -17,6 +17,7 @@ const Button = styled.button`
     display: inline-block;
     height: ${({ height }) => height || HEIGHT};
     border: 1px solid #cccccc;
+    padding: 0;
 
     font-family: ${font.helvetica};
     font-size: ${rem(14)};
