@@ -5,6 +5,7 @@ import Modal from 'components/Modal';
 import Youtube from 'react-youtube';
 
 import { MODALS } from '../constants';
+import { Player } from './style';
 
 const VideoModal = ({ currentModal, close, videoUrl }) => (
     <Modal
@@ -14,6 +15,7 @@ const VideoModal = ({ currentModal, close, videoUrl }) => (
     >
         {
             !!videoUrl &&
+
             <Youtube
                 videoId={getYouTubeID(videoUrl)}
                 onReady={(e) => e.target.playVideo()}

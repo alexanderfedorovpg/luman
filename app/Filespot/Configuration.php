@@ -10,7 +10,10 @@ namespace App\Filespot;
  */
 class Configuration
 {
-
+    /**
+     * Ссылка на видео плеер
+     */
+    const URL_VIDEO_PLAYER = 'https://video.platformcraft.ru/';
 
     /**
      * Версия API

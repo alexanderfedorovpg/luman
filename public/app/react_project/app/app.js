@@ -49,9 +49,12 @@ import './global-styles';
 // Import root routes
 import createRoutes from './routes';
 
-localforage.getItem('appState', init)
+localforage.getItem('appState', init);
 
 function init(_, state) {
+    if (state) {
+        state.app.preloader = false; // eslint-disable-line no-param-reassign
+    }
 
     // Create redux store with history
     // this uses the singleton browserHistory provided by react-router

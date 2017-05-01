@@ -22,9 +22,10 @@ import {
     setRecordsType,
     openModal,
     searchRecord,
+    publishRecords,
 } from '../actions';
 import { recordsTypes, MODALS } from '../constants';
-import makeSelectProgramsPage from '../selectors';
+import makeSelectProgramsPage, { makeCheckCanSave } from '../selectors';
 import { Buttons, StyledBtn, Search } from './style';
 
 class Header extends React.PureComponent {
@@ -33,6 +34,17 @@ class Header extends React.PureComponent {
 
         this.searchRecords = debounce(props.search, 300);
         this.openAddRecordModal = this.openAddRecordModal.bind(this);
+        this.onSaveClick = this.onSaveClick.bind(this);
+    }
+
+    onSaveClick(e) {
+        e.preventDefault();
+
+        if (e.target.disabled) {
+            return;
+        }
+
+        this.props.publishRecords();
     }
 
     openAddRecordModal() {
@@ -40,9 +52,9 @@ class Header extends React.PureComponent {
     }
 
     render() {
-        const { recordsType, canSave } = this.props.ProgramsPage;
+        const { recordsType } = this.props.ProgramsPage;
         const activeType = (recordsTypes.find((item) => item.value === recordsType) || {}).title;
-        const { menuOpen } = this.props;
+        const { menuOpen, canSave } = this.props;
 
         return (
             <Bot moved={menuOpen}>
@@ -63,6 +75,7 @@ class Header extends React.PureComponent {
                             success
                             active={canSave}
                             disabled={!canSave}
+                            onClick={this.onSaveClick}
                         >
                             <Check className="programs-icon" width="12px" height="12px" />
                             {' '}
@@ -88,7 +101,7 @@ class Header extends React.PureComponent {
 Header.propTypes = {
     ProgramsPage: PropTypes.object,
     openModal: PropTypes.func,
-    onSave: PropTypes.func,
+    publishRecords: PropTypes.func,
     setRecordsType: PropTypes.func,
     search: PropTypes.func,
     canSave: PropTypes.bool,
@@ -98,6 +111,7 @@ Header.propTypes = {
 const mapStateToProps = createStructuredSelector({
     ProgramsPage: makeSelectProgramsPage(),
     menuOpen: selectMenuExpandedStatus,
+    canSave: makeCheckCanSave(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -105,6 +119,7 @@ function mapDispatchToProps(dispatch) {
         setRecordsType: (type) => dispatch(setRecordsType(type.value)),
         openModal: (modal) => dispatch(openModal(modal)),
         search: (query) => dispatch(searchRecord(query)),
+        publishRecords: () => dispatch(publishRecords()),
     };
 }
 

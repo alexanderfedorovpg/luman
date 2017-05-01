@@ -8,6 +8,8 @@ use Illuminate\Validation\ValidationException;
 use App\Http\Transformers\v1\AirRecordTransformer;
 use App\Models\AirRecord;
 use App\Http\Traits\AirRecordFilter;
+use App\Helpers\FileHelper;
+use App\Filespot\Configuration;
 
 /**
  * Контроллер записей эфиров
@@ -135,4 +137,61 @@ class AirRecordController extends CmsController
         return $this->respond(['success' => $record->delete()]);
     }
 
+    /**
+     * Публикует эфирные записи
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function publish(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'records' => 'array',
+                'records.*' => 'integer|exists:air_records,id'
+            ]);
+
+            $records = $request->input('records');
+            if (!$records) {
+                $records = [];
+            }
+
+            return $this->respondCreated([
+                'success' => (bool) AirRecord::publish($records)
+            ]);
+
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
+        }
+    }
+
+    /**
+     * Аплоад видео файла
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function upload(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'file' => 'file|required|max:262144',
+            ]);
+
+            $cdnFile = FileHelper::uploadFilespotFile($request->file('file'));
+            if ($cdnFile) {
+                return $this->respondCreated([
+                    'url' => Configuration::URL_VIDEO_PLAYER . $cdnFile->external_id
+                ]);
+            }
+
+            throw new \Exception('Error uploading file');
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
+        } catch (\Exception $e) {
+            return $this->respondFail500x();
+        }
+
+    }
+    
 }
