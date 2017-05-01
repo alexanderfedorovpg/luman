@@ -10,7 +10,6 @@ import {
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as api from 'api';
 import { showPreloader, hidePreloader, showInfoModal } from 'containers/App/actions';
-import { fetchRubrics } from 'containers/App/sagas';
 import {
     successLoadPrograms,
     failureLoadPrograms,
@@ -22,6 +21,8 @@ import {
     failurePostRecord,
     successEditRecord,
     failureEditRecord,
+    successPublishRecords,
+    failurePublishRecords,
     selectRecord,
     openModal,
     closeModal,
@@ -42,12 +43,22 @@ import {
     SEARCH_RECORD,
     PLAY_VIDEO,
     WANT_DELETE_RECORD,
+    PUBLISH_RECORDS,
 } from './constants';
 
 const getRecordsType = (state) => state.getIn(['programsPage', 'recordsType']);
 const getRecordsOffset = (state) => state.getIn(['programsPage', 'records']).size;
 const getProgramId = (state) => state.getIn(['programsPage', 'selectedProgram']);
 const getSearchQuery = (state) => state.getIn(['programsPage', 'searchQuery']);
+const getUnpublishedRecords = (state) => {
+    const records = state.getIn(['programsPage', 'records']);
+
+    if (!records) {
+        return [];
+    }
+
+    return records.toJS().filter((record) => !record.is_published);
+};
 
 export function* getPrograms() {
     try {
@@ -64,6 +75,7 @@ export function* getPrograms() {
 
         yield put(successLoadPrograms(programs));
     } catch (err) {
+        console.error(err);
         yield put(failureLoadPrograms(err));
     }
 }
@@ -87,6 +99,7 @@ export function* deleteRecord({ payload }) {
             throw new Error(response.statusText);
         }
     } catch (err) {
+        console.error(err);
         yield put(failureDeleteRecord(err));
         yield put(hidePreloader());
         yield put(showInfoModal('Не удалось удалить запись. Попробуйте еще раз'));
@@ -130,6 +143,7 @@ export function* getRecords(action = { payload: {} }) {
             replace,
         }));
     } catch (err) {
+        console.error(err);
         yield put(failureLoadRecords(err));
     }
 }
@@ -137,13 +151,17 @@ export function* getRecords(action = { payload: {} }) {
 export function* postRecord({ payload }) {
     try {
         yield put(showPreloader());
-        const uploadFileResponse = yield call(api.uploadFile, payload.video_url[0]);
+        const [uploadedVideo, uploadedFile] = [
+            yield call(api.uploadVideo, payload.video_url[0]),
+            yield call(api.uploadFile, payload.image_preview[0]),
+        ];
         const type = yield select(getRecordsType);
 
         const data = {
             ...payload,
             is_full_video: type === 'FULL',
-            video_url: uploadFileResponse.data.file.url,
+            video_url: uploadedVideo.data.url,
+            image_preview: uploadedFile.data.file.url,
             is_published: 0,
         };
 
@@ -160,6 +178,7 @@ export function* postRecord({ payload }) {
             throw new Error(response.statusText);
         }
     } catch (err) {
+        console.error(err);
         yield put(failurePostRecord(err));
         yield put(hidePreloader());
         yield put(showInfoModal('Не удалось добавить запись. Попробуйте еще раз'));
@@ -174,9 +193,14 @@ export function* editRecord({ payload }) {
 
         yield put(showPreloader());
 
+        if (typeof payload.image_preview !== 'string') {
+            const uploadedFile = yield call(api.uploadFile, payload.image_preview[0]);
+            data.image_preview = uploadedFile.data.file.url;
+        }
+
         if (typeof payload.video_url !== 'string') {
-            const uploadFileResponse = yield call(api.uploadFile, payload.video_url[0]);
-            data.video_url = uploadFileResponse.data.file.url;
+            const uploadedVideo = yield call(api.uploadVideo, payload.video_url[0]);
+            data.video_url = uploadedVideo.data.url;
         }
 
         const response = yield call(api.editRecord, data.id, data);
@@ -190,6 +214,7 @@ export function* editRecord({ payload }) {
             throw new Error(response.statusText);
         }
     } catch (err) {
+        console.error(err);
         yield put(failureEditRecord(err));
         yield put(hidePreloader());
         yield put(showInfoModal('Не удалось отредактировать запись. Попробуйте еще раз'));
@@ -206,12 +231,32 @@ export function* playVideo({ payload }) {
     yield put(openModal(MODALS.video));
 }
 
-export function* initPage() {
-    yield [
-        call(fetchRubrics),
-        call(getPrograms),
-    ];
+export function* publishRecords() {
+    try {
+        yield put(showPreloader());
 
+        const records = yield select(getUnpublishedRecords);
+        const ids = records.map((record) => record.id);
+
+        const response = yield call(api.publishRecords, { records: ids });
+
+        yield put(hidePreloader());
+
+        if (response.data.success) {
+            yield put(successPublishRecords(ids));
+        } else {
+            throw new Error(response.statusText);
+        }
+    } catch (err) {
+        console.error(err);
+        yield put(failurePublishRecords(err));
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось опубликовать записи. Попробуйте еще раз'));
+    }
+}
+
+export function* initPage() {
+    yield call(getPrograms);
     yield call(getRecords, { payload: { replace: true } });
 }
 
@@ -235,6 +280,7 @@ export function* programsData() {
     yield takeLatest(SEARCH_RECORD, getRecords, { payload: { replace: true } });
     yield takeLatest(PLAY_VIDEO, playVideo);
     yield takeLatest(WANT_DELETE_RECORD, wantDeleteRecord);
+    yield takeLatest(PUBLISH_RECORDS, publishRecords);
 }
 
 // All sagas to be loaded

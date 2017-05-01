@@ -22,6 +22,7 @@ import {
     setRecordsType,
     openModal,
     searchRecord,
+    publishRecords,
 } from '../actions';
 import { recordsTypes, MODALS } from '../constants';
 import makeSelectProgramsPage, { makeCheckCanSave } from '../selectors';
@@ -33,6 +34,17 @@ class Header extends React.PureComponent {
 
         this.searchRecords = debounce(props.search, 300);
         this.openAddRecordModal = this.openAddRecordModal.bind(this);
+        this.onSaveClick = this.onSaveClick.bind(this);
+    }
+
+    onSaveClick(e) {
+        e.preventDefault();
+
+        if (e.target.disabled) {
+            return;
+        }
+
+        this.props.publishRecords();
     }
 
     openAddRecordModal() {
@@ -63,6 +75,7 @@ class Header extends React.PureComponent {
                             success
                             active={canSave}
                             disabled={!canSave}
+                            onClick={this.onSaveClick}
                         >
                             <Check className="programs-icon" width="12px" height="12px" />
                             {' '}
@@ -88,7 +101,7 @@ class Header extends React.PureComponent {
 Header.propTypes = {
     ProgramsPage: PropTypes.object,
     openModal: PropTypes.func,
-    onSave: PropTypes.func,
+    publishRecords: PropTypes.func,
     setRecordsType: PropTypes.func,
     search: PropTypes.func,
     canSave: PropTypes.bool,
@@ -106,6 +119,7 @@ function mapDispatchToProps(dispatch) {
         setRecordsType: (type) => dispatch(setRecordsType(type.value)),
         openModal: (modal) => dispatch(openModal(modal)),
         search: (query) => dispatch(searchRecord(query)),
+        publishRecords: () => dispatch(publishRecords()),
     };
 }
 
