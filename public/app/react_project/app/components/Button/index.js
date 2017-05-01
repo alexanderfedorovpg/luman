@@ -3,8 +3,8 @@ import { rem, ifProp } from '../../utils/style';
 import { font, color, height as HEIGHT } from '../../constants/style';
 
 /* eslint-disable */
-const bgColor = css`
-    background-color: ${(props) => (
+const activeColor = css`
+    ${(props) => (
         props.success ? color.success :
         props.danger ? color.danger :
         props.primary ? color.primary :
@@ -28,19 +28,18 @@ const Button = styled.button`
     background: transparent;
 
     &[disabled] {
+        color: rgba(51, 51, 51, .4);
         cursor: not-allowed;
     }
 
     &:not([disabled]):hover {
         color: #fff;
-        ${bgColor}
+        background-color: ${activeColor};
     }
 
     ${ifProp('active')(css`
         &:not([disabled]) {
-            color: #fff;
-
-            ${bgColor}
+            color: ${activeColor};
         }
     `)}
 
