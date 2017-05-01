@@ -1,20 +1,20 @@
-import { createSelector } from 'reselect'
-import { List } from 'immutable'
+import { createSelector } from 'reselect';
+import { List } from 'immutable';
 
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
-  let prevRoutingState;
-  let prevRoutingStateJS;
+    let prevRoutingState;
+    let prevRoutingStateJS;
 
-  return (state) => {
-    const routingState = state.get('route'); // or state.route
+    return (state) => {
+      const routingState = state.get('route'); // or state.route
 
-    if (!routingState.equals(prevRoutingState)) {
-      prevRoutingState = routingState;
-      prevRoutingStateJS = routingState.toJS();
+      if (!routingState.equals(prevRoutingState)) {
+        prevRoutingState = routingState;
+        prevRoutingStateJS = routingState.toJS();
     }
 
-    return prevRoutingStateJS;
+      return prevRoutingStateJS;
   };
 };
 
@@ -22,51 +22,61 @@ const selectAppDomain = (state) => state.get('app');
 
 const usersMap = createSelector(
     selectAppDomain,
-    app => app.getIn(['users', 'data'])
-)
+    (app) => app.getIn(['users', 'data'])
+);
 
 const selectEditors = createSelector(
     selectAppDomain,
     usersMap,
     (app, users) => app.getIn(['users', 'editors'])
-        .map(value => users.get(`${value}`))
-        .map(value => (value && value.toJS) ? value.toJS() : value)
-)
+        .map((value) => users.get(`${value}`))
+        .map((value) => (value && value.toJS) ? value.toJS() : value)
+);
 
 const selectUsersMap = createSelector(
     selectAppDomain,
     usersMap,
     (app, users) => app.getIn(['users', 'data']).toJS()
-)
+);
 
 const selectUsers = createSelector(
     selectAppDomain,
     usersMap,
     (app, users) => app.getIn(['users', 'data']).toJS()
-)
+);
 
 const selectCurrentUser = createSelector(
     selectAppDomain,
     usersMap,
     (app, users) => {
-        const user = app.getIn(['current', 'data'])
+        const user = app.getIn(['current', 'data']);
 
         if (user && user.toJS)
-            return user.toJS()
+            {return user.toJS()};
 
-        return user
+        return user;
     }
-)
+);
 
 const selectRubrics = createSelector(
     selectAppDomain,
-    app => app.getIn(['rubrics', 'data']).toJS()
-)
+    (app) => app.getIn(['rubrics', 'data']).toJS()
+);
 
 const selectMenuExpandedStatus = createSelector(
     selectAppDomain,
-    app => app.get('menuOpen')
-)
+    (app) => app.get('menuOpen')
+);
+
+const makeSelectPreloader = () => createSelector(
+    selectAppDomain,
+    (app) => app.get('preloader')
+);
+
+const makeSelectInfo = () => createSelector(
+    selectAppDomain,
+    (app) => app.get('infoModalText')
+);
 
 export {
     selectEditors,
@@ -75,5 +85,7 @@ export {
     selectUsersMap,
     selectRubrics,
     makeSelectLocationState,
-    selectMenuExpandedStatus
-}
+    selectMenuExpandedStatus,
+    makeSelectPreloader,
+    makeSelectInfo,
+};

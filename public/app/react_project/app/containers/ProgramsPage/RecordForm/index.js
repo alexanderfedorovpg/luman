@@ -69,6 +69,15 @@ class RecordForm extends React.PureComponent {
                         component={InputRedux}
                     />
                 </Group>
+                <Group md>
+                    <Field
+                        block
+                        placeholder="Выберите изображение для превью"
+                        icon="clip"
+                        name="image_preview"
+                        component={FileInputRedux}
+                    />
+                </Group>
                 <Group md horizontal>
                     <Field
                         name="publish_date"
@@ -78,6 +87,7 @@ class RecordForm extends React.PureComponent {
                         name="video_url"
                         accept="video/*"
                         icon="arrow"
+                        placeholder="Выберите видео"
                         component={FileInputRedux}
                     />
                 </Group>
@@ -124,6 +134,10 @@ const validate = (values) => {
 
     if (!values.get('video_url')) {
         errors.video_url = 'Не загружено видео';
+    }
+
+    if (!values.get('image_preview')) {
+        errors.image_preview = 'Не выбрано изображение для превью';
     }
 
     return errors;

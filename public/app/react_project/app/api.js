@@ -240,6 +240,13 @@ export const getRecord = (id) => axios.get(`${baseUrl}/air/record/${id}`);
 export const deleteRecord = (id) => axios.delete(`${baseUrl}/air/record/${id}`);
 export const postRecord = (data) => axios.post(`${baseUrl}/air/record`, data);
 export const editRecord = (id, data) => axios.put(`${baseUrl}/air/record/${id}`, data);
+export const publishRecords = (data) => axios.put(`${baseUrl}/air/record/publish`, data);
+export const uploadVideo = (file) => {
+    const data = new FormData();
+    data.append('file', file);
+
+    return axios.post(`${baseUrl}/air/record/upload`, data);
+};
 
 // =============================================================================
 

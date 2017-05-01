@@ -30,6 +30,9 @@ import {
     SEARCH_RECORD,
     SELECT_RECORD,
     PLAY_VIDEO,
+    PUBLISH_RECORDS,
+    PUBLISH_RECORDS_SUCCESS,
+    PUBLISH_RECORDS_FAILURE,
 } from './constants';
 
 export function openPage() {
@@ -201,5 +204,24 @@ export function playVideo(id) {
     return {
         type: PLAY_VIDEO,
         payload: { id },
+    };
+}
+
+export function publishRecords() {
+    return {
+        type: PUBLISH_RECORDS,
+    };
+}
+
+export function successPublishRecords(ids) {
+    return {
+        type: PUBLISH_RECORDS_SUCCESS,
+        payload: { ids },
+    };
+}
+
+export function failurePublishRecords() {
+    return {
+        type: PUBLISH_RECORDS_FAILURE,
     };
 }

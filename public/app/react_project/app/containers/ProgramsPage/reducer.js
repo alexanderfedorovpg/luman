@@ -14,6 +14,7 @@ import {
     DELETE_RECORD_SUCCESS,
     EDIT_RECORD_SUCCESS,
     POST_RECORD_SUCCESS,
+    PUBLISH_RECORDS_SUCCESS,
     SEARCH_RECORD,
     OPEN_MODAL,
     CLOSE_MODAL,
@@ -31,7 +32,6 @@ const initialState = fromJS({
     allRecordsUploaded: false,
     loading: true,
     modal: null,
-    canSave: false,
     searchQuery: null,
     pendingToDelete: null,
     selectedRecord: null,
@@ -75,28 +75,36 @@ function programsPageReducer(state = initialState, action) {
                     'records',
                     (records) => records.filter((record) => record.get('id') !== action.payload.id)
                 )
-                .set('pendingToDelete', null)
-                .set('canSave', true);
+                .set('pendingToDelete', null);
 
         case POST_RECORD_SUCCESS:
             return state
                 .update(
                     'records',
                     (records) => records.unshift(fromJS(action.payload))
-                )
-                .set('canSave', true);
+                );
 
         case EDIT_RECORD_SUCCESS:
             recordInd = state.get('records').findIndex(
                 (record) => record.get('id') === action.payload.id
             );
 
-            return state
-                .setIn(
-                    ['records', recordInd],
-                    fromJS(action.payload)
-                )
-                .set('canSave', true);
+            return state.setIn(
+                ['records', recordInd],
+                fromJS(action.payload)
+            );
+
+        case PUBLISH_RECORDS_SUCCESS:
+            return state.update(
+                'records',
+                (records) => records.map((record) => {
+                    if (action.payload.ids.indexOf(record.get('id')) === -1) {
+                        return record;
+                    }
+
+                    return record.set('is_published', 1);
+                })
+            );
 
         case SELECT_RECORD:
             return state.set('selectedRecord', action.payload.id);

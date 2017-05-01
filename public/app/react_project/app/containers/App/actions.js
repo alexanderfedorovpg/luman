@@ -21,85 +21,109 @@ import {
     POST_MESSAGE,
     POST_MESSAGE_SUCCESS,
     POST_MESSAGE_FAILURE,
+
+    SHOW_PRELOADER,
+    HIDE_PRELOADER,
+
+    SHOW_INFO,
+    HIDE_INFO,
 } from './constants';
 
 export const toggleMenu = () => ({
-    type: TOGGLE_MENU
-})
+    type: TOGGLE_MENU,
+});
 
 export const closeMenu = () => ({
-    type: CLOSE_MENU
-})
+    type: CLOSE_MENU,
+});
 
 export const loadEditors = () => ({
-    type: LOAD_EDITORS
-})
+    type: LOAD_EDITORS,
+});
 
-export const editorsLoaded = data => ({
+export const editorsLoaded = (data) => ({
     type: LOAD_EDITORS_SUCCESS,
-    payload: data
-})
+    payload: data,
+});
 
-export const editorsLoadingError = error => ({
+export const editorsLoadingError = (error) => ({
     type: LOAD_EDITORS_FAILURE,
-    error
-})
+    error,
+});
 
 export const loadUsers = () => ({
-    type: LOAD_USERS
-})
+    type: LOAD_USERS,
+});
 
-export const usersLoaded = data => ({
+export const usersLoaded = (data) => ({
     type: LOAD_USERS_SUCCESS,
-    payload: data
-})
+    payload: data,
+});
 
-export const usersLoadingError = error => ({
+export const usersLoadingError = (error) => ({
     type: LOAD_USERS_FAILURE,
-    error
-})
+    error,
+});
 
 export const loadCurrentUser = () => ({
-    type: LOAD_CURRENT_USER
-})
+    type: LOAD_CURRENT_USER,
+});
 
-export const currentUserLoaded = data => ({
+export const currentUserLoaded = (data) => ({
     type: LOAD_CURRENT_USER_SUCCESS,
-    payload: data
-})
+    payload: data,
+});
 
-export const currentUserLoadingError = error => ({
+export const currentUserLoadingError = (error) => ({
     type: LOAD_CURRENT_USER_FAILURE,
-    error
-})
+    error,
+});
 
 export const loadRubrics = () => ({
-    type: LOAD_RUBRICS
-})
+    type: LOAD_RUBRICS,
+});
 
-export const rubricsLoaded = data => ({
+export const rubricsLoaded = (data) => ({
     type: LOAD_RUBRICS_SUCCESS,
-    payload: data
-})
+    payload: data,
+});
 
-export const rubricsLoadingError = error => ({
+export const rubricsLoadingError = (error) => ({
     type: LOAD_RUBRICS_FAILURE,
-    error
-})
+    error,
+});
 
 export const postMessage = (room, message) => ({
     type: POST_MESSAGE,
     payload: {
         room,
-        message
-    }
-})
+        message,
+    },
+});
 
 export const messagePosted = () => ({
-    type: POST_MESSAGE_SUCCESS
-})
+    type: POST_MESSAGE_SUCCESS,
+});
 
-export const messagePostingError = error => ({
+export const messagePostingError = (error) => ({
     type: POST_MESSAGE_FAILURE,
-    error
-})
+    error,
+});
+
+export const showPreloader = () => ({
+    type: SHOW_PRELOADER,
+});
+
+export const hidePreloader = () => ({
+    type: HIDE_PRELOADER,
+});
+
+export const showInfoModal = (text) => ({
+    type: SHOW_INFO,
+    payload: { text },
+});
+
+export const hideInfoModal = () => ({
+    type: HIDE_INFO,
+});
+
