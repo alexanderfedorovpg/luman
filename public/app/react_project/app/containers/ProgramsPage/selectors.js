@@ -92,6 +92,11 @@ const makeCheckCanSave = () => createSelector(
     (records) => records.some((record) => record.is_published === 0)
 );
 
+const makeGetRecordsType = () => createSelector(
+    selectProgramsPageDomain(),
+    (substate) => substate.get('recordsType')
+);
+
 /**
  * Default selector used by ProgramsPage
  */
@@ -111,4 +116,5 @@ export {
     makeGetSelectedRecord,
     makeGetProgramsArray,
     makeCheckCanSave,
+    makeGetRecordsType,
 };

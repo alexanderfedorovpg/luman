@@ -25,7 +25,7 @@ import {
     publishRecords,
 } from '../actions';
 import { recordsTypes, MODALS } from '../constants';
-import makeSelectProgramsPage, { makeCheckCanSave } from '../selectors';
+import { makeCheckCanSave, makeGetRecordsType } from '../selectors';
 import { Buttons, StyledBtn, Search } from './style';
 
 class Header extends React.PureComponent {
@@ -52,9 +52,8 @@ class Header extends React.PureComponent {
     }
 
     render() {
-        const { recordsType } = this.props.ProgramsPage;
+        const { menuOpen, canSave, recordsType } = this.props;
         const activeType = (recordsTypes.find((item) => item.value === recordsType) || {}).title;
-        const { menuOpen, canSave } = this.props;
 
         return (
             <Bot moved={menuOpen}>
@@ -99,7 +98,7 @@ class Header extends React.PureComponent {
 }
 
 Header.propTypes = {
-    ProgramsPage: PropTypes.object,
+    recordsType: PropTypes.string,
     openModal: PropTypes.func,
     publishRecords: PropTypes.func,
     setRecordsType: PropTypes.func,
@@ -109,7 +108,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-    ProgramsPage: makeSelectProgramsPage(),
+    recordsType: makeGetRecordsType(),
     menuOpen: selectMenuExpandedStatus,
     canSave: makeCheckCanSave(),
 });

@@ -58,7 +58,9 @@ function programsPageReducer(state = initialState, action) {
             }
 
             return state
-                .update('records', (records) => records.concat(action.payload.records))
+                .update('records', (records) => records.concat(
+                    fromJS(action.payload.records)
+                ))
                 .set('allRecordsUploaded', action.payload.allUploaded)
                 .set('loading', false);
 
