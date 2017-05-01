@@ -63,6 +63,8 @@ const UserName = styled.a`
 `
 
 const TableExt = styled(Table)`
+    text-align: left;
+    table-layout: fixed;
     width: 100%;
     margin-top: 24px;
     text-align: left;
@@ -80,9 +82,9 @@ const Summary = styled.tr`
 `
 
 
-function CategoriesList({}) {
+function CategoriesStats({}) {
     return (
-        <TableExt class="table stats-article">
+        <TableExt>
             <thead>
             <tr>
                 <ColName>Статьи</ColName>
@@ -121,4 +123,4 @@ function CategoriesList({}) {
 }
 
 
-export default CategoriesList;
+export default CategoriesStats;

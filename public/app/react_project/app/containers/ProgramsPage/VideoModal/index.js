@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import getYouTubeID from 'get-youtube-id';
+import getYouTubeID from 'get-youtube-id';
 import Modal from 'components/Modal';
-// import Youtube from 'react-youtube';
+import Youtube from 'react-youtube';
 
 import { MODALS } from '../constants';
 
@@ -13,11 +13,11 @@ const VideoModal = ({ currentModal, close, videoUrl }) => (
         onRequestClose={close}
     >
         {
-            // !!videoUrl &&
-            // <Youtube
-            //     videoId={getYouTubeID(videoUrl)}
-            //     onReady={(e) => e.target.playVideo()}
-            // />
+            !!videoUrl &&
+            <Youtube
+                videoId={getYouTubeID(videoUrl)}
+                onReady={(e) => e.target.playVideo()}
+            />
         }
     </Modal>
 );
