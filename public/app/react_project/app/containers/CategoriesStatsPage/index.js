@@ -27,8 +27,7 @@ class CategoriesStatsPage extends Component {
     }
 
     componentDidMount() {
-        this.props.onCategoryChange(this.props.params.type)
-        this.props.loadPage();
+        this.props.loadPage(this.props.params.type);
     }
 
     render() {
@@ -59,8 +58,8 @@ function mapDispatchToProps(dispatch) {
         onCategoryChange: (category) => {
             dispatch(changeCategoryName(category));
         },
-        loadPage(){
-            dispatch(loadCategoriesPageStatslist());
+        loadPage(category) {
+            dispatch(loadCategoriesPageStatslist(category));
         }
 
     };

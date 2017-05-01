@@ -7,8 +7,9 @@ import {
 
 
 
-export const loadCategoriesPageStatslist = ()=> ({
+export const loadCategoriesPageStatslist = (category) => ({
     type: LOAD_CATEGORIES_PAGE_STATS,
+    payload: { category },
 });
 
 export const categoriesPagetatsLoaded = payload => ({

@@ -5,24 +5,20 @@ import { take, call, put, select, cancel, fork, takeLatest, takeEvery } from 're
 import { push } from 'react-router-redux'
 import {makeSelectType} from './selectors'
 
-
 import {
     LOAD_CATEGORIES_PAGE_STATS,
 } from './constants'
 
 import {
     categoriesPagetatsLoaded,
-    categoriesStatsPageLoadingError
+    categoriesStatsPageLoadingError,
 } from './actions'
 
 import * as api from 'api'
 
-export function* getCategoryStatsList() {
+export function* getCategoryStatsList({ payload }) {
     try {
-        console.log('SAGAS');
-        const type = yield select(makeSelectType()); // HANGS
-        console.log('END');
-        const { data } = yield call(api.getOneCategoryStat, type);
+        const { data } = yield call(api.getOneCategoryStat, payload.category);
 
         yield put(categoriesPagetatsLoaded(data))
 
