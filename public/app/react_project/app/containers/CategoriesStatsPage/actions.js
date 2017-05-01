@@ -1,10 +1,28 @@
-/**
- * Created by work on 22.04.17.
- */
+import {
+    LOAD_CATEGORIES_PAGE_STATS_SUCCESS,
+    LOAD_CATEGORIES_PAGE_STATS,
+    LOAD_CATEGORIES_PAGE_STATS_FAILURE,
+    CHANGE_CATEGORY
+} from './constants'
 
-import { push } from 'react-router-redux';
 
-export default function userClick(user) {
 
-    alert(123);
-}
+export const loadCategoriesPageStatslist = ()=> ({
+    type: LOAD_CATEGORIES_PAGE_STATS,
+});
+
+export const categoriesPagetatsLoaded = payload => ({
+    type: LOAD_CATEGORIES_PAGE_STATS_SUCCESS,
+    payload
+});
+
+export const categoriesStatsPageLoadingError = error => ({
+    type: LOAD_CATEGORIES_PAGE_STATS_FAILURE,
+    error
+});
+
+
+export const changeCategoryName = (category) => ({
+        type: CHANGE_CATEGORY,
+        category
+});

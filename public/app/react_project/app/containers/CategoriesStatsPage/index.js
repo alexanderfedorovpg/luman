@@ -6,7 +6,10 @@ import {push} from 'react-router-redux';
 import CategoriesList from 'components/CategoriesStats/index'
 import {Content, Users, Wrap, Header} from '../../components/Stats'
 import styled from 'styled-components'
-
+import {
+    loadCategoriesPageStatslist,
+    changeCategoryName
+} from './actions'
 
 const TodayStatsLisk = styled.a`
     letter-spacing: -1.17px;
@@ -24,8 +27,8 @@ class CategoriesStatsPage extends Component {
     }
 
     componentDidMount() {
-        console.log(CategoriesList);
-        console.log(this.props.params.type);
+        this.props.onCategoryChange(this.props.params.type)
+        this.props.loadPage();
     }
 
     render() {
@@ -33,10 +36,10 @@ class CategoriesStatsPage extends Component {
             <div>
                 <Helmet
                     title="Cтатистика"/>
-                <Header href="javascript:void()" />
-            <Wrap>
-                <CategoriesList/>
-            </Wrap>
+                <Header href="javascript:void()"/>
+                <Wrap>
+                    <CategoriesList/>
+                </Wrap>
             </div>
         )
     }
@@ -45,6 +48,7 @@ class CategoriesStatsPage extends Component {
 const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
+
     return {
         categoryRowClickCallback(categoryName) {
             dispatch(push(`categoriesStatsPage/${categoryName}`));
@@ -52,6 +56,12 @@ function mapDispatchToProps(dispatch) {
         userRowClickCallback(userId) {
             dispatch(push(`articleUserStatsPage/${userId}`));
         },
+        onCategoryChange: (category) => {
+            dispatch(changeCategoryName(category));
+        },
+        loadPage(){
+            dispatch(loadCategoriesPageStatslist());
+        }
 
     };
 }
