@@ -36,7 +36,7 @@ class FileHelper
             $result =  $result->jsonDecode()->object;
             $cdnFile = new CdnFile([
                 'external_id' => $result->id,
-                'url' => $result->cdn_url,
+                'url' => 'http://' . $result->cdn_url,
                 'content_type' => $result->content_type
             ]);
 
