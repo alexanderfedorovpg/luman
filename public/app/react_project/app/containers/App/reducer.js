@@ -70,7 +70,7 @@ function AppReducer(state = initialState, action) {
             editors = action.payload.map((value) => value.id);
 
             return state
-                .setIn(['users', 'editors'], editors)
+                .setIn(['users', 'editors'], fromJS(editors))
                 .updateIn(['users', 'data'], (data) => data.merge(fromJS(users)));
 
         case LOAD_USERS_SUCCESS:
@@ -80,7 +80,7 @@ function AppReducer(state = initialState, action) {
                 .map((value) => value.id);
 
             return state
-                .setIn(['users', 'editors'], editors)
+                .setIn(['users', 'editors'], fromJS(editors))
                 .updateIn(['users', 'data'], (data) => data.merge(fromJS(users)));
 
         case LOAD_RUBRICS_SUCCESS:

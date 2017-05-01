@@ -5,19 +5,20 @@ import { createStructuredSelector } from 'reselect';
 
 import Tags from 'components/Tags';
 import { Wrapper } from './style';
-import makeSelectProgramsPage, {
+import {
     makeSelectProgramsNames,
+    makeGetSelectedProgram,
 } from '../selectors';
 import { changeProgram } from '../actions';
 
-const Programs = ({ ProgramsPage: { selectedProgram }, programs, ...props }) => (
+const Programs = ({ selected, programs, ...props }) => (
     <Wrapper>
         {
             !!programs &&
             <Tags
                 type="radio"
                 data={programs}
-                value={[selectedProgram]}
+                value={[selected]}
                 onChange={props.changeProgram}
             />
         }
@@ -25,13 +26,13 @@ const Programs = ({ ProgramsPage: { selectedProgram }, programs, ...props }) => 
 );
 
 Programs.propTypes = {
-    ProgramsPage: PropTypes.object,
+    selected: PropTypes.number,
     changeProgram: PropTypes.func,
     programs: Tags.propTypes.data,
 };
 
 const mapStateToProps = createStructuredSelector({
-    ProgramsPage: makeSelectProgramsPage(),
+    selected: makeGetSelectedProgram(),
     programs: makeSelectProgramsNames(),
 });
 

@@ -18,15 +18,15 @@ const makeSelectLocationState = () => {
   };
 };
 
-const selectAppDomain = (state) => state.get('app');
+const selectAppDomain = () => (state) => state.get('app');
 
 const usersMap = createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     (app) => app.getIn(['users', 'data'])
 );
 
 const selectEditors = createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     usersMap,
     (app, users) => app.getIn(['users', 'editors'])
         .map((value) => users.get(`${value}`))
@@ -34,19 +34,19 @@ const selectEditors = createSelector(
 );
 
 const selectUsersMap = createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     usersMap,
     (app, users) => app.getIn(['users', 'data']).toJS()
 );
 
 const selectUsers = createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     usersMap,
     (app, users) => app.getIn(['users', 'data']).toJS()
 );
 
 const selectCurrentUser = createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     usersMap,
     (app, users) => {
         const user = app.getIn(['current', 'data']);
@@ -59,28 +59,41 @@ const selectCurrentUser = createSelector(
 );
 
 const selectRubrics = createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     (app) => app.getIn(['rubrics', 'data']).toJS()
 );
 
 const selectMenuExpandedStatus = createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     (app) => app.get('menuOpen')
 );
 
 const makeSelectPreloader = () => createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     (app) => app.get('preloader')
 );
 
 const makeSelectInfo = () => createSelector(
-    selectAppDomain,
+    selectAppDomain(),
     (app) => app.get('infoModalText')
 );
 
 const makeSelectPrograms = () => createSelector(
-    selectAppDomain,
-    (app) => app.get('programs').toJS()
+    selectAppDomain(),
+    (app) => app.get('programs')
+);
+
+const makeGetProgramsArray = () => createSelector(
+    makeSelectPrograms(),
+    (programsMap) => {
+        const programs = programsMap.toJS();
+
+        if (!programs || !programs.ids || !programs.byId) {
+            return [];
+        }
+
+        return programs.ids.map((id) => programs.byId[id]);
+    }
 );
 
 export {
@@ -94,4 +107,5 @@ export {
     makeSelectPreloader,
     makeSelectInfo,
     makeSelectPrograms,
+    makeGetProgramsArray,
 };

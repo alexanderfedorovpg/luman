@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Waypoint from 'react-waypoint';
 import RecordsList from 'components/Records';
-import makeSelectProgramsPage, {
+import {
+    makeGetAllRecordsUploaded,
+    makeGetLoadingState,
     makeGetRecords,
 } from '../selectors';
 import {
@@ -14,7 +16,7 @@ import {
     playVideo,
 } from '../actions';
 
-const Records = ({ ProgramsPage: { loading, allRecordsUploaded }, records, ...props }) => (
+const Records = ({ loading, allUploaded, records, ...props }) => (
     <div>
         {
             !!records &&
@@ -28,7 +30,7 @@ const Records = ({ ProgramsPage: { loading, allRecordsUploaded }, records, ...pr
         {
             loading ?
             'Загрузка...' :
-            !allRecordsUploaded &&
+            !allUploaded &&
             <Waypoint
                 bottomOffset="-50%"
                 scrollableAncestor={window}
@@ -44,11 +46,13 @@ Records.propTypes = {
     loadRecords: PropTypes.func,
     startEditRecord: PropTypes.func,
     deleteRecord: PropTypes.func,
-    ProgramsPage: PropTypes.object,
+    allUploaded: PropTypes.bool,
+    loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-    ProgramsPage: makeSelectProgramsPage(),
+    allUploaded: makeGetAllRecordsUploaded(),
+    loading: makeGetLoadingState(),
     records: makeGetRecords(),
 });
 

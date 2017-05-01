@@ -7,18 +7,20 @@ import Tabs from 'components/Constructor/Tabs'
 import Collapse from '../Collapse'
 
 import {
+    makeGetProgramsArray
+} from 'containers/App/selectors';
+import {
     searchRecord,
 } from 'containers/ProgramsPage/actions'
+import {
+    selectRecords,
+} from 'containers/ProgramsPage/selectors';
 
 import {
     itemToMain,
     removeFromMain,
 } from '../actions'
 
-import {
-    selectRecords,
-    makeGetProgramsArray
-} from 'containers/ProgramsPage/selectors';
 
 import {
     selectFilters

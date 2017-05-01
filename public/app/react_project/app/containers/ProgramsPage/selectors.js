@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { makeSelectPrograms } from '../App/selectors';
+import { makeSelectPrograms, makeGetProgramsArray } from '../App/selectors';
 
 /**
  * Direct selector to the programsPage state domain
@@ -13,24 +13,12 @@ const selectProgramsPageDomain = () => (state) => state.get('programsPage');
 
 const selectRecords = createSelector(
     selectProgramsPageDomain(),
-    (substate) => substate.get('records').toJS()
+    (substate) => substate.get('records')
 );
 
 const selectSelectedRecord = createSelector(
     selectProgramsPageDomain(),
     (substate) => substate.get('selectedRecord')
-);
-
-
-const makeGetProgramsArray = () => createSelector(
-    makeSelectPrograms(),
-    (programs) => {
-        if (!programs || !programs.ids || !programs.byId) {
-            return [];
-        }
-
-        return programs.ids.map((id) => programs.byId[id]);
-    }
 );
 
 const makeSelectProgramsNames = () => createSelector(
@@ -43,7 +31,9 @@ const makeSelectProgramsNames = () => createSelector(
 
 const makeGetProgramsAsOptions = () => createSelector(
     makeSelectPrograms(),
-    (programs) => {
+    (programsMap) => {
+        const programs = programsMap.toJS();
+
         if (!programs || !programs.ids || !programs.byId) {
             return [];
         }
@@ -59,15 +49,20 @@ const makeGetProgramsAsOptions = () => createSelector(
     }
 );
 
+const makeGetSelectedProgram = () => createSelector(
+    selectProgramsPageDomain(),
+    (state) => state.get('selectedProgram')
+);
+
 const makeGetRecords = () => createSelector(
     [selectRecords, makeSelectPrograms()],
-    (records, programs) => records.map((record) => (
+    (records, programs) => records.toJS().map((record) => (
         {
             id: record.id,
             date: record.publish_date,
             title: record.title,
             preview: record.image_preview,
-            program: programs.byId[record.program_id].name,
+            program: programs.toJS().byId[record.program_id].name,
         }
     ))
 );
@@ -75,7 +70,7 @@ const makeGetRecords = () => createSelector(
 const makeGetSelectedRecord = () => createSelector(
     [selectRecords, selectSelectedRecord],
     (records, selected) => {
-        const target = records.find((record) => record.id === selected);
+        const target = records.toJS().find((record) => record.id === selected);
 
         if (!target) {
             return {
@@ -89,12 +84,22 @@ const makeGetSelectedRecord = () => createSelector(
 
 const makeCheckCanSave = () => createSelector(
     selectRecords,
-    (records) => records.some((record) => record.is_published === 0)
+    (records) => records.toJS().some((record) => record.is_published === 0)
 );
 
 const makeGetRecordsType = () => createSelector(
     selectProgramsPageDomain(),
     (substate) => substate.get('recordsType')
+);
+
+const makeGetLoadingState = () => createSelector(
+    selectProgramsPageDomain(),
+    (substate) => substate.get('loading')
+);
+
+const makeGetAllRecordsUploaded = () => createSelector(
+    selectProgramsPageDomain(),
+    (substate) => substate.get('allRecordsUploaded')
 );
 
 /**
@@ -114,7 +119,9 @@ export {
     makeGetRecords,
     makeGetProgramsAsOptions,
     makeGetSelectedRecord,
-    makeGetProgramsArray,
     makeCheckCanSave,
     makeGetRecordsType,
+    makeGetSelectedProgram,
+    makeGetAllRecordsUploaded,
+    makeGetLoadingState,
 };
