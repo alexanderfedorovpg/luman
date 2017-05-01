@@ -16,9 +16,9 @@ trait AirRecordFilter
             $builder->fullVideo(false);
         }
 
-        $rubricId = $request->input('rubricId');
-        if ($rubricId) {
-            $builder->where('rubric_id', '=', $rubricId);
+        $programId = $request->input('programId');
+        if ($programId) {
+            $builder->where('program_id', '=', $programId);
         }
 
         $searchString = $request->input('search');
