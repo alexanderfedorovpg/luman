@@ -30,6 +30,7 @@ import {
     SEARCH_RECORD,
     SELECT_RECORD,
     PLAY_VIDEO,
+    SHOW_INFO,
 } from './constants';
 
 export function openPage() {

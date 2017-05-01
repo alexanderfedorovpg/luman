@@ -31,7 +31,6 @@ const initialState = fromJS({
     allRecordsUploaded: false,
     loading: true,
     modal: null,
-    canSave: false,
     searchQuery: null,
     pendingToDelete: null,
     selectedRecord: null,
@@ -75,16 +74,14 @@ function programsPageReducer(state = initialState, action) {
                     'records',
                     (records) => records.filter((record) => record.get('id') !== action.payload.id)
                 )
-                .set('pendingToDelete', null)
-                .set('canSave', true);
+                .set('pendingToDelete', null);
 
         case POST_RECORD_SUCCESS:
             return state
                 .update(
                     'records',
                     (records) => records.unshift(fromJS(action.payload))
-                )
-                .set('canSave', true);
+                );
 
         case EDIT_RECORD_SUCCESS:
             recordInd = state.get('records').findIndex(
@@ -95,8 +92,7 @@ function programsPageReducer(state = initialState, action) {
                 .setIn(
                     ['records', recordInd],
                     fromJS(action.payload)
-                )
-                .set('canSave', true);
+                );
 
         case SELECT_RECORD:
             return state.set('selectedRecord', action.payload.id);

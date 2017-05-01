@@ -9,6 +9,7 @@ import {
 } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as api from 'api';
+import { showPreloader, hidePreloader, showInfoModal } from 'containers/App/actions';
 import { fetchRubrics } from 'containers/App/sagas';
 import {
     successLoadPrograms,
@@ -68,13 +69,16 @@ export function* getPrograms() {
 }
 
 export function* wantDeleteRecord() {
-    yield put(closeModal());
     yield put(openModal(MODALS.confirmRecordDelete));
 }
 
 export function* deleteRecord({ payload }) {
     try {
+        yield put(showPreloader());
+
         const response = yield call(api.deleteRecord, payload.id);
+
+        yield put(hidePreloader());
 
         if (response.data.success) {
             yield put(successDeleteRecord(payload.id));
@@ -84,6 +88,8 @@ export function* deleteRecord({ payload }) {
         }
     } catch (err) {
         yield put(failureDeleteRecord(err));
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось удалить запись. Попробуйте еще раз'));
     }
 }
 
@@ -130,6 +136,7 @@ export function* getRecords(action = { payload: {} }) {
 
 export function* postRecord({ payload }) {
     try {
+        yield put(showPreloader());
         const uploadFileResponse = yield call(api.uploadFile, payload.video_url[0]);
         const type = yield select(getRecordsType);
 
@@ -137,18 +144,25 @@ export function* postRecord({ payload }) {
             ...payload,
             is_full_video: type === 'FULL',
             video_url: uploadFileResponse.data.file.url,
+            is_published: 0,
         };
 
         const response = yield call(api.postRecord, data);
+
+        yield put(hidePreloader());
 
         if (response.data.success) {
             data.id = response.data.data.id;
 
             yield put(successPostRecord(data));
             yield put(closeModal());
+        } else {
+            throw new Error(response.statusText);
         }
     } catch (err) {
         yield put(failurePostRecord(err));
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось добавить запись. Попробуйте еще раз'));
     }
 }
 
@@ -158,6 +172,8 @@ export function* editRecord({ payload }) {
             ...payload,
         };
 
+        yield put(showPreloader());
+
         if (typeof payload.video_url !== 'string') {
             const uploadFileResponse = yield call(api.uploadFile, payload.video_url[0]);
             data.video_url = uploadFileResponse.data.file.url;
@@ -165,23 +181,27 @@ export function* editRecord({ payload }) {
 
         const response = yield call(api.editRecord, data.id, data);
 
+        yield put(hidePreloader());
+
         if (response.data.success) {
             yield put(successEditRecord(data));
             yield put(closeModal());
+        } else {
+            throw new Error(response.statusText);
         }
     } catch (err) {
         yield put(failureEditRecord(err));
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось отредактировать запись. Попробуйте еще раз'));
     }
 }
 
 export function* startEditRecord({ payload }) {
-    yield put(closeModal());
     yield put(selectRecord(payload.id));
     yield put(openModal(MODALS.record));
 }
 
 export function* playVideo({ payload }) {
-    yield put(closeModal());
     yield put(selectRecord(payload.id));
     yield put(openModal(MODALS.video));
 }

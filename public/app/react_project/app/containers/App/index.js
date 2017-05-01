@@ -12,29 +12,29 @@
  */
 
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
-import Root from 'components/Root'
-import Header from 'components/Header'
-import NavSide from 'components/NavSide'
-import Content from 'components/Content'
+import Root from 'components/Root';
+import Header from 'components/Header';
+import NavSide from 'components/NavSide';
+import Content from 'components/Content';
 
-import LoginPage from 'containers/LoginPage'
+import LoginPage from 'containers/LoginPage';
 
-import { logout } from 'containers/LoginPage/actions'
+import { logout } from 'containers/LoginPage/actions';
 import {
     closeMenu,
     toggleMenu,
     loadRubrics,
     loadUsers,
-    loadCurrentUser
-} from './actions'
+    loadCurrentUser,
+} from './actions';
 
-import { selectCurrentUser } from './selectors'
+import { selectCurrentUser } from './selectors';
+import Preloader from './Preloader';
+import InfoModal from './InfoModal';
 
-import * as api from 'api'
+import * as api from 'api';
 
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -44,28 +44,28 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 
     componentWillMount() {
         if (this.props.token) {
-            this.loadData(this.props.token)
+            this.loadData(this.props.token);
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.token && (this.props.token !== nextProps.token)) {
-            this.loadData(nextProps.token)
+            this.loadData(nextProps.token);
         }
     }
 
     loadData(token) {
-        api.setToken(token)
+        api.setToken(token);
 
         setTimeout(() => {
-            this.props.loadRubrics()
-            this.props.loadUsers()
-            this.props.loadCurrentUser()
-        })
+            this.props.loadRubrics();
+            this.props.loadUsers();
+            this.props.loadCurrentUser();
+        });
     }
 
     render() {
-        let { menuOpen, toggleMenu, closeMenu, router, token, currentUser } = this.props
+        let { menuOpen, toggleMenu, closeMenu, router, token, currentUser } = this.props;
 
         return token && currentUser
             ? <Root onClick={closeMenu}>
@@ -74,50 +74,54 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
                     user={currentUser}
                     onToggle={toggleMenu}
                     isActive={router.isActive}
-                    onLogout={this.props.logout} />
+                    onLogout={this.props.logout}
+                />
                 <NavSide
                     expanded={menuOpen}
                     location={router.location}
-                    isActive={router.isActive} />
+                    isActive={router.isActive}
+                />
                 <Content moved={menuOpen}>
                     {React.Children.toArray(this.props.children)}
                 </Content>
+                <Preloader />
+                <InfoModal />
             </Root>
 
-            : <LoginPage />
+            : <LoginPage />;
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     currentUser: selectCurrentUser(state),
     menuOpen: state.get('app').get('menuOpen'),
     token: state.get('app').get('api-token'),
-})
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     toggleMenu() {
-        dispatch(toggleMenu())
+        dispatch(toggleMenu());
     },
 
     closeMenu() {
-        dispatch(closeMenu())
+        dispatch(closeMenu());
     },
 
     logout() {
-        dispatch(logout())
+        dispatch(logout());
     },
 
     loadRubrics() {
-        dispatch(loadRubrics())
+        dispatch(loadRubrics());
     },
 
     loadUsers() {
-        dispatch(loadUsers())
+        dispatch(loadUsers());
     },
 
     loadCurrentUser() {
-        dispatch(loadCurrentUser())
-    }
-})
+        dispatch(loadCurrentUser());
+    },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

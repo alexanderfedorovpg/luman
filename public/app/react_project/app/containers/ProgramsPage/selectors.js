@@ -91,6 +91,11 @@ const makeGetSelectedRecord = () => createSelector(
     }
 );
 
+const makeCheckCanSave = () => createSelector(
+    selectRecords,
+    (records) => records.some((record) => record.is_published === 0)
+);
+
 /**
  * Default selector used by ProgramsPage
  */
@@ -109,4 +114,5 @@ export {
     makeGetProgramsAsOptions,
     makeGetSelectedRecord,
     makeGetPrograms,
+    makeCheckCanSave,
 };

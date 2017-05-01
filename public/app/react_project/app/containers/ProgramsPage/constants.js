@@ -39,6 +39,7 @@ export const MODALS = {
     record: 'record',
     video: 'video',
     confirmRecordDelete: 'confirmRecordDelete',
+    info: 'info',
 };
 
 export const recordsTypes = [
