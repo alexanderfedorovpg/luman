@@ -34,7 +34,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
 
     render() {
         const { selectedRecord } = this.props;
-        const { modal, pendingToDelete, infoModalText } = this.props.ProgramsPage;
+        const { modal, pendingToDelete } = this.props.ProgramsPage;
 
         return (
             <Wrapper>

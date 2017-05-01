@@ -2,18 +2,26 @@ import { take, call, put, select, cancel, takeLatest, takeEvery } from 'redux-sa
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {
+    loginSuccess,
+    loginError,
+} from 'containers/LoginPage/actions';
+
+import * as api from 'api';
+
+import {
+    LOGIN,
+} from 'containers/LoginPage/constants';
+
+import {
     LOAD_EDITORS,
     LOAD_USERS,
     LOAD_CURRENT_USER,
     LOAD_RUBRICS,
     POST_MESSAGE,
+    LOAD_PROGRAMS,
 
-    groups
-} from './constants'
-
-import {
-    LOGIN
-} from 'containers/LoginPage/constants'
+    groups,
+} from './constants';
 
 import {
     editorsLoaded,
@@ -29,24 +37,19 @@ import {
     rubricsLoadingError,
 
     messagePosted,
-    messagePostingError
-} from './actions'
+    messagePostingError,
 
-import {
-    loginSuccess,
-    loginError
-} from 'containers/LoginPage/actions'
-
-import * as api from 'api'
+    successLoadPrograms,
+    failureLoadPrograms,
+} from './actions';
 
 function* login({ payload }) {
-
     try {
-        let { data: { api_token } } = yield call(api.login, {
-            ...payload
+        const { data: { api_token } } = yield call(api.login, {
+            ...payload,
         });
 
-        api.setToken(api_token)
+        api.setToken(api_token);
 
         yield put(loginSuccess(api_token));
     } catch (err) {
@@ -59,9 +62,8 @@ function* loginWatcher() {
 }
 
 function* fetchEditors() {
-
     try {
-        let { data } = yield call(api.getUsersInGroup, groups.editor);
+        const { data } = yield call(api.getUsersInGroup, groups.editor);
 
         yield put(editorsLoaded(data));
     } catch (err) {
@@ -70,9 +72,8 @@ function* fetchEditors() {
 }
 
 function* fetchUsers() {
-
     try {
-        let { data } = yield call(api.getUser)
+        const { data } = yield call(api.getUser);
 
         yield put(usersLoaded(data));
     } catch (err) {
@@ -81,9 +82,8 @@ function* fetchUsers() {
 }
 
 function* fetchCurrentUser() {
-
     try {
-        let { data } = yield call(api.getCurrentUser)
+        const { data } = yield call(api.getCurrentUser);
 
         yield put(currentUserLoaded(data));
     } catch (err) {
@@ -98,9 +98,8 @@ function* usersData() {
 }
 
 export function* fetchRubrics() {
-
     try {
-        let { data } = yield call(api.getRubrics);
+        const { data } = yield call(api.getRubrics);
 
         yield put(rubricsLoaded(data));
     } catch (err) {
@@ -113,40 +112,65 @@ function* rubricsData() {
 }
 
 function* postMessage({ payload }) {
-    let files = []
+    const files = [];
 
     if (payload.message.files) {
-        for (let item, i = 0; item = payload.message.files[i++]; ) {
-            let { data: { file: { id } } } = yield call(api.uploadFile, item)
-            files.push(id)
+        for (let item, i = 0; item = payload.message.files[i++];) {
+            const { data: { file: { id } } } = yield call(api.uploadFile, item);
+            files.push(id);
         }
     }
 
     try {
         const data = yield call(api.postChatMessage, payload.room, {
             ...payload.message,
-            files
-        })
+            files,
+        });
 
-        yield put(messagePosted())
+        yield put(messagePosted());
     } catch (err) {
-        yield put(messagePostingError(err))
+        yield put(messagePostingError(err));
     }
 }
 
 function* uploadFile(file) {
-    const data = yield call(api.uploadFile, file)
+    const data = yield call(api.uploadFile, file);
 
-    yield data
+    yield data;
 }
 
 function* addMessage() {
-    yield takeEvery(POST_MESSAGE, postMessage)
+    yield takeEvery(POST_MESSAGE, postMessage);
+}
+
+export function* getPrograms() {
+    try {
+        const response = yield call(api.getPrograms);
+        const programs = {
+            byId: {},
+            ids: [],
+        };
+
+        response.data.forEach((program) => {
+            programs.byId[program.id] = program;
+            programs.ids.push(program.id);
+        });
+
+        yield put(successLoadPrograms(programs));
+    } catch (err) {
+        console.error(err);
+        yield put(failureLoadPrograms(err));
+    }
+}
+
+export function* programsData() {
+    yield takeLatest(LOAD_PROGRAMS, getPrograms);
 }
 
 export default [
     loginWatcher,
     usersData,
     rubricsData,
-    addMessage
-]
+    addMessage,
+    programsData,
+];

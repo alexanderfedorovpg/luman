@@ -20,6 +20,7 @@ import {
     HIDE_PRELOADER,
     SHOW_INFO,
     HIDE_INFO,
+    LOAD_PROGRAMS_SUCCESS,
     groups,
 } from './constants';
 
@@ -36,6 +37,7 @@ const initialState = fromJS({
     rubrics: {
         data: [],
     },
+    programs: {},
     preloader: false,
     infoModalText: '',
 });
@@ -95,6 +97,9 @@ function AppReducer(state = initialState, action) {
 
         case HIDE_INFO:
             return state.set('infoModalText', '');
+
+        case LOAD_PROGRAMS_SUCCESS:
+            return state.set('programs', fromJS(action.payload.programs));
 
         default:
             return state;

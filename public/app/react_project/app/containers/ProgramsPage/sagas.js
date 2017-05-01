@@ -9,10 +9,9 @@ import {
 } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as api from 'api';
+import { getPrograms } from 'containers/App/sagas';
 import { showPreloader, hidePreloader, showInfoModal } from 'containers/App/actions';
 import {
-    successLoadPrograms,
-    failureLoadPrograms,
     successDeleteRecord,
     failureDeleteRecord,
     successLoadRecords,
@@ -31,7 +30,6 @@ import {
     SET_RECORDS_TYPE,
     CHANGE_PROGRAM,
     OPEN_PAGE,
-    LOAD_PROGRAMS,
     DELETE_RECORD,
     LOAD_RECORDS,
     PENDING_RECORDS,
@@ -59,26 +57,6 @@ const getUnpublishedRecords = (state) => {
 
     return records.toJS().filter((record) => !record.is_published);
 };
-
-export function* getPrograms() {
-    try {
-        const response = yield call(api.getPrograms);
-        const programs = {
-            byId: {},
-            ids: [],
-        };
-
-        response.data.forEach((program) => {
-            programs.byId[program.id] = program;
-            programs.ids.push(program.id);
-        });
-
-        yield put(successLoadPrograms(programs));
-    } catch (err) {
-        console.error(err);
-        yield put(failureLoadPrograms(err));
-    }
-}
 
 export function* wantDeleteRecord() {
     yield put(openModal(MODALS.confirmRecordDelete));
@@ -269,7 +247,6 @@ export function* initData() {
 
 // Individual exports for testing
 export function* programsData() {
-    yield takeLatest(LOAD_PROGRAMS, getPrograms);
     yield takeEvery(DELETE_RECORD, deleteRecord);
     yield takeLatest(LOAD_RECORDS, getRecords);
     yield takeLatest(SET_RECORDS_TYPE, getRecords);

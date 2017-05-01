@@ -8,7 +8,6 @@ import { fromJS } from 'immutable';
 import {
     SET_RECORDS_TYPE,
     CHANGE_PROGRAM,
-    LOAD_PROGRAMS_SUCCESS,
     LOAD_RECORDS_SUCCESS,
     PENDING_RECORDS,
     DELETE_RECORD_SUCCESS,
@@ -46,9 +45,6 @@ function programsPageReducer(state = initialState, action) {
 
         case CHANGE_PROGRAM:
             return state.set('selectedProgram', action.payload.id);
-
-        case LOAD_PROGRAMS_SUCCESS:
-            return state.set('programs', fromJS(action.payload.programs));
 
         case PENDING_RECORDS:
             return state.set('loading', true);
