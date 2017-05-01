@@ -41,6 +41,8 @@ trait AirRecordFilter
             $builder->take($limit);
         }
 
+        $builder->orderBy('id', 'DESC');
+
         return $builder;
     }
 }
