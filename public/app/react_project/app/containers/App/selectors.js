@@ -78,6 +78,11 @@ const makeSelectInfo = () => createSelector(
     (app) => app.get('infoModalText')
 );
 
+const makeSelectPrograms = () => createSelector(
+    selectAppDomain,
+    (app) => app.get('programs').toJS()
+);
+
 export {
     selectEditors,
     selectUsers,
@@ -88,4 +93,5 @@ export {
     selectMenuExpandedStatus,
     makeSelectPreloader,
     makeSelectInfo,
+    makeSelectPrograms,
 };

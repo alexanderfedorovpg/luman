@@ -20,6 +20,10 @@ export const groups = {
 export const TOGGLE_MENU = 'app/TOGGLE_MENU';
 export const CLOSE_MENU = 'app/CLOSE_MENU';
 
+export const LOAD_PROGRAMS = 'app/ProgramsPage/LOAD_PROGRAMS';
+export const LOAD_PROGRAMS_SUCCESS = 'app/ProgramsPage/LOAD_PROGRAMS_SUCCESS';
+export const LOAD_PROGRAMS_FAILURE = 'app/ProgramsPage/LOAD_PROGRAMS_FAILURE';
+
 export const LOAD_EDITORS = 'app/LOAD_EDITORS';
 export const LOAD_EDITORS_SUCCESS = 'app/LOAD_EDITORS_SUCCESS';
 export const LOAD_EDITORS_FAILURE = 'app/LOAD_EDITORS_FAILURE';

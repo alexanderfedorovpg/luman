@@ -17,7 +17,7 @@ import {
 
 import {
     selectRecords,
-    makeGetPrograms
+    makeGetProgramsArray
 } from 'containers/ProgramsPage/selectors';
 
 import {
@@ -72,7 +72,7 @@ Broadcast.propTypes = {
 const mapStateToProps = state => ({
     records: selectRecords(state),
     filters: selectFilters(state),
-    programs: makeGetPrograms()(state),
+    programs: makeGetProgramsArray()(state),
 })
 
 const mapDispatchToProps = dispatch => ({

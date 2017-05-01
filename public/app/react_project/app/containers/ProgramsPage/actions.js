@@ -8,9 +8,6 @@ import {
     OPEN_PAGE,
     SET_RECORDS_TYPE,
     CHANGE_PROGRAM,
-    LOAD_PROGRAMS,
-    LOAD_PROGRAMS_SUCCESS,
-    LOAD_PROGRAMS_FAILURE,
     WANT_DELETE_RECORD,
     DELETE_RECORD,
     DELETE_RECORD_SUCCESS,
@@ -62,26 +59,6 @@ export function changeProgram(id) {
     };
 }
 
-export function loadPrograms() {
-    return {
-        type: LOAD_PROGRAMS,
-    };
-}
-
-export function successLoadPrograms(programs) {
-    return {
-        type: LOAD_PROGRAMS_SUCCESS,
-        payload: { programs },
-    };
-}
-
-export function failureLoadPrograms(error) {
-    return {
-        type: LOAD_PROGRAMS_FAILURE,
-        error,
-    };
-}
-
 export function wantDeleteRecord(id) {
     return {
         type: WANT_DELETE_RECORD,
@@ -110,10 +87,12 @@ export function failureDeleteRecord(error) {
     };
 }
 
-export function loadRecords(params) {
+export function loadRecords(replace) {
     return {
         type: LOAD_RECORDS,
-        payload: params,
+        payload: {
+            replace,
+        },
     };
 }
 

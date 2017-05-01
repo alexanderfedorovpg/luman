@@ -13,6 +13,7 @@ const VideoModal = ({ currentModal, close, videoUrl }) => (
     >
         {
             !!videoUrl &&
+
             <Player
                 src={videoUrl}
             />

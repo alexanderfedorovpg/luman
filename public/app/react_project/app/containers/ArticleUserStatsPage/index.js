@@ -3,28 +3,28 @@ import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 import {createStructuredSelector} from 'reselect';
 import {push} from 'react-router-redux';
-import CategoriesList from 'components/CategoriesStats/index'
-import {Content, Users, Wrap, Header} from '../../components/Stats'
+import ArticlesCategoriesList from '../../components/ArticleUserStats/index'
+import {Header} from '../../components/Stats'
 import styled from 'styled-components'
+import {Wrap} from 'components/ArticleUserStats/index'
 
 
 const TodayStatsLisk = styled.a`
     letter-spacing: -1.17px;
     text-decoration: none;
     cursor: pointer;    c
-    olor: #369;
+    color: #369;
     font-weight: 400;
  `
 
 
-class CategoriesStatsPage extends Component {
+class ArticleUserStatsPage extends Component {
 
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        console.log(CategoriesList);
         console.log(this.props.params.type);
     }
 
@@ -34,9 +34,9 @@ class CategoriesStatsPage extends Component {
                 <Helmet
                     title="Cтатистика"/>
                 <Header href="javascript:void()" />
-            <Wrap>
-                <CategoriesList/>
-            </Wrap>
+                <Wrap>
+                    <ArticlesCategoriesList/>
+                </Wrap>
             </div>
         )
     }
@@ -56,4 +56,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesStatsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleUserStatsPage);

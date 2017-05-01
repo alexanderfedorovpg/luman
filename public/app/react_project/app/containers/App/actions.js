@@ -27,6 +27,10 @@ import {
 
     SHOW_INFO,
     HIDE_INFO,
+
+    LOAD_PROGRAMS,
+    LOAD_PROGRAMS_SUCCESS,
+    LOAD_PROGRAMS_FAILURE,
 } from './constants';
 
 export const toggleMenu = () => ({
@@ -127,3 +131,22 @@ export const hideInfoModal = () => ({
     type: HIDE_INFO,
 });
 
+export function loadPrograms() {
+    return {
+        type: LOAD_PROGRAMS,
+    };
+}
+
+export function successLoadPrograms(programs) {
+    return {
+        type: LOAD_PROGRAMS_SUCCESS,
+        payload: { programs },
+    };
+}
+
+export function failureLoadPrograms(error) {
+    return {
+        type: LOAD_PROGRAMS_FAILURE,
+        error,
+    };
+}
