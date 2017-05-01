@@ -18,6 +18,7 @@ import Root from 'components/Root';
 import Header from 'components/Header';
 import NavSide from 'components/NavSide';
 import Content from 'components/Content';
+import withProgressBar from 'components/ProgressBar';
 
 import LoginPage from 'containers/LoginPage';
 
@@ -123,5 +124,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(loadCurrentUser());
     },
 });
+
+App = withProgressBar(App);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

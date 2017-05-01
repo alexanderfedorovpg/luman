@@ -75,6 +75,7 @@ class RecordForm extends React.PureComponent {
                         placeholder="Выберите изображение для превью"
                         icon="clip"
                         name="image_preview"
+                        accept="image/*"
                         component={FileInputRedux}
                     />
                 </Group>

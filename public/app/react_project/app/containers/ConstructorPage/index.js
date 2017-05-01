@@ -6,6 +6,10 @@ import { createStructuredSelector } from 'reselect';
 import Header from 'components/Constructor/Header';
 
 import {
+    loadPrograms
+} from 'containers/App/actions'
+
+import {
     loadCategories,
     loadHomeNews,
     cancelChanges,
@@ -13,10 +17,6 @@ import {
     setFilter,
     saveChanges
 } from './actions'
-
-import {
-    loadPrograms
-} from 'containers/ProgramsPage/actions'
 
 import {
     selectCategories,

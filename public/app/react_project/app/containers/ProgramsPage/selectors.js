@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
+import { makeSelectPrograms } from '../App/selectors';
 
 /**
  * Direct selector to the programsPage state domain
@@ -15,19 +16,14 @@ const selectRecords = createSelector(
     (substate) => substate.get('records').toJS()
 );
 
-const selectPrograms = createSelector(
-    selectProgramsPageDomain(),
-    (substate) => substate.get('programs').toJS()
-);
-
 const selectSelectedRecord = createSelector(
     selectProgramsPageDomain(),
     (substate) => substate.get('selectedRecord')
 );
 
 
-const makeGetPrograms = () => createSelector(
-    selectPrograms,
+const makeGetProgramsArray = () => createSelector(
+    makeSelectPrograms(),
     (programs) => {
         if (!programs || !programs.ids || !programs.byId) {
             return [];
@@ -38,7 +34,7 @@ const makeGetPrograms = () => createSelector(
 );
 
 const makeSelectProgramsNames = () => createSelector(
-    makeGetPrograms(),
+    makeGetProgramsArray(),
     (programs) => [
         { id: -1, name: 'Все' },
         ...programs,
@@ -46,7 +42,7 @@ const makeSelectProgramsNames = () => createSelector(
 );
 
 const makeGetProgramsAsOptions = () => createSelector(
-    selectPrograms,
+    makeSelectPrograms(),
     (programs) => {
         if (!programs || !programs.ids || !programs.byId) {
             return [];
@@ -64,7 +60,7 @@ const makeGetProgramsAsOptions = () => createSelector(
 );
 
 const makeGetRecords = () => createSelector(
-    [selectRecords, selectPrograms],
+    [selectRecords, makeSelectPrograms()],
     (records, programs) => records.map((record) => (
         {
             id: record.id,
@@ -113,6 +109,6 @@ export {
     makeGetRecords,
     makeGetProgramsAsOptions,
     makeGetSelectedRecord,
-    makeGetPrograms,
+    makeGetProgramsArray,
     makeCheckCanSave,
 };

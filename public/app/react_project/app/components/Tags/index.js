@@ -32,7 +32,7 @@ const Label = styled.label`
     display: flex;
     align-items: center;
     height: 24px;
-    padding: 4px 10px 0 10px;
+    padding: 0 10px;
 
     font-family: ${font.helvetica};
     font-size: ${rem(14)};
