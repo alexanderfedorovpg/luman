@@ -1,8 +1,9 @@
 import { takeEvery, takeLatest, call, put, select } from 'redux-saga/effects';
 import * as api from 'api';
-// import { showPreloader, hidePreloader, showInfoModal } from 'containers/App/actions';
+import { showPreloader, hidePreloader, showInfoModal } from 'containers/App/actions';
 import {
     GET_NEWS,
+    LIVE_ON,
 } from './constants';
 import {
     successGetNews,
@@ -42,9 +43,31 @@ export function* getNews() {
     }
 }
 
+export function* liveOn({ payload }) {
+    try {
+        yield put(showPreloader());
+
+        const data = {
+            ...payload,
+        };
+
+        if (typeof payload.image_preview !== 'string') {
+            const uploadedFile = yield call(api.uploadFile, payload.image_preview[0]);
+            data.image_preview = uploadedFile.data.file.url;
+        }
+
+        yield put(hidePreloader());
+    } catch (err) {
+        console.error(err);
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось включить прямой эфир. Попробуйте еще раз'));
+    }
+}
+
 // Individual exports for testing
 export function* LiveData() {
     yield takeLatest(GET_NEWS, getNews);
+    yield takeLatest(LIVE_ON, liveOn);
 }
 
 // All sagas to be loaded
