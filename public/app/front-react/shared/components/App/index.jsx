@@ -13,6 +13,7 @@ import Header from 'components/Header'
 import Footer from 'components/Footer'
 
 import HomePage from 'containers/HomePage'
+import AboutPage from 'containers/AboutPage'
 
 import 'normalize.css/normalize.css'
 import './style.scss'
@@ -36,6 +37,7 @@ function App() {
 
                 <Switch>
                     <Route exact path="/" component={HomePage} />
+                    <Route exact path="/about" component={AboutPage} />
                 </Switch>
 
                 <Footer />

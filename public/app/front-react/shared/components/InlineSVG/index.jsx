@@ -4,13 +4,13 @@ import { string, bool } from 'prop-types';
 import { switchSVGAttrToReactProp, getSVGFromSource, extractSVGProps, stripSVG } from './util';
 
 
-const process = process || { env: {} };
+// const process = process || { env: {} };
 
 export default class InlineSVG extends React.Component {
     componentWillReceiveProps({ children }) {
-        if ("production" !== process.env.NODE_ENV && children != null) {
-            console.info('<InlineSVG />: `children` prop will be ignored.');
-        }
+        // if ("production" !== process.env.NODE_ENV && children != null) {
+        //     console.info('<InlineSVG />: `children` prop will be ignored.');
+        // }
     }
 
     render() {
