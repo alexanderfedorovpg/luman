@@ -26,7 +26,6 @@ export const Wrapper = styled.article`
 
     border-right: 1px solid #d7d7d7;
     border-bottom: 1px solid #e9e9e9;
-    cursor: pointer;
 
     ${ifProp('active')(activeStyle)}
     &:hover {
@@ -76,7 +75,7 @@ export const StyledRating = styled(Rating)`
     margin-bottom: 0;
 `;
 
-export const Category = styled.div`
+export const Rubric = styled.div`
     margin: 0;
 
     font-family: $opensans;
@@ -103,7 +102,7 @@ export const StyledTags = styled(HashTags)`
     margin-left: -.2rem;
 `;
 
-export const ToLive = styled(TipIcon)`
+export const ActionBtn = styled(TipIcon)`
     position: absolute;
     top: 2.9rem;
     right: -.7rem;

@@ -64,6 +64,10 @@ export const Label = styled.label`
         font-weight: 400;
     `)}
 
+    ${ifProp('error')(css`
+        color: ${color.danger};
+    `)}
+
     ${ifProp('right')`
         float: right;
     `}
@@ -86,6 +90,10 @@ export const Textarea = styled.textarea`
         opacity: 1;
     }
 
+    &[disabled] {
+        background-color: #fff;
+    }
+
     ${ifProp('block')`
         display: block;
         width: 100%;
@@ -101,8 +109,11 @@ export const Textarea = styled.textarea`
         line-height: ${rem(21)};
     `)}
 
-
     ${ifProp('error')(css`
         border-color: ${color.danger};
+    `)}
+
+    ${ifProp('success')(css`
+        border-color: ${color.success};
     `)}
 `;

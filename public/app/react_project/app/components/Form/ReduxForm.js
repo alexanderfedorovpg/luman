@@ -4,8 +4,8 @@ import { Input, FileInput, Select, Datepicker, Textarea } from './';
 export const InputRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Input
         {...props}
-        success={touched && valid}
-        error={touched && invalid}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e)}
     />
@@ -14,8 +14,8 @@ export const InputRedux = ({ input, meta: { touched, invalid, valid }, ...props 
 export const TextareaRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Textarea
         {...props}
-        success={touched && valid}
-        error={touched && invalid}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e)}
     />
@@ -24,8 +24,8 @@ export const TextareaRedux = ({ input, meta: { touched, invalid, valid }, ...pro
 export const FileInputRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <FileInput
         {...props}
-        success={touched && valid}
-        error={touched && invalid}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e.target.files)}
     />
@@ -34,8 +34,8 @@ export const FileInputRedux = ({ input, meta: { touched, invalid, valid }, ...pr
 export const SelectRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Select
         {...props}
-        success={touched && valid}
-        error={touched && invalid}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(option) => input.onChange(option.value)}
         onBlur={() => input.onBlur(input.value)}
@@ -45,8 +45,8 @@ export const SelectRedux = ({ input, meta: { touched, invalid, valid }, ...props
 export const DatepickerRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Datepicker
         {...props}
-        success={touched && valid}
-        error={touched && invalid}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         selected={input.value}
         onChange={(value) => input.onChange(value)}
     />

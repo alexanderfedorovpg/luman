@@ -63,6 +63,11 @@ const selectRubrics = createSelector(
     (app) => app.getIn(['rubrics', 'data']).toJS()
 );
 
+const selectRubricsList = createSelector(
+    selectAppDomain(),
+    (app) => app.getIn(['rubrics', 'data'])
+);
+
 const selectMenuExpandedStatus = createSelector(
     selectAppDomain(),
     (app) => app.get('menuOpen')
@@ -102,6 +107,7 @@ export {
     selectCurrentUser,
     selectUsersMap,
     selectRubrics,
+    selectRubricsList,
     makeSelectLocationState,
     selectMenuExpandedStatus,
     makeSelectPreloader,

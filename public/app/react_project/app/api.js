@@ -65,130 +65,97 @@ export const feedToWork = (data) => {
 
     return axios.post('/newsfeed/work', formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-}
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    });
+};
 
-export const getUser = (id, params) => {
-    return axios.get(`/user${id ? `/${id}` : ''}`, {
+export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
         params
-    })
-}
+    });
 
-export const getCurrentUser = () => {
-    return axios.get('/userprofile')
-}
+export const getCurrentUser = () => axios.get('/userprofile');
 
-export const getUsersInGroup = group_id => {
-    return axios.get(`/group/${group_id}/users`)
-}
+export const getUsersInGroup = (group_id) => axios.get(`/group/${group_id}/users`);
 
-export const getGroup = id => {
-    return axios.get(`/group${id ? `/${id}` : ''}`)
-}
+export const getGroup = (id) => axios.get(`/group${id ? `/${id}` : ''}`);
 
-export const getLinks = query => {
-    return axios.get('/reference/search', {
+export const getLinks = (query) => axios.get('/reference/search', {
         params: {
             query: query
         }
-    })
-}
+    });
 
-export const getNewslist = () => {
-    return axios.get('/newslisteditor')
-}
+export const getNewslist = () => axios.get('/newslisteditor');
 
-export const getNews = (params) => publicApi.get('/news', {
-    headers: {},
-    params,
-});
+export const getTags = () => axios.get('/tags');
 
-export const getTags = () => {
-    return axios.get('/tags')
-}
+export const getRubrics = () => axios.get('/rubrics');
 
-export const getRubrics = () => {
-    return axios.get('/rubrics')
-}
+export const getArticle = (id) => axios.get(`/newseditor/${id}`);
 
-export const getArticle = id => {
-    return axios.get(`/newseditor/${id}`)
-}
+export const deleteArticle = (id) => axios.delete(`/newseditor/${id}`);
 
-export const deleteArticle = id => {
-    return axios.delete(`/newseditor/${id}`)
-}
-
-export const delegateArticle = id => {
-    return axios.post('/newseditor/delegate', {
+export const delegateArticle = (id) => axios.post('/newseditor/delegate', {
         id
-    })
-}
+    });
 
-export const rejectArticle = id => {
-    return axios.post('/newseditor/rejection', {
+export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
         id
-    })
-}
+    });
 
-export const finishArticle = data => {
-    let formData = xwwwfurlenc({
+export const finishArticle = (data) => {
+    const formData = xwwwfurlenc({
         ...data,
-        action: 'edit'
-    })
+        action: 'edit',
+    });
 
     return axios.put('/newseditor/edit', formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-}
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    });
+};
 
-export const publishArticle = data => {
-    let formData = xwwwfurlenc(data)
+export const publishArticle = (data) => {
+    const formData = xwwwfurlenc(data);
 
     return axios.post('/newseditor', formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-}
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    });
+};
 
-export const toFixArticle = id => {
-    let formData = xwwwfurlenc({ id })
+export const toFixArticle = (id) => {
+    const formData = xwwwfurlenc({ id });
 
     return axios.post('/newseditor/tofix', formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-}
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    });
+};
 
 
 // TODO: найти нормальный npm пакет для конвертации
 //       json -> x-www-form-urlencoded
-function xwwwfurlenc(srcjson){
-    var u = encodeURIComponent;
-    var urljson = "";
-    var keys = Object.keys(srcjson);
-    for(var i=0; i <keys.length; i++){
-        urljson += u(keys[i]) + "=" + u(srcjson[keys[i]]);
-        if(i < (keys.length-1))urljson+="&";
+function xwwwfurlenc(srcjson) {
+    let u = encodeURIComponent;
+    let urljson = '';
+    let keys = Object.keys(srcjson);
+    for (let i = 0; i < keys.length; i++) {
+        urljson += `${u(keys[i])  }=${  u(srcjson[keys[i]])}`;
+        if (i < (keys.length - 1))urljson += '&';
     }
     return urljson;
 }
 
-export const acceptArticle = id => {
-    return axios.post('/newseditor/work', {
+export const acceptArticle = (id) => axios.post('/newseditor/work', {
         id
-    })
-}
+    });
 
-export const getChatMessages = room => {
-    return axios.get(`/newschat/${room}`)
-}
+export const getChatMessages = (room) => axios.get(`/newschat/${room}`);
 
 export const postChatMessage = (room, { message, files }) => {
     const formData = new FormData();
@@ -215,24 +182,24 @@ export const uploadFile = (file) => {
     });
 };
 
-export const getReadyNews = params => axios.get('/newseditor/moderated', {
+export const getReadyNews = (params) => axios.get('/newseditor/moderated', {
     params,
 });
 
-export const publishModeratedArticle = id => axios.put(`/newseditor/publish/${id}`)
+export const publishModeratedArticle = (id) => axios.put(`/newseditor/publish/${id}`);
 
 // =============================================================================
 // Constructor API
 // =============================================================================
 
-export const getConstructorCategories = () => axios.get('/homepage/newscategory')
-export const getHomepageNews = () => axios.get('/homepage')
-export const getConstructorNews = params => axios.get('/newslist', { params })
-export const saveHomepageNews = data => axios.put('/homepage', qs.stringify(data), {
+export const getConstructorCategories = () => axios.get('/homepage/newscategory');
+export const getHomepageNews = () => axios.get('/homepage');
+export const getConstructorNews = (params) => axios.get('/newslist', { params });
+export const saveHomepageNews = (data) => axios.put('/homepage', qs.stringify(data), {
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
-})
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+});
 
 // =============================================================================
 
@@ -261,5 +228,16 @@ export const getAuthorStats = (from_date, to_date) => axios.get('/newsstatistics
 export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`/statistics?type=${type}`);
 export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor/?editor_id?${editor_id}`);
 
+
+// =============================================================================
+// PUBLIC API
+// =============================================================================
+
+export const getNews = (params) => publicApi.get('/news', {
+    headers: {
+        'Api-Token': null,
+    },
+    params,
+});
 
 export default axios;

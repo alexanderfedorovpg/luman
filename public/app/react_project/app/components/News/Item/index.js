@@ -9,31 +9,34 @@ import {
     StyledTime,
     Header,
     StyledRating,
-    Category,
+    Rubric,
     Title,
     StyledTags,
-    ToLive,
+    ActionBtn,
 } from './style';
 
-const LiveItem = ({ date, category, rating, title, hashTags, toLiveClick }) => {
+const NewsItem = ({ active, date, rubric, rating, title, hashTags, actionBtn, actionBtnClick }) => {
     const dateObj = new Date(Date.parse(date));
     return (
-        <Wrapper>
+        <Wrapper active={active}>
             <RightColumn>
                 <Header>
                     <StyledRating checked={rating} rating={rating} disabled />
-                    <Category>{category}</Category>
+                    <Rubric>{rubric}</Rubric>
                 </Header>
                 <Title rating={rating}>{title}</Title>
                 {
                     !!hashTags && <StyledTags tags={hashTags} />
                 }
-                <ToLive
-                    message="В прямой эфир"
-                    eventType="hover"
-                    icon="go-right"
-                    onClick={toLiveClick}
-                />
+                {
+                    !!actionBtn &&
+                    <ActionBtn
+                        message={actionBtn}
+                        eventType="hover"
+                        icon="go-right"
+                        onClick={actionBtnClick}
+                    />
+                }
             </RightColumn>
             <LeftColumn>
                 {
@@ -57,13 +60,15 @@ const LiveItem = ({ date, category, rating, title, hashTags, toLiveClick }) => {
     );
 };
 
-LiveItem.propTypes = {
+NewsItem.propTypes = {
     date: PropTypes.string,
-    category: PropTypes.string,
+    rubric: PropTypes.string,
     rating: PropTypes.number,
     title: PropTypes.string,
     hashTags: PropTypes.arrayOf(PropTypes.string),
-    toLiveClick: PropTypes.func,
+    actionBtn: PropTypes.string,
+    actionBtnClick: PropTypes.func,
+    active: PropTypes.bool,
 };
 
-export default LiveItem;
+export default NewsItem;

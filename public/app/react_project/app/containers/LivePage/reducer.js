@@ -6,41 +6,35 @@
 
 import { fromJS } from 'immutable';
 import {
-    DEFAULT_ACTION,
+    GET_NEWS_SUCCESS,
+    NEWS_TO_LIVE,
+    LIVE_ON,
+    LIVE_OFF,
 } from './constants';
 
 const initialState = fromJS({
-    items: [
-        {
-            id: 1,
-            date: '2016-04-14 12:28:04',
-            rating: 8,
-            category: 'Политика',
-            title: 'Северокорейский лидер Ким Чен Ын был сегодня убит во время спецоперации',
-            hashTags: ['бред'],
-        },
-        {
-            id: 2,
-            date: '2016-04-14 12:28:04',
-            rating: 7,
-            category: 'Наука',
-            title: 'Российские ученые нашли противоречия в самом популярном методе теоретической химии',
-        },
-        {
-            id: 3,
-            date: '2016-04-14 12:28:04',
-            rating: 6,
-            category: 'Политика',
-            title: 'Петагон: США готовы сбить ракеты КНДР при наличии угрозы',
-            hashTags: [],
-        },
-    ],
+    news: {
+        byId: {},
+        ids: [],
+    },
+    selected: null,
+    live: false,
 });
 
 function livePageReducer(state = initialState, action) {
     switch (action.type) {
-        case DEFAULT_ACTION:
-            return state;
+        case GET_NEWS_SUCCESS:
+            return state.set('news', fromJS(action.payload.news));
+
+        case NEWS_TO_LIVE:
+            return state.set('selected', action.payload.id);
+
+        case LIVE_ON:
+            return state.set('live', true);
+
+        case LIVE_OFF:
+            return state.set('live', false);
+
         default:
             return state;
     }
