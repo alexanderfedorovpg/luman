@@ -295,4 +295,78 @@ class Permission extends Command
             ],
         ];
     }
+
+    public function permissAirLive()
+    {
+        return [
+            [
+                'name' => 'v1.airLive-index',
+                'description' => 'Просмотор списка прямых эфиров'
+            ],
+            [
+                'name' => 'v1.airLive-onAir',
+                'description' => 'Отправка в прямой эфир'
+            ],
+        ];
+    }
+
+    public function permissAirRecord()
+    {
+        return [
+            [
+                'name' => 'v1.airRecord-index',
+                'description' => 'Просмотор списка записей эфиров'
+            ],
+            [
+                'name' => 'v1.airRecord-show',
+                'description' => 'Просмотор записи эфироа'
+            ],
+            [
+                'name' => 'v1.airRecord-create',
+                'description' => 'Создание записи эфира'
+            ],
+            [
+                'name' => 'v1.airRecord-update',
+                'description' => 'Редактирование записи эфира'
+            ],
+            [
+                'name' => 'v1.airRecord-destroy',
+                'description' => 'Удаление записи эфира'
+            ],
+            [
+                'name' => 'v1.airRecord-publish',
+                'description' => 'Публикация на главной странице записей эфиров'
+            ],
+            [
+                'name' => 'v1.airRecord-upload',
+                'description' => 'Загрузка записи эфира'
+            ],
+        ];
+    }
+
+    public function permissTvProgram()
+    {
+        return [
+            [
+                'name' => 'v1.tvProgram-index',
+                'description' => 'Просмотр списка программ'
+            ],
+            [
+                'name' => 'v1.tvProgram-show',
+                'description' => 'Просмотр прогрммы'
+            ],
+            [
+                'name' => 'v1.tvProgram-create',
+                'description' => 'Создание прораммы'
+            ],
+            [
+                'name' => 'v1.tvProgram-update',
+                'description' => 'Редактирование программы'
+            ],
+            [
+                'name' => 'v1.tvProgram-destroy',
+                'description' => 'Удаление программы'
+            ],
+        ];
+    }
 }
