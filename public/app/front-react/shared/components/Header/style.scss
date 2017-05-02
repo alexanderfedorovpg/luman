@@ -2,33 +2,24 @@
 @import "~style/vars";
 
 .header {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    right: 0;
+    left: 0;
+
     background-color: $bg-gray;
 
-    &_margin {
-        margin-bottom: rem(43);
-    }
-
-    &_open::before {
-        content: '';
-
-        display: block;
-        width: 100%;
-        height: rem(70);
-
-        background-color: $purple;
-    }
-
-    &.position {
-        position: relative;
-        z-index: 1;
+    &_margin + main {
+        margin-top: 2.6875rem;
     }
 
     &__container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding-top: rem(11);
-        padding-bottom: rem(8);
+        padding-top: rem(5);
+        padding-bottom: rem(5);
 
         &_alarm {
             @include padding_y(0);
@@ -39,13 +30,20 @@
         }
     }
 
+    &__right-part {
+        display: flex;
+        justify-content: flex-end;
+        flex: 1;
+    }
+
     &__part-wrapper {
         display: flex;
         flex-direction: row;
+        height: 100%;
     }
 
     &__burger {
-        padding-top: rem(7);
+        padding-top: rem(15);
 
         cursor: pointer;
     }
@@ -62,9 +60,8 @@
         }
     }
 
-    &__rss,
-    &__search {
-        float: right;
+    &__rss {
+        order: 2;
     }
 
     &__rss {
@@ -76,8 +73,13 @@
         top: 0;
         left: 0;
 
+        display: block;
         width: 100%;
         height: rem(70);
+
+        text-decoration: none;
+
+        cursor: pointer;
 
     }
 
@@ -97,6 +99,9 @@
 
         text-align: right;
         text-decoration: none;
+        &:hover {
+            color: #fff;
+        }
     }
 
     &__event {
@@ -104,4 +109,16 @@
         color: $white;
     }
 
+}
+
+.war {
+    .header:before {
+        content: '';
+
+        display: block;
+        width: 100%;
+        height: rem(70);
+
+        background-color: $purple;
+    }
 }

@@ -7,6 +7,10 @@ import {
     fetched,
     fetchError,
 
+    fetchRelated,
+    relatedFetched,
+    relatedFetchError,
+
     fetchVideo,
     videoFetched,
     videoFetchError,
@@ -23,12 +27,24 @@ export default function* news() {
     yield takeEvery(fetch.getType(), function* () {
 
         try {
-            const { data } = yield call(axios.get, `${endpoint}/newslist`)
+            const { data: { data } } = yield call(axios.get, `${endpoint}/news`)
 
             yield put(fetched(data))
         }
         catch (e) {
             yield put(fetchError(e))
+        }
+    })
+
+    yield takeEvery(fetchRelated.getType(), function* ({ payload }) {
+
+        try {
+            const { data } = yield call(axios.get, `${endpoint}/news/${payload}/related`)
+
+            yield put(relatedFetched(data))
+        }
+        catch (e) {
+            yield put(relatedfetchError(e))
         }
     })
 

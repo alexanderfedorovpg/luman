@@ -4,6 +4,10 @@ export const fetch = createAction('FETCH_NEWS')
 export const fetched = createAction('FETCH_NEWS_SUCCESS')
 export const fetchError = createAction('FETCH_NEWS_FAILURE')
 
+export const fetchRelated = createAction('FETCH_RELATED_NEWS')
+export const relatedFetched = createAction('FETCH_RELATED_NEWS_SUCCESS')
+export const relatedFetchError = createAction('FETCH_RELATED_NEWS_FAILURE')
+
 export const fetchVideo = createAction('FETCH_VIDEO_NEWS')
 export const videoFetched = createAction('FETCH_VIDEO_NEWS_SUCCESS')
 export const videoFetchError = createAction('FETCH_VIDEO_NEWS_FAILURE')

@@ -55,6 +55,7 @@ a {
 
 main {
     margin-top: 1px;
+    padding-top: rem(54);
 }
 
 .container {
@@ -124,6 +125,7 @@ main {
 }
 
 .inner-wrapper {
+    margin-top: 2.6875rem;
 
     .general-video {
         height: rem(396);
@@ -133,5 +135,43 @@ main {
         .general-video__link {
             height: rem(396);
         }
+    }
+}
+.inner-default {
+    h1 {
+        margin-top: rem(4);
+
+        line-height: rem(39);
+    }
+
+    .inner-about__content {
+        position: relative;
+
+        margin-top: rem(30);
+
+        > p {
+            letter-spacing: rem(-0.35);
+        }
+
+    }
+
+    .social-links {
+        position: absolute;
+        top: 100%;
+        left: rem(180);
+
+        margin-top: rem(-32);
+    }
+    .social-links--pad {
+        left: rem(196);
+    }
+
+    .inner-about__date {
+        margin-top: rem(2);
+
+        font-family: $stemReg;
+        font-size: rem(12);
+
+        color: $gray-date;
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import FromEnter from '../FromEnter'
+import FromEnter from 'components/Broadcast/Item'
 
 import './style.scss'
 

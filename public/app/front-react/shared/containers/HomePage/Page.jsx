@@ -15,7 +15,7 @@ class HomePage extends PureComponent {
 
     }
 
-    asyncBootstrap() {
+    componentDidMount() {
         this.props.fetchHome()
     }
 
@@ -23,13 +23,13 @@ class HomePage extends PureComponent {
         let { broadcast, home } = this.props
 
         return (
-            <div>
+            <main>
                 <Helmet>
                     <title>Главная</title>
                 </Helmet>
 
                 <Home data={home} broadcast={broadcast} />
-            </div>
+            </main>
         )
     }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Switch from 'react-router-dom/Switch'
 import Route from 'react-router-dom/Route'
+import withRouter from 'react-router-dom/withRouter'
 import { IntlProvider } from 'react-intl'
 import Helmet from 'react-helmet'
 
@@ -14,10 +15,11 @@ import Header from 'components/Header'
 import Footer from 'components/Footer'
 
 import HomePage from 'containers/HomePage'
+import NoisePage from 'containers/NoisePage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
 
-import 'normalize.css/normalize.css'
+// import 'normalize.css/normalize.css'
 import './style.scss'
 
 addLocaleData(ruLocaleData)
@@ -46,6 +48,11 @@ class App extends Component {
 
                     <Switch>
                         <Route exact path="/" component={HomePage} />
+
+                        <Route exact path="/noise" component={NoisePage} />
+                        <Route path="/noise/:id" component={NoisePage} />
+
+                        <Route component={HomePage} />
                     </Switch>
 
                     <Footer />
@@ -63,4 +70,4 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

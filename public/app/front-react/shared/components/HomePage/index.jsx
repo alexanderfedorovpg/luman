@@ -3,9 +3,9 @@ import React from 'react'
 import BigNews from './BigNews'
 import Now from './Now'
 import Today from './Today'
-import Noise from './Noise'
-import Video from './Video'
-import EnterOne from './EnterOne'
+import Noise from 'components/Noise'
+import Video from 'components/GeneralVideo'
+import EnterOne from 'components/Broadcast/One'
 import Banner from './Banner'
 import RandomNews from './RandomNews'
 import Subscribe from './Subscribe'
@@ -31,7 +31,7 @@ function HomePage({ data, broadcast }) {
         .filter(v => v.category.id == 3) // 3 - id категории "прочее"
         .map(v => v.news)
 
-    const noiseNews = data.noise.map(v => v.news).slice(0, 6)
+    const noiseNews = data.noise.map(v => v.news)
     const randomNews = otherNews.slice(0, 7)
     const moreNews = otherNews.slice(7, 13)
 

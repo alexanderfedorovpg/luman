@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './style.scss'
 
@@ -9,16 +10,24 @@ function TopMenu() {
             <nav className="top-menu__nav">
                 <ul className="top-menu__ul">
                     <li className="top-menu__item">
-                        <a className="top-menu__link" href="javascript:void(0)">Главное</a>
+                        <Link to="/#" className="top-menu__link">
+                            Главное
+                        </Link>
                     </li>
                     <li className="top-menu__item">
-                        <a className="top-menu__link" href="javascript:void(0)">Новости</a>
+                        <Link to="/#" className="top-menu__link">
+                            Новости
+                        </Link>
                     </li>
                     <li className="top-menu__item">
-                        <a className="top-menu__link" href="javascript:void(0)">Инфошум</a>
+                        <Link to="/noise" className="top-menu__link">
+                            Инфошум
+                        </Link>
                     </li>
                     <li className="top-menu__item">
-                        <a className="top-menu__link" href="javascript:void(0)">Из эфира</a>
+                        <Link to="/#" className="top-menu__link">
+                            Из эфира
+                        </Link>
                     </li>
                 </ul>
             </nav>

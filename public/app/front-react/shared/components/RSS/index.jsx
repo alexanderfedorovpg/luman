@@ -10,8 +10,8 @@ function RSS() {
         <div className="rss header__rss">
             <a className="rss__link" href="javascript:void(0)">
                 <span className="rss__text rss__float rss__float_left">RSS</span>
+                <InlineSVG className="rss__img rss__float_right" src={icon} />
             </a>
-            <InlineSVG className="rss__img rss__float_right" src={icon} />
         </div>
     )
 }
