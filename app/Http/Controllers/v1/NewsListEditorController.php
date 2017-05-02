@@ -167,7 +167,7 @@ class NewsListEditorController extends CmsController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request)
     {
         try {
 
