@@ -38,18 +38,19 @@ module.exports = (options) => ({
       test: /\.(jpg|png|gif)$/,
       loaders: [
         'url-loader?limit=10000',
-        {
-          loader: 'image-webpack-loader',
-          query: {
-            progressive: true,
-            optimizationLevel: 7,
-            interlaced: false,
-            pngquant: {
-              quality: '65-90',
-              speed: 4,
-            },
-          },
-        },
+        // дропает ошибке при билде на сервере клиента
+        // {
+        //   loader: 'image-webpack-loader',
+        //   query: {
+        //     progressive: true,
+        //     optimizationLevel: 7,
+        //     interlaced: false,
+        //     pngquant: {
+        //       quality: '65-90',
+        //       speed: 4,
+        //     },
+        //   },
+        // },
       ],
     }, {
       test: /\.html$/,
