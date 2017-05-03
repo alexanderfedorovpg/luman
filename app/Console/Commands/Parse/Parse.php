@@ -104,7 +104,7 @@ class Parse extends Command
                 $u++;
                 $crc32 = crc32($item->title . $item->pubDate);
 
-                $tags = "";
+                $tags = [];
                 foreach ($item->category as $category) {
                     $tags[] = $category;
                 }
