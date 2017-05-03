@@ -125,7 +125,7 @@ class Parse extends Command
                     ]
                 );
                 $newsFeed->save();
-                if (!$newsFeed->exists) {
+                if ( $newsFeed->exists==false) {
                     $i++;
                 }
 
