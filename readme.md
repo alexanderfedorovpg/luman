@@ -108,3 +108,8 @@ MAIL_ENCRYPTION=tls
 
 'notification' => ['address' => "notification@rtvi.ru", 'name' => "Сообщение от Client API"],
 ```
+
+##### 5. Запуск парсера фида из консоли.
+```bash
+./artisan parse:upload tass
+```

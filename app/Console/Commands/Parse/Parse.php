@@ -92,9 +92,10 @@ class Parse extends Command
 
 
             $xml = simplexml_load_string($file);
-            if (!$xml) {
+            if (!isset($xml->channel)) {
                 throw new Exception("Ошибка загрузки файла источника ТАСС \n");
             }
+
             $chanel = $xml->channel;
             $i = 0;
             $u = 0;
