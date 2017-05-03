@@ -8,7 +8,7 @@ import Content from './Content'
 
 import './style.scss'
 
-function NoisePage({ data, news, related }) {
+function NoisePage({ data, noise, related, broadcast }) {
 
     return (
         <div className="inner-wrapper">
@@ -22,8 +22,8 @@ function NoisePage({ data, news, related }) {
                         </div>
                         <div className="right right-col">
                             <Video />
-                            <Noise data={news} className="inner-about__info-noize" />
-                            <OneVideo data={{}} className="inner-about__enter-one" />
+                            <Noise data={noise} className="inner-about__info-noize" />
+                            <OneVideo data={broadcast[0]} className="inner-about__enter-one" />
                         </div>
                     </div>
                 </div>

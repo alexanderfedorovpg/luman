@@ -22,18 +22,34 @@ import {
 
 const endpoint = config('apiEndpoint')
 
+function* getNewsItem(id) {
+    try {
+        const { data } = yield call(axios.get, `${endpoint}/news/${id}`)
+
+        yield put(fetched([data]))
+    }
+    catch (e) {
+        yield put(fetchError(e))
+    }
+}
+
+function* getNewsList() {
+    try {
+        const { data: { data } } = yield call(axios.get, `${endpoint}/news`)
+
+        yield put(fetched(data))
+    }
+    catch (e) {
+        yield put(fetchError(e))
+    }
+}
+
 export default function* news() {
 
-    yield takeEvery(fetch.getType(), function* () {
-
-        try {
-            const { data: { data } } = yield call(axios.get, `${endpoint}/news`)
-
-            yield put(fetched(data))
-        }
-        catch (e) {
-            yield put(fetchError(e))
-        }
+    yield takeEvery(fetch.getType(), function* ({ payload }) {
+        yield payload && payload.id
+            ? call(getNewsItem, payload.id)
+            : call(getNewsList)
     })
 
     yield takeEvery(fetchRelated.getType(), function* ({ payload }) {

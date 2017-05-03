@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FormattedTime, FormattedDate } from 'react-intl'
 
@@ -10,7 +11,7 @@ function FromEnter({ data, className }) {
 
     return (
         <div className={classNames('from-enter', className)}>
-            <a className="from-enter__link from-enter__link from-enter__link_position" href="javascript:void(0)">
+            <Link to={`/broadcast/${data.id}`} className="from-enter__link from-enter__link from-enter__link_position">
                 <img className="from-enter__img" src={ensureAbs(data.image_preview)} alt="" alt="" role="presentation" />
                 <span className="from-enter__time-keeping">
                     <img className="from-enter__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
@@ -24,14 +25,14 @@ function FromEnter({ data, className }) {
                     }
                     </span>
                 </span>
-            </a>
+            </Link>
             <div className="from-enter__info">
-                <a className="from-enter__link" href="javascript:void(0)">
+                <Link to={`/broadcast/${data.id}`} className="from-enter__link">
                     {data.title}
-                </a>
+                </Link>
                 <p className="from-enter__category">
-                    {data.rubric
-                        ? data.rubric.name
+                    {data.program
+                        ? data.program.name
                         : null
                     }
                     {` `}

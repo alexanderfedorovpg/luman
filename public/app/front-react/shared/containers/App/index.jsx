@@ -16,6 +16,8 @@ import Footer from 'components/Footer'
 
 import HomePage from 'containers/HomePage'
 import NoisePage from 'containers/NoisePage'
+import NewsPage from 'containers/NewsPage'
+import BroadcastPage from 'containers/BroadcastPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
 
@@ -51,6 +53,12 @@ class App extends Component {
 
                         <Route exact path="/noise" component={NoisePage} />
                         <Route path="/noise/:id" component={NoisePage} />
+
+                        <Route exact path="/news" component={NewsPage} />
+                        <Route path="/news/:id" component={NewsPage} />
+
+                        <Route exact path="/broadcast" component={BroadcastPage} />
+                        <Route path="/broadcast/:id" component={BroadcastPage} />
 
                         <Route component={HomePage} />
                     </Switch>

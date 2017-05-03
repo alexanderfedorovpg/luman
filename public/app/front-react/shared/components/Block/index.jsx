@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FormattedRelative } from 'react-intl'
 
-import { ensureAbs } from 'shared/utils/uri'
+import { ensureAbs, newsLink } from 'shared/utils/uri'
 import MiniNews from 'components/MiniNews'
 
 import './style.scss'
@@ -34,7 +35,7 @@ function renderItem(className, type, data) {
 
     return (
         <div className={classNames(`${type}`, className)}>
-            <a className={`${type}__link`} href="javascript:void(0)"></a>
+            <Link className={`${type}__link`} to={newsLink(data)}></Link>
             <img className={`${type}__img`} src={ensureAbs(data.image_preview)} alt=" "role="presentation" />
             <div className={`${type}__info`}>
                 {data.time_keeping

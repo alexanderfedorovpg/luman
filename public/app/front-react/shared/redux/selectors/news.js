@@ -1,35 +1,52 @@
 import { selectRubricsData } from 'selectors/rubrics'
+import { createSelector } from 'reselect'
 import update from 'immutability-helper'
 
 export const selectNewsDomain = state => state.news
 
-export const selectNewsData = state => selectNewsDomain(state).all.data
-export const selectNews = state => (
-    selectNewsDomain(state).all.ids
-        .map(id => selectNewsData(state)[id])
+export const selectNewsData = createSelector(
+    selectNewsDomain,
+    root => root.all.data
 )
-export const selectById = (state, id) => selectNewsData(state)[id] || null
-
-export const selectNoise = state => (
-    selectNews(state).filter(item => item.top < 5)
+export const selectNews = createSelector(
+    selectNewsDomain,
+    selectNewsData,
+    (root, list) => root.all.ids.map(id => list[id])
 )
-export const selectRelated = state => selectNewsDomain(state).related
 
-export const selectVideoNews = state => selectNewsDomain(state).video
+export const selectNoise = createSelector(
+    selectNews,
+    news => news.filter(item => item.top <= 4)
+)
+export const selectRelated = createSelector(
+    selectNewsDomain,
+    root => root.related
+)
 
-export const selectHome = state => selectNewsDomain(state).home
+export const selectHome = createSelector(
+    selectNewsDomain,
+    root => root.home
+)
 
 // subsets of homenews
-export const selectHomeNews = state => selectHome(state).news
-export const selectHomeNoise = state => selectHome(state).noise
-export const selectHomeBroadcast = state => (
-    selectHome(state).broadcast.map(v => (
+export const selectHomeNews = createSelector(
+    selectHome,
+    home => home.news
+)
+export const selectHomeNoise = createSelector(
+    selectHome,
+    home => home.noise
+)
+export const selectHomeBroadcast = createSelector(
+    selectHome,
+    selectRubricsData,
+    (home, rubrics) => home.broadcast.map(v => (
         update(
             v,
             {
                 record: {
                     rubric: {
-                        $set: selectRubricsData(state)[v.record.rubric_id]
+                        $set: rubrics[v.record.rubric_id]
                     }
                 }
             }

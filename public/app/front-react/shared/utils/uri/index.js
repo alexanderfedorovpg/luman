@@ -5,3 +5,11 @@ export const ensureAbs = (url = '') => (
         ? url
         : `//${url}`
 )
+
+export const newsLink = article => (
+    article
+        ? article.top > 4
+            ? `/news/${article.id}`
+            : `/noise/${article.id}`
+        : ''
+)

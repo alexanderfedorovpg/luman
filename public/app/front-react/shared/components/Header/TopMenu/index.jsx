@@ -10,12 +10,12 @@ function TopMenu() {
             <nav className="top-menu__nav">
                 <ul className="top-menu__ul">
                     <li className="top-menu__item">
-                        <Link to="/#" className="top-menu__link">
+                        <Link to="/" className="top-menu__link">
                             Главное
                         </Link>
                     </li>
                     <li className="top-menu__item">
-                        <Link to="/#" className="top-menu__link">
+                        <Link to="/news" className="top-menu__link">
                             Новости
                         </Link>
                     </li>
@@ -25,7 +25,7 @@ function TopMenu() {
                         </Link>
                     </li>
                     <li className="top-menu__item">
-                        <Link to="/#" className="top-menu__link">
+                        <Link to="/broadcast" className="top-menu__link">
                             Из эфира
                         </Link>
                     </li>

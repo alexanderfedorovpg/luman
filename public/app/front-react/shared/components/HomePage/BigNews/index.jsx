@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FormattedRelative } from 'react-intl'
 
-import { ensureAbs } from 'shared/utils/uri'
+import { ensureAbs, newsLink } from 'shared/utils/uri'
 
 import './style.scss'
 import logo from './blue-rtvi.png'
@@ -11,7 +12,7 @@ function BigNews({ data, className }) {
 
     return (
         <div className={classNames('big-news', className)}>
-            <a className="big-news__link" href="javascript:void(0)"></a>
+            <Link className="big-news__link" to={newsLink(data)}></Link>
             <img className="big-news__img" src={ensureAbs(data.image_preview)} alt="" role="presentation" />
             <div className="big-news__info">
                 <p className="big-news__title">

@@ -14,7 +14,7 @@ import { fetch as fetchRecords } from 'actions/broadcast'
 
 import Detail from 'components/NewsDetail'
 
-class NoisePage extends PureComponent {
+class NewsPage extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -50,18 +50,18 @@ class NoisePage extends PureComponent {
     }
 
     render() {
-        let { news, match, relatedNews, broadcast } = this.props
+        let { noise, match, relatedNews, broadcast } = this.props
         const item = this.getById(match.params.id)
 
         return (
             <main>
                 <Helmet>
-                    <title>Инфошум</title>
+                    <title>Новости</title>
                 </Helmet>
 
                 <Detail
                     data={item}
-                    noise={news}
+                    noise={noise}
                     related={relatedNews}
                     broadcast={broadcast} />
             </main>
@@ -70,7 +70,7 @@ class NoisePage extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-    news: selectNoise(state),
+    noise: selectNoise(state),
     newsData: selectNewsData(state),
     relatedNews: selectRelated(state),
     broadcast: selectBroadcast(state)
@@ -88,4 +88,4 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoisePage)
+export default connect(mapStateToProps, mapDispatchToProps)(NewsPage)

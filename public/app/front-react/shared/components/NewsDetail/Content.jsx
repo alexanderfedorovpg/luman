@@ -2,6 +2,7 @@ import React from 'react'
 import { FormattedRelative } from 'react-intl'
 
 import Socials from 'components/Socials'
+import Tags from 'components/Tags'
 
 import { ensureAbs } from 'shared/utils/uri'
 
@@ -18,8 +19,7 @@ function Content({ data, children }) {
             </div>
             <div className="text-bg-gray text-bg-gray--news inner-about__text-bg-gray">
                 <div className="news-preview news-preview--wide">
-                    <div className="breadcrumbs">
-                    </div>
+                    <Tags data={data.tags} />
                     <figure className="news-preview__img">
                         <img src={ensureAbs(data.image_main)} />
                         <figcaption className="news-preview__source">
