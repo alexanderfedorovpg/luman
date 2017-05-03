@@ -222,6 +222,6 @@ class NewsFeedController extends CmsController
     public function reload() {
         $job = (new NewsFeedParserJob())->onQueue('parser');
         dispatch($job);
-        return $this->respondAccepted('Задание на обновление информации из новостных bсточников принято!');
+        return $this->respondAccepted(['Задание на обновление информации из новостных источников принято!']);
     }
 }

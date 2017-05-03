@@ -428,6 +428,7 @@ class NewsListEditorController extends CmsController
      */
     public function delegate(Request $request)
     {
+
         try {
 
             $this->validate($request, [
@@ -457,6 +458,7 @@ class NewsListEditorController extends CmsController
             $this->log->setLog('DELEGATE', $this->user_id, "Error, news id=".$id." don't delegate  [".$this->user_id.">".$new_editor_id."]");
             throw new \Exception('Error, news don\'t delegate');
         } catch (\Exception $e) {
+            $id = $request->input('id');
             $this->log->setLog('DELEGATE', $this->user_id, "Error 500 news id=".$id);
             return $this->respondFail500x($e->getMessage());
         }

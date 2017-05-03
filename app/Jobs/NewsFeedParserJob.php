@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Helpers\ITARTASSParser;
-use App\Helpers\ParserHelpers;
+
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Задание на загрузку новостных фидов
@@ -29,9 +29,9 @@ class NewsFeedParserJob  extends Job
     {
         try {
 
-            $parserTASS=new ITARTASSParser();
-            $parserTASS->parse();
-            unset($parserTASS);
+            Artisan::call('parse:upload', [
+                'source'=>'tass'
+            ]);
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

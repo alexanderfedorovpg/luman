@@ -28,6 +28,7 @@ class NewsFeed extends Model
         'source_feed',
         'tags',
         'hidden',
+        'crc32'
     ];
 
     /**

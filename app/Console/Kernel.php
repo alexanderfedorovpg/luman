@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+
+use App\Console\Commands\Parse\Parse;
+use App\Console\Commands\Rbac\Administarator;
+use App\Console\Commands\Rbac\Permission;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
 
@@ -13,14 +17,15 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Rbac\Administarator::class,
-        \App\Console\Commands\Rbac\Permission::class
+        Administarator::class,
+        Permission::class,
+        Parse::class
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
