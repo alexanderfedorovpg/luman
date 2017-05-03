@@ -124,11 +124,12 @@ class Parse extends Command
                         'hidden' => 0,
                     ]
                 );
-                $newsFeed->save();
+
                 if ( $newsFeed->exists==false) {
                     $i++;
                 }
 
+                $newsFeed->save();
             }
             echo "Получено {$u} записей из них загружено новых {$i}. \n";
 
