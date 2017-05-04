@@ -1,8 +1,13 @@
 import { css } from 'styled-components';
 
 export const rem = (num) => {
-    const stripUnit = num / ((num * 0) + 1);
+    const stripUnit = parseInt(num, 10);
     return `${stripUnit / 16}rem`;
+};
+
+export const em = (num, parent = 16) => {
+    const stripUnit = parseInt(num, 10);
+    return `${stripUnit / parent}em`;
 };
 
 export const below = (width, orientation = 'width') => (...args) => css`

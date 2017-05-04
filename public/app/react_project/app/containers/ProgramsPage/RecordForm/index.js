@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Group, Label } from 'components/Form';
-import { SelectRedux, InputRedux } from 'components/Form/ReduxForm';
+import { SelectRedux, InputRedux, DropzoneRedux } from 'components/Form/ReduxForm';
 import { Close, ArrowDown } from 'components/Icon/svg';
 
 import { StyledBtn } from '../style';
@@ -69,16 +69,6 @@ class RecordForm extends React.PureComponent {
                         component={InputRedux}
                     />
                 </Group>
-                <Group md>
-                    <Field
-                        block
-                        placeholder="Выберите изображение для превью"
-                        icon="clip"
-                        name="image_preview"
-                        accept="image/*"
-                        component={FileInputRedux}
-                    />
-                </Group>
                 <Group md horizontal>
                     <Field
                         name="publish_date"
@@ -90,6 +80,18 @@ class RecordForm extends React.PureComponent {
                         icon="arrow"
                         placeholder="Выберите видео"
                         component={FileInputRedux}
+                    />
+                </Group>
+                <Group md>
+                    <Field
+                        placeholder="Добавить превью"
+                        name="image_preview"
+                        accept="image/*"
+                        multiple={false}
+                        likeInput
+                        icon
+                        size="s"
+                        component={DropzoneRedux}
                     />
                 </Group>
                 <Group marginBottom="40px">

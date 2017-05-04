@@ -83,7 +83,7 @@ export function* getLive() {
     try {
         const response = yield call(api.getLive);
 
-        yield put(successGetLive(response.data[0].stream_url));
+        yield put(successGetLive(response.data.stream_url));
     } catch (err) {
         console.error(err);
         yield put(failureGetLive());
