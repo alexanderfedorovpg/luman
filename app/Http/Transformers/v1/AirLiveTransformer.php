@@ -9,7 +9,7 @@ class AirLiveTransformer extends Transformer
     public function transform($live)
     {
         $transform = $live;
-        unset($live['created_at'], $live['updated_at']);
-        return $live;
+        unset($transform['created_at'], $transform['updated_at'], $transform['enabled_live']);
+        return $transform;
     }
 }

@@ -6,6 +6,11 @@ use App\Models\News;
 trait NewsListTrait {
 
     public function processing(&$request, &$news) {
+        $this->validate($request, [
+            'orderBy' => 'in:id,top',
+            'orderType' => 'in:asc,desc'
+        ]);
+
         $searchString = $request->input('searchString');
         if ($searchString) {
             $substrings = explode(',', $searchString);
@@ -32,6 +37,12 @@ trait NewsListTrait {
             } elseif ($video === 'false') {
                 $news->existVideo(false);
             }
+        }
+
+        $orderBy = $request->input('orderBy');
+        if ($orderBy !== null) {
+            $orderType = $request->input('orderType') ? $request->input('orderType') : 'ASC';
+            $news->orderBy($orderBy, $orderType);
         }
 
         $start = $request->input('start');

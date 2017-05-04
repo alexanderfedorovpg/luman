@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Icon from 'components/Icon'
 import Article from './Article'
+import NotFound from './NotFound'
 
 import { font, padding } from 'constants/style';
 import { rem, ifProp } from 'utils/style';
@@ -44,13 +45,6 @@ const Wrap = styled.div`
 
 const Content = styled.div``
 
-const NotFound = styled.div`
-    padding-top: ${padding};
-    padding-bottom: ${padding};
-    padding-right: ${rem(35)};
-    padding-left: ${rem(18)};
-`
-
 const Placeholder = styled.div`
     width: 100%;
     border: 1px solid;
@@ -76,7 +70,7 @@ class CollapseItem extends React.Component {
         super(props);
 
         this.state = {
-            open: false,
+            open: true,
 
             // placeholder index
             placeholder: -1
@@ -168,7 +162,7 @@ class CollapseItem extends React.Component {
                         {items}
                         {data.length
                             ? null
-                            : <NotFound>Ничего не найдено</NotFound>
+                            : <NotFound category={category.id} />
                         }
                     </Content>
                 </Wrap>

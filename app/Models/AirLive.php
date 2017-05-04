@@ -76,4 +76,9 @@ class AirLive extends Model
         $live = new static($fields);
         return $live->save();
     }
+
+    public function scopeEnabledLive($query)
+    {
+        return $query->where('enabled_live', '=', true);
+    }
 }
