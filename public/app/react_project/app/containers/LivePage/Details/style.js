@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rem } from 'utils/style';
 import { Checkbox, Textarea } from 'components/Form';
 
@@ -9,12 +9,27 @@ export const Wrapper = styled.article`
     padding-bottom: ${rem(25)};
 `;
 
-export const Display = styled.figure`
+const displayStyles = css`
     width: 100%;
     height: ${rem(300)};
     margin: 0;
     margin-bottom: ${rem(20)};
     padding: 0;
+`;
+
+export const DisplayStream = styled.iframe`
+    ${displayStyles}
+
+    background: #eee;
+`;
+
+export const DisplayEmpty = styled.div`
+    ${displayStyles}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
 
     background: #eee;
 `;

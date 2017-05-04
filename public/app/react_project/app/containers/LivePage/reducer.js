@@ -7,8 +7,9 @@
 import { fromJS } from 'immutable';
 import {
     GET_NEWS_SUCCESS,
-    NEWS_TO_LIVE,
-    LIVE_ON,
+    GET_LIVE_SUCCESS,
+    SELECT_NEWS,
+    LIVE_ON_SUCCESS,
     LIVE_OFF,
 } from './constants';
 
@@ -19,6 +20,7 @@ const initialState = fromJS({
     },
     selected: null,
     live: false,
+    streamUrl: null,
 });
 
 function livePageReducer(state = initialState, action) {
@@ -26,10 +28,13 @@ function livePageReducer(state = initialState, action) {
         case GET_NEWS_SUCCESS:
             return state.set('news', fromJS(action.payload.news));
 
-        case NEWS_TO_LIVE:
+        case GET_LIVE_SUCCESS:
+            return state.set('streamUrl', action.payload.url);
+
+        case SELECT_NEWS:
             return state.set('selected', action.payload.id);
 
-        case LIVE_ON:
+        case LIVE_ON_SUCCESS:
             return state.set('live', true);
 
         case LIVE_OFF:

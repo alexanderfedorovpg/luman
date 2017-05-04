@@ -200,7 +200,6 @@ export const saveHomepageNews = (data) => axios.put('/homepage', qs.stringify(da
         'Content-Type': 'application/x-www-form-urlencoded',
     },
 });
-
 // =============================================================================
 
 // =============================================================================
@@ -220,14 +219,25 @@ export const uploadVideo = (file) => {
 
     return axios.post('/air/record/upload', data);
 };
+// =============================================================================
 
+// =============================================================================
+// STATISTIC API
 // =============================================================================
 
 export const getCategoryStats = (from_date, to_date) => axios.get('/statistics');
 export const getAuthorStats = (from_date, to_date) => axios.get('/newsstatistics/editor/top');
 export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`/statistics?type=${type}`);
 export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor/?editor_id?${editor_id}`);
+// =============================================================================
 
+// =============================================================================
+// LIVE API
+// =============================================================================
+
+export const getLive = () => axios.get('/air/live');
+export const newsToLive = (data) => axios.post('/air/live', data);
+// =============================================================================
 
 // =============================================================================
 // PUBLIC API
