@@ -36,11 +36,9 @@ class AirLiveController extends CmsController
      */
     public function index()
     {
-        $lives = AirLive::all();
-
-        return $this->respond(
-            $this->liveTransformer->transformCollection($lives->toArray())
-        );
+        $live = AirLive::enabledLive()->first();
+        $live = $live ? $this->liveTransformer->transform($live->toArray()) : null;
+        return $this->respond($live);
     }
 
     /**
