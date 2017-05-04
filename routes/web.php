@@ -144,6 +144,11 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->put('/homepage','HomepageController@update');
     $group->get('/homepage/newscategory','HomepageController@getNewsCategories');
 
+    //Уведомление редактору (сообщение)
+	$group->post('/editor/notification','MessagingController@sentMessage');
+	$group->get('/editor/notification','MessagingController@checkMessage');
+	$group->put('/editor/notification/{id}','MessagingController@switchStatusMessage');
+
     //Прямой эфир
     $group->get('/air/live','AirLiveController@index');
     $group->post('/air/live','AirLiveController@onAir');
