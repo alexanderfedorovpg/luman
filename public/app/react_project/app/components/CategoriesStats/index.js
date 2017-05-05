@@ -86,7 +86,7 @@ function CategoriesStats({data}) {
     const display = () => {
         return JSON.stringify(data,null,2);
     }
-    return (<pre>
+    return (<pre>5
         {display()}
         <TableExt>
             <thead>

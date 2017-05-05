@@ -42,7 +42,7 @@ class CategoriesStatsPage extends Component {
                     title="Cтатистика"/>
                 <Header href="javascript:void()"/>
                 <Wrap>
-                    {/*<CategoriesList data={this.props.data}/>*/}
+                    {<CategoriesList data={this.props.data}/>}
                 </Wrap>
             </div>
         )
