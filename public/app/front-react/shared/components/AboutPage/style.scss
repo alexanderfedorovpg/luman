@@ -1,0 +1,142 @@
+@import "~style/mixins";
+@import "~style/vars";
+.inner-about {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-between;
+        margin-bottom: rem(60);
+    }
+
+    &__enter-one {
+        margin-top: rem(31);
+    }
+
+    &__info-noize {
+        margin-top: rem(22);
+    }
+
+    &__enter-one--nopad .from-enter__info {
+        width: 100%;
+        padding-right: 6.7%;
+        padding-left: 0;
+    }
+
+    &__text-bg-gray {
+        position: relative;
+
+        margin-top: rem(20);
+        margin-bottom: rem(100);
+
+        transform: translateX(-17%);
+    }
+
+    &__left {
+        margin-top: rem(-15);
+    }
+
+    &__content {
+        padding-left: rem(82);
+        margin-top: rem(30);
+
+        color: $enter;
+
+        p {
+            margin-bottom: rem(21);
+
+            letter-spacing: rem(-.35);
+        }
+    }
+
+    &__figure-title {
+        padding-left: rem(20);
+        margin-top: rem(51);
+        margin-bottom: rem(15);
+
+        letter-spacing: rem(-.5);
+    }
+
+    &__box-preview {
+        width: rem(782);
+        height: rem(289);
+        margin-left: rem(81);
+
+        background-color: $box;
+
+        &_position {
+            position: relative;
+        }
+    }
+
+    &__box-img {
+        width: inherit;
+        height: inherit;
+    }
+
+    &__box-text {
+        width: rem(356);
+        height: rem(172);
+        padding: #{rem(50)} #{rem(48) #{rem(28)} #{rem(25)}};
+
+        font: #{rem(16)}/ #{rem(24)} $stemBold;
+        color: $white;
+        letter-spacing: rem(-.8);
+
+        background-image: url(/content/about/box-text.png);
+        background-position: center;
+        background-size: cover;
+
+        &_position {
+            position: absolute;
+            top: rem(-72);
+            right: rem(-36);
+        }
+    }
+
+    &__title {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        padding-right: rem(30);
+    }
+
+    &__copy {
+        margin-top: rem(22);
+
+        font-family: $stemReg;
+        font-size: rem(12);
+        color: $blue;
+        text-decoration: none;
+    }
+
+    &__new-content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: rem(5);
+        &__message {
+            margin-right: rem(22);
+
+            font-family: $stemReg;
+            font-size: rem(12);
+            line-height: rem(14);
+            color: $gray-date;
+        }
+    }
+
+    .inner-about__enter-one--no-category {
+        .from-enter__category-link {
+            display: none;
+        }
+    }
+
+    &_margin {
+        margin-top: rem(54);
+    }
+
+}
+

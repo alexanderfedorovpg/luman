@@ -28,7 +28,7 @@ const values = {
   apiEndpoint: 'http://librorum-client.rtvi.ddemo.ru/api/v1/web',
 
   // The host on which the server should run.
-  host: EnvVars.string('HOST', '0.0.0.0'),
+  host: EnvVars.string('HOST', '127.0.0.1'),
 
   // The port on which the server should run.
   port: EnvVars.number('PORT', 1337),

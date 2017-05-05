@@ -18,6 +18,7 @@ import HomePage from 'containers/HomePage'
 import NoisePage from 'containers/NoisePage'
 import NewsPage from 'containers/NewsPage'
 import BroadcastPage from 'containers/BroadcastPage'
+import AboutPage from 'containers/AboutPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
 
@@ -60,6 +61,8 @@ class App extends Component {
 
                             <Route exact path="/broadcast" component={BroadcastPage} />
                             <Route path="/broadcast/:id" component={BroadcastPage} />
+
+                            <Route exact path="/about" component={AboutPage} />
 
                             <Route component={HomePage} />
                         </Switch>
