@@ -19,9 +19,9 @@ import * as api from 'api'
 
 export function* getCategoryStatsList() {
     try {
-        console.log('SAGAS');
         const type = yield select(makeSelectType()); // HANGS
-        console.log('END');
+
+
         const { data } = yield call(api.getOneCategoryStat, type);
 
         yield put(categoriesPagetatsLoaded(data))
