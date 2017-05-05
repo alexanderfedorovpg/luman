@@ -36,7 +36,7 @@ class App extends Component {
 
         return (
             <IntlProvider locale="ru">
-                <div>
+                <div className="root">
                     <Helmet>
                         <html lang="ru" />
                         <meta charSet="utf-8" />
@@ -48,20 +48,22 @@ class App extends Component {
 
                     <Header />
 
-                    <Switch>
-                        <Route exact path="/" component={HomePage} />
+                    <main>
+                        <Switch>
+                            <Route exact path="/" component={HomePage} />
 
-                        <Route exact path="/noise" component={NoisePage} />
-                        <Route path="/noise/:id" component={NoisePage} />
+                            <Route exact path="/noise" component={NoisePage} />
+                            <Route path="/noise/:id" component={NoisePage} />
 
-                        <Route exact path="/news" component={NewsPage} />
-                        <Route path="/news/:id" component={NewsPage} />
+                            <Route exact path="/news" component={NewsPage} />
+                            <Route path="/news/:id" component={NewsPage} />
 
-                        <Route exact path="/broadcast" component={BroadcastPage} />
-                        <Route path="/broadcast/:id" component={BroadcastPage} />
+                            <Route exact path="/broadcast" component={BroadcastPage} />
+                            <Route path="/broadcast/:id" component={BroadcastPage} />
 
-                        <Route component={HomePage} />
-                    </Switch>
+                            <Route component={HomePage} />
+                        </Switch>
+                    </main>
 
                     <Footer />
                 </div>

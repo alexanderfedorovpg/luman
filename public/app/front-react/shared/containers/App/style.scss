@@ -55,7 +55,14 @@ a {
 
 main {
     margin-top: 1px;
+    flex: 1;
     padding-top: rem(54);
+}
+
+.root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {

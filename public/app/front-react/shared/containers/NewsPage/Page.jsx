@@ -1,15 +1,17 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
+import { Link } from 'react-router-dom'
 
 import {
     selectNoise,
     selectRelated,
-    selectNewsData
+    selectTop,
+    selectTopData
 } from 'selectors/news'
 import { selectBroadcast } from 'selectors/broadcast'
 
-import { fetch, fetchRelated } from 'actions/news'
+import { fetchTop, fetchNoise, fetchRelated } from 'actions/news'
 import { fetch as fetchRecords } from 'actions/broadcast'
 
 import Detail from 'components/NewsDetail'
@@ -24,61 +26,81 @@ class NewsPage extends PureComponent {
     componentDidMount() {
         const { match } = this.props
 
-        this.props.fetch()
+        this.props.fetchTop()
+        this.props.fetchNoise()
         this.props.fetchRecords()
 
         if (match.params.id) {
-            this.props.fetch({ id: match.params.id })
-            this.props.fetchRelated(match.params.id)
+            // this.props.fetch({ id: match.params.id })
+            // this.props.fetchRelated(match.params.id)
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
-            this.props.fetch({ id: nextProps.match.params.id })
+            // this.props.fetch({ id: nextProps.match.params.id })
 
-            if (nextProps.match.params.id) {
-                this.props.fetchRelated(nextProps.match.params.id)
-            }
+            // if (nextProps.match.params.id) {
+            //     this.props.fetchRelated(nextProps.match.params.id)
+            // }
         }
     }
 
     getById(id) {
-        const { newsData } = this.props
+        const { topData } = this.props
 
-        return newsData[id] || {}
+        return topData[id] || {}
     }
 
     render() {
-        let { noise, match, relatedNews, broadcast } = this.props
+        let { noise, news, match, relatedNews, broadcast } = this.props
         const item = this.getById(match.params.id)
 
         return (
-            <main>
+            <div>
                 <Helmet>
                     <title>Новости</title>
                 </Helmet>
 
-                <Detail
-                    data={item}
-                    noise={noise}
-                    related={relatedNews}
-                    broadcast={broadcast} />
-            </main>
+                {match.params.id
+                    ? (
+                        <Detail
+                            data={item}
+                            noise={noise}
+                            related={relatedNews}
+                            broadcast={broadcast} />
+                    )
+                    : (
+                        <ul>
+                            {news.map(v => (
+                                <li key={v.id}>
+                                    <Link to={`/news/${v.id}`}>
+                                        {v.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    )
+                }
+            </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
     noise: selectNoise(state),
-    newsData: selectNewsData(state),
+    topData: selectTopData(state),
+    news: selectTop(state),
     relatedNews: selectRelated(state),
     broadcast: selectBroadcast(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetch(params) {
-        dispatch(fetch(params))
+    fetchTop(params) {
+        dispatch(fetchTop(params))
+    },
+    fetchNoise(params) {
+        dispatch(fetchNoise(params))
     },
     fetchRelated(id) {
         dispatch(fetchRelated(id))

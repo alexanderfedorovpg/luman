@@ -21,7 +21,7 @@ function NoisePage({ data, noise, related, broadcast }) {
                             </Content>
                         </div>
                         <div className="right right-col">
-                            <Video />
+                            <Video className="inner-about__general-video general-video--sm" />
                             <Noise data={noise} className="inner-about__info-noize" />
                             <OneVideo data={broadcast[0]} className="inner-about__enter-one" />
                         </div>

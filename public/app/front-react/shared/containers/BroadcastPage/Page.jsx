@@ -5,12 +5,16 @@ import Helmet from 'react-helmet'
 import {
     selectNoise,
     selectRelated,
-    selectNewsData
 } from 'selectors/news'
-import { selectBroadcast } from 'selectors/broadcast'
+import {
+    selectBroadcast,
+    selectBroadcastData
+} from 'selectors/broadcast'
 
-import { fetch, fetchRelated } from 'actions/news'
-import { fetch as fetchRecords } from 'actions/broadcast'
+// import { fetch, fetchRelated } from 'actions/news'
+import { fetch } from 'actions/broadcast'
+
+import Detail from 'components/Broadcast/Page'
 
 class BroadcastPage extends PureComponent {
 
@@ -20,46 +24,57 @@ class BroadcastPage extends PureComponent {
     }
 
     componentDidMount() {
-        // const { match } = this.props
+        const { match } = this.props
 
-        // this.props.fetch()
-        // this.props.fetchRecords()
-        // this.props.fetchRelated(match.params.id)
+        this.props.fetch()
+
+        if (match.params.id) {
+            this.props.fetch({ id: match.params.id })
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.match.params.id !== nextProps.match.params.id) {
+            this.props.fetch({ id: nextProps.match.params.id })
+        }
     }
 
     getById(id) {
-        const { newsData } = this.props
+        const { broadcastData } = this.props
 
-        return newsData[id] || {}
+        return broadcastData[id] || {}
     }
 
     render() {
-        // let { news, match, relatedNews, broadcast } = this.props
-        // const item = this.getById(match.params.id)
+        let { match, broadcast } = this.props
+        const item = this.getById(match.params.id)
 
         return (
-            <main>
+            <div>
                 <Helmet>
                     <title>Из эфира</title>
                 </Helmet>
 
-                Из эфира
-            </main>
+                {match.params.id
+                    ? <Detail data={item} />
+                    : null
+                }
+            </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    // news: selectNoise(state),
-    // newsData: selectNewsData(state),
+    broadcast: selectBroadcast(state),
+    broadcastData: selectBroadcastData(state),
     // relatedNews: selectRelated(state),
     // broadcast: selectBroadcast(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-    // fetch() {
-    //     dispatch(fetch())
-    // },
+    fetch(params) {
+        dispatch(fetch(params))
+    },
     // fetchRelated(id) {
     //     dispatch(fetchRelated(id))
     // },

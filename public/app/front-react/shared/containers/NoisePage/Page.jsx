@@ -4,15 +4,23 @@ import Helmet from 'react-helmet'
 
 import {
     selectNoise,
+    selectNoiseData,
+    selectNoisePagination,
     selectRelated,
-    selectNewsData
+    selectTop
 } from 'selectors/news'
 import { selectBroadcast } from 'selectors/broadcast'
 
-import { fetch, fetchRelated } from 'actions/news'
+import {
+    fetchNoise,
+    fetchMoreNoise,
+    fetchTop,
+    fetchRelated
+} from 'actions/news'
 import { fetch as fetchRecords } from 'actions/broadcast'
 
 import Detail from 'components/NewsDetail'
+import Noise from 'components/Noise/Page'
 
 class NoisePage extends PureComponent {
 
@@ -24,61 +32,99 @@ class NoisePage extends PureComponent {
     componentDidMount() {
         const { match } = this.props
 
-        this.props.fetch()
+        this.props.fetchNoise()
+        this.props.fetchTop()
         this.props.fetchRecords()
 
         if (match.params.id) {
-            this.props.fetch({ id: match.params.id })
-            this.props.fetchRelated(match.params.id)
+            this.fetchItem(match.params.id)
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
-            this.props.fetch({ id: nextProps.match.params.id })
 
             if (nextProps.match.params.id) {
-                this.props.fetchRelated(nextProps.match.params.id)
+                this.fetchItem(nextProps.match.params.id)
             }
         }
     }
 
-    getById(id) {
-        const { newsData } = this.props
+    // загружает новость, если ее нет в списке
+    // также загружает "новости по теме"
+    fetchItem(id) {
+        if (!this.getById(id)) {
+            this.props.fetchNoise({ id })
+        }
+        this.props.fetchRelated(id)
+    }
 
-        return newsData[id] || {}
+    getById(id) {
+        const { noiseData } = this.props
+
+        return noiseData[id] || {}
     }
 
     render() {
-        let { news, match, relatedNews, broadcast } = this.props
+        let {
+            news,
+            noise,
+            loadMore,
+            match,
+            relatedNews,
+            broadcast,
+            pagination
+        } = this.props
+
         const item = this.getById(match.params.id)
 
         return (
-            <main>
+            <div>
                 <Helmet>
-                    <title>Инфошум</title>
+                    <title>
+                        {match.params.id
+                            ? `Инфошум - ${item.title}`
+                            : 'Инфошум'
+                        }
+                    </title>
                 </Helmet>
 
-                <Detail
-                    data={item}
-                    noise={news}
-                    related={relatedNews}
-                    broadcast={broadcast} />
-            </main>
+                {match.params.id
+                    ? (
+                        <Detail
+                            data={item}
+                            noise={noise}
+                            related={relatedNews}
+                            broadcast={broadcast} />
+                    )
+                    : (
+                        <Noise
+                            onLoadRequest={loadMore}
+                            canLoad={pagination.page < pagination.lastPage}
+                            news={news}
+                            noise={noise} />
+                    )
+                }
+            </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    news: selectNoise(state),
-    newsData: selectNewsData(state),
+    noise: selectNoise(state),
+    noiseData: selectNoiseData(state),
+    pagination: selectNoisePagination(state),
+    news: selectTop(state),
     relatedNews: selectRelated(state),
     broadcast: selectBroadcast(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetch(params) {
-        dispatch(fetch(params))
+    fetchTop(params) {
+        dispatch(fetchTop(params))
+    },
+    fetchNoise(params) {
+        dispatch(fetchNoise(params))
     },
     fetchRelated(id) {
         dispatch(fetchRelated(id))
@@ -86,6 +132,9 @@ const mapDispatchToProps = dispatch => ({
     fetchRecords() {
         dispatch(fetchRecords())
     },
+    loadMore() {
+        dispatch(fetchMoreNoise())
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoisePage)

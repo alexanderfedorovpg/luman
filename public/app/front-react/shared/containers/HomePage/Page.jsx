@@ -23,13 +23,13 @@ class HomePage extends PureComponent {
         let { broadcast, home } = this.props
 
         return (
-            <main>
+            <div>
                 <Helmet>
                     <title>Главная</title>
                 </Helmet>
 
                 <Home data={home} broadcast={broadcast} />
-            </main>
+            </div>
         )
     }
 }

@@ -12,7 +12,9 @@ function Item({ data, className, rectangle }) {
     const type = rectangle
         ? 'block-rectangle'
         : 'block-square';
-if (!data) return null;
+
+    if (!data) return null;
+
     return (
         data.list
             ? renderList(className, type, data.list)

@@ -1,0 +1,29 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.block-rectangle-border {
+    width: rem(299);
+    min-height: rem(145);
+    padding: #{rem(21)} #{rem(30)} #{rem(15)} #{rem(19)};
+
+    border: 1px solid $gray;
+
+    &:hover {
+        border-color: $purple;
+
+        .block-rectangle-border__link {
+            color: $blue;
+        }
+    }
+
+    &__link {
+        font: #{rem(21)}/ #{rem(26)} $stemBold;
+        color: $enter;
+        text-decoration: none;
+    }
+
+    &__date {
+        font: #{rem(12)} / #{rem(24)} $stemReg;
+        color: $gray-date;
+    }
+}

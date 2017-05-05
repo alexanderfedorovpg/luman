@@ -18,6 +18,9 @@ import {
     selectNewsList,
     selectOldIds
 } from './selectors'
+import {
+    selectMenuExpandedStatus
+} from 'containers/App/selectors'
 
 class ReadyPage extends PureComponent {
 
@@ -26,7 +29,7 @@ class ReadyPage extends PureComponent {
     }
 
     render() {
-        let { news, oldNews, publish, setFilters } = this.props
+        let { news, menuOpen, oldNews, publish, setFilters } = this.props
 
         return (
             <div>
@@ -34,6 +37,7 @@ class ReadyPage extends PureComponent {
                     title="Готовые новости" />
 
                 <Header
+                    moved={menuOpen}
                     filters={filters}
                     setFilters={setFilters} />
                 <Wrap>
@@ -48,6 +52,7 @@ class ReadyPage extends PureComponent {
 }
 
 const mapStateToProps = state => ({
+    menuOpen: selectMenuExpandedStatus(state),
     news: selectNewsList(state),
     oldNews: selectOldIds(state)
 })
