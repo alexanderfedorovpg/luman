@@ -19,6 +19,10 @@ export const selectTopPagination = createSelector(
         lastPage: root.top.lastPage,
     })
 )
+export const selectTopRubric = createSelector(
+    selectNewsDomain,
+    root => root.top.rubric
+)
 
 export const selectNoiseData = createSelector(
     selectNewsDomain,

@@ -79,7 +79,11 @@ const values = {
     connectSrc: [],
     defaultSrc: [],
     fontSrc: ['https://fonts.googleapis.com/css', 'https://fonts.gstatic.com'],
-    imgSrc: ['http://rtvi-cache.cdnvideo.ru','http://rtvi.com'],
+    imgSrc: [
+      'http://rtvi-cache.cdnvideo.ru',
+      'http://rtvi.com',
+      'https://lorempixel.com'
+    ],
     mediaSrc: [],
     manifestSrc: [],
     objectSrc: [],

@@ -28,7 +28,7 @@ addLocaleData(ruLocaleData)
 
 class App extends Component {
 
-    asyncBootstrap() {
+    componentDidMount() {
         this.props.fetchData()
     }
 

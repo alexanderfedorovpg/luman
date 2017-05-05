@@ -13,8 +13,9 @@ import './style.scss'
 
 class Noise extends PureComponent {
 
-    renderRow(data) {
-        let items = [
+    // рендерит 30 новостей в массиве
+    renderItems(data) {
+        return [
             <Block data={data[0]} className="noize-all__block-square" />,
             <div className="noize-all__list-mini">
                 {data.slice(1, 4).map(v => (
@@ -52,6 +53,15 @@ class Noise extends PureComponent {
                 ))}
             </div>,
         ]
+    }
+
+    renderRow(data) {
+        let items = []
+
+        // рендерим новости по 30 штук
+        while (data.length) {
+            items = items.concat(this.renderItems(data.splice(0, 30)))
+        }
 
         return (
             <Masonry

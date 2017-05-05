@@ -1,0 +1,80 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.breadcrumb {
+    position: relative;
+
+    &::after {
+        content: '';
+
+        position: absolute;
+        bottom: rem(6);
+        left: 0;
+
+        display: block;
+        width: 100%;
+        height: 1px;
+
+        background-color: $gray;
+    }
+
+    &__ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: rem(6);
+
+        font-size: 0;
+    }
+
+    &__item {
+        position: relative;
+
+        display: inline-block;
+
+        &::before {
+            content: '';
+
+            position: absolute;
+            z-index: 1;
+            bottom: rem(6);
+            left: 0;
+
+            width: 100%;
+            height: rem(4);
+
+            background-color: transparent;
+        }
+
+        &:hover {
+            color: $enter;
+
+            &::before {
+                background-color: $purple;
+            }
+
+            .breadcrumbs__link {
+                color: $enter;
+            }
+        }
+
+        &_active {
+            color: $enter;
+
+            &::before {
+                background-color: $purple;
+            }
+
+            .breadcrumb__link {
+                color: $enter;
+            }
+        }
+    }
+
+    &__link {
+        font: #{rem(16)} / #{rem(40)} $stemBold;
+        color: $crumb;
+        cursor: pointer;
+        text-decoration: none;
+    }
+}

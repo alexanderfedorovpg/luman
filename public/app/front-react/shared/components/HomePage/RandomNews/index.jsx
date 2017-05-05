@@ -19,7 +19,7 @@ function RandomNews({ data, className }) {
             <div className="random-news__row">
                 <Block data={primal} rectangle className="random-news__block-rectangle random-news__block" />
                 {secondary.map((value, i) => (
-                    <Block data={value} key={i} className="random-news__block-square random-news__block" />
+                    <Block data={value} key={i} className="random-news__block-square random-news__block random-news__block-square_list" />
                 ))}
             </div>
         </div>

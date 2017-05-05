@@ -1,0 +1,157 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.news-top {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-between;
+        margin-bottom: rem(65);
+    }
+
+    &__news-one-line {
+        margin-top: rem(25);
+
+        .block-square__info {
+            bottom: rem(10) !important;
+        }
+
+        .block-square__title {
+            margin-bottom: 0 !important;
+        }
+    }
+
+    &__left {
+        margin-top: rem(-9);
+    }
+
+    &__info-noize {
+        margin-top: rem(23);
+
+        .info-noize__wrapper {
+            margin-top: rem(19);
+        }
+
+        .info-noize__mini-news {
+
+            &:first-child {
+
+                .mini-news__title {
+                    line-height: rem(22) !important;
+                }
+            }
+        }
+
+        .mini-news__title {
+            letter-spacing: rem(-.5);
+        }
+    }
+
+    &__enter-one {
+        position: relative;
+
+        margin-top: rem(30);
+    }
+
+    &__banner {
+        margin-top: rem(47);
+    }
+
+    &__plots-week {
+        margin-top: rem(24);
+
+        .block-rectangle-mini__points {
+            margin-right: rem(10);
+        }
+    }
+
+    &__per-day {
+        margin-top: rem(37);
+
+        .block-square__title {
+            margin-bottom: rem(3) !important;
+        }
+    }
+
+    &__banner-preview {
+        height: rem(142);
+        margin-top: rem(14);
+    }
+
+    &__random-news {
+        margin-top: rem(57);
+        margin-bottom: rem(57);
+    }
+
+    &__subscribe {
+        margin-top: rem(42);
+    }
+
+    &__more-news {
+        margin-top: rem(17);
+
+        .mini-news {
+
+            &:not(:first-child) {
+                margin-top: rem(17);
+
+                .mini-news__title {
+                    line-height: rem(18);
+                }
+            }
+        }
+    }
+
+    &_margin {
+        margin-top: rem(51);
+    }
+}
+
+
+.news-one-line {
+
+    &__row {
+        @include margin_y(#{rem(-7)});
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &__block-rectangle {
+        @include margin_y(#{rem(7)});
+        width: rem(617);
+        height: rem(245);
+
+        .block-rectangle__link,
+        .block-rectangle__img {
+            height: rem(245);
+        }
+    }
+
+    .block-rectangle__info {
+        bottom: rem(6);
+    }
+
+    &__block-square {
+        @include margin_y(#{rem(7)});
+        width: rem(300);
+
+        &::before,
+        .block-square__img,
+        .block-square__link {
+            width: rem(300);
+        }
+
+        .block-square__title {
+            letter-spacing: rem(-.2);
+        }
+
+        .block-square__info {
+            bottom: rem(8);
+        }
+    }
+}
