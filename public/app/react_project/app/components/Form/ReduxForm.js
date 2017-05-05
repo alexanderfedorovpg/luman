@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, FileInput, Select, Datepicker, Textarea } from './';
+import { Input, FileInput, Select, Datepicker, Textarea, Dropzone } from './';
 
 export const InputRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Input
@@ -49,5 +49,15 @@ export const DatepickerRedux = ({ input, meta: { touched, invalid, valid }, ...p
         error={touched && invalid && !props.disabled}
         selected={input.value}
         onChange={(value) => input.onChange(value)}
+    />
+);
+
+export const DropzoneRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
+    <Dropzone
+        {...props}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
+        value={input.value}
+        onDrop={(files) => input.onChange(files)}
     />
 );

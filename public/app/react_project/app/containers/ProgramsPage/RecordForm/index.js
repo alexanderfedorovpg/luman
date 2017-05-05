@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm, Field, isDirty, isValid } from 'redux-form/immutable';
+import { reduxForm, Field } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Group, Label } from 'components/Form';
-import { SelectRedux, InputRedux } from 'components/Form/ReduxForm';
+import { SelectRedux, InputRedux, DropzoneRedux } from 'components/Form/ReduxForm';
 import { Close, ArrowDown } from 'components/Icon/svg';
 
 import { StyledBtn } from '../style';
@@ -46,7 +46,7 @@ class RecordForm extends React.PureComponent {
     }
 
     render() {
-        const { programs, handleSubmit, isFormValid, isFormDirty } = this.props;
+        const { programs, handleSubmit, valid, dirty } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -69,16 +69,6 @@ class RecordForm extends React.PureComponent {
                         component={InputRedux}
                     />
                 </Group>
-                <Group md>
-                    <Field
-                        block
-                        placeholder="Выберите изображение для превью"
-                        icon="clip"
-                        name="image_preview"
-                        accept="image/*"
-                        component={FileInputRedux}
-                    />
-                </Group>
                 <Group md horizontal>
                     <Field
                         name="publish_date"
@@ -90,6 +80,18 @@ class RecordForm extends React.PureComponent {
                         icon="arrow"
                         placeholder="Выберите видео"
                         component={FileInputRedux}
+                    />
+                </Group>
+                <Group md>
+                    <Field
+                        placeholder="Добавить превью"
+                        name="image_preview"
+                        accept="image/*"
+                        multiple={false}
+                        likeInput
+                        icon
+                        size="s"
+                        component={DropzoneRedux}
                     />
                 </Group>
                 <Group marginBottom="40px">
@@ -110,8 +112,8 @@ class RecordForm extends React.PureComponent {
                     <StyledBtn
                         type="submit"
                         success
-                        disabled={!isFormValid || !isFormDirty}
-                        active={isFormValid && isFormDirty}
+                        disabled={!valid || !dirty}
+                        active={valid && dirty}
                     >
                         <ArrowDown opacity=".33" />
                         Загрузить
@@ -157,15 +159,13 @@ RecordForm.propTypes = {
     handleSubmit: PropTypes.func,
     postRecord: PropTypes.func,
     editRecord: PropTypes.func,
-    isFormDirty: PropTypes.bool,
-    isFormValid: PropTypes.bool,
+    dirty: PropTypes.bool,
+    valid: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
     programs: makeGetProgramsAsOptions(),
     initialValues: makeGetSelectedRecord(),
-    isFormDirty: isDirty('recordForm'),
-    isFormValid: isValid('recordForm'),
 });
 
 export default connect(mapStateToProps, { postRecord, editRecord })(RecordForm);

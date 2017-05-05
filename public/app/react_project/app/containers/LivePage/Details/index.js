@@ -1,16 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
     Wrapper,
-    Display,
+    DisplayStream,
+    DisplayEmpty,
 } from './style';
 import LiveForm from '../LiveForm';
 
-const Details = () => (
+const Details = ({ url }) => (
     <Wrapper>
-        <Display />
+        {
+            url ?
+            <DisplayStream src={url} /> :
+            <DisplayEmpty>
+                Нет прямого эфира
+            </DisplayEmpty>
+        }
+
         <LiveForm />
     </Wrapper>
 );
+
+Details.propTypes = {
+    url: PropTypes.string,
+};
 
 export default Details;

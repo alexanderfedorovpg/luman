@@ -14,18 +14,19 @@ import { Wrap } from 'components/Content';
 import { NewsList } from 'components/News';
 
 import makeSelectLivePage, { makeGetNews } from './selectors';
-import { getNews, newsToLive } from './actions';
+import { getNews, selectNews, getLive } from './actions';
 import Header from './Header';
 import Details from './Details';
 
 export class LivePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
+        this.props.getLive();
         this.props.getNews();
     }
 
     render() {
         const { news, menuOpen } = this.props;
-        const { live, selected } = this.props.LivePage;
+        const { live, selected, streamUrl } = this.props.LivePage;
         return (
             <div>
                 <Helmet title="Прямой эфир" />
@@ -33,11 +34,11 @@ export class LivePage extends React.PureComponent { // eslint-disable-line react
                 <Wrap>
                     <NewsList
                         active={selected}
-                        action={this.props.newsToLive}
+                        action={this.props.selectNews}
                         actionText={live ? null : 'В прямой эфир'}
                         items={news}
                     />
-                    <Details />
+                    <Details url={streamUrl} />
                 </Wrap>
             </div>
         );
@@ -48,7 +49,8 @@ LivePage.propTypes = {
     LivePage: PropTypes.object,
     news: PropTypes.array,
     getNews: PropTypes.func,
-    newsToLive: PropTypes.func,
+    getLive: PropTypes.func,
+    selectNews: PropTypes.func,
     menuOpen: PropTypes.bool,
 };
 
@@ -61,7 +63,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
     return {
         getNews: () => dispatch(getNews()),
-        newsToLive: (id) => dispatch(newsToLive(id)),
+        selectNews: (id) => dispatch(selectNews(id)),
+        getLive: () => dispatch(getLive()),
     };
 }
 

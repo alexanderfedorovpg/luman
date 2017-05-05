@@ -1,0 +1,55 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Img = styled.img`
+    max-width: 100%;
+    max-height: 100%;
+`;
+
+class ImgPreview extends React.PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            src: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+        };
+    }
+
+    componentWillMount() {
+        this.parseImg(this.props.img);
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.img !== this.props.img) {
+            this.parseImg(newProps.img);
+        }
+    }
+
+    parseImg(img) {
+        if (typeof img === 'string') {
+            this.setState({ src: img });
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => this.setState({ src: reader.result });
+
+        reader.readAsDataURL(img);
+    }
+
+    render() {
+        return <Img src={this.state.src} alt={this.props.alt} />;
+    }
+}
+
+ImgPreview.defaultProps = {
+    alt: '',
+};
+
+ImgPreview.propTypes = {
+    img: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(File)]).isRequired,
+    alt: PropTypes.string,
+};
+
+export default ImgPreview;
