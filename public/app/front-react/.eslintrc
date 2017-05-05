@@ -14,6 +14,26 @@
     // A jsx extension is not required for files containing jsx
     "react/jsx-filename-extension": 0,
     // This rule struggles with flow and class properties
-    "react/sort-comp": 0
+    "react/sort-comp": 0,
+    "import/no-unresolved": 0,
+    "indent": [
+        2,
+        4,
+        {
+            "SwitchCase": 1
+        }
+    ],
+    "react/jsx-first-prop-new-line": [
+        2,
+        "multiline"
+    ],
+    "react/jsx-indent": [
+        2,
+        4
+    ],
+    "react/jsx-indent-props": [
+        2,
+        4
+    ],
   }
 }
