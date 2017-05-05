@@ -416,7 +416,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 /* Vars, which are specific for current project */
 /* Styles for UI-elements */
 .icon-play {
-  background-image: url(../img/png-sprite/96dpi/spritevdpwqjz1pdkila0pb9.png);
+  background-image: url(../img/png-sprite/96dpi/sprite86y01e2y3jd0yv3rf6r.png);
   background-position: 0px 0px;
   width: 40px;
   height: 40px;
@@ -497,7 +497,7 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 .subtitle-order .dig {
   position: relative;
   margin-right: 0.6875rem;
-  background-image: url(../img/png-sprite/96dpi/spritevdpwqjz1pdkila0pb9.png);
+  background-image: url(../img/png-sprite/96dpi/sprite86y01e2y3jd0yv3rf6r.png);
   background-position: -44px 0px;
   width: 36px;
   height: 38px;
@@ -1187,7 +1187,7 @@ main {
 }
 
 .top-button__btn {
-  background-image: url(../img/png-sprite/96dpi/spritevdpwqjz1pdkila0pb9.png);
+  background-image: url(../img/png-sprite/96dpi/sprite86y01e2y3jd0yv3rf6r.png);
   background-position: 0px -44px;
   width: 32px;
   height: 32px;
@@ -1433,7 +1433,7 @@ main {
 
 .general-news__info-noize_war .block-square_war .block-square__title {
   margin-bottom: 2.0625rem !important;
-  letter-spacing: 0.01562rem;
+  letter-spacing: 0.01563rem;
 }
 
 .general-news__banner {
@@ -2537,15 +2537,38 @@ main {
   width: 18.75rem;
 }
 
+.subscribe:hover .subscribe__container {
+  display: block;
+}
+
 .subscribe__img {
   width: 18.75rem;
+}
+
+.subscribe__container {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  width: 18.75rem;
+  padding: 1.2rem 1.1rem .9rem;
+  margin-top: -.5rem;
+  border: 0.0625rem solid #0f7686;
+  background-color: #fff;
+}
+
+.subscribe__container .subscribe-networks__ico-image {
+  width: 2rem;
+}
+
+.subscribe__container .subscribe-networks__ico-link:not(:last-child) .subscribe-networks__ico-image {
+  margin-right: .45rem;
 }
 
 .more-news .mini-news__title {
   display: inline-block;
   font-size: 0.875rem;
   line-height: 1rem;
-  letter-spacing: -0.01562rem;
+  letter-spacing: -0.01563rem;
 }
 
 .more-news .mini-news {
@@ -2897,7 +2920,7 @@ main {
 }
 
 .blockquote:before {
-  background-image: url(../img/png-sprite/96dpi/spritevdpwqjz1pdkila0pb9.png);
+  background-image: url(../img/png-sprite/96dpi/sprite86y01e2y3jd0yv3rf6r.png);
   background-position: -36px -44px;
   width: 25px;
   height: 18px;

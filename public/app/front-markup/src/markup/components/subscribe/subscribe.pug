@@ -1,5 +1,9 @@
+include ../subscribe-networks/subscribe-networks
+
 mixin subscribe(data)
     +b.subscribe()&attributes(attributes)
         block
         +e.A(href=jv0).link
             +e.IMG(src="%=static=%img/content/subscribe/subscribe.png" alt="").img
+        +e.container
+            +subscribe-networks(subscribe_networks.subscribe)(class="subscribe__subscribe-networks")

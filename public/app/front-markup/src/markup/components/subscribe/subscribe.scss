@@ -1,8 +1,39 @@
 .subscribe {
     width: rem(300);
 
+    &:hover {
+        & .subscribe {
+            &__container {
+                display: block;
+            }
+        }
+    }
+
     &__img {
         width: rem(300);
+    }
+
+    &__container {
+        position: absolute;
+        z-index: 2;
+
+        display: none;
+        width: rem(300);
+        padding: 1.2rem 1.1rem .9rem;
+        margin-top: -.5rem;
+
+        border: rem(1) solid $dark-blue;
+        background-color: $white;
+
+        .subscribe-networks {
+            &__ico-image {
+                width: 2rem;
+            }
+
+            &__ico-link:not(:last-child) .subscribe-networks__ico-image {
+                margin-right: .45rem;
+            }
+        }
     }
 
 }
