@@ -17,11 +17,9 @@ function StatsPageReducer(state = initialState, action) {
 
     switch (action.type) {
         case LOAD_CATEGORIES_PAGE_STATS_SUCCESS:
-            return state
-                .set('data', fromJS(action.payload));
+            return state.set('data', fromJS(action.payload));
         case CHANGE_CATEGORY:
-            return state
-                .set('category', fromJS(action.category));
+            return  state.set('category', fromJS(action.category));
         default:
             return state;
     }

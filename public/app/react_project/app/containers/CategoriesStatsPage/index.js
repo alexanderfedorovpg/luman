@@ -10,6 +10,9 @@ import {
     loadCategoriesPageStatslist,
     changeCategoryName
 } from './actions'
+import {
+    selectCategoryPageStatsData,
+} from './selectors'
 
 const TodayStatsLisk = styled.a`
     letter-spacing: -1.17px;
@@ -33,19 +36,20 @@ class CategoriesStatsPage extends Component {
     render() {
         return (
             <div>
+                {console.log(this.props.data)}
                 <Helmet
                     title="Cтатистика"/>
                 <Header href="javascript:void()"/>
                 <Wrap>
-                    <CategoriesList/>
+                    {<CategoriesList data={this.props.data}/>}
                 </Wrap>
             </div>
         )
     }
 }
-
-const mapStateToProps = createStructuredSelector({});
-
+const mapStateToProps = state => ({
+   data: selectCategoryPageStatsData(state),
+});
 function mapDispatchToProps(dispatch) {
 
     return {

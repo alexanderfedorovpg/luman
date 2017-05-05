@@ -82,8 +82,12 @@ const Summary = styled.tr`
 `
 
 
-function CategoriesStats({}) {
-    return (
+function CategoriesStats({data}) {
+    const display = () => {
+        return JSON.stringify(data,null,2);
+    }
+    return (<pre>5
+        {display()}
         <TableExt>
             <thead>
             <tr>
@@ -119,6 +123,7 @@ function CategoriesStats({}) {
             </Summary>
             </tbody>
         </TableExt>
+        </pre>
     )
 }
 

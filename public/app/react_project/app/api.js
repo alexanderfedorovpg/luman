@@ -1,11 +1,7 @@
 import axios from 'axios';
-import qs from 'qs';
+import qs from 'qs'
 
-axios.defaults.baseURL = 'http://librorum.rtvi.ddemo.ru/api/v1';
-
-const publicApi = axios.create({
-    baseURL: 'http://librorum-client.rtvi.ddemo.ru/api/v1/web',
-});
+const baseUrl = 'http://librorum.rtvi.ddemo.ru/api/v1';
 
 export const setToken = (token) => {
     axios.defaults.headers.common['Api-Token'] = token;
@@ -17,20 +13,20 @@ export const login = ({ username, password }) => {
     formData.append('login', username);
     formData.append('password', password);
 
-    return axios.post('/auth/login', formData, {
+    return axios.post(`${baseUrl}/auth/login`, formData, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
     });
 };
 
-export const getFeed = (params) => axios.get('/newsfeed', {
+export const getFeed = (params) => axios.get(`${baseUrl}/newsfeed`, {
     params: {
         ...params,
     },
 });
 
-export const hideFeedItem = (id) => axios.post('/newsfeed', {
+export const hideFeedItem = (id) => axios.post(`${baseUrl}/newsfeed`, {
     action: 'hide',
     id,
 });
@@ -63,99 +59,127 @@ export const feedToWork = (data) => {
     formData.append('top', rating);
     formData.append('header', header);
 
-    return axios.post('/newsfeed/work', formData, {
+    return axios.post(`${baseUrl}/newsfeed/work`, formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
 
-export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
+export const getUser = (id, params) => {
+    return axios.get(`${baseUrl}/user${id ? `/${id}` : ''}`, {
         params
-    });
+    })
+}
 
-export const getCurrentUser = () => axios.get('/userprofile');
+export const getCurrentUser = () => {
+    return axios.get(`${baseUrl}/userprofile`)
+}
 
-export const getUsersInGroup = (group_id) => axios.get(`/group/${group_id}/users`);
+export const getUsersInGroup = group_id => {
+    return axios.get(`${baseUrl}/group/${group_id}/users`)
+}
 
-export const getGroup = (id) => axios.get(`/group${id ? `/${id}` : ''}`);
+export const getGroup = id => {
+    return axios.get(`${baseUrl}/group${id ? `/${id}` : ''}`)
+}
 
-export const getLinks = (query) => axios.get('/reference/search', {
+export const getLinks = query => {
+    return axios.get(`${baseUrl}/reference/search`, {
         params: {
             query: query
         }
-    });
+    })
+}
 
-export const getNewslist = () => axios.get('/newslisteditor');
+export const getNewslist = () => {
+    return axios.get(`${baseUrl}/newslisteditor`)
+}
 
-export const getTags = () => axios.get('/tags');
+export const getTags = () => {
+    return axios.get(`${baseUrl}/tags`)
+}
 
-export const getRubrics = () => axios.get('/rubrics');
+export const getRubrics = () => {
+    return axios.get(`${baseUrl}/rubrics`)
+}
 
-export const getArticle = (id) => axios.get(`/newseditor/${id}`);
+export const getArticle = id => {
+    return axios.get(`${baseUrl}/newseditor/${id}`)
+}
 
-export const deleteArticle = (id) => axios.delete(`/newseditor/${id}`);
+export const deleteArticle = id => {
+    return axios.delete(`${baseUrl}/newseditor/${id}`)
+}
 
-export const delegateArticle = (id) => axios.post('/newseditor/delegate', {
+export const delegateArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/delegate`, {
         id
-    });
+    })
+}
 
-export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
+export const rejectArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/rejection`, {
         id
-    });
+    })
+}
 
-export const finishArticle = (data) => {
-    const formData = xwwwfurlenc({
+export const finishArticle = data => {
+    let formData = xwwwfurlenc({
         ...data,
-        action: 'edit',
-    });
+        action: 'edit'
+    })
 
-    return axios.put('/newseditor/edit', formData, {
+    return axios.put(`${baseUrl}/newseditor/edit`, formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
 
-export const publishArticle = (data) => {
-    const formData = xwwwfurlenc(data);
+export const publishArticle = data => {
+    let formData = xwwwfurlenc(data)
 
-    return axios.post('/newseditor', formData, {
+    return axios.post(`${baseUrl}/newseditor`, formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
 
-export const toFixArticle = (id) => {
-    const formData = xwwwfurlenc({ id });
+export const toFixArticle = id => {
+    let formData = xwwwfurlenc({ id })
 
-    return axios.post('/newseditor/tofix', formData, {
+    return axios.post(`${baseUrl}/newseditor/tofix`, formData, {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+}
 
 
 // TODO: найти нормальный npm пакет для конвертации
 //       json -> x-www-form-urlencoded
-function xwwwfurlenc(srcjson) {
-    let u = encodeURIComponent;
-    let urljson = '';
-    let keys = Object.keys(srcjson);
-    for (let i = 0; i < keys.length; i++) {
-        urljson += `${u(keys[i])  }=${  u(srcjson[keys[i]])}`;
-        if (i < (keys.length - 1))urljson += '&';
+function xwwwfurlenc(srcjson){
+    var u = encodeURIComponent;
+    var urljson = "";
+    var keys = Object.keys(srcjson);
+    for(var i=0; i <keys.length; i++){
+        urljson += u(keys[i]) + "=" + u(srcjson[keys[i]]);
+        if(i < (keys.length-1))urljson+="&";
     }
     return urljson;
 }
 
-export const acceptArticle = (id) => axios.post('/newseditor/work', {
+export const acceptArticle = id => {
+    return axios.post(`${baseUrl}/newseditor/work`, {
         id
-    });
+    })
+}
 
-export const getChatMessages = (room) => axios.get(`/newschat/${room}`);
+export const getChatMessages = room => {
+    return axios.get(`${baseUrl}/newschat/${room}`)
+}
 
 export const postChatMessage = (room, { message, files }) => {
     const formData = new FormData();
@@ -163,7 +187,7 @@ export const postChatMessage = (room, { message, files }) => {
     formData.append('message', message);
     formData.append('files', files);
 
-    return axios.post(`/newschat/${room}`, formData, {
+    return axios.post(`${baseUrl}/newschat/${room}`, formData, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -217,18 +241,22 @@ export const uploadVideo = (file) => {
     const data = new FormData();
     data.append('file', file);
 
-    return axios.post('/air/record/upload', data);
+    return axios.post(`${baseUrl}/air/record/upload`, data);
 };
 // =============================================================================
 
+export const getCategoryStats = (from_date, to_date) => axios.get(`${baseUrl}/statistics`);
+export const getAuthorStats = (from_date, to_date) => axios.get(`${baseUrl}/newsstatistics/editor/top`);
+export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`${baseUrl}/newsstatistics/editor/extended?type=${type}`);
+export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`${baseUrl}//newsstatistics/editor/?editor_id?${editor_id}`);
 // =============================================================================
 // STATISTIC API
 // =============================================================================
 
 export const getCategoryStats = (from_date, to_date) => axios.get('/statistics');
 export const getAuthorStats = (from_date, to_date) => axios.get('/newsstatistics/editor/top');
-export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`/statistics?type=${type}`);
-export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor/?editor_id?${editor_id}`);
+export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`newsstatistics/editor/extended?type${type}`);
+export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor/=/extended??editor_id?${editor_id}`);
 // =============================================================================
 
 // =============================================================================
