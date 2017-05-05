@@ -19,7 +19,7 @@
   },
   "scripts": {
     "init": "node ./tars/user-tasks/helpers/init-project.js",
-    "lint:eslint": "eslint markup/components --cache",
+    "lint:eslint": "eslint markup/components --cache"
   },
   "author": "",
   "license": "ISC"
