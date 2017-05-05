@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-const selectStatsPageDomain = () => (state) => state.get('categoryStatsPage');
+const selectStatsPageDomain = () => (state) => state.get('categoriesStatsPage');
 
 const selectCategoryPageStatsData = createSelector(
     selectStatsPageDomain(),
-    root => root.get('categories').toJS()
+    root => root.get('data').toJS()
 );
 
 const makeSelectType = () => createSelector(

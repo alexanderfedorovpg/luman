@@ -253,12 +253,6 @@ export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`$
 // STATISTIC API
 // =============================================================================
 
-export const getCategoryStats = (from_date, to_date) => axios.get('/statistics');
-export const getAuthorStats = (from_date, to_date) => axios.get('/newsstatistics/editor/top');
-export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`newsstatistics/editor/extended?type${type}`);
-export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor/=/extended??editor_id?${editor_id}`);
-// =============================================================================
-
 // =============================================================================
 // LIVE API
 // =============================================================================
