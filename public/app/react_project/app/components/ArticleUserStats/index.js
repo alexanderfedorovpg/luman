@@ -94,12 +94,46 @@ td {
 
 
 
-function ArticlesCategoriesList({}) {
- return ( <ExtTable>
+function ArticlesCategoriesList({data}) {
+    if(!data ) return;
+
+    // Itterate over the data to result a rendered list with data included
+    const dataSet = data.map((item, i) => {
+        if(!item || !item.mews ||!item.mews.avg_time_work) return;
+
+         return   <tr key={i}>
+            <td>{item.mews.title}</td>
+            <td>10:35</td>
+            <td>{item.mews.avg_time_work.hours} часов {item.mews.avg_time_work.minutes} минут</td>
+            <td>{item.mews.count_views}</td>
+            <td>{item.mews.count_click}</td>
+        </tr>
+
+
+    });
+
+    // Count the sums of each required  col
+    const sums = (category) => {
+        let val = 0;
+        data.forEach((item) => {
+            if(!item.mews || !item.mews[category]) return;
+            val += parseInt(item.mews[category]);
+        });
+        return val;
+    };
+
+    const getAuthor = () =>{
+       return {avatar:((data.length > 0&&data[0].editor)?data[0].editor.avatar:''),
+           name:((data.length > 0&&data[0].editor)?data[0].editor.name:'')}
+    }
+
+   return (
+
+    <ExtTable>
                  <thead>
                  <tr>
                      <ThColName>
-                            <UserRow/>
+                         <UserRow author={getAuthor()}/>
                      </ThColName>
                      <ThColTime>Опубликовано{/*<i class="icon icon-dropdown"></i>*/}</ThColTime>
                      <ThColwrites>Время написания</ThColwrites>
@@ -108,40 +142,13 @@ function ArticlesCategoriesList({}) {
                  </tr>
                  </thead>
                  <tbody>
-                 <tr>
-                     <td>Ожидания и реальность выборов в Америке</td>
-                     <td>10:35</td>
-                     <td>26 мин</td>
-                     <td>6 780</td>
-                     <td>7 674</td>
-                 </tr>
-                 <tr>
-                     <td>Почему Трамп победил: секрет</td>
-                     <td>16:00</td>
-                     <td>44 мин</td>
-                     <td>4 539</td>
-                     <td>4 539</td>
-                 </tr>
-                 <tr>
-                     <td>Тайны, скандалы, расследования</td>
-                     <td>17:10</td>
-                     <td>12 мин</td>
-                     <td>1 343</td>
-                     <td>1 343</td>
-                 </tr>
-                 <tr>
-                     <td>Патриоты, которые запросто могут предать Родину: кто они?</td>
-                     <td>22:30</td>
-                     <td>1 ч 24 мин</td>
-                     <td>789</td>
-                     <td>789</td>
-                 </tr>
+                 {dataSet}
                  <Summary>
                      <td>Всего</td>
                      <td></td>
                      <td></td>
-                     <td>13 993</td>
-                     <td>25 742</td>
+                     <td>{sums('count_views')}</td>
+                     <td>{sums('count_click')}</td>
                  </Summary>
                  </tbody>
              </ExtTable>

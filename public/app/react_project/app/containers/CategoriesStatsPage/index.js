@@ -36,7 +36,6 @@ class CategoriesStatsPage extends Component {
     render() {
         return (
             <div>
-                {console.log(this.props.data)}
                 <Helmet
                     title="Cтатистика"/>
                 <Header href="javascript:void()"/>

@@ -248,7 +248,7 @@ export const uploadVideo = (file) => {
 export const getCategoryStats = (from_date, to_date) => axios.get(`${baseUrl}/statistics`);
 export const getAuthorStats = (from_date, to_date) => axios.get(`${baseUrl}/newsstatistics/editor/top`);
 export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`${baseUrl}/newsstatistics/editor/extended?type=${type}`);
-export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`${baseUrl}//newsstatistics/editor/?editor_id?${editor_id}`);
+export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`${baseUrl}/newsstatistics/editor?editor_id=${editor_id}`);
 // =============================================================================
 // STATISTIC API
 // =============================================================================

@@ -1,17 +1,20 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
-const selectStatsPageDomain = (state) => state.get('categoriesStatsPage');
+const selectStatsPageDomain = () => (state) => state.get('authorsStatsPage');
 
-const selectCategoryStatsData = createSelector(
-    selectStatsPageDomain,
+const selectAuthorStatsPageData = createSelector(
+    selectStatsPageDomain(),
     root => root.get('data').toJS()
 );
-const selectAuthorsStatsData = createSelector(
-    selectStatsPageDomain,
-    root => root.get('category').toJS()
+
+const makeSelectType = () => createSelector(
+    selectStatsPageDomain(),
+    (state) => state.get('author_id')
 );
 
+
 export {
-    selectCategoryStatsData,
-    selectAuthorsStatsData
+    selectAuthorStatsPageData,
+    makeSelectType
 }
+
