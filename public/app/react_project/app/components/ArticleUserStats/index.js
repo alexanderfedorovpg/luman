@@ -123,7 +123,7 @@ function ArticlesCategoriesList({data}) {
     };
 
     const getAuthor = () =>{
-       return {avatar:((data.length > 0&&data[0].editor)?data[0].editor.avatar:''),
+       return {avatar:((data.length > 0&&data[0].editor)?'//'+data[0].editor.avatar:''),
            name:((data.length > 0&&data[0].editor)?data[0].editor.name:'')}
     }
 

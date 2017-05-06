@@ -34,7 +34,8 @@ function Users({rowClickCallback, data}) {
 
     // Itterate over the data to result a rendered list with data included
     const dataSet = data.map((item) => {
-        return <tr key={item.editor_id} onClick={()=>rowClickCallback(1)}>
+        if(!item || !item.avg_time_work) return;
+        return <tr key={item.editor_id} onClick={()=>rowClickCallback(item.editor_id)}>
             <td >
                 <User data={{ avatar_url: item.avatar_img }}>
                     <UserName className={userClassName}>

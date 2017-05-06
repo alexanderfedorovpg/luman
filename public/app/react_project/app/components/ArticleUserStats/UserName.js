@@ -16,8 +16,8 @@ const User = styled.div`
 `
 
 const UserPicLink = styled.a`
-    max-width: 100%;
-    height: 100%;
+    max-width: 100px;
+    height: 100px;
     border-radius: 50%;
     -o-object-fit: cover;
     object-fit: cover;
@@ -46,7 +46,7 @@ function UserRow({author}){
     return (
     <User>
         <UserPicLink href="javascript:void(0)">
-            <img src="//{author.avatar}"/>
+            <img src={author.avatar}/>
         </UserPicLink>
         <UserNameLink href="javascript:void(0)">
             {author.name}
