@@ -193,8 +193,8 @@ function Header({ moved, onToggle, isActive, onLogout, user }) {
                                 Аналитика
                             </NavItem>
                         </nav>
-                        <CustomUser data={user}>
-                            <CustomUserName href="#">
+                        <CustomUser to="profile" data={user}>
+                            <CustomUserName to="profile">
                                 {user.name}
                             </CustomUserName>
                         </CustomUser>
