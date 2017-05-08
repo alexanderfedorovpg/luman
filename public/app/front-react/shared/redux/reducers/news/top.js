@@ -20,7 +20,7 @@ export default createReducer({
             ...payload.data.map(v => v.id)
         ]),
         page: payload.page || state.page,
-        lastPage: payload.lastPage || state.lastPage,
+        lastPage: Number.isInteger(payload.lastPage) ? payload.lastPage : state.lastPage,
         data: payload.data.reduce((acc, v) => ({ ...acc, [v.id]: v }), state.data)
     }),
     [setTopRubric]: (state, payload) => ({

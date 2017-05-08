@@ -28,10 +28,14 @@ export const selectNoiseData = createSelector(
     selectNewsDomain,
     root => root.noise.data
 )
-export const selectNoise = createSelector(
+export const selectNoiseIds = createSelector(
     selectNewsDomain,
+    root => root.noise.ids
+)
+export const selectNoise = createSelector(
+    selectNoiseIds,
     selectNoiseData,
-    (root, list) => root.noise.ids.map(id => list[id])
+    (ids, data) => ids.map(id => data[id])
 )
 export const selectNoisePagination = createSelector(
     selectNewsDomain,

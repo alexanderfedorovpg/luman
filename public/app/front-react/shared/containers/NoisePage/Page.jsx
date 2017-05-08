@@ -7,14 +7,12 @@ import {
     selectNoiseData,
     selectNoisePagination,
     selectRelated,
-    selectTop
 } from 'selectors/news'
 import { selectBroadcast } from 'selectors/broadcast'
 
 import {
     fetchNoise,
     fetchMoreNoise,
-    fetchTop,
     fetchRelated
 } from 'actions/news'
 import { fetch as fetchRecords } from 'actions/broadcast'
@@ -33,7 +31,6 @@ class NoisePage extends PureComponent {
         const { match } = this.props
 
         this.props.fetchNoise()
-        this.props.fetchTop()
         this.props.fetchRecords()
 
         if (match.params.id) {
@@ -67,7 +64,6 @@ class NoisePage extends PureComponent {
 
     render() {
         let {
-            news,
             noise,
             loadMore,
             match,
@@ -101,7 +97,6 @@ class NoisePage extends PureComponent {
                         <Noise
                             onLoadRequest={loadMore}
                             canLoad={pagination.page < pagination.lastPage}
-                            news={news}
                             noise={noise} />
                     )
                 }
@@ -114,15 +109,11 @@ const mapStateToProps = state => ({
     noise: selectNoise(state),
     noiseData: selectNoiseData(state),
     pagination: selectNoisePagination(state),
-    news: selectTop(state),
     relatedNews: selectRelated(state),
     broadcast: selectBroadcast(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchTop(params) {
-        dispatch(fetchTop(params))
-    },
     fetchNoise(params) {
         dispatch(fetchNoise(params))
     },

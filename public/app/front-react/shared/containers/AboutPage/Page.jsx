@@ -7,6 +7,7 @@ import About from 'components/AboutPage'
 import { selectBroadcast } from 'selectors/broadcast'
 
 import { fetch } from 'actions/broadcast'
+import { fetchNoise } from 'actions/news'
 
 
 class AboutPage extends PureComponent {
@@ -16,10 +17,11 @@ class AboutPage extends PureComponent {
 
     componentDidMount() {
         this.props.fetchRecords()
+        this.props.fetchNoise()
     }
 
     render() {
-        let { broadcast } = this.props
+        let { } = this.props
 
         return (
             <div>
@@ -27,7 +29,7 @@ class AboutPage extends PureComponent {
                     <title>О телеканале</title>
                 </Helmet>
 
-                <About broadcast={broadcast} />
+                <About />
             </div>
         )
     }
@@ -35,12 +37,14 @@ class AboutPage extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-    broadcast: selectBroadcast(state),
 })
 
 const mapDispatchToProps = dispatch => ({
     fetchRecords() {
         dispatch(fetch())
+    },
+    fetchNoise() {
+        dispatch(fetchNoise())
     }
 })
 

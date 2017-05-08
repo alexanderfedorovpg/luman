@@ -1,12 +1,12 @@
 import React from 'react'
 
-import Aside from 'components/Aside';
+import Aside from 'containers/Aside';
 
 import Team from './Team'
 
 import './style.scss'
 
-function About({ broadcast }) {
+function About({}) {
 
     return (
       <div className="inner-wrapper">
@@ -36,7 +36,7 @@ function About({ broadcast }) {
               </div>
               <Team />
             </div>
-            <Aside video={broadcast} />
+            <Aside />
           </div>
         </div>
       </div>

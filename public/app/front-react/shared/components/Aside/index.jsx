@@ -1,16 +1,19 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import Video from 'components/GeneralVideo'
+import Noise from 'components/Noise'
 import One from 'components/Broadcast/One'
 
-function Aside({news, video}) {
+function Aside({noise, broadcast, className }) {
 
     return (
-        <div className="right-col">
-            <Video className="general-news__general-video"  />
-            <One className="general-news__enter-one" data={video[0]}/>
+        <div className={classNames('right-col', className)}>
+            <Video />
+            <Noise data={noise} />
+            <One data={broadcast[0]}/>
         </div>
     )
 }
 
-export default Aside;
+export default Aside

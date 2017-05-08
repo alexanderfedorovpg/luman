@@ -1,67 +1,135 @@
-import React from 'react'
+import React, { Component } from 'react'
+import Masonry from 'react-masonry-component'
 
 import Title from 'components/Title'
 import Tabs from 'components/Tabs'
-import Video from 'components/GeneralVideo'
-import Noise from 'components/Noise'
+import MiniNews from 'components/MiniNews'
 import Block from 'components/Block'
+import BlockMini from 'components/Block/Mini'
+import BlockBorder from 'components/Block/Border'
 import Subscribe from 'components/Subscribe'
 import Banner from 'components/HomePage/Banner'
 import BannerPreview from 'components/HomePage/BannerPreview'
 import RandomNews from 'components/HomePage/RandomNews'
 import MoreNews from 'components/HomePage/MoreNews'
 import LoadMore from 'components/LoadMore'
+import Aside from 'containers/Aside'
 
 import './style.scss'
 
-function News({ news, noise, rubrics, rubric, setRubric, onLoadRequest, canLoad }) {
+class News extends Component {
 
-    return (
-        <div className="inner-wrapper">
-            <div className="news-top">
-                <div className="news-top__container container">
-                    <div className="news-top__left left-col left-col left-col_width_inner">
-                        <Title>
-                            Новости
-                        </Title>
-                        <Tabs data={rubrics} active={rubric} onChange={setRubric} />
-                        <div className="news-one-line news-top__news-one-line">
-                            <div className="news-one-line__row">
-                                <Block data={news[0]} rectangle className="news-one-line__block-rectangle" />
-                                <Block data={news[1]} className="news-one-line__block-square" />
-                                <Block data={news[2]} className="news-one-line__block-square" />
-                                <Block data={news[3]} className="news-one-line__block-square" />
-                                <Block data={news[4]} className="news-one-line__block-square" />
+    renderItems(data) {
+
+        return [
+            <Block data={data[0]} />,
+            <div>
+                {data.slice(1, 7).map(v => (
+                    <MiniNews key={v.id} data={v} className="news-top__mini-news" />
+                ))}
+            </div>,
+            <BlockBorder data={data[7]} />,
+        ]
+    }
+
+    renderAdditionalData(data) {
+        let items = []
+
+        while (data.length) {
+            items = items.concat(this.renderItems(data.splice(0, 8)))
+        }
+
+        return (
+            <Masonry
+                className={'news-top__row'}
+                options={{
+                    gutter: 10
+                }}>
+                {items.map((v, i) => (
+                    <div key={i} className="news-top__row-item">
+                        {v}
+                    </div>
+                ))}
+            </Masonry>
+        )
+    }
+
+    render() {
+        const {
+            news,
+            rubrics,
+            rubric,
+            setRubric,
+            onLoadRequest,
+            canLoad
+        } = this.props
+
+        const data = news.filter(v => rubric ? v.rubrics[0].id == rubric : true)
+
+        return (
+            <div className="inner-wrapper">
+                <div className="news-top">
+                    <div className="news-top__container container">
+                        <div className="news-top__left left-col left-col left-col_width_inner">
+                            <Title>
+                                Новости
+                            </Title>
+                            <Tabs data={rubrics} active={rubric} onChange={setRubric} />
+                            <div className="news-one-line news-top__news-one-line">
+                                <div className="news-one-line__row">
+                                    <Block data={data[0]} rectangle className="news-one-line__block-rectangle" />
+                                    <Block data={data[1]} className="news-one-line__block-square" />
+                                    <Block data={data[2]} className="news-one-line__block-square" />
+                                    <Block data={data[3]} className="news-one-line__block-square" />
+                                    <Block data={data[4]} className="news-one-line__block-square" />
+                                </div>
+                            </div>
+                            <Banner className="news-top__banner" />
+                            <div className="plots-week news-top__plots-week">
+                                <p className="plots-week__title section-title section-title section-title_no-border">
+                                    Сюжеты недели
+                                </p>
+                                <div className="plots-week__list">
+                                    <BlockMini data={data[8]} />
+                                    <BlockMini data={data[9]} />
+                                </div>
+                            </div>
+                            <div className="per-day news-top__per-day">
+                                <p className="per-day__title section-title">
+                                    Главное за последние сутки
+                                </p>
+                                <div className="per-day__wrapper">
+                                    <Block data={data[10]} className="news-one-line__block-square" />
+                                    <Block data={data[11]} className="news-one-line__block-square" />
+                                    <Block data={data[12]} className="news-one-line__block-square" />
+                                </div>
                             </div>
                         </div>
-                        <Banner className="news-top__banner" />
-                    </div>
-                    <div className="news-top__right right-col">
-                        <Video className="news-top__general-video" />
-                        <Noise data={noise} className="news-top__info-noize" />
-                    </div>
-                    <div className="news-top__middle middle-col">
-                        <BannerPreview className="news-top__banner-preview" />
-                    </div>
-                    <div className="news-top__left left-col left-col left-col_width_inner">
-                        <RandomNews data={news.slice(5, 12)} className="news-top__random-news" />
-                        {canLoad
-                            ? (
-                                <LoadMore onClick={onLoadRequest}>
-                                    Больше новостей
-                                </LoadMore>
-                            )
-                            : null
-                        }
-                    </div>
-                    <div className="news-top__right right-col">
-                        <Subscribe className="news-top__subscribe" />
-                        <MoreNews data={news.slice(12, 16)} className="news-top__more-news" />
+                        <Aside />
+                        <div className="news-top__middle middle-col">
+                            <BannerPreview className="news-top__banner-preview" />
+                        </div>
+                        <div className="news-top__left left-col left-col left-col_width_inner">
+                            <RandomNews data={data.slice(5, 12)} className="news-top__random-news" />
+                            {this.renderAdditionalData(data.slice(16))}
+                            {canLoad
+                                ? (
+                                    <LoadMore onClick={onLoadRequest}>
+                                        Больше новостей
+                                    </LoadMore>
+                                )
+                                : null
+                            }
+                        </div>
+                        <div className="news-top__right right-col">
+                            <Subscribe className="news-top__subscribe" />
+                            <MoreNews data={data.slice(12, 16)} className="news-top__more-news" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default News

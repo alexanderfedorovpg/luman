@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react'
 import Masonry from 'react-masonry-component'
 
-import Video from 'components/GeneralVideo'
-import News from 'components/News'
 import LoadMore from 'components/LoadMore'
 import Title from 'components/Title'
 import Block from 'components/Block'
 import BlockBorder from 'components/Block/Border'
 import MiniNews from 'components/MiniNews'
+import Aside from 'containers/Aside'
 
 import './style.scss'
 
@@ -55,7 +54,7 @@ class Noise extends PureComponent {
         ]
     }
 
-    renderRow(data) {
+    renderData(data) {
         let items = []
 
         // рендерим новости по 30 штук
@@ -79,7 +78,7 @@ class Noise extends PureComponent {
     }
 
     render() {
-        const { news, noise, onLoadRequest, canLoad } = this.props
+        const { noise, onLoadRequest, canLoad } = this.props
 
         return (
             <div className="inner-wrapper">
@@ -90,7 +89,7 @@ class Noise extends PureComponent {
                                 Инфошум
                             </Title>
                             <div className="noize-all__list">
-                                {this.renderRow(noise)}
+                                {this.renderData(noise.slice(0))}
                             </div>
                             {canLoad
                                 ? (
@@ -101,10 +100,7 @@ class Noise extends PureComponent {
                                 : null
                             }
                         </div>
-                        <div className="noize-all__right right-col">
-                            <Video className="noize-all__general-video" />
-                            <News data={news} className="noize-all__news" />
-                        </div>
+                        <Aside />
                     </div>
                 </div>
             </div>

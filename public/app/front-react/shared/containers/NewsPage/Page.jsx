@@ -41,25 +41,32 @@ class NewsPage extends PureComponent {
         this.props.fetchRecords()
 
         if (match.params.id) {
-            // this.props.fetch({ id: match.params.id })
-            // this.props.fetchRelated(match.params.id)
+            this.fetchItem(match.params.id)
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
-            // this.props.fetch({ id: nextProps.match.params.id })
 
-            // if (nextProps.match.params.id) {
-            //     this.props.fetchRelated(nextProps.match.params.id)
-            // }
+            if (nextProps.match.params.id) {
+                this.fetchItem(nextProps.match.params.id)
+            }
         }
+    }
+
+    // загружает новость, если ее нет в списке
+    // также загружает "новости по теме"
+    fetchItem(id) {
+        if (!this.getById(id)) {
+            this.props.fetchTop({ id })
+        }
+        this.props.fetchRelated(id)
     }
 
     getById(id) {
         const { topData } = this.props
 
-        return topData[id] || {}
+        return topData[id]
     }
 
     render() {
@@ -76,7 +83,7 @@ class NewsPage extends PureComponent {
             currentRubric
         } = this.props
 
-        const item = this.getById(match.params.id)
+        const item = this.getById(match.params.id) || {}
 
         const r = [{ id: null, name: 'Все новости' }, ...rubrics]
 
@@ -102,7 +109,6 @@ class NewsPage extends PureComponent {
                     : (
                         <News
                             news={news}
-                            noise={noise}
                             setRubric={setTopRubric}
                             rubrics={r}
                             rubric={currentRubric}
@@ -144,6 +150,7 @@ const mapDispatchToProps = dispatch => ({
     },
     setTopRubric(id) {
         dispatch(setTopRubric(id))
+        dispatch(fetchTop())
     }
 })
 
