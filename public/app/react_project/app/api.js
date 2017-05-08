@@ -215,7 +215,7 @@ export const uploadVideo = (file) => {
     const data = new FormData();
     data.append('file', file);
 
-    return axios.post(`/air/record/upload`, data);
+    return axios.post('/air/record/upload', data);
 };
 // =============================================================================
 
