@@ -5,10 +5,11 @@ import OneVideo from 'components/Broadcast/One'
 import Noise from 'components/Noise'
 import Related from 'components/RelatedNews'
 import Content from './Content'
+import Aside from 'containers/Aside'
 
 import './style.scss'
 
-function NoisePage({ data, noise, related, broadcast }) {
+function Detail({ data, noise, related, broadcast }) {
 
     return (
         <div className="inner-wrapper">
@@ -20,11 +21,7 @@ function NoisePage({ data, noise, related, broadcast }) {
                                 <Related data={related} />
                             </Content>
                         </div>
-                        <div className="right right-col">
-                            <Video className="inner-about__general-video general-video--sm" />
-                            <Noise data={noise} className="inner-about__info-noize" />
-                            <OneVideo data={broadcast[0]} className="inner-about__enter-one" />
-                        </div>
+                        <Aside />
                     </div>
                 </div>
             </div>
@@ -32,4 +29,4 @@ function NoisePage({ data, noise, related, broadcast }) {
     )
 }
 
-export default NoisePage
+export default Detail

@@ -6,6 +6,7 @@ import {
     fetchTop,
     topFetched,
     topFetchError,
+    fetchMoreTop,
 
     fetchNoise,
     noiseFetched,
@@ -22,7 +23,9 @@ import {
 } from 'actions/news'
 
 import {
-    selectNoisePagination
+    selectNoisePagination,
+    selectTopPagination,
+    selectTopRubric,
 } from 'selectors/news'
 
 const endpoint = config('apiEndpoint')
@@ -42,12 +45,15 @@ function* getTopItem(id) {
 
 function* getTopList(params) {
     try {
+        const rubric = yield select(selectTopRubric)
+
         const { data } = yield call(axios.get, `${endpoint}/news`, {
             params: {
                 ...params,
-                limit: 30,
+                limit: 16,
                 top: 5,
-                top_direction: 'up'
+                top_direction: 'up',
+                rubrics_id: rubric
             }
         })
 
@@ -109,6 +115,14 @@ export default function* news() {
         yield payload && payload.id
             ? call(getNoiseItem, payload.id)
             : call(getNoiseList)
+    })
+
+    yield takeEvery(fetchMoreTop.getType(), function* () {
+        const { page, lastPage } = yield select(selectTopPagination)
+
+        if (page < lastPage) {
+            yield call(getTopList, { page: page+1 })
+        }
     })
 
     yield takeEvery(fetchMoreNoise.getType(), function* () {

@@ -28,7 +28,13 @@ const values = {
   apiEndpoint: 'http://librorum-client.rtvi.ddemo.ru/api/v1/web',
 
   // The host on which the server should run.
+<<<<<<< HEAD
   host: EnvVars.string('HOST', 'localhost'),
+||||||| merged common ancestors
+  host: EnvVars.string('HOST', '0.0.0.0'),
+=======
+  host: EnvVars.string('HOST', '127.0.0.1'),
+>>>>>>> 654c802ab56c83ca13bbe2c3341fe64c3416de6d
 
   // The port on which the server should run.
   port: EnvVars.number('PORT', 1337),
@@ -79,7 +85,11 @@ const values = {
     connectSrc: [],
     defaultSrc: [],
     fontSrc: ['https://fonts.googleapis.com/css', 'https://fonts.gstatic.com'],
-    imgSrc: ['http://rtvi-cache.cdnvideo.ru','http://rtvi.com'],
+    imgSrc: [
+      'http://rtvi-cache.cdnvideo.ru',
+      'http://rtvi.com',
+      'https://lorempixel.com'
+    ],
     mediaSrc: [],
     manifestSrc: [],
     objectSrc: [],

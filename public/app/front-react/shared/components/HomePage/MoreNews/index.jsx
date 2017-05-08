@@ -10,7 +10,7 @@ function MoreNews({ data, className }) {
     return (
         <div className={classNames("more-news", className)}>
             {data.map(value => (
-                <MiniNews key={value.Id} data={value} />
+                <MiniNews key={value.id} data={value} />
             ))}
         </div>
     )
