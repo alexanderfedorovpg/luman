@@ -87,7 +87,7 @@ function Header() {
     return (
         <Root>
             <Wrapper>
-                <Tabs data={filters} />
+                {/*<Tabs data={filters} />
                 <Period>
                     <Link href="#">Показать за период</Link>
                     <Date>
@@ -96,7 +96,7 @@ function Header() {
                         <CustomInput icon="calendar" right defaultValue="15.01.2017" />
                     </Date>
                     <CustomButton xs success>OK</CustomButton>
-                </Period>
+                </Period>*/}
             </Wrapper>
         </Root>
     )
