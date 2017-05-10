@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
 import './style.scss'
@@ -11,9 +12,9 @@ function Menu({ className }) {
                 <ul className="col-menu__ul">
                     {menuData.map(({ title, link }, i) => (
                         <li className="col-menu__li" key={i}>
-                            <a className="col-menu__link" href={link}>
+                            <Link className="col-menu__link" to={link}>
                                 {title}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -27,30 +28,30 @@ export default Menu
 const menuData = [
     {
         title: 'Телепрограмма',
-        link: 'javascript:void(0)'
+        link: '#'
     },
     {
         title: 'Лицензии',
-        link: 'javascript:void(0)'
+        link: '#'
     },
     {
         title: 'Как смотреть',
-        link: 'javascript:void(0)'
+        link: '/how'
     },
     {
         title: 'Карьера',
-        link: 'javascript:void(0)'
+        link: '#'
     },
     {
         title: 'Размещение рекламы',
-        link: 'javascript:void(0)'
+        link: '#'
     },
     {
         title: 'Правила пользования',
-        link: 'javascript:void(0)'
+        link: '#'
     },
     {
         title: 'Контакты',
-        link: 'javascript:void(0)'
+        link: '#'
     }
 ]

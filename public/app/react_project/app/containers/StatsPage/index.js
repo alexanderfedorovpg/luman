@@ -38,7 +38,7 @@ class StatsPage extends Component {
                     <Content rowClickCallback={this.props.categoryRowClickCallback} data={this.props.categoriesStats}/>
                     <Users rowClickCallback={this.props.userRowClickCallback}б data={this.props.authorsStats}/>
                 </Wrap>
-                <Dynamic />
+                {/*<Dynamic />*/}
             </div>
         )
     }

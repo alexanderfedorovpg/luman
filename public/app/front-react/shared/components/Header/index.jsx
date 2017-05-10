@@ -1,22 +1,27 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import Burger from 'components/Burger'
 import Logo from './Logo'
 import TopMenu from './TopMenu'
+import Alarm from './Alarm'
 import RSS from 'components/RSS'
 import Search from 'components/Search'
 
 import './style.scss'
 
-function Header() {
+function Header({ war }) {
 
     return (
-        <header className="header position">
+        <header className={classNames('header', { header_war: war })}>
+            {war
+                ? <Alarm />
+                : null
+            }
             <div className="header__container container">
                 <div className="header__left-part">
                     <div className="header__part-wrapper">
-                        <Burger />
-                        <Logo />
+                        <Logo war={war} />
                         <TopMenu />
                     </div>
                 </div>

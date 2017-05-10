@@ -66,5 +66,9 @@ export const selectHomeNoise = createSelector(
 )
 export const selectHomeBroadcast = createSelector(
     selectHome,
-    (home, rubrics) => home.broadcast
+    home => home.broadcast
+)
+export const selectWarMode = createSelector(
+    selectHome,
+    home => home.war
 )

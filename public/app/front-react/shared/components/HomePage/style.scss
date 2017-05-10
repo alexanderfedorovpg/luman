@@ -33,7 +33,11 @@
         justify-content: space-between;
 
         &.two-wrapper {
-            margin-top: rem(15);
+            margin-top: rem(16);
+
+            &_war {
+                margin-top: rem(12);
+            }
         }
     }
 
@@ -41,6 +45,14 @@
 
         &_war {
             height: rem(515);
+
+            .big-news__info {
+                bottom: rem(30);
+            }
+
+            .big-news__position_margin {
+                margin-top: rem(3);
+            }
         }
     }
 
@@ -57,10 +69,44 @@
         &_right-block {
             padding-left: 0;
             margin-top: rem(30);
+
+            .info-noize__wrapper {
+                margin-top: rem(10);
+            }
+
+            .info-noize__title {
+                padding-bottom: rem(2);
+                padding-left: rem(24);
+            }
+
+            .mini-news__title {
+                letter-spacing: rem(-.3);
+            }
+
+            .info-noize__mini-news {
+                margin-top: rem(9);
+
+                &:not(:first-child) {
+                    margin-top: rem(9);
+                }
+            }
         }
 
         &_war {
-            margin-top: rem(15);
+            margin-top: rem(11);
+
+            .info-noize__wrapper {
+                margin-top: rem(18);
+            }
+
+            .block-square_war {
+
+                .block-square__title {
+                    margin-bottom: rem(33) !important;
+
+                    letter-spacing: rem(.25);
+                }
+            }
         }
 
     }
@@ -78,29 +124,49 @@
         margin-top: rem(26);
 
         &_war {
+            margin-top: rem(29);
 
+            .mini-news:first-child {
+                padding-top: 0 !important;
+            }
         }
     }
 
     &__more-news {
-        margin-top: rem(24);
+        margin-top: rem(23);
+
+        &_war {
+            margin-top: rem(24);
+        }
     }
 
     &__enter-one {
-        margin-top: rem(31);
+        margin-top: rem(30);
     }
 
     &__more-video {
-        margin-top: rem(18);
+        margin-top: rem(20);
+
+        &_war {
+            margin-top: rem(18);
+        }
     }
 
     &__list-video {
         margin-top: rem(50);
+
+        &_war {
+            margin-top: rem(49);
+        }
     }
 
     &__banner-preview {
         height: rem(145);
-        margin-top: rem(-18);
+        margin-top: rem(-20);
+
+        &_war {
+            margin-top: rem(-22);
+        }
     }
 
     &__now-war {
@@ -110,7 +176,16 @@
     &__per-day {
 
         &_war {
-            margin-top: 15px;
+            margin-top: 11px;
+        }
+    }
+
+    &__from-enter {
+        margin-top: rem(5);
+
+        &_war {
+            margin-top: 1px;
         }
     }
 }
+
