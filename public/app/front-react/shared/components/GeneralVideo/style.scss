@@ -92,6 +92,8 @@
         display: inline-block;
         width: rem(137);
         height: rem(79);
+        background-image: url(./purple-rtvi.png);
+        background-size: contain;
     }
 
     &__logo-title {
@@ -104,6 +106,26 @@
         line-height: rem(18);
         color: $white;
         text-transform: uppercase;
+    }
+
+    &_left {
+
+        .general-video__logo {
+            right: auto;
+            left: 0;
+
+            width: rem(147);
+            height: rem(85);
+
+            background-image: url(./green-rtvi-left.png);
+        }
+
+        .general-video__logo-title {
+            top: rem(8);
+            right: rem(12);
+            left: auto;
+        }
+
     }
 
 }

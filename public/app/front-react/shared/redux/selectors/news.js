@@ -1,23 +1,50 @@
-import { selectRubricsData } from 'selectors/rubrics'
 import { createSelector } from 'reselect'
 import update from 'immutability-helper'
 
 export const selectNewsDomain = state => state.news
 
-export const selectNewsData = createSelector(
+export const selectTopData = createSelector(
     selectNewsDomain,
-    root => root.all.data
+    root => root.top.data
 )
-export const selectNews = createSelector(
+export const selectTop = createSelector(
     selectNewsDomain,
-    selectNewsData,
-    (root, list) => root.all.ids.map(id => list[id])
+    selectTopData,
+    (root, list) => root.top.ids.map(id => list[id])
+)
+export const selectTopPagination = createSelector(
+    selectNewsDomain,
+    (root, list) => ({
+        page: root.top.page,
+        lastPage: root.top.lastPage,
+    })
+)
+export const selectTopRubric = createSelector(
+    selectNewsDomain,
+    root => root.top.rubric
 )
 
-export const selectNoise = createSelector(
-    selectNews,
-    news => news.filter(item => item.top <= 4)
+export const selectNoiseData = createSelector(
+    selectNewsDomain,
+    root => root.noise.data
 )
+export const selectNoiseIds = createSelector(
+    selectNewsDomain,
+    root => root.noise.ids
+)
+export const selectNoise = createSelector(
+    selectNoiseIds,
+    selectNoiseData,
+    (ids, data) => ids.map(id => data[id])
+)
+export const selectNoisePagination = createSelector(
+    selectNewsDomain,
+    (root, list) => ({
+        page: root.noise.page,
+        lastPage: root.noise.lastPage,
+    })
+)
+
 export const selectRelated = createSelector(
     selectNewsDomain,
     root => root.related
@@ -39,17 +66,5 @@ export const selectHomeNoise = createSelector(
 )
 export const selectHomeBroadcast = createSelector(
     selectHome,
-    selectRubricsData,
-    (home, rubrics) => home.broadcast.map(v => (
-        update(
-            v,
-            {
-                record: {
-                    rubric: {
-                        $set: rubrics[v.record.rubric_id]
-                    }
-                }
-            }
-        )
-    ))
+    (home, rubrics) => home.broadcast
 )

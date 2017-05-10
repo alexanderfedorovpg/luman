@@ -16,8 +16,8 @@ const User = styled.div`
 `
 
 const UserPicLink = styled.a`
-    max-width: 100%;
-    height: 100%;
+    max-width: 100px;
+    height: 100px;
     border-radius: 50%;
     -o-object-fit: cover;
     object-fit: cover;
@@ -38,18 +38,18 @@ const UserNameLink = styled.a`
     font-weight: 600!important;
     color: #333!important;
     letter-spacing: -0.2px!important;
-    text-decoration: none;
+    text-decoration: none !important;
 `;
 
 
-function UserRow({}){
+function UserRow({author}){
     return (
     <User>
         <UserPicLink href="javascript:void(0)">
-            <img src="http://markup.librorum.rtvi.ddemo.ru/app/html_markup/build/static/img/content/user1.png"/>
+            <img src={author.avatar}/>
         </UserPicLink>
         <UserNameLink href="javascript:void(0)">
-            Поликарпов Анатолий
+            {author.name}
         </UserNameLink>
     </User>
 )}

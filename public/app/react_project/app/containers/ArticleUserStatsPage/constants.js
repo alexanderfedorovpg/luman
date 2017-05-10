@@ -1,0 +1,4 @@
+export const LOAD_AUTHORS_STATS = 'app/StatsPage/LOAD_AUTHORS_STATS';
+export const LOAD_AUTHORS_STATS_SUCCESS = 'app/StatsPage/LOAD_AUTHORS_STATS_SUCCESS';
+export const LOAD_AUTHORS_FAILURE = 'app/StatsPage/LOAD_AUTHORS_FAILURE';
+export const CHANGE_AUTHOR = 'app/StatsPage/CHANGE_AUTHOR';

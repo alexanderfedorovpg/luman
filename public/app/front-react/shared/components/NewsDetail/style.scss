@@ -86,7 +86,7 @@
         color: $white;
         letter-spacing: rem(-.8);
 
-        background-image: url(%=static=%content/about/box-text.png);
+        background-image: url(/content/about/box-text.png);
         background-position: center;
         background-size: cover;
 
@@ -138,6 +138,48 @@
     &_margin {
         margin-top: rem(54);
     }
+
+}
+
+.inner-default {
+    // margin-top: rem(11);
+    h1 {
+        margin-top: rem(4);
+
+        line-height: rem(39);
+    }
+
+    .inner-about__content {
+        position: relative;
+
+        margin-top: rem(30);
+
+        > p {
+            letter-spacing: rem(-0.35);
+        }
+
+    }
+
+    .social-links {
+        position: absolute;
+        top: 100%;
+        left: rem(180);
+
+        margin-top: rem(-32);
+    }
+    .social-links--pad {
+        left: rem(196);
+    }
+
+    .inner-about__date {
+        margin-top: rem(2);
+
+        font-family: $stemReg;
+        font-size: rem(12);
+
+        color: $gray-date;
+    }
+
 
 }
 
@@ -228,7 +270,7 @@
         text-align: right;
         letter-spacing: rem(-.8);
 
-        background-image: url(%=static=%content/text-bg-gray/text-block.png);
+        background-image: url(/content/text-bg-gray/text-block.png);
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -272,7 +314,7 @@
         text-decoration: none;
         text-transform: uppercase;
 
-        background: url('%=static=%general/geometry/ice-cube.png');
+        background: url('/general/geometry/ice-cube.png');
         background-repeat: no-repeat;
         background-size: cover;
         &:hover {
@@ -304,7 +346,7 @@
 
             text-align: left;
 
-            background-image: url(%=static=%content/text-bg-gray/text-block2.png);
+            background-image: url(/content/text-bg-gray/text-block2.png);
         }
         &__text {
             margin-bottom: rem(18);
@@ -359,25 +401,11 @@
             width: auto;
         }
 
-        &__logo {
-            right: auto;
-            left: 0;
-
-            width: rem(147);
-            height: rem(85);
-        }
-
         &__span {
             left: rem(33);
 
             font-family: $stemReg;
             font-size: rem(14);
-        }
-
-        &__logo-title {
-            top: rem(8);
-            right: rem(12);
-            left: auto;
         }
 
         &__title {

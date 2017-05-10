@@ -40,14 +40,14 @@ const makeGetSelected = () => createSelector(
 
         if (!target) {
             return {
-                id: null,
+                news_id: null,
                 title: null,
                 image_preview: null,
             };
         }
 
         return {
-            id: selected,
+            news_id: selected,
             title: target.title,
             image_preview: target.image,
         };

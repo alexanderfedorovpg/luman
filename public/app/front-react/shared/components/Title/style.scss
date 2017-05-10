@@ -1,0 +1,56 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.title-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: space-between;
+    padding-bottom: rem(3);
+
+    border-bottom: 1px solid $gray;
+
+    &__ico {
+        display: inline-block;
+
+        vertical-align: middle;
+
+        margin-left: 10px;
+    }
+
+    &__title {
+        line-height: rem(40);
+    }
+
+    &__title-img {
+        width: rem(21);
+        height: rem(21);
+    }
+
+    &__subtitle {
+        margin-top: rem(7);
+
+        font-size: rem(16);
+        line-height: rem(40);
+        color: $enter;
+        letter-spacing: rem(-.5);
+    }
+
+    &__ico {
+
+        svg {
+            vertical-align: top;
+        }
+
+        &_point {
+            width: rem(12);
+            height: rem(16);
+        }
+
+        &_info {
+            width: rem(24);
+            height: rem(24);
+        }
+    }
+}

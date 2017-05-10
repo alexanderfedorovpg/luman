@@ -18,6 +18,7 @@ import HomePage from 'containers/HomePage'
 import NoisePage from 'containers/NoisePage'
 import NewsPage from 'containers/NewsPage'
 import BroadcastPage from 'containers/BroadcastPage'
+import AboutPage from 'containers/AboutPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
 
@@ -28,7 +29,7 @@ addLocaleData(ruLocaleData)
 
 class App extends Component {
 
-    asyncBootstrap() {
+    componentDidMount() {
         this.props.fetchData()
     }
 
@@ -36,7 +37,7 @@ class App extends Component {
 
         return (
             <IntlProvider locale="ru">
-                <div>
+                <div className="root">
                     <Helmet>
                         <html lang="ru" />
                         <meta charSet="utf-8" />
@@ -48,20 +49,24 @@ class App extends Component {
 
                     <Header />
 
-                    <Switch>
-                        <Route exact path="/" component={HomePage} />
+                    <main>
+                        <Switch>
+                            <Route exact path="/" component={HomePage} />
 
-                        <Route exact path="/noise" component={NoisePage} />
-                        <Route path="/noise/:id" component={NoisePage} />
+                            <Route exact path="/noise" component={NoisePage} />
+                            <Route path="/noise/:id" component={NoisePage} />
 
-                        <Route exact path="/news" component={NewsPage} />
-                        <Route path="/news/:id" component={NewsPage} />
+                            <Route exact path="/news" component={NewsPage} />
+                            <Route path="/news/:id" component={NewsPage} />
 
-                        <Route exact path="/broadcast" component={BroadcastPage} />
-                        <Route path="/broadcast/:id" component={BroadcastPage} />
+                            <Route exact path="/broadcast" component={BroadcastPage} />
+                            <Route path="/broadcast/:id" component={BroadcastPage} />
 
-                        <Route component={HomePage} />
-                    </Switch>
+                            <Route exact path="/about" component={AboutPage} />
+
+                            <Route component={HomePage} />
+                        </Switch>
+                    </main>
 
                     <Footer />
                 </div>

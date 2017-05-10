@@ -69,10 +69,10 @@ class Header extends PureComponent {
     }
 
     render() {
-        let { filters } = this.props
+        let { filters, moved } = this.props
 
         return (
-            <Bot>
+            <Bot moved={moved}>
                 <Left>
                     <Form onSubmit={this.handleSubmit}>
                         <CustomInput

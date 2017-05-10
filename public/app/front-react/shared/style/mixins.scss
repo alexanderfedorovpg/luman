@@ -186,6 +186,11 @@
     margin-right: $param;
 }
 
+@mixin margin_y($param) {
+    margin-top: $param;
+    margin-bottom: $param;
+}
+
 @mixin padding_y($param) {
     padding-top: $param;
     padding-bottom: $param;
@@ -194,4 +199,11 @@
 @mixin padding_x($param) {
     padding-left: $param;
     padding-right: $param;
+}
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
 }

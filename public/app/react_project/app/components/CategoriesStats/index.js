@@ -5,6 +5,7 @@ import {font} from 'constants/style'
 import Helmet from 'react-helmet';
 import {Content, Users, Wrap, Header} from '../../components/Stats'
 import Dynamic from '../../components/Dynamic'
+import moment from 'moment'
 
 import Table from '../Table'
 
@@ -82,7 +83,39 @@ const Summary = styled.tr`
 `
 
 
-function CategoriesStats({}) {
+function CategoriesStats({data}) {
+
+    // Itterate over the data to result a rendered list with data included
+    const dataSet = data.map((item, i) => {
+        return   <tr key={i}>
+            <TdFirst>{item.news_name}</TdFirst>
+
+            <td>{moment(item.publish_date).format("DD.MM.YYYY")}</td>
+
+            <td>
+                <User>
+                    <UserPicLink>
+                        <UserImg
+                            src="//{item.avatar_img}"/></UserPicLink>
+                    <UserName >
+                        {item.editor_name}</UserName>
+                </User>
+            </td>
+            <td>{item.count_views}</td>
+            <td>{item.count_click}</td>
+        </tr>
+
+    });
+
+    // Count the sums of each required  col
+    const sums = (category) => {
+        let val = 0;
+        data.forEach((item) => {
+            val += parseInt(item[category]);
+        });
+        return val;
+    };
+
     return (
         <TableExt>
             <thead>
@@ -95,27 +128,15 @@ function CategoriesStats({}) {
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <TdFirst>Ожидания и реальность выборов в Америке</TdFirst>
-                <td>10:35</td>
-                <td>
-                    <User>
-                        <UserPicLink>
-                            <UserImg
-                                src="http://markup.librorum.rtvi.ddemo.ru/app/html_markup/build/static/img/content/user2.png"/></UserPicLink>
-                        <UserName >
-                            Поликарпов Анатолий</UserName>
-                    </User>
-                </td>
-                <td>6 780</td>
-                <td>7 674</td>
-            </tr>
+
+            {dataSet}
+
             <Summary>
                 <td>Всего</td>
                 <td></td>
                 <td></td>
-                <td>13 993</td>
-                <td>25 742</td>
+                <td>{sums('count_views')}</td>
+                <td>{sums('count_click')}</td>
             </Summary>
             </tbody>
         </TableExt>

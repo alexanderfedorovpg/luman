@@ -71,8 +71,8 @@ export const feedToWork = (data) => {
 };
 
 export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
-        params
-    });
+    params,
+});
 
 export const getCurrentUser = () => axios.get('/userprofile');
 
@@ -81,10 +81,8 @@ export const getUsersInGroup = (group_id) => axios.get(`/group/${group_id}/users
 export const getGroup = (id) => axios.get(`/group${id ? `/${id}` : ''}`);
 
 export const getLinks = (query) => axios.get('/reference/search', {
-        params: {
-            query: query
-        }
-    });
+    params: { query },
+});
 
 export const getNewslist = () => axios.get('/newslisteditor');
 
@@ -97,12 +95,12 @@ export const getArticle = (id) => axios.get(`/newseditor/${id}`);
 export const deleteArticle = (id) => axios.delete(`/newseditor/${id}`);
 
 export const delegateArticle = (id) => axios.post('/newseditor/delegate', {
-        id
-    });
+    id,
+});
 
 export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
-        id
-    });
+    id,
+});
 
 export const finishArticle = (data) => {
     const formData = xwwwfurlenc({
@@ -152,8 +150,8 @@ function xwwwfurlenc(srcjson) {
 }
 
 export const acceptArticle = (id) => axios.post('/newseditor/work', {
-        id
-    });
+    id,
+});
 
 export const getChatMessages = (room) => axios.get(`/newschat/${room}`);
 
@@ -200,7 +198,6 @@ export const saveHomepageNews = (data) => axios.put('/homepage', qs.stringify(da
         'Content-Type': 'application/x-www-form-urlencoded',
     },
 });
-
 // =============================================================================
 
 // =============================================================================
@@ -220,14 +217,23 @@ export const uploadVideo = (file) => {
 
     return axios.post('/air/record/upload', data);
 };
-
 // =============================================================================
 
+// =============================================================================
+// STATISTIC API
+// =============================================================================
 export const getCategoryStats = (from_date, to_date) => axios.get('/statistics');
 export const getAuthorStats = (from_date, to_date) => axios.get('/newsstatistics/editor/top');
-export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`/statistics?type=${type}`);
-export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor/?editor_id?${editor_id}`);
+export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`/newsstatistics/editor/extended?type=${type}`);
+export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor?editor_id=${editor_id}`);
 
+// =============================================================================
+// LIVE API
+// =============================================================================
+
+export const getLive = () => axios.get('/air/live');
+export const newsToLive = (data) => axios.post('/air/live', data);
+// =============================================================================
 
 // =============================================================================
 // PUBLIC API

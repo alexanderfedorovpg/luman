@@ -1,55 +1,136 @@
 import config from 'config'
 import axios from 'axios'
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, call, put, select } from 'redux-saga/effects'
 
 import {
-    fetch,
-    fetched,
-    fetchError,
+    fetchTop,
+    topFetched,
+    topFetchError,
+    fetchMoreTop,
+
+    fetchNoise,
+    noiseFetched,
+    noiseFetchError,
+    fetchMoreNoise,
 
     fetchRelated,
     relatedFetched,
     relatedFetchError,
-
-    fetchVideo,
-    videoFetched,
-    videoFetchError,
 
     fetchHome,
     homeFetched,
     homeFetchError
 } from 'actions/news'
 
+import {
+    selectNoisePagination,
+    selectTopPagination,
+    selectTopRubric,
+} from 'selectors/news'
+
 const endpoint = config('apiEndpoint')
 
-function* getNewsItem(id) {
+function* getTopItem(id) {
     try {
         const { data } = yield call(axios.get, `${endpoint}/news/${id}`)
 
-        yield put(fetched([data]))
+        yield put(topFetched({
+            data: [data]
+        }))
     }
     catch (e) {
-        yield put(fetchError(e))
+        yield put(topFetchError(e))
     }
 }
 
-function* getNewsList() {
+function* getTopList(params) {
     try {
-        const { data: { data } } = yield call(axios.get, `${endpoint}/news`)
+        const rubric = yield select(selectTopRubric)
 
-        yield put(fetched(data))
+        const { data } = yield call(axios.get, `${endpoint}/news`, {
+            params: {
+                ...params,
+                limit: 16,
+                top: 5,
+                top_direction: 'up',
+                rubrics_id: rubric
+            }
+        })
+
+        yield put(topFetched({
+            data: data.data,
+            page: data.current_page,
+            lastPage: data.last_page
+        }))
     }
     catch (e) {
-        yield put(fetchError(e))
+        yield put(topFetchError(e))
+    }
+}
+
+function* getNoiseItem(id) {
+    try {
+        const { data } = yield call(axios.get, `${endpoint}/news/${id}`)
+
+        yield put(noiseFetched({
+            data: [data]
+        }))
+    }
+    catch (e) {
+        yield put(noiseFetchError(e))
+    }
+}
+
+function* getNoiseList(params) {
+    try {
+        const { data } = yield call(axios.get, `${endpoint}/news`, {
+            params: {
+                ...params,
+                limit: 30,
+                top: 4,
+                top_direction: 'down'
+            }
+        })
+
+        yield put(noiseFetched({
+            data: data.data,
+            page: data.current_page,
+            lastPage: data.last_page
+        }))
+    }
+    catch (e) {
+        yield put(noiseFetchError(e))
     }
 }
 
 export default function* news() {
 
-    yield takeEvery(fetch.getType(), function* ({ payload }) {
+    yield takeEvery(fetchTop.getType(), function* ({ payload }) {
         yield payload && payload.id
-            ? call(getNewsItem, payload.id)
-            : call(getNewsList)
+            ? call(getTopItem, payload.id)
+            : call(getTopList)
+    })
+
+    yield takeEvery(fetchNoise.getType(), function* ({ payload }) {
+        yield payload && payload.id
+            ? call(getNoiseItem, payload.id)
+            : call(getNoiseList)
+    })
+
+    yield takeEvery(fetchMoreTop.getType(), function* () {
+        const { page, lastPage } = yield select(selectTopPagination)
+
+        if (page < lastPage) {
+            yield call(getTopList, { page: page+1 })
+        }
+    })
+
+    yield takeEvery(fetchMoreNoise.getType(), function* () {
+        const { page, lastPage } = yield select(selectNoisePagination)
+
+        if (page < lastPage) {
+            yield call(getNoiseList, { page: page+1 })
+        }
     })
 
     yield takeEvery(fetchRelated.getType(), function* ({ payload }) {
@@ -61,18 +142,6 @@ export default function* news() {
         }
         catch (e) {
             yield put(relatedfetchError(e))
-        }
-    })
-
-    yield takeEvery(fetchVideo.getType(), function* () {
-
-        try {
-            const { data } = yield call(axios.get, `${endpoint}/newslist?video="true"`)
-
-            yield put(videoFetched(data))
-        }
-        catch (e) {
-            yield put(videoFetchError(e))
         }
     })
 

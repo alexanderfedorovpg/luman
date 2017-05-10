@@ -1,18 +1,30 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
+import { Link } from 'react-router-dom'
 
 import {
     selectNoise,
     selectRelated,
-    selectNewsData
+    selectTop,
+    selectTopData,
+    selectTopPagination,
+    selectTopRubric
 } from 'selectors/news'
+import { selectRubrics } from 'selectors/rubrics'
 import { selectBroadcast } from 'selectors/broadcast'
 
-import { fetch, fetchRelated } from 'actions/news'
+import {
+    fetchTop,
+    fetchMoreTop,
+    fetchNoise,
+    fetchRelated,
+    setTopRubric
+} from 'actions/news'
 import { fetch as fetchRecords } from 'actions/broadcast'
 
 import Detail from 'components/NewsDetail'
+import News from 'components/News/Page'
 
 class NewsPage extends PureComponent {
 
@@ -24,61 +36,108 @@ class NewsPage extends PureComponent {
     componentDidMount() {
         const { match } = this.props
 
-        this.props.fetch()
+        this.props.fetchTop()
+        this.props.fetchNoise()
         this.props.fetchRecords()
 
         if (match.params.id) {
-            this.props.fetch({ id: match.params.id })
-            this.props.fetchRelated(match.params.id)
+            this.fetchItem(match.params.id)
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
-            this.props.fetch({ id: nextProps.match.params.id })
 
             if (nextProps.match.params.id) {
-                this.props.fetchRelated(nextProps.match.params.id)
+                this.fetchItem(nextProps.match.params.id)
             }
         }
     }
 
-    getById(id) {
-        const { newsData } = this.props
+    // загружает новость, если ее нет в списке
+    // также загружает "новости по теме"
+    fetchItem(id) {
+        if (!this.getById(id)) {
+            this.props.fetchTop({ id })
+        }
+        this.props.fetchRelated(id)
+    }
 
-        return newsData[id] || {}
+    getById(id) {
+        const { topData } = this.props
+
+        return topData[id]
     }
 
     render() {
-        let { noise, match, relatedNews, broadcast } = this.props
-        const item = this.getById(match.params.id)
+        let {
+            noise,
+            news,
+            match,
+            relatedNews,
+            broadcast,
+            pagination,
+            rubrics,
+            loadMore,
+            setTopRubric,
+            currentRubric
+        } = this.props
+
+        const item = this.getById(match.params.id) || {}
+
+        const r = [{ id: null, name: 'Все новости' }, ...rubrics]
 
         return (
-            <main>
+            <div>
                 <Helmet>
-                    <title>Новости</title>
+                    <title>
+                        {match.params.id
+                            ? `Новости - ${item.title}`
+                            : 'Новости'
+                        }
+                    </title>
                 </Helmet>
 
-                <Detail
-                    data={item}
-                    noise={noise}
-                    related={relatedNews}
-                    broadcast={broadcast} />
-            </main>
+                {match.params.id
+                    ? (
+                        <Detail
+                            data={item}
+                            noise={noise}
+                            related={relatedNews}
+                            broadcast={broadcast} />
+                    )
+                    : (
+                        <News
+                            news={news}
+                            setRubric={setTopRubric}
+                            rubrics={r}
+                            rubric={currentRubric}
+                            onLoadRequest={loadMore}
+                            canLoad={pagination.page < pagination.lastPage} />
+                    )
+                }
+            </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
     noise: selectNoise(state),
-    newsData: selectNewsData(state),
+    topData: selectTopData(state),
+    pagination: selectTopPagination(state),
+    news: selectTop(state),
     relatedNews: selectRelated(state),
-    broadcast: selectBroadcast(state)
+    broadcast: selectBroadcast(state),
+    rubrics: selectRubrics(state),
+    currentRubric: selectTopRubric(state),
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetch(params) {
-        dispatch(fetch(params))
+    fetchTop(params) {
+        dispatch(fetchTop(params))
+    },
+    fetchNoise(params) {
+        dispatch(fetchNoise(params))
     },
     fetchRelated(id) {
         dispatch(fetchRelated(id))
@@ -86,6 +145,13 @@ const mapDispatchToProps = dispatch => ({
     fetchRecords() {
         dispatch(fetchRecords())
     },
+    loadMore() {
+        dispatch(fetchMoreTop())
+    },
+    setTopRubric(id) {
+        dispatch(setTopRubric(id))
+        dispatch(fetchTop())
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsPage)

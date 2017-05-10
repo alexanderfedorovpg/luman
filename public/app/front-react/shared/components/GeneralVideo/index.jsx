@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 
 import './style.scss'
-import logo from './purple-rtvi.png'
+// import logo from './purple-rtvi.png'
 
 function Video({ className }) {
 
@@ -20,7 +20,6 @@ function Video({ className }) {
                 </div>
                 <div className="general-video__logo">
                     <span className="general-video__logo-title">Today</span>
-                    <img className="general-video__logo" src={logo} alt="" role="presentation" />
                 </div>
             </div>
         </div>

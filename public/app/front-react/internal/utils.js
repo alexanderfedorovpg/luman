@@ -18,12 +18,12 @@ export function happyPackPlugin({ name, loaders }) {
 export function log(options) {
   const title = `${options.title.toUpperCase()}`;
 
-  if (options.notify) {
-    notifier.notify({
-      title,
-      message: options.message,
-    });
-  }
+//   if (options.notify) {
+//     notifier.notify({
+//       title,
+//       message: options.message,
+//     });
+//   }
 
   const level = options.level || 'info';
   const msg = `==> ${title} -> ${options.message}`;

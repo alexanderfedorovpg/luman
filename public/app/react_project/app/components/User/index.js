@@ -1,8 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router';
 
-import { rem, ifProp } from 'utils/style'
-import { font } from 'constants/style'
+import { rem, ifProp } from 'utils/style';
+import { font } from 'constants/style';
 
 const Root = styled.div`
     display: flex;
@@ -10,7 +11,7 @@ const Root = styled.div`
     margin-right: ${rem(11)};
 `
 
-const Pic = styled.a`
+const Pic = styled(Link)`
     display: block;
     flex-shrink: 0;
     width: 40px;
@@ -35,7 +36,7 @@ const Img = styled.img`
     }
 `
 
-export const Name = styled.a`
+export const Name = styled(Link)`
     font-family: ${font.helvetica};
     font-size: ${rem(14)};
     font-weight: 400;
@@ -45,11 +46,11 @@ export const Name = styled.a`
     letter-spacing: 0.25px;
 `
 
-function User({ data, children, className }) {
+function User({ to, data, children, className }) {
     let url = data.avatar_url ? `//${data.avatar_url}` : ''
     return (
         <Root className={className}>
-            <Pic href="#">
+            <Pic to={to}>
                 {url
                     ? (
                         <Img src={url} />
@@ -59,7 +60,7 @@ function User({ data, children, className }) {
             </Pic>
             {children
                 ? children
-                : <Name href="#">
+                : <Name to={to}>
                     {data.name}
                 </Name>}
         </Root>

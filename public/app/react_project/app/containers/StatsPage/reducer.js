@@ -19,7 +19,6 @@ function StatsPageReducer(state = initialState, action) {
             return state.set('catstatsdata', fromJS(action.payload));
             break
         case LOAD_AUTHORS_STATS_SUCCESS:
-            console.log(action.payload);
             return state.set('autstatsdata', fromJS(action.payload));
             break;
         default:

@@ -52,13 +52,13 @@ class LiveForm extends React.PureComponent {
     }
 
     render() {
-        const { handleSubmit, live } = this.props;
+        const { handleSubmit, live, valid } = this.props;
 
         return (
             <Form onSubmit={handleSubmit(this.onSubmit)}>
                 <Field
                     type="hidden"
-                    name="id"
+                    name="news_id"
                     component={this.renderIdField}
                 />
                 <Group md>
@@ -86,6 +86,7 @@ class LiveForm extends React.PureComponent {
                     success={!live}
                     danger={live}
                     onClick={this.onButtonClick}
+                    active={valid && !live}
                     block
                 >
                     {live ? 'Выключить' : 'Включить'} прямой эфир
@@ -106,8 +107,8 @@ const validate = (values) => {
         errors.image_preview = 'Не выбрано изображение для превью';
     }
 
-    if (!values.get('id')) {
-        errors.id = 'Нужно выбрать новость из списка';
+    if (!values.get('news_id')) {
+        errors.news_id = 'Нужно выбрать новость из списка';
     }
 
     return errors;
@@ -119,6 +120,7 @@ LiveForm.propTypes = {
     liveOn: PropTypes.func,
     liveOff: PropTypes.func,
     submit: PropTypes.func,
+    valid: PropTypes.bool,
 };
 
 // eslint-disable-next-line no-class-assign

@@ -19,8 +19,7 @@
   },
   "scripts": {
     "init": "node ./tars/user-tasks/helpers/init-project.js",
-    "lint:eslint": "eslint markup/components --cache",
-    "precommit": "npm run lint:eslint --silent"
+    "lint:eslint": "eslint markup/components --cache"
   },
   "author": "",
   "license": "ISC"
