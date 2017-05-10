@@ -5,6 +5,7 @@
         position: relative;
 
         display: flex;
+        align-items: center;
         padding: 1.4rem 0 1.6rem 1.5rem;
 
         cursor: pointer;
@@ -51,10 +52,11 @@
             }
         }
 
-        &_state1 {
+        /*&_state1 {
+
             .programs {
                 &__title {
-                    font-size: rem(24);
+                    font-size: rem(21);
                     line-height: 1.2;
                     letter-spacing: -.004rem;
                 }
@@ -127,7 +129,7 @@
                 &__date {
                     padding-top: .2rem;
                 }
-                
+
                 &__title {
                     margin-top: .55rem;
 
@@ -136,7 +138,7 @@
                     letter-spacing: -.004rem;
                 }
             }
-        }
+        }*/
     }
 
     &__img-container {
@@ -162,7 +164,7 @@
         display: none;
         width: 100%;
         height: 100%;
-        
+
         background-color: rgba(0, 0, 0, .3);
         background-image: url('../img/minified-svg/youtube.svg');
         background-repeat: no-repeat;
@@ -180,9 +182,10 @@
     &__date {
             padding: 0 0 0 .1rem;
             margin-bottom: 0;
+            margin-top: 0;
 
             font-size: .75rem;
-            font-weight: 600;
+            font-weight: 400;
             color: #666;
             letter-spacing: -.01rem;
     }
@@ -195,8 +198,8 @@
         color: #999;
     }
 
-    &__category {    
-        font-size: .8rem;
+    &__category {
+        font-size: .75rem;
         letter-spacing: -.03rem;
         text-transform: uppercase;
     }
@@ -204,10 +207,11 @@
     &__title {
         margin: 0;
 
-        font-size: 1.3rem;
+        font-size: 1.315rem;
         font-weight: 600;
         line-height: 1.3;
-        letter-spacing: -.072rem;
+        //letter-spacing: -.072rem;
+        letter-spacing: rem(-.1px);
     }
 
     &__tags {

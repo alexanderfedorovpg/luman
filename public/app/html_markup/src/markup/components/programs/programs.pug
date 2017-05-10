@@ -14,17 +14,18 @@ mixin programs(data)
                 +e.DIV.info
                     +e.P.date
                         = item.date
-                        | ,
+                        if (item.time)
+                            | ,
                         +e.SPAN.time= item.time
                     +e.A.category(href-jv0)= item.category
                     +e.P.title= item.title
 
-                    +e.DIV.tags
+                    //-+e.DIV.tags
                         each tag in item.tags
                             +e.SPAN.tag
                                 | #
                                 = tag
-                
+
                 +e.DIV.btn-container
                     button.btn.btn-md.btn-danger
                         i.icon.icon-delete-reverse

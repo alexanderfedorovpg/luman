@@ -6,8 +6,8 @@ mixin p-constructor(data)
             +b.header-l
                 .input-icon
                     input.input.input-block#ko4(type='text' placeholder='Ключевые слова')
-                    +icon({ icon: 'search', class: 'search' }) 
-            +b.header-r 
+                    +icon({ icon: 'search', class: 'search' })
+            +b.header-r
                 +b.FORM.form-feed(action='' method='POST')
                     .form-horizontal
                         button.btn.btn-xs.btn-danger
@@ -58,11 +58,11 @@ mixin p-constructor(data)
                         span ВОЙНА OFF
 
                     +b.constructor-filter-nav
-                        +e.A.item.is-active(href=jv0) Новости 
+                        +e.A.item.is-active(href=jv0) Новости
                             span 10
-                        +e.A.item(href=jv0) Инфошум 
+                        +e.A.item(href=jv0) Инфошум
                             span 4
-                        +e.A.item(href=jv0) Из эфира 
+                        +e.A.item(href=jv0) Из эфира
                             span 6
 
                 +e.col-r

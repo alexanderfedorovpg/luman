@@ -5,7 +5,7 @@ var data = { programs: {
             state: 'state1',
             image: 'img/content/program1.png',
             date: '15 января 2017',
-            time: '15:18',
+            //time: '15:18',
             category: 'тайм-код',
             tags: [
                 'вашингтон',
@@ -20,7 +20,7 @@ var data = { programs: {
             state: 'state2',
             image: 'img/content/program2.png',
             date: '15 января 2017',
-            time: '15:18',
+            //time: '15:18',
             category: 'израиль за неделю',
             tags: [
                 'израиль',
@@ -34,7 +34,7 @@ var data = { programs: {
             state: 'state3',
             image: 'img/content/program3.png',
             date: '15 января 2017',
-            time: '15:18',
+            //time: '15:18',
             category: 'русский акцент',
             tags: [
                 'генетика',
@@ -47,7 +47,7 @@ var data = { programs: {
             state: 'state4',
             image: 'img/content/program4.png',
             date: '15 января 2017',
-            time: '15:18',
+            //time: '15:18',
             category: 'израиль за неделю',
             tags: [
                 'вашингтон',
@@ -61,7 +61,7 @@ var data = { programs: {
             state: 'state5',
             image: 'img/content/program5.png',
             date: '15 января 2017',
-            time: '15:18',
+            //time: '15:18',
             category: 'русский акцент',
             tags: [
                 'генетика',
@@ -74,7 +74,7 @@ var data = { programs: {
             state: 'state6',
             image: 'img/content/program6.png',
             date: '15 января 2017',
-            time: '15:18',
+            //time: '15:18',
             category: 'израиль за неделю',
             tags: [
                 'вашингтон',
