@@ -10,6 +10,16 @@
 
     background-color: $bg-gray;
 
+    &_war:before {
+        content: '';
+
+        display: block;
+        width: 100%;
+        height: rem(70);
+
+        background-color: $war;
+    }
+
     &_margin + main {
         margin-top: 2.6875rem;
     }
@@ -109,16 +119,4 @@
         color: $white;
     }
 
-}
-
-.war {
-    .header:before {
-        content: '';
-
-        display: block;
-        width: 100%;
-        height: rem(70);
-
-        background-color: $purple;
-    }
 }

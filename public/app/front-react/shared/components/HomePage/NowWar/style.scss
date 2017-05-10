@@ -1,0 +1,80 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.now-war {
+    width: rem(300);
+    padding-left: rem(14);
+
+    &__title {
+        font: #{rem(24)}/#{rem(24)} $stemBold;
+        color: $war;
+        text-decoration: none;
+    }
+
+    &__live {
+        padding-left: rem(6);
+
+        background-color: $war;
+
+        &_margin {
+            margin-top: rem(13);
+        }
+    }
+
+    &__live-title {
+        font: #{rem(16)}/#{rem(23)} $stemBold;
+        color: $white;
+        text-transform: uppercase;
+    }
+
+    &__translate {
+        padding-bottom: rem(18);
+
+        border-bottom: 1px solid $gray;
+
+        &_margin {
+            margin-top: rem(3);
+            margin-bottom: rem(6);
+        }
+    }
+
+    &__translate-link {
+        font: rem(14) $stemBold;
+        color: $blue;
+        text-decoration: none;
+    }
+
+    &__mini-news {
+        position: relative;
+
+        padding-bottom: 0 !important;
+        padding-left: rem(18);
+
+        border-bottom: none !important;
+
+        &::before {
+            content: '';
+
+            position: absolute;
+            top: calc(50% - #{rem(9)});
+            left: 0;
+
+            display: block;
+            width: rem(11);
+            height: 1px;
+
+            background-color: $war;
+        }
+
+        &:not(:first-child) {
+            padding-top: rem(14);
+        }
+
+        .mini-news__title {
+            display: inline-block;
+
+            font-size: rem(14);
+            line-height: rem(19);
+        }
+    }
+}
