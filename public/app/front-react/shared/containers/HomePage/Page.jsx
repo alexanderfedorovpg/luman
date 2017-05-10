@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
-import { selectHome, selectHomeBroadcast } from 'selectors/news'
+import { selectHome, selectHomeBroadcast, selectWarMode } from 'selectors/news'
 
 import { fetchHome } from 'actions/news'
 
@@ -20,7 +20,7 @@ class HomePage extends PureComponent {
     }
 
     render() {
-        let { broadcast, home } = this.props
+        let { broadcast, home, warMode } = this.props
 
         return (
             <div>
@@ -28,7 +28,7 @@ class HomePage extends PureComponent {
                     <title>Главная</title>
                 </Helmet>
 
-                <Home data={home} broadcast={broadcast} />
+                <Home data={home} broadcast={broadcast} war={warMode} />
             </div>
         )
     }
@@ -36,7 +36,8 @@ class HomePage extends PureComponent {
 
 const mapStateToProps = state => ({
     home: selectHome(state),
-    broadcast: selectHomeBroadcast(state)
+    broadcast: selectHomeBroadcast(state),
+    warMode: selectWarMode(state)
 })
 
 const mapDispatchToProps = dispatch => ({

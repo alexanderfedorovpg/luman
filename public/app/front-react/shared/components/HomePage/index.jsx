@@ -1,9 +1,13 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import BigNews from './BigNews'
 import Now from './Now'
+import NowWar from './NowWar'
 import Today from './Today'
 import Noise from 'components/Noise'
+import Block from 'components/Block'
+import MiniNews from 'components/MiniNews'
 import Video from 'components/GeneralVideo'
 import EnterOne from 'components/Broadcast/One'
 import Banner from './Banner'
@@ -16,7 +20,7 @@ import ListVideo from './ListVideo'
 
 import './style.scss'
 
-function HomePage({ data, broadcast }) {
+function HomePage({ data, broadcast, war }) {
     const nowNews = data.news
         .filter(v => v.category.id == 1) // 1 - id категории "сейчас"
         .map(v => v.news)
@@ -25,7 +29,7 @@ function HomePage({ data, broadcast }) {
     const todayNews = data.news
         .filter(v => v.category.id == 2) // 2 - id категории "главное за сутки"
         .map(v => v.news)
-        .slice(0, 3)
+        .slice(0)
 
     const otherNews = data.news
         .filter(v => v.category.id == 3) // 3 - id категории "прочее"
@@ -48,16 +52,41 @@ function HomePage({ data, broadcast }) {
                 <div className="general-news__left">
                     <div className="general-news__left-wrapper">
                         <BigNews className="general-news__big-news" data={nowNews[0]||{}} />
-                        <Now className="general-news__now" data={nowNews.slice(1)} />
+                        {war
+                            ? null // <NowWar data={[]} className="general-news__now-war" />
+                            : <Now data={nowNews.slice(1)} className="general-news__now" />
+                        }
                     </div>
                     <div className="general-news__left-wrapper two-wrapper">
-                        <Today className="general-news__per-day" data={todayNews} />
-                        <Noise className="general-news__info-noize" data={noiseNews} />
+                        <Today
+                            data={war ? [firstVideo, ...todayNews] : todayNews}
+                            war={war}
+                            className={classNames('general-news__per-day', { 'general-news__per-day_war': war })} />
+                        {war
+                            ? (
+                                <div className="info-noize general-news__info-noize general-news__info-noize_war">
+                                    <Block
+                                        data={todayNews[2]}
+                                        war
+                                        warTitle={firstVideo.title}
+                                        className="info-noize__block-square info-noize__block-square_war" />
+                                    <div className="info-noize__wrapper">
+                                        {todayNews.slice(3, 7).map(v => (
+                                            <MiniNews key={v.id} data={v} className="info-noize__mini-news info-noize__mini-news_war" />
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                            : <Noise className="general-news__info-noize" data={noiseNews} />
+                        }
                     </div>
                 </div>
-                <div className="general-news__right">
+                <div className="general-news__right right-col">
                     <Video className="general-news__general-video" />
-                    <EnterOne className="general-news__enter-one" data={firstVideo} />
+                    {war
+                        ? <Noise className="general-news__info-noize" data={noiseNews} />
+                        : <EnterOne className="general-news__enter-one" data={firstVideo} />
+                    }
                 </div>
                 <div className="general-news__left general-news__left_more">
                     <div className="general-news__left-wrapper">

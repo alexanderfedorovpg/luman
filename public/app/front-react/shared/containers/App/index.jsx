@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import { connect } from 'react-redux'
 import Switch from 'react-router-dom/Switch'
 import Route from 'react-router-dom/Route'
@@ -22,6 +23,7 @@ import AboutPage from 'containers/AboutPage'
 import HowPage from 'containers/HowPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
+import { selectWarMode } from 'selectors/news'
 
 // import 'normalize.css/normalize.css'
 import './style.scss'
@@ -35,10 +37,11 @@ class App extends Component {
     }
 
     render() {
+        const { warMode } = this.props
 
         return (
             <IntlProvider locale="ru">
-                <div className="root">
+                <div className={classNames('root', { war: warMode })}>
                     <Helmet>
                         <html lang="ru" />
                         <meta charSet="utf-8" />
@@ -48,7 +51,7 @@ class App extends Component {
                         <meta name="HandheldFriendly" content="true" />
                     </Helmet>
 
-                    <Header />
+                    <Header war={warMode} />
 
                     <main>
                         <Switch>
@@ -77,7 +80,9 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+    warMode: selectWarMode(state)
+})
 
 const mapDispatchToProps = dispatch => ({
     fetchData() {

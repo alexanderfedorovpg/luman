@@ -29,13 +29,6 @@ html {
     @include above(1600px) {
         font-size: 16px;
     }
-
-    &.war {
-
-        .header::before {
-            background-color: $war;
-        }
-    }
 }
 
 h1 {
@@ -57,6 +50,11 @@ main {
     margin-top: 1px;
     flex: 1;
     padding-top: rem(54);
+}
+.war {
+    main {
+        padding-top: rem(113);
+    }
 }
 
 .root {
@@ -131,6 +129,9 @@ main {
     width: rem(300);
 
     .enter-one {
+        margin-top: rem(30);
+    }
+    .info-noize {
         margin-top: rem(30);
     }
 }
