@@ -152,7 +152,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     //Прямой эфир
     $group->get('/air/live','AirLiveController@index');
     $group->post('/air/live','AirLiveController@onAir');
-
+    $group->delete('/air/live','AirLiveController@disableAir');
 
 });
 
