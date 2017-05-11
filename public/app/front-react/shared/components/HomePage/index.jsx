@@ -20,27 +20,14 @@ import ListVideo from './ListVideo'
 
 import './style.scss'
 
-function HomePage({ data, broadcast, war }) {
-    const nowNews = data.news
-        .filter(v => v.category.id == 1) // 1 - id категории "сейчас"
-        .map(v => v.news)
-        .slice(0, 5)
+function HomePage({ now, today, other, noise, broadcast, war }) {
 
-    const todayNews = data.news
-        .filter(v => v.category.id == 2) // 2 - id категории "главное за сутки"
-        .map(v => v.news)
-        .slice(0)
+    const todayNews = today.slice(0)
 
-    const otherNews = data.news
-        .filter(v => v.category.id == 3) // 3 - id категории "прочее"
-        .map(v => v.news)
+    const randomNews = other.slice(0, 7)
+    const moreNews = other.slice(7, 13)
 
-    const noiseNews = data.noise.map(v => v.news)
-    const randomNews = otherNews.slice(0, 7)
-    const moreNews = otherNews.slice(7, 13)
-
-    const videoNews = broadcast
-        .map(v => v.record)
+    const videoNews = broadcast.map(v => v.record)
     const firstVideo = videoNews[0] || {}
 
     const moreVideo = videoNews.slice(1, 4)
@@ -51,10 +38,10 @@ function HomePage({ data, broadcast, war }) {
             <div className="general-news__container container">
                 <div className="general-news__left">
                     <div className="general-news__left-wrapper">
-                        <BigNews className="general-news__big-news" data={nowNews[0]||{}} />
+                        <BigNews className="general-news__big-news" data={now[0]||{}} />
                         {war
                             ? null // <NowWar data={[]} className="general-news__now-war" />
-                            : <Now data={nowNews.slice(1)} className="general-news__now" />
+                            : <Now data={now.slice(1, 5)} className="general-news__now" />
                         }
                     </div>
                     <div className="general-news__left-wrapper two-wrapper">
@@ -77,14 +64,17 @@ function HomePage({ data, broadcast, war }) {
                                     </div>
                                 </div>
                             )
-                            : <Noise className="general-news__info-noize" data={noiseNews} />
+                            : <Noise className="general-news__info-noize" data={noise} />
                         }
                     </div>
                 </div>
                 <div className="general-news__right right-col">
-                    <Video className="general-news__general-video" />
+                    <Video
+                        playTitle="date"
+                        title="Все ключевые события этого дня"
+                        className="general-news__general-video" />
                     {war
-                        ? <Noise className="general-news__info-noize" data={noiseNews} />
+                        ? <Noise className="general-news__info-noize" data={noise} />
                         : <EnterOne className="general-news__enter-one" data={firstVideo} />
                     }
                 </div>

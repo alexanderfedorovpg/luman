@@ -15,6 +15,7 @@ import {
     publishArticle,
     delegateArticle
 } from './actions'
+import { rejectArticle } from 'containers/NewslistPage/actions'
 
 import { loadEditors, postMessage } from 'containers/App/actions'
 
@@ -74,7 +75,7 @@ class EditorPage extends Component {
             loadMessages,
             postMessage,
             deleteArticle,
-            delegateArticle,
+            rejectArticle,
             finishArticle,
             publishArticle,
             toFixArticle,
@@ -119,7 +120,7 @@ class EditorPage extends Component {
                     article={article}
                     rubrics={rubrics}
                     chatRoom={params.id}
-                    delegate={delegateArticle.bind(this, article.id)}
+                    delegate={rejectArticle.bind(this, article.id)}
                     preview={this.state.preview}
                     finish={finishArticle}
                     closePreview={this.closePreview}
@@ -127,7 +128,7 @@ class EditorPage extends Component {
                     postMessage={postMessage}>
 
                     <HeaderEditor
-                        delegate={delegateArticle.bind(this, article.id)}
+                        delegate={rejectArticle.bind(this, article.id)}
                         finish={finishArticle}
                         {...headerProps} />
                 </Content>
@@ -182,6 +183,9 @@ const mapDispatchToProps = dispatch => ({
     },
     delegateArticle(id) {
         dispatch(delegateArticle(id))
+    },
+    rejectArticle(id) {
+        dispatch(rejectArticle(id))
     },
     postMessage(room, message) {
         dispatch(postMessage(room, message))
