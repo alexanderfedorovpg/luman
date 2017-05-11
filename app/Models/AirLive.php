@@ -16,8 +16,7 @@ class AirLive extends Model
         'image_preview',
         'title',
         'comment',
-        'to_homepage',
-        'enabled_timer',
+        'enabled_live'
     ];
 
     /**
@@ -30,8 +29,7 @@ class AirLive extends Model
         'image_preview' => 'string',
         'title' => 'string',
         'comment' => 'string',
-        'to_homepage' => 'boolean',
-        'enabled_timer' => 'boolean'
+        'enabled_live' => 'boolean'
     ];
 
     /**

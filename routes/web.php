@@ -69,6 +69,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/user','UserController@create');
     $group->put('/user/{id}','UserController@update');
     $group->delete('/user/{id}','UserController@destroy');
+    $group->put('/userprofile','UserController@editProfile');
 
     //Группы
     $group->get('/group','GroupController@index');
@@ -152,8 +153,11 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     //Прямой эфир
     $group->get('/air/live','AirLiveController@index');
     $group->post('/air/live','AirLiveController@onAir');
+    $group->delete('/air/live','AirLiveController@disableAir');
 
-
+    //Логи
+    $group->get('/logs','LogController@getAll');
+    $group->get('/logs/user','LogController@getCurrentUser');
 });
 
 

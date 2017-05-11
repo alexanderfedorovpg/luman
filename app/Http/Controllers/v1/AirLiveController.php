@@ -63,4 +63,19 @@ class AirLiveController extends CmsController
             return $this->respondFail422x($e->response->original);
         }
     }
+
+    /**
+     * Откдючает прямой эфир
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function disableAir()
+    {
+        $live = AirLive::enabledLive()->first();
+        if ($live) {
+            $live->enabled_live = false;
+            $live->update();
+        }
+        return $this->respond(['success' => true]);
+    }
 }

@@ -6,9 +6,10 @@ namespace App\Http\Controllers\v1;
 use App\Http\Transformers\v1\UsersTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Validation\ValidationException;
+use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Auth;
+use Hash;
 
 /**
  * Контроллер управления пользователя
@@ -77,10 +78,10 @@ class UserController extends CmsController
     {
         try {
             $rules = User::$rules;
-            $rules['password'] = 'required|min:6|confirmed';
+            $rules['password'] = 'required|min:6';
             $this->validate($request, $rules);
         } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+            return $this->respondFail422x($e->response->original);
         }
 
         $user = User::createNew($request->all());
@@ -141,6 +142,42 @@ class UserController extends CmsController
     {
         $user = Auth::user();
         return $this->respond($this->usersTransformer->transform($user->toArray()));
+    }
+
+    /**
+     * Редактирование профиля
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function editProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        try {
+            $this->validate($request, [
+                'firstname' => 'required|max:128',
+                'lastname' => 'max:127',
+                'login' => "required|max:255|unique:users,login,{$user->id}",
+                'email' => "required|email|unique:users,email,{$user->id}",
+                'avatar_id' => 'integer|exists:cdn_files,id',
+                'password' => 'min:6'
+            ]);
+
+            $requestData = $request->all();
+            $password = $request->input('password');
+            if ($password) {
+                $user->setAuthPassword($password);
+            }
+
+            $requestData['name'] = $request->input('firstname');
+            if ($request->input('lastname')) {
+                $requestData['name'] .= ' ' . $request->input('lastname');
+            }
+            return $this->respond(['success' => $user->save($requestData)]);
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
+        }
     }
 
 

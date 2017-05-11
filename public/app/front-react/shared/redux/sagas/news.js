@@ -153,7 +153,8 @@ export default function* news() {
             yield put(homeFetched({
                 news: data.news,
                 noise: data.info_noise,
-                broadcast: data.from_air
+                broadcast: data.from_air,
+                war: !!+data.options.is_war_mode
             }))
         }
         catch (e) {

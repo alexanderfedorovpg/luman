@@ -35,6 +35,9 @@ function Content({ data, children }) {
                     )
                     : null
                 }
+                {/*<div className="general-video general-news__general-video">
+                    <Video />
+                </div>*/}
                 <Video className="general-news__general-video general-video_left" />
                 <div className="news-preview">
                     <Tags data={data.tags} />
