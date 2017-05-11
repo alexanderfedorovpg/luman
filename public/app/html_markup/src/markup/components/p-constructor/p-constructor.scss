@@ -1,5 +1,7 @@
 .constructor {
+    height: 100vh;
     margin-top: -3px;
+
     &__top {
         .header-l {
             flex-grow: 0;
@@ -35,17 +37,18 @@
     }
 
     .content-l {
-        flex-grow: 0;
-        flex-shrink: 0;
-        flex-basis: 41.8%;
-        width: 41.8%;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 24%;
+        width: 24%;
+        overflow-x: hidden;
 
         @include below(1100px) {
             flex-basis: 100%;
             width: 100%;
         }
     }
-    
+
     .working__item:last-child {
         .working__wrap {
             border-bottom: 0;
@@ -152,7 +155,7 @@
         text-transform: uppercase;
         span {
             font-weight: 400;
-            
+
         }
         &.is-active,
         &:hover {

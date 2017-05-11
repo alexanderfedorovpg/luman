@@ -50,10 +50,10 @@ var data = {tabsNav: {
 
         items: [
             {
-                name: 'Выпуски'
+                name: 'Из эфира'
             },
             {
-                name: 'Из эфира',
+                name: 'Выпуски',
                 class: 'is-active'
             },
             {

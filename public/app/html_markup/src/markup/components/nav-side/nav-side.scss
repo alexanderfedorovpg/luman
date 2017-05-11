@@ -36,7 +36,6 @@
             .nav-side__name {
                 color: #fff;
             }
-
         }
     }
 
@@ -81,7 +80,7 @@
         }
 
         .badge {
-            top: 14px;
+            top: calc(50% - 8.5px);
             right: 22px;
         }
 
