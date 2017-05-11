@@ -155,7 +155,7 @@ class NewsFeedController extends CmsController
             $rules['editor_id']= 'numeric|exists:users,id';
             $rules['keywords']= 'required';
             $rules['header']= 'required';
-            $rules['body']= 'required';
+
             $rules['top']='required|numeric';
             $rules['is_online']= 'in:0,1';
             $rules['is_war_mode']= 'in:0,1';
@@ -176,14 +176,16 @@ class NewsFeedController extends CmsController
                 $news->is_publish = '0';
                 $news->publish_date = 'null';
                 $news->top = $data['top'];
-                $news->body = $data['body'];
+
                 $news->keywords = $data['keywords'];
                 $news->editor_id = $data['editor_id'];
 
                 //необязательные поля
-
                 if (isset($data['rubrics'])) {
                     $rubrics = $data['rubrics'];
+                }
+                if (isset($data['body'])) {
+                    $news->body = $data['body'];
                 }
                 if (isset($data['theses'])) {
                     $news->theses = $data['theses'];
