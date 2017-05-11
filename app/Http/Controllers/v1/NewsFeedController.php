@@ -72,11 +72,7 @@ class NewsFeedController extends CmsController
                 $feed->InformAgency($searchIA);
             }
 
-            $tagList = $request->input('tagList');
-            if ($tagList) {
-                $tags = explode(',', $tagList);
-                $feed->tags($tags);
-            }
+
 
 
             $limit = $request->input('limit');
@@ -154,7 +150,7 @@ class NewsFeedController extends CmsController
             }
 
             $rules['action']= 'required';
-            $rules['id']= 'required|exists:news_feed,id';
+            $rules['id']= 'exists:news_feed,id';
             $rules['editor_id']= 'numeric|exists:users,id';
             $rules['keywords']= 'required';
             $rules['top']='required|numeric';
