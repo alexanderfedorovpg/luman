@@ -78,6 +78,10 @@ h4 {
             // flex-direction: column;
         }
 
+        &--margin {
+            margin-top: rem(10);
+        }
+
     }
 
     &-l {
@@ -230,7 +234,7 @@ h4 {
 }
 
 .video-status {
-    
+
     font-family: $opensans;
     font-size: 13px;
     color: #999999;
@@ -259,6 +263,18 @@ h4 {
 
     }
 
+    &__title {
+        font-weight: 700;
+        letter-spacing: 0;
+        color: $cl-success;
+    }
+
+    &__timer {
+        font-weight: 400;
+    }
+
+
+
 }
 
 
@@ -279,7 +295,7 @@ h4 {
     &__item {
         flex: 1;
         margin-right: 4px;
-        
+
         &:last-child {
             margin-right: 0;
         }
@@ -404,6 +420,7 @@ h4 {
 }
 
 .text-edit {
+    position: relative;
     border: 1px solid rgba(204, 204, 204, 0.74);
 
     &__cnt {
@@ -417,7 +434,7 @@ h4 {
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
-        
+
         &:selection {
             background: #b0d7eb;
         }
@@ -434,6 +451,10 @@ h4 {
                 margin-bottom: 0;
             }
 
+        }
+
+        &--padding {
+            padding-bottom: rem(39);
         }
 
     }
@@ -480,6 +501,20 @@ h4 {
 
     }
 
+    &__ico {
+        position: absolute;
+        bottom: rem(-11);
+        left: calc(50% - #{rem(10.5)});
+        display: block;
+        @include bg($text-edit-ico);
+    }
+
+    &__highlighting {
+        @include padding_x(5px);
+        background-color: $cl-highlighting;
+        cursor: pointer;
+    }
+
     .icon-delete-reverse {
         margin-left: 7px;
         vertical-align: top;
@@ -510,7 +545,7 @@ h4 {
     font-size: 12px;
     font-weight: 400;
     text-align: right;
-    
+
     &__date {
 
         display: block;

@@ -181,6 +181,10 @@
 
 // Добавлять свои миксины здесь
 
+@mixin padding_x($val) {
+    padding-left: $val;
+    padding-right: $val;
+}
 
 @mixin placeholder {
   &.placeholder { @content }

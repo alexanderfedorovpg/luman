@@ -51,6 +51,11 @@
         justify-content: flex-start;
     }
 
+    &--margin {
+        margin-top: rem(27);
+        margin-bottom: rem(25);
+    }
+
     &__label {
 
         margin-bottom: 2px;
@@ -167,7 +172,7 @@
         line-height: 24px;
         letter-spacing: 0;
 
-        resize: vertical; 
+        resize: vertical;
     }
 
     // input with icon

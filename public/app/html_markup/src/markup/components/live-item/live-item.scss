@@ -33,7 +33,7 @@
 
     .checkbox input[type=checkbox].active+label:before,
     .checkbox input[type=checkbox]+label:hover:before {
-        background-position: -175px -159px;
+        background-position: -150px -169px;
     }
 
     .checkbox input[type="checkbox"]:checked + label {
@@ -41,7 +41,7 @@
     }
 
     .checkbox input[type="checkbox"]:checked + label:before {
-        background-position: -201px -152px;
+        background-position: -206px -152px;
     }
 
     .btn {

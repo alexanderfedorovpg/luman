@@ -1,0 +1,31 @@
+extends ../layouts/default
+
+include ../components/p-text-translate/p-text-translate
+
+block vars
+    -pageSettings.title = 'Текстовая трансляция';
+
+block content
+
+    +b.HEADER.header.header-off.text-translate__top
+        +b.header-bot
+            +b.header-l
+                +b.FORM.form-feed(action='' method='POST')
+                    .form-horizontal
+                        button.btn.btn-xs.btn-danger
+                            i.icon.icon-delete-reverse
+                            | Удалить
+                        a.btn.btn-xs.btn-danger(href="working.html")
+                            | Выключить
+                        button.btn.btn-xs.btn-primary Редактировать
+                        button.btn.btn-xs.btn-success.is-active
+                            +icon({icon: 'arrowRight', class: 'arrowRight'})
+                            | Обновление
+            +b.header-r
+                a.link-black(href=jv0)
+                    span ?
+                    | справка
+
+    // Контент здесь
+    +p-text-translate
+

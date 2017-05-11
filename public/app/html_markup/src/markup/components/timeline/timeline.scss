@@ -1,0 +1,109 @@
+.timeline {
+    border: 1px solid rgba(204, 204, 204, 0.74);
+
+    &__item {
+        position: relative;
+
+        display: flex;
+        align-items: flex-start;
+        padding-top: rem(14);
+        padding-right: rem(39);
+        padding-bottom: rem(14);
+        padding-left: rem(21);
+        margin-bottom: rem(-10);
+
+        color: $enter;
+
+        cursor: pointer;
+
+        &:hover {
+            color: $purple;
+
+            background-color: #f0f1f2;
+            .social-links {
+
+                display: flex;
+                margin-top: 0;
+
+            }
+        }
+
+        &:first-child {
+            // padding-top: rem();
+        }
+
+        &.is-important {
+            // margin-bottom: rem(12);
+            p.timeline__title {
+                font-family: $opensans;
+                font-size: rem(18);
+                font-weight: 700;
+                line-height: rem(24);
+            }
+        }
+    }
+
+    &__date {
+        flex-shrink: 0;
+        width: rem(40);
+        margin-right: rem(4);
+    }
+
+    &__time {
+        font-family: $opensans;
+        font-size: rem(12);
+        color: $purple;
+    }
+
+    &__cnt {
+        @include clearfix;
+    }
+
+    p.timeline__title {
+        margin-top: 0;
+        margin-bottom: 0;
+
+        font-family: $opensans;
+        font-size: rem(14);
+        line-height: rem(19);
+        color: inherit;
+        letter-spacing: rem(-0.16);
+    }
+
+    &__img {
+        margin-top: rem(11);
+    }
+
+    /*&__video {
+        position: relative;
+
+        float: left;
+
+        margin-top: rem(10);
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        &-mask {
+            position: absolute;
+            z-index: 4;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            background: rgba(0,0,0,0.38);
+        }
+    }
+
+    .icon-play {
+        position: absolute;
+        z-index: 5;
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+    }
+    */
+}

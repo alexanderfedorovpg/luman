@@ -1,0 +1,48 @@
+include ../cover-photo/cover-photo
+include ../timeline/timeline
+
+mixin p-text-translate(data)
+    +b.text-translate()&attributes(attributes)
+        block
+        +e.HEADER.header
+            .content-wrap
+                .content-l
+                    form(action='')
+                        input.input.input-block(value='rtvi.com/news/2017/10/10/url/kiberataki')
+                .content-r
+                    +b.video-status
+                        +e.SPAN.title Трансляция включена:
+                        +e.SPAN.timer  12 мин 24 с
+        .content-wrap.content-wrap--margin
+            .content-l
+                +b.translate-data
+                    +e.image
+                        +cover-photo
+                    +e.text
+                        form(action='')
+                            .form-group
+                                +b.form-group__label.form-group__label--right
+                                    span Заголовок
+                                    | : осталось 30 символов
+                                textarea.textarea.input-title.input-block
+                                    | Покушение на президента США Дональда Трампа
+                .form-group.form-group--margin
+                    +b.text-edit
+                        +text-header()
+                            +e.SPAN.remove Очистить
+                        +e.cnt.text-edit__cnt--padding
+                            p Разведка США исходит из того, что недавние хакерские атаки на США, приписываемые Вашингтоном Москве, могли быть санкционированы только высшим российским руководством. Такое утверждение приводится в совместном заявлении директора национальной разведки США
+                                = ' '
+                                +e.SPAN.highlighting.text-selected Джеймса Клэппера
+                                    +b.SPAN.text-selected-popup
+                                        +e.SPAN.item
+                                            +e.SPAN.icon
+                                                i.icon.icon-question-lite
+                                            | Справка
+                                | , заместителя министра обороны США по разведке Марселя Леттре и главы Агентства национальной безопасности и Киберкомандования ВС США адмирала Майкла Роджерса, распространенном на слушаниях в четверг в сенатском комитете по делам вооруженных сил.
+                        +e.A(href=jv0).ico
+
+                +timeline(timeline.textStream)(class="text-translate__timeline")
+
+            .content-r
+                +chat(class="text-translate__chat")

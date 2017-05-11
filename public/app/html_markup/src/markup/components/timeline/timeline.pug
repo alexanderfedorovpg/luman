@@ -1,0 +1,17 @@
+mixin timeline(data)
+    +b.timeline()&attributes(attributes)
+        block
+        each item in data.items
+            +e.item(class= item.class)
+                +e.date
+                    +e.TIME.time= item.time
+                +e.cnt
+                    +e.P.title= item.text
+                    if item.img
+                        +e.img
+                            img(src= item.img, alt="")
+                    if item.video
+                        +e.video
+                            img(src= item.video, alt="")
+                            +e.video-mask
+                            i.icon.icon-play

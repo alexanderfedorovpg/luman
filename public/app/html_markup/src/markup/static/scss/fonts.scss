@@ -22,7 +22,6 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 // font Nexa without Cyrillic
 @include font-face('Nexa', '../fonts/hinted-HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
 
-
 $georgia: Georgia, Times, 'Times New Roman', serif;
 $opensans: 'Open Sans', Arial, sans-serif;
 $helvetica: 'HelveticaNeue', Helvetica, Arial, sans-serif;
