@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Auth;
 use Hash;
+use App\Models\News;
 
 /**
  * Контроллер управления пользователя
@@ -180,5 +181,50 @@ class UserController extends CmsController
         }
     }
 
+    /**
+     * Статистика пользователей
+     *
+     * @param int $userId ID пользователя
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getStatistic($userId)
+    {
+        try {
+            $user = User::findOrFail($userId);
+            $written = News::where('is_publish', '=', true)
+                ->where('editor_id', '=', $user->id)->count();
+            $edited = News::where('editor_id', '=', $user->id)->count();
 
+            return $this->respond([
+                'written' => $written,
+                'edited' => $edited
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('User not found');
+        }
+    }
+
+    /**
+     * Статистика текущего пользователя
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getStatisticCurrentUser()
+    {
+        try {
+            $user = Auth::user();
+
+            $written = News::where('is_publish', '=', true)
+                ->where('editor_id', '=', $user->id)->count();
+            $edited = News::where('editor_id', '=', $user->id)->count();
+
+            return $this->respond([
+                'written' => $written,
+                'edited' => $edited
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('User not found');
+        }
+    }
 }
