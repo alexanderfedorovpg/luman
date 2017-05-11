@@ -65,11 +65,13 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     //Пользователи
     $group->get('/user','UserController@index');
     $group->get('/userprofile','UserController@profile');
-    $group->get('/user/{id}','UserController@show');
+    $group->get('/user/{id:[0-9]+}','UserController@show');
     $group->post('/user','UserController@create');
     $group->put('/user/{id}','UserController@update');
     $group->delete('/user/{id}','UserController@destroy');
     $group->put('/userprofile','UserController@editProfile');
+    $group->get('/user/{id}/statistic','UserController@getStatistic');
+    $group->get('/user/statistic','UserController@getStatisticCurrentUser');
 
     //Группы
     $group->get('/group','GroupController@index');

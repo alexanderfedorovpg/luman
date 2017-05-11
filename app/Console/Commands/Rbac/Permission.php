@@ -393,4 +393,18 @@ class Permission extends Command
             ],
         ];
     }
+
+    public function permissUserStatistic()
+    {
+        return [
+            [
+                'name' => 'v1.user-getStatistic',
+                'description' => 'Просмотор статистики пользователей'
+            ],
+            [
+                'name' => 'v1.user-getStatisticCurrentUser',
+                'description' => 'Просмотор статистики текущего(авторизированого) пользователя'
+            ],
+        ];
+    }
 }
