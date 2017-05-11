@@ -214,7 +214,7 @@ class NewsFeedController extends CmsController
                         $news->rubrics()->attach($rubrics);
                     }
 
-                    if ($feed ) {
+                    if (isset($feed) && $feed ) {
                         $feed->hidden = '1';
                         $feed->save();
                     }
