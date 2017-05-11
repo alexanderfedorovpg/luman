@@ -2,7 +2,7 @@ import React from 'react'
 import { FormattedRelative } from 'react-intl'
 
 import Video from 'components/GeneralVideo'
-import Tags from 'components/Tags'
+import Rubrics from 'components/Rubrics'
 
 import { ensureAbs } from 'shared/utils/uri'
 
@@ -40,7 +40,7 @@ function Content({ data, children }) {
                 </div>*/}
                 <Video className="general-news__general-video general-video_left" />
                 <div className="news-preview">
-                    <Tags data={data.tags} />
+                    <Rubrics data={data.rubrics} />
                     <figure className="news-preview__img">
                         <img src={ensureAbs(data.image_preview)} />
                         <figcaption className="news-preview__source">

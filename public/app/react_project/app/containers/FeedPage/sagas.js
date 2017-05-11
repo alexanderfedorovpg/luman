@@ -1,5 +1,6 @@
 import { take, call, put, select, cancel, takeLatest, takeEvery, fork } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import {
     LOAD_FEED,
@@ -29,6 +30,7 @@ export function* getFeed({ payload }) {
             ...stateParams,
             ...payload
         });
+
         yield put(feedLoaded(feed));
     } catch (err) {
         yield put(feedLoadingError(err));
@@ -64,8 +66,12 @@ export function* feedToWork({ payload }) {
     try {
         yield call(api.feedToWork, payload);
 
+        toastr.success('Новость добавлена в работу');
+
         yield put(feedInWork());
     } catch (err) {
+        toastr.error('Что-то пошло не так... :(');
+
         yield put(feedToWorkError(err));
     }
 }

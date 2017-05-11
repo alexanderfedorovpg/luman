@@ -25,7 +25,7 @@ function Item({ data, className, rectangle, war, warTitle }) {
 function renderList(className, type, data) {
 
     return (
-        <div className={classNames(`${type} ${type}_list`, className, { [`${type}_war`]: war })}>
+        <div className={classNames(`${type} ${type}_list`, className)}>
             {data.map((value, i) => (
                 <MiniNews key={i} data={value} />
             ))}

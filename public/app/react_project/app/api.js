@@ -38,7 +38,7 @@ export const hideFeedItem = (id) => axios.post('/newsfeed', {
 export const feedToWork = (data) => {
     let {
         id,
-        tags,
+        rubrics,
         keywords,
         editor,
         online_editor,
@@ -47,23 +47,21 @@ export const feedToWork = (data) => {
         header,
     } = data;
 
-    const formData = new FormData();
+    const formData = {
+        action: 'work',
+        id,
+        rubrics,
+        keywords: keywords.join(','),
+        editor_id: editor,
+        online_editor_id: online_editor,
+        video_group: (Array.isArray(video_group)
+            ? video_group
+            : [video_group, 2, 5]).filter(v => v).join(','),
+        top: rating,
+        header
+    }
 
-    video_group = Array.isArray(video_group)
-        ? video_group
-        : [video_group, 2, 5];
-
-    formData.append('action', 'work');
-    formData.append('id', id);
-    formData.append('tags', tags);
-    formData.append('keywords', keywords);
-    formData.append('editor_id', editor);
-    formData.append('online_editor_id', online_editor);
-    formData.append('video_group', video_group);
-    formData.append('top', rating);
-    formData.append('header', header);
-
-    return axios.post('/newsfeed/work', formData, {
+    return axios.post('/newsfeed/work', qs.stringify(formData), {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -103,7 +101,7 @@ export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
 });
 
 export const finishArticle = (data) => {
-    const formData = xwwwfurlenc({
+    const formData = qs.stringify({
         ...data,
         action: 'edit',
     });
@@ -115,15 +113,15 @@ export const finishArticle = (data) => {
     });
 };
 
-export const publishArticle = (data) => {
-    const formData = xwwwfurlenc(data);
+// export const publishArticle = (data) => {
+//     const formData = qs.stringify(data);
 
-    return axios.post('/newseditor', formData, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
+//     return axios.put('/newseditor', formData, {
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//     });
+// };
 
 export const toFixArticle = (id) => {
     const formData = xwwwfurlenc({ id });
@@ -184,7 +182,7 @@ export const getReadyNews = (params) => axios.get('/newseditor/moderated', {
     params,
 });
 
-export const publishModeratedArticle = (id) => axios.put(`/newseditor/publish/${id}`);
+export const publishArticle = (id) => axios.put(`/newseditor/publish/${id}`);
 
 // =============================================================================
 // Constructor API

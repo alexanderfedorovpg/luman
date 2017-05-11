@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import Tags from './../Tags'
 import Rating from './../Rating'
@@ -22,7 +23,7 @@ class Form extends Component {
         this.state = {
             data: {
                 header: props.data.header || '',
-                rating: props.data.header && 5
+                rating: 5
             },
             error: {
 
@@ -46,9 +47,6 @@ class Form extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.data.tags) {
-            this.setError('tags', false);
-        }
     }
 
     setValue(prop, value) {
@@ -80,9 +78,7 @@ class Form extends Component {
         let errors = {
             header: !this.state.data.header,
             keywords: !form.get('keywords'),
-            tags: form.getAll('tags').length < 1,
-            editor: !form.get('editor'),
-            id: !this.props.data.id
+            editor: !form.get('editor')
         }
 
         this.setState({
@@ -98,13 +94,17 @@ class Form extends Component {
         let form = new FormData(e.target)
 
         let errors = this.validate(form)
-        console.log(errors);
-        if (Object.values(errors).reduce((a,b) => a || b, false)) return
+
+        if (Object.values(errors).reduce((a,b) => a || b, false)) {
+            toastr.warning('Заполните обязательные поля')
+
+            return
+        }
 
         this.props.onSubmit({
             header: this.state.data.header,
             rating: this.state.data.rating,
-            tags: form.getAll('tags'),
+            rubrics: form.getAll('tags'),
             editor: form.get('editor'),
             online_editor: form.get('online_editor'),
             video_group: form.get('video_group'),
@@ -116,18 +116,18 @@ class Form extends Component {
 
         this.setState({
             data: {
-                header: '',
-                rating: null
+                ...this.state.data,
+                id: null,
             }
         })
     }
 
     render() {
-        let { data, users } = this.props
+        let { data, users, rubrics } = this.props
 
         return (
             <form onSubmit={this.submitHandler}>
-                <Tags data={(data.tags || "").split(', ')} />
+                <Tags data={rubrics} />
                 <Rating
                     value={this.state.data.rating}
                     onChange={value => this.setValue('rating', value)} />

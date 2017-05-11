@@ -7,6 +7,7 @@ import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { reducer as FormReducer } from 'redux-form/immutable';
+import toastrReducer from 'react-redux-toastr/lib/reducer';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import appReducer from 'containers/App/reducer';
@@ -49,5 +50,6 @@ export default function createReducer(asyncReducers) {
     app: appReducer,
     ...asyncReducers,
     form: FormReducer,
+    toastr: toastrReducer,
   });
 }

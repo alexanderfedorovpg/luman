@@ -1,5 +1,6 @@
 import { take, call, put, cancel, takeLatest, takeEvery } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import {
     TO_FIX_ARTICLE,
@@ -97,10 +98,13 @@ export function* finishArticle({ payload }) {
     try {
         yield call(api.finishArticle, payload)
 
+        toastr.success('Изменения сохранены')
+
         yield put(articleFinished())
 
-        yield put(push(`/newslist`))
+        // yield put(push(`/newslist`))
     } catch (err) {
+        toastr.error('Что-то пошло не так...')
         yield put(articleFinishError(err))
     }
 }
@@ -118,12 +122,17 @@ export function* publishArticle({ payload }) {
 
 
     try {
-        yield call(api.publishArticle, payload)
+        yield call(api.finishArticle, payload)
+
+        yield call(api.publishArticle, payload.id)
+
+        toastr.success('Новость опубликована')
 
         yield put(articlePublished())
 
-        yield put(push(`/newslist`))
+        // yield put(push(`/newslist`))
     } catch (err) {
+        toastr.error('Что-то пошло не так...')
         yield put(articlePublishError(err))
     }
 }

@@ -12,7 +12,7 @@ import { titleWrapper } from './style'
 import { padding, font } from 'constants/style'
 import { ifProp } from 'utils/style'
 
-const navClassName = randomString()
+const navClassName = 'super-item-secret'
 
 const Root = styled.div`
     padding-left: ${padding};
@@ -168,7 +168,9 @@ function Item({ data, newItem, clearTask, postMessage }) {
                             rating={data.top}
                             checked={data.top} />
                         <Rubric>
-                            {data.rubrics && data.rubrics.name}
+                            {(data.rubrics || []).map(v => (
+                                v.name
+                            )).join(' ')}
                         </Rubric>
                     </Header>
                     <Title new={newItem}>
@@ -177,10 +179,10 @@ function Item({ data, newItem, clearTask, postMessage }) {
                         </TitleWrapper>
                     </Title>
                     <Tags>
-                        {data.tags
+                        {(data.keywords || [])
                             .filter(value => !!value.trim())
-                            .map(value => (
-                                <span key={value}>
+                            .map((value, i) => (
+                                <span key={i}>
                                     #{value}
                                 </span>
                             ))

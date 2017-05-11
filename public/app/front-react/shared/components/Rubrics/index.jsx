@@ -2,7 +2,7 @@ import React from 'react'
 
 import './style.scss'
 
-function Tags({ data }) {
+function Rubrics({ data }) {
     if (!data) return null
 
     const cleanData = data.filter(v => v && `${v}`.trim())
@@ -10,12 +10,12 @@ function Tags({ data }) {
     return (
         <div className="breadcrumbs">
             {cleanData.map(v => (
-                <a key={v} className="breadcrumbs__item">
-                    {v}
+                <a key={v.id} className="breadcrumbs__item">
+                    {v.name}
                 </a>
             ))}
         </div>
     )
 }
 
-export default Tags
+export default Rubrics

@@ -22,7 +22,6 @@ const selectNewsList = createSelector(
                 }
 
                 return result
-                    .set('rubrics', rubrics.find(rub => rub.id === value.get('rubrics_id')))
             }).toJS()
     }
 )

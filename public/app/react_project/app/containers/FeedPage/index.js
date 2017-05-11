@@ -18,7 +18,8 @@ import {
 } from './selectors';
 
 import {
-    selectEditors
+    selectEditors,
+    selectRubrics
 } from 'containers/App/selectors';
 
 import {
@@ -92,7 +93,8 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
             router,
             loading,
             search,
-            editors
+            editors,
+            rubrics
         } = this.props
 
         return (
@@ -114,6 +116,7 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
                         <Form
                             data={selectedFeed}
                             users={editors}
+                            rubrics={rubrics}
                             onSubmit={this.sendToWork} />
                     </Right>
                 </Wrap>
@@ -133,7 +136,8 @@ const mapStateToProps = state => ({
     selectedFeed: selectedFeed(state),
     pagination: selectedPagination(state),
     loading: selectedLoading(state),
-    editors: selectEditors(state)
+    editors: selectEditors(state).toJS(),
+    rubrics: selectRubrics(state)
 })
 
 function mapDispatchToProps(dispatch) {

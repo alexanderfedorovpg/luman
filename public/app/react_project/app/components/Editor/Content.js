@@ -2,6 +2,7 @@ import React, { Component, PropTypes, Children, cloneElement } from 'react'
 import styled from 'styled-components'
 import ReactQuill from 'react-quill'
 import Dropzone from 'react-dropzone'
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import { Wrap, Left, Right } from 'components/Content'
 import { Group, Textarea, Label } from 'components/Form'
@@ -17,6 +18,7 @@ import HeaderEditor from './Header.editor'
 import HeaderSupervisor from './Header.supervisor'
 
 import { ifProp } from 'utils/style'
+import { ensureAbs } from 'utils/uri'
 import { font, padding, color } from 'constants/style'
 
 import 'quill/dist/quill.snow.css'
@@ -200,24 +202,25 @@ class Content extends Component {
     }
 
     validate() {
-        let { data, error } = this.state
-        let { article } = this.props
+        const { data, error } = this.state
+        const { article } = this.props
+        let retFlag = false
 
         if (!data.rubrics.length) {
-            alert('Выберите рубрику!')
-            return
+            toastr.warning('Выберите рубрики!')
+            retFlag = true
         }
         if (!data.image_main_temp && !article.image_main_id) {
-            alert('Выберите основное изображение!')
-            return
+            toastr.warning('Выберите основное изображение!')
+            retFlag = true
         }
         if (!data.image_preview_temp && !article.image_preview_id) {
-            alert('Выберите превью!')
-            return
+            toastr.warning('Выберите превью!')
+            retFlag = true
         }
         if (!data.top) {
-            alert('Выберите рейтинг!')
-            return
+            toastr.warning('Выберите рейтинг!')
+            retFlag = true
         }
         let newError = {
             ...error,
@@ -231,10 +234,16 @@ class Content extends Component {
             this.setState({
                 error: newError
             })
-            return
+            toastr.warning('Заполните обязательные поля!')
+            retFlag = true
         }
 
-        return true
+        if (retFlag) {
+            return
+        }
+        else {
+            return true
+        }
     }
 
     dataToSubmit() {
@@ -243,7 +252,7 @@ class Content extends Component {
 
         let r = data.rubrics.map(name => (
             rubrics.find(r=>r.name==name).id
-        ))[0]
+        ))
 
         if (!this.validate()) return
 
@@ -253,8 +262,8 @@ class Content extends Component {
             title: data.title.slice(0, titleMax),
             sub_title: data.subtitle.slice(0, subtitleMax),
             editor_id: article.editor.id,
-            rubrics_id: r,
-            keywords: data.keywords.split(' '),
+            rubrics: r,
+            keywords: data.keywords.trim().replace(/ +/g, ','),
             tags: article.tags,
             theses: data.theses,
             image_main: data.image_main_temp || article.image_main_id,
@@ -365,7 +374,6 @@ class Content extends Component {
                         <Tags
                             data={rubrics.map(r => r.name)}
                             value={this.state.data.rubrics}
-                            type="radio"
                             onChange={this.changeHandlerValue('rubrics')} />
                     </Wrap>
                 </Action>
@@ -423,7 +431,7 @@ class Content extends Component {
                                     title="Нажмите чтобы выбрать другое изображение">
 
                                     {this.state.data.image_main
-                                        ? <img src={urlHelper(this.state.data.image_main)} />
+                                        ? <img src={ensureAbs(this.state.data.image_main)} />
                                         : (
                                             <span>
                                                 Переместите изображение<br />
@@ -440,7 +448,7 @@ class Content extends Component {
                                 title="Нажмите чтобы выбрать другое изображение">
 
                                 {this.state.data.image_preview
-                                    ? <img src={urlHelper(this.state.data.image_preview)} />
+                                    ? <img src={ensureAbs(this.state.data.image_preview)} />
                                     : (
                                         <span>
                                             Переместите изображение<br />
