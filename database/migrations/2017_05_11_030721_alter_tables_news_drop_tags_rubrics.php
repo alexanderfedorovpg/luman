@@ -14,9 +14,9 @@ class AlterTablesNewsDropTagsRubrics extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->dropForeign('news_rubrics_id_foreign');
+//            $table->dropForeign('news_rubrics_id_foreign');
             $table->dropColumn('rubrics_id');
-            $table->dropColumn('rubrics');
+//            $table->dropColumn('rubrics');
             $table->dropColumn('tags');
         });
     }
