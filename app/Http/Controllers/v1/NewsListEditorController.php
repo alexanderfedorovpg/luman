@@ -221,7 +221,7 @@ class NewsListEditorController extends CmsController
             $moderation = $request->input('moderation');
             $theses = $request->input('theses');
 
-            $newsEdit = News::ModerationMode()->find(intval($id));
+            $newsEdit = News::find(intval($id));
 
             if ($newsEdit == null) {
                 return $this->respondNotFound("Элемент не найден");
