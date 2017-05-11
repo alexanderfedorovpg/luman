@@ -439,6 +439,8 @@ class NewsListEditorController extends CmsController
             }
             $this->log->setLog('DELETE_NEWS', $this->user_id, "Error, news id=" . $id . " don't delete");
             throw new \Exception('Error, news don\'t delete');
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('DELETE_NEWS', $this->user_id, "Error 500 news id=" . $id);
             return $this->respondFail500x($e->getMessage());
@@ -479,6 +481,8 @@ class NewsListEditorController extends CmsController
             }
             $this->log->setLog('DELEGATE', $this->user_id, "Error, news id=" . $id . " don't delegate  [" . $this->user_id . ">" . $new_editor_id . "]");
             throw new \Exception('Error, news don\'t delegate');
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $id = $request->input('id');
             $this->log->setLog('DELEGATE', $this->user_id, "Error 500 news id=" . $id);
@@ -596,8 +600,9 @@ class NewsListEditorController extends CmsController
             }
             $this->log->setLog('PUBLISH', $this->user_id, "Error, news id=" . $id . " don't publish  [" . $this->user_id . "]");
             throw new \Exception('Error, news don\'t publish');
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
-
             return $this->respondFail500x($e->getMessage());
         }
     }
