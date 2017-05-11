@@ -58,6 +58,7 @@ class UserController extends CmsController
             if (!$user) {
                 return $this->respondNotFound('User is not found');
             }
+            
             return $this->respond($this->usersTransformer->transform($user->toArray()));
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound($e);

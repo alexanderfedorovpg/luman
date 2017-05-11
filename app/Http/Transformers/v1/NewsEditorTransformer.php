@@ -14,9 +14,9 @@ class NewsEditorTransformer extends Transformer
     public function transform($news)
     {
         $transform = $news;
-        $transform['tags'] =  explode(',', $news['tags']);
+
         $transform['keywords'] = explode(',', $news['keywords']);
-        $transform['rubrics'] = Rubrics::where('id', '=', $news['rubrics_id'])->get();
+        $transform['rubrics'] = News::find($news['id'])->rubrics()->orderBy('name')->get(['rubrics.id','rubrics.name'])->toArray();
         $transform['editor'] = $this->transformEditor($news['id']);
         $editorComments = $this->transformEditorComments($news['id']);
         $transform['editor_id'] = isset($transform['editor']['id']) ? $transform['editor']['id'] : null;
@@ -39,7 +39,7 @@ class NewsEditorTransformer extends Transformer
         $interval = $time_edit->diff($datetime_now);
         $transform['time_edit']=$interval->format('%D:%H:%I:%S');
 
-        unset($transform['rubrics_id']);
+
         
         return $transform;
     }

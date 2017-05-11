@@ -26,7 +26,7 @@ class News extends Model
         'video_stream',
         'body',
         'keywords',
-        'tags',
+
         'editor_id',
         'image_main',
         'image_preview',
@@ -34,6 +34,8 @@ class News extends Model
         'moderation',
         'theses',
     ];
+
+    protected $hidden = ['pivot'];
 
     public static $rules = [
         'id' => 'integer|exists:news,id',
@@ -48,6 +50,16 @@ class News extends Model
     public function comments()
     {
         return $this->hasMany(NewsComments::class);
+    }
+
+    /**
+     * Возвращает связь с рубриками
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rubrics()
+    {
+        return $this->belongsToMany('App\Models\Rubrics');
     }
 
     /**
@@ -94,34 +106,20 @@ class News extends Model
      * Фильтрация по наличию подстроки в заголовке или тегах
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param array $tags
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSubstring($query, array $strings)
     {
         foreach ($strings as $string) {
             $query->where(function ($query) use ($string) {
-                $query->orWhere('title', 'like', "%{$string}%")
-                    ->orWhere('tags', 'like', "%{$string}%");
+                $query->orWhere('title', 'like', "%{$string}%");
             });
         }
         return $query;
     }
 
-    /**
-     * Фильтрация по тегам
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param array $tags
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeTags($query, array $tags)
-    {
-        foreach ($tags as $tag) {
-            $query->where('tags', 'like', "%{$tag}%");
-        }
-        return $query;
-    }
+
 
     /**
      * Фильтрация по наличию или отсутсвию видеокассета

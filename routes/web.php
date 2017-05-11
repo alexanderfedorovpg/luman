@@ -155,6 +155,9 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/air/live','AirLiveController@onAir');
     $group->delete('/air/live','AirLiveController@disableAir');
 
+    //Логи
+    $group->get('/logs','LogController@getAll');
+    $group->get('/logs/user','LogController@getCurrentUser');
 });
 
 
