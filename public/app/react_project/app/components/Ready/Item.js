@@ -226,7 +226,9 @@ function Item({ data, intl, newItem, open, publish }) {
                         <Header>
                             <CustomRating rating={data.top} checked={data.top} />
                             <Rubric>
-                                {data.rubrics[0] && data.rubrics[0].name}
+                                {(data.rubrics || []).map(v => (
+                                    v.name
+                                )).join(' ')}
                             </Rubric>
                         </Header>
                         <Title new={newItem}>
@@ -238,10 +240,12 @@ function Item({ data, intl, newItem, open, publish }) {
                             </TitleWrapper>
                         </Title>
                         <Tags>
-                            {data.tags
-                                .filter(tag=>tag.trim())
-                                .map(tag => (
-                                    <span key={tag}>#{tag}</span>
+                            {(data.keywords || [])
+                                .filter(value => !!value.trim())
+                                .map((tag, i) => (
+                                    <span key={i}>
+                                        #{tag}
+                                    </span>
                                 ))
                             }
                         </Tags>
