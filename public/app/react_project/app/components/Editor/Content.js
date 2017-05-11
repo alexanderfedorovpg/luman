@@ -264,7 +264,6 @@ class Content extends Component {
             editor_id: article.editor.id,
             rubrics: r,
             keywords: data.keywords.trim().replace(/ +/g, ','),
-            tags: article.tags,
             theses: data.theses,
             image_main: data.image_main_temp || article.image_main_id,
             image_preview: data.image_preview_temp || article.image_preview_id,
