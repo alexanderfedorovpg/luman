@@ -233,7 +233,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->sub_title = $sub_title;
                 $newsEdit->note = $note;
                 $newsEdit->video_stream = $video_stream;
-                $newsEdit->is_publish = false;
+                $newsEdit->is_publish = 0;
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
