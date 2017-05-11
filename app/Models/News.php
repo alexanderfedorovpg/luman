@@ -35,6 +35,8 @@ class News extends Model
         'theses',
     ];
 
+    protected $hidden = ['pivot'];
+
     public static $rules = [
         'id' => 'integer|exists:news,id',
 
@@ -48,6 +50,16 @@ class News extends Model
     public function comments()
     {
         return $this->hasMany(NewsComments::class);
+    }
+
+    /**
+     * Возвращает связь с рубриками
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rubrics()
+    {
+        return $this->belongsToMany('App\Models\Rubrics');
     }
 
     /**
