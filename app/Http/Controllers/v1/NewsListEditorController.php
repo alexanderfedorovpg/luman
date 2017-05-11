@@ -178,7 +178,7 @@ class NewsListEditorController extends CmsController
                     $rules['rubrics.' . $key] = 'required|exists:rubrics,id';
                 }
             }
-            $rules['action'] = 'required';
+
             $rules['id'] = 'required|exists:news,id';
             $rules['editor_id'] = 'numeric|exists:users,id';
             $rules['keywords'] = 'required';
@@ -200,7 +200,7 @@ class NewsListEditorController extends CmsController
 
 
             $id = $request->input('id');
-            $action = $request->input('action');
+
             $title = $request->input('title');
             $sub_title = $request->input('sub_title');
             $top = $request->input('top');
@@ -227,7 +227,7 @@ class NewsListEditorController extends CmsController
                 return $this->respondNotFound("Элемент не найден");
             }
 
-            if ($newsEdit && $action == 'edit') {
+            if ($newsEdit ) {
 
                 $newsEdit->title = $title;
                 $newsEdit->sub_title = $sub_title;
