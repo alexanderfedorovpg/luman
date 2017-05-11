@@ -7,6 +7,7 @@ namespace App\Http\Controllers\v1;
 
 
 use App\Http\Transformers\v1\NewsFeedTransformer;
+use App\Http\Transformers\v1\NewsListTransformer;
 use App\Jobs\NewsFeedParserJob;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -153,6 +154,8 @@ class NewsFeedController extends CmsController
             $rules['id']= 'exists:news_feed,id';
             $rules['editor_id']= 'numeric|exists:users,id';
             $rules['keywords']= 'required';
+            $rules['header']= 'required';
+            $rules['body']= 'required';
             $rules['top']='required|numeric';
             $rules['is_online']= 'in:0,1';
             $rules['is_war_mode']= 'in:0,1';
@@ -161,16 +164,19 @@ class NewsFeedController extends CmsController
                 $rules
             );
 
-            $feed = NewsFeed::ViewMode(0)->findOrFail($data['id']);
+            if (isset($data['id'])){
+                $feed = NewsFeed::ViewMode(0)->find($data['id']);
+            }
 
-            if ($feed && $data['action'] == 'work') {
+
+            if ($data['action'] == 'work') {
 
                 $news = new News;
-                $news->title = $feed->header;
+                $news->title = $data['header'];
                 $news->is_publish = '0';
                 $news->publish_date = 'null';
                 $news->top = $data['top'];
-                $news->body = $feed->body;
+                $news->body = $data['body'];
                 $news->keywords = $data['keywords'];
                 $news->editor_id = $data['editor_id'];
 
@@ -208,11 +214,15 @@ class NewsFeedController extends CmsController
                         $news->rubrics()->attach($rubrics);
                     }
 
-                    $feed->hidden = '1';
-                    $feed->save();
+                    if ($feed ) {
+                        $feed->hidden = '1';
+                        $feed->save();
+                    }
+
                     $this->respond($news);
+                    $newsListTransformer=new NewsListTransformer;
                     return $this->respondCreated(
-                        $this->newsFeedTransformer->transform($feed->toArray())
+                        $newsListTransformer->transform($news)
                     );
                 }
                 throw new \Exception("Ошибка, новость не создана...");
