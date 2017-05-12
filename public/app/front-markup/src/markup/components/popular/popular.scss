@@ -1,0 +1,65 @@
+.popular {
+
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__part-l {
+        width: rem(618);
+        height: rem(450);
+    }
+
+    &__part-r {
+        width: rem(284);
+
+        &--margin {
+            margin-top: rem(-9);
+        }
+    }
+
+    &__title {
+        padding-bottom: rem(3);
+    }
+
+    &__from-enter {
+
+        &--big {
+            min-height: rem(450);
+            padding-bottom: 0;
+
+            & > .from-enter__link {
+                height: rem(345);
+            }
+
+            .from-enter__img {
+                height: inherit;
+            }
+
+            .from-enter__category {
+                margin-top: rem(-3);
+            }
+
+            .from-enter__info {
+                width: 100%;
+                padding-right: rem(25);
+                padding-left: rem(21);
+
+                & > .from-enter__link {
+                    font-size: rem(24);
+                    line-height: rem(26);
+                }
+            }
+        }
+    }
+
+    &__list-video {
+        margin-top: rem(27);
+
+        .list-video__title {
+            font-size: rem(16);
+            line-height: rem(18);
+        }
+    }
+}

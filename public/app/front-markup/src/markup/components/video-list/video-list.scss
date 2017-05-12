@@ -1,0 +1,49 @@
+.video-list {
+
+    &__no-border {
+
+        .more-video__title {
+            border-bottom: none;
+        }
+    }
+
+    &__from-enter {
+        width: rem(301);
+
+        .from-enter__info {
+            padding-left: rem(20);
+        }
+
+        &_war {
+
+            .from-enter__info {
+                padding-top: rem(13);
+            }
+        }
+    }
+
+    .from-enter__link {
+        line-height: rem(21);
+    }
+
+    .from-enter__category {
+        letter-spacing: -.2px;
+    }
+
+    .from-enter__img {
+        width: rem(301);
+        height: rem(185);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .from-enter__link_position::before {
+        width: rem(301);
+        height: rem(185);
+    }
+}

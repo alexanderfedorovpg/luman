@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+include ../components/p-from-the-enter/p-from-the-enter
+
+block vars
+    -pageSettings.title = 'Из эфира';
+    -pageSettings.headerClass = 'header_margin';
+
+block content
+    // Контент здесь
+    main
+        .inner-wrapper
+            +p-from-the-enter()
+
+
+

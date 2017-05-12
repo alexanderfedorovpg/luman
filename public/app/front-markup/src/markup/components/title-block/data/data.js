@@ -7,5 +7,10 @@ var data = {title_block: {
     noize: {
         title: 'Инфошум',
         ico_title: 'info'
+    },
+    from_enter: {
+        title: 'Из эфира',
+        subtitle: 'Телепрограмма',
+        ico_subtitle: 'menu'
     }
 }};

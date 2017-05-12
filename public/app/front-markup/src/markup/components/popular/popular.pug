@@ -1,0 +1,14 @@
+include ../from-enter/from-enter
+
+mixin popular(data)
+    +b.popular()&attributes(attributes)
+        block
+        +e.wrapper
+            +e.part-l
+                +from-enter(more_video.single)(class="popular__from-enter popular__from-enter--big from-enter_border")
+            +e.part-r.popular__part-r--margin
+                +e.P.title.section-title Популярное
+
+                //- список видео с иконкой
+                +list-video(list_video.from_enter)(class="popular__list-video")
+
