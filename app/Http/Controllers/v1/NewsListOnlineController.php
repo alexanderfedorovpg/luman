@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use App\Http\Transformers\v1\NewsListOnlineTransformer;
+use Validator;
 
 /**
  * Class NewsListOnlineController
@@ -94,9 +95,13 @@ class NewsListOnlineController extends CmsController
     public function addCommentNewsOnline(Request $request)
     {
         try {
-            $this->validate($request, NewsComments::$rules);
+            $validator = new Validator($request->all(), NewsComments::$rules);
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+
             if ($request->input('image_preview') && $request->input('video_stream')) {
-                throw new ValidationException('Only one of the fields must be filled');
+
             }
             $news = NewsComments::create($request->all());
             return $this->respondCreated([
