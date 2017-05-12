@@ -21,7 +21,7 @@ class UserController extends CmsController
 
 
     /**
-     * @var App\Http\Transformers\v1\UsersTransformer
+     * @var \App\Http\Transformers\v1\UsersTransformer
      */
     protected $usersTransformer;
 
@@ -157,8 +157,8 @@ class UserController extends CmsController
 
         try {
             $this->validate($request, [
-                'firstname' => 'required|max:128',
-                'lastname' => 'max:127',
+                'name' => 'required|max:255',
+                'lastname' => 'max:255',
                 'login' => "required|max:255|unique:users,login,{$user->id}",
                 'email' => "required|email|unique:users,email,{$user->id}",
                 'avatar_id' => 'integer|exists:cdn_files,id',
@@ -171,11 +171,8 @@ class UserController extends CmsController
                 $user->setAuthPassword($password);
             }
 
-            $requestData['name'] = $request->input('firstname');
-            if ($request->input('lastname')) {
-                $requestData['name'] .= ' ' . $request->input('lastname');
-            }
-            return $this->respond(['success' => $user->save($requestData)]);
+
+            return $this->respond(['success' => $user->update($requestData)]);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
         }
