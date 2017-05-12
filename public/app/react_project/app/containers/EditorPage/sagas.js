@@ -84,18 +84,17 @@ export function* delegateArticle({ payload }) {
 }
 
 export function* finishArticle({ payload }) {
-    if (!Number.isInteger(payload.image_main)) {
-        let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
-        payload.image_main = idMain
-    }
-
-    if (!Number.isInteger(payload.image_preview)) {
-        let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
-        payload.image_preview = idPreview
-    }
-
-
     try {
+        if (!Number.isInteger(payload.image_main)) {
+            let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
+            payload.image_main = idMain
+        }
+
+        if (!Number.isInteger(payload.image_preview)) {
+            let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
+            payload.image_preview = idPreview
+        }
+
         yield call(api.finishArticle, payload)
 
         toastr.success('Изменения сохранены')
@@ -110,18 +109,17 @@ export function* finishArticle({ payload }) {
 }
 
 export function* publishArticle({ payload }) {
-    if (!Number.isInteger(payload.image_main)) {
-        let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
-        payload.image_main = idMain
-    }
-
-    if (!Number.isInteger(payload.image_preview)) {
-        let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
-        payload.image_preview = idPreview
-    }
-
-
     try {
+        if (!Number.isInteger(payload.image_main)) {
+            let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
+            payload.image_main = idMain
+        }
+
+        if (!Number.isInteger(payload.image_preview)) {
+            let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
+            payload.image_preview = idPreview
+        }
+
         yield call(api.finishArticle, payload)
 
         yield call(api.publishArticle, payload.id)

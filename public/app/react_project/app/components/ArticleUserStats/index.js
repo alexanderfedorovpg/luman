@@ -20,7 +20,7 @@ export const Wrap = styled.div`
 const ExtTable = styled(Table)`
     width: 100%;
     margin-top: 11px;
-    
+
     th{
         color: #4d4d4d;
         font-weight: 700;
@@ -28,17 +28,17 @@ const ExtTable = styled(Table)`
         padding-bottom: 4px;
         padding-top: 21px;
     }
-    .stats-editor 
-    .col-clicks, 
     .stats-editor
-     .col-time, 
-     .stats-editor 
-     .col-views, 
-     .stats-editor
-     .col-write {
+    .col-clicks,
+    .stats-editor
+    .col-time,
+    .stats-editor
+    .col-views,
+    .stats-editor
+    .col-write {
         padding-top: 21px;
     }
-    
+
     td:first-child {
         position: relative;
         font-size: 16px;
@@ -61,12 +61,15 @@ const THead = styled.th`
 `
 
 const ThColName = styled(THead)`
-    font-size: 24px;
-    color: #333;
-    font-weight: 600;
-    letter-spacing: -.7px;
-    width: 38.7%;
-    padding-top: 17px;
+
+    &:first-child {
+        font-size: 24px;
+        color: #333;
+        font-weight: 600;
+        letter-spacing: -.7px;
+        width: 38.7%;
+        padding-top: 17px;
+    }
 `
 const ThColTime = styled(THead)`
      width: 14.3%;

@@ -13,6 +13,37 @@ class NewsComments extends Model
 {
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'news_id',
+        'editor_id',
+        'publish_date',
+        'is_publish',
+        'body',
+        'image_preview',
+        'video_stream',
+        'video_stream_preview',
+    ];
+
+    /**
+     * Правила
+     *
+     * @var array
+     */
+    public static $rules = [
+        'editor_id' => 'required|exists:users,id',
+        'news_id' => 'required|exists:news,id',
+        'body' => 'required',
+        'is_publish' => 'boolean',
+        'publish_date' => 'date|date_format:Y-m-d H:i:s',
+        'image_preview' => 'integer|exists:cdn_files,id',
+        'video_stream_preview' => 'integer|exists:cdn_files,id'
+    ];
+
+    /**
      * Возвращает связь с автором статьи
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

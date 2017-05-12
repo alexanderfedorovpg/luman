@@ -38,7 +38,10 @@ function Content({ data, children }) {
                 {/*<div className="general-video general-news__general-video">
                     <Video />
                 </div>*/}
-                <Video className="general-news__general-video general-video_left" />
+                <Video
+                    className="general-news__general-video"
+                    left
+                    data={data.video_stream} />
                 <div className="news-preview">
                     <Rubrics data={data.rubrics} />
                     <figure className="news-preview__img">
@@ -53,7 +56,7 @@ function Content({ data, children }) {
                 </div>
             </div>
             <div className="inner-about__content">
-                {data.body}
+                <div dangerouslySetInnerHTML={{ __html: data.body }} />
                 {children}
             </div>
         </div>

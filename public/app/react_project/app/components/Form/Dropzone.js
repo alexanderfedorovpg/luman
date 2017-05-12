@@ -1,27 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { ifProp, rem, em } from 'utils/style';
-import { color } from 'constants/style';
+import styled from 'styled-components';
+import { ifProp, rem } from 'utils/style';
 import ReactDropzone from 'react-dropzone';
 import ImgPreview from 'components/ImgPreview';
-import { Camera } from 'components/Icon/svg';
-
-const sizes = {
-    s: {
-        width: 130,
-        height: 130,
-        fontSize: 14,
-    },
-};
 
 const StyledDropzone = styled(({
-    size,
-    likeInput,
-    success,
-    error,
     hasValue,
-    icon,
     ...rest
 }) => <ReactDropzone {...rest} />)`
     display: flex;
@@ -34,50 +19,16 @@ const StyledDropzone = styled(({
     border-radius: 5px;
     overflow: hidden;
 
-    ${ifProp('size')(css`
-        width: ${({ size }) => rem(sizes[size].width)};
-        height: ${({ size }) => rem(sizes[size].height)};
-        min-height: 0;
-
-        font-size: ${({ size }) => sizes[size].fontSize ? rem(sizes[size].fontSize) : rem(16)}
-    `)}
-
     ${ifProp('hasValue')`
         border: 0;
     `}
-
-    ${ifProp('likeInput')(css`
-        color: #c4c4c4;
-
-        border: 1px solid rgba(204, 204, 204, 0.74);
-        border-radius: 0;
-
-        ${ifProp('success')(css`
-            border-color: ${color.success};
-        `)}
-
-        ${ifProp('error')(css`
-            border-color: ${color.danger};
-        `)}
-    `)}
 `;
 
 const PlaceholderWrapper = styled.div`
     padding: 0 ${rem(5)};
 `;
 
-const Icon = styled(Camera)`
-    display: block;
-    width: ${em(40)};
-    height: ${em(40)};
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: ${em(5)};
-
-    color: #eee;
-`;
-
-const Dropzone = ({ placeholder, value, icon, ...props }) => (
+const Dropzone = ({ placeholder, value, ...props }) => (
     <StyledDropzone
         hasValue={!!value}
         title="Нажмите чтобы выбрать другое изображение"
@@ -89,10 +40,6 @@ const Dropzone = ({ placeholder, value, icon, ...props }) => (
                 :
                 (
                     <PlaceholderWrapper>
-                        {
-                            !!icon &&
-                            <Icon />
-                        }
                         {placeholder}
                     </PlaceholderWrapper>
                 )
@@ -105,7 +52,6 @@ Dropzone.defaultProps = {
 };
 
 Dropzone.propTypes = {
-    icon: PropTypes.bool,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.instanceOf(File)),

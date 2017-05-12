@@ -4,8 +4,7 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Group, Label } from 'components/Form';
-import { SelectRedux, InputRedux, DropzoneRedux } from 'components/Form/ReduxForm';
-import { Close, ArrowDown } from 'components/Icon/svg';
+import { SelectRedux, InputRedux, ImageLoaderRedux } from 'components/Form/ReduxForm';
 
 import { StyledBtn } from '../style';
 import { makeGetProgramsAsOptions, makeGetSelectedRecord } from '../selectors';
@@ -88,10 +87,9 @@ class RecordForm extends React.PureComponent {
                         name="image_preview"
                         accept="image/*"
                         multiple={false}
-                        likeInput
                         icon
                         size="s"
-                        component={DropzoneRedux}
+                        component={ImageLoaderRedux}
                     />
                 </Group>
                 <Group marginBottom="40px">
@@ -105,19 +103,14 @@ class RecordForm extends React.PureComponent {
                     />
                 </Group>
                 <Group horizontal>
-                    <StyledBtn type="reset" onClick={this.onCancelClick} danger>
-                        <Close opacity=".5" width="14" heiht="14" />
-                        Отменить
-                    </StyledBtn>
+                    <StyledBtn buttonType="cancel" type="reset" onClick={this.onCancelClick} />
                     <StyledBtn
                         type="submit"
+                        buttonType="upload"
                         success
                         disabled={!valid || !dirty}
                         active={valid && dirty}
-                    >
-                        <ArrowDown opacity=".33" />
-                        Загрузить
-                    </StyledBtn>
+                    />
                 </Group>
             </form>
         );

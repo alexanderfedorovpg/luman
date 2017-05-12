@@ -66,7 +66,7 @@ class Item extends Component {
                 <Header>
                     <CustomRating rating={data.top} checked={data.top} />
                     <Rubrics>
-                        {data.rubrics_id
+                        {data.rubrics
                             .map(rubric => (
                                 <span key={rubric.id}>
                                     {rubric.name}

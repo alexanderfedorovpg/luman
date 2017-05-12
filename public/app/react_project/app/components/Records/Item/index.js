@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedTime, FormattedDate } from 'react-intl';
 import HashTags from 'components/HashTags';
-import { Close, ArrowUp } from 'components/Icon/svg';
 import {
     Wrapper,
     ImgWrapper,
@@ -63,12 +62,10 @@ const Record = ({
                 }
             </Info>
             <Buttons className="record-buttons">
-                <StyledBtn danger className="record-btn" onClick={onDelete}>
-                    <Close width="14px" height="14px" /> Удалить
+                <StyledBtn buttonType="cancel" className="record-btn" onClick={onDelete}>
+                    Удалить
                 </StyledBtn>
-                <StyledBtn primary className="record-btn" onClick={onEdit}>
-                    <ArrowUp className="record-icon" width="12px" height="14px" /> Редактировать
-                </StyledBtn>
+                <StyledBtn buttonType="edit" className="record-btn" onClick={onEdit} />
             </Buttons>
         </Wrapper>
     );
