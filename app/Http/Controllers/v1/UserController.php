@@ -157,20 +157,23 @@ class UserController extends CmsController
 
         try {
             $this->validate($request, [
-                'name' => 'required|max:255',
+                'firstname' => 'required|max:255',
                 'lastname' => 'max:255',
                 'login' => "required|max:255|unique:users,login,{$user->id}",
                 'email' => "required|email|unique:users,email,{$user->id}",
                 'avatar_id' => 'integer|exists:cdn_files,id',
                 'password' => 'min:6'
             ]);
-
             $requestData = $request->all();
             $password = $request->input('password');
             if ($password) {
                 $user->setAuthPassword($password);
             }
 
+            $firstname = $request->input('firstname');
+            if ($firstname) {
+                $requestData['name'] = $firstname;
+            }
 
             return $this->respond(['success' => $user->update($requestData)]);
         } catch (ValidationException $e) {
