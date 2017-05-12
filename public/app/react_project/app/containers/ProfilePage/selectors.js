@@ -2,7 +2,7 @@ import React from 'react';
 import { createSelector } from 'reselect';
 import { FormattedDate } from 'react-intl';
 import { getCurrentUserData } from 'containers/App/selectors';
-import { userGroups } from './constants';
+import { userGroups, lastActionsMap } from './constants';
 
 /**
  * Direct selector to the profilePage state domain
@@ -27,14 +27,15 @@ const makeAccountFormInitialValues = () => createSelector(
 
         const user = userImmutable.toJS();
         const userName = user.name.split(' ');
+        const url = user.avatar && user.avatar.url ? user.avatar.url : null;
 
         return {
             firstname: userName[0],
             lastname: userName[1],
             email: user.email,
             login: user.login,
-            avatar_id: `//${user.avatar_url}`,
-            password: '123',
+            avatar: url,
+            password: null,
         };
     }
 );
@@ -67,13 +68,53 @@ const makeProfileStats = () => createSelector(
                 day="2-digit"
             />
         );
-        makeStatsItem('totalArticles', 'Всего написано статей', 0);
+        // makeStatsItem('totalArticles', 'Всего написано статей', 0);
         makeStatsItem('group', 'Группа', user.groups.map(makeGroups).join(', '));
-        makeStatsItem('edited', 'Отредактировано', 0);
+        // makeStatsItem('edited', 'Отредактировано', 0);
         makeStatsItem('enabled', 'Статус профиля', user.enabled > 0 ? 'Активный' : 'Не активный');
 
         return data;
     }
+);
+
+const selectLastActions = createSelector(
+    selectProfilePageDomain(),
+    (page) => page.get('lastActions')
+);
+
+const makeLastActions = () => createSelector(
+    selectLastActions,
+    (lastActionsImmutable) => {
+        const lastActions = lastActionsImmutable.toJS();
+
+        return lastActions.map((action) => lastActionsMap.map((item) => action[item.value]));
+    }
+);
+
+const selectLastActionsSort = createSelector(
+    selectProfilePageDomain(),
+    (page) => page.get('lastActionsSort')
+);
+
+const makeLastActionsSort = () => createSelector(
+    selectLastActionsSort,
+    (sortDataImmutable) => {
+        const sortData = sortDataImmutable.toJS();
+
+        if (!sortData.index || !sortData.direction) {
+            return {};
+        }
+
+        return {
+            orderBy: lastActionsMap[sortData.index].value,
+            orderType: sortData.direction === 'up' ? 'asc' : 'desc',
+        };
+    }
+);
+
+const makeGetCanEditPassword = () => createSelector(
+    selectProfilePageDomain(),
+    (page) => page.get('canEditPassword')
 );
 
 /**
@@ -91,4 +132,7 @@ export {
     makeSelectedTab,
     makeAccountFormInitialValues,
     makeProfileStats,
+    makeLastActions,
+    makeLastActionsSort,
+    makeGetCanEditPassword,
 };

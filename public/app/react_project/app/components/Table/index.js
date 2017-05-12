@@ -98,8 +98,8 @@ class Table extends React.PureComponent {
 
         this.state = {
             sort: {
-                index: -1,
-                direction: 'up',
+                index: null,
+                direction: null,
             },
             data: props.body || [],
         };
@@ -109,6 +109,14 @@ class Table extends React.PureComponent {
         this.renderRow = this.renderRow.bind(this);
         this.renderCell = this.renderCell.bind(this);
         this.renderTh = this.renderTh.bind(this);
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.body === this.props.body) {
+            return;
+        }
+
+        this.sortTable(newProps.body);
     }
 
     onThClick(e, index) {
@@ -125,23 +133,29 @@ class Table extends React.PureComponent {
         }
     }
 
-    sortTable() {
+    sortTable(data = this.state.data, cb) {
         const { sort: { index, direction } } = this.state;
-        const newData = [...this.state.data].sort((a, b) => {
+        const newData = [...data].sort((row1, row2) => {
             const toDown = direction === 'down';
+            const a = row1[index] === null ? '' : row1[index];
+            const b = row2[index] === null ? '' : row2[index];
 
-            if (a[index] > b[index]) {
+            if (a > b) {
                 return toDown ? -1 : 1;
-            } else if (a[index] < b[index]) {
+            } else if (a < b) {
                 return toDown ? 1 : -1;
             }
 
             return 0;
         });
 
+        if (this.props.onSort) {
+            this.props.onSort(this.state.sort);
+        }
+
         this.setState({
             data: newData,
-        });
+        }, cb);
     }
 
     changeSortIndex(index) {
@@ -216,7 +230,7 @@ class Table extends React.PureComponent {
     render() {
         const { children, header, ...props } = this.props;
         return (
-            <StyledTable {...props}>
+            <StyledTable {...props} innerRef={(rootEl) => { this.rootEl = rootEl; }}>
                 {
                     !!children &&
                     Children.toArray(children)
@@ -239,6 +253,7 @@ Table.propTypes = {
     header: PropTypes.array,
     body: PropTypes.array,
     sortable: PropTypes.bool,
+    onSort: PropTypes.func,
 };
 
 export default Table;
