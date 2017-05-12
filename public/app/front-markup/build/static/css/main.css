@@ -4560,6 +4560,9 @@ main {
   letter-spacing: -0.0125rem;
   border: none;
   border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
 }
 
 .global-search__clear {
@@ -4572,8 +4575,6 @@ main {
   position: absolute;
   bottom: 0.625rem;
   left: 45.5rem;
-  width: 0.875rem;
-  height: 0.875rem;
   border: none;
   background-color: transparent;
 }

@@ -21,6 +21,9 @@
 
         border: none;
         border-bottom: 1px solid $gray;
+        border-radius: 0;
+        box-shadow: none;
+        -webkit-appearance: none;
     }
 
     &__clear {
@@ -28,9 +31,6 @@
         position: absolute;
         bottom: rem(10);
         left: rem(728);
-
-        width: rem(14);
-        height: rem(14);
 
         border: none;
         background-color: transparent;
