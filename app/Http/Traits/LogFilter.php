@@ -5,13 +5,14 @@ namespace App\Http\Traits;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Log;
+use DB;
 
 trait LogFilter
 {
     public function filter(Request $request, Builder $builder)
     {
         $this->validate($request, [
-            'orderBy' => 'in:id,date,type_event',
+            'orderBy' => 'in:id,date,time,type_event,ip,host,session',
             'orderType' => 'in:asc,desc',
             'userId' => 'integer|exists:users,id',
             'offset' => 'integer|min:0',
@@ -21,7 +22,14 @@ trait LogFilter
         $orderBy = $request->input('orderBy');
         if ($orderBy) {
             $orderType = $request->input('orderType');
-            $builder->orderBy($orderBy, $orderType ? $orderType : 'desc');
+            if ($orderBy === 'date') {
+                $orderBy = "DATE(updated_at)";
+            }
+            if ($orderBy === 'time') {
+                $orderBy = "TIME(updated_at)";
+            }
+
+            $builder->orderBy(DB::raw($orderBy), $orderType ? $orderType : 'desc');
         }
 
         $offset = $request->input('offset');
