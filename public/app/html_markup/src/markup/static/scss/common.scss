@@ -503,8 +503,8 @@ h4 {
 
     &__ico {
         position: absolute;
-        bottom: rem(-11);
-        left: calc(50% - #{rem(10.5)});
+        bottom: rem(-8);
+        left: calc(60% - #{rem(3)});
         display: block;
         @include bg($text-edit-ico);
     }
