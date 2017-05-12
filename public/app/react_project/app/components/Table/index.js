@@ -1,11 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { Children } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { ifProp } from 'utils/style';
+import { font } from 'constants/style';
+import uniqueId from 'lodash/uniqueId';
+import Icon from 'components/Icon';
 
-import tableOpacity from './img/table-opacity.png'
+import tableOpacity from './img/table-opacity.png';
 
-import { font } from 'constants/style'
-
-const Table = styled.table`
+const StyledTable = styled.table`
     width: 100%;
     text-align: left;
     table-layout: fixed;
@@ -24,12 +27,9 @@ const Table = styled.table`
         font-weight: 700;
         text-align: left;
 
-        &:first-child {
-            font-size: 24px;
-            color: #333;
-            font-weight: 600;
-            letter-spacing: -0.7px;
-        }
+        ${ifProp('sortable')`
+            cursor: pointer;
+        `}
     }
 
     td {
@@ -85,6 +85,160 @@ const Table = styled.table`
             }
         }
     }
-`
+`;
 
-export default Table
+const SortIcon = styled(Icon)`
+    transform: ${({ direction }) => direction === 'down' ? 'none' : 'rotate(-180deg)'}
+`;
+
+// eslint-disable-next-line react/prefer-stateless-function
+class Table extends React.PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sort: {
+                index: -1,
+                direction: 'up',
+            },
+            data: props.body || [],
+        };
+
+        this.onThClick = this.onThClick.bind(this);
+        this.sortTable = this.sortTable.bind(this);
+        this.renderRow = this.renderRow.bind(this);
+        this.renderCell = this.renderCell.bind(this);
+        this.renderTh = this.renderTh.bind(this);
+    }
+
+    onThClick(e, index) {
+        if (!this.props.sortable) {
+            return;
+        }
+
+        e.preventDefault();
+
+        if (this.state.sort.index === index) {
+            this.toggleSortDirection();
+        } else {
+            this.changeSortIndex(index);
+        }
+    }
+
+    sortTable() {
+        const { sort: { index, direction } } = this.state;
+        const newData = [...this.state.data].sort((a, b) => {
+            const toDown = direction === 'down';
+
+            if (a[index] > b[index]) {
+                return toDown ? -1 : 1;
+            } else if (a[index] < b[index]) {
+                return toDown ? 1 : -1;
+            }
+
+            return 0;
+        });
+
+        this.setState({
+            data: newData,
+        });
+    }
+
+    changeSortIndex(index) {
+        this.setState({
+            sort: {
+                ...this.state.sort,
+                index,
+            },
+        }, this.sortTable);
+    }
+
+    toggleSortDirection() {
+        const newDirection = this.state.sort.direction === 'down' ? 'up' : 'down';
+
+        this.setState({
+            sort: {
+                ...this.state.sort,
+                direction: newDirection,
+            },
+        }, this.sortTable);
+    }
+
+    renderCell(content) {
+        return <td key={uniqueId()}>{content}</td>;
+    }
+
+    renderRow(data) {
+        return (
+            <tr key={uniqueId()}>
+                {data.map(this.renderCell)}
+            </tr>
+        );
+    }
+
+    renderTh(data, ind) {
+        const { sort } = this.state;
+
+        return (
+            <th
+                onClick={(e) => this.onThClick(e, ind)}
+                role="button"
+                key={uniqueId()}
+            >
+                {data}
+                {' '}
+                {
+                    ind === sort.index &&
+                        <SortIcon type="dropdown-arrow" direction={sort.direction} />
+                }
+            </th>
+        );
+    }
+
+    renderHeader(data) {
+        return (
+            <thead>
+                <tr>
+                    {data.map(this.renderTh)}
+                </tr>
+            </thead>
+        );
+    }
+
+    renderBody() {
+        return (
+            <tbody>
+                {this.state.data.map(this.renderRow)}
+            </tbody>
+        );
+    }
+
+    render() {
+        const { children, header, ...props } = this.props;
+        return (
+            <StyledTable {...props}>
+                {
+                    !!children &&
+                    Children.toArray(children)
+                }
+                {
+                    !children && !!header &&
+                    this.renderHeader(header)
+                }
+                {
+                    !children &&
+                    this.renderBody()
+                }
+            </StyledTable>
+        );
+    }
+}
+
+Table.propTypes = {
+    children: PropTypes.node,
+    header: PropTypes.array,
+    body: PropTypes.array,
+    sortable: PropTypes.bool,
+};
+
+export default Table;

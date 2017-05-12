@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { Wrap } from 'components/Content';
-import Button from 'components/Button';
+import TypedBtn from 'components/Button/TypedBtn';
 
 const height = 40;
 
-export const StyledBtn = styled(Button)`
+export const StyledBtn = styled(TypedBtn)`
     width: 50%;
     height: ${height}px;
     line-height: ${height - 2}px;

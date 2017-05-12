@@ -37,11 +37,11 @@ class App extends Component {
     }
 
     render() {
-        const { warMode } = this.props
+        const { warMode, match } = this.props
 
         return (
             <IntlProvider locale="ru">
-                <div className={classNames('root', { war: warMode })}>
+                <div className={classNames('root', { war: match.isExact && warMode })}>
                     <Helmet>
                         <html lang="ru" />
                         <meta charSet="utf-8" />
@@ -51,7 +51,7 @@ class App extends Component {
                         <meta name="HandheldFriendly" content="true" />
                     </Helmet>
 
-                    <Header war={warMode} />
+                    <Header war={match.isExact && warMode} />
 
                     <main>
                         <Switch>

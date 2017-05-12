@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { rem, ifProp } from 'utils/style';
 import { YoutubePlayBtn } from 'components/Icon/svg';
-import Button from 'components/Button';
+import TypedBtn from 'components/Button/TypedBtn';
 
 export const activeState = css`
     background-color: #f3f3f3;
@@ -157,7 +157,7 @@ export const Buttons = styled.div`
     }
 `;
 
-export const StyledBtn = styled(Button)`
+export const StyledBtn = styled(TypedBtn)`
     background-color: #fff;
 
     &:not(:last-child) {

@@ -24,11 +24,17 @@ class News extends Component {
         return [
             <Block data={data[0]} />,
             <div>
-                {data.slice(1, 7).map(v => (
+                {data.slice(1, 5).map(v => (
                     <MiniNews key={v.id} data={v} className="news-top__mini-news" />
                 ))}
             </div>,
-            <BlockBorder data={data[7]} />,
+            <Block data={data[5]} />,
+            <div>
+                {data.slice(6, 10).map(v => (
+                    <MiniNews key={v.id} data={v} className="news-top__mini-news" />
+                ))}
+            </div>,
+            <BlockBorder data={data[10]} />,
         ]
     }
 
@@ -36,7 +42,7 @@ class News extends Component {
         let items = []
 
         while (data.length) {
-            items = items.concat(this.renderItems(data.splice(0, 8)))
+            items = items.concat(this.renderItems(data.splice(0, 11)))
         }
 
         return (
@@ -57,6 +63,8 @@ class News extends Component {
     render() {
         const {
             news,
+            now,
+            today,
             rubrics,
             rubric,
             setRubric,
@@ -64,7 +72,11 @@ class News extends Component {
             canLoad
         } = this.props
 
-        const data = news.filter(v => rubric ? v.rubrics[0].id == rubric : true)
+        const data = news.filter(v => (
+            rubric
+                ? v.rubrics.find(({ id }) => id == rubric)
+                : true
+        ))
 
         return (
             <div className="inner-wrapper">
@@ -77,31 +89,22 @@ class News extends Component {
                             <Tabs data={rubrics} active={rubric} onChange={setRubric} />
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row">
-                                    <Block data={data[0]} rectangle className="news-one-line__block-rectangle" />
-                                    <Block data={data[1]} className="news-one-line__block-square" />
-                                    <Block data={data[2]} className="news-one-line__block-square" />
-                                    <Block data={data[3]} className="news-one-line__block-square" />
-                                    <Block data={data[4]} className="news-one-line__block-square" />
+                                    <Block data={now[0]} rectangle className="news-one-line__block-rectangle" />
+                                    <Block data={now[1]} className="news-one-line__block-square" />
+                                    <Block data={now[2]} className="news-one-line__block-square" />
+                                    <Block data={now[3]} className="news-one-line__block-square" />
+                                    <Block data={now[4]} className="news-one-line__block-square" />
                                 </div>
                             </div>
                             <Banner className="news-top__banner" />
-                            <div className="plots-week news-top__plots-week">
-                                <p className="plots-week__title section-title section-title section-title_no-border">
-                                    Сюжеты недели
-                                </p>
-                                <div className="plots-week__list">
-                                    <BlockMini data={data[8]} />
-                                    <BlockMini data={data[9]} />
-                                </div>
-                            </div>
                             <div className="per-day news-top__per-day">
                                 <p className="per-day__title section-title">
                                     Главное за последние сутки
                                 </p>
                                 <div className="per-day__wrapper">
-                                    <Block data={data[10]} className="news-one-line__block-square" />
-                                    <Block data={data[11]} className="news-one-line__block-square" />
-                                    <Block data={data[12]} className="news-one-line__block-square" />
+                                    <Block data={today[0]} className="news-one-line__block-square" />
+                                    <Block data={today[1]} className="news-one-line__block-square" />
+                                    <Block data={today[2]} className="news-one-line__block-square" />
                                 </div>
                             </div>
                         </div>
@@ -110,8 +113,8 @@ class News extends Component {
                             <BannerPreview className="news-top__banner-preview" />
                         </div>
                         <div className="news-top__left left-col left-col left-col_width_inner">
-                            <RandomNews data={data.slice(5, 12)} className="news-top__random-news" />
-                            {this.renderAdditionalData(data.slice(16))}
+                            <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
+                            {this.renderAdditionalData(data.slice(11))}
                             {canLoad
                                 ? (
                                     <LoadMore onClick={onLoadRequest}>
@@ -123,7 +126,7 @@ class News extends Component {
                         </div>
                         <div className="news-top__right right-col">
                             <Subscribe className="news-top__subscribe" />
-                            <MoreNews data={data.slice(12, 16)} className="news-top__more-news" />
+                            <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                         </div>
                     </div>
                 </div>

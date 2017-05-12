@@ -50,7 +50,7 @@ function* getTopList(params) {
         const { data } = yield call(axios.get, `${endpoint}/news`, {
             params: {
                 ...params,
-                limit: 16,
+                limit: 11,
                 top: 5,
                 top_direction: 'up',
                 rubrics_id: rubric
