@@ -1,0 +1,8 @@
+include ../global-search-item/global-search-item
+include ../banner-preview/banner-preview
+
+mixin global-search-result(data)
+    +b.global-search-result()&attributes(attributes)
+        block
+        each item in data
+            +global-search-item(item)(class="global-search-result__global-search-item")
