@@ -15,6 +15,7 @@ import {
     startEditRecord,
     playVideo,
 } from '../actions';
+import { Preloader } from './style';
 
 const Records = ({ loading, allUploaded, records, ...props }) => (
     <div>
@@ -29,13 +30,13 @@ const Records = ({ loading, allUploaded, records, ...props }) => (
         }
         {
             loading ?
-            'Загрузка...' :
-            !allUploaded &&
-            <Waypoint
-                bottomOffset="-50%"
-                scrollableAncestor={window}
-                onEnter={() => props.loadRecords(false)}
-            />
+                <Preloader>Загрузка...</Preloader> :
+                !allUploaded &&
+                <Waypoint
+                    bottomOffset="-50%"
+                    scrollableAncestor={window}
+                    onEnter={() => props.loadRecords(false)}
+                />
         }
     </div>
 );

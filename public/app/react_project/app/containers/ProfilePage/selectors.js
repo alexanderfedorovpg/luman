@@ -91,27 +91,6 @@ const makeLastActions = () => createSelector(
     }
 );
 
-const selectLastActionsSort = createSelector(
-    selectProfilePageDomain(),
-    (page) => page.get('lastActionsSort')
-);
-
-const makeLastActionsSort = () => createSelector(
-    selectLastActionsSort,
-    (sortDataImmutable) => {
-        const sortData = sortDataImmutable.toJS();
-
-        if (!sortData.index || !sortData.direction) {
-            return {};
-        }
-
-        return {
-            orderBy: lastActionsMap[sortData.index].value,
-            orderType: sortData.direction === 'up' ? 'asc' : 'desc',
-        };
-    }
-);
-
 const makeGetCanEditPassword = () => createSelector(
     selectProfilePageDomain(),
     (page) => page.get('canEditPassword')
@@ -133,6 +112,5 @@ export {
     makeAccountFormInitialValues,
     makeProfileStats,
     makeLastActions,
-    makeLastActionsSort,
     makeGetCanEditPassword,
 };

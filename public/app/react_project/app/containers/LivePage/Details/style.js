@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 import { rem } from 'utils/style';
 import { Checkbox, Textarea } from 'components/Form';
 
-export const Wrapper = styled.article`
-    width: 41.8%;
+export const Wrapper = styled.div`
+    width: 40%;
     padding-top: .4rem;
     padding-left: 1.7rem;
     padding-bottom: ${rem(25)};

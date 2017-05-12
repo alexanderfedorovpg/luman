@@ -41,10 +41,14 @@ function programsPageReducer(state = initialState, action) {
 
     switch (action.type) {
         case SET_RECORDS_TYPE:
-            return state.set('recordsType', action.payload.type);
+            return state
+                .set('records', fromJS([]))
+                .set('recordsType', action.payload.type);
 
         case CHANGE_PROGRAM:
-            return state.set('selectedProgram', action.payload.id);
+            return state
+                .set('records', fromJS([]))
+                .set('selectedProgram', action.payload.id);
 
         case PENDING_RECORDS:
             return state.set('loading', true);

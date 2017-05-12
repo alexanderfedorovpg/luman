@@ -12,7 +12,6 @@ import {
     GET_LAST_ACTIONS,
     GET_LAST_ACTIONS_SUCCESS,
     GET_LAST_ACTIONS_FAILURE,
-    SORT_HISTORY,
     ALL_ACTIONS_LOADED,
     ENABLE_EDIT_PASSWORD,
 } from './constants';
@@ -57,13 +56,6 @@ export function successEditUserData() {
 export function failureEditUserData() {
     return {
         type: EDIT_USER_DATA_FAILURE,
-    };
-}
-
-export function sortHistory(sortData) {
-    return {
-        type: SORT_HISTORY,
-        payload: sortData,
     };
 }
 
