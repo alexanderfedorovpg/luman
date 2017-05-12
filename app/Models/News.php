@@ -199,4 +199,15 @@ class News extends Model
         }
     }
 
+    /**
+     * Новостной онлайн
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNewsOnline($query)
+    {
+        return $query->where('is_online', '=', true);
+    }
+
 }
