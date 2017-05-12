@@ -4,9 +4,8 @@ namespace App\Http\Transformers\v1;
 
 use App\Models\CdnFile;
 use App\Models\HasGroups;
-use App\User;
 use App\Http\Transformers\Transformer;
-
+use App\Models\News;
 /**
  * Class UsersTransformer
  * @package App\Http\Transformers\v1
@@ -34,6 +33,12 @@ class UsersTransformer extends Transformer
             ];
         }
 
+        $written = News::where('is_publish', '=', true)->where('editor_id', '=', $user['id'])->count();
+        $edited = News::where('editor_id', '=', $user['id'])->count();
+        $transform['statistic'] = [
+            'written' => $written,
+            'edited' => $edited
+        ];
         return $transform;
     }
 
