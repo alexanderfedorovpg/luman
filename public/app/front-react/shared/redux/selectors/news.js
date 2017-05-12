@@ -60,11 +60,21 @@ export const selectHomeNews = createSelector(
     selectHome,
     home => home.news
 )
+export const makeSelectHomeNewsByCategory = category => (
+    createSelector(
+        selectHomeNews,
+        news => news.filter(v => v.category.id == category)
+    )
+)
 export const selectHomeNoise = createSelector(
     selectHome,
     home => home.noise
 )
 export const selectHomeBroadcast = createSelector(
     selectHome,
-    (home, rubrics) => home.broadcast
+    home => home.broadcast
+)
+export const selectWarMode = createSelector(
+    selectHome,
+    home => home.war
 )

@@ -8,7 +8,7 @@ import MiniNews from 'components/MiniNews'
 
 import './style.scss'
 
-function Item({ data, className, rectangle }) {
+function Item({ data, className, rectangle, war, warTitle }) {
     const type = rectangle
         ? 'block-rectangle'
         : 'block-square';
@@ -18,7 +18,7 @@ function Item({ data, className, rectangle }) {
     return (
         data.list
             ? renderList(className, type, data.list)
-            : renderItem(className, type, data)
+            : renderItem(className, type, data, war, warTitle)
     )
 }
 
@@ -33,10 +33,9 @@ function renderList(className, type, data) {
     )
 }
 
-function renderItem(className, type, data) {
-
+function renderItem(className, type, data, war, wTitle) {
     return (
-        <div className={classNames(`${type}`, className)}>
+        <div className={classNames(`${type}`, className, { [`${type}_war`]: war })}>
             <Link className={`${type}__link`} to={newsLink(data)}></Link>
             <img className={`${type}__img`} src={ensureAbs(data.image_preview)} alt=" "role="presentation" />
             <div className={`${type}__info`}>
@@ -52,20 +51,29 @@ function renderItem(className, type, data) {
                 <p className={`${type}__title`}>
                     {data.title}
                 </p>
-                <p className={`${type}__time-add`}>
-                    {Date.parse(data.publish_date)
-                        ? <FormattedRelative value={data.publish_date} />
-                        : null
-                    }
-                    {data.updated_at
-                        ? (
-                            <span className={`${type}__time-upadate`}>
-                                {data.updated_at}
-                            </span>
-                        )
-                        : null
-                    }
-                </p>
+                {war
+                    ? (
+                        <p className={`${type}__title-war`}>
+                            {wTitle}
+                        </p>
+                    )
+                    : (
+                        <p className={`${type}__time-add`}>
+                            {Date.parse(data.publish_date)
+                                ? <FormattedRelative value={data.publish_date} />
+                                : null
+                            }
+                            {Date.parse(data.updated_at)
+                                ? (
+                                    <span className={`${type}__time-upadate`}>
+                                        / Обновлено <FormattedRelative value={data.updated_at} />
+                                    </span>
+                                )
+                                : null
+                            }
+                        </p>
+                    )
+                }
             </div>
         </div>
     )

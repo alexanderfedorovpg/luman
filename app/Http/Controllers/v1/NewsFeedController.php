@@ -5,14 +5,15 @@
 
 namespace App\Http\Controllers\v1;
 
-use App\Http\Controllers\ApiController;
+
 use App\Http\Transformers\v1\NewsFeedTransformer;
+use App\Http\Transformers\v1\NewsListTransformer;
 use App\Jobs\NewsFeedParserJob;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\NewsFeed;
 use App\Models\News;
-use Mockery\Exception;
+
 
 
 define('DEFAULT_VALUE', '50');
@@ -72,11 +73,7 @@ class NewsFeedController extends CmsController
                 $feed->InformAgency($searchIA);
             }
 
-            $tagList = $request->input('tagList');
-            if ($tagList) {
-                $tags = explode(',', $tagList);
-                $feed->tags($tags);
-            }
+
 
 
             $limit = $request->input('limit');
@@ -125,6 +122,7 @@ class NewsFeedController extends CmsController
             }
 
             if ($feed->save()) {
+
                 return $this->respondCreated(
                     ["data" => "hidden"]
                 );
@@ -146,39 +144,51 @@ class NewsFeedController extends CmsController
             //устанавливаем часовой пояс
             date_default_timezone_set('Europe/Moscow');
 
-            $this->validate($request, [
-                'action' => 'required',
-                'id' => 'required|numeric',
-                'editor_id' => 'required|numeric',
-                'keywords' => 'required',
-                'tags' => 'required',
-                'top' => 'required|numeric',
-                //'theses' => 'required',
-//                'video_stream' => 'url',
-//                'image_main' => 'mimes:jpeg,png',
-//                'image_preview' => 'mimes:jpeg,png',
-//                'is_online' => 'in:0,1',
-//                'is_war_mode' => 'in:0,1',
-            ]);
+            if ($request->get('rubrics')) {
+                foreach ($request->get('rubrics') as $key => $val) {
+                    $rules['rubrics.' . $key] = 'required|exists:rubrics,id';
+                }
+            }
 
-            $feed = NewsFeed::ViewMode(0)->findOrFail($data['id']);
+            $rules['action']= 'required';
+            $rules['id']= 'exists:news_feed,id';
+            $rules['editor_id']= 'numeric|exists:users,id';
+            $rules['keywords']= 'required';
+            $rules['header']= 'required';
 
-            if ($feed && $data['action'] == 'work') {
+            $rules['top']='required|numeric';
+            $rules['is_online']= 'in:0,1';
+            $rules['is_war_mode']= 'in:0,1';
+
+            $this->validate($request,
+                $rules
+            );
+
+            if (isset($data['id'])){
+                $feed = NewsFeed::ViewMode(0)->find($data['id']);
+            }
+
+
+            if ($data['action'] == 'work') {
 
                 $news = new News;
-                $news->title = $feed->header;
+                $news->title = $data['header'];
                 $news->is_publish = '0';
                 $news->publish_date = 'null';
                 $news->top = $data['top'];
-                $news->body = $feed->body;
-                $news->tags = $data['tags'];
+
                 $news->keywords = $data['keywords'];
                 $news->editor_id = $data['editor_id'];
 
                 //необязательные поля
-
+                if (isset($data['rubrics'])) {
+                    $rubrics = $data['rubrics'];
+                }
+                if (isset($data['body'])) {
+                    $news->body = $data['body'];
+                }
                 if (isset($data['theses'])) {
-	                $news->theses = $data['theses'];
+                    $news->theses = $data['theses'];
                 }
                 if (isset($data['sub_title'])) {
                     $news->sub_title = $data['sub_title'];
@@ -202,11 +212,19 @@ class NewsFeedController extends CmsController
                 $news->save();
 
                 if ($news->save()) {
-                    $feed->hidden = '1';
-                    $feed->save();
+                    if (isset($rubrics) && is_array($rubrics)) {
+                        $news->rubrics()->attach($rubrics);
+                    }
+
+                    if (isset($feed) && $feed ) {
+                        $feed->hidden = '1';
+                        $feed->save();
+                    }
+
                     $this->respond($news);
+                    $newsListTransformer=new NewsListTransformer;
                     return $this->respondCreated(
-                        $this->newsFeedTransformer->transform($feed->toArray())
+                        $newsListTransformer->transform($news)
                     );
                 }
                 throw new \Exception("Ошибка, новость не создана...");
@@ -219,7 +237,8 @@ class NewsFeedController extends CmsController
         }
     }
 
-    public function reload() {
+    public function reload()
+    {
         $job = (new NewsFeedParserJob())->onQueue('parser');
         dispatch($job);
         return $this->respondAccepted(['Задание на обновление информации из новостных источников принято!']);

@@ -12,7 +12,7 @@ import { titleWrapper } from './style'
 import { font } from 'constants/style'
 import { ifProp } from 'utils/style'
 
-const secretClassName = randomString()
+const secretClassName = 'editor-item-secret'
 
 const Root = styled.div`
     position: relative;
@@ -200,7 +200,9 @@ function Item({ data, newItem, reject, accept }) {
                 <Header>
                     <CustomRating rating={data.top} checked={data.top} />
                     <Category>
-                        {data.rubrics && data.rubrics.name}
+                        {(data.rubrics || []).map(v => (
+                            v.name
+                        )).join(' ')}
                     </Category>
                 </Header>
                 <Title new={newItem}>
@@ -226,10 +228,10 @@ function Item({ data, newItem, reject, accept }) {
                     : null
                 }
                 <Tags>
-                    {data.tags
+                    {(data.keywords || [])
                         .filter(value => !!value.trim())
-                        .map(tag => (
-                            <span key={tag}>
+                        .map((tag, i) => (
+                            <span key={i}>
                                 #{tag}
                             </span>
                         ))

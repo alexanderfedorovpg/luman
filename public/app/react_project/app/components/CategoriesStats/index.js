@@ -92,6 +92,10 @@ const Summary = styled.tr`
 
 function CategoriesStats({data}) {
 
+
+    const getProperUrl = (url) => {
+        return  url ? `//${url}` : ''
+    }
     // Itterate over the data to result a rendered list with data included
     const dataSet = data.map((item, i) => {
         return   <tr key={i}>
@@ -103,7 +107,7 @@ function CategoriesStats({data}) {
                 <User>
                     <UserPicLink>
                         <UserImg
-                            src="//{item.avatar_img}"/></UserPicLink>
+                            src={getProperUrl(item.avatar_img)}/></UserPicLink>
                     <UserName >
                         {item.editor_name}</UserName>
                 </User>

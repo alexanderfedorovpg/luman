@@ -9,13 +9,15 @@ import {
     selectTop,
     selectTopData,
     selectTopPagination,
-    selectTopRubric
+    selectTopRubric,
+    makeSelectHomeNewsByCategory
 } from 'selectors/news'
 import { selectRubrics } from 'selectors/rubrics'
 import { selectBroadcast } from 'selectors/broadcast'
 
 import {
     fetchTop,
+    fetchHome,
     fetchMoreTop,
     fetchNoise,
     fetchRelated,
@@ -37,6 +39,7 @@ class NewsPage extends PureComponent {
         const { match } = this.props
 
         this.props.fetchTop()
+        this.props.fetchHome()
         this.props.fetchNoise()
         this.props.fetchRecords()
 
@@ -80,19 +83,23 @@ class NewsPage extends PureComponent {
             rubrics,
             loadMore,
             setTopRubric,
-            currentRubric
+            currentRubric,
+            homeToday,
+            homeNow,
         } = this.props
 
         const item = this.getById(match.params.id) || {}
 
         const r = [{ id: null, name: 'Все новости' }, ...rubrics]
+        const now = homeNow.map(v => v.news)
+        const today = homeToday.map(v => v.news)
 
         return (
             <div>
                 <Helmet>
                     <title>
                         {match.params.id
-                            ? `Новости - ${item.title}`
+                            ? `Новости - ${item.title||''}`
                             : 'Новости'
                         }
                     </title>
@@ -108,6 +115,8 @@ class NewsPage extends PureComponent {
                     )
                     : (
                         <News
+                            now={now}
+                            today={today}
                             news={news}
                             setRubric={setTopRubric}
                             rubrics={r}
@@ -121,6 +130,9 @@ class NewsPage extends PureComponent {
     }
 }
 
+const selectHomeToday = makeSelectHomeNewsByCategory(2)
+const selectHomeNow = makeSelectHomeNewsByCategory(1)
+
 const mapStateToProps = state => ({
     noise: selectNoise(state),
     topData: selectTopData(state),
@@ -130,6 +142,8 @@ const mapStateToProps = state => ({
     broadcast: selectBroadcast(state),
     rubrics: selectRubrics(state),
     currentRubric: selectTopRubric(state),
+    homeToday: selectHomeToday(state),
+    homeNow: selectHomeNow(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -138,6 +152,9 @@ const mapDispatchToProps = dispatch => ({
     },
     fetchNoise(params) {
         dispatch(fetchNoise(params))
+    },
+    fetchHome() {
+        dispatch(fetchHome())
     },
     fetchRelated(id) {
         dispatch(fetchRelated(id))

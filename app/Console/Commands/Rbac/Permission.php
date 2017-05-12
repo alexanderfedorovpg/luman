@@ -369,4 +369,42 @@ class Permission extends Command
             ],
         ];
     }
+
+    public function permissLog()
+    {
+        return [
+            [
+                'name' => 'v1.log-getAll',
+                'description' => 'Просмотор логов'
+            ],
+            [
+                'name' => 'v1.log-getCurrentUser',
+                'description' => 'Просмотор логов текущего(авторизированого) пользователя'
+            ],
+        ];
+    }
+
+    public function permissUserProfile()
+    {
+        return [
+            [
+                'name' => 'v1.user-editProfile',
+                'description' => 'Редактирование профиля'
+            ],
+        ];
+    }
+
+    public function permissUserStatistic()
+    {
+        return [
+            [
+                'name' => 'v1.user-getStatistic',
+                'description' => 'Просмотор статистики пользователей'
+            ],
+            [
+                'name' => 'v1.user-getStatisticCurrentUser',
+                'description' => 'Просмотор статистики текущего(авторизированого) пользователя'
+            ],
+        ];
+    }
 }

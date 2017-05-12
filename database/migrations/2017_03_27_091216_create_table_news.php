@@ -21,17 +21,17 @@ class CreateTableNews extends Migration
             $table->string('title',120);
             $table->string('sub_title',140);
             $table->text('note');
-            $table->string('video_stream')->nullable;
+            $table->string('video_stream')->nullable();
             $table->binary('body');
             $table->string('keywords');
             $table->string('tags');
-            $table->integer('editor_id')->unsigned();
+            $table->integer('editor_id')->unsigned()->nullable();
             $table->string('image_main');
             $table->string('image_preview');
             $table->boolean('is_online');
             $table->timestamps();
 
-            $table->foreign('editor_id')->references('id')->on('users');
+
         });
     }
 

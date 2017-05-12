@@ -26,8 +26,13 @@ class UsersTransformer extends Transformer
         $transform['groups']=$hasGroup?array_pluck($hasGroup,'group_id'):[];
 
         unset($transform['avatar_id']);
-        $avatar = CdnFile::where('id', '=', $user['avatar_id'])->get(['url'])->first();
-        $transform['avatar_url'] = $avatar ? $avatar->url : null;
+        if ($user['avatar_id']) {
+            $avatar = CdnFile::where('id', '=', $user['avatar_id'])->get(['url'])->first();
+            $transform['avatar'] = [
+                'id' => $user['avatar_id'],
+                'url' => $avatar->url
+            ];
+        }
 
         return $transform;
     }

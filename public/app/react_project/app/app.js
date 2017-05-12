@@ -19,7 +19,9 @@ import localforage from 'localforage'
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContextProvider } from 'react-dnd';
 import { fromJS } from 'immutable'
+import ReduxToastr from 'react-redux-toastr/lib/ReduxToastr';
 import 'normalize.css';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 
 // Import root app
 import App from 'containers/App';
@@ -91,19 +93,24 @@ function init(_, state) {
     const render = (messages) => {
       ReactDOM.render(
         <Provider store={store}>
-          <DragDropContextProvider backend={HTML5Backend}>
-            <LanguageProvider messages={messages}>
-              <Router
-                history={history}
-                routes={rootRoute}
-                render={
-                  // Scroll to top when going to a new page, imitating default browser
-                  // behaviour
-                  applyRouterMiddleware(useScroll())
-                }
-              />
-            </LanguageProvider>
-          </DragDropContextProvider>
+            <div>
+              <DragDropContextProvider backend={HTML5Backend}>
+                <LanguageProvider messages={messages}>
+                  <Router
+                    history={history}
+                    routes={rootRoute}
+                    render={
+                      // Scroll to top when going to a new page, imitating default browser
+                      // behaviour
+                      applyRouterMiddleware(useScroll())
+                    }
+                  />
+                </LanguageProvider>
+              </DragDropContextProvider>
+              <ReduxToastr
+                transitionIn="bounceInDown"
+                transitionOut="bounceOutUp" />
+          </div>
         </Provider>,
         document.getElementById('app')
       );

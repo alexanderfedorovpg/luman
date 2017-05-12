@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import { connect } from 'react-redux'
 import Switch from 'react-router-dom/Switch'
 import Route from 'react-router-dom/Route'
@@ -19,8 +20,10 @@ import NoisePage from 'containers/NoisePage'
 import NewsPage from 'containers/NewsPage'
 import BroadcastPage from 'containers/BroadcastPage'
 import AboutPage from 'containers/AboutPage'
+import HowPage from 'containers/HowPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
+import { selectWarMode } from 'selectors/news'
 
 // import 'normalize.css/normalize.css'
 import './style.scss'
@@ -34,10 +37,11 @@ class App extends Component {
     }
 
     render() {
+        const { warMode, match } = this.props
 
         return (
             <IntlProvider locale="ru">
-                <div className="root">
+                <div className={classNames('root', { war: match.isExact && warMode })}>
                     <Helmet>
                         <html lang="ru" />
                         <meta charSet="utf-8" />
@@ -47,7 +51,7 @@ class App extends Component {
                         <meta name="HandheldFriendly" content="true" />
                     </Helmet>
 
-                    <Header />
+                    <Header war={match.isExact && warMode} />
 
                     <main>
                         <Switch>
@@ -63,6 +67,7 @@ class App extends Component {
                             <Route path="/broadcast/:id" component={BroadcastPage} />
 
                             <Route exact path="/about" component={AboutPage} />
+                            <Route exact path="/how" component={HowPage} />
 
                             <Route component={HomePage} />
                         </Switch>
@@ -75,7 +80,9 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+    warMode: selectWarMode(state)
+})
 
 const mapDispatchToProps = dispatch => ({
     fetchData() {

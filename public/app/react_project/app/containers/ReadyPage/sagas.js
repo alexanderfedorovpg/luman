@@ -37,7 +37,7 @@ export function* getNews({ payload }) {
 export function* publishArticle({ payload }) {
 
     try {
-        yield call(api.publishModeratedArticle, payload);
+        yield call(api.publishArticle, payload);
 
         yield put(articlePublished(payload));
 

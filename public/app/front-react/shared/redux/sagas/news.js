@@ -50,7 +50,7 @@ function* getTopList(params) {
         const { data } = yield call(axios.get, `${endpoint}/news`, {
             params: {
                 ...params,
-                limit: 16,
+                limit: 11,
                 top: 5,
                 top_direction: 'up',
                 rubrics_id: rubric
@@ -153,7 +153,8 @@ export default function* news() {
             yield put(homeFetched({
                 news: data.news,
                 noise: data.info_noise,
-                broadcast: data.from_air
+                broadcast: data.from_air,
+                war: !!+data.options.is_war_mode
             }))
         }
         catch (e) {

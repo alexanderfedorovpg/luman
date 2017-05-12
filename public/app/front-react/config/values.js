@@ -37,7 +37,7 @@ const values = {
   clientDevServerPort: EnvVars.number('CLIENT_DEV_PORT', 7331),
 
   // Disable server side rendering?
-  disableSSR: true,
+  disableSSR: false,
 
   // How long should we set the browser cache for the served assets?
   // Don't worry, we add hashes to the files, so if they change the new files
@@ -75,16 +75,12 @@ const values = {
   // Content Security Policy (CSP)
   // @see server/middleware/security for more info.
   cspExtensions: {
-    childSrc: [],
+    childSrc: ['*'],
     connectSrc: [],
     defaultSrc: [],
-    fontSrc: ['https://fonts.googleapis.com/css', 'https://fonts.gstatic.com'],
-    imgSrc: [
-      'http://rtvi-cache.cdnvideo.ru',
-      'http://rtvi.com',
-      'https://lorempixel.com'
-    ],
-    mediaSrc: [],
+    fontSrc: ['data:', 'https://fonts.googleapis.com/css', 'https://fonts.gstatic.com'],
+    imgSrc: ['*'],
+    mediaSrc: ['*'],
     manifestSrc: [],
     objectSrc: [],
     scriptSrc: [

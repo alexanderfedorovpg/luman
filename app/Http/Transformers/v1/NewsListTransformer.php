@@ -3,6 +3,7 @@
 namespace App\Http\Transformers\v1;
 
 use App\Helpers\UrlReplaceHelper;
+use App\Models\News;
 use App\Models\User;
 use App\Http\Transformers\Transformer;
 use App\Models\Rubrics;
@@ -33,7 +34,7 @@ class NewsListTransformer extends Transformer
         $transform['top'] = $news['top'];
         $transform['title'] = $news['title'];
         $transform['subtitle'] = $news['sub_title'];
-        $transform['tags'] =  explode(',', $news['tags']);
+
 
         $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->pluck('url')->first();
         $transform['image_preview'] = $imagePreview;
@@ -70,7 +71,8 @@ class NewsListTransformer extends Transformer
 
 
         $transform['keywords'] = explode(',', $news['keywords']);
-        $transform['rubrics_id'] = Rubrics::where('id', '=', $news['rubrics_id'])->get();
+
+        $transform['rubrics'] = News::find($news['id'])->rubrics()->orderBy('name')->get(['rubrics.id','rubrics.name'])->toArray();
 
         return $transform;
     }
