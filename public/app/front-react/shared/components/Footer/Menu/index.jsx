@@ -28,11 +28,11 @@ export default Menu
 const menuData = [
     {
         title: 'Телепрограмма',
-        link: '#'
+        link: '/#'
     },
     {
         title: 'Лицензии',
-        link: '#'
+        link: '/#'
     },
     {
         title: 'Как смотреть',
@@ -40,18 +40,18 @@ const menuData = [
     },
     {
         title: 'Карьера',
-        link: '#'
+        link: '/#'
     },
     {
         title: 'Размещение рекламы',
-        link: '#'
+        link: '/#'
     },
     {
         title: 'Правила пользования',
-        link: '#'
+        link: '/#'
     },
     {
         title: 'Контакты',
-        link: '#'
+        link: '/#'
     }
 ]

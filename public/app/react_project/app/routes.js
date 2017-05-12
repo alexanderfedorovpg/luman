@@ -273,10 +273,16 @@ export default function createRoutes(store) {
                     return;
                 }
 
-                const importModules = System.import('containers/EditorPage/sagas');
+                const importModules = Promise.all([
+                    import('containers/EditorPage/sagas'),
+                    import('containers/NewslistPage/sagas'),
+                ]);
 
-                importModules.then((sagas) => {
-                    this.loadedSagas = injectSagas(sagas.default);
+                importModules.then(([editorSagas, newslistSagas]) => {
+                    this.loadedSagas = injectSagas([
+                        ...editorSagas.default,
+                        ...newslistSagas.default,
+                    ]);
                     callback();
                 });
 
