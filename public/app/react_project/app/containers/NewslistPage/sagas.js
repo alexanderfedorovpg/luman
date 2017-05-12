@@ -38,6 +38,8 @@ export function* rejectArticle({ payload }) {
 
         yield put(articleRejected(payload))
 
+        yield put(push(`/newslist`))
+
         yield fork(getList)
     } catch (err) {
         yield put(articleRejectionError(err))

@@ -33,7 +33,7 @@ function Content({ data, children }) {
                 <Socials />
             </div>
             <div className="inner-about__content">
-                {data.body}
+                <div dangerouslySetInnerHTML={{ __html: data.body }} />
                 {children}
             </div>
         </div>

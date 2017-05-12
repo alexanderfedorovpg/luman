@@ -2,7 +2,12 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
-import { selectHome, selectHomeBroadcast, selectWarMode } from 'selectors/news'
+import {
+    makeSelectHomeNewsByCategory,
+    selectHomeBroadcast,
+    selectHomeNoise,
+    selectWarMode
+} from 'selectors/news'
 
 import { fetchHome } from 'actions/news'
 
@@ -20,7 +25,7 @@ class HomePage extends PureComponent {
     }
 
     render() {
-        let { broadcast, home, warMode } = this.props
+        let { noise, broadcast, today, now, other, warMode } = this.props
 
         return (
             <div>
@@ -28,14 +33,27 @@ class HomePage extends PureComponent {
                     <title>Главная</title>
                 </Helmet>
 
-                <Home data={home} broadcast={broadcast} war={warMode} />
+                <Home
+                    now={now.map(v => v.news)}
+                    today={today.map(v => v.news)}
+                    other={other.map(v => v.news)}
+                    noise={noise.map(v => v.news)}
+                    broadcast={broadcast}
+                    war={warMode} />
             </div>
         )
     }
 }
 
+const selectHomeNow = makeSelectHomeNewsByCategory(1)
+const selectHomeToday = makeSelectHomeNewsByCategory(2)
+const selectHomeOther = makeSelectHomeNewsByCategory(3)
+
 const mapStateToProps = state => ({
-    home: selectHome(state),
+    now: selectHomeNow(state),
+    today: selectHomeToday(state),
+    other: selectHomeOther(state),
+    noise: selectHomeNoise(state),
     broadcast: selectHomeBroadcast(state),
     warMode: selectWarMode(state)
 })

@@ -10,10 +10,13 @@ function Aside({noise, broadcast, className }) {
 
     return (
         <div className={classNames('right-col', className)}>
-            <Video />
+            <Video
+                data={{}}
+                playTitle="date"
+                title="Все ключевые события этого дня" />
             <Noise data={noise} />
-            <One data={broadcast[0]}/>
-            <Subscribe /> 
+            <One data={broadcast[1]}/>
+            <Subscribe />
         </div>
     )
 }

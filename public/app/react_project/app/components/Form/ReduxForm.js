@@ -1,14 +1,29 @@
 import React from 'react';
-import { Input, FileInput, Select, Datepicker, Textarea, Dropzone } from './';
+import {
+    Label,
+    Input,
+    FileInput,
+    Select,
+    Datepicker,
+    Textarea,
+    Dropzone,
+    ImageLoader,
+} from './';
 
-export const InputRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
-    <Input
-        {...props}
-        success={touched && valid && !props.disabled}
-        error={touched && invalid && !props.disabled}
-        value={input.value}
-        onChange={(e) => input.onChange(e)}
-    />
+export const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
+    <div>
+        <Input
+            {...props}
+            success={touched && valid && !props.disabled}
+            error={touched && invalid && !props.disabled}
+            value={input.value}
+            onChange={(e) => input.onChange(e)}
+        />
+        {
+            touched && showError &&
+            <Label light error>{error}</Label>
+        }
+    </div>
 );
 
 export const TextareaRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
@@ -59,5 +74,15 @@ export const DropzoneRedux = ({ input, meta: { touched, invalid, valid }, ...pro
         error={touched && invalid && !props.disabled}
         value={input.value}
         onDrop={(files) => input.onChange(files)}
+    />
+);
+
+export const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
+    <ImageLoader
+        {...props}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
+        value={input.value}
+        onChange={(e) => input.onChange(e.target.files)}
     />
 );

@@ -20,6 +20,15 @@
 
         background-color: rgba(0, 0, 0, .32);
     }
+    &_play::before {
+        display: none;
+    }
+
+    iframe {
+        border: none;
+        height: 100%;
+        width: 100%;
+    }
 
     &__date {
         margin-left: rem(18);
@@ -43,6 +52,7 @@
     }
 
     &__link {
+        cursor: pointer;
         position: absolute;
         z-index: 2;
         top: 0;

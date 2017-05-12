@@ -70,7 +70,7 @@ const FileInput = ({
     success,
     icon,
     accept,
-    inputName,
+    name,
     onChange,
     placeholder,
     ...rest
@@ -91,7 +91,7 @@ const FileInput = ({
         <Wrapper {...rest} icon={icon} success={success} error={error} hasVal={!!value}>
             <Input
                 type="file"
-                name={inputName}
+                name={name}
                 accept={accept}
                 required={required}
                 disabled={disabled}
@@ -119,7 +119,7 @@ FileInput.propTypes = {
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     accept: PropTypes.string,
-    inputName: PropTypes.string,
+    name: PropTypes.string,
     onChange: PropTypes.func,
     error: PropTypes.bool,
     success: PropTypes.bool,

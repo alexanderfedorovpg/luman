@@ -12,12 +12,7 @@ import Tabs from 'components/Tabs';
 import {
     Horizontal as FormHorizontal,
 } from 'components/Form';
-import {
-    ArrowDown,
-    Check,
-} from 'components/Icon/svg';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
-
 import {
     setRecordsType,
     openModal,
@@ -64,22 +59,14 @@ class Header extends React.PureComponent {
                         active={activeType}
                     />
                     <Buttons>
-                        <StyledBtn md primary onClick={this.openAddRecordModal}>
-                            <ArrowDown className="programs-icon" width="12px" height="14px" />
-                            {' '}
-                            Загрузить
-                        </StyledBtn>
+                        <StyledBtn md buttonType="upload" onClick={this.openAddRecordModal} />
                         <StyledBtn
                             md
-                            success
+                            buttonType="save"
                             active={canSave}
                             disabled={!canSave}
                             onClick={this.onSaveClick}
-                        >
-                            <Check className="programs-icon" width="12px" height="12px" />
-                            {' '}
-                            Сохранить
-                        </StyledBtn>
+                        />
                     </Buttons>
                 </Left>
                 <Right>
