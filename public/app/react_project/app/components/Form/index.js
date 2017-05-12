@@ -6,11 +6,12 @@ import FileInput from './FileInput';
 import Checkbox from './Checkbox';
 import Datepicker from './Datepicker';
 import Dropzone from './Dropzone';
+import ImageLoader from './ImageLoader';
 
 import { ifProp, rem } from './../../utils/style';
 import { color, font } from './../../constants/style';
 
-export { Select, Input, InputIcon, Checkbox, FileInput, Datepicker, Dropzone };
+export { Select, Input, InputIcon, Checkbox, FileInput, Datepicker, Dropzone, ImageLoader };
 
 export const Horizontal = styled.div`
     display: flex;
@@ -19,6 +20,8 @@ export const Horizontal = styled.div`
 `;
 
 export const Group = styled.div`
+    position: relative;
+
     margin-bottom: ${({ marginBottom }) => marginBottom || '24px'};
 
     &:last-child {

@@ -20,7 +20,14 @@ const TdFirst = styled.td`
 `
 
 const ColName = styled.th`
-       width: 38.72%;
+    width: 38.72%;
+
+    &:first-child {
+        font-size: 24px;
+        color: #333;
+        font-weight: 600;
+        letter-spacing: -0.7px;
+    }
 `;
 const ColTitle = styled.th`    width: 14.3%;`;
 const ColEditor = styled.th`   width: 28%;`;

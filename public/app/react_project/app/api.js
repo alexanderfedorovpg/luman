@@ -75,6 +75,7 @@ export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
 });
 
 export const getCurrentUser = () => axios.get('/userprofile');
+export const editUserProfile = (data) => axios.put('/userprofile', data);
 
 export const getUsersInGroup = (group_id) => axios.get(`/group/${group_id}/users`);
 
