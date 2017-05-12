@@ -79,7 +79,7 @@ class NoisePage extends PureComponent {
                 <Helmet>
                     <title>
                         {match.params.id
-                            ? `Инфошум - ${item.title}`
+                            ? `Инфошум - ${item.title||''}`
                             : 'Инфошум'
                         }
                     </title>

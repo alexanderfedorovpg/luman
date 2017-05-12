@@ -13,9 +13,17 @@
         font: #{rem(14)}/#{rem(20)} $stemBold;
         color: $enter;
         text-decoration: none;
+
+        cursor: pointer;
     }
 
     &__img {
+        width: rem(300);
+        height: rem(185);
+    }
+
+    iframe {
+        border: none;
         width: rem(300);
         height: rem(185);
     }
@@ -54,7 +62,7 @@
     }
 
     &__category {
-        margin-top: rem(22);
+        // margin-top: rem(22);
 
         font-size: rem(12);
         line-height: rem(42);

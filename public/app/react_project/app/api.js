@@ -73,6 +73,7 @@ export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
 });
 
 export const getCurrentUser = () => axios.get('/userprofile');
+export const editUserProfile = (data) => axios.put('/userprofile', data);
 
 export const getUsersInGroup = (group_id) => axios.get(`/group/${group_id}/users`);
 
@@ -231,6 +232,14 @@ export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/
 
 export const getLive = () => axios.get('/air/live');
 export const newsToLive = (data) => axios.post('/air/live', data);
+// =============================================================================
+
+// =============================================================================
+// LOGS API
+// =============================================================================
+
+export const getLogs = (params) => axios.get('/logs', { params });
+export const getUserLogs = (params) => axios.get('/logs/user', { params });
 // =============================================================================
 
 // =============================================================================

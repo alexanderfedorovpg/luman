@@ -15,6 +15,7 @@ import {
     LOAD_EDITORS_SUCCESS,
     LOAD_USERS_SUCCESS,
     LOAD_CURRENT_USER_SUCCESS,
+    EDIT_PROFILE,
     LOAD_RUBRICS_SUCCESS,
     SHOW_PRELOADER,
     HIDE_PRELOADER,
@@ -64,6 +65,9 @@ function AppReducer(state = initialState, action) {
 
         case LOAD_CURRENT_USER_SUCCESS:
             return state.setIn(['current', 'data'], fromJS(action.payload));
+
+        case EDIT_PROFILE:
+            return state.mergeIn(['current', 'data'], fromJS(action.payload));
 
         case LOAD_EDITORS_SUCCESS:
             users = action.payload.reduce((result, item) => ({ ...result, [item.id]: item }), {});

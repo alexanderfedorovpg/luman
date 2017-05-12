@@ -47,12 +47,12 @@ const selectUsers = createSelector(
 
 const selectCurrentUser = createSelector(
     selectAppDomain(),
-    usersMap,
-    (app, users) => {
+    (app) => {
         const user = app.getIn(['current', 'data']);
 
-        if (user && user.toJS)
-            {return user.toJS()};
+        if (user && user.toJS) {
+            return user.toJS();
+        }
 
         return user;
     }
@@ -71,6 +71,11 @@ const selectRubricsList = createSelector(
 const selectMenuExpandedStatus = createSelector(
     selectAppDomain(),
     (app) => app.get('menuOpen')
+);
+
+const getCurrentUserData = createSelector(
+    selectAppDomain(),
+    (app) => app.getIn(['current', 'data'])
 );
 
 const makeSelectPreloader = () => createSelector(
@@ -105,6 +110,7 @@ export {
     selectEditors,
     selectUsers,
     selectCurrentUser,
+    getCurrentUserData,
     selectUsersMap,
     selectRubrics,
     selectRubricsList,

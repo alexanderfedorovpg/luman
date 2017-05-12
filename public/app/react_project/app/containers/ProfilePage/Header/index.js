@@ -10,6 +10,7 @@ import Tabs from 'components/Tabs';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
 import { makeSelectedTab } from '../selectors';
 import { tabs } from '../constants';
+import { changeTab } from '../actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Header extends React.PureComponent {
@@ -23,6 +24,7 @@ class Header extends React.PureComponent {
                     <Tabs
                         data={tabs}
                         active={active}
+                        onClick={this.props.changeTab}
                     />
                 </Left>
             </Bot>
@@ -33,6 +35,7 @@ class Header extends React.PureComponent {
 Header.propTypes = {
     selectedTab: PropTypes.string,
     menuOpen: PropTypes.bool,
+    changeTab: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -40,8 +43,4 @@ const mapStateToProps = createStructuredSelector({
     selectedTab: makeSelectedTab(),
 });
 
-function mapDispatchToProps() {
-    return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, { changeTab })(Header);

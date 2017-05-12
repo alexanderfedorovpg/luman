@@ -13,6 +13,7 @@ import {
     LOAD_CURRENT_USER,
     LOAD_CURRENT_USER_SUCCESS,
     LOAD_CURRENT_USER_FAILURE,
+    EDIT_PROFILE,
 
     LOAD_RUBRICS,
     LOAD_RUBRICS_SUCCESS,
@@ -81,6 +82,11 @@ export const currentUserLoaded = (data) => ({
 export const currentUserLoadingError = (error) => ({
     type: LOAD_CURRENT_USER_FAILURE,
     error,
+});
+
+export const editProfile = (payload) => ({
+    type: EDIT_PROFILE,
+    payload,
 });
 
 export const loadRubrics = () => ({
