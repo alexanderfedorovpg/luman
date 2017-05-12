@@ -6,8 +6,11 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import { Group, Label } from 'components/Form';
 import { InputRedux, ImageLoaderRedux } from 'components/Form/ReduxForm';
 import { rem } from 'utils/style';
-import { makeAccountFormInitialValues } from '../selectors';
-import { editUserData } from '../actions';
+import {
+    makeAccountFormInitialValues,
+    makeGetCanEditPassword,
+} from '../selectors';
+import { editUserData, enableEditPassword } from '../actions';
 import {
     Wrapper,
     Left,
@@ -24,10 +27,6 @@ class AccountForm extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        this.state = {
-            editPassword: false,
-        };
-
         this.onSubmit = this.onSubmit.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
         this.onChangePasswordBtnClick = this.onChangePasswordBtnClick.bind(this);
@@ -42,7 +41,7 @@ class AccountForm extends React.PureComponent {
     }
 
     onPasswordChange(e) {
-        if (this.state.editPassword) {
+        if (this.props.canEditPassword) {
             return;
         }
 
@@ -52,22 +51,18 @@ class AccountForm extends React.PureComponent {
     onChangePasswordBtnClick(e) {
         e.preventDefault();
 
-        this.setState(
-            {
-                editPassword: true,
-            },
-            () => { this.passwordField.querySelector('input').focus(); }
-        );
+        this.props.enableEditPassword();
+        this.passwordField.querySelector('input').focus();
     }
 
     render() {
-        const { handleSubmit, valid, dirty, reset } = this.props;
+        const { handleSubmit, valid, dirty, reset, canEditPassword } = this.props;
 
         return (
             <Wrapper onSubmit={handleSubmit(this.onSubmit)}>
                 <Left>
                     <Field
-                        name="avatar_id"
+                        name="avatar"
                         size="xs"
                         round
                         icon
@@ -116,7 +111,7 @@ class AccountForm extends React.PureComponent {
                         />
                     </Group>
                     <Group
-                        marginBottom={this.state.editPassword ? rem(10) : rem(30)}
+                        marginBottom={canEditPassword ? rem(10) : rem(30)}
                         innerRef={(el) => { this.passwordField = el; }}
                     >
                         <Field
@@ -124,12 +119,13 @@ class AccountForm extends React.PureComponent {
                             name="password"
                             showError
                             placeholder="Пароль"
+                            type="password"
                             onChange={this.onPasswordChange}
-                            readOnly={!this.state.editPassword}
+                            readOnly={!canEditPassword}
                             component={InputRedux}
                         />
                         {
-                            !this.state.editPassword &&
+                            !canEditPassword &&
                             (
                                 <ChangePasswordBtn onClick={this.onChangePasswordBtnClick}>
                                     Сменить пароль
@@ -138,7 +134,7 @@ class AccountForm extends React.PureComponent {
                         }
                     </Group>
                     {
-                        this.state.editPassword &&
+                        canEditPassword &&
                         (
                             <Group marginBottom={rem(30)}>
                                 <Label light>
@@ -148,6 +144,7 @@ class AccountForm extends React.PureComponent {
                                     <Field
                                         block
                                         showError
+                                        type="password"
                                         name="password_repeat"
                                         placeholder="Повторите пароль"
                                         component={InputRedux}
@@ -196,13 +193,13 @@ const validate = (values, props) => {
         errors.login = 'Не введен логин';
     }
 
-    const pass = values.get('password');
+    if (props.canEditPassword) {
+        const pass = values.get('password');
 
-    if (pass.length < 6) {
-        errors.password = 'Пароль должен быть минимум 6 символов';
-    }
+        if (!pass || pass.length < 6) {
+            errors.password = 'Пароль должен быть минимум 6 символов';
+        }
 
-    if (props.initialValues.get('password') !== pass) {
         if (values.get('password_repeat') !== pass) {
             errors.password_repeat = 'Пароли не совпадают';
         }
@@ -215,11 +212,14 @@ const validate = (values, props) => {
 AccountForm = reduxForm({
     form: 'accountForm',
     enableReinitialize: true,
+    keepDirtyOnReinitialize: true,
+    destroyOnUnmount: false,
     validate,
 })(AccountForm);
 
 const mapStateToProps = createStructuredSelector({
     initialValues: makeAccountFormInitialValues(),
+    canEditPassword: makeGetCanEditPassword(),
 });
 
-export default connect(mapStateToProps, { editUserData })(AccountForm);
+export default connect(mapStateToProps, { editUserData, enableEditPassword })(AccountForm);

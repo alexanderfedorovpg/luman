@@ -11,15 +11,34 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { Wrap } from 'components/Content';
 
-import makeSelectProfilePage, { makeProfileStats } from './selectors';
+import { lastActionsMap, LAST_ACTIONS_UPLOAD_NUM } from './constants';
+import makeSelectProfilePage, {
+    makeProfileStats,
+    makeLastActions,
+} from './selectors';
+import { sortHistory, getLastActions } from './actions';
 import Header from './Header';
 import AccountForm from './AccountForm';
 import Stats from './Stats';
 import { Profile, History, HistoryTable, MoreLink } from './style';
 
+const historyHeader = lastActionsMap.map((item) => item.label);
+
 export class ProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props) {
+        super(props);
+
+        this.onMoreLinkClick = this.onMoreLinkClick.bind(this);
+    }
+
+    onMoreLinkClick(e) {
+        e.preventDefault();
+        this.props.getLastActions();
+    }
+
     renderTabContent() {
-        const { activeTab, lastActions } = this.props.ProfilePage;
+        const { activeTab, allActionsLoaded } = this.props.ProfilePage;
+        const { lastActions } = this.props;
 
         switch (activeTab) {
             case 'PROFILE':
@@ -32,10 +51,20 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
             case 'LAST_ACTIONS':
                 return (
                     <History>
-                        <HistoryTable {...lastActions} sortable />
-                        <MoreLink href="#">
-                            Показать еще 10 записей
-                        </MoreLink>
+                        <HistoryTable
+                            onSort={this.props.sortHistory}
+                            header={historyHeader}
+                            body={lastActions}
+                            sortable
+                        />
+                        {
+                            !allActionsLoaded &&
+                            (
+                                <MoreLink href="#" onClick={this.onMoreLinkClick}>
+                                    Показать еще {LAST_ACTIONS_UPLOAD_NUM} записей
+                                </MoreLink>
+                            )
+                        }
                     </History>
                 );
             default:
@@ -61,11 +90,15 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
 ProfilePage.propTypes = {
     ProfilePage: PropTypes.object,
     stats: PropTypes.array,
+    lastActions: PropTypes.array,
+    sortHistory: PropTypes.func,
+    getLastActions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
     ProfilePage: makeSelectProfilePage(),
     stats: makeProfileStats(),
+    lastActions: makeLastActions(),
 });
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps, { sortHistory, getLastActions })(ProfilePage);

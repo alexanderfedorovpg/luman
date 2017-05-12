@@ -47,7 +47,7 @@ export const Name = styled(Link)`
 `
 
 function User({ to, data, children, className }) {
-    let url = data.avatar_url ? `//${data.avatar_url}` : ''
+    const url = (data.avatar && data.avatar.url) ? data.avatar.url : '';
     return (
         <Root className={className}>
             <Pic to={to}>

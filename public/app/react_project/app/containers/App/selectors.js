@@ -47,8 +47,7 @@ const selectUsers = createSelector(
 
 const selectCurrentUser = createSelector(
     selectAppDomain(),
-    usersMap,
-    (app, users) => {
+    (app) => {
         const user = app.getIn(['current', 'data']);
 
         if (user && user.toJS) {
