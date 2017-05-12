@@ -65,6 +65,7 @@ export function* wantDeleteRecord() {
 export function* deleteRecord({ payload }) {
     try {
         yield put(showPreloader());
+        yield put(closeModal());
 
         const response = yield call(api.deleteRecord, payload.id);
 
