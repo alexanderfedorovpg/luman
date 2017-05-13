@@ -1,0 +1,103 @@
+@import "~style/mixins";
+@import "~style/vars";
+@import "~style/fonts";
+
+.global-search {
+
+    &__form {
+        position: relative;
+
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    &__input-wrapper {
+        position: relative;
+        width: rem(725);
+        margin-left: rem(21);
+    }
+
+    &__text {
+        width: 100%;
+        height: rem(37);
+        padding-right: rem(30);
+
+        font-size: rem(18);
+        line-height: rem(21);
+        color: $purple;
+        letter-spacing: rem(-.2);
+
+        border: none;
+        border-bottom: 1px solid $gray;
+        border-radius: 0;
+        box-shadow: none;
+        -webkit-appearance: none;
+
+        &::-webkit-search-cancel-button {
+            display: none;
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+    }
+
+    &__clear {
+        position: absolute;
+        bottom: rem(10);
+        right: rem(5);
+
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    &__icon {
+        display: block;
+        width: rem(20);
+        height: rem(20);
+    }
+
+    &__go {
+        position: relative;
+
+        width: rem(155);
+        height: rem(75);
+
+        font: #{rem(16)}/#{rem(18)} $stemReg;
+        color: $white;
+        text-transform: uppercase;
+
+        cursor: pointer;
+        border: none;
+        background-color: #00a5b6;
+
+        transition: background-color .3s;
+
+        &:hover {
+            background-color: darken(#00a5b6, 5);
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -1px;
+
+            border-right: rem(12) solid transparent;
+            border-top: rem(38) solid #fff;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            border-bottom: rem(16) solid #fff;
+            border-left: rem(68) solid transparent;
+        }
+    }
+}
