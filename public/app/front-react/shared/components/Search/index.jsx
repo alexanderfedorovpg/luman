@@ -25,11 +25,12 @@ class Search extends React.PureComponent {
     onSubmit(e) {
         e.preventDefault();
 
-
         if (this.props.onSearch && this.state.query) {
             this.props.onSearch(this.state.query);
+
             this.setState({
                 query: '',
+                open: false,
             });
         }
     }
@@ -74,7 +75,7 @@ class Search extends React.PureComponent {
                         className="search__input-text"
                         ref={(el) => { this.input = el; }}
                         value={this.state.query}
-                        onInput={this.onInputChange}
+                        onChange={this.onInputChange}
                         onFocus={this.onInputFocus}
                         type="search"
                         placeholder="Поиск по сайту"
@@ -93,6 +94,10 @@ class Search extends React.PureComponent {
         );
     }
 }
+
+Search.defaultProps = {
+    classNames: {},
+};
 
 Search.propTypes = {
     onSearch: PropTypes.func,

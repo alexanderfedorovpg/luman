@@ -46,7 +46,7 @@ class BigSearch extends PureComponent {
                         <input
                             className="global-search__text"
                             type="search"
-                            onInput={this.onInputChange}
+                            onChange={this.onInputChange}
                             value={this.state.query}
                         />
                         <button

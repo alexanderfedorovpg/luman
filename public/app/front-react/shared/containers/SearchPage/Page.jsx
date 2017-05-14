@@ -1,9 +1,18 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 
+import { search } from 'actions/search';
+import { makeGetSearchResults } from 'selectors/search';
 import BigSearch from 'components/BigSearch';
+import AsideContainer from 'containers/Aside';
+import Tabs from 'components/Tabs';
+import SearchResultList from 'components/SearchResultList';
+import { TABS_DATA } from './constants';
+import './style.scss';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class SearchPage extends PureComponent {
@@ -13,6 +22,8 @@ class SearchPage extends PureComponent {
         this.state = {
             query: '',
         };
+
+        this.onSearch = this.onSearch.bind(this);
     }
 
     componentWillMount() {
@@ -20,6 +31,21 @@ class SearchPage extends PureComponent {
 
         this.setState({
             query: parsed.query,
+        });
+    }
+
+    componentDidMount() {
+        if (!this.state.query) {
+            return;
+        }
+
+        this.props.search(this.state.query);
+    }
+
+    onSearch(query) {
+        this.props.search(query);
+        this.props.history.push({
+            search: `?query=${query}`,
         });
     }
 
@@ -35,8 +61,23 @@ class SearchPage extends PureComponent {
                         <div className="p-search__container container">
                             <div className="p-search__left p-search__left--margin left-col left-col_width_inner">
                                 <h1>Результаты поиска</h1>
+                                <BigSearch
+                                    onSearch={this.onSearch}
+                                    initialQuery={this.state.query}
+                                />
+                                <Tabs
+                                    data={TABS_DATA}
+                                    active={0}
+                                    classNames={{ root: 'p-search__breadcrumb' }}
+                                />
+                                <SearchResultList
+                                    classNames={{ root: 'p-search__global-search-result' }}
+                                    items={this.props.results}
+                                />
                             </div>
-                            <BigSearch initialQuery={this.state.query} />
+                            <div className="p-search__right right-col">
+                                <AsideContainer />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,4 +86,8 @@ class SearchPage extends PureComponent {
     }
 }
 
-export default withRouter(SearchPage);
+const mapStateToProps = createStructuredSelector({
+    results: makeGetSearchResults(),
+});
+
+export default withRouter(connect(mapStateToProps, { search })(SearchPage));

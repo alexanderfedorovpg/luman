@@ -1,0 +1,82 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.global-search-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $gray;
+    }
+
+    &__img-block {
+        width: rem(200);
+        height: rem(164);
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__img {
+        max-width: 100%;
+        max-height: 100%;
+
+        @supports (object-fit: cover) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__text {
+        width: calc(100% - #{rem(221)});
+        padding-right: rem(59);
+
+        &--full {
+            width: 100%;
+        }
+    }
+
+    &__category-link {
+        margin-top: rem(-5);
+    }
+
+    &__category {
+        font: #{rem(12)}/#{rem(21)} $stemReg;
+        color: $purple;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    &__title {
+        font: #{rem(18)}/#{rem(21)} $stemBold;
+        color: $blue;
+        text-decoration: none;
+        letter-spacing: rem(-.5);
+    }
+
+    &__introtext {
+        font-size: rem(14);
+        line-height: rem(21);
+        color: $enter;
+        letter-spacing: rem(-.35);
+    }
+
+    &__time {
+        font-size: rem(12);
+        line-height: rem(21);
+        color: $gray-date;
+    }
+
+    &--full {
+        padding-bottom: rem(15) !important;
+    }
+}

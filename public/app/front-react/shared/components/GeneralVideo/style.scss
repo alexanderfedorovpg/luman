@@ -40,6 +40,9 @@
 
     &__img {
         width: rem(300);
+
+        object-fit: cover;
+        object-position: top;
     }
 
     &__info {

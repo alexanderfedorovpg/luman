@@ -76,6 +76,10 @@
 
         transition: background-color .3s;
 
+        &:focus {
+            outline: none;
+        }
+
         &:hover {
             background-color: darken(#00a5b6, 5);
         }
