@@ -11,12 +11,12 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
 import { Wrap } from 'components/Content';
-import { NewsList } from 'components/News';
 
 import makeSelectLivePage, { makeGetNews } from './selectors';
 import { getNews, selectNews, getLive } from './actions';
 import Header from './Header';
 import Details from './Details';
+import { StyledNewsList } from './style';
 
 export class LivePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
@@ -32,7 +32,7 @@ export class LivePage extends React.PureComponent { // eslint-disable-line react
                 <Helmet title="Прямой эфир" />
                 <Header moved={menuOpen} live={live} />
                 <Wrap>
-                    <NewsList
+                    <StyledNewsList
                         active={selected}
                         action={this.props.selectNews}
                         actionText={live ? null : 'В прямой эфир'}

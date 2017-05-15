@@ -16,7 +16,7 @@ import makeSelectProfilePage, {
     makeProfileStats,
     makeLastActions,
 } from './selectors';
-import { sortHistory, getLastActions } from './actions';
+import { getLastActions } from './actions';
 import Header from './Header';
 import AccountForm from './AccountForm';
 import Stats from './Stats';
@@ -52,7 +52,6 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 return (
                     <History>
                         <HistoryTable
-                            onSort={this.props.sortHistory}
                             header={historyHeader}
                             body={lastActions}
                             sortable
@@ -91,7 +90,6 @@ ProfilePage.propTypes = {
     ProfilePage: PropTypes.object,
     stats: PropTypes.array,
     lastActions: PropTypes.array,
-    sortHistory: PropTypes.func,
     getLastActions: PropTypes.func,
 };
 
@@ -101,4 +99,4 @@ const mapStateToProps = createStructuredSelector({
     lastActions: makeLastActions(),
 });
 
-export default connect(mapStateToProps, { sortHistory, getLastActions })(ProfilePage);
+export default connect(mapStateToProps, { getLastActions })(ProfilePage);

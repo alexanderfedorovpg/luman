@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { selectRubricsList } from 'containers/App/selectors';
 
 /**
  * Direct selector to the livePage state domain
@@ -21,15 +20,11 @@ const selectSelected = createSelector(
 );
 
 const makeGetNews = () => createSelector(
-    [selectNews, selectRubricsList],
-    (newsMap, rubricsList) => {
+    selectNews,
+    (newsMap) => {
         const news = newsMap.toJS();
-        const rubrics = rubricsList.toJS();
 
-        return news.ids.map((id) => ({
-            ...news.byId[id],
-            rubric: rubrics.find((rubric) => rubric.id === news.byId[id].rubric),
-        }));
+        return news.ids.map((id) => news.byId[id]);
     }
 );
 

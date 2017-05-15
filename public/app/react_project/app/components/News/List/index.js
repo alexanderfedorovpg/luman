@@ -36,7 +36,7 @@ class NewsList extends React.PureComponent {
 
     render() {
         return (
-            <Wrapper>
+            <Wrapper className={this.props.className}>
                 {this.props.items.map(this.renderItem)}
             </Wrapper>
         );
@@ -51,6 +51,7 @@ NewsList.propTypes = {
         ...Item.propTypes,
         id: PropTypes.number.isRequired,
     })),
+    className: PropTypes.string,
 };
 
 export default NewsList;

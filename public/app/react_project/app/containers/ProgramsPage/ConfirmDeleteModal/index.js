@@ -14,14 +14,17 @@ const ConfirmDeleteModal = ({ currentModal, close, onConfirm }) => (
         onRequestClose={close}
     >
         <Group horizontal>
-            <StyledBtn onClick={close} primary>
-                Отменить
+            <StyledBtn
+                onClick={close}
+                buttonType="save"
+            >
+                Передумал удалять
             </StyledBtn>
             <StyledBtn
                 onClick={onConfirm}
-                danger
+                buttonType="cancel"
             >
-                Удалить
+                Да, жажду удалить
             </StyledBtn>
         </Group>
     </ContentModal>

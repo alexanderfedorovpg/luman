@@ -1,0 +1,13 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.global-search-result {
+
+    &__global-search-item {
+        padding-bottom: rem(20);
+
+        &:not(:first-child) {
+            margin-top: rem(20);
+        }
+    }
+}

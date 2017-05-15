@@ -25,10 +25,10 @@ import {
 
 export function* getNews() {
     try {
-        const response = yield call(api.getNews, {
+        const response = yield call(api.getConstructorNews, {
             limit: 5,
-            filter_by: 'POPULARITY',
-            order_direction: 'ASC',
+            orderBy: 'top',
+            orderType: 'desc',
         });
 
         const news = {
@@ -36,16 +36,16 @@ export function* getNews() {
             ids: [],
         };
 
-        response.data.data.forEach((item) => {
+        response.data.forEach((item) => {
             news.ids.push(item.id);
             news.byId[item.id] = {
                 id: item.id,
                 date: item.publish_date,
-                category: item.category_id,
+                categories: item.rubrics.map((rubric) => rubric.name),
                 rating: item.top,
                 title: item.title,
-                hashTags: item.tags,
-                image: item.image_main,
+                hashTags: item.keywords,
+                image: item.image_preview,
             };
         });
 

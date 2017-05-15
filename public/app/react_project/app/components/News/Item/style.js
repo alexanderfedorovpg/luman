@@ -104,8 +104,10 @@ export const StyledTags = styled(HashTags)`
 
 export const ActionBtn = styled(TipIcon)`
     position: absolute;
-    top: 2.9rem;
+    top: 50%;
     right: -.7rem;
 
     display: none;
+
+    transform: translateY(-50%);
 `;

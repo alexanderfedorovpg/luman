@@ -20,17 +20,14 @@ import {
     failureEditUserData,
     allActionsLoaded,
 } from './actions';
-import { makeLastActionsSort } from './selectors';
 
 const selectLastActions = (state) => state.getIn(['profilePage', 'lastActions']).toJS();
 
 export function* getLastActions() {
     try {
-        const sortData = yield select(makeLastActionsSort());
         const loadedHistory = yield select(selectLastActions);
 
         const response = yield call(api.getUserLogs, {
-            ...sortData,
             offset: loadedHistory.length,
             limit: LAST_ACTIONS_UPLOAD_NUM,
         });

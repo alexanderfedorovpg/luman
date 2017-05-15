@@ -1,16 +1,26 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from 'react';
+import classNames from 'classnames';
 
-import Burger from 'components/Burger'
-import Logo from './Logo'
-import TopMenu from './TopMenu'
-import Alarm from './Alarm'
-import RSS from 'components/RSS'
-import Search from 'components/Search'
+import { withRouter } from 'react-router-dom';
+import Burger from 'components/Burger';
+import RSS from 'components/RSS';
+import Search from 'components/Search';
 
-import './style.scss'
+import Logo from './Logo';
+import TopMenu from './TopMenu';
+import Alarm from './Alarm';
 
-function Header({ war }) {
+import './style.scss';
+
+function Header({ war, history }) {
+    function onSearch(query) {
+        const location = {
+            pathname: '/search',
+            search: `?query=${query}`,
+        };
+
+        history.push(location);
+    }
 
     return (
         <header className={classNames('header', { header_war: war })}>
@@ -27,11 +37,14 @@ function Header({ war }) {
                 </div>
                 <div className="header__right-part">
                     <RSS />
-                    <Search />
+                    <Search
+                        onSearch={onSearch}
+                        classNames={{ root: 'header__search' }}
+                    />
                 </div>
             </div>
         </header>
     )
 }
 
-export default Header
+export default withRouter(Header);

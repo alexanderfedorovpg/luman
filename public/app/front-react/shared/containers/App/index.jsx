@@ -21,6 +21,7 @@ import NewsPage from 'containers/NewsPage'
 import BroadcastPage from 'containers/BroadcastPage'
 import AboutPage from 'containers/AboutPage'
 import HowPage from 'containers/HowPage'
+import SearchPage from 'containers/SearchPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
 import { selectWarMode } from 'selectors/news'
@@ -68,6 +69,8 @@ class App extends Component {
 
                             <Route exact path="/about" component={AboutPage} />
                             <Route exact path="/how" component={HowPage} />
+
+                            <Route exact path="/search" component={SearchPage} />
 
                             <Route component={HomePage} />
                         </Switch>
