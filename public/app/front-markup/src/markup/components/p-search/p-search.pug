@@ -1,0 +1,36 @@
+include ../global-search/global-search
+include ../global-search-result/global-search-result
+include ../breadcrumb/breadcrumb
+include ../general-video/general-video
+include ../info-noize/info-noize
+include ../enter-one/enter-one
+
+mixin p-search(data)
+    +b.p-search()&attributes(attributes)
+        block
+        +e.container.container
+            +e.left.left-col.left-col_width_inner.p-search__left--margin
+                +e.H1 Результаты поиска
+
+                //- Поиск
+                +global-search()
+
+                //- Табы
+                +breadcrumb(breadcrumb.search)(class="p-search__breadcrumb")
+
+                +global-search-result(global_search_result.all_result)(class="p-search__global-search-result")
+
+            +e.right.right-col
+                //- ключевое видео
+                +general-video(general_video.mini_photo)(class="news-top__general-video")
+                //- инфошум
+                +info-noize(info_noize.news)(class="p-search__info-noize")
+                //- из эфира
+                +enter-one(from_enter.one)(class="p-search__enter-one")
+
+            +e.middle.middle-col
+                //- большой инфо баннер
+                +banner-preview(banner_preview)(class="p-search__banner-preview")
+
+            +e.left.left-col.left-col_width_inner
+                +global-search-result(global_search_result.after_banner)(class="p-search__global-search-result p-search__global-search-result--after-banner")

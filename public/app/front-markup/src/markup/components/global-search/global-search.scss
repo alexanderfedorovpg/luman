@@ -1,0 +1,55 @@
+.global-search {
+
+    &__form {
+        position: relative;
+
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    &__text {
+        width: rem(725);
+        height: rem(37);
+        margin-left: rem(21);
+
+        font-size: rem(18);
+        line-height: rem(21);
+        color: $purple;
+        letter-spacing: rem(-.2);
+
+        border: none;
+        border-bottom: 1px solid $gray;
+        border-radius: 0;
+        box-shadow: none;
+        -webkit-appearance: none;
+    }
+
+    &__clear {
+        @include bg($close);
+        position: absolute;
+        bottom: rem(10);
+        left: rem(728);
+
+        border: none;
+        background-color: transparent;
+
+    }
+
+    &__go {
+        width: rem(155);
+        height: rem(75);
+
+        font: #{rem(16)}/#{rem(18)} $stemReg;
+        color: $white;
+        text-transform: uppercase;
+
+        border: none;
+        background-color: transparent;
+        background-image: url(%=static=%content/global-search/go-search.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}

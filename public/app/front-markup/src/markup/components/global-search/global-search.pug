@@ -1,0 +1,7 @@
+mixin global-search(data)
+    +b.global-search()&attributes(attributes)
+        block
+        +e.FORM.form
+            +e.INPUT(type="text" value="Дмитрий Медведев").text
+            +e.INPUT(type="reset" value="").clear
+            +e.INPUT(type="submit" value="Искать").go
