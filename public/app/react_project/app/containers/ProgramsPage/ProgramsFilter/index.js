@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import Tags from 'components/Tags';
+import InlineFilter from 'components/InlineFilter';
 import { Wrapper } from './style';
 import {
     makeSelectProgramsNames,
@@ -15,9 +15,8 @@ const Programs = ({ selected, programs, ...props }) => (
     <Wrapper>
         {
             !!programs &&
-            <Tags
-                type="radio"
-                data={programs}
+            <InlineFilter
+                items={programs}
                 value={[selected]}
                 onChange={props.changeProgram}
             />
@@ -28,7 +27,7 @@ const Programs = ({ selected, programs, ...props }) => (
 Programs.propTypes = {
     selected: PropTypes.number,
     changeProgram: PropTypes.func,
-    programs: Tags.propTypes.data,
+    programs: InlineFilter.propTypes.items,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -38,7 +37,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
     return {
-        changeProgram: (id) => dispatch(changeProgram(id[0])),
+        changeProgram: (id) => dispatch(changeProgram(id)),
     };
 }
 

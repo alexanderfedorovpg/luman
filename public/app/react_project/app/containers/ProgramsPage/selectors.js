@@ -24,8 +24,8 @@ const selectSelectedRecord = createSelector(
 const makeSelectProgramsNames = () => createSelector(
     makeGetProgramsArray(),
     (programs) => [
-        { id: -1, name: 'Все' },
-        ...programs,
+        { value: -1, label: 'Все' },
+        ...programs.map(({ id, name }) => ({ value: id, label: name })),
     ]
 );
 
