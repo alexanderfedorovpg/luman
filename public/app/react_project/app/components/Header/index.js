@@ -122,9 +122,11 @@ const NavItem = styled(({ active, ...rest }) => <ReactLink {...rest} />)`
 
     color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
+
     &:hover {
-        text-decoration: underline;
+        color: #fff;
     }
+
     &:last-child {
         margin-right: 0;
     }

@@ -13,6 +13,8 @@ const activeColor = css`
 `;
 /* eslint-enable */
 
+const calcLH = (height) => `${(parseInt(height, 10) - 2)}px`;
+
 const Button = styled.button`
     display: inline-block;
     height: ${({ height }) => height || HEIGHT};
@@ -21,7 +23,7 @@ const Button = styled.button`
 
     font-family: ${font.helvetica};
     font-size: ${rem(14)};
-    line-height: ${({ height }) => height || HEIGHT};
+    line-height: ${({ height }) => height ? calcLH(height) : calcLH(HEIGHT)};
     font-weight: 700;
     color: #333333;
 
