@@ -20,7 +20,7 @@ a {
 
         span {
             margin-right: 3px;
-            
+
             font-family: $helvetica;
             font-size: 18px;
         }
@@ -43,7 +43,7 @@ a {
     height: $el-height;
     padding: 0;
     border: 1px solid #cccccc;
-    
+
     font-family: $helvetica;
     font-size: rem(14);
     line-height: $el-height;
@@ -62,8 +62,9 @@ a {
 
     // styling
     &.btn-success {
-        
-        &:not([disabled]):hover {
+
+        &:not([disabled]):hover,
+        &:not([disabled]).is-verify {
             color: #fff;
             background-color: $cl-success;
         }
@@ -126,8 +127,9 @@ a {
     }
 
     .icon {
-        margin-top: -3px;
-        vertical-align: baseline;
+        position: relative;
+        top: -3px;
+        vertical-align: middle;
     }
 
     i.icon {
@@ -209,7 +211,7 @@ a {
     padding-right: 3px;
     border-top: 1px solid #2e3136;
     border-bottom: 1px solid #2e3136;
-    
+
     font-family: $opensans;
     font-size: 14px;
     font-weight: 600;
@@ -271,7 +273,7 @@ a {
 
             &:checked + label {
                 color: #333;
-                
+
                 &:before {
                     @include bg($radio-active);
                     /* Radio Checked */
@@ -304,7 +306,7 @@ a {
             + label:hover,
             &.active + label {
                 color: #333;
-                
+
                 &:before {
                     @include bg($checkbox-hover);
                     // background-size: cover;
@@ -371,7 +373,7 @@ a {
 
         cursor: pointer;
         user-select: none;
-    
+
         background: #cb0813;
         border-radius: 2em;
         outline: 0;
@@ -385,7 +387,7 @@ a {
             width: 50%;
             height: 100%;
         }
-    
+
         &:after {
             top: 1px;
             left: 5%;
@@ -395,12 +397,12 @@ a {
             height: 10px;
             transition: all .2s ease;
         }
-    
+
         &:before {
             display: none;
         }
     }
-    
+
     input:checked + label {
         background: #359918;
 
@@ -628,7 +630,7 @@ a {
             &:last-child {
                 border-bottom: 0;
             }
-            
+
 
             &:hover {
                 background-color: #f0f0f0;
@@ -648,7 +650,7 @@ a {
                 }
 
             }
-            
+
             &.summary {
 
                 td {
