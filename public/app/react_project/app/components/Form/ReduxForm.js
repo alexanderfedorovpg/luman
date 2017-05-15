@@ -1,4 +1,6 @@
 import React from 'react';
+import Tags from 'components/Tags';
+import Rating from 'components/Rating';
 import {
     Label,
     Input,
@@ -84,5 +86,21 @@ export const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid, dirty
         error={touched && invalid && dirty && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e.target.files)}
+    />
+);
+
+export const TagsRedux = ({ input, ...props }) => (
+    <Tags
+        {...props}
+        value={input.value}
+        onChange={(checked) => input.onChange(checked)}
+    />
+);
+
+export const RatingRedux = ({ input, ...props }) => (
+    <Rating
+        {...props}
+        value={input.value}
+        onChange={(value) => input.onChange(value)}
     />
 );

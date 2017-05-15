@@ -6,12 +6,12 @@ export const items = [
     },
     {
         link: '/editor',
-        icon: 'view',
+        icon: 'draft',
         name: 'Задания',
     },
     {
         link: '/newslist',
-        icon: 'draft',
+        icon: 'view',
         name: 'В работе',
     },
     {

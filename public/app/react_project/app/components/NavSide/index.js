@@ -35,9 +35,9 @@ const NavItem = styled(({expanded, active, ...rest}) => <Link {...rest} />)`
     height: 60px;
 
     text-decoration: none;
+    color: #999999;
 
     border-bottom: 1px solid #000;
-
     background-color: #181818;
 
     &:last-child {
@@ -50,6 +50,7 @@ const NavItem = styled(({expanded, active, ...rest}) => <Link {...rest} />)`
 
     ${ifProp('active')`
         background-color: #2e2e2e;
+        color: #fff;
     `}
 
     ${ifProp('expanded')(css`
@@ -65,7 +66,6 @@ const Name = styled.span`
     font-family: ${font.opensans};
     font-size: 13px;
     font-weight: 400;
-    color: #999999;
     text-transform: uppercase;
 
     ${ifProp('expanded')`

@@ -78,7 +78,6 @@ class Form extends Component {
         let errors = {
             header: !this.state.data.header,
             keywords: !form.get('keywords'),
-            editor: !form.get('editor')
         }
 
         this.setState({
@@ -146,8 +145,6 @@ class Form extends Component {
                     <Label bold>Назначить редактора статьи</Label>
                     <Select
                         options={users}
-                        error={this.state.error.editor}
-                        onChange={() => this.setError('editor', false)}
                         icon="search"
                         name="editor" />
                 </Group>
