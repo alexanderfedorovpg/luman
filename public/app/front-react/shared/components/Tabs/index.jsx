@@ -34,7 +34,7 @@ Tabs.defaultProps = {
 
 Tabs.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
+        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         name: PropTypes.string,
     })),
     active: PropTypes.number,

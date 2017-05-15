@@ -9,20 +9,9 @@ import {
     selectWarMode
 } from 'selectors/news'
 
-import { fetchHome } from 'actions/news'
-
 import Home from 'components/HomePage'
 
 class HomePage extends PureComponent {
-
-    constructor(props) {
-        super(props);
-
-    }
-
-    componentDidMount() {
-        this.props.fetchHome()
-    }
 
     render() {
         let { noise, broadcast, today, now, other, warMode } = this.props
@@ -59,9 +48,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchHome() {
-        dispatch(fetchHome())
-    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

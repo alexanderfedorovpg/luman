@@ -276,12 +276,14 @@ export default function createRoutes(store) {
                 const importModules = Promise.all([
                     import('containers/EditorPage/sagas'),
                     import('containers/NewslistPage/sagas'),
+                    import('containers/Chat/sagas'),
                 ]);
 
-                importModules.then(([editorSagas, newslistSagas]) => {
+                importModules.then(([editorSagas, newslistSagas, chatSagas]) => {
                     this.loadedSagas = injectSagas([
                         ...editorSagas.default,
                         ...newslistSagas.default,
+                        ...chatSagas.default,
                     ]);
                     callback();
                 });
@@ -296,14 +298,16 @@ export default function createRoutes(store) {
             },
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
+                    import('containers/Chat/reducer'),
                     import('containers/EditorPage/reducer'),
                     import('containers/EditorPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([reducer, component]) => {
-                    injectReducer('editorPage', reducer.default)
+                importModules.then(([chatReducer, editorReducer, component]) => {
+                    injectReducer('chat', chatReducer.default)
+                    injectReducer('editorPage', editorReducer.default)
 
                     renderRoute(component)
                 });
@@ -412,6 +416,23 @@ export default function createRoutes(store) {
                     name: 'articleUserStatsPage'
                 }
             ]
+        },
+        {
+            path: '/translation',
+            name: 'translation',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/TranslationPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([component]) => {
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
         },
         {
       path: '/profile',

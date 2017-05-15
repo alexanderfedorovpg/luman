@@ -431,6 +431,46 @@ a {
             order: 1;
         }
     }
+    // когда текст с двух сторон
+    &--doubled {
+        label {
+            order: 2;
+            &:after {
+                left: auto;
+                left: 65%;
+            }
+        }
+        span {
+            order: 1;
+            &:last-child {
+                order: 3;
+            }
+        }
+        input:checked {
+            + label {
+                &:after {
+                    left: 5%;
+                    right: auto;
+
+                }
+                + span {
+                    + span {
+                        color: #808080;
+                    }
+                }
+            }
+        }
+        input {
+            + label {
+                + span {
+                    + span {
+                        color: #333;
+                    }
+                }
+            }
+        }
+
+    }
 
 }
 

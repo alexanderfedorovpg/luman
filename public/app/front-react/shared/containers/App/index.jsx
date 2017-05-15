@@ -25,6 +25,8 @@ import SearchPage from 'containers/SearchPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
 import { fetch as fetchPrograms } from 'actions/programs'
+import { fetchHome } from 'actions/news'
+
 import { selectWarMode } from 'selectors/news'
 
 // import 'normalize.css/normalize.css'
@@ -92,6 +94,7 @@ const mapDispatchToProps = dispatch => ({
     fetchData() {
         dispatch(fetchRubrics())
         dispatch(fetchPrograms())
+        dispatch(fetchHome())
     }
 })
 

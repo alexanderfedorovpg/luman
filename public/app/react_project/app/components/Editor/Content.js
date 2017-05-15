@@ -1,27 +1,25 @@
 import React, { Component, PropTypes, Children, cloneElement } from 'react'
 import styled from 'styled-components'
-import ReactQuill from 'react-quill'
 import Dropzone from 'react-dropzone'
 import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import { Wrap, Left, Right } from 'components/Content'
 import { Group, Textarea, Label } from 'components/Form'
 import Input from 'components/Form/Input'
+import Rich from 'components/Form/Rich'
 import User from 'components/User'
 import Icon from 'components/Icon'
 import Rating from 'components/Rating'
 import Tags from 'components/Tags'
 import Modal from 'components/Modal'
 import Preview from './Preview'
-import Chat from './Chat'
+import Chat from 'containers/Chat'
 import HeaderEditor from './Header.editor'
 import HeaderSupervisor from './Header.supervisor'
 
 import { ifProp } from 'utils/style'
 import { ensureAbs } from 'utils/uri'
 import { font, padding, color } from 'constants/style'
-
-import 'quill/dist/quill.snow.css'
 
 const titleMax = 120
 const subtitleMax = 140
@@ -197,8 +195,18 @@ class Content extends Component {
         }
     }
 
-    symbolsLeft(string, max) {
-        return `осталось ${max - string.length} символов`
+    renderLabel(title, string, max) {
+        const limit = max - string.length
+
+        return (
+            <Label right light>
+                <span>{title}</span> : осталось {
+                    limit < 0
+                        ? <span className="out">{limit}</span>
+                        : limit
+                } символов
+            </Label>
+        )
     }
 
     validate() {
@@ -227,7 +235,6 @@ class Content extends Component {
             title: !data.title || data.title.length > titleMax,
             subtitle: !data.subtitle || data.subtitle.length > subtitleMax,
             theses: !data.theses,
-            keywords: !data.keywords,
         }
 
         if (Object.values(newError).reduce((a,b) => a || b, false)) {
@@ -322,11 +329,8 @@ class Content extends Component {
 
     render() {
         let {
-            chat,
             article,
             rubrics,
-            postMessage,
-            loadMessages,
             getUserById,
             chatRoom,
             delegate,
@@ -379,9 +383,7 @@ class Content extends Component {
                 <Wrap>
                     <CustomLeft>
                         <Group>
-                            <Label right light>
-                                <span>Заголовок</span> : {this.symbolsLeft(this.state.data.title, titleMax)}
-                            </Label>
+                            {this.renderLabel('Заголовок', this.state.data.title, titleMax)}
                             <TitleField
                                 value={this.state.data.title}
                                 error={this.state.error.title}
@@ -392,9 +394,7 @@ class Content extends Component {
                                 block />
                         </Group>
                         <Group>
-                            <Label right light>
-                                <span>Подзаголовок</span> : {this.symbolsLeft(this.state.data.subtitle, subtitleMax)}
-                            </Label>
+                            {this.renderLabel('Подзаголовок', this.state.data.subtitle, subtitleMax)}
                             <SubtitleField
                                 value={this.state.data.subtitle}
                                 error={this.state.error.subtitle}
@@ -418,7 +418,7 @@ class Content extends Component {
                                 block />
                         </Group>
                         <Group>
-                            <ReactQuill value={this.state.data.body}
+                            <Rich value={this.state.data.body}
                                 onChange={this.changeHandlerValue('body')} />
                         </Group>
                         <Group>
@@ -478,11 +478,7 @@ class Content extends Component {
                             ? <User data={editor} />
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
-                        <Chat
-                            {...chat}
-                            postMessage={postMessage}
-                            loadMessages={loadMessages}
-                            room={chatRoom} />
+                        <Chat room={chatRoom} />
                     </CustomRight>
                 </Wrap>
                 <Modal
@@ -502,13 +498,7 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-    chat: PropTypes.shape({
-        messages: PropTypes.array,
-        loading: PropTypes.bool
-    }).isRequired,
     article: PropTypes.object.isRequired,
-    postMessage: PropTypes.func.isRequired,
-    loadMessages: PropTypes.func.isRequired,
     rubrics: PropTypes.array.isRequired,
     chatRoom: PropTypes.oneOfType([
         PropTypes.string,
@@ -517,11 +507,3 @@ Content.propTypes = {
 }
 
 export default Content
-
-// если url не base64 - префиксит его с "//" чтобы он был абсолютным
-function urlHelper(url) {
-    return url.trim().search(/^data:/) > -1
-        ? url
-        : `//${url}`
-}
-

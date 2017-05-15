@@ -8,6 +8,8 @@ import Badge from 'components/Badge';
 import { ifProp } from 'utils/style';
 import { padding, font } from 'constants/style';
 import { items } from './constants';
+import logoMin from './assets/logo-min.png';
+import logo from './assets/logo.png';
 
 const Wrapper = styled.nav`
     position: fixed;
@@ -85,13 +87,13 @@ const NavBadge = styled(Badge)`
     `)}
 `;
 
-
 function NavSide({ expanded, isActive, location }) {
     function renderItem(item) {
         return (
             <NavItem
                 key={item.link}
                 to={item.link}
+                logo
                 expanded={expanded}
                 active={isActive(item.link)}
             >
@@ -105,10 +107,10 @@ function NavSide({ expanded, isActive, location }) {
 
     return (
         <Wrapper expanded={expanded} onClick={(e) => e.stopPropagation()}>
-            <NavItem href="#">
+            <NavItem expanded={expanded} href="#">
                 {expanded
-                    ? <Icon type="logo-light" />
-                    : <Icon type="logo" />
+                    ? <img src={logo} alt="rtvi" />
+                    : <img src={logoMin} alt="rtvi" />
                 }
             </NavItem>
             {items.map(renderItem)}

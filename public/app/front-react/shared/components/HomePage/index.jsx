@@ -30,7 +30,7 @@ function HomePage({ now, today, other, noise, broadcast, war }) {
 
     const videoNews = broadcast.map(v => v.record)
     const firstVideo = videoNews[0] || {}
-    const secondVideo = videoNews[0] || {}
+    const secondVideo = videoNews[1] || {}
 
     const moreVideo = videoNews.slice(2, 5)
     const listVideo = videoNews.slice(5, 8)

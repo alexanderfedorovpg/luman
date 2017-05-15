@@ -34,4 +34,9 @@ export const items = [
         icon: 'live',
         name: 'Прямой эфир',
     },
+    {
+        link: '/translation',
+        icon: 'text-edit-ico',
+        name: 'Текстовая трансляция',
+    },
 ];

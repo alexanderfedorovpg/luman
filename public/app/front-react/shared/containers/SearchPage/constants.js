@@ -1,18 +1,18 @@
 export const TABS_DATA = [
     {
-        id: 0,
+        id: 'all',
         name: 'Все результаты',
     },
     {
-        id: 1,
+        id: 'news',
         name: 'Новости',
     },
     {
-        id: 2,
+        id: 'noise',
         name: 'Инфошум',
     },
     {
-        id: 3,
+        id: 'air',
         name: 'Из эфира',
     },
 ];

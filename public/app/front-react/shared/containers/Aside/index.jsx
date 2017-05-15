@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { selectBroadcast } from 'selectors/broadcast'
-import { selectNoise } from 'selectors/news'
+import { selectHomeNoise, selectHomeBroadcast } from 'selectors/news'
 
 import Content from 'components/Aside'
 
@@ -12,14 +11,16 @@ class Aside extends PureComponent {
         const { noise, broadcast } = this.props
 
         return (
-            <Content noise={noise} broadcast={broadcast} />
+            <Content
+                noise={noise.map(v=>v.news)}
+                broadcast={broadcast.map(v=>v.record)} />
         )
     }
 }
 
 const mapStateToProps = state => ({
-    noise: selectNoise(state),
-    broadcast: selectBroadcast(state)
+    noise: selectHomeNoise(state),
+    broadcast: selectHomeBroadcast(state)
 })
 
 const mapDispatchToProps = dispatch => ({

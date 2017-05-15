@@ -85,6 +85,21 @@ var data = {tabsNav: {
                 class: 'is-active'
             }
         ]
+    },
+
+    userEdit: {
+        items: [
+            {
+                name: 'Пользователи',
+                class: 'is-active'
+            },
+            {
+                name: 'Группы'
+            },
+            {
+                name: 'Журнал'
+            }
+        ]
     }
 
 }}

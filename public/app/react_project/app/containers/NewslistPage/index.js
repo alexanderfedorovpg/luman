@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
-
+import { push } from 'react-router-redux'
 
 import { Wrap, Left, Right } from 'components/Content'
 import Header from 'components/Working/Header'
@@ -76,12 +76,14 @@ class NewslistPage extends Component {
             acceptArticle,
             postMessage,
             oldNews,
-            user
+            user,
+            push
         } = this.props
 
         const contentProps = {
             news: this.filterNews(),
-            old: oldNews
+            old: oldNews,
+            push
         }
 
         const headerProps = {
@@ -160,6 +162,9 @@ const mapDispatchToProps = dispatch => ({
     },
     postMessage(room, message) {
         dispatch(postMessage(room, message))
+    },
+    push(url) {
+        dispatch(push(url))
     }
 })
 
