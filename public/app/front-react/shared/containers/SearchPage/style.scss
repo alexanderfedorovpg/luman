@@ -75,5 +75,10 @@
     &__banner-preview {
         height: rem(145);
         margin-top: rem(-23);
+        margin-bottom: rem(43);
+    }
+
+    &__preloader {
+        margin-top: rem(15);
     }
 }

@@ -1,0 +1,14 @@
+@import "~style/mixins";
+
+.preloader {
+    display: flex;
+    align-items: center;
+
+    font-size: rem(16);
+
+    &__icon {
+        width: rem(24);
+        height: rem(24);
+        margin-right: rem(4);
+    }
+}

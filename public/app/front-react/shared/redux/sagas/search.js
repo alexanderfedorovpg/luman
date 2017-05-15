@@ -1,18 +1,30 @@
 import axios from 'axios';
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import config from 'config';
 
 import {
+    setInitialState,
     search,
     searchSuccess,
     searchError,
+    changeSearchCategory,
 } from 'actions/search';
 
 const endpoint = config('apiEndpoint');
 
+const selectCurrentCategory = state => state.search.category;
+const selectQuery = state => state.search.query;
+
 export function* searchSaga({ payload: query }) {
     try {
-        const response = yield call(axios.get, `${endpoint}/news/search?query=${query}`);
+        const params = { query };
+        const category = yield select(selectCurrentCategory);
+
+        if (category !== 'all') {
+            params.category = category;
+        }
+
+        const response = yield call(axios.get, `${endpoint}/news/search`, { params });
 
         yield put(searchSuccess(response.data));
     } catch (err) {
@@ -20,6 +32,13 @@ export function* searchSaga({ payload: query }) {
     }
 }
 
+export function* getQueryAndSearch() {
+    const query = yield select(selectQuery);
+    yield put(search(query));
+}
+
 export default function* searchData() {
-    yield takeEvery(search.getType(), searchSaga);
+    yield takeLatest(search.getType(), searchSaga);
+    yield takeLatest(changeSearchCategory.getType(), getQueryAndSearch);
+    yield takeLatest(setInitialState.getType(), getQueryAndSearch);
 }
