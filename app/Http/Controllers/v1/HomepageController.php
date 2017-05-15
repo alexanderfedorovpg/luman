@@ -124,9 +124,9 @@ class HomepageController extends CmsController
 
             $warModeTitle = $request->input('war_mode_title');
             if ($warModeTitle !== null) {
-                $option = HomepageOption::where('name', '=', 'war_mode')->firstOrCreate(['name' => 'war_mode_title','value'=>$warModeTitle]);
-                $option->value = $warModeTitle;
-                $option->save();
+                 HomepageOption::updateOrCreate(['name' => 'war_mode_title'],  [ 'value'=>$warModeTitle]);
+
+
             }
 
         } catch (ValidationException $e) {
