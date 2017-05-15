@@ -153,7 +153,7 @@ class NewsFeedController extends CmsController
             $rules['action']= 'required';
             $rules['id']= 'exists:news_feed,id';
             $rules['editor_id']= 'numeric|exists:users,id';
-            $rules['keywords']= 'required';
+
             $rules['header']= 'required';
 
             $rules['top']='required|numeric';
@@ -177,10 +177,13 @@ class NewsFeedController extends CmsController
                 $news->publish_date = 'null';
                 $news->top = $data['top'];
 
-                $news->keywords = $data['keywords'];
+
                 $news->editor_id = $data['editor_id'];
 
                 //необязательные поля
+                if (isset($data['keywords'])) {
+                    $news->keywords = $data['keywords'];
+                }
                 if (isset($data['rubrics'])) {
                     $rubrics = $data['rubrics'];
                 }
