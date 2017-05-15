@@ -8,6 +8,6 @@ export default [
     news,
     rubrics,
     programs,
-    broadcast
+    broadcast,
     search,
 ];
