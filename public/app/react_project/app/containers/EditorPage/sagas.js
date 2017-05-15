@@ -4,7 +4,6 @@ import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import {
     TO_FIX_ARTICLE,
-    LOAD_CHAT_MESSAGES,
     LOAD_ARTICLE,
     FINISH_ARTICLE,
     PUBLISH_ARTICLE,
@@ -23,28 +22,11 @@ import {
     articleFinishError,
     articlePublished,
     articlePublishError,
-    chatMessagesLoaded,
-    chatMessagesLoadingError,
     articleSendedToFix,
     articleToFixError
 } from './actions'
 
 import * as api from 'api'
-
-export function* getMessages({ payload }) {
-
-    try {
-        const { data } = yield call(api.getChatMessages, payload)
-
-        yield put(chatMessagesLoaded(data))
-    } catch (err) {
-        yield put(chatMessagesLoadingError(err))
-    }
-}
-
-export function* chatData() {
-    yield takeLatest(LOAD_CHAT_MESSAGES, getMessages)
-}
 
 export function* getArticle({ payload }) {
 
@@ -160,6 +142,5 @@ export function* articleData() {
 }
 
 export default [
-    chatData,
     articleData
 ]

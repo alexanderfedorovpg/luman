@@ -20,7 +20,8 @@ import {
 
 import {
     selectCategories,
-    selectWarMode
+    selectWarMode,
+    selectPristine
 } from './selectors';
 
 import {
@@ -46,7 +47,8 @@ export class ConstructorPage extends React.Component {
             menuOpen,
             cancelChanges,
             setFilter,
-            saveChanges
+            saveChanges,
+            pristine
         } = this.props;
 
         return (
@@ -55,6 +57,7 @@ export class ConstructorPage extends React.Component {
                 <Helmet title="Конструтор" />
 
                 <Header
+                    pristine={pristine}
                     onSave={saveChanges}
                     moved={menuOpen}
                     onCancel={cancelChanges}
@@ -75,6 +78,7 @@ const mapStateToProps = state => ({
     menuOpen: selectMenuExpandedStatus(state),
     categories: selectCategories(state),
     war: selectWarMode(state),
+    pristine: selectPristine(state)
 })
 
 const mapDispatchToProps = dispatch => ({

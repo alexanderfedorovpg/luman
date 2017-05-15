@@ -154,13 +154,13 @@ const NavItem = styled.a`${navItemStyles}`
 const CustomLink = styled(Link)`${navItemStyles}`
 const CustomPush = styled(PushNotification)`${navItemStyles}`
 
-function Item({ data, newItem, clearTask, postMessage }) {
+function Item({ data, push, newItem, clearTask, postMessage }) {
     let editor = data.editor
         ? data.editor
         : null
 
     return (
-        <Root>
+        <Root onClick={()=>push(`/editor/${data.id}`)}>
             <Wrapper>
                 <Left>
                     <Header>

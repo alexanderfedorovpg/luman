@@ -5,6 +5,7 @@ import './style.scss'
 import icon from './rss.svg'
 
 function RSS() {
+    return null
 
     return (
         <div className="rss header__rss">

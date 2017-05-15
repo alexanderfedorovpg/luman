@@ -152,21 +152,6 @@ export const acceptArticle = (id) => axios.post('/newseditor/work', {
     id,
 });
 
-export const getChatMessages = (room) => axios.get(`/newschat/${room}`);
-
-export const postChatMessage = (room, { message, files }) => {
-    const formData = new FormData();
-
-    formData.append('message', message);
-    formData.append('files', files);
-
-    return axios.post(`/newschat/${room}`, formData, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
-
 export const uploadFile = (file) => {
     const formData = new FormData();
 
@@ -184,6 +169,24 @@ export const getReadyNews = (params) => axios.get('/newseditor/moderated', {
 });
 
 export const publishArticle = (id) => axios.put(`/newseditor/publish/${id}`);
+
+// =============================================================================
+// Chat API
+// =============================================================================
+export const getChatMessages = (room) => axios.get(`/newschat/${room}`);
+
+export const postChatMessage = (room, { message, files }) => {
+    const formData = new FormData();
+
+    formData.append('message', message);
+    formData.append('files', files);
+
+    return axios.post(`/newschat/${room}`, formData, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    });
+};
 
 // =============================================================================
 // Constructor API

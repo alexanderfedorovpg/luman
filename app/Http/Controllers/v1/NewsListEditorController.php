@@ -208,7 +208,7 @@ class NewsListEditorController extends CmsController
             $video_stream = $request->input('video_stream');
 
             $body = $request->input('body');
-            $keywords = $request->input('keywords');
+
 
             $editor_id = $request->input('editor_id');
             $image_main = $request->input('image_main');
@@ -237,7 +237,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
-                $newsEdit->keywords = $keywords;
+
                 $newsEdit->moderation = 0;
 
 
@@ -248,6 +248,11 @@ class NewsListEditorController extends CmsController
                 }
 
                 //необязательные поля
+                if ($request->get('keywords')) {
+                    $newsEdit->keywords = $request->get('keywords');
+                }
+
+
                 if ($request->get('rubrics')) {
                     $rubrics = $request->get('rubrics');
                 }
@@ -336,7 +341,7 @@ class NewsListEditorController extends CmsController
             $video_stream = $request->input('video_stream');
 
             $body = $request->input('body');
-            $keywords = $request->input('keywords');
+
 
             $editor_id = $request->input('editor_id');
             $image_main = $request->input('image_main');
@@ -361,13 +366,17 @@ class NewsListEditorController extends CmsController
             $news->top = $top;
             $news->body = $body ? $body : '';
 
-            $news->keywords = $keywords;
+
             $news->moderation = false;
 
             $news->original_source_link = $original_source_link ? $original_source_link : '';
 
 
             //необязательные поля
+            if ($request->get('keywords')) {
+                $news->keywords = $request->get('keywords');
+            }
+
             if ($request->get('rubrics')) {
                 $rubrics = $request->get('rubrics');
             }

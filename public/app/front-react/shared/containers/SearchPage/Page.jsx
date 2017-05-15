@@ -5,12 +5,19 @@ import { createStructuredSelector } from 'reselect';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 
-import { search } from 'actions/search';
-import { makeGetSearchResults } from 'selectors/search';
+import { search, changeSearchCategory, setInitialState } from 'actions/search';
+import {
+    makeGetSearchResults,
+    makeGetCurrentCategory,
+    makeGetQuery,
+    makeGetLoading,
+} from 'selectors/search';
 import BigSearch from 'components/BigSearch';
-import AsideContainer from 'containers/Aside';
+import BannerPreview from 'components/HomePage/BannerPreview'
 import Tabs from 'components/Tabs';
 import SearchResultList from 'components/SearchResultList';
+import AsideContainer from 'containers/Aside';
+import Preloader from 'components/Preloader';
 import { TABS_DATA } from './constants';
 import './style.scss';
 
@@ -19,34 +26,47 @@ class SearchPage extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.state = {
-            query: '',
-        };
-
         this.onSearch = this.onSearch.bind(this);
+        this.onCategoryChange = this.onCategoryChange.bind(this);
     }
 
     componentWillMount() {
         const parsed = queryString.parse(this.props.location.search);
 
         this.setState({
-            query: parsed.query,
+            paramsFromUrl: {
+                query: parsed.query,
+                category: parsed.category || 'all',
+            },
         });
     }
 
     componentDidMount() {
-        if (!this.state.query) {
-            return;
-        }
+        const parsed = queryString.parse(this.props.location.search);
 
-        this.props.search(this.state.query);
+        this.props.setInitialState(this.state.paramsFromUrl);
+    }
+
+    changeUrl(overwriteParams) {
+        const params = {
+            query: this.props.query,
+            category: this.props.category,
+            ...overwriteParams,
+        };
+
+        this.props.history.push({
+            search: `${queryString.stringify(params)}`,
+        });
     }
 
     onSearch(query) {
         this.props.search(query);
-        this.props.history.push({
-            search: `?query=${query}`,
-        });
+        this.changeUrl({ query });
+    }
+
+    onCategoryChange(category) {
+        this.props.changeSearchCategory(category);
+        this.changeUrl({ category });
     }
 
     render() {
@@ -63,20 +83,32 @@ class SearchPage extends PureComponent {
                                 <h1>Результаты поиска</h1>
                                 <BigSearch
                                     onSearch={this.onSearch}
-                                    initialQuery={this.state.query}
+                                    initialQuery={this.state.paramsFromUrl.query}
                                 />
                                 <Tabs
                                     data={TABS_DATA}
-                                    active={0}
+                                    active={this.props.category}
+                                    onChange={this.onCategoryChange}
                                     classNames={{ root: 'p-search__breadcrumb' }}
                                 />
-                                <SearchResultList
-                                    classNames={{ root: 'p-search__global-search-result' }}
-                                    items={this.props.results}
-                                />
+                                {
+                                    this.props.loading ?
+                                        <Preloader className="p-search__preloader" /> :
+                                        this.props.results.length ?
+                                            (
+                                                <SearchResultList
+                                                    classNames={{ root: 'p-search__global-search-result' }}
+                                                    items={this.props.results}
+                                                />
+                                            ) :
+                                            <div className="p-search__preloader">Ничего не найдено :(</div>
+                                }
                             </div>
                             <div className="p-search__right right-col">
                                 <AsideContainer />
+                            </div>
+                            <div className="p-search__middle middle-col">
+                                <BannerPreview className="p-search__banner-preview" />
                             </div>
                         </div>
                     </div>
@@ -88,6 +120,12 @@ class SearchPage extends PureComponent {
 
 const mapStateToProps = createStructuredSelector({
     results: makeGetSearchResults(),
+    category: makeGetCurrentCategory(),
+    query: makeGetQuery(),
+    loading: makeGetLoading(),
 });
 
-export default withRouter(connect(mapStateToProps, { search })(SearchPage));
+export default withRouter(connect(
+    mapStateToProps,
+    { search, changeSearchCategory, setInitialState },
+)(SearchPage));

@@ -1,14 +1,50 @@
 import { createSelector } from 'reselect';
 
+const categoriesMap = {
+    noise: {
+        link: '/noise',
+        name: 'Инфошум',
+    },
+    news: {
+        link: '/news',
+        name: 'Новости',
+    },
+    air: {
+        link: '/broadcast',
+        name: 'Из эфира',
+    },
+};
+
 export const selectSearchDomain = state => state.search;
 
 export const makeGetSearchResults = () => createSelector(
     selectSearchDomain,
-    search => search.results.map(item => ({
-        id: parseInt(item.id, 10),
-        date: parseInt(item.publish_date, 10),
-        title: item.title,
-        categoryName: 'Новости',
-        categoryLink: '/news',
-    })),
+    search => search.results.map((item) => {
+        const category = categoriesMap[item.category] || {};
+
+        return {
+            id: parseInt(item.id, 10),
+            date: parseInt(item.publish_date, 10),
+            title: item.title,
+            text: item.note,
+            img: item.preview,
+            categoryName: category.name || 'Новости',
+            categoryLink: category.link || '/news',
+        };
+    }),
+);
+
+export const makeGetCurrentCategory = () => createSelector(
+    selectSearchDomain,
+    search => search.category,
+);
+
+export const makeGetQuery = () => createSelector(
+    selectSearchDomain,
+    search => search.query,
+);
+
+export const makeGetLoading = () => createSelector(
+    selectSearchDomain,
+    search => search.loading,
 );

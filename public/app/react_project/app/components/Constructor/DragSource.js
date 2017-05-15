@@ -105,14 +105,14 @@ class Item extends Component {
                 <Root style={style}>
                     <Wrapper>
                         {children}
-                        <ToMain message="На главную" eventType="hover" direction="bottom">
+                        {/*<ToMain message="На главную" eventType="hover" direction="bottom">
                             <Icon
                                 type="go-right"
                                 onClick={e => {
                                     toMain(data)
                                     e.stopPropagation()
                                 }} />
-                        </ToMain>
+                        </ToMain>*/}
                     </Wrapper>
                 </Root>
             </div>

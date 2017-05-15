@@ -7,7 +7,6 @@ import HeaderSupervisor from 'components/Editor/Header.supervisor'
 import Content from 'components/Editor/Content'
 
 import {
-    loadChatMessages,
     loadArticle,
     deleteArticle,
     finishArticle,
@@ -17,10 +16,9 @@ import {
 } from './actions'
 import { rejectArticle } from 'containers/NewslistPage/actions'
 
-import { loadEditors, postMessage } from 'containers/App/actions'
+import { loadEditors } from 'containers/App/actions'
 
 import {
-    selectChat,
     selectArticle
 } from './selectors'
 import { selectRubrics } from 'containers/App/selectors'
@@ -69,11 +67,8 @@ class EditorPage extends Component {
     renderContent() {
         let {
             menuOpen,
-            chat,
             article,
             rubrics,
-            loadMessages,
-            postMessage,
             deleteArticle,
             rejectArticle,
             finishArticle,
@@ -95,16 +90,13 @@ class EditorPage extends Component {
         if (checkPermissons(user, ['admin', 'сommissioning-editor'])) {
             return (
                 <Content
-                    chat={chat}
                     article={article}
                     rubrics={rubrics}
                     chatRoom={params.id}
                     preview={this.state.preview}
                     publish={publishArticle}
                     closePreview={this.closePreview}
-                    editor={usersMap[article.EditorId]}
-                    loadMessages={loadMessages}
-                    postMessage={postMessage}>
+                    editor={usersMap[article.EditorId]}>
 
                     <HeaderSupervisor
                         {...headerProps}
@@ -116,16 +108,13 @@ class EditorPage extends Component {
         else if (checkPermissons(user, ['editor'])) {
             return (
                 <Content
-                    chat={chat}
                     article={article}
                     rubrics={rubrics}
                     chatRoom={params.id}
                     delegate={rejectArticle.bind(this, article.id)}
                     preview={this.state.preview}
                     finish={finishArticle}
-                    closePreview={this.closePreview}
-                    loadMessages={loadMessages}
-                    postMessage={postMessage}>
+                    closePreview={this.closePreview}>
 
                     <HeaderEditor
                         delegate={rejectArticle.bind(this, article.id)}
@@ -153,7 +142,6 @@ class EditorPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    chat: selectChat(state),
     article: selectArticle(state),
     rubrics: selectRubrics(state),
     usersMap: selectUsersMap(state),
@@ -162,9 +150,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    loadMessages(room) {
-        dispatch(loadChatMessages(room))
-    },
     loadArticle(id) {
         dispatch(loadArticle(id))
     },
@@ -186,9 +171,6 @@ const mapDispatchToProps = dispatch => ({
     },
     rejectArticle(id) {
         dispatch(rejectArticle(id))
-    },
-    postMessage(room, message) {
-        dispatch(postMessage(room, message))
     },
     toFixArticle(id) {
         dispatch(toFixArticle(id))

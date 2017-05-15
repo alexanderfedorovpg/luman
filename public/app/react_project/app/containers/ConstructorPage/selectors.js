@@ -15,7 +15,7 @@ const selectSearchVars = createSelector(
 
 const selectHomeNews = createSelector(
     selectConstructorPageDomain,
-    root => root.getIn(['temporary', 'home'], List()).toJS()
+    root => root.getIn(['temporary', 'home'], Map()).toJS()
 )
 
 const selectCategories = createSelector(
@@ -45,6 +45,11 @@ const selectWarMode = createSelector(
     root => root.getIn(['temporary', 'home', 'war'])
 )
 
+const selectPristine = createSelector(
+    selectConstructorPageDomain,
+    root => root.getIn(['temporary', 'home']) == root.getIn(['home', 'data'])
+)
+
 export {
     selectConstructorPageDomain,
     selectCategories,
@@ -52,5 +57,6 @@ export {
     selectNews,
     selectHomeNews,
     selectFilters,
-    selectWarMode
+    selectWarMode,
+    selectPristine
 }
