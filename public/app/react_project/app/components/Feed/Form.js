@@ -77,7 +77,6 @@ class Form extends Component {
 
         let errors = {
             header: !this.state.data.header,
-            keywords: !form.get('keywords'),
         }
 
         this.setState({
@@ -139,14 +138,16 @@ class Form extends Component {
                         }}
                         style={{ minHeight: '150px' }}
                         error={this.state.error.header}
-                        block />
+                        block
+                    />
                 </Group>
                 <Group sm>
                     <Label bold>Назначить редактора статьи</Label>
                     <Select
                         options={users}
                         icon="search"
-                        name="editor" />
+                        name="editor"
+                    />
                 </Group>
                 <Group sm>
                     <Label bold>Назначить редактора в прямой эфир</Label>
@@ -161,9 +162,8 @@ class Form extends Component {
                     <Input
                         name="keywords"
                         placeholder="Ключевые слова"
-                        error={this.state.error.keywords}
-                        onChange={e => this.setError('keywords', false)}
-                        block />
+                        block
+                    />
                 </Group>
                 <Group>
                     <InputIcon icon="clip" name="comment" block placeholder="Комментарий" />
