@@ -25,7 +25,7 @@ const Root = styled.div`
     margin-top: -15px;
 `
 
-function Content({ news, old, clearTask, postMessage }) {
+function Content({ news, push, old, clearTask, postMessage }) {
 
     return (
         <Root>
@@ -37,6 +37,7 @@ function Content({ news, old, clearTask, postMessage }) {
                 {news.map(value => (
                     <Item
                         key={value.id}
+                        push={push}
                         data={value}
                         clearTask={clearTask}
                         postMessage={postMessage}

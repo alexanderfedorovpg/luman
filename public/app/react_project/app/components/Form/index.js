@@ -7,11 +7,12 @@ import Checkbox from './Checkbox';
 import Datepicker from './Datepicker';
 import Dropzone from './Dropzone';
 import ImageLoader from './ImageLoader';
+import Rich from './Rich';
 
-import { ifProp, rem } from './../../utils/style';
-import { color, font } from './../../constants/style';
+import { ifProp, rem } from 'utils/style';
+import { color, font } from 'constants/style';
 
-export { Select, Input, InputIcon, Checkbox, FileInput, Datepicker, Dropzone, ImageLoader };
+export { Select, Input, InputIcon, Checkbox, FileInput, Datepicker, Dropzone, ImageLoader, Rich };
 
 export const Horizontal = styled.div`
     display: flex;
@@ -50,11 +51,15 @@ export const Label = styled.label`
     letter-spacing: -0.1px;
 
     span {
-        color: #333333;
+        color: #333;
+
+        &.out {
+            color: #A00;
+        }
     }
 
     ${ifProp('bold')(css`
-        color: #333333;
+        color: #333;
         font-family: ${font.opensans};
         font-size: ${rem(13)};
         font-weight: 700;
@@ -62,7 +67,7 @@ export const Label = styled.label`
     `)}
 
     ${ifProp('light')(css`
-        color: #999999;
+        color: #999;
         font-family: ${font.opensans};
         font-size: 12px;
         font-weight: 400;
@@ -119,5 +124,18 @@ export const Textarea = styled.textarea`
 
     ${ifProp('success')(css`
         border-color: ${color.success};
+    `)}
+
+    ${ifProp('title')(css`
+        height: 119px;
+        padding-left: 16px;
+        padding-right: 16px;
+
+        font-family: ${font.opensans};
+        font-weight: 400;
+        color: #333;
+        font-size: 30px;
+        line-height: 34px;
+        letter-spacing: -0.7px;
     `)}
 `;

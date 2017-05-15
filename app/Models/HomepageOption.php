@@ -16,6 +16,7 @@ class HomepageOption extends Model
      * @var array
      */
     protected $fillable = [
+        'name',
         'value'
     ];
 

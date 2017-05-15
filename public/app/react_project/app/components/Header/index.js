@@ -191,9 +191,6 @@ function Header({ moved, onToggle, isActive, onLogout, user }) {
                             <NavItem to="/stats" active={isActive('/stats')}>
                                 Статистика
                             </NavItem>
-                            <NavItem to="#" active={false}>
-                                Аналитика
-                            </NavItem>
                         </nav>
                         <CustomUser to="profile" data={user}>
                             <CustomUserName to="profile">

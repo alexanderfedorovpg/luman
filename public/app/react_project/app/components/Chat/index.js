@@ -100,30 +100,13 @@ class Chat extends PureComponent {
 
         this.changeHandler = this.changeHandler.bind(this)
         this.submitHandler = this.submitHandler.bind(this)
-        this.queueUpdate = this.queueUpdate.bind(this)
-    }
-
-    componentDidMount() {
-        this.queueUpdate()
-    }
-
-    componentWillUnmount() {
-        clearTimeout(this.timeout)
-    }
-
-    queueUpdate() {
-        let { loadMessages, room } = this.props
-
-        if (room) loadMessages(room)
-
-        this.timeout = setTimeout(this.queueUpdate, 5000)
     }
 
     submitHandler(e) {
         e.preventDefault()
 
         if (this.state.message) {
-            this.props.postMessage(this.props.room, {
+            this.props.onPost(this.props.room, {
                 message: this.state.message,
                 files: e.target.file.files
             })
