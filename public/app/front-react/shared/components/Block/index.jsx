@@ -34,16 +34,18 @@ function renderList(className, type, data) {
 }
 
 function renderItem(className, type, data, war, wTitle) {
+    const video = data.video_stream
+
     return (
         <div className={classNames(`${type}`, className, { [`${type}_war`]: war })}>
             <Link className={`${type}__link`} to={newsLink(data)}></Link>
             <img className={`${type}__img`} src={ensureAbs(data.image_preview)} alt=" "role="presentation" />
             <div className={`${type}__info`}>
-                {data.time_keeping
+                {video
                     ? (
                         <div className={`${type}__time-keeping`}>
                             <img className={`${type}__ico`} src="/content/video-ico/video-ico.png" alt="" role="presentation" />
-                            <span className={`${type}__keeping`}>{data.time_keeping}</span>
+                            <span className={`${type}__keeping`}>{video.duration}</span>
                         </div>
                     )
                     : null

@@ -7,14 +7,18 @@ import {
     selectRelated,
 } from 'selectors/news'
 import {
+    selectProgram,
+    selectPagination,
     selectBroadcast,
     selectBroadcastData
 } from 'selectors/broadcast'
+import { selectPrograms } from 'selectors/programs'
 
-// import { fetch, fetchRelated } from 'actions/news'
-import { fetch } from 'actions/broadcast'
+import { fetchNoise, fetchRelated } from 'actions/news'
+import { fetch, fetchMore, setProgram } from 'actions/broadcast'
 
-import Detail from 'components/Broadcast/Page'
+import Detail from 'components/NewsDetail'
+import Broadcast from 'components/Broadcast/Page'
 
 class BroadcastPage extends PureComponent {
 
@@ -27,27 +31,51 @@ class BroadcastPage extends PureComponent {
         const { match } = this.props
 
         this.props.fetch()
+        this.props.fetchNoise()
 
         if (match.params.id) {
-            this.props.fetch({ id: match.params.id })
+            this.fetchItem(match.params.id)
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
-            this.props.fetch({ id: nextProps.match.params.id })
+
+            if (nextProps.match.params.id) {
+                this.fetchItem(nextProps.match.params.id)
+            }
         }
+    }
+
+    // загружает новость, если ее нет в списке
+    // также загружает "новости по теме"
+    fetchItem(id) {
+        if (!this.getById(id)) {
+            this.props.fetch({ id })
+        }
+        this.props.fetchRelated(id)
     }
 
     getById(id) {
         const { broadcastData } = this.props
 
-        return broadcastData[id] || {}
+        return broadcastData[id]
     }
 
     render() {
-        let { match, broadcast } = this.props
-        const item = this.getById(match.params.id)
+        let {
+            match,
+            broadcast,
+            noise,
+            relatedNews,
+            program,
+            programs,
+            pagination,
+            setProgram,
+            loadMore
+        } = this.props
+        const item = this.getById(match.params.id) || {}
+        const p = [{ id: null, name: 'Все сразу' }, ...programs]
 
         return (
             <div>
@@ -56,8 +84,18 @@ class BroadcastPage extends PureComponent {
                 </Helmet>
 
                 {match.params.id
-                    ? <Detail data={item} />
-                    : null
+                    ? <Detail
+                        data={item}
+                        noise={noise}
+                        related={relatedNews}
+                        broadcast={broadcast} />
+                    : <Broadcast
+                        broadcast={broadcast}
+                        onLoadRequest={loadMore}
+                        canLoad={pagination.page < pagination.lastPage}
+                        setProgram={setProgram}
+                        programs={p}
+                        program={program} />
                 }
             </div>
         )
@@ -67,20 +105,30 @@ class BroadcastPage extends PureComponent {
 const mapStateToProps = state => ({
     broadcast: selectBroadcast(state),
     broadcastData: selectBroadcastData(state),
-    // relatedNews: selectRelated(state),
-    // broadcast: selectBroadcast(state)
+    programs: selectPrograms(state),
+    program: selectProgram(state),
+    pagination: selectPagination(state),
+    relatedNews: selectRelated(state),
+    noise: selectNoise(state),
 })
 
 const mapDispatchToProps = dispatch => ({
     fetch(params) {
         dispatch(fetch(params))
     },
-    // fetchRelated(id) {
-    //     dispatch(fetchRelated(id))
-    // },
-    // fetchRecords() {
-    //     dispatch(fetchRecords())
-    // },
+    loadMore() {
+        dispatch(fetchMore())
+    },
+    setProgram(id) {
+        dispatch(setProgram(id))
+        dispatch(fetch())
+    },
+    fetchNoise() {
+        dispatch(fetchNoise())
+    },
+    fetchRelated(id) {
+        dispatch(fetchRelated(id))
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BroadcastPage)

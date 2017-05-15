@@ -3,6 +3,8 @@
 
 .general-video {
     position: relative;
+    overflow: hidden;
+    transition: height .3s;
 
     height: rem(593);
 
@@ -22,6 +24,10 @@
     }
     &_play::before {
         display: none;
+    }
+
+    &_collapsed {
+        height: rem(396);
     }
 
     iframe {

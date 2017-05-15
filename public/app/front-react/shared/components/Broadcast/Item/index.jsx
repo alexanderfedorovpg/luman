@@ -7,71 +7,42 @@ import { ensureAbs } from 'shared/utils/uri'
 
 import './style.scss'
 
-class FromEnter extends PureComponent {
+function FromEnter({ data, big, className }) {
+    if (!data) return null
 
-    constructor(props) {
-        super(props);
+    const video = data.video_stream || {}
 
-        this.state = {
-            play: false
-        }
-
-        this.play = this.play.bind(this)
-    }
-
-    play() {
-        this.setState({
-            play: true
-        })
-    }
-
-    render() {
-        const { data, className } = this.props
-
-        return (
-            <div className={classNames('from-enter', className)}>
-                {this.state.play
-                    ? null
-                    : (
-                        <a onClick={this.play}
-                            className="from-enter__link from-enter__link from-enter__link_position">
-                            <img className="from-enter__img" src={ensureAbs(data.image_preview)} alt="" alt="" role="presentation" />
-                            <span className="from-enter__time-keeping">
-                                <img className="from-enter__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
-                                <span className="from-enter__keeping">
-                                {Date.parse(data.time_keeping)
-                                    ? <FormattedTime value={data.time_keeping}
-                                        hour="2-digit"
-                                        minute="2-digit"
-                                        second="2-digit" />
-                                    : null
-                                }
-                                </span>
-                            </span>
-                        </a>
-                    )
-                }
-                <div className="from-enter__info">
-                    <Link to={`/broadcast/${data.id}`} className="from-enter__link">
-                        {data.title}
-                    </Link>
-                    <p className="from-enter__category">
-                        {data.program
-                            ? data.program.name
+    return (
+        <div className={classNames('from-enter', className, { 'from-enter_big': big })}>
+            <Link to={`/broadcast/${data.id}`} className="from-enter__link from-enter__link from-enter__link_position">
+                <img className="from-enter__img" src={ensureAbs(video.preview)} alt="" alt="" role="presentation" />
+                <span className="from-enter__time-keeping">
+                    <img className="from-enter__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
+                    <span className="from-enter__keeping">
+                        {`${video.duration}`.replace('.', ':')}
+                    </span>
+                </span>
+            </Link>
+            <div className="from-enter__info">
+                <Link to={`/broadcast/${data.id}`} className="from-enter__link">
+                    {data.title}
+                </Link>
+                <p className="from-enter__category">
+                    {data.program
+                        ? data.program.name
+                        : null
+                    }
+                    {` `}
+                    <span className="from-enter__time-add">
+                        {Date.parse(data.publish_date)
+                            ? <FormattedDate value={data.publish_date} month="long" day="2-digit" />
                             : null
                         }
-                        {` `}
-                        <span className="from-enter__time-add">
-                            {Date.parse(data.publish_date)
-                                ? <FormattedDate value={data.publish_date} month="long" day="2-digit" />
-                                : null
-                            }
-                        </span>
-                    </p>
-                </div>
+                    </span>
+                </p>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default FromEnter
