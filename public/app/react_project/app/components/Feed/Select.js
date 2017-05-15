@@ -100,19 +100,23 @@ class Select extends PureComponent {
 
         this.state = {
             open: false,
+            placeholder: '',
             value: {
                 name: '',
                 id: '',
             },
         };
 
-        this.open = this.open.bind(this);
-        this.close = this.close.bind(this);
+        this.open = ::this.open;
+        this.close = ::this.close;
+        this.changeHandler = ::this.changeHandler;
     }
 
     open() {
         if (!this.state.open) {
             this.setState({
+                ...this.state,
+                placeholder: '',
                 open: true,
             });
         }
@@ -121,6 +125,7 @@ class Select extends PureComponent {
     close() {
         if (this.state.open) {
             this.setState({
+                ...this.state,
                 open: false,
             });
         }
@@ -132,22 +137,32 @@ class Select extends PureComponent {
 
     selectHandler(item) {
         this.setState({
+            ...this.state,
             value: item,
+            placeholder: item.name,
+            open: false
         });
-
-        this.close();
 
         (this.props.onChange || (() => {}))(item);
     }
 
+    changeHandler(e) {
+        this.setState({
+            ...this.state,
+            placeholder: e.target.value
+        })
+    }
+
     render() {
         const { icon, options, error } = this.props;
+        const { placeholder } = this.state;
 
         return (
             <Root className={this.props.className} onClick={this.open}>
                 <InputIcon
+                    onChange={this.changeHandler}
                     icon={icon}
-                    value={this.state.value.name}
+                    value={placeholder}
                     error={error}
                     block
                 />
@@ -158,23 +173,26 @@ class Select extends PureComponent {
                 />
 
                 <Options open={this.state.open}>
-                    {options.map((option, index) => (
-                        <Item
-                            key={index}
-                            onClick={this.selectHandler.bind(this, option)}>
+                    {options
+                        .filter(option => option.name.indexOf(placeholder) > -1)
+                        .map((option, index) => (
+                            <Item
+                                key={index}
+                                onClick={this.selectHandler.bind(this, option)}>
 
-                            {
-                                !!option.pic &&
-                                <Pic>
-                                    <img src={option.pic} alt="" />
-                                </Pic>
-                            }
-                            <Text noPic={!option.pic}>
-                                <p>{option.name}</p>
-                                <span>Выбрать</span>
-                            </Text>
-                        </Item>
-                    ))}
+                                {
+                                    !!option.pic &&
+                                    <Pic>
+                                        <img src={option.pic} alt="" />
+                                    </Pic>
+                                }
+                                <Text noPic={!option.pic}>
+                                    <p>{option.name}</p>
+                                    <span>Выбрать</span>
+                                </Text>
+                            </Item>
+                        ))
+                    }
                 </Options>
             </Root>
         );

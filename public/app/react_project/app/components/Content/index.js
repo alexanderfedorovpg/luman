@@ -1,14 +1,15 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { padding } from './../../constants/style'
-import { ifProp } from './../../utils/style'
+import { padding } from 'constants/style'
+import { ifProp, rem } from 'utils/style'
 
 const Content = styled.div`
     position: relative;
     padding-right: ${padding};
     padding-top: 138px;
     margin-left: 67px;
+    margin-bottom: ${padding};
     left: 0;
 
     transition: all 0.4s ease;
@@ -21,6 +22,10 @@ const Content = styled.div`
 export const Wrap = styled.div`
     display: flex;
     align-items: stretch;
+
+    ${ifProp('margin')(css`
+        margin-top: ${rem(10)}
+    `)}
 `
 
 export const Left = styled.div`

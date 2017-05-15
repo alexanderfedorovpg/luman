@@ -56,9 +56,11 @@ function constructorPageReducer(state = initialState, action) {
             return state.setIn(['home', 'loading'], true)
 
         case LOAD_HOME_NEWS_SUCCESS:
+            const newData = fromJS(action.payload)
+
             return state
-                .setIn(['home', 'data'], fromJS(action.payload))
-                .setIn(['temporary', 'home'], fromJS(action.payload))
+                .setIn(['home', 'data'], newData)
+                .setIn(['temporary', 'home'], newData)
                 .setIn(['home', 'loading'], false)
 
         case LOAD_HOME_NEWS_FAILURE:
