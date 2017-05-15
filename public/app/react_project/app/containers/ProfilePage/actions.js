@@ -12,6 +12,9 @@ import {
     GET_LAST_ACTIONS,
     GET_LAST_ACTIONS_SUCCESS,
     GET_LAST_ACTIONS_FAILURE,
+    SORT_HISTORY,
+    ALL_ACTIONS_LOADED,
+    ENABLE_EDIT_PASSWORD,
 } from './constants';
 
 export function changeTab(tab) {
@@ -54,5 +57,24 @@ export function successEditUserData() {
 export function failureEditUserData() {
     return {
         type: EDIT_USER_DATA_FAILURE,
+    };
+}
+
+export function sortHistory(sortData) {
+    return {
+        type: SORT_HISTORY,
+        payload: sortData,
+    };
+}
+
+export function allActionsLoaded() {
+    return {
+        type: ALL_ACTIONS_LOADED,
+    };
+}
+
+export function enableEditPassword() {
+    return {
+        type: ENABLE_EDIT_PASSWORD,
     };
 }

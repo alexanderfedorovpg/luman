@@ -2244,8 +2244,8 @@ h3 {
 
 .text-edit__ico {
   position: absolute;
-  bottom: -0.6875rem;
-  left: calc(50% - 0.65625rem);
+  bottom: -0.5rem;
+  left: calc(60% - 0.1875rem);
   display: block;
   background-image: url(../img/png-sprite/96dpi/sprite.png);
   background-position: -179px -78px;
@@ -5238,9 +5238,9 @@ h3 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   padding-top: 0.875rem;
   padding-right: 2.4375rem;
   padding-bottom: 0.875rem;
@@ -6319,7 +6319,7 @@ h3 {
 }
 
 .text-translate__header .content-wrap .video-status {
-  width: 235px;
+  width: 236px;
 }
 
 .text-translate .content-l {

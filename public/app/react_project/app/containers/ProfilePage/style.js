@@ -7,6 +7,7 @@ export const Profile = styled.div`
 `;
 
 export const History = styled.div`
+    padding-bottom: 2rem;
     margin-left: 1.5rem;
 `;
 

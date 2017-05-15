@@ -42,7 +42,8 @@ trait NewsListTrait {
         $orderBy = $request->input('orderBy');
         if ($orderBy !== null) {
             $orderType = $request->input('orderType') ? $request->input('orderType') : 'ASC';
-            $news->orderBy($orderBy, $orderType);
+            $news->orderBy($orderBy , $orderType);
+            $news->orderBy('publish_date' , 'ASC');
         }
 
         $start = $request->input('start');
