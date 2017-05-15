@@ -1,0 +1,21 @@
+mixin global-search-item(data)
+    +b.global-search-item(class={'global-search-item--full': !data.img})&attributes(attributes)
+        block
+        if (data.img)
+
+            +e.img-block
+
+                +e.A(href=jv0).link
+
+                    +e.IMG(src=data.img alt="").img
+
+        +e.text(class={"global-search-item__text--full": !data.img})
+
+            +e.category-link
+                +e.A(href=jv0).category #{data.category}
+
+            +e.A(href=jv0).title #{data.title}
+
+            +e.P.introtext #{data.introtext}
+
+            +e.P.time #{data.time}

@@ -1,0 +1,79 @@
+.p-from-the-enter {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: rem(60);
+    }
+
+    &__left {
+
+        &--margin {
+            margin-top: rem(-12);
+        }
+    }
+
+    &__title-block {
+       padding-bottom: rem(-1);
+    }
+
+    &__popular {
+        margin-top: rem(22);
+    }
+
+    &__video-list {
+
+        &--one-margin {
+            margin-top: rem(17);
+        }
+
+        &--two-margin {
+            margin-top: rem(33);
+        }
+
+        &--three-margin {
+            margin-top: rem(31);
+        }
+
+        &--four-margin {
+            margin-top: rem(34);
+        }
+    }
+
+    &__banner {
+        margin-top: rem(26);
+    }
+
+    &__subscribe {
+       margin-top: rem(18);
+    }
+
+    &__list-video {
+
+        &--right {
+            margin-top: rem(28);
+        }
+    }
+
+    &__banner-preview {
+        height: rem(145);
+        margin-top: rem(-22);
+    }
+
+    &__more-goods {
+        margin-top: rem(19);
+    }
+
+    &__info-noize {
+        margin-top: rem(22);
+
+        .info-noize__mini-news:first-child {
+
+            .mini-news__title {
+                line-height: rem(23);
+            }
+        }
+    }
+}

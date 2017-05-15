@@ -1,0 +1,69 @@
+include ../title-block/title-block
+include ../breadcrumb/breadcrumb
+include ../general-video/general-video
+include ../info-noize/info-noize
+include ../banner/banner
+include ../video-list/video-list
+include ../banner-preview/banner-preview
+include ../list-video/list-video
+include ../more-goods/more-goods
+include ../popular/popular
+include ../subscribe/subscribe
+include ../more-news/more-news
+
+mixin p-from-the-enter(data)
+    +b.p-from-the-enter()&attributes(attributes)
+        block
+        +e.container.container
+            +e.left.left-col.left-col_width_inner.p-from-the-enter__left--margin
+
+                //- заголовок страницы
+                +title-block(title_block.from_enter)(class="p-from-the-enter__title-block")
+
+                //- хлебные крошки
+                +breadcrumb(breadcrumb.from_enter)
+
+                +popular(per_day.index)(class="p-from-the-enter__popular")
+
+                //- видео без заголовка раздела
+                +video-list(more_video.list)(class="p-from-the-enter__video-list p-from-the-enter__video-list--one-margin")
+
+            +e.right.right-col
+
+                //- ключевое видео
+                +general-video(general_video.mini_photo)(class="news-top__general-video")
+
+                //- инфошум
+                +info-noize(info_noize.news)(class="p-from-the-enter__info-noize")
+
+            +e.left.left-col.left-col_width_inner
+
+                //- как смотреть
+                +banner(class="banner__where-view p-from-the-enter__banner")
+
+                //- видео без заголовка раздела
+                +video-list(more_video.from_enter)(class="p-from-the-enter__video-list p-from-the-enter__video-list--two-margin")
+
+            +e.right.right-col
+
+                //- подписка
+                +subscribe(class="p-from-the-enter__subscribe")
+
+                //- новости под подпиской
+                +list-video(list_video.from_enter_three)(class="p-from-the-enter__list-video p-from-the-enter__list-video--right")
+
+            +e.middle.middle-col
+
+                //- большой инфо баннер
+                +banner-preview(banner_preview)(class="p-from-the-enter__banner-preview")
+
+            +e.left.left-col.left-col_width_inner
+
+                //- видео без заголовка раздела
+                +video-list(more_video.list)(class="p-from-the-enter__video-list p-from-the-enter__video-list--three-margin")
+
+                +more-goods('Больше сюжетов')(class="p-from-the-enter__more-goods")
+
+            +e.right.right-col
+                //- список видео с иконкой
+                +list-video(list_video.index)(class="p-from-the-enter__video-list p-from-the-enter__video-list--four-margin")

@@ -1,0 +1,8 @@
+include ../from-enter/from-enter
+
+mixin video-list(data)
+    +b.video-list()&attributes(attributes)
+        block
+        +e.list
+            each item in data
+                +from-enter(item)(class="more-video__from-enter from-enter_border")

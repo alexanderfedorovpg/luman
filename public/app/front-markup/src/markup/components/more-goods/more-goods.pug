@@ -8,5 +8,7 @@ mixin more-goods(data)
             })
             if data == 'предыдущие записи'
                 +e.SPAN.more-text.more-text предыдущие записи
+            else if data == 'Больше сюжетов'
+                +e.SPAN.more-text.more-text Больше сюжетов
             else
                 +e.SPAN.more-text.more-text Больше новостей

@@ -1,0 +1,17 @@
+extends ../layouts/default
+
+include ../components/p-search/p-search
+
+block vars
+    -pageSettings.title = 'Страница поиска';
+    -pageSettings.headerClass = 'header_margin';
+
+block content
+    // Контент здесь
+    main
+        .inner-wrapper
+            +p-search(class="search-page__p-search")
+
+
+
+

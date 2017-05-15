@@ -173,4 +173,26 @@
         }
     }
 
+    &_video {
+        width: rem(618);
+        height: rem(450);
+
+        .block-rectangle__img {
+            height: rem(347);
+        }
+
+        .block-rectangle__info {
+            bottom: 0;
+
+            width: 100%;
+            min-height: calc(100% - #{rem(347)});
+
+            background-color: $white;
+        }
+
+        .block-rectangle__title {
+            color: $enter;
+        }
+    }
+
 }
