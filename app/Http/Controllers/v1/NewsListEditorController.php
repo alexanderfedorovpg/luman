@@ -181,7 +181,7 @@ class NewsListEditorController extends CmsController
 
             $rules['id'] = 'required|exists:news,id';
             $rules['editor_id'] = 'numeric|exists:users,id';
-            $rules['keywords'] = 'required';
+
             $rules['is_online'] = 'in:0,1';
             $rules['is_war_mode'] = 'in:0,1';
             $rules['top'] = 'required|numeric';
@@ -316,7 +316,7 @@ class NewsListEditorController extends CmsController
             }
 
             $rules['editor_id'] = 'numeric|exists:users,id';
-            $rules['keywords'] = 'required';
+
             $rules['is_online'] = 'in:0,1';
             $rules['is_war_mode'] = 'in:0,1';
             $rules['top'] = 'required|numeric';
