@@ -473,7 +473,7 @@ class NewsListEditorController extends CmsController
             $new_editor_id = $request->input('new_editor_id');
 
             $news = News::find($id);
-            $log_moderation = new NewsModerationLogHelper($news);
+          //  $log_moderation = new NewsModerationLogHelper($news);
 
             if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
@@ -482,19 +482,19 @@ class NewsListEditorController extends CmsController
             $news->editor_id = $new_editor_id;
             $news->moderation = 0;
 
-            if ($log_moderation->setModeration() && $news->save()) {
-                $this->log->setLog('DELEGATE', $id, "Successful, news id=" . $id . " delegate [" . $this->user_id . ">" . $new_editor_id . "]");
+            if (/*$log_moderation->setModeration() &&*/ $news->save()) {
+                $this->log->setLog('DELEGATE', $id, "Successful, news id=" . $id . " delegate [" . $id . ">" . $new_editor_id . "]");
                 return $this->respondCreated(
                     ["data" => "delegate"]
                 );
             }
-            $this->log->setLog('DELEGATE', $id, "Error, news id=" . $id . " don't delegate  [" . $this->user_id . ">" . $new_editor_id . "]");
+         $this->log->setLog('DELEGATE', $id, "Error, news id=" . $id . " don't delegate  [" . $id . ">" . $new_editor_id . "]");
             throw new \Exception('Error, news don\'t delegate');
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $id = $request->input('id');
-            $this->log->setLog('DELEGATE', $id, "Error 500 news id=" . $id);
+           $this->log->setLog('DELEGATE', $id, "Error 500 news id=" . $id);
             return $this->respondFail500x($e->getMessage());
         }
     }
