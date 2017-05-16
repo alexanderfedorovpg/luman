@@ -669,4 +669,52 @@ class NewsListEditorController extends CmsController
             return $this->respondFail500x($e->getMessage());
         }
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateCover(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+                'cover_id' => 'required|number',
+            ]);
+            $id = $request->input('id');
+            $request->input('id');
+            $news = News::findOrfail($id);
+            $news->cover_id = $request->input('cover_id');
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    public function updateTitle(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+                'title' => 'required|string',
+            ]);
+            $id = $request->input('id');
+            $request->input('id');
+            $news = News::findOrfail($id);
+            $news->title = $request->input('title');
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
 }

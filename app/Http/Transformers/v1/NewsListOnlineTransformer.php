@@ -23,6 +23,7 @@ class NewsListOnlineTransformer extends Transformer
     public function transformComment($comment)
     {
         $transform = $comment;
+
         if ($comment['image_preview']) {
             $preview = CdnFile::where('id', '=', $comment['image_preview'])->pluck('url')->first();
             $transform['image_preview'] = [
