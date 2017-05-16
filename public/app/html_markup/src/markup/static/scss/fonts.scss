@@ -15,12 +15,12 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 @include font-face('Open Sans', '../fonts/hinted-OpenSans-Bold', 700, normal, $exts: woff woff2);
 @include font-face('Open Sans', '../fonts/hinted-OpenSans-Extrabold', 800, normal, $exts: woff woff2);
 // font Helvetice Neue
-@include font-face('HelveticaNeue', '../fonts/helveticaneuecyr-roman', 400, normal, $exts: woff woff2);
-@include font-face('HelveticaNeue', '../fonts/helveticaneuecyr-light', 300, normal, $exts: woff woff2);
-@include font-face('HelveticaNeue', '../fonts/helveticaneuecyr-bold', 700, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/HelveticaNeueCyr-Roman', 400, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/HelveticaNeueCyr-Light', 300, normal, $exts: woff woff2);
+@include font-face('HelveticaNeue', '../fonts/HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
 
 // font Nexa without Cyrillic
-@include font-face('Nexa', '../fonts/hinted-HelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
+@include font-face('Nexa', '../fonts/hintedHelveticaNeueCyr-Bold', 700, normal, $exts: woff woff2);
 
 $georgia: Georgia, Times, 'Times New Roman', serif;
 $opensans: 'Open Sans', Arial, sans-serif;

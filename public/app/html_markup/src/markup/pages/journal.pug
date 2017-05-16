@@ -1,0 +1,20 @@
+extends ../layouts/default
+include ../components/profile-history/profile-history
+include ../components/tabs-nav/tabs-nav
+block vars
+    -pageSettings.title = 'Журнал';
+
+block content
+
+    +b.HEADER.header.header-off.journal__top
+        +b.header-bot
+            +b.header-l
+                +tabs-nav(tabsNav.userEdit)
+            +b.header-r
+                .form-group
+                    .input-icon
+                        input.input.input-block#ko4(type='text' placeholder='Поиск по журналу')
+                        +icon({ icon: 'search', class: 'search' })
+    
+    +profile-history(journal)(class='journal')
+    // Контент здесь

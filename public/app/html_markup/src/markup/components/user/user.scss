@@ -18,6 +18,26 @@
         }
     }
 
+    &__category {
+        display: block;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        margin-right: rem(12);
+
+        font-family: $helvetica;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 40px;
+        color: #fff;
+
+        text-align: center;
+        text-decoration: none;
+
+        border-radius: 50%;
+        background-color: #2a2f38;
+    }
+
     &__name {
         font-family: $helvetica;
         font-size: rem(14);
