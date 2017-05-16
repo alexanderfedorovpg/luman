@@ -150,7 +150,7 @@ class HomepageController extends CmsController
 
         }
         else{
-            $categories = HomepageNewsCategory::where('mode','!=','war')->orWhereNull('mode')->get()->toArray();
+            $categories = HomepageNewsCategory::get()->toArray();
         }
 
 

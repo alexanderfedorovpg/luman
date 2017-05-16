@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import merge from 'lodash/merge';
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
 import Icon from 'components/Icon';
 import { rem, ifProp } from 'utils/style';
 
-const styles = {
+const defaultStyles = {
     overlay: {
         zIndex: 9999,
         backgroundColor: 'rgba(0, 0, 0, .4)',
@@ -54,10 +55,10 @@ CloseBtn.propTypes = {
     onClick: PropTypes.func,
 };
 
-function Modal(props) {
+function Modal({ style = {}, ...props}) {
     const innerProps = {
         ...props,
-        style: styles,
+        style: merge({}, defaultStyles, style),
     };
 
     return (

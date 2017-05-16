@@ -38,24 +38,32 @@ export class News extends PureComponent {
     }
 
     render() {
-        let {
+        const {
             news,
             categories,
             removeFromMain,
             toMain,
+            location
         } = this.props
+        const type = location.pathname.split('/').pop()
+        const filteredCategories = categories.filter(v => (
+            type == 'news'
+                ? v.mode == null
+                : v.mode == type
+        ))
 
         return (
             <Wrap>
                 <Left>
                     <Tabs />
-                    <NewsComponent data={news} toMain={toMain} />
+                    <NewsComponent data={news} toMain={toMain.bind(this, type)} />
                 </Left>
                 <Right>
                     <Collapse
-                        type={'news'}
-                        onRemove={removeFromMain}
-                        categories={categories} />
+                        type={type}
+                        showTitle={type=='war'}
+                        onRemove={removeFromMain.bind(this, type)}
+                        categories={filteredCategories} />
                 </Right>
             </Wrap>
         )
@@ -76,11 +84,11 @@ const mapDispatchToProps = dispatch => ({
     loadNewslist() {
         dispatch(loadNews())
     },
-    toMain(item, category, before) {
-        dispatch(itemToMain(item, 'news', category, before))
+    toMain(type, item, category, before) {
+        dispatch(itemToMain(item, type, category, before))
     },
-    removeFromMain(item) {
-        dispatch(removeFromMain(item, 'news'))
+    removeFromMain(type, item) {
+        dispatch(removeFromMain(item, type))
     },
 })
 

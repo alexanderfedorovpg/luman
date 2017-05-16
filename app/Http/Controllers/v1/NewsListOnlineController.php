@@ -142,6 +142,8 @@ class NewsListOnlineController extends CmsController
 
     }
 
+
+
     /** Удалить коменнтарий новстоного онлайна
      * @param $id
      *
@@ -170,10 +172,10 @@ class NewsListOnlineController extends CmsController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getListCommentsNewsOnline($id)
+    public function getListCommentsNewsOnline($news_id)
     {
         try {
-            $newsComments = NewsComments::where('news_id', '=', $id)->get();
+            $newsComments = NewsComments::where('news_id', '=', $news_id)->get();
             return $this->respond(
                 $this->newsListTransformer
                     ->transformCollectionComments($newsComments->toArray())

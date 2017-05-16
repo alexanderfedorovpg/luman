@@ -1,10 +1,13 @@
 import { take, call, put, push, select, cancel, takeLatest, takeEvery, fork } from 'redux-saga/effects';
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import {
     LOAD_HOME_NEWS,
     LOAD_CATEGORIES,
     LOAD_NEWS,
     SAVE_CHANGES,
+
+    strings
 } from './constants';
 
 import {
@@ -39,7 +42,11 @@ export function* getHomeNews() {
             news: data.news,
             noise: data.info_noise,
             broadcast: data.from_air,
-            war: !!+data.options.is_war_mode
+            options: {
+                war: !!+data.options.is_war_mode,
+                title: data.options.war_mode_title
+            },
+            war: data.war
         }))
     } catch (err) {
         yield put(homeNewsLoadingError(err))
@@ -57,6 +64,11 @@ export function* saveHomeNews() {
                 category_id: v.category.id,
                 top: v.top
             })),
+            war: data.war.map(v => ({
+                news_id: v.data.id,
+                category_id: v.category.id,
+                top: v.top
+            })),
             from_air: data.broadcast.map(v => ({
                 record_id: v.data.id,
                 top: v.top
@@ -65,10 +77,13 @@ export function* saveHomeNews() {
                 news_id: v.data.id,
                 top: v.top
             })),
-            is_war_mode: +data.war
+            is_war_mode: +data.options.war,
+            war_mode_title: data.options.title
         }
 
         yield call(api.saveHomepageNews, formData)
+
+        toastr.success(strings.saveHomeSuccess)
 
         yield put(changesSaved())
 

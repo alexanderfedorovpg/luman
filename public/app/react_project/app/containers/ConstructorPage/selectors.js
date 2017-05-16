@@ -42,7 +42,12 @@ const selectFilters = createSelector(
 
 const selectWarMode = createSelector(
     selectConstructorPageDomain,
-    root => root.getIn(['temporary', 'home', 'war'])
+    root => root.getIn(['temporary', 'home', 'options', 'war'])
+)
+
+const selectWarTitle = createSelector(
+    selectConstructorPageDomain,
+    root => root.getIn(['temporary', 'home', 'options', 'title'])
 )
 
 const selectPristine = createSelector(
@@ -58,5 +63,6 @@ export {
     selectHomeNews,
     selectFilters,
     selectWarMode,
+    selectWarTitle,
     selectPristine
 }

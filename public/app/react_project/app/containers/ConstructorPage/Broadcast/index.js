@@ -72,7 +72,7 @@ Broadcast.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    records: selectRecords(state),
+    records: selectRecords(state).toJS(),
     filters: selectFilters(state),
     programs: makeGetProgramsArray()(state),
 })
