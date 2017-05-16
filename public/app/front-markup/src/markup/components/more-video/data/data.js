@@ -34,7 +34,7 @@ var data = {more_video: {
         title: 'Подробности атаки на Вестминстер: кем был лондонский террорист?',
         time_add: '2 часа назад',
         category: 'Новости',
-        time_keeping: '03:40',
+        time_keeping: '07:30',
         time_keeping_img: '%=static=%img/content/video-ico/video-ico.png'
     },
     from_enter: {
