@@ -679,7 +679,7 @@ class NewsListEditorController extends CmsController
         try {
             $this->validate($request, [
                 'id' => 'required',
-                'cover_id' => 'required|number',
+                'cover_id' => 'integer|exists:cdn_files,id',
             ]);
             $id = $request->input('id');
             $request->input('id');
