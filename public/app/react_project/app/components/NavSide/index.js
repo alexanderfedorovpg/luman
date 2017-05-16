@@ -1,12 +1,15 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { Link } from 'react-router'
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router';
 
-import Icon from 'components/Icon'
-import Badge from 'components/Badge'
+import Icon from 'components/Icon';
+import Badge from 'components/Badge';
 
-import { ifProp } from 'utils/style'
-import { padding, font } from 'constants/style'
+import { ifProp } from 'utils/style';
+import { padding, font } from 'constants/style';
+import { items } from './constants';
+import logoMin from './assets/logo-min.png';
+import logo from './assets/logo.png';
 
 const Wrapper = styled.nav`
     position: fixed;
@@ -25,7 +28,7 @@ const Wrapper = styled.nav`
         width: 251px;
     `}
 `
-const NavItem = styled(({expanded, ...rest}) => <Link {...rest} />)`
+const NavItem = styled(({expanded, active, ...rest}) => <Link {...rest} />)`
     position: relative;
 
     display: flex;
@@ -34,9 +37,9 @@ const NavItem = styled(({expanded, ...rest}) => <Link {...rest} />)`
     height: 60px;
 
     text-decoration: none;
+    color: #999999;
 
     border-bottom: 1px solid #000;
-
     background-color: #181818;
 
     &:last-child {
@@ -49,6 +52,7 @@ const NavItem = styled(({expanded, ...rest}) => <Link {...rest} />)`
 
     ${ifProp('active')`
         background-color: #2e2e2e;
+        color: #fff;
     `}
 
     ${ifProp('expanded')(css`
@@ -64,7 +68,6 @@ const Name = styled.span`
     font-family: ${font.opensans};
     font-size: 13px;
     font-weight: 400;
-    color: #999999;
     text-transform: uppercase;
 
     ${ifProp('expanded')`
@@ -82,64 +85,35 @@ const NavBadge = styled(Badge)`
         top: 14px;
         right: 22px;
     `)}
-`
+`;
 
 function NavSide({ expanded, isActive, location }) {
+    function renderItem(item) {
+        return (
+            <NavItem
+                key={item.link}
+                to={item.link}
+                logo
+                expanded={expanded}
+                active={isActive(item.link)}
+            >
+                <Icon type={item.icon} active={isActive(item.link)} />
+                <Name expanded={expanded}>
+                    {item.name}
+                </Name>
+            </NavItem>
+        );
+    }
 
     return (
-        <Wrapper expanded={expanded} onClick={e => e.stopPropagation()}>
-            <NavItem href="#">
+        <Wrapper expanded={expanded} onClick={(e) => e.stopPropagation()}>
+            <NavItem expanded={expanded} href="#">
                 {expanded
-                    ? <Icon type="logo-light" />
-                    : <Icon type="logo" />
+                    ? <img src={logo} alt="rtvi" />
+                    : <img src={logoMin} alt="rtvi" />
                 }
-
             </NavItem>
-            <NavItem to="/feed" expanded={expanded}>
-                <Icon type="feed" active={isActive('/feed')} />
-                <Name expanded={expanded}>
-                    Лента
-                </Name>
-            </NavItem>
-            <NavItem to="/editor" expanded={expanded}>
-                <Icon type="view" active={isActive('/editor')} />
-                <Name expanded={expanded}>
-                    Задания
-                </Name>
-            </NavItem>
-            <NavItem to="/newslist" expanded={expanded}>
-                <Icon type="draft" active={isActive('/newslist')} />
-                <Name expanded={expanded}>
-                    В работе
-                </Name>
-            </NavItem>
-            <NavItem to="/ready" expanded={expanded}>
-                <Icon type="ready" active={isActive('/ready')} />
-                <Name expanded={expanded}>
-                    Готово
-                </Name>
-                <NavBadge success expanded={expanded}>8</NavBadge>
-            </NavItem>
-            <NavItem to="/constructor" expanded={expanded}>
-                <Icon type="main" active={isActive('/constructor')} />
-                <Name expanded={expanded}>
-                    Главная страница
-                </Name>
-            </NavItem>
-            <NavItem to="/programs" expanded={expanded}>
-                <Icon type="tv" active={isActive('/programs')} />
-                <Name expanded={expanded}>
-                    Программы
-                </Name>
-                <NavBadge success expanded={expanded}>2</NavBadge>
-            </NavItem>
-            <NavItem to="/live" expanded={expanded}>
-                <Icon type="live" active={isActive('/live')} />
-                <Name expanded={expanded}>
-                    Прямой эфир
-                </Name>
-                <NavBadge danger expanded={expanded}>off</NavBadge>
-            </NavItem>
+            {items.map(renderItem)}
         </Wrapper>
     )
 }

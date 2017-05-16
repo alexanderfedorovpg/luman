@@ -47,11 +47,7 @@ const Record = ({
                             year="numeric"
                             month="long"
                             day="2-digit"
-                        />,
-                        {' '}
-                        <Time>
-                            <FormattedTime value={dateObj} />
-                        </Time>
+                        />
                     </RecordDate>
                 }
                 <Program href="#">{program}</Program>

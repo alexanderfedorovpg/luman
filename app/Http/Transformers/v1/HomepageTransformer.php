@@ -18,6 +18,7 @@ class HomepageTransformer extends Transformer
         $transform['news'] = $this->transformNews($homePage['news']);
         $transform['info_noise'] = $this->transformInfoNoise($homePage['info_noise']);
         $transform['from_air'] = $this->tranformRecords($homePage['from_air']);
+        $transform['war'] = $this->transformWar($homePage['war']);
         $transform['options'] = $this->transformOptions($homePage['options']);
 
         return $transform;
@@ -61,6 +62,22 @@ class HomepageTransformer extends Transformer
             $transform[] = [
                 'data' => $news,
                 'top' => $infoNoise->top,
+            ];
+        }
+
+        return $transform;
+    }
+
+    public function transformWar(Collection $wars)
+    {
+        $transform = [];
+        foreach ($wars as $war) {
+            $news = $war->news->toArray();
+            $news['image_main'] = $war->news->imageMain ? $war->news->imageMain->url : null;
+            $news['image_preview'] = $war->news->imagePreview ? $war->news->imagePreview->url : null;
+            $transform[] = [
+                'data' => $news,
+                'top' => $war->top,
             ];
         }
 

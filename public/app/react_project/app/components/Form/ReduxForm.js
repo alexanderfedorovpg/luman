@@ -1,10 +1,13 @@
 import React from 'react';
+import Tags from 'components/Tags';
+import Rating from 'components/Rating';
 import {
     Label,
     Input,
     FileInput,
     Select,
     Datepicker,
+    Rich,
     Textarea,
     Dropzone,
     ImageLoader,
@@ -28,6 +31,16 @@ export const InputRedux = ({ input, meta: { touched, invalid, valid, dirty, erro
 
 export const TextareaRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
     <Textarea
+        {...props}
+        success={touched && valid && dirty && !props.disabled}
+        error={touched && invalid && dirty && !props.disabled}
+        value={input.value}
+        onChange={(e) => input.onChange(e)}
+    />
+);
+
+export const RichRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+    <Rich
         {...props}
         success={touched && valid && dirty && !props.disabled}
         error={touched && invalid && dirty && !props.disabled}
@@ -84,5 +97,21 @@ export const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid, dirty
         error={touched && invalid && dirty && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e.target.files)}
+    />
+);
+
+export const TagsRedux = ({ input, ...props }) => (
+    <Tags
+        {...props}
+        value={input.value}
+        onChange={(checked) => input.onChange(checked)}
+    />
+);
+
+export const RatingRedux = ({ input, ...props }) => (
+    <Rating
+        {...props}
+        value={input.value}
+        onChange={(value) => input.onChange(value)}
     />
 );

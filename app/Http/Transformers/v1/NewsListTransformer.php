@@ -42,12 +42,15 @@ class NewsListTransformer extends Transformer
 	    $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
 	    $transform['image_main'] = $imageMain;
 
+        $cover = CdnFile::where('id', '=', $news['cover_id'])->pluck('url')->first();
+        $transform['cover_id'] = $cover;
+
         $transform['video_stream'] = $news['video_stream'];
 
         $transHelper = new UrlReplaceHelper();
 	    $url_title = $transHelper->translate($news['title']);
 
-        $transform['share_link'] = 'http://rtvi.com/news/'. $news['id'].'-'.$url_title;
+        $transform['share_link'] = 'https://rtvi.com/news/'. $news['id'].'-'.$url_title;
 
         $transform['editor_id'] = $news['editor_id'];
 

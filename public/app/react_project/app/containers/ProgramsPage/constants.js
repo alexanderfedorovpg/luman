@@ -54,12 +54,12 @@ export const MODALS = {
 
 export const recordsTypes = [
     {
-        title: 'Выпуски',
-        value: 'FULL',
-    },
-    {
         title: 'Из эфира',
         value: 'CUT',
+    },
+    {
+        title: 'Выпуски',
+        value: 'FULL',
     },
 ];
 

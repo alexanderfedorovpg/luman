@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Item from './Item'
@@ -60,7 +61,8 @@ class Rating extends Component {
 }
 
 Rating.PropTypes = {
-    value: React.PropTypes.number
-}
+    value: PropTypes.number,
+    onChange: PropTypes.func,
+};
 
 export default Rating

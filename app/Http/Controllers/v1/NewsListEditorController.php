@@ -181,7 +181,7 @@ class NewsListEditorController extends CmsController
 
             $rules['id'] = 'required|exists:news,id';
             $rules['editor_id'] = 'numeric|exists:users,id';
-            $rules['keywords'] = 'required';
+
             $rules['is_online'] = 'in:0,1';
             $rules['is_war_mode'] = 'in:0,1';
             $rules['top'] = 'required|numeric';
@@ -208,7 +208,7 @@ class NewsListEditorController extends CmsController
             $video_stream = $request->input('video_stream');
 
             $body = $request->input('body');
-            $keywords = $request->input('keywords');
+
 
             $editor_id = $request->input('editor_id');
             $image_main = $request->input('image_main');
@@ -237,7 +237,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
-                $newsEdit->keywords = $keywords;
+
                 $newsEdit->moderation = 0;
 
 
@@ -248,6 +248,11 @@ class NewsListEditorController extends CmsController
                 }
 
                 //необязательные поля
+                if ($request->get('keywords')) {
+                    $newsEdit->keywords = $request->get('keywords');
+                }
+
+
                 if ($request->get('rubrics')) {
                     $rubrics = $request->get('rubrics');
                 }
@@ -311,7 +316,7 @@ class NewsListEditorController extends CmsController
             }
 
             $rules['editor_id'] = 'numeric|exists:users,id';
-            $rules['keywords'] = 'required';
+
             $rules['is_online'] = 'in:0,1';
             $rules['is_war_mode'] = 'in:0,1';
             $rules['top'] = 'required|numeric';
@@ -336,7 +341,7 @@ class NewsListEditorController extends CmsController
             $video_stream = $request->input('video_stream');
 
             $body = $request->input('body');
-            $keywords = $request->input('keywords');
+
 
             $editor_id = $request->input('editor_id');
             $image_main = $request->input('image_main');
@@ -361,13 +366,17 @@ class NewsListEditorController extends CmsController
             $news->top = $top;
             $news->body = $body ? $body : '';
 
-            $news->keywords = $keywords;
+
             $news->moderation = false;
 
             $news->original_source_link = $original_source_link ? $original_source_link : '';
 
 
             //необязательные поля
+            if ($request->get('keywords')) {
+                $news->keywords = $request->get('keywords');
+            }
+
             if ($request->get('rubrics')) {
                 $rubrics = $request->get('rubrics');
             }
@@ -657,6 +666,54 @@ class NewsListEditorController extends CmsController
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $this->log->setLog('TO_FIX', $this->user_id, "Error 500 news id=" . $id);
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateCover(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+                'cover_id' => 'integer|exists:cdn_files,id',
+            ]);
+            $id = $request->input('id');
+            $request->input('id');
+            $news = News::findOrfail($id);
+            $news->cover_id = $request->input('cover_id');
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    public function updateTitle(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+                'title' => 'required|string',
+            ]);
+            $id = $request->input('id');
+            $request->input('id');
+            $news = News::findOrfail($id);
+            $news->title = $request->input('title');
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
             return $this->respondFail500x($e->getMessage());
         }
     }

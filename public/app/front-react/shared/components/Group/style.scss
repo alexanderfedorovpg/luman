@@ -1,0 +1,15 @@
+@import "~style/mixins";
+
+.group {
+
+    &__title {
+        display: block;
+        padding-left: rem(28);
+
+        line-height: rem(34);
+        text-decoration: none;
+    }
+    &__wrapper {
+       margin-top: rem(17);
+    }
+}

@@ -1,0 +1,13 @@
+extends ../layouts/default
+include ../components/p-user-edit/p-user-edit
+block vars
+    -pageSettings.title = 'Пользователи';
+
+block content
+    // Контент здесь
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                +tabs-nav(tabsNav.userEdit)
+
+    +p-user-edit

@@ -122,9 +122,11 @@ const NavItem = styled(({ active, ...rest }) => <ReactLink {...rest} />)`
 
     color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
+
     &:hover {
-        text-decoration: underline;
+        color: #fff;
     }
+
     &:last-child {
         margin-right: 0;
     }
@@ -188,9 +190,6 @@ function Header({ moved, onToggle, isActive, onLogout, user }) {
                         <nav>
                             <NavItem to="/stats" active={isActive('/stats')}>
                                 Статистика
-                            </NavItem>
-                            <NavItem to="#" active={false}>
-                                Аналитика
                             </NavItem>
                         </nav>
                         <CustomUser to="profile" data={user}>

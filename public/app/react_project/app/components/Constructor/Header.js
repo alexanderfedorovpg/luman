@@ -106,7 +106,14 @@ class Header extends Component {
     }
 
     render() {
-        let { moved, onSearchChange, onSave, onCancel, onFilterChange } = this.props
+        let {
+            moved,
+            pristine,
+            onSearchChange,
+            onSave,
+            onCancel,
+            onFilterChange
+        } = this.props
 
         return (
             <ConstructorBot moved={moved}>
@@ -131,9 +138,13 @@ class Header extends Component {
 
                         Предпросмотр
                     </CustomButton>
-                    <CustomButton xs success onClick={e=>onSave()}>
+                    <CustomButton
+                        xs success
+                        active={!pristine}
+                        onClick={e=>onSave()}>
+
                         <Icon type="okay" />
-                        Сохранить
+                        Опубликовать
                     </CustomButton>
                 </ConstrutorRight>
             </ConstructorBot>
