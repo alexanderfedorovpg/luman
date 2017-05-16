@@ -1,0 +1,13 @@
+extends ../layouts/default
+include ../components/p-group-edit/p-group-edit
+block vars
+    -pageSettings.title = 'Редактирование групп';
+
+block content
+    // Контент здесь
+    +b.HEADER.header.header-off
+        +b.header-bot
+            +b.header-l
+                +tabs-nav(tabsNav.userEdit)
+
+    +p-group-edit
