@@ -564,3 +564,61 @@ h4 {
     }
 
 }
+
+.journal {
+    &__top {
+        .header-r {
+            width: 31.8%;
+            padding-left: 0;
+            .form-group {
+                margin-top: 3px;
+                width: 100%;
+                .search {
+                    left: 7px;
+                }
+            }
+            input {
+                padding-left: 34px;
+                @include placeholder {
+                    color: #999;
+                }
+            }
+        }
+    }
+    .profile-history {
+        &__table {
+            border-bottom: 0;
+        }
+        &__cell {
+            &_date {
+                width: 7.7%;
+            }
+            &_time {
+                width: 8.3%;
+            }
+            &_user {
+                width: 21.5%;
+            }
+            &_event {
+                width: 16.7%;
+            }
+            &_session {
+                width: 12%;
+            }
+            &_host {
+                width: 9.2%;
+            }
+            &_ip {
+                width: 14%;
+            }
+            &_link {
+                width: auto;
+            }
+            &_sort {
+                .icon {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

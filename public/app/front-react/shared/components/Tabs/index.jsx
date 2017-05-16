@@ -37,7 +37,7 @@ Tabs.propTypes = {
         id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         name: PropTypes.string,
     })),
-    active: PropTypes.number,
+    active: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     onChange: PropTypes.func,
     classNames: PropTypes.shape({
         root: PropTypes.string,

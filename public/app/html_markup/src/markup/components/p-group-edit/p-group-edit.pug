@@ -1,0 +1,120 @@
+mixin p-group-edit(data)
+    +b.group-edit()&attributes(attributes)
+        .content-wrap
+
+            .content-l
+                +b.TABLE.table.edit-table.group-edit__table
+                    thead
+                        tr
+                            th.col-name Группа
+                            th.col-group Пользователей
+                            th.col-status Статус
+
+                    tbody
+                        //- создает 2ух пиксельную прослойку между шапкой и телом
+                        tr.table-space
+                            td
+
+                        each item in groupEdit.items
+                            tr(class= item.class)
+                                td
+                                    +b.user
+                                        +e.A.category(href=jv0)
+                                            span= item.userPic
+                                        +e.A.name(href=jv0)= item.userName
+                                td= item.users
+                                td= item.status
+            .content-r
+                //- добавление группы
+                +b.FORM.group-edit-form.group-edit-form__add
+                    .form-group
+                        input.input.input-block(type='text' name='group' placeholder='Название группы')
+
+                    div.form-group.form-group__checkbox
+                        .checkbox
+                            input(type='checkbox' id='checkbox1' name='checkbox1' value='lol')
+                            label(for='checkbox1') Чтение материалов 
+                        .checkbox
+                            input(type='checkbox' id='checkbox2' name='checkbox1' value='lol')
+                            label(for='checkbox2') Чтение материалов 
+                        .checkbox
+                            input(type='checkbox' id='checkbox3' name='checkbox1' value='lol')
+                            label(for='checkbox3') Написание материалов
+                        .checkbox
+                            input(type='checkbox' id='checkbox4' name='checkbox1' value='lol')
+                            label(for='checkbox4') Удаление материала
+                        .checkbox
+                            input(type='checkbox' id='checkbox5' name='checkbox1' value='lol')
+                            label(for='checkbox5') Редактирование  статей
+                        .checkbox
+                            input(type='checkbox' id='checkbox6' name='checkbox1' value='lol')
+                            label(for='checkbox6') Редактирование  рейтинга
+                        .checkbox
+                            input(type='checkbox' id='checkbox7' name='checkbox1' value='lol')
+                            label(for='checkbox7') Редактирвоание фото
+                        .checkbox
+                            input(type='checkbox' id='checkbox8' name='checkbox1' value='lol')
+                            label(for='checkbox8') Редактирование прав 
+                        .checkbox
+                            input(type='checkbox' id='checkbox9' name='checkbox1' value='lol')
+                            label(for='checkbox9') Редактирование видео
+
+                    div.form-group.form-group__btns
+                        button.btn.btn-success Добавить группу
+
+                //- изменения группы
+                +b.FORM.group-edit-form(style='display: none')
+
+                    +b.user
+                        +e.A.category(href=jv0)
+                            span П
+                        +e.A.name(href=jv0) Практикант
+
+                    div.form-group.form-group__checkbox
+                        .checkbox
+                            input(type='checkbox' id='checkbox11' name='checkbox11' value='lol')
+                            label(for='checkbox11') Чтение материалов 
+                        .checkbox
+                            input(type='checkbox' id='checkbox22' name='checkbox11' value='lol')
+                            label(for='checkbox22') Чтение материалов 
+                        .checkbox
+                            input(type='checkbox' id='checkbox33' name='checkbox11' value='lol')
+                            label(for='checkbox33') Написание материалов
+                        .checkbox
+                            input(type='checkbox' id='checkbox44' name='checkbox11' value='lol')
+                            label(for='checkbox44') Удаление материала
+                        .checkbox
+                            input(type='checkbox' id='checkbox55' name='checkbox11' value='lol')
+                            label(for='checkbox55') Редактирование  статей
+                        .checkbox
+                            input(type='checkbox' id='checkbox66' name='checkbox11' value='lol')
+                            label(for='checkbox66') Редактирование  рейтинга
+                        .checkbox
+                            input(type='checkbox' id='checkbox77' name='checkbox11' value='lol')
+                            label(for='checkbox77') Редактирвоание фото
+                        .checkbox
+                            input(type='checkbox' id='checkbox88' name='checkbox11' value='lol')
+                            label(for='checkbox88') Редактирование прав 
+                        .checkbox
+                            input(type='checkbox' id='checkbox99' name='checkbox11' value='lol')
+                            label(for='checkbox99') Редактирование видео
+
+                    div.form-group.form-group__toggle
+                        .toggle.toggle--doubled
+                            input#cb1(type='checkbox' checked)
+                            label(for='cb1')
+                            span Активна
+                            span Заблокирована
+
+                    div.form-group.form-group__btns
+                        button.btn.btn-danger
+                            i.icon.icon-delete-reverse
+                            | Удалить
+                        button.btn.btn-success
+                            i.icon.icon-okay
+                            | Сохранить
+
+                    a.icon.icon-delete.icon-delete-reverse(href=jv0)
+
+
+        block

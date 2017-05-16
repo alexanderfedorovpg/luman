@@ -4,12 +4,12 @@ mixin p-user-edit(data)
         .content-wrap
 
             .content-l
-                +b.TABLE.table
+                +b.TABLE.table.edit-table.user-edit__table
                     thead
                         tr
                             th.col-name Пользователь
-                            th.col-count Группа
-                            th.col-time Статус
+                            th.col-group Группа
+                            th.col-status Статус
 
                     tbody
                         //- создает 2ух пиксельную прослойку между шапкой и телом
@@ -23,17 +23,20 @@ mixin p-user-edit(data)
                                 td= item.group
                                 td= item.status
             .content-r
-                +b.FORM.user-edit-form
-                    +user('Константинов Виталий', '%=static=%img/content/user.png')
+                //- добавление пользователя
+                +b.FORM.user-edit-form.user-edit-form__add
                     .form-group
-                        input.input.input-md(value='konstantin@rtvi.com' type='email' name='email' placeholder='Email')
+                        input.input.input-block(type='text' name='lastName' placeholder='Фамилия')
                     .form-group
-                        input.input.input-md(value='bigredcar2' type='text' name='login' placeholder='Логин')
+                        input.input.input-block(type='text' name='firstName' placeholder='Имя')
                     .form-group
-                        input.input.input-md(value='rolling_roling2' type='text' name='password' placeholder='Пароль')
-                        a(href=jv0) Сбросить пароль
+                        input.input.input-block(type='email' name='email' placeholder='Электронная почта')
+                    .form-group
+                        input.input.input-block(type='text' name='login' placeholder='Логин')
+                    .form-group.form-group__reset
+                        input.input.input-block(type='text' name='password' placeholder='Пароль')
 
-                    div.form-group
+                    div.form-group.form-group__radio
                         .radio
                             input(type='radio' id='radio1' name='radio1' value='lol')
                             label(for='radio1') Читатель
@@ -47,20 +50,48 @@ mixin p-user-edit(data)
                             input(type='radio' id='radio4' name='radio1' value='lol')
                             label(for='radio4') Выпускающий
 
-                    div.form-group
+                    div.form-group.form-group__btns
+                        button.btn.btn-success Добавить пользователя
+
+                //- изменения пользователя
+                +b.FORM.user-edit-form(style='display: none')
+                    +user('Константинов Виталий', '%=static=%img/content/user.png')
+                    .form-group
+                        input.input.input-block(value='konstantin@rtvi.com' type='email' name='email' placeholder='Email')
+                    .form-group
+                        input.input.input-block(value='bigredcar2' type='text' name='login' placeholder='Логин')
+                    .form-group.form-group__reset
+                        input.input.input-block(value='rolling_roling2' type='text' name='password' placeholder='Пароль')
+                        a(href=jv0) Сбросить пароль
+
+                    div.form-group.form-group__radio
+                        .radio
+                            input(type='radio' id='radio11' name='radio1' value='lol')
+                            label(for='radio11') Читатель
+                        .radio
+                            input(type='radio' id='radio22' name='radio1' value='lol')
+                            label(for='radio22') Редактор
+                        .radio
+                            input(type='radio' id='radio33' name='radio1' value='lol')
+                            label(for='radio33') Практикант
+                        .radio
+                            input(type='radio' id='radio44' name='radio1' value='lol')
+                            label(for='radio44') Выпускающий
+
+                    div.form-group.form-group__toggle
                         .toggle.toggle--doubled
                             input#cb1(type='checkbox' checked)
                             label(for='cb1')
                             span Активен
                             span Заблокирован
 
-                    button.btn.btn-md.btn-danger
-                        i.icon.icon-delete-reverse
-                        | Удалить
-
-                    button.btn.btn-md.btn-success
-                        i.icon.icon-okay
-                        | Сохранить
+                    div.form-group.form-group__btns
+                        button.btn.btn-danger
+                            i.icon.icon-delete-reverse
+                            | Удалить
+                        button.btn.btn-success
+                            i.icon.icon-okay
+                            | Сохранить
 
                     a.icon.icon-delete.icon-delete-reverse(href=jv0)
         

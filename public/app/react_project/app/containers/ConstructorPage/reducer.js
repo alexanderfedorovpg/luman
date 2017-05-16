@@ -19,7 +19,7 @@ import {
 
     SET_FILTER,
 
-    SET_WAR_MODE,
+    SET_OPTION,
 } from './constants';
 
 import {
@@ -140,8 +140,8 @@ function constructorPageReducer(state = initialState, action) {
         case SET_FILTER:
             return state.update('filters', f => f.merge(fromJS(action.payload)))
 
-        case SET_WAR_MODE:
-            return state.setIn(['temporary', 'home', 'war'], action.payload)
+        case SET_OPTION:
+            return state.setIn(['temporary', 'home', 'options', action.payload.name], action.payload.value)
 
         case MOVE_ITEM:
             return state.
@@ -192,6 +192,7 @@ function addItemToMain(type, item, category, before) {
 
                 switch (type) {
                     case 'news':
+                    case 'war':
                         data = fromJS({
                             category: state.getIn(['categories', 'data', `${category}`]).toJS(),
                             data: item,

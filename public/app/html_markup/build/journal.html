@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Профиль пользователя</title>
+    <title>Журнал</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,16 +48,26 @@
       </div>
     </header>
     <div class="content">
-      <!-- Контент здесь-->
-      <header class="header header-off">
+      <header class="header header-off journal__top">
         <div class="header-bot">
           <div class="header-l">
-            <div class="tabs-nav"><a class="tabs-nav__item" href="javascript:void(0)">Профиль пользователя</a><a class="tabs-nav__item is-active" href="javascript:void(0)">Последние действия</a>
+            <div class="tabs-nav"><a class="tabs-nav__item is-active" href="javascript:void(0)">Пользователи</a><a class="tabs-nav__item" href="javascript:void(0)">Группы</a><a class="tabs-nav__item" href="javascript:void(0)">Журнал</a>
+            </div>
+          </div>
+          <div class="header-r">
+            <div class="form-group">
+              <div class="input-icon">
+                <input class="input input-block" id="ko4" type="text" placeholder="Поиск по журналу">
+            <svg class="icon icon_search search" width="17px" height="17px">
+                <use xlink:href="svg-symbolsx74pqcjbcpz6dz45tgldi.svg#search"></use>
+            </svg>
+        
+              </div>
             </div>
           </div>
         </div>
       </header>
-      <div class="profile-history">
+      <div class="profile-history journal">
         <div class="profile-history__wrapper">
           <div class="profile-history__table">
             <div class="profile-history__row profile-history__row_title">
@@ -65,7 +75,9 @@
               </div>
               <div class="profile-history__cell profile-history__cell_time">Время
               </div>
-              <div class="profile-history__cell profile-history__cell_event profile-history__cell_sort">Событие<i class="icon icon-sort-arrow"></i>
+              <div class="profile-history__cell profile-history__cell_user profile-history__cell_sort">Пользователь<i class="icon icon-sort-arrow"></i>
+              </div>
+              <div class="profile-history__cell profile-history__cell_event">Событие
               </div>
               <div class="profile-history__cell profile-history__cell_session">Сессия
               </div>
@@ -80,6 +92,8 @@
               <div class="profile-history__cell profile-history__cell_date">14.01.17
               </div>
               <div class="profile-history__cell profile-history__cell_time">09:12:10
+              </div>
+              <div class="profile-history__cell profile-history__cell_user">Поликарпов Анатолий
               </div>
               <div class="profile-history__cell profile-history__cell_event">login
               </div>
@@ -97,6 +111,8 @@
               </div>
               <div class="profile-history__cell profile-history__cell_time">09:09:10
               </div>
+              <div class="profile-history__cell profile-history__cell_user">Ковалев Максим
+              </div>
               <div class="profile-history__cell profile-history__cell_event">Создание страницы
               </div>
               <div class="profile-history__cell profile-history__cell_session">94.230.115.33
@@ -112,6 +128,8 @@
               <div class="profile-history__cell profile-history__cell_date">14.01.17
               </div>
               <div class="profile-history__cell profile-history__cell_time">09:01:10
+              </div>
+              <div class="profile-history__cell profile-history__cell_user">Короленко Анастасия
               </div>
               <div class="profile-history__cell profile-history__cell_event">logout
               </div>
@@ -129,6 +147,8 @@
               </div>
               <div class="profile-history__cell profile-history__cell_time">08:54:10
               </div>
+              <div class="profile-history__cell profile-history__cell_user">Константинов Виталий
+              </div>
               <div class="profile-history__cell profile-history__cell_event">Создание страницы
               </div>
               <div class="profile-history__cell profile-history__cell_session">94.230.115.33
@@ -144,6 +164,8 @@
               <div class="profile-history__cell profile-history__cell_date">14.01.17
               </div>
               <div class="profile-history__cell profile-history__cell_time">08:46:10
+              </div>
+              <div class="profile-history__cell profile-history__cell_user">Марышева Елена
               </div>
               <div class="profile-history__cell profile-history__cell_event">login error
               </div>
@@ -161,6 +183,8 @@
               </div>
               <div class="profile-history__cell profile-history__cell_time">08:25:10
               </div>
+              <div class="profile-history__cell profile-history__cell_user">Санченков Роман
+              </div>
               <div class="profile-history__cell profile-history__cell_event">Удаление страницы
               </div>
               <div class="profile-history__cell profile-history__cell_session">94.230.115.33
@@ -172,57 +196,10 @@
               <div class="profile-history__cell profile-history__cell_link"><a href="javascript:void(0);">Перейти</a>
               </div>
             </div>
-            <div class="profile-history__row">
-              <div class="profile-history__cell profile-history__cell_date">14.01.17
-              </div>
-              <div class="profile-history__cell profile-history__cell_time">09:01:10
-              </div>
-              <div class="profile-history__cell profile-history__cell_event">Авторизация
-              </div>
-              <div class="profile-history__cell profile-history__cell_session">94.230.115.33
-              </div>
-              <div class="profile-history__cell profile-history__cell_host">
-              </div>
-              <div class="profile-history__cell profile-history__cell_ip">94.230.115.33
-              </div>
-              <div class="profile-history__cell profile-history__cell_link"><a href="javascript:void(0);">Перейти</a>
-              </div>
-            </div>
-            <div class="profile-history__row">
-              <div class="profile-history__cell profile-history__cell_date">14.01.17
-              </div>
-              <div class="profile-history__cell profile-history__cell_time">08:54:10
-              </div>
-              <div class="profile-history__cell profile-history__cell_event">Создание страницы
-              </div>
-              <div class="profile-history__cell profile-history__cell_session">94.230.115.33
-              </div>
-              <div class="profile-history__cell profile-history__cell_host">
-              </div>
-              <div class="profile-history__cell profile-history__cell_ip">94.230.115.33
-              </div>
-              <div class="profile-history__cell profile-history__cell_link"><a href="javascript:void(0);">Перейти</a>
-              </div>
-            </div>
-            <div class="profile-history__row">
-              <div class="profile-history__cell profile-history__cell_date">14.01.17
-              </div>
-              <div class="profile-history__cell profile-history__cell_time">08:46:10
-              </div>
-              <div class="profile-history__cell profile-history__cell_event">Сохранение страницы
-              </div>
-              <div class="profile-history__cell profile-history__cell_session">94.230.115.33
-              </div>
-              <div class="profile-history__cell profile-history__cell_host">
-              </div>
-              <div class="profile-history__cell profile-history__cell_ip">94.230.115.33
-              </div>
-              <div class="profile-history__cell profile-history__cell_link"><a href="javascript:void(0);">Перейти</a>
-              </div>
-            </div>
-          </div><a class="profile-history__link-more" href="javascript:void(0)">Показать следующие 10 записей</a>
+          </div>
         </div>
       </div>
+      <!-- Контент здесь-->
     </div>
     <script src="static/js/mainx74pqcjbcpz6dz45tgldi.min.js"></script>
   </body>

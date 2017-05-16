@@ -23,7 +23,7 @@ import {
 
     SET_FILTER,
 
-    SET_WAR_MODE,
+    SET_OPTION,
 } from './constants';
 
 export const moveItem = (type, source, target) => ({
@@ -35,9 +35,12 @@ export const moveItem = (type, source, target) => ({
     }
 })
 
-export const setWarMode = value => ({
-    type: SET_WAR_MODE,
-    payload: value
+export const setOption = (name, value) => ({
+    type: SET_OPTION,
+    payload: {
+        name,
+        value
+    }
 })
 
 export const setFilter = filters => ({

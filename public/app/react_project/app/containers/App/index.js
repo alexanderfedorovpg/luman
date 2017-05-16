@@ -85,8 +85,8 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
                 <Content moved={menuOpen}>
                     {React.Children.toArray(this.props.children)}
                 </Content>
-                <Preloader />
                 <InfoModal />
+                <Preloader />
             </Root>
 
             : <LoginPage />;

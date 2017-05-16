@@ -22,4 +22,8 @@ export const MOVE_ITEM = 'app/ConstructorPage/MOVE_ITEM';
 
 export const SET_FILTER = 'app/ConstructorPage/SET_FILTER';
 
-export const SET_WAR_MODE = 'app/ConstructorPage/SET_WAR_MODE';
+export const SET_OPTION = 'app/ConstructorPage/SET_OPTION';
+
+export const strings = {
+    saveHomeSuccess: 'Изменения сохранены'
+}

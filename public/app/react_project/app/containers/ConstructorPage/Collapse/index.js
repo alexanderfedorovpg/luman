@@ -1,17 +1,19 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import Header from 'components/Constructor/Collapse/Header';
 import Collapse from 'components/Constructor/Collapse';
 
 import {
-    setWarMode,
+    setOption,
     moveItem,
     chooseCategory,
 } from '../actions'
 
 import {
     selectWarMode,
+    selectWarTitle,
     selectHomeNews
 } from '../selectors'
 
@@ -19,11 +21,14 @@ export class CollapseContainer extends PureComponent {
 
     constructor(props) {
         super(props);
+
+        this.setWarMode = ::this.setWarMode
     }
 
     dataByCategory(type, value) {
         switch (type) {
             case 'news':
+            case 'war':
                 return item => value.id == item.category.id
 
             case 'noise':
@@ -51,10 +56,23 @@ export class CollapseContainer extends PureComponent {
         )
     }
 
+    setWarMode(value) {
+        const { type, dispatch } = this.props
+
+        dispatch(setOption('war', value));
+
+        if (!value && type == 'war' ) {
+            dispatch(push('/constructor/news'));
+        }
+    }
+
     render() {
         let {
             war,
+            warTitle,
             setWarMode,
+            setTitle,
+            showTitle,
             type,
             chooseCategory,
             onRemove,
@@ -65,8 +83,11 @@ export class CollapseContainer extends PureComponent {
 
         return (
             <div>
-                <Header data={data} war={war} onWarModeChange={setWarMode} />
+                <Header data={data} war={war} onWarModeChange={this.setWarMode} />
                 <Collapse
+                    warTitle={warTitle}
+                    setTitle={setTitle}
+                    showTitle={showTitle}
                     choose={chooseCategory}
                     onRemove={onRemove}
                     onMove={moveItem.bind(this, type)}
@@ -83,12 +104,14 @@ Collapse.propTypes = {
 
 const mapStateToProps = state => ({
     war: selectWarMode(state),
+    warTitle: selectWarTitle(state),
     data: selectHomeNews(state),
 })
 
 const mapDispatchToProps = dispatch => ({
-    setWarMode(value) {
-        dispatch(setWarMode(value));
+    dispatch,
+    setTitle(value) {
+        dispatch(setOption('title', value));
     },
     chooseCategory(category) {
         dispatch(chooseCategory(category))

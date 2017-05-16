@@ -10,6 +10,7 @@ const PreloaderModal = ({ isOpen }) => (
     <Modal
         contentLabel="Подождите, идёт загрузка"
         isOpen={isOpen}
+        style={{ overlay: { zIndex: 10000 } }}
     >
         <img width="90" src={preloader} alt="" />
     </Modal>
