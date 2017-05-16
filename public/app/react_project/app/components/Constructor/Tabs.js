@@ -37,7 +37,10 @@ function Tabs({ router }) {
         <Root>
             <Item
                 to="/constructor/news"
-                active={router.isActive('/constructor/news')}>
+                active={
+                    router.isActive('/constructor/news') ||
+                    router.isActive('/constructor/war')
+                }>
                 Новости
             </Item>
             <Item

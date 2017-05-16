@@ -22,6 +22,23 @@ export default function createRoutes(store) {
             name: 'constructor',
             childRoutes: [
                 {
+                    path: '/constructor/war',
+                    name: 'constructor-war',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/ConstructorPage/News'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component)
+                        });
+
+                        importModules.catch(errorLoading);
+                    }
+                },
+                {
                     path: '/constructor/news',
                     name: 'constructor-news',
                     getComponent(nextState, cb) {
