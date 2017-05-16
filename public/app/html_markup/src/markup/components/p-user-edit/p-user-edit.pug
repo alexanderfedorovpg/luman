@@ -24,7 +24,7 @@ mixin p-user-edit(data)
                                 td= item.status
             .content-r
                 //- добавление пользователя
-                +b.FORM.user-edit-form.user-edit-form__add(style='display: none')
+                +b.FORM.user-edit-form.user-edit-form__add
                     .form-group
                         input.input.input-block(type='text' name='lastName' placeholder='Фамилия')
                     .form-group
@@ -54,7 +54,7 @@ mixin p-user-edit(data)
                         button.btn.btn-success Добавить пользователя
 
                 //- изменения пользователя
-                +b.FORM.user-edit-form
+                +b.FORM.user-edit-form(style='display: none')
                     +user('Константинов Виталий', '%=static=%img/content/user.png')
                     .form-group
                         input.input.input-block(value='konstantin@rtvi.com' type='email' name='email' placeholder='Email')
