@@ -35,4 +35,14 @@ class HomepageWar extends Model
     {
         return $this->hasOne(News::class, 'id', 'news_id');
     }
+
+    /**
+     * Категория
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function category()
+    {
+        return $this->hasONe(HomepageNewsCategory::class, 'id', 'category_id');
+    }
 }
