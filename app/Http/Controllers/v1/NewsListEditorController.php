@@ -484,7 +484,7 @@ class NewsListEditorController extends CmsController
 
             if ( $news->save()  ) {
                 $log_moderation = new NewsModerationLogHelper($news);
-                $log_moderation->setModeration()
+                $log_moderation->setModeration();
                 $this->log->setLog('DELEGATE', $id, "Successful, news id=" . $id . " delegate [" . $id . ">" . $new_editor_id . "]");
                 return $this->respondCreated(
                     ["data" => "delegate"]
