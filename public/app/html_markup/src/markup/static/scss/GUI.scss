@@ -758,6 +758,9 @@ a {
             color: #cc0000;
         }
     }
+    td {
+        height: 52px;
+    }
     td:last-child {
         &:after {
             display: none;
