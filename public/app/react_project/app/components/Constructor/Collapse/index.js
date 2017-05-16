@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import Header from './Header';
 import Item from './Item';
+import { Group as GroupBase } from 'components/Form';
+import Input from 'components/Form/Input';
 
 import { rem } from 'utils/style'
 
@@ -11,16 +13,43 @@ const Root = styled.div`
     margin-left: ${rem(-19)};
 `
 
+const Group = styled(GroupBase)`
+    // padding-right: ${rem(18)};
+    padding-left: ${rem(18)};
+    margin-top: 12px;
+    margin-bottom: 12px;
+`
+
 class Collapse extends React.Component {
     constructor (props) {
         super(props);
     }
 
     render() {
-        let { categories, data, choose, onMove, onRemove } = this.props
+        let {
+            warTitle,
+            setTitle,
+            showTitle,
+            categories,
+            data,
+            choose,
+            onMove,
+            onRemove
+        } = this.props
 
         return (
             <Root>
+                {showTitle
+                    ? (
+                        <Group>
+                            <Input
+                                onChange={(e)=>setTitle(e.target.value)}
+                                value={warTitle||''}
+                                block />
+                        </Group>
+                    )
+                    : null
+                }
                 {categories.map(cat => {
                     return (
                         <Item

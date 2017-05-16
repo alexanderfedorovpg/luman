@@ -14,7 +14,7 @@ const Root = styled.div`
 
 const Item = styled.div`
     display: inline-block;
-    margin-right: 3px;
+    margin-right: 4px;
     margin-bottom: 15px;
 
     vertical-align: middle;
@@ -34,9 +34,9 @@ const Label = styled.label`
     height: 24px;
     padding: 0 10px;
 
-    font-family: ${font.helvetica};
     font-size: ${rem(14)};
     font-weight: 400;
+    line-height: 22px;
     color: #666666;
     text-decoration: none;
 
@@ -47,12 +47,13 @@ const Label = styled.label`
 
     &:hover {
         background-color: #f1f1f1;
+        border-color: #f1f1f1;
     }
 
     ${ifProp('checked')`
         color: #fff;
-        border-color: #56647b;
-        background-color: #56647b !important;
+        border-color: #56637c !important;
+        background-color: #56637c !important;
     `}
 `;
 

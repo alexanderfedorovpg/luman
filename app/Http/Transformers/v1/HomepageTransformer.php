@@ -76,6 +76,7 @@ class HomepageTransformer extends Transformer
             $news['image_main'] = $war->news->imageMain ? $war->news->imageMain->url : null;
             $news['image_preview'] = $war->news->imagePreview ? $war->news->imagePreview->url : null;
             $transform[] = [
+                'category' => $war->category,
                 'data' => $news,
                 'top' => $war->top,
             ];

@@ -22,6 +22,23 @@ export default function createRoutes(store) {
             name: 'constructor',
             childRoutes: [
                 {
+                    path: '/constructor/war',
+                    name: 'constructor-war',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/ConstructorPage/News'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component);
+                        });
+
+                        importModules.catch(errorLoading);
+                    },
+                },
+                {
                     path: '/constructor/news',
                     name: 'constructor-news',
                     getComponent(nextState, cb) {
@@ -32,11 +49,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/noise',
@@ -49,11 +66,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/broadcast',
@@ -66,18 +83,18 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
                     },
-                }
+                },
             ],
             indexRoute: {
                 onEnter(nextState, replace, callback) {
-                    replace('/constructor/news')
-                    callback()
-                }
+                    replace('/constructor/news');
+                    callback();
+                },
             },
             onEnter(nextState, replace, callback) {
                 if (this.loadedSagas) {
@@ -116,10 +133,10 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([pReducer, cReducer, component]) => {
-                    injectReducer('programsPage', pReducer.default)
-                    injectReducer('constructorPage', cReducer.default)
+                    injectReducer('programsPage', pReducer.default);
+                    injectReducer('constructorPage', cReducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -137,28 +154,28 @@ export default function createRoutes(store) {
                     import('containers/FeedPage/reducer'),
                     import('containers/FeedPage/sagas'),
                     import('containers/FeedPage'),
-                ])
+                ]);
 
-                const renderRoute = loadModule(cb)
+                const renderRoute = loadModule(cb);
 
-                importModules.then(results => {
+                importModules.then((results) => {
                     let [
                         helpReducer,
                         helpSagas,
                         reducer,
                         sagas,
-                        component
-                    ] = results
+                        component,
+                    ] = results;
 
-                    injectReducer('help', helpReducer.default)
-                    injectReducer('feedPage', reducer.default)
-                    injectSagas(sagas.default)
-                    injectSagas(helpSagas.default)
+                    injectReducer('help', helpReducer.default);
+                    injectReducer('feedPage', reducer.default);
+                    injectSagas(sagas.default);
+                    injectSagas(helpSagas.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
-                importModules.catch(errorLoading)
+                importModules.catch(errorLoading);
             },
         },
         {
@@ -215,9 +232,9 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([reducer, component]) => {
-                    injectReducer('newslistPage', reducer.default)
+                    injectReducer('newslistPage', reducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -256,9 +273,9 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([reducer, component]) => {
-                    injectReducer('readyPage', reducer.default)
+                    injectReducer('readyPage', reducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -306,10 +323,10 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([chatReducer, editorReducer, component]) => {
-                    injectReducer('chat', chatReducer.default)
-                    injectReducer('editorPage', editorReducer.default)
+                    injectReducer('chat', chatReducer.default);
+                    injectReducer('editorPage', editorReducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -317,30 +334,49 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/editor/:id',
-                    name: 'editor-old'
-                }
-            ]
+                    name: 'editor-old',
+                },
+            ],
         },
         {
             path: '/programs',
             name: 'programsPage',
-                getComponent(nextState, cb) {
-                    const importModules = Promise.all([
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
                     import('containers/ProgramsPage/reducer'),
-                    import('containers/ProgramsPage/sagas'),
                     import('containers/ProgramsPage'),
-                    ]);
+                ]);
 
-                    const renderRoute = loadModule(cb);
+                const renderRoute = loadModule(cb);
 
-                    importModules.then(([reducer, sagas, component]) => {
-                        injectReducer('programsPage', reducer.default);
-                        injectSagas(sagas.default);
-                        renderRoute(component);
-                    });
+                importModules.then(([reducer, component]) => {
+                    injectReducer('programsPage', reducer.default);
+                    renderRoute(component);
+                });
 
-                    importModules.catch(errorLoading);
-                },
+                importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/ProgramsPage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
         },
         {
             path: '/live',
@@ -348,19 +384,38 @@ export default function createRoutes(store) {
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/LivePage/reducer'),
-                    import('containers/LivePage/sagas'),
                     import('containers/LivePage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([reducer, sagas, component]) => {
+                importModules.then(([reducer, component]) => {
                     injectReducer('livePage', reducer.default);
-                    injectSagas(sagas.default);
                     renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/LivePage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
             },
         },
         {
@@ -386,9 +441,9 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/categoriesStatsPage/:type',
-                    name: 'categoriesStatsPage'
-                }
-            ]
+                    name: 'categoriesStatsPage',
+                },
+            ],
         },
         {
             path: '/articleUserStatsPage',
@@ -413,9 +468,9 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/articleUserStatsPage/:type',
-                    name: 'articleUserStatsPage'
-                }
-            ]
+                    name: 'articleUserStatsPage',
+                },
+            ],
         },
         {
             path: '/translation',
@@ -435,26 +490,46 @@ export default function createRoutes(store) {
             },
         },
         {
-      path: '/profile',
-      name: 'profilePage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/ProfilePage/reducer'),
-          import('containers/ProfilePage/sagas'),
-          import('containers/ProfilePage'),
-        ]);
+            path: '/profile',
+            name: 'profilePage',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/ProfilePage/reducer'),
+                    import('containers/ProfilePage'),
+                ]);
 
-        const renderRoute = loadModule(cb);
+                const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('profilePage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
+                importModules.then(([reducer, component]) => {
+                    injectReducer('profilePage', reducer.default);
+                    renderRoute(component);
+                });
 
-        importModules.catch(errorLoading);
-      },
-    }, {
+                importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/ProfilePage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
+        },
+        {
             path: '*',
             name: 'notfound',
             getComponent(nextState, cb) {

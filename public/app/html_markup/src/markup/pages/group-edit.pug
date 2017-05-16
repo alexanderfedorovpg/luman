@@ -1,8 +1,8 @@
 extends ../layouts/default
-include ../components/p-user-edit/p-user-edit
+include ../components/p-group-edit/p-group-edit
 include ../components/tabs-nav/tabs-nav
 block vars
-    -pageSettings.title = 'Пользователи';
+    -pageSettings.title = 'Редактирование групп';
 
 block content
     // Контент здесь
@@ -11,4 +11,4 @@ block content
             +b.header-l
                 +tabs-nav(tabsNav.userEdit)
 
-    +p-user-edit
+    +p-group-edit
