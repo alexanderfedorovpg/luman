@@ -473,7 +473,7 @@ class NewsListEditorController extends CmsController
             $new_editor_id = $request->input('new_editor_id');
 
             $news = News::find($id);
-          //  $log_moderation = new NewsModerationLogHelper($news);
+            $log_moderation = new NewsModerationLogHelper($news);
 
             if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
@@ -482,7 +482,7 @@ class NewsListEditorController extends CmsController
             $news->editor_id = $new_editor_id;
             $news->moderation = 0;
 
-            if (/*$log_moderation->setModeration() &&*/ $news->save()) {
+            if ( $news->save() && $log_moderation->setModeration() ) {
                 $this->log->setLog('DELEGATE', $id, "Successful, news id=" . $id . " delegate [" . $id . ">" . $new_editor_id . "]");
                 return $this->respondCreated(
                     ["data" => "delegate"]
