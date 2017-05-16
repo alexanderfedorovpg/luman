@@ -32,7 +32,7 @@ const Nav = styled.div`
     }
 `;
 
-const NavItem = styled(({active, ...rest})=> <Link {...rest} />)`
+const NavItem = styled(({active, war, ...rest}) => <Link {...rest} />)`
     margin-right: ${rem(21)};
 
     cursor: pointer;
@@ -53,14 +53,18 @@ const NavItem = styled(({active, ...rest})=> <Link {...rest} />)`
     &:last-child {
         margin-right: 0;
     }
-    .war-mode & {
-        color: #c00;
-    }
 
     ${ifProp('active')`
         color: #000;
         span {
             color: #666;
+        }
+    `}
+
+    ${ifProp(['war', 'active'])`
+        color: #c00;
+        span {
+            color: #c00;
         }
     `}
 `;
@@ -79,17 +83,30 @@ class Header extends Component {
     render() {
         let { data, router, war, onWarModeChange } = this.props
 
+        const warCount = (data.war||[]).length
         const newsCount = (data.news||[]).length
         const noiseCount = (data.noise||[]).length
         const broadcastCount = (data.broadcast||[]).length
 
-        const total = newsCount + noiseCount + broadcastCount
+        const total = warCount + newsCount + noiseCount + broadcastCount
 
         return (
             <Root>
                 <Left>
                     <Tumbler war={war} onWarModeChange={onWarModeChange} />
                     <Nav>
+                        {war
+                            ? (
+                                <NavItem
+                                    to="/constructor/war"
+                                    active={router.isActive('/constructor/war')}
+                                    war>
+
+                                    Война <span>{warCount}</span>
+                                </NavItem>
+                            )
+                            : null
+                        }
                         <NavItem
                             to="/constructor/news"
                             active={router.isActive('/constructor/news')}>
