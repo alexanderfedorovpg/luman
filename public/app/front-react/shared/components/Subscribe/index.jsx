@@ -1,15 +1,23 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from 'react';
+import classNames from 'classnames';
 
-import './style.scss'
+import { links } from './constants';
+import './style.scss';
 
-import vk from './imgs/vkk.png'
-import fb from './imgs/fb.png'
-import tw from './imgs/tw.png'
-import ok from './imgs/okk.png'
+function renderLink(link) {
+    return (
+        <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            className="subscribe-networks__ico-link"
+        >
+            <img src={link.img} alt="" className="subscribe-networks__ico-image" />
+        </a>
+    );
+}
 
 function Subscribe({ className }) {
-
     return (
         <div className={classNames('subscribe', className)}>
             <a className="subscribe__link" href="javascript:void(0)">
@@ -18,18 +26,7 @@ function Subscribe({ className }) {
             <div className="subscribe__container">
                 <div className="subscribe-networks subscribe__subscribe-networks">
                     <div className="subscribe-networks__list-network">
-                        <a href="#" className="subscribe-networks__ico-link">
-                            <img src={fb} alt="" className="subscribe-networks__ico-image"/>
-                        </a>
-                        <a href="#" className="subscribe-networks__ico-link">
-                            <img src={tw} alt="" className="subscribe-networks__ico-image"/>
-                        </a>
-                        <a href="#" className="subscribe-networks__ico-link">
-                            <img src={ok} alt="" className="subscribe-networks__ico-image"/>
-                        </a>
-                        <a href="#" className="subscribe-networks__ico-link">
-                            <img src={vk} alt="" className="subscribe-networks__ico-image"/>
-                        </a>
+                        {links.map(renderLink)}
                     </div>
                 </div>
             </div>
@@ -37,4 +34,4 @@ function Subscribe({ className }) {
     )
 }
 
-export default Subscribe
+export default Subscribe;
