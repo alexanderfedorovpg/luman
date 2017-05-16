@@ -239,15 +239,9 @@ export function* initPage() {
     yield call(getRecords, { payload: { replace: true } });
 }
 
-export function* initData() {
-    const watcher = yield takeLatest(OPEN_PAGE, initPage);
-
-    yield take(LOCATION_CHANGE);
-    yield cancel(watcher);
-}
-
 // Individual exports for testing
 export function* programsData() {
+    yield takeLatest(OPEN_PAGE, initPage);
     yield takeEvery(DELETE_RECORD, deleteRecord);
     yield takeLatest(LOAD_RECORDS, getRecords);
     yield takeLatest(SET_RECORDS_TYPE, getRecords);
@@ -264,5 +258,4 @@ export function* programsData() {
 // All sagas to be loaded
 export default [
     programsData,
-    initData,
 ];

@@ -306,10 +306,10 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([chatReducer, editorReducer, component]) => {
-                    injectReducer('chat', chatReducer.default)
-                    injectReducer('editorPage', editorReducer.default)
+                    injectReducer('chat', chatReducer.default);
+                    injectReducer('editorPage', editorReducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -317,30 +317,49 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/editor/:id',
-                    name: 'editor-old'
-                }
-            ]
+                    name: 'editor-old',
+                },
+            ],
         },
         {
             path: '/programs',
             name: 'programsPage',
-                getComponent(nextState, cb) {
-                    const importModules = Promise.all([
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
                     import('containers/ProgramsPage/reducer'),
-                    import('containers/ProgramsPage/sagas'),
                     import('containers/ProgramsPage'),
-                    ]);
+                ]);
 
-                    const renderRoute = loadModule(cb);
+                const renderRoute = loadModule(cb);
 
-                    importModules.then(([reducer, sagas, component]) => {
-                        injectReducer('programsPage', reducer.default);
-                        injectSagas(sagas.default);
-                        renderRoute(component);
-                    });
+                importModules.then(([reducer, component]) => {
+                    injectReducer('programsPage', reducer.default);
+                    renderRoute(component);
+                });
 
-                    importModules.catch(errorLoading);
-                },
+                importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/ProgramsPage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
         },
         {
             path: '/live',
@@ -348,19 +367,38 @@ export default function createRoutes(store) {
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/LivePage/reducer'),
-                    import('containers/LivePage/sagas'),
                     import('containers/LivePage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([reducer, sagas, component]) => {
+                importModules.then(([reducer, component]) => {
                     injectReducer('livePage', reducer.default);
-                    injectSagas(sagas.default);
                     renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/LivePage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
             },
         },
         {
@@ -435,26 +473,46 @@ export default function createRoutes(store) {
             },
         },
         {
-      path: '/profile',
-      name: 'profilePage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/ProfilePage/reducer'),
-          import('containers/ProfilePage/sagas'),
-          import('containers/ProfilePage'),
-        ]);
+            path: '/profile',
+            name: 'profilePage',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/ProfilePage/reducer'),
+                    import('containers/ProfilePage'),
+                ]);
 
-        const renderRoute = loadModule(cb);
+                const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('profilePage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
+                importModules.then(([reducer, component]) => {
+                    injectReducer('profilePage', reducer.default);
+                    renderRoute(component);
+                });
 
-        importModules.catch(errorLoading);
-      },
-    }, {
+                importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/ProfilePage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
+        },
+        {
             path: '*',
             name: 'notfound',
             getComponent(nextState, cb) {
