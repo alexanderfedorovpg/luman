@@ -190,8 +190,8 @@ class NewsListEditorController extends CmsController
             $rules['sub_title'] = 'required|max:140';
             $rules['theses'] = 'required';
 
-            $rules['image_main'] = 'required';
-            $rules['image_preview'] = 'required';
+            $rules['image_main'] = 'numeric';
+            $rules['image_preview'] = 'numeric';
             $rules['original_source_link'] = 'url';
 
             $this->validate($request,
@@ -325,8 +325,8 @@ class NewsListEditorController extends CmsController
             $rules['sub_title'] = 'required|max:140';
             $rules['theses'] = 'required';
 
-            $rules['image_main'] = 'required';
-            $rules['image_preview'] = 'required';
+            $rules['image_main'] = 'numeric';
+            $rules['image_preview'] = 'numeric';
             $rules['original_source_link'] = 'url';
 
             $this->validate($request,
