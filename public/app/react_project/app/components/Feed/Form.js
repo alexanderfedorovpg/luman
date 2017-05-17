@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
+import styled from 'styled-components'
 
 import Tags from './../Tags';
 import Rating from './../Rating';
@@ -13,6 +14,13 @@ import {
     Label,
 } from './../Form';
 import Select from './Select';
+
+const FixedForm = styled.form`
+    position: fixed;
+    top: 120px;
+    bottom: 0px;
+    overflow-y: scroll;
+`;
 
 class Form extends Component {
 
@@ -127,7 +135,7 @@ class Form extends Component {
         let { data, users, rubrics } = this.props;
 
         return (
-            <form onSubmit={this.submitHandler}>
+            <FixedForm onSubmit={this.submitHandler}>
                 <Tags data={rubrics} />
                 <Rating
                     value={this.state.data.rating}
@@ -181,7 +189,7 @@ class Form extends Component {
                         Отправить в работу
                     </Button>
                 </Group>
-            </form>
+            </FixedForm>
         );
     }
 }

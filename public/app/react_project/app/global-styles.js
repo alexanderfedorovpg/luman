@@ -51,4 +51,21 @@ injectGlobal`
     .ReactModal__Body--open {
         overflow: hidden;
     }
+
+    .ReactModal__Content {
+        right: -100% !important;
+        left: 100% !important;
+        transition: all .2s ease-in-out;
+
+        &--after-open {
+            right: 0px !important;
+            left: 0px !important;
+        }
+
+        &--before-close {
+            right: 0px !important;
+            left: 0px !important;
+        }
+    }
+
 `;

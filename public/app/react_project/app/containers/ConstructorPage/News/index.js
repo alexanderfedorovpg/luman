@@ -1,4 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
+import styled from 'styled-components'
 import { connect } from 'react-redux';
 
 import { Wrap, Left, Right } from 'components/Constructor/Content'
@@ -20,6 +21,13 @@ import {
 import {
     selectFilters
 } from '../selectors'
+
+const CollapseWrapp = styled.div`
+    position: fixed;
+    top: 121px;
+    bottom: 0px;
+    overflow-y: auto;
+`
 
 export class News extends PureComponent {
 
