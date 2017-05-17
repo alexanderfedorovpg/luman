@@ -2,6 +2,7 @@ import React, { Component, PropTypes, Children, cloneElement } from 'react'
 import styled from 'styled-components'
 import Dropzone from 'react-dropzone'
 import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
+import { StickyContainer, Sticky } from 'react-sticky';
 
 import { Wrap, Left, Right } from 'components/Content'
 import { Group, Textarea, Label } from 'components/Form'
@@ -29,11 +30,11 @@ const Root = styled.div`
     padding-left: ${padding}
 `
 
-const CustomLeft = styled(Left)`
+const CustomLeft = styled(Left) `
     border-right: 0;
 `
 
-const CustomRight = styled(Right)`
+const CustomRight = styled(Right) `
     flex-basis: auto;
     width: auto;
 `
@@ -57,13 +58,13 @@ const VideoStatus = styled.div`
         margin-left: 3px;
         color: ${color.danger}
 
-        ${ifProp('ready')`
+        ${ifProp('ready') `
             color: #1f9d29;
         `}
     }
 `
 
-const CustomIcon = styled(Icon)`
+const CustomIcon = styled(Icon) `
     margin-top: -3px;
     margin-left: 2px;
     margin-right: 5px;
@@ -75,12 +76,12 @@ const Action = styled.div`
     margin-bottom: -3px;
 `
 
-const CustomRating = styled(Rating)`
+const CustomRating = styled(Rating) `
     margin-right: 20px;
     margin-bottom: 21px;
 `
 
-const TitleField = styled(Textarea)`
+const TitleField = styled(Textarea) `
     height: 119px;
     padding-left: 16px;
     padding-right: 16px;
@@ -93,7 +94,7 @@ const TitleField = styled(Textarea)`
     letter-spacing: -0.7px;
 `
 
-const SubtitleField = styled(Textarea)`
+const SubtitleField = styled(Textarea) `
     height: 96px;
     padding-left: 19px;
     padding-right: 19px;
@@ -106,7 +107,7 @@ const SubtitleField = styled(Textarea)`
     letter-spacing: 0;
 `
 
-const ThesesField = styled(SubtitleField)`
+const ThesesField = styled(SubtitleField) `
     font-size: 16px;
     font-weight: 400;
 
@@ -134,7 +135,7 @@ const ImageContainer = styled.div`
     }
 `
 
-const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />)`
+const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />) `
     display: flex;
     align-items: center;
     justify-content: center;
@@ -144,7 +145,7 @@ const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />)`
     border: 2px dashed rgb(102, 102, 102);
     border-radius: 5px;
 
-    ${ifProp('filled')`
+    ${ifProp('filled') `
         border: 0;
     `}
 `
@@ -183,7 +184,7 @@ class Content extends Component {
     propsToData(props) {
         return {
             top: props.article.top || null,
-            rubrics: (props.article.rubrics||[]).map(r => r.name),
+            rubrics: (props.article.rubrics || []).map(r => r.name),
             stream: props.article.video_stream || '',
             body: props.article.body || '',
             title: props.article.title || '',
@@ -237,7 +238,7 @@ class Content extends Component {
             theses: !data.theses,
         }
 
-        if (Object.values(newError).reduce((a,b) => a || b, false)) {
+        if (Object.values(newError).reduce((a, b) => a || b, false)) {
             this.setState({
                 error: newError
             })
@@ -258,7 +259,7 @@ class Content extends Component {
         let { article, rubrics } = this.props
 
         let r = data.rubrics.map(name => (
-            rubrics.find(r=>r.name==name).id
+            rubrics.find(r => r.name == name).id
         ))
 
         if (!this.validate()) return
@@ -282,7 +283,7 @@ class Content extends Component {
     onDrop(prop) {
         return acceptedFiles => {
             if (acceptedFiles[0]) {
-                let reader  = new FileReader()
+                let reader = new FileReader()
 
                 reader.onload = () => {
 
@@ -363,7 +364,7 @@ class Content extends Component {
                                 <CustomIcon type="text-video-lg" />
                                 <strong>Статус видео:</strong>
                                 <span>
-                                    { article.video_stream ? 'готово' : 'не готово' }
+                                    {article.video_stream ? 'готово' : 'не готово'}
                                 </span>
                             </VideoStatus>
                         </CustomRight>
@@ -478,7 +479,17 @@ class Content extends Component {
                             ? <User data={editor} />
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
-                        <Chat room={chatRoom} />
+                        <StickyContainer>
+                            <Sticky relative={false}>
+                                {
+                                    () => {
+                                        return (
+                                            <Chat room={chatRoom} />
+                                        )
+                                    }
+                                }
+                            </Sticky>
+                        </StickyContainer>
                     </CustomRight>
                 </Wrap>
                 <Modal
@@ -490,7 +501,7 @@ class Content extends Component {
                         data={this.state.data}
                         onClose={closePreview}
                         delegate={delegate}
-                        done={()=>finish(this.dataToSubmit())} />
+                        done={() => finish(this.dataToSubmit())} />
                 </Modal>
             </Root>
         )
