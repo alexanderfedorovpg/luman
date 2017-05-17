@@ -44,8 +44,9 @@ class NewsListTransformer extends Transformer
         $transform['cover']=null;
 
 
-        $cover = CdnFile::where('id', '=', $news['cover_id'])->pluck('url')->first();
+
         if ($news['cover_id']) {
+
             $cover = CdnFile::where('id', '=', $news['cover_id'])->pluck('url')->first();
             $transform['cover']['cover_url'] = $cover;
             $transform['cover']['cover_id'] = $news['cover_id'];

@@ -34,7 +34,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->get('/news/online/setstatus/{id}','NewsListOnlineController@updateStatusNewsOnline');
     $group->get('/news/online/comments/{id}','NewsListOnlineController@getListCommentsNewsOnline');
     $group->post('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
-    $group->put('/news/online/comments','NewsListOnlineController@addCommentNewsOnline');
+    $group->put('/news/online/comments','NewsListOnlineController@updateCommentNewsOnline');
     $group->delete('/news/online/comments/{id}','NewsListOnlineController@deleteCommentNewsOnline');
     $group->get('/news/{id}','NewsListController@getOne');
     $group->get('/news/{id}/related','NewsListController@getRelated');

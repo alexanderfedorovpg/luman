@@ -26,6 +26,13 @@ class NewsEditorTransformer extends Transformer
             $transform['lastEditorComment'] = null;
         }
 
+        if ($news['cover_id']) {
+
+            $cover = CdnFile::where('id', '=', $news['cover_id'])->pluck('url')->first();
+            $transform['cover']['cover_url'] = $cover;
+            $transform['cover']['cover_id'] = $news['cover_id'];
+        }
+
         $imageMain = CdnFile::where('id', '=', $news['image_main'])->select(['url', 'id'])->first();
         $transform['image_main'] = $imageMain['url'];
         $transform['image_main_id'] = $imageMain['id'];
