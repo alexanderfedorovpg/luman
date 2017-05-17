@@ -24,6 +24,14 @@ export const ifProp = (propNames) => {
         : content;
 };
 
+export const noProp = (propNames) => {
+    const names = Array.isArray(propNames) ? propNames : [propNames];
+    return (content) => (props) => names.find((name) =>
+        !props[name])
+        ? content
+        : '';
+};
+
 export const equalProp = (propName, value) => (content) => (props) =>
     props[propName] === value
     ? content

@@ -7,6 +7,10 @@ const publicApi = axios.create({
     baseURL: 'http://librorum-client.rtvi.ddemo.ru/api/v1/web',
 });
 
+// =============================================================================
+// AUTH API
+// =============================================================================
+
 export const setToken = (token) => {
     axios.defaults.headers.common['Api-Token'] = token;
 };
@@ -23,6 +27,25 @@ export const login = ({ username, password }) => {
         },
     });
 };
+
+// ============================================================================
+
+
+// =============================================================================
+// USERS API
+// =============================================================================
+
+export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
+    params,
+});
+export const getCurrentUser = () => axios.get('/userprofile');
+export const editUserProfile = (data) => axios.put('/userprofile', data);
+export const getUsersInGroup = (groupId) => axios.get(`/group/${groupId}/users`);
+export const getGroup = (id) => axios.get(`/group${id ? `/${id}` : ''}`);
+export const getGroups = () => axios.get('/group');
+
+// ============================================================================
+
 
 export const getFeed = (params) => axios.get('/newsfeed', {
     params: {
@@ -67,17 +90,6 @@ export const feedToWork = (data) => {
         },
     });
 };
-
-export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
-    params,
-});
-
-export const getCurrentUser = () => axios.get('/userprofile');
-export const editUserProfile = (data) => axios.put('/userprofile', data);
-
-export const getUsersInGroup = (group_id) => axios.get(`/group/${group_id}/users`);
-
-export const getGroup = (id) => axios.get(`/group${id ? `/${id}` : ''}`);
 
 export const getLinks = (query) => axios.get('/reference/search', {
     params: { query },
@@ -246,15 +258,21 @@ export const uploadVideo = (file) => {
 
     return axios.post('/air/record/upload', data);
 };
+
 // =============================================================================
+
 
 // =============================================================================
 // STATISTIC API
 // =============================================================================
+
 export const getCategoryStats = (from_date, to_date) => axios.get('/statistics');
 export const getAuthorStats = (from_date, to_date) => axios.get('/newsstatistics/editor/top');
 export const getOneCategoryStat = (type, from_date, to_date) => axios.get(`/newsstatistics/editor/extended?type=${type}`);
 export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/newsstatistics/editor?editor_id=${editor_id}`);
+
+// =============================================================================
+
 
 // =============================================================================
 // LIVE API
@@ -262,7 +280,9 @@ export const getOneAuthorStats = (editor_id, from_date, to_date) => axios.get(`/
 
 export const getLive = () => axios.get('/air/live');
 export const newsToLive = (data) => axios.post('/air/live', data);
+
 // =============================================================================
+
 
 // =============================================================================
 // LOGS API
@@ -270,7 +290,9 @@ export const newsToLive = (data) => axios.post('/air/live', data);
 
 export const getLogs = (params) => axios.get('/logs', { params });
 export const getUserLogs = (params) => axios.get('/logs/user', { params });
+
 // =============================================================================
+
 
 // =============================================================================
 // PUBLIC API

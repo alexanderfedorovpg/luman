@@ -29,6 +29,7 @@ import {
     loadRubrics,
     loadUsers,
     loadCurrentUser,
+    loadGroups,
 } from './actions';
 
 import { selectCurrentUser } from './selectors';
@@ -43,7 +44,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
         children: React.PropTypes.node,
     };
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.token) {
             this.loadData(this.props.token);
         }
@@ -62,6 +63,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
             this.props.loadRubrics();
             this.props.loadUsers();
             this.props.loadCurrentUser();
+            this.props.loadGroups();
         });
     }
 
@@ -123,8 +125,10 @@ const mapDispatchToProps = (dispatch) => ({
     loadCurrentUser() {
         dispatch(loadCurrentUser());
     },
+
+    loadGroups() {
+        dispatch(loadGroups());
+    },
 });
 
-App = withProgressBar(App);
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withProgressBar(connect(mapStateToProps, mapDispatchToProps)(App));

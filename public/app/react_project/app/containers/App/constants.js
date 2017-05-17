@@ -17,6 +17,12 @@ export const groups = {
     'сommissioning-editor': 3,
 };
 
+export const groupNames = {
+    [groups.admin]: 'Администратор',
+    [groups.editor]: 'Редактор',
+    [groups['сommissioning-editor']]: 'Выпускающий',
+};
+
 export const TOGGLE_MENU = 'app/TOGGLE_MENU';
 export const CLOSE_MENU = 'app/CLOSE_MENU';
 
@@ -31,6 +37,10 @@ export const LOAD_EDITORS_FAILURE = 'app/LOAD_EDITORS_FAILURE';
 export const LOAD_USERS = 'app/LOAD_USERS';
 export const LOAD_USERS_SUCCESS = 'app/LOAD_USERS_SUCCESS';
 export const LOAD_USERS_FAILURE = 'app/LOAD_USERS_FAILURE';
+
+export const LOAD_GROUPS = 'app/LOAD_GROUPS';
+export const LOAD_GROUPS_SUCCESS = 'app/LOAD_GROUPS_SUCCESS';
+export const LOAD_GROUPS_FAILURE = 'app/LOAD_GROUPS_FAILURE';
 
 export const LOAD_CURRENT_USER = 'app/LOAD_CURRENT_USER';
 export const LOAD_CURRENT_USER_SUCCESS = 'app/LOAD_CURRENT_USER_SUCCESS';

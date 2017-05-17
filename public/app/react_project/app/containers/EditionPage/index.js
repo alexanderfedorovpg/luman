@@ -6,37 +6,34 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+
 import makeSelectEditionPage from './selectors';
+import Header from './Header';
 
 export class EditionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <div>
-        <Helmet
-          title="EditionPage"
-          meta={[
-            { name: 'description', content: 'Description of EditionPage' },
-          ]}
-        />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Header />
+                {this.props.children}
+            </div>
+        );
+    }
 }
 
 EditionPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+    children: PropTypes.node,
 };
 
 const mapStateToProps = createStructuredSelector({
-  EditionPage: makeSelectEditionPage(),
+    EditionPage: makeSelectEditionPage(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+    return {
+        dispatch,
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditionPage);

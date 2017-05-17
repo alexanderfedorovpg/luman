@@ -92,6 +92,11 @@ const makeSelectPrograms = () => createSelector(
     (app) => app.get('programs')
 );
 
+const makeGetGroups = () => createSelector(
+    selectAppDomain(),
+    (app) => app.get('groups')
+);
+
 const makeGetProgramsArray = () => createSelector(
     makeSelectPrograms(),
     (programsMap) => {
@@ -121,5 +126,6 @@ export {
     makeSelectInfo,
     makeSelectPrograms,
     makeGetProgramsArray,
-    selectLocationState
+    selectLocationState,
+    makeGetGroups
 };

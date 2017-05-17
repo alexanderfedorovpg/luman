@@ -10,6 +10,10 @@ import {
     LOAD_USERS_SUCCESS,
     LOAD_USERS_FAILURE,
 
+    LOAD_GROUPS,
+    LOAD_GROUPS_SUCCESS,
+    LOAD_GROUPS_FAILURE,
+
     LOAD_CURRENT_USER,
     LOAD_CURRENT_USER_SUCCESS,
     LOAD_CURRENT_USER_FAILURE,
@@ -153,6 +157,26 @@ export function successLoadPrograms(programs) {
 export function failureLoadPrograms(error) {
     return {
         type: LOAD_PROGRAMS_FAILURE,
+        error,
+    };
+}
+
+export function loadGroups() {
+    return {
+        type: LOAD_GROUPS,
+    };
+}
+
+export function successLoadGroups(groups) {
+    return {
+        type: LOAD_GROUPS_SUCCESS,
+        payload: { groups },
+    };
+}
+
+export function failureLoadGroups(error) {
+    return {
+        type: LOAD_GROUPS_FAILURE,
         error,
     };
 }

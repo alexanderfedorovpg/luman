@@ -19,8 +19,9 @@ import {
     LOAD_RUBRICS,
     POST_MESSAGE,
     LOAD_PROGRAMS,
+    LOAD_GROUPS,
 
-    groups,
+    groups as groupsMap,
 } from './constants';
 
 import {
@@ -41,6 +42,9 @@ import {
 
     successLoadPrograms,
     failureLoadPrograms,
+
+    successLoadGroups,
+    failureLoadGroups,
 } from './actions';
 
 function* login({ payload }) {
@@ -63,7 +67,7 @@ function* loginWatcher() {
 
 function* fetchEditors() {
     try {
-        const { data } = yield call(api.getUsersInGroup, groups.editor);
+        const { data } = yield call(api.getUsersInGroup, groupsMap.editor);
 
         yield put(editorsLoaded(data));
     } catch (err) {
@@ -167,10 +171,35 @@ export function* programsData() {
     yield takeLatest(LOAD_PROGRAMS, getPrograms);
 }
 
+export function* loadGroups() {
+    try {
+        const response = yield call(api.getGroups);
+        const groups = {
+            byId: {},
+            ids: [],
+        };
+
+        response.data.forEach((group) => {
+            groups.byId[group.id] = group;
+            groups.ids.push(group.id);
+        });
+
+        yield put(successLoadGroups(groups));
+    } catch (err) {
+        console.error(err);
+        yield put(failureLoadGroups(err));
+    }
+}
+
+export function* groupsData() {
+    yield takeLatest(LOAD_GROUPS, loadGroups);
+}
+
 export default [
     loginWatcher,
     usersData,
     rubricsData,
     addMessage,
     programsData,
+    groupsData,
 ];

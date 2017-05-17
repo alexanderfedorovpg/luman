@@ -195,12 +195,14 @@ class Table extends React.PureComponent {
 
     renderTh(data, ind) {
         const { sort } = this.state;
+        const { columnsWidth } = this.props;
 
         return (
             <th
                 onClick={(e) => this.onThClick(e, ind)}
                 role="button"
                 key={uniqueId()}
+                width={columnsWidth[ind]}
             >
                 {data}
                 {' '}
@@ -251,6 +253,10 @@ class Table extends React.PureComponent {
     }
 }
 
+Table.defaultProps = {
+    columnsWidth: [],
+};
+
 Table.propTypes = {
     children: PropTypes.node,
     header: PropTypes.array,
@@ -259,6 +265,7 @@ Table.propTypes = {
     sortDirection: PropTypes.oneOf(['up', 'down']),
     sortable: PropTypes.bool,
     onSort: PropTypes.func,
+    columnsWidth: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Table;

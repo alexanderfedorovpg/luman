@@ -3,13 +3,6 @@
  * ProfilePage constants
  *
  */
-import { groups } from 'containers/App/constants';
-
-export const userGroups = {
-    [groups.admin]: 'Администратор',
-    [groups.editor]: 'Редактор',
-    [groups['сommissioning-editor']]: 'Выпускающий',
-};
 
 export const EDIT_USER_DATA = 'app/ProfilePage/EDIT_USER_DATA';
 export const EDIT_USER_DATA_SUCCESS = 'app/ProfilePage/EDIT_USER_DATA_SUCCESS';

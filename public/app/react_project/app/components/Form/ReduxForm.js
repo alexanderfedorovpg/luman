@@ -11,14 +11,15 @@ import {
     Textarea,
     Dropzone,
     ImageLoader,
+    RadioButton,
 } from './';
 
-export const InputRedux = ({ input, meta: { touched, invalid, valid, dirty, error }, showError, ...props }) => (
+export const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
     <div>
         <Input
             {...props}
-            success={touched && valid && dirty && !props.disabled}
-            error={touched && invalid && dirty && !props.disabled}
+            success={touched && valid && !props.disabled}
+            error={touched && invalid && !props.disabled}
             value={input.value}
             onChange={(e) => input.onChange(e)}
         />
@@ -29,72 +30,81 @@ export const InputRedux = ({ input, meta: { touched, invalid, valid, dirty, erro
     </div>
 );
 
-export const TextareaRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+export const TextareaRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Textarea
         {...props}
-        success={touched && valid && dirty && !props.disabled}
-        error={touched && invalid && dirty && !props.disabled}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e)}
     />
 );
 
-export const RichRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+export const RadioButtonRedux = ({ input, meta, ...props }) => (
+    <RadioButton
+        {...props}
+        checked={input.checked}
+        value={input.value}
+        onChange={(e) => input.onChange(e)}
+    />
+);
+
+export const RichRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Rich
         {...props}
-        success={touched && valid && dirty && !props.disabled}
-        error={touched && invalid && dirty && !props.disabled}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e)}
     />
 );
 
-export const FileInputRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+export const FileInputRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <FileInput
         {...props}
-        success={touched && valid && dirty && !props.disabled}
-        error={touched && invalid && dirty && !props.disabled}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e.target.files)}
     />
 );
 
-export const SelectRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+export const SelectRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Select
         {...props}
-        success={touched && valid && dirty && !props.disabled}
-        error={touched && invalid && dirty && !props.disabled}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(option) => input.onChange(option.value)}
         onBlur={() => input.onBlur(input.value)}
     />
 );
 
-export const DatepickerRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+export const DatepickerRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Datepicker
         {...props}
-        success={touched && valid && dirty && !props.disabled}
-        error={touched && invalid && dirty && !props.disabled}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         selected={input.value}
         onChange={(value) => input.onChange(value)}
     />
 );
 
-export const DropzoneRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+export const DropzoneRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <Dropzone
         {...props}
-        success={touched && valid && dirty && !props.disabled}
-        error={touched && invalid && dirty && !props.disabled}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onDrop={(files) => input.onChange(files)}
     />
 );
 
-export const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid, dirty }, ...props }) => (
+export const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
     <ImageLoader
         {...props}
-        success={touched && valid && dirty && !props.disabled}
-        error={touched && invalid && dirty && !props.disabled}
+        success={touched && valid && !props.disabled}
+        error={touched && invalid && !props.disabled}
         value={input.value}
         onChange={(e) => input.onChange(e.target.files)}
     />

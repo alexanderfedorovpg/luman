@@ -647,6 +647,65 @@ export default function createRoutes(store) {
                     delete this.loadedSagas;
                 }
             },
+            childRoutes: [
+                {
+                    path: '/edition/users',
+                    name: 'edition-users',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/EditionPage/Users'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component);
+                        });
+
+                        importModules.catch(errorLoading);
+                    },
+                },
+                {
+                    path: '/edition/groups',
+                    name: 'edition-groups',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/EditionPage/Groups'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component);
+                        });
+
+                        importModules.catch(errorLoading);
+                    },
+                },
+                {
+                    path: '/edition/journal',
+                    name: 'profileJournal',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/EditionPage/Journal'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component);
+                        });
+
+                        importModules.catch(errorLoading);
+                    },
+                },
+            ],
+            indexRoute: {
+                onEnter(nextState, replace, callback) {
+                    replace({ pathname: '/edition/users', state: { redefined: true } });
+                    callback();
+                },
+            },
         },
         {
             path: '*',

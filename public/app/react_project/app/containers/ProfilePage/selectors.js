@@ -1,8 +1,8 @@
 import React from 'react';
 import { createSelector } from 'reselect';
 import { FormattedDate } from 'react-intl';
-import { getCurrentUserData } from 'containers/App/selectors';
-import { userGroups, lastActionsMap } from './constants';
+import { getCurrentUserData, makeGetGroups } from 'containers/App/selectors';
+import { lastActionsMap } from './constants';
 
 /**
  * Direct selector to the profilePage state domain
@@ -41,23 +41,25 @@ const makeAccountFormInitialValues = () => createSelector(
 );
 
 const makeProfileStats = () => createSelector(
-    getCurrentUserData,
-    (userImmutable) => {
+    [getCurrentUserData, makeGetGroups()],
+    (userImmutable, groupsImmutable) => {
         const data = [];
+
+        if (!userImmutable || !groupsImmutable) {
+            return data;
+        }
+
+        const user = userImmutable.toJS();
+        const groups = groupsImmutable.toJS();
 
         function makeStatsItem(key, name, value) {
             data.push({ key, name, value });
         }
 
         function makeGroups(group) {
-            return userGroups[group];
+            return groups.byId[group].name;
         }
 
-        if (!userImmutable) {
-            return data;
-        }
-
-        const user = userImmutable.toJS();
         makeStatsItem(
             'createdAt',
             'Добавлен',

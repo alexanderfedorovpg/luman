@@ -22,6 +22,7 @@ import {
     SHOW_INFO,
     HIDE_INFO,
     LOAD_PROGRAMS_SUCCESS,
+    LOAD_GROUPS_SUCCESS,
     groups,
 } from './constants';
 
@@ -104,6 +105,9 @@ function AppReducer(state = initialState, action) {
 
         case LOAD_PROGRAMS_SUCCESS:
             return state.set('programs', fromJS(action.payload.programs));
+
+        case LOAD_GROUPS_SUCCESS:
+            return state.set('groups', fromJS(action.payload.groups));
 
         default:
             return state;

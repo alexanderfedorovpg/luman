@@ -160,6 +160,8 @@ export const Link = styled.a`
 const CustomUser = styled(User)`
     margin-right: ${rem(27)};
     margin-left: ${rem(20)};
+
+    color: #fff;
 `;
 
 const CustomUserName = styled(UserName)`

@@ -9,6 +9,8 @@ const Root = styled.div`
     display: flex;
     align-items: center;
     margin-right: ${rem(11)};
+
+    color: #666;
 `
 
 const Pic = styled(Link)`
@@ -39,9 +41,9 @@ const Img = styled.img`
 export const Name = styled(Link)`
     font-family: ${font.helvetica};
     font-size: ${rem(14)};
-    font-weight: 400;
 
-    color: #666;
+    color: inherit;
+    font-weight: inherit;
     text-decoration: none;
     letter-spacing: 0.25px;
 `
