@@ -32,6 +32,13 @@ class NewsListOnlineTransformer extends Transformer
             ];
         }
 
+        $transform['cover_url']=null;
+        if ($comment['cover_id']) {
+            $cover = CdnFile::where('id', '=', $comment['cover_id'])->pluck('url')->first();
+            $transform['cover_url'] = $cover;
+        }
+
+
         if ($comment['video_stream_preview']) {
             $preview = CdnFile::where('id', '=', $comment['video_stream_preview'])->pluck('url')->first();
             $transform['video_stream_preview'] = [
@@ -44,6 +51,6 @@ class NewsListOnlineTransformer extends Transformer
 
     public function transformCollectionComments(array $items)
     {
-        return array_map([$this,'transformComment'], $items);
+        return array_map([$this, 'transformComment'], $items);
     }
 }
