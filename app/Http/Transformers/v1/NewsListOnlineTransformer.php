@@ -32,7 +32,7 @@ class NewsListOnlineTransformer extends Transformer
             ];
         }
 
-        $transform['cover_url']=null;
+        $transform['cover_url']="";
         if ($comment['cover_id']) {
             $cover = CdnFile::where('id', '=', $comment['cover_id'])->pluck('url')->first();
             $transform['cover_url'] = $cover;
