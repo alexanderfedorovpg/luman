@@ -6,7 +6,11 @@ import { Wrap } from 'components/Content'
 import Timeline from 'components/Translation/Timeline'
 import { Group, Textarea, Label } from 'components/Form'
 import Input from 'components/Form/Input'
-import { InputRedux, TextareaRedux, RichRedux } from 'components/Form/ReduxForm'
+import {
+    InputRedux,
+    TextareaRedux,
+    RichRedux
+} from 'components/Form/ReduxForm'
 import Chat from 'containers/Chat'
 import {
     Right,
@@ -76,17 +80,17 @@ const validate = (values) => {
     return errors;
 }
 
+const formPart1 = ({}) => (
+    <Field name="stream" component={InputRedux} block />
+)
+
 const TranslationForm1 = reduxForm({
     form: 'translationForm',
     enableReinitialize: true,
     validate
-})(({}) => (
-    <Field name="stream" component={InputRedux} block />
-))
+})(formPart1)
 
-const TranslationForm2 = reduxForm({
-    form: 'translationForm',
-})(({}) => (
+const formPart2 = ({}) => (
     <div>
         <Data>
             <Field name="image" component={ImageLoader} icon />
@@ -104,6 +108,9 @@ const TranslationForm2 = reduxForm({
             <Field name="body" component={RichRedux} />
         </Group>
     </div>
-))
+)
+const TranslationForm2 = reduxForm({
+    form: 'translationForm',
+})(formPart2)
 
 export default Detail
