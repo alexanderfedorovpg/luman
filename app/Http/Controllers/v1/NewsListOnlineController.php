@@ -99,10 +99,15 @@ class NewsListOnlineController extends CmsController
             if ($request->input('image_preview') && $request->input('video_stream')) {
 
             }
-            $news = NewsComments::create($request->all());
-            return $this->respondCreated([
-                'success' => true
-            ]);
+
+
+            $news['news_id'] =$request->input('news_id');
+            $news['editor_id'] = $this->user_id;
+            $news['body'] = $request->input('body');
+            $news['image_preview'] = $request->input('image_preview');
+            $news['video_stream_preview'] = $request->input('video_stream_preview');
+            $news = NewsComments::create($news);
+            return $this->respondCreated($news);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
