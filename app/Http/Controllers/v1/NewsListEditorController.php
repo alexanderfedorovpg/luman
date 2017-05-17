@@ -57,6 +57,7 @@ class NewsListEditorController extends CmsController
 
             $user_id = $this->user_id;
 
+
             switch ($assigned) {
                 case 'me' :
                     $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
