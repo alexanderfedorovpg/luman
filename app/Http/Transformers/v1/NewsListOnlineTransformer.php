@@ -34,10 +34,7 @@ class NewsListOnlineTransformer extends Transformer
 
         if ($comment['cover_id']) {
             $cover = CdnFile::where('id', '=', $comment['cover_id'])->pluck('url')->first();
-            $transform['cover_id'] = [
-                'id' => $comment['cover_id'],
-                'url' => $cover
-            ];
+            $transform['cover_id'] = $cover;
         }
 
 
