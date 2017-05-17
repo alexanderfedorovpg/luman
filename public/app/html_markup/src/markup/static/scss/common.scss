@@ -264,16 +264,25 @@ h4 {
     }
 
     &__title {
+        display: inline-block;
+        width: 157px;
+        font-size: 13px;
+        font-family: $opensans;
         font-weight: 700;
         letter-spacing: 0;
         color: $cl-success;
+        vertical-align: middle;
     }
 
     &__timer {
+        display: inline-block;
+        width: calc(100% - 157px);
+        font-size: 13px;
+        font-family: $opensans;
         font-weight: 400;
+        text-align: right;
+        vertical-align: middle;
     }
-
-
 
 }
 

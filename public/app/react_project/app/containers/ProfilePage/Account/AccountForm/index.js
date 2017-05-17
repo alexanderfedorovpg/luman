@@ -9,8 +9,8 @@ import { rem } from 'utils/style';
 import {
     makeAccountFormInitialValues,
     makeGetCanEditPassword,
-} from '../selectors';
-import { editUserData, enableEditPassword } from '../actions';
+} from '../../selectors';
+import { editUserData, enableEditPassword } from '../../actions';
 import {
     Wrapper,
     Left,

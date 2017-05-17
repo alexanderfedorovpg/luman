@@ -5,16 +5,12 @@ namespace App\Http\Controllers\v1;
 
 use App\Helpers\LogController;
 use App\Models\NewsComments;
-use App\Providers\LogServiceProvider;
-use App\Http\Transformers\v1\NewsListTransformer;
 use App\Models\News;
 use Illuminate\Http\Request;
-use App\Auth\Rbac\Models\Permission;
 use App\Http\Traits\NewsListTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
-use App\Http\Transformers\v1\NewsListOnlineTransformer;
 use Validator;
 
 /**
@@ -31,9 +27,9 @@ class NewsListOnlineController extends CmsController
 
     /**
      * NewsListOnlineController constructor.
-     * @param NewsListOnlineTransformer $transformer
+     * @param \App\Http\Transformers\v1\NewsListOnlineTransformer $transformer
      */
-    function __construct(NewsListOnlineTransformer $transformer)
+    function __construct(\App\Http\Transformers\v1\NewsListOnlineTransformer $transformer)
     {
         parent::__construct();
         $this->user_id = Auth::id();
@@ -95,18 +91,23 @@ class NewsListOnlineController extends CmsController
     public function addCommentNewsOnline(Request $request)
     {
         try {
-            $validator = new Validator($request->all(), NewsComments::$rules);
-            if ($validator->fails()) {
-                throw new ValidationException($validator);
-            }
+
+            $this->validate($request,
+                NewsComments::$rules
+            );
 
             if ($request->input('image_preview') && $request->input('video_stream')) {
 
             }
-            $news = NewsComments::create($request->all());
-            return $this->respondCreated([
-                'success' => true
-            ]);
+
+
+            $news['news_id'] =$request->input('news_id');
+            $news['editor_id'] = $this->user_id;
+            $news['body'] = $request->input('body');
+            $news['image_preview'] = $request->input('image_preview');
+            $news['video_stream_preview'] = $request->input('video_stream_preview');
+            $news = NewsComments::create($news);
+            return $this->respondCreated($news);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {

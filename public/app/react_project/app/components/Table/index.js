@@ -98,8 +98,8 @@ class Table extends React.PureComponent {
 
         this.state = {
             sort: {
-                index: null,
-                direction: null,
+                index: props.sortIndex || null,
+                direction: props.sortDirection || null,
             },
             data: props.body || [],
         };
@@ -150,7 +150,10 @@ class Table extends React.PureComponent {
         });
 
         if (this.props.onSort) {
-            this.props.onSort(this.state.sort);
+            this.props.onSort({
+                sortDirection: this.state.sort.direction,
+                sortIndex: this.state.sort.index,
+            });
         }
 
         this.setState({
@@ -252,6 +255,8 @@ Table.propTypes = {
     children: PropTypes.node,
     header: PropTypes.array,
     body: PropTypes.array,
+    sortIndex: PropTypes.number,
+    sortDirection: PropTypes.oneOf(['up', 'down']),
     sortable: PropTypes.bool,
     onSort: PropTypes.func,
 };

@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { font } from 'constants/style';
 import { rem, ifProp } from 'utils/style';
 
-const Root = styled.div`
+export const Root = styled.div`
     display: flex;
     align-items: center;
     height: 100%;
 `;
 
-const Item = styled.a`
+export const itemStyle = css`
     position: relative;
 
     cursor: pointer;
@@ -64,6 +64,10 @@ const Item = styled.a`
             background-color: #2a2f38;
         }
     `}
+`;
+
+const Item = styled.a`
+    ${itemStyle}
 `;
 
 function Tabs({ data, onClick, active }) {

@@ -2689,6 +2689,7 @@ main {
 .from-enter_border::before {
   content: '';
   position: absolute;
+  z-index: -1;
   bottom: 0;
   left: 0;
   display: block;
@@ -4128,7 +4129,7 @@ main {
 
 .title-block__ico {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: baseline;
 }
 
 .title-block__title {
@@ -4578,12 +4579,22 @@ main {
   margin-top: -0.75rem;
 }
 
+.p-from-the-enter__right {
+  margin-right: 0.1875rem;
+}
+
 .p-from-the-enter__title-block {
+  padding-right: 1.0625rem;
   padding-bottom: -0.0625rem;
 }
 
 .p-from-the-enter__popular {
-  margin-top: 1.375rem;
+  padding-right: 0.9375rem;
+  margin-top: 1.4375rem;
+}
+
+.p-from-the-enter__breadcrumb {
+  padding-right: 0.9375rem;
 }
 
 .p-from-the-enter__video-list--one-margin {
@@ -4599,7 +4610,7 @@ main {
 }
 
 .p-from-the-enter__video-list--four-margin {
-  margin-top: 2.125rem;
+  margin-top: 2rem;
 }
 
 .p-from-the-enter__banner {
@@ -4608,6 +4619,14 @@ main {
 
 .p-from-the-enter__subscribe {
   margin-top: 1.125rem;
+}
+
+.p-from-the-enter__list-video .list-video__item:not(:first-child) {
+  margin-top: 1.25rem;
+}
+
+.p-from-the-enter__list-video .list-video__title {
+  letter-spacing: 0;
 }
 
 .p-from-the-enter__list-video--right {
@@ -4629,6 +4648,15 @@ main {
 
 .p-from-the-enter__info-noize .info-noize__mini-news:first-child .mini-news__title {
   line-height: 1.4375rem;
+}
+
+.p-from-the-enter__info-noize .mini-news__title {
+  letter-spacing: -0.0125rem;
+}
+
+.p-from-the-enter__info-noize .mini-news__date {
+  margin-top: -0.3125rem;
+  font-size: 0.75rem;
 }
 
 .video-list__no-border .more-video__title {
@@ -4703,11 +4731,20 @@ main {
 }
 
 .popular__part-r--margin {
-  margin-top: -0.5625rem;
+  margin-top: -0.5rem;
 }
 
 .popular__title {
   padding-bottom: 0.1875rem;
+  padding-left: 1.75rem;
+}
+
+.popular__title::before {
+  top: calc(50% - 0.5rem);
+}
+
+.popular__title::after {
+  top: calc(50% - 0.6875rem);
 }
 
 .popular__from-enter--big {
@@ -4727,6 +4764,20 @@ main {
   margin-top: -0.1875rem;
 }
 
+.popular__from-enter--big .from-enter__ico {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.popular__from-enter--big .from-enter__time-keeping {
+  bottom: 0.9375rem;
+}
+
+.popular__from-enter--big .from-enter__keeping {
+  left: 1.9375rem;
+  font-size: 1rem;
+}
+
 .popular__from-enter--big .from-enter__info {
   width: 100%;
   padding-right: 1.5625rem;
@@ -4739,12 +4790,13 @@ main {
 }
 
 .popular__list-video {
-  margin-top: 1.6875rem;
+  margin-top: 1.5625rem;
 }
 
 .popular__list-video .list-video__title {
   font-size: 1rem;
   line-height: 1.125rem;
+  letter-spacing: 0;
 }
 
 .global-search__form {

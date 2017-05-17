@@ -32,11 +32,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/news',
@@ -49,11 +49,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/noise',
@@ -66,11 +66,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/broadcast',
@@ -83,18 +83,18 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
                     },
-                }
+                },
             ],
             indexRoute: {
                 onEnter(nextState, replace, callback) {
-                    replace('/constructor/news')
-                    callback()
-                }
+                    replace({ pathname: '/constructor/news', state: { redefined: true } });
+                    callback();
+                },
             },
             onEnter(nextState, replace, callback) {
                 if (this.loadedSagas) {
@@ -133,10 +133,10 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([pReducer, cReducer, component]) => {
-                    injectReducer('programsPage', pReducer.default)
-                    injectReducer('constructorPage', cReducer.default)
+                    injectReducer('programsPage', pReducer.default);
+                    injectReducer('constructorPage', cReducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -154,28 +154,28 @@ export default function createRoutes(store) {
                     import('containers/FeedPage/reducer'),
                     import('containers/FeedPage/sagas'),
                     import('containers/FeedPage'),
-                ])
+                ]);
 
-                const renderRoute = loadModule(cb)
+                const renderRoute = loadModule(cb);
 
-                importModules.then(results => {
+                importModules.then((results) => {
                     let [
                         helpReducer,
                         helpSagas,
                         reducer,
                         sagas,
-                        component
-                    ] = results
+                        component,
+                    ] = results;
 
-                    injectReducer('help', helpReducer.default)
-                    injectReducer('feedPage', reducer.default)
-                    injectSagas(sagas.default)
-                    injectSagas(helpSagas.default)
+                    injectReducer('help', helpReducer.default);
+                    injectReducer('feedPage', reducer.default);
+                    injectSagas(sagas.default);
+                    injectSagas(helpSagas.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
-                importModules.catch(errorLoading)
+                importModules.catch(errorLoading);
             },
         },
         {
@@ -232,9 +232,9 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([reducer, component]) => {
-                    injectReducer('newslistPage', reducer.default)
+                    injectReducer('newslistPage', reducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -273,9 +273,9 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([reducer, component]) => {
-                    injectReducer('readyPage', reducer.default)
+                    injectReducer('readyPage', reducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -441,9 +441,9 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/categoriesStatsPage/:type',
-                    name: 'categoriesStatsPage'
-                }
-            ]
+                    name: 'categoriesStatsPage',
+                },
+            ],
         },
         {
             path: '/articleUserStatsPage',
@@ -468,9 +468,9 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/articleUserStatsPage/:type',
-                    name: 'articleUserStatsPage'
-                }
-            ]
+                    name: 'articleUserStatsPage',
+                },
+            ],
         },
         {
             path: '/translation',
@@ -492,6 +492,48 @@ export default function createRoutes(store) {
         {
             path: '/profile',
             name: 'profilePage',
+            childRoutes: [
+                {
+                    path: '/profile/account',
+                    name: 'profileAccount',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/ProfilePage/Account'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component);
+                        });
+
+                        importModules.catch(errorLoading);
+                    },
+                },
+                {
+                    path: '/profile/history',
+                    name: 'profileHistory',
+                    getComponent(nextState, cb) {
+                        const importModules = Promise.all([
+                            import('containers/ProfilePage/History'),
+                        ]);
+
+                        const renderRoute = loadModule(cb);
+
+                        importModules.then(([component]) => {
+                            renderRoute(component);
+                        });
+
+                        importModules.catch(errorLoading);
+                    },
+                },
+            ],
+            indexRoute: {
+                onEnter(nextState, replace, callback) {
+                    replace({ pathname: '/profile/account', state: { redefined: true } });
+                    callback();
+                },
+            },
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/ProfilePage/reducer'),
@@ -514,6 +556,46 @@ export default function createRoutes(store) {
                 }
 
                 const importModules = System.import('containers/ProfilePage/sagas');
+
+                importModules.then((sagas) => {
+                    this.loadedSagas = injectSagas(sagas.default);
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
+        },
+        {
+            path: '/edition',
+            name: 'editionPage',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    import('containers/EditionPage/reducer'),
+                    import('containers/EditionPage'),
+                ]);
+
+                const renderRoute = loadModule(cb);
+
+                importModules.then(([reducer, component]) => {
+                    injectReducer('editionPage', reducer.default);
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = System.import('containers/EditionPage/sagas');
 
                 importModules.then((sagas) => {
                     this.loadedSagas = injectSagas(sagas.default);
