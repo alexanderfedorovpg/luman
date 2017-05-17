@@ -24,7 +24,7 @@ import {
 import { selectRubrics } from 'containers/App/selectors'
 
 import {
-    selectUsersMap,
+    selectEditors,
     selectCurrentUser,
     selectMenuExpandedStatus
 } from 'containers/App/selectors'
@@ -69,13 +69,14 @@ class EditorPage extends Component {
             menuOpen,
             article,
             rubrics,
+            delegateArticle,
             deleteArticle,
             rejectArticle,
             finishArticle,
             publishArticle,
             toFixArticle,
             params,
-            usersMap,
+            users,
             user
         } = this.props
 
@@ -95,8 +96,10 @@ class EditorPage extends Component {
                     chatRoom={params.id}
                     preview={this.state.preview}
                     publish={publishArticle}
+                    delegate={delegateArticle}
                     closePreview={this.closePreview}
-                    editor={usersMap[article.EditorId]}>
+                    users={users.toJS()}
+                    supervisor>
 
                     <HeaderSupervisor
                         {...headerProps}
@@ -144,7 +147,7 @@ class EditorPage extends Component {
 const mapStateToProps = state => ({
     article: selectArticle(state),
     rubrics: selectRubrics(state),
-    usersMap: selectUsersMap(state),
+    users: selectEditors(state),
     user: selectCurrentUser(state),
     menuOpen: selectMenuExpandedStatus(state)
 })
@@ -166,8 +169,8 @@ const mapDispatchToProps = dispatch => ({
     deleteArticle(id) {
         dispatch(deleteArticle(id))
     },
-    delegateArticle(id) {
-        dispatch(delegateArticle(id))
+    delegateArticle(params) {
+        dispatch(delegateArticle(params))
     },
     rejectArticle(id) {
         dispatch(rejectArticle(id))

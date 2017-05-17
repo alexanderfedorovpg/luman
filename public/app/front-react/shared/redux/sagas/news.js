@@ -19,7 +19,11 @@ import {
 
     fetchHome,
     homeFetched,
-    homeFetchError
+    homeFetchError,
+
+    fetchOnline,
+    onlineFetched,
+    onlineFetchError
 } from 'actions/news'
 
 import {
@@ -145,6 +149,22 @@ export default function* news() {
         }
     })
 
+    yield takeEvery(fetchOnline.getType(), function* ({ payload }) {
+
+        try {
+            const { data: { data } } = yield call(axios.get, `${endpoint}/news/comments`, {
+                params: {
+                    news_order: 'DESC'
+                }
+            })
+
+            yield put(onlineFetched(data))
+        }
+        catch (e) {
+            yield put(onlineFetchError(e))
+        }
+    })
+
     yield takeEvery(fetchHome.getType(), function* () {
 
         try {
@@ -154,7 +174,11 @@ export default function* news() {
                 news: data.news,
                 noise: data.info_noise,
                 broadcast: data.from_air,
-                war: !!+data.options.is_war_mode
+                war: data.war,
+                options: {
+                    title: data.options.war_mode_title,
+                    war: !!+data.options.is_war_mode
+                }
             }))
         }
         catch (e) {

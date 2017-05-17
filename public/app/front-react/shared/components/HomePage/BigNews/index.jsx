@@ -8,7 +8,7 @@ import { ensureAbs, newsLink } from 'shared/utils/uri'
 import './style.scss'
 import logo from './blue-rtvi.png'
 
-function BigNews({ data, className }) {
+function BigNews({ data, war, warTitle, className }) {
 
     return (
         <div className={classNames('big-news', className)}>
@@ -16,7 +16,10 @@ function BigNews({ data, className }) {
             <img className="big-news__img" src={ensureAbs(data.image_preview)} alt="" role="presentation" />
             <div className="big-news__info">
                 <p className="big-news__title">
-                    {data.title}
+                    {war
+                        ? `${warTitle}: ${data.title}`
+                        : data.title
+                    }
                 </p>
                 <p className="big-news__time-add">
                     {Date.parse(data.publish_date)

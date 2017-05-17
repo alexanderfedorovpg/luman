@@ -47,7 +47,9 @@ export class FeedPage extends React.Component { // eslint-disable-line react/pre
     }
 
     componentDidMount() {
-        this.loadFeed()
+        let page = this.props.location.query.page || 1
+
+        this.loadFeed({ page })
     }
 
     componentWillReceiveProps(nextProps) {

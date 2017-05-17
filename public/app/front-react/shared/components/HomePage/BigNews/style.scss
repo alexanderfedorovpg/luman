@@ -88,6 +88,10 @@
         color: $white;
 
         background-color: $gray-dirty;
+
+        .war & {
+            background-color: $war;
+        }
     }
 
     &__position_margin {

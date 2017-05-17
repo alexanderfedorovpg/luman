@@ -2,6 +2,10 @@
 
 .group {
 
+    &_margin {
+        margin-top: rem(28);
+    }
+
     &__title {
         display: block;
         padding-left: rem(28);

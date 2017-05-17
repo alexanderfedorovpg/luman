@@ -38,20 +38,24 @@ const CustomRight = styled(Right)`
     width: 259px;
 `
 
-function Header({ moved, onSubmit }) {
+function Header({ moved, onDelete, onEdit, onSubmit }) {
 
     return (
         <Bot moved={moved}>
             <Left>
                 <CustomHorizontal>
-                    <CustomButton xs danger>
+                    <CustomButton
+                        onClick={onDelete}
+                        xs danger>
                         <Icon type="delete-bold" />
                         Удалить
                     </CustomButton>
                     <CustomButton xs danger>
                         Выключить
                     </CustomButton>
-                    <CustomButton xs primary>
+                    <CustomButton
+                        onClick={onEdit}
+                        xs primary>
                         Редактировать
                     </CustomButton>
                     <CustomButton

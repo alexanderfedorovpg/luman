@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
 import styled from 'styled-components'
 
-import Tags from './../Tags';
-import Rating from './../Rating';
-import Icon from './../Icon';
-import Button from './../Button';
+import Tags from 'components/Tags';
+import Rating from 'components/Rating';
+import Icon from 'components/Icon';
+import Button from 'components/Button';
+
 import {
     Input,
     InputIcon,
     Group,
     Textarea,
     Label,
-} from './../Form';
+} from 'components/Form';
 import Select from './Select';
 
 const FixedForm = styled.form`

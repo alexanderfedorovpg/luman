@@ -59,7 +59,6 @@ export function* delegateArticle({ payload }) {
 
         yield put(articleDelegated())
 
-        yield put(push(`/newslist`))
     } catch (err) {
         yield put(articleDelegationError(err))
     }
@@ -138,7 +137,7 @@ export function* articleData() {
 
     yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
 
-    yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
+    yield takeEvery(DELETE_ARTICLE, deleteArticle)
 }
 
 export default [

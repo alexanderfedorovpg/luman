@@ -93,7 +93,6 @@ function NavSide({ expanded, isActive, location }) {
             <NavItem
                 key={item.link}
                 to={item.link}
-                logo
                 expanded={expanded}
                 active={isActive(item.link)}
             >
@@ -114,6 +113,18 @@ function NavSide({ expanded, isActive, location }) {
                 }
             </NavItem>
             {items.map(renderItem)}
+
+            {/* пока нет иконки активной, иначе ошибки сыпятся*/}
+            <NavItem
+                to={'/translation'}
+                expanded={expanded}
+                active={isActive('/translation')}
+            >
+                <Icon type="text-edit-ico" />
+                <Name expanded={expanded}>
+                    Текстовая трансляция
+                </Name>
+            </NavItem>
         </Wrapper>
     )
 }

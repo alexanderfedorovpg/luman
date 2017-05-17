@@ -9,6 +9,7 @@ import { Group, Textarea, Label } from 'components/Form'
 import Input from 'components/Form/Input'
 import Rich from 'components/Form/Rich'
 import User from 'components/User'
+import Select from './Select'
 import Icon from 'components/Icon'
 import Rating from 'components/Rating'
 import Tags from 'components/Tags'
@@ -160,7 +161,8 @@ class Content extends Component {
             error: {}
         };
 
-        this.changeHandlerTarget = this.changeHandlerTarget.bind(this);
+        this.changeHandlerTarget = ::this.changeHandlerTarget;
+        this.changeHandlerEditor = ::this.changeHandlerEditor;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -193,6 +195,7 @@ class Content extends Component {
             keywords: (props.article.keywords || []).join(' ').trim(),
             image_main: props.article.image_main || '',
             image_preview: props.article.image_preview || '',
+            editor: props.article.editor_id
         }
     }
 
@@ -269,7 +272,7 @@ class Content extends Component {
             top: data.top,
             title: data.title.slice(0, titleMax),
             sub_title: data.subtitle.slice(0, subtitleMax),
-            editor_id: article.editor.id,
+            editor_id: data.editor,
             rubrics: r,
             keywords: data.keywords.trim().replace(/ +/g, ','),
             theses: data.theses,
@@ -328,14 +331,30 @@ class Content extends Component {
         }
     }
 
+    changeHandlerEditor(editor) {
+        const { article, delegate } = this.props
+
+        this.setState({
+            data: {
+                ...this.state.data,
+                editor: editor.id
+            }
+        }, () => {
+            delegate({
+                id: article.id,
+                new_editor_id: editor.id
+            })
+        })
+    }
+
     render() {
         let {
             article,
             rubrics,
-            getUserById,
             chatRoom,
             delegate,
-            editor,
+            users,
+            supervisor,
             preview,
             finish,
             closePreview
@@ -475,8 +494,13 @@ class Content extends Component {
                         </Group>
                     </CustomLeft>
                     <CustomRight>
-                        {editor
-                            ? <User data={editor} />
+                        {supervisor
+                            ? (
+                                <Select
+                                    options={users}
+                                    onChange={this.changeHandlerEditor}
+                                    value={this.state.data.editor} />
+                            )
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
                         <StickyContainer>

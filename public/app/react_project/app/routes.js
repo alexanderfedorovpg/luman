@@ -475,18 +475,55 @@ export default function createRoutes(store) {
         {
             path: '/translation',
             name: 'translation',
+            childRoutes: [
+                {
+                    path: '/translation/:id',
+                    name: 'translation-detail'
+                }
+            ],
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
+                    import('containers/Chat/reducer'),
+                    import('containers/TranslationPage/reducer'),
                     import('containers/TranslationPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([component]) => {
+                importModules.then(([chatReducer, translationReducer, component]) => {
+                    injectReducer('chat', chatReducer.default);
+                    injectReducer('translationPage', translationReducer.default);
+
                     renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
+            },
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
+
+                const importModules = Promise.all([
+                    import('containers/TranslationPage/sagas'),
+                    import('containers/Chat/sagas'),
+                ]);
+
+                importModules.then(sagas => {
+                    this.loadedSagas = injectSagas(
+                        sagas.reduce((acc, item) => [...acc, ...item.default], [])
+                    );
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
             },
         },
         {

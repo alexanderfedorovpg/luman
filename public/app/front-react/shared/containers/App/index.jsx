@@ -6,6 +6,7 @@ import Route from 'react-router-dom/Route'
 import withRouter from 'react-router-dom/withRouter'
 import { IntlProvider } from 'react-intl'
 import Helmet from 'react-helmet'
+import { createStructuredSelector } from 'reselect'
 
 import { addLocaleData } from 'react-intl'
 import ruLocaleData from 'react-intl/locale-data/ru'
@@ -27,7 +28,7 @@ import { fetch as fetchRubrics } from 'actions/rubrics'
 import { fetch as fetchPrograms } from 'actions/programs'
 import { fetchHome } from 'actions/news'
 
-import { selectWarMode } from 'selectors/news'
+import { selectWarMode, selectWarTitle } from 'selectors/news'
 
 // import 'normalize.css/normalize.css'
 import './style.scss'
@@ -41,7 +42,7 @@ class App extends Component {
     }
 
     render() {
-        const { warMode, match } = this.props
+        const { warMode, warTitle, match } = this.props
 
         return (
             <IntlProvider locale="ru">
@@ -55,7 +56,7 @@ class App extends Component {
                         <meta name="HandheldFriendly" content="true" />
                     </Helmet>
 
-                    <Header war={match.isExact && warMode} />
+                    <Header war={match.isExact && warMode} warTitle={warTitle} />
 
                     <main>
                         <Switch>
@@ -86,8 +87,9 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    warMode: selectWarMode(state)
+const mapStateToProps = createStructuredSelector({
+    warMode: selectWarMode,
+    warTitle: selectWarTitle
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -50,6 +50,11 @@ export const selectRelated = createSelector(
     root => root.related
 )
 
+export const selectOnline = createSelector(
+    selectNewsDomain,
+    root => root.online
+)
+
 export const selectHome = createSelector(
     selectNewsDomain,
     root => root.home
@@ -60,10 +65,15 @@ export const selectHomeNews = createSelector(
     selectHome,
     home => home.news
 )
+export const selectHomeWar = createSelector(
+    selectHome,
+    home => home.war
+)
 export const makeSelectHomeNewsByCategory = category => (
     createSelector(
         selectHomeNews,
-        news => news.filter(v => v.category.id == category)
+        selectHomeWar,
+        (news, war) => [...news, ...war].filter(v => v.category.id == category)
     )
 )
 export const selectHomeNoise = createSelector(
@@ -76,5 +86,9 @@ export const selectHomeBroadcast = createSelector(
 )
 export const selectWarMode = createSelector(
     selectHome,
-    home => home.war
+    home => home.options.war
+)
+export const selectWarTitle = createSelector(
+    selectHome,
+    home => home.options.title
 )

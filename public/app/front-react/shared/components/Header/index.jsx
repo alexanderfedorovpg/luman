@@ -12,7 +12,7 @@ import Alarm from './Alarm';
 
 import './style.scss';
 
-function Header({ war, history }) {
+function Header({ war, warTitle, history }) {
     function onSearch(query) {
         const location = {
             pathname: '/search',
@@ -25,7 +25,7 @@ function Header({ war, history }) {
     return (
         <header className={classNames('header', { header_war: war })}>
             {war
-                ? <Alarm />
+                ? <Alarm data={warTitle} />
                 : null
             }
             <div className="header__container container">

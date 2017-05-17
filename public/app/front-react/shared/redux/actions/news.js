@@ -19,3 +19,7 @@ export const relatedFetchError = createAction('FETCH_RELATED_NEWS_FAILURE')
 export const fetchHome = createAction('FETCH_HOME_NEWS')
 export const homeFetched = createAction('FETCH_HOME_NEWS_SUCCESS')
 export const homeFetchError = createAction('FETCH_HOME_NEWS_FAILURE')
+
+export const fetchOnline = createAction('FETCH_ONLINE_NEWS')
+export const onlineFetched = createAction('FETCH_ONLINE_NEWS_SUCCESS')
+export const onlineFetchError = createAction('FETCH_ONLINE_NEWS_FAILURE')

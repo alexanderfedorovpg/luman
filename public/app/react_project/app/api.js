@@ -93,9 +93,7 @@ export const getArticle = (id) => axios.get(`/newseditor/${id}`);
 
 export const deleteArticle = (id) => axios.delete(`/newseditor/${id}`);
 
-export const delegateArticle = (id) => axios.post('/newseditor/delegate', {
-    id,
-});
+export const delegateArticle = (params) => axios.post('/newseditor/delegate', params);
 
 export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
     id,
@@ -196,6 +194,35 @@ export const getConstructorCategories = () => axios.get('/homepage/newscategory'
 export const getHomepageNews = () => axios.get('/homepage');
 export const getConstructorNews = (params) => axios.get('/newslist', { params });
 export const saveHomepageNews = (data) => axios.put('/homepage', qs.stringify(data), {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+});
+// =============================================================================
+
+// =============================================================================
+// Translation API
+// =============================================================================
+
+export const getOnlines = () => axios.get(`/news/onlines`);
+export const getOnlineComments = id => axios.get(`/news/online/comments/${id}`);
+export const postOnlineComment = data => axios.post(`/news/online/comments`, qs.stringify(data), {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+});
+export const putOnlineComment = data => axios.put(`/news/online/comments`, qs.stringify(data), {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+});
+export const deleteOnlineComment = id => axios.delete(`/news/online/comments/${id}`);
+export const putArticleCover = data => axios.put(`/newseditor/cover`, qs.stringify(data), {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+});
+export const putArticleTitle = data => axios.put(`/newseditor/title`, qs.stringify(data), {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
     },

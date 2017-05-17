@@ -1,35 +1,51 @@
 import React from 'react'
-import styled from 'styled-components'
+import { FormattedTime } from 'react-intl'
 
-import { color } from 'constants/style'
-import { rem } from 'utils/style'
+import {
+    Root,
+    Item,
+    Left,
+    Right,
+    Title,
+    Img,
+    Video
+} from './style'
 
-const Root = styled.div`
-    border: 1px solid rgba(204, 204, 204, 0.74);
-
-    min-height: 20px;
-    margin-top: ${rem(27)};
-`
-
-const Item = styled.div`
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    padding-top: ${rem(14)};
-    padding-right: ${rem(39)};
-    padding-bottom: ${rem(14)};
-    padding-left: ${rem(21)};
-    margin-bottom: ${rem(-10)};
-    color: ${color.enter};
-    cursor: pointer;
-`
-
-function Timeline({ data }) {
+function Timeline({ data, onClick }) {
 
     return (
         <Root>
-            {[].map(v => (
-                <Item key={v.id}>
+            {data.map(v => (
+                <Item key={v.id} onClick={() => onClick(v)}>
+                    <Left>
+                        {v.publish_date
+                            && (
+                                <FormattedTime
+                                    value={v.publish_date}
+                                    hour="2-digit"
+                                    minute="2-digit" />
+                            )
+                        }
+                    </Left>
+                    <Right>
+                        <Title>
+                            <div dangerouslySetInnerHTML={{ __html: v.body }} />
+                        </Title>
+                        {v.image_preview
+                            && (
+                                <Img>
+                                    <img src={v.image_preview.url} />
+                                </Img>
+                            )
+                        }
+                        {v.video_stream_preview
+                            && (
+                                <Video>
+                                    <img src={v.video_stream_preview.url} />
+                                </Video>
+                            )
+                        }
+                    </Right>
                 </Item>
             ))}
         </Root>

@@ -55,9 +55,11 @@ const Pic = styled.div`
     width: 40px;
     height: 40px;
     flex-shrink: 0;
+    text-align: center;
     margin-right: 11px;
 
     img {
+        border-radius: 50%;
         max-width: 100%;
         height: 100%;
         object-fit: cover;
@@ -101,7 +103,7 @@ class Select extends PureComponent {
         this.state = {
             open: false,
             placeholder: '',
-            value: {
+            value: props.value || {
                 name: '',
                 id: '',
             },
@@ -116,7 +118,6 @@ class Select extends PureComponent {
         if (!this.state.open) {
             this.setState({
                 ...this.state,
-                placeholder: '',
                 open: true,
             });
         }
@@ -156,6 +157,9 @@ class Select extends PureComponent {
     render() {
         const { icon, options, error } = this.props;
         const { placeholder } = this.state;
+        const filteredOptions = options.filter(option => (
+            option.name.toLowerCase().indexOf(placeholder.toLowerCase()) > -1)
+        )
 
         return (
             <Root className={this.props.className} onClick={this.open}>
@@ -173,17 +177,16 @@ class Select extends PureComponent {
                 />
 
                 <Options open={this.state.open}>
-                    {options
-                        .filter(option => option.name.indexOf(placeholder) > -1)
+                    {filteredOptions
                         .map((option, index) => (
                             <Item
                                 key={index}
                                 onClick={this.selectHandler.bind(this, option)}>
 
                                 {
-                                    !!option.pic &&
+                                    !!option.avatar &&
                                     <Pic>
-                                        <img src={option.pic} alt="" />
+                                        <img src={option.avatar.url} alt={option.name} />
                                     </Pic>
                                 }
                                 <Text noPic={!option.pic}>

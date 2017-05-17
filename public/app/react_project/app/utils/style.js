@@ -42,3 +42,11 @@ export const hidden = () => `
 
     overflow: hidden;
 `;
+
+export const clearfix = () => `
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+`;

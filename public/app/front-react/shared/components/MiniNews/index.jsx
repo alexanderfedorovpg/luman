@@ -14,9 +14,11 @@ function MiniNews({ data, className }) {
         <div className={classNames('mini-news', className)}>
             <img className="mini-news__img" src={ensureAbs(data.image_preview)} alt="" role="presentation" />
             <div className="mini-news__info">
-                <Link className="mini-news__title" to={newsLink(data)}>
-                    {data.title}
-                </Link>
+                <Link
+                    className="mini-news__title"
+                    to={newsLink(data)}
+                    dangerouslySetInnerHTML={{ __html: data.title }} />
+
                 {Date.parse(data.publish_date)
                     ? (
                         <p className="mini-news__date">

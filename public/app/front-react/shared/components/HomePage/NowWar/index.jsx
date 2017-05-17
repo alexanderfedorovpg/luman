@@ -7,11 +7,12 @@ import MiniNews from 'components/MiniNews'
 import './style.scss'
 
 function NowWar({ data, className }) {
+    if (!data) return null
 
     return (
         <div className={classNames('now-war', className)}>
             <Link to={'#'} className="now-war__title">
-                Убит лидер Северной Кореи
+                {data.title}
             </Link>
             <div className="now-war__live now-war__live now-war__live_margin">
                 <p className="now-war__live-title">
@@ -19,12 +20,15 @@ function NowWar({ data, className }) {
                 </p>
             </div>
             <div className="now-war__translate now-war__translate now-war__translate_margin">
-                {data.map(value => (
-                    <MiniNews data={value} key={value.id} className="now-war__mini-news" />
-                ))}
+                {data.comments
+                    .map(v => ({ ...v, title: v.body }))
+                    .map((value, i) => (
+                        <MiniNews data={value} key={i} className="now-war__mini-news" />
+                    ))
+                }
             </div>
             <Link to={'#'} className="now-war__translate-link">
-                 Следить за онлайн-трансляцией
+                Следить за онлайн-трансляцией
             </Link>
         </div>
     )

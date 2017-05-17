@@ -152,7 +152,7 @@ class Article extends Component {
                                     <Rubrics>
                                         {data.rubrics.map(value => (
                                             <span>
-                                                {value}
+                                                {value.name}
                                             </span>
                                         ))}
                                     </Rubrics>

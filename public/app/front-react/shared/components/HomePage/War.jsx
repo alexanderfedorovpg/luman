@@ -5,7 +5,6 @@ import BigNews from './BigNews'
 import Now from './Now'
 import NowWar from './NowWar'
 import Today from './Today'
-import Noise from 'components/Noise'
 import Group from 'components/Group'
 import Block from 'components/Block'
 import MiniNews from 'components/MiniNews'
@@ -23,10 +22,13 @@ import ListVideo from 'components/Broadcast/List'
 import './style.scss'
 
 function HomePage({
+    title,
+    online,
     now,
     today,
     other,
-    noise,
+    breakingNews,
+    newsBlock,
     broadcast,
 }) {
 
@@ -47,15 +49,30 @@ function HomePage({
             <div className="general-news__container container">
                 <div className="general-news__left">
                     <div className="general-news__left-wrapper">
-                        <BigNews className="general-news__big-news" data={now[0]||{}} />
-                        <Now data={now.slice(1, 5)} className="general-news__now" />
+                        <BigNews
+                            war
+                            warTitle={title}
+                            className="general-news__big-news" data={breakingNews[0]||{}} />
+                        <NowWar data={online[0]} className="general-news__now-war" />
                     </div>
                     <div className="general-news__left-wrapper two-wrapper">
                         <Today
                             data={todayNews}
-                            className="general-news__per-day" />
+                            war
+                            className="general-news__per-day general-news__per-day_war" />
 
-                        <Noise className="general-news__info-noize" data={noise} />
+                        <div className="info-noize general-news__info-noize general-news__info-noize_war">
+                            <Block
+                                data={todayNews[2]}
+                                war
+                                warTitle={secondVideo.title}
+                                className="info-noize__block-square info-noize__block-square_war" />
+                            <div className="info-noize__wrapper">
+                                {todayNews.slice(3, 7).map(v => (
+                                    <MiniNews key={v.id} data={v} className="info-noize__mini-news info-noize__mini-news_war" />
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="general-news__right right-col">
@@ -66,26 +83,24 @@ function HomePage({
                             title="Все ключевые события этого дня"
                             className="general-news__general-video" />
                     </VideoWrapper>
-                    <EnterOne className="general-news__enter-one" data={secondVideo} />
+                    <Group title="Другие новости" margin>
+                        {newsBlock.slice(0, 4).map(v => (
+                            <MiniNews key={v.id} data={v} className="info-noize__mini-news info-noize__mini-news_war" />
+                        ))}
+                    </Group>
                 </div>
                 <div className="general-news__left general-news__left_more">
                     <div className="general-news__left-wrapper">
                         <Banner className="general-news__banner" />
+                        {/*<BannerPreview className="general-news__banner-preview" />*/}
                     </div>
                     <RandomNews className="general-news__random-news" data={randomNews} />
                 </div>
                 <div className="general-news__right general-news__right_more">
                     <Subscribe className="general-news__subscribe"/>
-                    <MoreNews className="general-news__more-news" data={moreNews} />
-                </div>
-                <div className="general-news__middle">
-                    <BannerPreview className="general-news__banner-preview" />
-                </div>
-                <div className="general-news__left general-news__left_more">
-                    <MoreVideo className="general-news__more-video" data={moreVideo} />
-                </div>
-                <div className="general-news__right general-news__right_more">
-                    <ListVideo className="general-news__list-video" data={listVideo} />
+                    {newsBlock.slice(4, 10).map(v => (
+                        <MiniNews key={v.id} data={v} className="info-noize__mini-news info-noize__mini-news_war" />
+                    ))}
                 </div>
             </div>
         </div>

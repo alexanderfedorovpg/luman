@@ -11,9 +11,7 @@ function Today({ data, className, war }) {
 
     return (
         <div className={classNames('per-day', className)}>
-            {war
-                ? null
-                : (
+            {!war && (
                     <p className="per-day__title section-title">
                         Главное за последние сутки
                     </p>

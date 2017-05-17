@@ -35,8 +35,7 @@ const selectEditors = createSelector(
 
 const selectUsersMap = createSelector(
     selectAppDomain(),
-    usersMap,
-    (app, users) => app.getIn(['users', 'data']).toJS()
+    app => app.getIn(['users', 'data']).toJS()
 );
 
 const selectUsers = createSelector(
@@ -106,6 +105,8 @@ const makeGetProgramsArray = () => createSelector(
     }
 );
 
+const selectLocationState = makeSelectLocationState()
+
 export {
     selectEditors,
     selectUsers,
@@ -120,4 +121,5 @@ export {
     makeSelectInfo,
     makeSelectPrograms,
     makeGetProgramsArray,
+    selectLocationState
 };

@@ -6,7 +6,11 @@ const initialState = {
     news: [],
     noise: [],
     broadcast: [],
-    war: false
+    war: [],
+    options: {
+        war: false,
+        title: ''
+    }
 }
 
 export default createReducer({

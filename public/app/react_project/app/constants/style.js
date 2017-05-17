@@ -1,10 +1,11 @@
-import { rem } from './../utils/style'
+import { rem } from 'utils/style'
 
 export const color = {
     success: '#390',
     danger: '#c00',
     primary: '#369',
     enter: '#243746',
+    purple: '#a03761'
 }
 
 export const height = '36px'
