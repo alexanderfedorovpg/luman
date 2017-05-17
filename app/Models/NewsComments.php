@@ -34,7 +34,7 @@ class NewsComments extends Model
      * @var array
      */
     public static $rules = [
-        'editor_id' => 'required|exists:users,id',
+        'editor_id' => 'exists:users,id',
         'news_id' => 'required|exists:news,id',
         'body' => 'required',
         'is_publish' => 'boolean',
