@@ -1,31 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router';
+import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import {
     Bot,
     Left,
 } from 'components/Header';
-import Tabs from 'components/Tabs';
+import { Root as Tabs, itemStyle } from 'components/Tabs';
 import { selectMenuExpandedStatus } from 'containers/App/selectors';
-import { makeSelectedTab } from '../selectors';
 import { tabs } from '../constants';
-import { changeTab } from '../actions';
+
+const StyledLink = styled(({ active, ...rest }) => <Link {...rest} />)`
+    ${itemStyle}
+`;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Header extends React.PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.renderLink = this.renderLink.bind(this);
+    }
+
+    renderLink(link) {
+        const { router } = this.props;
+        return (
+            <StyledLink key={link.href} to={link.href} active={router.isActive(link.href)}>
+                {link.label}
+            </StyledLink>
+        );
+    }
+
     render() {
-        const { menuOpen, selectedTab } = this.props;
-        const active = (tabs.find((item) => item.value === selectedTab) || {}).title;
+        const { menuOpen } = this.props;
 
         return (
             <Bot moved={menuOpen}>
                 <Left>
-                    <Tabs
-                        data={tabs}
-                        active={active}
-                        onClick={this.props.changeTab}
-                    />
+                    <Tabs>
+                        {tabs.map(this.renderLink)}
+                    </Tabs>
                 </Left>
             </Bot>
         );
@@ -33,14 +49,12 @@ class Header extends React.PureComponent {
 }
 
 Header.propTypes = {
-    selectedTab: PropTypes.string,
+    router: PropTypes.object,
     menuOpen: PropTypes.bool,
-    changeTab: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
     menuOpen: selectMenuExpandedStatus,
-    selectedTab: makeSelectedTab(),
 });
 
-export default connect(mapStateToProps, { changeTab })(Header);
+export default withRouter(connect(mapStateToProps)(Header));

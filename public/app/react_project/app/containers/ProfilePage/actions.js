@@ -5,7 +5,6 @@
  */
 
 import {
-    CHANGE_TAB,
     EDIT_USER_DATA,
     EDIT_USER_DATA_SUCCESS,
     EDIT_USER_DATA_FAILURE,
@@ -15,13 +14,6 @@ import {
     ALL_ACTIONS_LOADED,
     ENABLE_EDIT_PASSWORD,
 } from './constants';
-
-export function changeTab(tab) {
-    return {
-        type: CHANGE_TAB,
-        payload: { tab },
-    };
-}
 
 export function getLastActions() {
     return {

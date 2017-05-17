@@ -6779,6 +6779,7 @@ h3 {
 
 .text-translate__top .header-l .btn:last-child {
   margin-right: 0;
+  font-weight: 700;
 }
 
 .text-translate__top .header-l .btn .icon-delete-reverse {

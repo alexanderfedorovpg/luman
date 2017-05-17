@@ -8,7 +8,6 @@ import {
 } from 'containers/App/actions';
 import { selectCurrentUser } from 'containers/App/selectors';
 import {
-    CHANGE_TAB,
     GET_LAST_ACTIONS,
     EDIT_USER_DATA,
     LAST_ACTIONS_UPLOAD_NUM,
@@ -38,17 +37,6 @@ export function* getLastActions() {
     } catch (err) {
         console.error(err);
         yield put(failureGetLastActions());
-    }
-}
-
-export function* initLastActions() {
-    while (true) {
-        const action = yield take(CHANGE_TAB);
-
-        if (action.payload.tab.value === 'LAST_ACTIONS') {
-            yield call(getLastActions);
-            break;
-        }
     }
 }
 
@@ -89,7 +77,6 @@ export function* editUserData({ payload }) {
         yield put(editProfile(newProfile));
         yield put(showInfoModal('Учетные данные успешно изменены'));
         yield put(hidePreloader());
-
     } catch (err) {
         console.error(err);
         yield put(hidePreloader());
@@ -106,6 +93,5 @@ export function* profileData() {
 
 // All sagas to be loaded
 export default [
-    initLastActions,
     profileData,
 ];
