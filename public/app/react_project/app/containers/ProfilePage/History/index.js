@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { History as Wrapper, HistoryTable, MoreLink } from '../style';
 import { getLastActions } from '../actions';
@@ -45,6 +46,9 @@ class History extends PureComponent {
 
         return (
             <Wrapper>
+                <Helmet
+                    title="Последние действия пользователя"
+                />
                 <HistoryTable
                     {...sortState}
                     header={historyHeader}

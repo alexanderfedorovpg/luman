@@ -92,7 +92,7 @@ export default function createRoutes(store) {
             ],
             indexRoute: {
                 onEnter(nextState, replace, callback) {
-                    replace('/constructor/news');
+                    replace({ pathname: '/constructor/news', state: { redefined: true } });
                     callback();
                 },
             },
@@ -530,7 +530,7 @@ export default function createRoutes(store) {
             ],
             indexRoute: {
                 onEnter(nextState, replace, callback) {
-                    replace('/profile/account');
+                    replace({ pathname: '/profile/account', state: { redefined: true } });
                     callback();
                 },
             },

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { makeProfileStats } from '../selectors';
 import { Profile } from '../style';
@@ -9,6 +10,9 @@ import Stats from './Stats';
 
 const Account = ({ stats }) => (
     <Profile>
+        <Helmet
+            title="Учётная запись"
+        />
         <AccountForm />
         <Stats items={stats} />
     </Profile>
