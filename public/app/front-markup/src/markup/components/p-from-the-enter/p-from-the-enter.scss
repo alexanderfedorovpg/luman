@@ -15,12 +15,22 @@
         }
     }
 
+    &__right {
+        margin-right: rem(3);
+    }
+
     &__title-block {
-       padding-bottom: rem(-1);
+        padding-right: rem(17);
+        padding-bottom: rem(-1);
     }
 
     &__popular {
-        margin-top: rem(22);
+        padding-right: rem(15);
+        margin-top: rem(23);
+    }
+
+    &__breadcrumb {
+        padding-right: rem(15);
     }
 
     &__video-list {
@@ -38,7 +48,7 @@
         }
 
         &--four-margin {
-            margin-top: rem(34);
+            margin-top: rem(32);
         }
     }
 
@@ -52,9 +62,18 @@
 
     &__list-video {
 
+        .list-video__item:not(:first-child) {
+            margin-top: rem(20);
+        }
+
+        .list-video__title {
+            letter-spacing: 0;
+        }
+
         &--right {
             margin-top: rem(28);
         }
+
     }
 
     &__banner-preview {
@@ -74,6 +93,16 @@
             .mini-news__title {
                 line-height: rem(23);
             }
+        }
+
+        .mini-news__title {
+            letter-spacing: rem(-.2);
+        }
+
+        .mini-news__date {
+            margin-top: rem(-5);
+
+            font-size: rem(12);
         }
     }
 }

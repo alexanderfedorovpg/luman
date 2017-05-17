@@ -15,12 +15,20 @@
         width: rem(284);
 
         &--margin {
-            margin-top: rem(-9);
+            margin-top: rem(-8);
         }
     }
 
     &__title {
         padding-bottom: rem(3);
+        padding-left: rem(28);
+
+        &::before {
+            top: calc(50% - #{rem(8)});
+        }
+        &::after {
+            top: calc(50% - #{rem(11)});
+        }
     }
 
     &__from-enter {
@@ -41,6 +49,21 @@
                 margin-top: rem(-3);
             }
 
+            .from-enter__ico {
+                width: rem(36);
+                height: rem(36);
+            }
+
+            .from-enter__time-keeping {
+                bottom: rem(15);
+            }
+
+            .from-enter__keeping {
+                left: rem(31);
+
+                font-size: rem(16);
+            }
+
             .from-enter__info {
                 width: 100%;
                 padding-right: rem(25);
@@ -55,11 +78,12 @@
     }
 
     &__list-video {
-        margin-top: rem(27);
+        margin-top: rem(25);
 
         .list-video__title {
             font-size: rem(16);
             line-height: rem(18);
+            letter-spacing: 0;
         }
     }
 }

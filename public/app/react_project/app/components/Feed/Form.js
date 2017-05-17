@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
+import React, { Component } from 'react';
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
 
-import Tags from './../Tags'
-import Rating from './../Rating'
-import Icon from './../Icon'
-import Button from './../Button'
+import Tags from './../Tags';
+import Rating from './../Rating';
+import Icon from './../Icon';
+import Button from './../Button';
 import {
     Input,
     InputIcon,
@@ -23,14 +23,16 @@ class Form extends Component {
         this.state = {
             data: {
                 header: props.data.header || '',
-                rating: 5
+                rating: 5,
+                keywords: this.getKeywords(props),
             },
-            error: {
+            error: {},
+        };
 
-            }
-        }
+        this.submitHandler = this.submitHandler.bind(this);
+    }
 
-        this.submitHandler = this.submitHandler.bind(this)
+    componentDidMount() {
     }
 
     componentWillReceiveProps(nextProps) {
@@ -39,64 +41,65 @@ class Form extends Component {
                 data: {
                     ...this.state.data,
                     header: nextProps.data.header,
-                    rating: 5
+                    keywords: this.getKeywords(nextProps),
+                    rating: 5,
                 },
-                error: {}
-            })
+                error: {},
+            });
         }
     }
 
-    componentDidMount() {
+    getKeywords(props) {
+        const keywords = props.data.tags;
+
+        return keywords ? keywords.replace(/,/g, '') : '';
     }
 
     setValue(prop, value) {
-
         this.setState({
             data: {
                 ...this.state.data,
-                [prop]: value
-            }
-        })
+                [prop]: value,
+            },
+        });
     }
 
     setError(prop, value) {
-
         this.setState({
             error: {
                 ...this.state.error,
-                [prop]: value
-            }
-        })
+                [prop]: value,
+            },
+        });
     }
 
     validateField(prop, predicate) {
-        return predicate(prop)
+        return predicate(prop);
     }
 
     validate(form) {
-
-        let errors = {
+        const errors = {
             header: !this.state.data.header,
-        }
+        };
 
         this.setState({
-            error: errors
-        })
+            error: errors,
+        });
 
-        return errors
+        return errors;
     }
 
     submitHandler(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        let form = new FormData(e.target)
+        const form = new FormData(e.target);
 
-        let errors = this.validate(form)
+        const errors = this.validate(form);
 
-        if (Object.values(errors).reduce((a,b) => a || b, false)) {
-            toastr.warning('Заполните обязательные поля')
+        if (Object.values(errors).reduce((a, b) => a || b, false)) {
+            toastr.warning('Заполните обязательные поля');
 
-            return
+            return;
         }
 
         this.props.onSubmit({
@@ -109,32 +112,33 @@ class Form extends Component {
             keywords: form.get('keywords').split(' ').slice(0, 4),
             comment: form.get('comment'),
 
-            id: this.props.data.id
-        })
+            id: this.props.data.id,
+        });
 
         this.setState({
             data: {
                 ...this.state.data,
                 id: null,
-            }
-        })
+            },
+        });
     }
 
     render() {
-        let { data, users, rubrics } = this.props
+        let { data, users, rubrics } = this.props;
 
         return (
             <form onSubmit={this.submitHandler}>
                 <Tags data={rubrics} />
                 <Rating
                     value={this.state.data.rating}
-                    onChange={value => this.setValue('rating', value)} />
+                    onChange={(value) => this.setValue('rating', value)}
+                />
                 <Group>
                     <Textarea
                         value={this.state.data.header}
-                        onChange={e=>{
-                            this.setValue('header', e.target.value)
-                            this.setError('header', !e.target.value)
+                        onChange={(e) => {
+                            this.setValue('header', e.target.value);
+                            this.setError('header', !e.target.value);
                         }}
                         style={{ minHeight: '150px' }}
                         error={this.state.error.header}
@@ -160,6 +164,10 @@ class Form extends Component {
                 <Group>
                     <Label light right>Не более 4 слов через пробел</Label>
                     <Input
+                        value={this.state.data.keywords}
+                        onChange={(e) => {
+                            this.setValue('keywords', e.target.value);
+                        }}
                         name="keywords"
                         placeholder="Ключевые слова"
                         block
@@ -174,8 +182,8 @@ class Form extends Component {
                     </Button>
                 </Group>
             </form>
-        )
+        );
     }
 }
 
-export default Form
+export default Form;

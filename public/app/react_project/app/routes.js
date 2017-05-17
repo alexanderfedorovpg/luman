@@ -32,11 +32,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/news',
@@ -49,11 +49,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/noise',
@@ -66,11 +66,11 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
-                    }
+                    },
                 },
                 {
                     path: '/constructor/broadcast',
@@ -83,18 +83,18 @@ export default function createRoutes(store) {
                         const renderRoute = loadModule(cb);
 
                         importModules.then(([component]) => {
-                            renderRoute(component)
+                            renderRoute(component);
                         });
 
                         importModules.catch(errorLoading);
                     },
-                }
+                },
             ],
             indexRoute: {
                 onEnter(nextState, replace, callback) {
-                    replace('/constructor/news')
-                    callback()
-                }
+                    replace('/constructor/news');
+                    callback();
+                },
             },
             onEnter(nextState, replace, callback) {
                 if (this.loadedSagas) {
@@ -133,10 +133,10 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([pReducer, cReducer, component]) => {
-                    injectReducer('programsPage', pReducer.default)
-                    injectReducer('constructorPage', cReducer.default)
+                    injectReducer('programsPage', pReducer.default);
+                    injectReducer('constructorPage', cReducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -154,28 +154,28 @@ export default function createRoutes(store) {
                     import('containers/FeedPage/reducer'),
                     import('containers/FeedPage/sagas'),
                     import('containers/FeedPage'),
-                ])
+                ]);
 
-                const renderRoute = loadModule(cb)
+                const renderRoute = loadModule(cb);
 
-                importModules.then(results => {
+                importModules.then((results) => {
                     let [
                         helpReducer,
                         helpSagas,
                         reducer,
                         sagas,
-                        component
-                    ] = results
+                        component,
+                    ] = results;
 
-                    injectReducer('help', helpReducer.default)
-                    injectReducer('feedPage', reducer.default)
-                    injectSagas(sagas.default)
-                    injectSagas(helpSagas.default)
+                    injectReducer('help', helpReducer.default);
+                    injectReducer('feedPage', reducer.default);
+                    injectSagas(sagas.default);
+                    injectSagas(helpSagas.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
-                importModules.catch(errorLoading)
+                importModules.catch(errorLoading);
             },
         },
         {
@@ -232,9 +232,9 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([reducer, component]) => {
-                    injectReducer('newslistPage', reducer.default)
+                    injectReducer('newslistPage', reducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -273,9 +273,9 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then(([reducer, component]) => {
-                    injectReducer('readyPage', reducer.default)
+                    injectReducer('readyPage', reducer.default);
 
-                    renderRoute(component)
+                    renderRoute(component);
                 });
 
                 importModules.catch(errorLoading);
@@ -441,9 +441,9 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/categoriesStatsPage/:type',
-                    name: 'categoriesStatsPage'
-                }
-            ]
+                    name: 'categoriesStatsPage',
+                },
+            ],
         },
         {
             path: '/articleUserStatsPage',
@@ -468,9 +468,9 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/articleUserStatsPage/:type',
-                    name: 'articleUserStatsPage'
-                }
-            ]
+                    name: 'articleUserStatsPage',
+                },
+            ],
         },
         {
             path: '/translation',

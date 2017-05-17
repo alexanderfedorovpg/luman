@@ -16,9 +16,12 @@
         position: relative;
         .form-group {
             margin-bottom: 15px;
+            .input {
+                font-weight: 600;
+            }
             &__reset {
                 position: relative;
-                input {
+                .input {
                     padding-right: 120px;
                 }
                 a {
@@ -28,7 +31,7 @@
 
                     font-family: $opensans;
                     font-size: 12px;
-                    font-weight: 300;
+                    font-weight: 400;
                     color: #336699;
                     text-decoration: none;
 
