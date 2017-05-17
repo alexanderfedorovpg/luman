@@ -11,7 +11,6 @@ export const userGroups = {
     [groups['сommissioning-editor']]: 'Выпускающий',
 };
 
-export const CHANGE_TAB = 'app/ProfilePage/CHANGE_TAB';
 export const EDIT_USER_DATA = 'app/ProfilePage/EDIT_USER_DATA';
 export const EDIT_USER_DATA_SUCCESS = 'app/ProfilePage/EDIT_USER_DATA_SUCCESS';
 export const EDIT_USER_DATA_FAILURE = 'app/ProfilePage/EDIT_USER_DATA_FAILURE';
@@ -23,12 +22,12 @@ export const ENABLE_EDIT_PASSWORD = 'app/ProfilePage/ENABLE_EDIT_PASSWORD';
 
 export const tabs = [
     {
-        title: 'Профиль пользователя',
-        value: 'PROFILE',
+        label: 'Профиль пользователя',
+        href: '/profile/account',
     },
     {
-        title: 'Последние действия',
-        value: 'LAST_ACTIONS',
+        label: 'Последние действия',
+        href: '/profile/history',
     },
 ];
 

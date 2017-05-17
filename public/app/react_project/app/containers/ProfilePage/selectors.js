@@ -96,6 +96,11 @@ const makeGetCanEditPassword = () => createSelector(
     (page) => page.get('canEditPassword')
 );
 
+const makeGetAllHistoryLoaded = () => createSelector(
+    selectProfilePageDomain(),
+    (page) => page.get('allActionsLoaded'),
+);
+
 /**
  * Default selector used by ProfilePage
  */
@@ -113,4 +118,5 @@ export {
     makeProfileStats,
     makeLastActions,
     makeGetCanEditPassword,
+    makeGetAllHistoryLoaded,
 };
