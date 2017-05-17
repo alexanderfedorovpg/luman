@@ -104,6 +104,8 @@ class NewsListOnlineController extends CmsController
             $news['news_id'] =$request->input('news_id');
             $news['editor_id'] = $this->user_id;
             $news['body'] = $request->input('body');
+            $news['is_publish'] = 1;
+            $news['publish_date'] = new \DateTime();
             $news['image_preview'] = $request->input('image_preview');
             $news['video_stream_preview'] = $request->input('video_stream_preview');
             $news = NewsComments::create($news);
