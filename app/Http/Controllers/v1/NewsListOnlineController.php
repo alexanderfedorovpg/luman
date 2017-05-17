@@ -5,16 +5,12 @@ namespace App\Http\Controllers\v1;
 
 use App\Helpers\LogController;
 use App\Models\NewsComments;
-use App\Providers\LogServiceProvider;
-use App\Http\Transformers\v1\NewsListTransformer;
 use App\Models\News;
 use Illuminate\Http\Request;
-use App\Auth\Rbac\Models\Permission;
 use App\Http\Traits\NewsListTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
-use App\Http\Transformers\v1\NewsListOnlineTransformer;
 use Validator;
 
 /**
@@ -31,9 +27,9 @@ class NewsListOnlineController extends CmsController
 
     /**
      * NewsListOnlineController constructor.
-     * @param NewsListOnlineTransformer $transformer
+     * @param \App\Http\Transformers\v1\NewsListOnlineTransformer $transformer
      */
-    function __construct(NewsListOnlineTransformer $transformer)
+    function __construct(\App\Http\Transformers\v1\NewsListOnlineTransformer $transformer)
     {
         parent::__construct();
         $this->user_id = Auth::id();
