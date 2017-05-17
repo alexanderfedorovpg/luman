@@ -91,10 +91,10 @@ class NewsListOnlineController extends CmsController
     public function addCommentNewsOnline(Request $request)
     {
         try {
-            $validator = new Validator($request->all(), NewsComments::$rules);
-            if ($validator->fails()) {
-                throw new ValidationException($validator);
-            }
+
+            $this->validate($request,
+                NewsComments::$rules
+            );
 
             if ($request->input('image_preview') && $request->input('video_stream')) {
 
