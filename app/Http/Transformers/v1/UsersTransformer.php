@@ -4,6 +4,8 @@ namespace App\Http\Transformers\v1;
 
 use App\Auth\Rbac\Models\Permission;
 use App\Models\CdnFile;
+
+use App\Models\Groups;
 use App\Models\HasGroups;
 use App\Http\Transformers\Transformer;
 use App\Models\News;
@@ -25,14 +27,25 @@ class UsersTransformer extends Transformer
         $hasGroup=HasGroups::where('user_id', '=',$user['id'])->get(['group_id'])->toArray();
 
         $transform['groups']=$hasGroup?array_pluck($hasGroup,'group_id'):[];
-        $permission=[];
-
-        foreach (HasGroups::where('user_id', '=',$user['id'])  as $group) {
-            $permission[] = $group->permissions()->get()->toArray();
+        $permissions=[];
+        if (isset($hasGroup['group_id'])) {
 
 
+            foreach ($hasGroup   as $group) {
+                $group= Groups::find($group )  ;
+
+                foreach ($group->permissions   as $permission) {
+
+                    $permissions[ ]=$permission->toArray();
+                }
+
+
+
+
+            }
         }
-        $transform['permissions']=$permission;
+
+        $transform['permissions']=$permissions;
         unset($transform['avatar_id']);
         if ($user['avatar_id']) {
             $avatar = CdnFile::where('id', '=', $user['avatar_id'])->get(['url'])->first();

@@ -28,6 +28,10 @@ class Groups extends Model
         'enable',
     ];
 
+    public function permissions()
+    {
+        return $this->belongsToMany(Permissions::class, 'groups_permissions', 'group_id', 'permission_id');
+    }
 
 
 }
