@@ -45,7 +45,7 @@ class User extends Model implements AuthenticatableContract
         'lastname' => 'max:255',
         'login' => 'required|max:255|unique:users,login',
         'email' => 'required|email|unique:users,email',
-        'need_change_password' => 'required|boolean',
+        'need_change_password' => 'boolean',
         'enabled' => 'boolean',
         'avatar_id' => 'integer|exists:cdn_files,id'
     ];
@@ -59,8 +59,8 @@ class User extends Model implements AuthenticatableContract
     {
         $user = new static($fields);
         $user->setAuthPassword($fields['password']);
-
-        return $user->save();
+        $user->save();
+        return $user;
     }
 
     /**
