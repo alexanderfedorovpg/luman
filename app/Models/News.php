@@ -185,6 +185,7 @@ class News extends Model
     public function scopeModerationMode($query)
     {
         $query->where('moderation', '=', 1);
+        $query->where('is_publish', '=', 0);
 
         return $query;
     }
