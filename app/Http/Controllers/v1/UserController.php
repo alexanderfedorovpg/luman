@@ -80,6 +80,7 @@ class UserController extends CmsController
         try {
             $rules = User::$rules;
             $rules['password'] = 'required|min:6';
+            $rules['password_confirmation']=  'min:6';
             $this->validate($request, $rules);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
@@ -87,7 +88,7 @@ class UserController extends CmsController
 
         $user = User::createNew($request->all());
         if ($user) {
-            return $this->respondCreated(['success' => true]);
+            return $this->respond($this->usersTransformer->transform($user->toArray()));
         }
 
         return $this->respondFail500x();
@@ -115,8 +116,8 @@ class UserController extends CmsController
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->getMessage());
         }
-
-        return $this->respondCreated(['success' => $user->update($request->all())]);
+        $user->update($request->all());
+        return $this->respond($this->usersTransformer->transform($user->toArray()));
     }
 
     /**
@@ -162,7 +163,9 @@ class UserController extends CmsController
                 'login' => "required|max:255|unique:users,login,{$user->id}",
                 'email' => "required|email|unique:users,email,{$user->id}",
                 'avatar_id' => 'integer|exists:cdn_files,id',
-                'password' => 'min:6'
+                'password' => 'min:6|confirmed',
+                'password_confirmation'=> 'min:6',
+                'need_change_password'=>'in:1,0'
             ]);
             $requestData = $request->all();
             $password = $request->input('password');
