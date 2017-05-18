@@ -595,6 +595,7 @@ class NewsListEditorController extends CmsController
             $this->validate($request, News::$rules);
 
             $news = News::find($id);
+            $news->publish_date = new \DateTime();
             $log_moderation = new NewsModerationLogHelper($news);
 
             if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
