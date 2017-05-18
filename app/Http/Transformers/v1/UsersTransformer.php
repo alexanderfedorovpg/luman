@@ -25,7 +25,14 @@ class UsersTransformer extends Transformer
         $hasGroup=HasGroups::where('user_id', '=',$user['id'])->get(['group_id'])->toArray();
 
         $transform['groups']=$hasGroup?array_pluck($hasGroup,'group_id'):[];
-        $transform['permissions']=$hasGroup?array_pluck($hasGroup,'group_id'):[];
+        $permission=[];
+
+        foreach (HasGroups::where('user_id', '=',$user['id'])  as $group) {
+            $permission[] = $group->permissions()->get()->toArray();
+
+
+        }
+        $transform['permissions']=$permission;
         unset($transform['avatar_id']);
         if ($user['avatar_id']) {
             $avatar = CdnFile::where('id', '=', $user['avatar_id'])->get(['url'])->first();
