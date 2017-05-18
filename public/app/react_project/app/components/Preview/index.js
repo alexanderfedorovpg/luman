@@ -126,7 +126,7 @@ const CloseButton = styled(Icon)`
     right: 20px;
 `
 
-function Preview({ data, onClose, delegate, done }) {
+function Preview({ data, onClose, delegate, done, doneTitle }) {
     const createDate = data.created_at
 
     return (
@@ -165,16 +165,16 @@ function Preview({ data, onClose, delegate, done }) {
             <Content>
                 <div dangerouslySetInnerHTML={{ __html: data.body }} />
                 <Btns>
-                    {/*<CustomButton primary onClick={e=>delegate()}>
+                    <CustomButton primary onClick={e=>delegate()}>
                         <Icon type="arrow-left" />
                         Передать другому
-                    </CustomButton>*/}
+                    </CustomButton>
                     <CustomButton success onClick={e=> {
                             done(data.id)
                             onClose()
                         }}>
                         <Icon type="arrow-right" />
-                        Опубликовать
+                        {doneTitle || 'Опубликовать'}
                     </CustomButton>
                 </Btns>
             </Content>

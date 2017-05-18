@@ -368,6 +368,7 @@ class Content extends Component {
             supervisor,
             preview,
             finish,
+            publish,
             closePreview
         } = this.props
 
@@ -536,7 +537,12 @@ class Content extends Component {
                         data={this.state.data}
                         onClose={closePreview}
                         delegate={this.toggleDelegate}
-                        done={() => finish(this.dataToSubmit())} />
+                        doneTitle={supervisor ? 'Опубликовать' : 'Готово'}
+                        done={() => (
+                            supervisor
+                                ? publish(this.dataToSubmit())
+                                : finish(this.dataToSubmit())
+                        )} />
                 </Modal>
                 <Modal
                     isOpen={this.state.delegate}
