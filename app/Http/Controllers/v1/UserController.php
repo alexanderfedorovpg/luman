@@ -88,6 +88,7 @@ class UserController extends CmsController
 
         $user = User::createNew($request->all());
         if ($user) {
+
             return $this->respond($this->usersTransformer->transform($user->toArray()));
         }
 

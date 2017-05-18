@@ -59,8 +59,8 @@ class User extends Model implements AuthenticatableContract
     {
         $user = new static($fields);
         $user->setAuthPassword($fields['password']);
-
-        return $user->save();
+        $user->save();
+        return $user;
     }
 
     /**
