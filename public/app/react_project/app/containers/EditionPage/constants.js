@@ -4,7 +4,9 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/EditionPage/DEFAULT_ACTION';
+export const ADD_USER = 'app/EditionPage/ADD_USER';
+export const ADD_USER_SUCCESS = 'app/EditionPage/ADD_USER_SUCCESS';
+export const ADD_USER_FAILURE = 'app/EditionPage/ADD_USER_FAILURE';
 
 export const tabs = [
     {

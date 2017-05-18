@@ -38,9 +38,12 @@ export const login = ({ username, password }) => {
 export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
     params,
 });
+export const addUser = (data) => axios.post('/user', data);
 export const getCurrentUser = () => axios.get('/userprofile');
 export const editUserProfile = (data) => axios.put('/userprofile', data);
+
 export const getUsersInGroup = (groupId) => axios.get(`/group/${groupId}/users`);
+export const addUserToGroup = (groupId, userId) => axios.post(`/group/${groupId}/bind/${userId}`);
 export const getGroup = (id) => axios.get(`/group${id ? `/${id}` : ''}`);
 export const getGroups = () => axios.get('/group');
 
