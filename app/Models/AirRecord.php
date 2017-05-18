@@ -50,6 +50,10 @@ class AirRecord extends Model
         return $query->where('is_full_video', '=', $isFullVideo);
     }
 
+    public function scopeConstructor($query, $constructor = 1)
+    {
+        return $query->where('to_constructor', '=', $constructor);
+    }
     /**
      * Фильтрация по наличмю посдстраки в заголоках
      *

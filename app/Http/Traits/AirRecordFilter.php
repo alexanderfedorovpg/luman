@@ -16,6 +16,13 @@ trait AirRecordFilter
             $builder->fullVideo(false);
         }
 
+        $constructor = $request->input('constructor');
+        if ($constructor === 'true') {
+            $builder->constructor(1);
+        } elseif ($constructor === 'false') {
+            $builder->constructor(0);
+        }
+
         $programId = $request->input('programId');
         if ($programId) {
             $builder->where('program_id', '=', $programId);

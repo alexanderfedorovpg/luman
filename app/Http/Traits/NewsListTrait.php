@@ -30,6 +30,13 @@ trait NewsListTrait {
             $news->infoNoise(false);
         }
 
+        $constructor = $request->input('constructor');
+        if ($constructor === 'true') {
+            $news->constructor(1);
+        } elseif ($constructor === 'false') {
+            $news->constructor(0);
+        }
+
         $video = $request->input('video');
         if ($video !== null) {
             if ($video === 'true') {

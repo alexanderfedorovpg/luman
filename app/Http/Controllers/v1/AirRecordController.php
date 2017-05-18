@@ -157,7 +157,7 @@ class AirRecordController extends CmsController
             }
 
             return $this->respondCreated([
-                'success' => (bool) AirRecord::publish($records)
+                'success' => (bool)AirRecord::publish($records)
             ]);
 
         } catch (ValidationException $e) {
@@ -191,7 +191,28 @@ class AirRecordController extends CmsController
         } catch (\Exception $e) {
             return $this->respondFail500x();
         }
-
     }
-    
+
+    public function triggerVisibleConstructor(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required:exists:air_records,id',
+            ]);
+            $id = $request->input('id');
+
+            $rec = AirRecord::findOrfail($id);
+            $rec->to_constructor = !$rec->to_constructor;
+
+            if ($rec->save()) {
+                return $this->respond($rec->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+
 }

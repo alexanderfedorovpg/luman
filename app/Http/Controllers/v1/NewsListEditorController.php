@@ -720,4 +720,25 @@ class NewsListEditorController extends CmsController
             return $this->respondFail500x($e->getMessage());
         }
     }
+
+    public function triggerVisibleConstructor(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required:exists:news,id',
+            ]);
+            $id = $request->input('id');
+
+            $news = News::findOrfail($id);
+            $news->to_constructor = !$news->to_constructor;
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
 }
