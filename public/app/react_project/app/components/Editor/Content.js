@@ -14,7 +14,7 @@ import Icon from 'components/Icon'
 import Rating from 'components/Rating'
 import Tags from 'components/Tags'
 import Modal from 'components/Modal'
-import Preview from './Preview'
+import Preview from 'components/Preview'
 import Chat from 'containers/Chat'
 import HeaderEditor from './Header.editor'
 import HeaderSupervisor from './Header.supervisor'
@@ -222,14 +222,6 @@ class Content extends Component {
             toastr.warning('Выберите рубрики!')
             retFlag = true
         }
-        if (!data.image_main_temp && !article.image_main_id) {
-            toastr.warning('Выберите основное изображение!')
-            retFlag = true
-        }
-        if (!data.image_preview_temp && !article.image_preview_id) {
-            toastr.warning('Выберите превью!')
-            retFlag = true
-        }
         if (!data.top) {
             toastr.warning('Выберите рейтинг!')
             retFlag = true
@@ -238,7 +230,6 @@ class Content extends Component {
             ...error,
             title: !data.title || data.title.length > titleMax,
             subtitle: !data.subtitle || data.subtitle.length > subtitleMax,
-            theses: !data.theses,
         }
 
         if (Object.values(newError).reduce((a, b) => a || b, false)) {

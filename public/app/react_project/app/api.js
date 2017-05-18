@@ -95,7 +95,13 @@ export const getLinks = (query) => axios.get('/reference/search', {
     params: { query },
 });
 
-export const getNewslist = () => axios.get('/newslisteditor');
+export const getNewslist = () => axios.get('/newslisteditor', {
+    params: {
+        is_publish: false,
+        orderBy: 'id',
+        orderType: 'desc'
+    }
+});
 
 export const getTags = () => axios.get('/tags');
 
@@ -175,7 +181,11 @@ export const uploadFile = (file) => {
 };
 
 export const getReadyNews = (params) => axios.get('/newseditor/moderated', {
-    params,
+    params: {
+        ...params,
+        orderBy: 'id',
+        orderType: 'desc'
+    }
 });
 
 export const publishArticle = (id) => axios.put(`/newseditor/publish/${id}`);
@@ -204,7 +214,13 @@ export const postChatMessage = (room, { message, files }) => {
 
 export const getConstructorCategories = () => axios.get('/homepage/newscategory');
 export const getHomepageNews = () => axios.get('/homepage');
-export const getConstructorNews = (params) => axios.get('/newslist', { params });
+export const getConstructorNews = (params) => axios.get('/newslist', {
+    params: {
+        ...params,
+        orderBy: 'publish_date',
+        orderType: 'desc'
+    }
+});
 export const saveHomepageNews = (data) => axios.put('/homepage', qs.stringify(data), {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -246,7 +262,13 @@ export const putArticleTitle = data => axios.put(`/newseditor/title`, qs.stringi
 // =============================================================================
 
 export const getPrograms = () => axios.get('/tv-program');
-export const getRecords = (params) => axios.get('/air/record', { params });
+export const getRecords = (params) => axios.get('/air/record', {
+    params: {
+        ...params,
+        orderBy: 'publish_date',
+        orderType: 'desc'
+    }
+});
 export const getRecord = (id) => axios.get(`/air/record/${id}`);
 export const deleteRecord = (id) => axios.delete(`/air/record/${id}`);
 export const postRecord = (data) => axios.post('/air/record', data);

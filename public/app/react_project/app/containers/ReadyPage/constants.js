@@ -20,3 +20,7 @@ export const filters = [
         value: 'top'
     },
 ]
+
+export const strings = {
+    articlePublished: 'Новость опубликована'
+}

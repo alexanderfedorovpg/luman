@@ -80,9 +80,10 @@ const NavBadge = styled(Badge)`
     position: absolute;
     top: 10px;
     right: 13px;
+    transition: all .3s;
 
     ${ifProp('expanded')(css`
-        top: 14px;
+        top: 22px;
         right: 22px;
     `)}
 `;
@@ -122,8 +123,11 @@ function NavSide({ expanded, isActive, location }) {
             >
                 <Icon type="text-edit-ico" />
                 <Name expanded={expanded}>
-                    Текстовая трансляция
+                    Трансляция
                 </Name>
+                <NavBadge expanded={expanded} success>
+                    8
+                </NavBadge>
             </NavItem>
         </Wrapper>
     )

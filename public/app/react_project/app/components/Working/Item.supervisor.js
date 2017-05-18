@@ -193,7 +193,7 @@ function Item({ data, push, newItem, clearTask, postMessage }) {
                     <UserWrapper>
                         {editor
                             ? <User data={editor} />
-                            : null
+                            : 'Без автора'
                         }
                     </UserWrapper>
                     <Time is-out={!!data.timeClass}>
@@ -211,9 +211,9 @@ function Item({ data, push, newItem, clearTask, postMessage }) {
                                     send={postMessage.bind(this, data.id)}>
                                     Пуш-уведомление
                                 </CustomPush>
-                                <CustomLink to={`/editor/${data.id}`}>
+                                <NavItem onCLick={()=>push(`/editor/${data.id}`)}>
                                     Сменить редактора
-                                </CustomLink>
+                                </NavItem>
                                 <NavItem onClick={()=>clearTask(data.id)}>
                                     Снять задание
                                 </NavItem>

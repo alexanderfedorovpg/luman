@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import Item from './Item'
-import Detail from 'components/Editor/Preview'
+import Detail from 'components/Preview'
 import Modal from 'components/Modal'
 
 const Root = styled.div`
@@ -56,14 +56,17 @@ class Content extends PureComponent {
 
         return (
             <Root>
-                {data.map(value => (
-                    <Item
-                        key={value.id}
-                        data={value}
-                        open={this.selectItem}
-                        publish={publish}
-                        newItem={old.indexOf(value.id) == -1} />
-                ))}
+                {data
+                    .filter(v => !+v.is_publish)
+                    .map(value => (
+                        <Item
+                            key={value.id}
+                            data={value}
+                            open={this.selectItem}
+                            publish={publish}
+                            newItem={old.indexOf(value.id) == -1} />
+                    ))
+                }
 
                 <Modal
                     isOpen={this.state.modalOpen}
@@ -71,6 +74,7 @@ class Content extends PureComponent {
                     onRequestClose={this.closeModal}>
                     <Detail
                         onClose={this.closeModal}
+                        done={publish}
                         data={selected} />
                 </Modal>
             </Root>

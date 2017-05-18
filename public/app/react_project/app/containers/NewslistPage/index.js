@@ -35,7 +35,9 @@ import { checkPermissons } from 'utils/permissons'
 class NewslistPage extends Component {
 
     componentDidMount() {
-        this.props.loadNewslist()
+        setTimeout(() => {
+            this.props.loadNewslist()
+        })
     }
 
     componentWillMount() {
@@ -81,7 +83,7 @@ class NewslistPage extends Component {
         } = this.props
 
         const contentProps = {
-            news: this.filterNews(),
+            news: this.filterNews().filter(v => !+v.is_publish),
             old: oldNews,
             push
         }

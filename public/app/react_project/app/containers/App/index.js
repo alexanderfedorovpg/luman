@@ -44,7 +44,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
         children: React.PropTypes.node,
     };
 
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.token) {
             this.loadData(this.props.token);
         }
