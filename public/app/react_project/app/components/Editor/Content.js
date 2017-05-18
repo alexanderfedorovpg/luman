@@ -524,9 +524,9 @@ class Content extends Component {
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
                         <StickyContainer>
-                            <Sticky relative={false}>
+                            <Sticky topOffset={220}>
                                 {
-                                    () => {
+                                    ({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => {
                                         return (
                                             <Chat room={chatRoom} />
                                         )
