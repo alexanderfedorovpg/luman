@@ -173,11 +173,6 @@ class UserController extends CmsController
                 $user->setAuthPassword($password);
             }
 
-            $firstname = $request->input('firstname');
-            if ($firstname) {
-                $requestData['name'] = $firstname;
-            }
-
             return $this->respond(['success' => $user->update($requestData)]);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);

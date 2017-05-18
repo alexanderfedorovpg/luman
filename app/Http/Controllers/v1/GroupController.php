@@ -20,6 +20,7 @@ use Mockery\Exception;
 class GroupController extends CmsController
 {
 
+
     /**
      * @var GroupsTransformer
      */
