@@ -10,7 +10,9 @@ const Root = styled.div`
     align-items: center;
     margin-right: ${rem(11)};
 
+    font-size: ${rem(14)};
     color: #666;
+    letter-spacing: 0.25px;
 `
 
 const Pic = styled(Link)`
@@ -40,12 +42,10 @@ const Img = styled.img`
 
 export const Name = styled(Link)`
     font-family: ${font.helvetica};
-    font-size: ${rem(14)};
 
     color: inherit;
     font-weight: inherit;
     text-decoration: none;
-    letter-spacing: 0.25px;
 `
 
 function User({ to, data, children, className }) {

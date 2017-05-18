@@ -75,6 +75,7 @@ const makeProfileStats = () => createSelector(
         // makeStatsItem('edited', 'Отредактировано', 0);
         makeStatsItem('enabled', 'Статус профиля', user.enabled > 0 ? 'Активный' : 'Не активный');
 
+
         return data;
     }
 );

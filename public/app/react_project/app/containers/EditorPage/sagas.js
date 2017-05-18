@@ -66,12 +66,12 @@ export function* delegateArticle({ payload }) {
 
 export function* finishArticle({ payload }) {
     try {
-        if (!Number.isInteger(payload.image_main)) {
+        if (payload.image_main && !Number.isInteger(payload.image_main)) {
             let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
             payload.image_main = idMain
         }
 
-        if (!Number.isInteger(payload.image_preview)) {
+        if (payload.image_main && !Number.isInteger(payload.image_preview)) {
             let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
             payload.image_preview = idPreview
         }
@@ -90,13 +90,14 @@ export function* finishArticle({ payload }) {
 }
 
 export function* publishArticle({ payload }) {
+
     try {
-        if (!Number.isInteger(payload.image_main)) {
+        if (payload.image_main && !Number.isInteger(payload.image_main)) {
             let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
             payload.image_main = idMain
         }
 
-        if (!Number.isInteger(payload.image_preview)) {
+        if (payload.image_main && !Number.isInteger(payload.image_preview)) {
             let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
             payload.image_preview = idPreview
         }

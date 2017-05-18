@@ -18,7 +18,8 @@ import Select from './Select';
 
 const FixedForm = styled.form`
     position: fixed;
-    top: 120px;
+    padding-right: 20px;
+    top: 140px;
     bottom: 0px;
     overflow-y: scroll;
 `;

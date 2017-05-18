@@ -10,6 +10,8 @@ import {
     LOAD_USERS_SUCCESS,
     LOAD_USERS_FAILURE,
 
+    ADD_USER,
+
     LOAD_GROUPS,
     LOAD_GROUPS_SUCCESS,
     LOAD_GROUPS_FAILURE,
@@ -178,5 +180,12 @@ export function failureLoadGroups(error) {
     return {
         type: LOAD_GROUPS_FAILURE,
         error,
+    };
+}
+
+export function addUser(userData) {
+    return {
+        type: ADD_USER,
+        payload: userData,
     };
 }

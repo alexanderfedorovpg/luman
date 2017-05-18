@@ -25,7 +25,9 @@ import {
 class ReadyPage extends PureComponent {
 
     componentWillMount() {
-        this.props.loadNews()
+        setTimeout(() => (
+            this.props.loadNews()
+        ))
     }
 
     render() {

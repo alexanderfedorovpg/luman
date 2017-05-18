@@ -23,14 +23,13 @@ import {
     HIDE_INFO,
     LOAD_PROGRAMS_SUCCESS,
     LOAD_GROUPS_SUCCESS,
-    groups,
+    ADD_USER,
 } from './constants';
 
 const initialState = fromJS({
     menuOpen: false,
     'api-token': null,
     users: {
-        editors: [],
         data: {},
     },
     current: {
@@ -46,7 +45,6 @@ const initialState = fromJS({
 
 function AppReducer(state = initialState, action) {
     let users = {};
-    let editors = [];
 
     switch (action.type) {
         case TOGGLE_MENU:
@@ -71,22 +69,18 @@ function AppReducer(state = initialState, action) {
             return state.mergeIn(['current', 'data'], fromJS(action.payload));
 
         case LOAD_EDITORS_SUCCESS:
-            users = action.payload.reduce((result, item) => ({ ...result, [item.id]: item }), {});
-            editors = action.payload.map((value) => value.id);
-
-            return state
-                .setIn(['users', 'editors'], fromJS(editors))
-                .updateIn(['users', 'data'], (data) => data.merge(fromJS(users)));
-
         case LOAD_USERS_SUCCESS:
             users = action.payload.reduce((result, item) => ({ ...result, [item.id]: item }), {});
-            editors = action.payload
-                .filter((value) => value.groups.indexOf(groups.editor) > -1)
-                .map((value) => value.id);
 
             return state
-                .setIn(['users', 'editors'], fromJS(editors))
                 .updateIn(['users', 'data'], (data) => data.merge(fromJS(users)));
+
+        case ADD_USER:
+            return state
+                .updateIn(
+                    ['users', 'data'],
+                    (usersData) => usersData.set(action.payload.id, fromJS(action.payload))
+                );
 
         case LOAD_RUBRICS_SUCCESS:
             return state.setIn(['rubrics', 'data'], fromJS(action.payload));

@@ -7,6 +7,7 @@ import Button from 'components/Button'
 import Icon from 'components/Icon'
 
 import { padding, font } from 'constants/style'
+import { ensureAbs } from 'utils/uri'
 
 const Root = styled.div`
     max-width: 908px;
@@ -118,11 +119,19 @@ const CustomButton = styled(Button)`
     }
 `
 
+const CloseButton = styled(Icon)`
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+`
+
 function Preview({ data, onClose, delegate, done }) {
     const createDate = data.created_at
 
     return (
         <Root>
+            <CloseButton type="delete-lg" onClick={onClose} />
             <Header>
                 {createDate
                     ? (
@@ -141,7 +150,7 @@ function Preview({ data, onClose, delegate, done }) {
             <ImageWrapper>
                 <div>
                     <Img>
-                        <img src={`//${data.image_main}`} />
+                        <img src={ensureAbs(data.image_main)} />
                     </Img>
                     <Source>
                         Источник: Интерфакс
@@ -154,16 +163,18 @@ function Preview({ data, onClose, delegate, done }) {
                 </div>
             </ImageWrapper>
             <Content>
-                {/*{data.body}*/}
-                <div dangerouslySetInnerHTML={{__html: data.body}} />
+                <div dangerouslySetInnerHTML={{ __html: data.body }} />
                 <Btns>
-                    <CustomButton primary onClick={e=>delegate()}>
+                    {/*<CustomButton primary onClick={e=>delegate()}>
                         <Icon type="arrow-left" />
                         Передать другому
-                    </CustomButton>
-                    <CustomButton success onClick={e=>done()}>
+                    </CustomButton>*/}
+                    <CustomButton success onClick={e=> {
+                            done(data.id)
+                            onClose()
+                        }}>
                         <Icon type="arrow-right" />
-                        Готово
+                        Опубликовать
                     </CustomButton>
                 </Btns>
             </Content>

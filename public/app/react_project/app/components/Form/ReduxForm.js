@@ -1,6 +1,7 @@
 import React from 'react';
 import Tags from 'components/Tags';
 import Rating from 'components/Rating';
+import Switch from 'components/Switch';
 import {
     Label,
     Input,
@@ -24,7 +25,7 @@ export const InputRedux = ({ input, meta: { touched, invalid, valid, error }, sh
             onChange={(e) => input.onChange(e)}
         />
         {
-            touched && showError &&
+            touched && showError && error &&
             <Label light error>{error}</Label>
         }
     </div>
@@ -124,4 +125,19 @@ export const RatingRedux = ({ input, ...props }) => (
         value={input.value}
         onChange={(value) => input.onChange(value)}
     />
+);
+
+export const SwitchRedux = ({ input, meta: { touched, error }, showError, ...props }) => (
+    <div>
+        <Switch
+            {...props}
+            checked={input.checked}
+            value={input.value}
+            onChange={(e) => input.onChange(e)}
+        />
+        {
+            touched && showError && error &&
+            <Label light error>{error}</Label>
+        }
+    </div>
 );
