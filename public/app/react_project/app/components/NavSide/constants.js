@@ -5,12 +5,12 @@ export const items = [
         name: 'Лента',
     },
     {
-        link: '/editor',
+        link: '/newslist',
         icon: 'draft',
         name: 'Задания',
     },
     {
-        link: '/newslist',
+        link: '/editor',
         icon: 'view',
         name: 'В работе',
     },
