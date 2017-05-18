@@ -25,7 +25,7 @@ const Root = styled.div`
     margin-top: -15px;
 `
 
-function Content({ news, push, old, clearTask, postMessage }) {
+function Content({ news, push, old, clearTask, postMessage, toggle, open }) {
 
     return (
         <Root>
@@ -41,7 +41,9 @@ function Content({ news, push, old, clearTask, postMessage }) {
                         data={value}
                         clearTask={clearTask}
                         postMessage={postMessage}
-                        newItem={old.indexOf(value.id) == -1} />
+                        newItem={old.indexOf(value.id) == -1} 
+                        toggle={toggle}
+                        open={open}/>
                 ))}
             </ReactCSSTransitionGroup>
         </Root>
@@ -49,3 +51,15 @@ function Content({ news, push, old, clearTask, postMessage }) {
 }
 
 export default Content
+
+
+/*  
+<Modal
+    isOpen={open}
+    contentLabel="Удалить задание"
+    onRequestClose={toggle}>
+    <div>
+        <button>Удалить</button>
+    </div>
+</Modal>
+*/
