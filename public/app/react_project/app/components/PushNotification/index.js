@@ -11,6 +11,7 @@ import { padding, font, color } from 'constants/style'
 
 const Root = styled.form`
     max-width: 536px;
+    min-width: 536px;
     padding-top: 28px;
     padding-right: 26px;
     padding-bottom: 29px;
@@ -85,7 +86,8 @@ class PushNotification extends PureComponent {
                 <Modal
                     isOpen={this.state.open}
                     contentLabel="Уведомление"
-                    onRequestClose={this.closeModal}>
+                    onRequestClose={this.closeModal}
+                    width={536}>
 
                     <Root onSubmit={this.handleSubmit}>
                         <CloseIcon type="delete-lg" onClick={this.closeModal} />

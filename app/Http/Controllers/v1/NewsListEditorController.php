@@ -189,7 +189,7 @@ class NewsListEditorController extends CmsController
 
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
-            $rules['theses'] = 'required';
+          //  $rules['theses'] = 'required';
 
             $rules['image_main'] = 'numeric';
             $rules['image_preview'] = 'numeric';
@@ -324,7 +324,7 @@ class NewsListEditorController extends CmsController
 
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
-            $rules['theses'] = 'required';
+//            $rules['theses'] = 'required';
 
             $rules['image_main'] = 'numeric';
             $rules['image_preview'] = 'numeric';
@@ -595,6 +595,7 @@ class NewsListEditorController extends CmsController
             $this->validate($request, News::$rules);
 
             $news = News::find($id);
+            $news->publish_date = new \DateTime();
             $log_moderation = new NewsModerationLogHelper($news);
 
             if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {
@@ -710,6 +711,27 @@ class NewsListEditorController extends CmsController
             $request->input('id');
             $news = News::findOrfail($id);
             $news->title = $request->input('title');
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    public function triggerVisibleConstructor(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required:exists:news,id',
+            ]);
+            $id = $request->input('id');
+
+            $news = News::findOrfail($id);
+            $news->to_constructor = !$news->to_constructor;
 
             if ($news->save()) {
                 return $this->respond($news->toArray());

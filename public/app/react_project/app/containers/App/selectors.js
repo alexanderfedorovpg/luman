@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
+import { groups } from './constants';
 
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
@@ -26,11 +27,10 @@ const usersMap = createSelector(
 );
 
 const selectEditors = createSelector(
-    selectAppDomain(),
     usersMap,
-    (app, users) => app.getIn(['users', 'editors'])
-        .map((value) => users.get(`${value}`))
-        .map((value) => (value && value.toJS) ? value.toJS() : value)
+    (users) => users
+        .filter((user) => user.get('groups').includes(groups.editor))
+        .toIndexedSeq()
 );
 
 const selectUsersMap = createSelector(

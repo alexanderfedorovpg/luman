@@ -4,13 +4,25 @@ import { createStructuredSelector } from 'reselect';
 
 import { Wrapper, StyledTable, LeftColumn, RightColumn } from '../style';
 import { usersTableHeader } from '../constants';
+import { addUser } from '../actions';
 import {
     makeGetUsers,
     makeRadioButtonsFromGroups,
+    makeSelected,
+    makeUserInfo,
+    makeUserAccount,
 } from '../selectors';
 import NewUserForm from './NewUserForm';
+import EditUserForm from './EditUserForm';
 
-const Users = ({ users, groups }) => (
+const Users = ({
+    users,
+    groups,
+    addUser,
+    selected,
+    userInfo,
+    userAccount,
+}) => (
     <Wrapper>
         <LeftColumn>
             <StyledTable
@@ -20,7 +32,22 @@ const Users = ({ users, groups }) => (
             />
         </LeftColumn>
         <RightColumn>
-            <NewUserForm groups={groups} />
+            {
+                selected ?
+                    (
+                        <EditUserForm
+                            user={userInfo}
+                            initialValues={userAccount}
+                            groups={groups}
+                        />
+                    ) :
+                    (
+                        <NewUserForm
+                            groups={groups}
+                            addUser={addUser}
+                        />
+                    )
+            }
         </RightColumn>
     </Wrapper>
 );
@@ -28,6 +55,9 @@ const Users = ({ users, groups }) => (
 const mapStateToProps = createStructuredSelector({
     users: makeGetUsers(),
     groups: makeRadioButtonsFromGroups(),
+    selected: makeSelected(),
+    userInfo: makeUserInfo(),
+    userAccount: makeUserAccount(),
 });
 
-export default connect(mapStateToProps)(Users);
+export default connect(mapStateToProps, { addUser })(Users);

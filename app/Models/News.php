@@ -150,6 +150,11 @@ class News extends Model
         return $query->where('is_publish', '=', $published);
     }
 
+
+    public function scopeConstructor($query, $constructor = 1)
+    {
+        return $query->where('to_constructor', '=', $constructor);
+    }
     /**
      * Чат
      *

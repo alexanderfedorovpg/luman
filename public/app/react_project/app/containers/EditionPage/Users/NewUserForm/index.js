@@ -1,54 +1,23 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form/immutable';
-import { Group, Label } from 'components/Form';
 import Button from 'components/Button';
+import { Group } from 'components/Form';
 import {
     InputRedux,
-    RadioButtonRedux,
 } from 'components/Form/ReduxForm';
 import { rem } from 'utils/style';
+import { checkEmail } from 'utils/validate';
 
-import { Form, RadioGroup, StyledLabel } from './style';
+import { Form, GroupControls } from './style';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class NewUserForm extends PureComponent {
-    onSubmit(data) {
-        console.log(data);
-    }
-
-    renderError({ meta: { touched, error } }) {
-        return (touched && !!error) ?
-            (
-                <StyledLabel
-                    error
-                    light
-                >
-                    {error}
-                </StyledLabel>
-            ) :
-            null;
-    }
-
-    renderGroupInput(group) {
-        return (
-            <Field
-                name="group"
-                key={group.value}
-                value={String(group.value)}
-                type="radio"
-                component={RadioButtonRedux}
-            >
-                {group.label}
-            </Field>
-        );
-    }
-
     render() {
         const { handleSubmit, groups, valid } = this.props;
 
         return (
-            <Form onSubmit={handleSubmit(this.onSubmit)}>
+            <Form onSubmit={handleSubmit(this.props.addUser)}>
                 <Group sm>
                     <Field
                         block
@@ -93,10 +62,7 @@ class NewUserForm extends PureComponent {
                         component={InputRedux}
                     />
                 </Group>
-                <RadioGroup>
-                    {groups.map(this.renderGroupInput)}
-                    <Field name="group" component={this.renderError} />
-                </RadioGroup>
+                <GroupControls name="group" items={groups} />
                 <Button active={valid} success block>
                     Добавить пользователя
                 </Button>
@@ -107,13 +73,9 @@ class NewUserForm extends PureComponent {
 
 NewUserForm.propTypes = {
     handleSubmit: PropTypes.func,
+    addUser: PropTypes.func,
     groups: PropTypes.array,
 };
-
-function validateEmail(email) {
-    const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i;
-    return re.test(email);
-}
 
 const validate = (values) => {
     const errors = {};
@@ -130,7 +92,7 @@ const validate = (values) => {
 
     if (!email) {
         errors.email = 'Введите адрес электронной почты нового пользователя';
-    } else if (!validateEmail(email)) {
+    } else if (!checkEmail(email)) {
         errors.email = 'Введите корректный адрес электронной почты';
     }
 

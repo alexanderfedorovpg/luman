@@ -30,7 +30,7 @@ class HasGroups extends Model
         'user_id',
         'group_id',
     ];
-
+   
     /**
      * @param $query
      * @param array $strings

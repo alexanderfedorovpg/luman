@@ -230,6 +230,9 @@ class Permission extends Command
                 'name' => 'v1.newslisteditor-getOne',
                 'description' => 'Просмотр новости',
             ],
+                'name'=>'v1.newslisteditor-getModerated',
+                'description'=>'Модерирование',
+            [],
         ];
     }
 

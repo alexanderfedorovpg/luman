@@ -5,19 +5,19 @@
  */
 
 import { fromJS } from 'immutable';
-import {
-  DEFAULT_ACTION,
-} from './constants';
+// import {
+//     ADD_USER_SUCCESS,
+// } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+    selectedUser: 2,
+});
 
 function editionPageReducer(state = initialState, action) {
-  switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        default:
+            return state;
+    }
 }
 
 export default editionPageReducer;

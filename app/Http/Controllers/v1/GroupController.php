@@ -20,6 +20,7 @@ use Mockery\Exception;
 class GroupController extends CmsController
 {
 
+
     /**
      * @var GroupsTransformer
      */
@@ -244,6 +245,21 @@ class GroupController extends CmsController
             $group = Group::findOrFail($id);
             if ($group) {
                 return $this->respond($this->groupsTransformer->transformUsersByGroup($group->toArray()));
+            }
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('Group is not found');
+        } catch (\Exception $e) {
+            $this->respondFail500x();
+        }
+    }
+
+    public function PermissByGroup($id) {
+        try {
+            $group = Group::findOrFail($id);
+            $permiss=$group->permissions()->get();
+
+            if ($group) {
+                return $this->respond($permiss->toArray());
             }
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('Group is not found');

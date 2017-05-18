@@ -37,6 +37,7 @@ export const LOAD_EDITORS_FAILURE = 'app/LOAD_EDITORS_FAILURE';
 export const LOAD_USERS = 'app/LOAD_USERS';
 export const LOAD_USERS_SUCCESS = 'app/LOAD_USERS_SUCCESS';
 export const LOAD_USERS_FAILURE = 'app/LOAD_USERS_FAILURE';
+export const ADD_USER = 'app/ADD_USER';
 
 export const LOAD_GROUPS = 'app/LOAD_GROUPS';
 export const LOAD_GROUPS_SUCCESS = 'app/LOAD_GROUPS_SUCCESS';

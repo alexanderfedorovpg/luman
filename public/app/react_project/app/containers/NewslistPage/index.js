@@ -34,6 +34,15 @@ import { checkPermissons } from 'utils/permissons'
 
 class NewslistPage extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
     componentDidMount() {
         setTimeout(() => {
             this.props.loadNewslist()
@@ -67,6 +76,13 @@ class NewslistPage extends Component {
             default:
                 return news
         }
+    }
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
+        console.log(this.state);
     }
 
     renderContent() {
@@ -105,7 +121,9 @@ class NewslistPage extends Component {
                         <ContentSupervisor
                             {...contentProps}
                             clearTask={rejectArticle}
-                            postMessage={postMessage} />
+                            postMessage={postMessage} 
+                            toggle={this.toggle}
+                            open={this.state.modal}/>
                     </Wrap>
                 </div>
             )

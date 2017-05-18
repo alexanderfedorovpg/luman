@@ -12,13 +12,18 @@ class User extends Model implements AuthenticatableContract
 {
     use Authenticatable, Rbac;
 
+    public static $allow_all_function = [
+        'v1.group-index',
+        'v1.group-show',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
+        'firstname',
         'lastname',
         'email',
         'login',
@@ -36,7 +41,8 @@ class User extends Model implements AuthenticatableContract
     ];
 
     public static $rules = [
-        'name' => 'required|max:255',
+        'firstname' => 'required|max:255',
+        'lastname' => 'max:255',
         'login' => 'required|max:255|unique:users,login',
         'email' => 'required|email|unique:users,email',
         'need_change_password' => 'required|boolean',
@@ -94,6 +100,9 @@ class User extends Model implements AuthenticatableContract
             return true;
         }
 
+        if (in_array($permissionName, self::$allow_all_function)){
+            return true;
+        }
         foreach ($this->groups as $group) {
             $permission = $group->permissions()
                 ->where('name', $permissionName)

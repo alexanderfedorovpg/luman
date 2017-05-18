@@ -7,7 +7,7 @@ trait NewsListTrait {
 
     public function processing(&$request, &$news) {
         $this->validate($request, [
-            'orderBy' => 'in:id,top',
+            'orderBy' => 'in:id,top,publish_date',
             'orderType' => 'in:asc,desc'
         ]);
 
@@ -30,6 +30,20 @@ trait NewsListTrait {
             $news->infoNoise(false);
         }
 
+        $constructor = $request->input('constructor');
+        if ($constructor === 'true') {
+            $news->constructor(1);
+        } elseif ($constructor === 'false') {
+            $news->constructor(0);
+        }
+
+        $isPublish = $request->input('is_publish');
+        if ($isPublish === 'true') {
+            $news->published(1);
+        } elseif ($isPublish === 'false') {
+            $news->published(0);
+        }
+
         $video = $request->input('video');
         if ($video !== null) {
             if ($video === 'true') {
@@ -43,7 +57,10 @@ trait NewsListTrait {
         if ($orderBy !== null) {
             $orderType = $request->input('orderType') ? $request->input('orderType') : 'ASC';
             $news->orderBy($orderBy , $orderType);
-            $news->orderBy('publish_date' , 'ASC');
+            if ($orderBy !== 'publish_date'){
+                $news->orderBy('publish_date' , 'ASC');
+            }
+
         }
 
         $start = $request->input('start');
