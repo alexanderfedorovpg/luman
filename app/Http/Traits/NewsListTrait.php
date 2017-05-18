@@ -39,9 +39,9 @@ trait NewsListTrait {
 
         $isPublish = $request->input('is_publish');
         if ($isPublish === 'true') {
-            $news->is_publish(1);
+            $news->published(1);
         } elseif ($isPublish === 'false') {
-            $news->is_publish(0);
+            $news->published(0);
         }
 
         $video = $request->input('video');
