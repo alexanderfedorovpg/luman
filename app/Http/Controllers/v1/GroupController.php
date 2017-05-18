@@ -252,4 +252,19 @@ class GroupController extends CmsController
             $this->respondFail500x();
         }
     }
+
+    public function PermissByGroup($id) {
+        try {
+            $group = Group::findOrFail($id);
+            $permiss=$group->permissions()->get();
+
+            if ($group) {
+                return $this->respond($permiss->toArray());
+            }
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound('Group is not found');
+        } catch (\Exception $e) {
+            $this->respondFail500x();
+        }
+    }
 }

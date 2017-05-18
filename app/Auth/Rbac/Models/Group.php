@@ -28,7 +28,7 @@ class Group extends Model
         'name',
         'enabled'
     ];
-
+    protected $hidden = ['pivot'];
     /**
      * Правила
      *

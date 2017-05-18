@@ -87,6 +87,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/group/{groupId}/permiss','GroupController@addPermiss');
     $group->delete('/group/{groupId}/permiss/{permissId}','GroupController@addPermiss');
     $group->get('/group/{id}/users','GroupController@UsersByGroup');
+    $group->get('/group/{id}/permiss','GroupController@PermissByGroup');
 
 
     // Уведомления
