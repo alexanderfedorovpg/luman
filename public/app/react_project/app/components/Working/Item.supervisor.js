@@ -174,7 +174,7 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
 
     return (
         <Root onClick={()=>push(`/editor/${data.id}`)}>
-        {/*// <Root>*/}
+        {/*<Root>*/}
             <Wrapper>
                 <Left>
                     <Header>

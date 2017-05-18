@@ -23,6 +23,8 @@ import { ifProp } from 'utils/style'
 import { ensureAbs } from 'utils/uri'
 import { font, padding, color } from 'constants/style'
 
+import Button from 'components/Button'
+
 const titleMax = 120
 const subtitleMax = 140
 
@@ -151,6 +153,16 @@ const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />) `
     `}
 `
 
+const DelegateRoot = styled.div`
+    width: 500px;
+    padding: 30px 1.5rem 79px;
+    margin: auto;
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: #fff;
+    height: 100%;
+    overflow-y: auto;
+`
+
 class Content extends Component {
 
     constructor(props) {
@@ -158,11 +170,19 @@ class Content extends Component {
 
         this.state = {
             data: this.propsToData(props),
-            error: {}
+            error: {},
+            delegate: false
         };
 
         this.changeHandlerTarget = ::this.changeHandlerTarget;
         this.changeHandlerEditor = ::this.changeHandlerEditor;
+        this.toggleDelegate = ::this.toggleDelegate;
+    }
+
+    toggleDelegate () {
+        this.setState({
+            delegate: !this.state.delegate
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -524,8 +544,26 @@ class Content extends Component {
                     <Preview
                         data={this.state.data}
                         onClose={closePreview}
-                        delegate={delegate}
+                        delegate={this.toggleDelegate}
                         done={() => finish(this.dataToSubmit())} />
+                </Modal>
+                <Modal
+                    isOpen={this.state.delegate}
+                    contentLabel="Сменить редактора"
+                    onRequestClose={this.toggleDelegate}>
+                    <DelegateRoot>
+                        <h2>Сменить редактора</h2>
+                        <Select
+                            options={users}
+                            onChange={this.changeHandlerEditor}
+                            value={this.state.data.editor} />
+                            <br/>
+                            <br/>
+                            <Button block danger onClick={this.toggleDelegate}>
+                                <Icon type="delete-bold" />
+                                Закрыть
+                            </Button>
+                    </DelegateRoot>
                 </Modal>
             </Root>
         )

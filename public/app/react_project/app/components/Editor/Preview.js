@@ -1,4 +1,4 @@
-import React, {dangerouslySetInnerHTML } from 'react'
+import React, { dangerouslySetInnerHTML } from 'react'
 import styled from 'styled-components'
 import { FormattedTime, FormattedRelative } from 'react-intl'
 
