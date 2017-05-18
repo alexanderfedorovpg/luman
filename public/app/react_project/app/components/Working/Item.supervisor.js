@@ -6,6 +6,10 @@ import randomString from 'random-string'
 import Rating from 'components/Rating/Item'
 import User from 'components/User'
 import Status from 'components/Status'
+import Icon from 'components/Icon'
+
+import Modal from 'components/Modal'
+
 import PushNotification from 'components/PushNotification'
 import { titleWrapper } from './style'
 
@@ -29,12 +33,21 @@ const Root = styled.div`
     }
 `
 
+const CloseIcon = styled(Icon)`
+    position: absolute;
+    top: 13px;
+    right: 12px;
+
+    display: none;
+`
+
 const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding-top: 20px;
     padding-bottom: 15px;
+    position:relative;
 
     border-bottom: 1px solid #e9e9e9;
 `
@@ -154,13 +167,14 @@ const NavItem = styled.a`${navItemStyles}`
 const CustomLink = styled(Link)`${navItemStyles}`
 const CustomPush = styled(PushNotification)`${navItemStyles}`
 
-function Item({ data, push, newItem, clearTask, postMessage }) {
+function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
     let editor = data.editor
         ? data.editor
         : null
 
     return (
         <Root onClick={()=>push(`/editor/${data.id}`)}>
+        {/*// <Root>*/}
             <Wrapper>
                 <Left>
                     <Header>
@@ -228,6 +242,13 @@ function Item({ data, push, newItem, clearTask, postMessage }) {
                         )
                     }
                 </Right>
+                {!editor
+                    ? (
+                        <CloseIcon onClick={() => toggle()} className={navClassName} type="delete-bold"/>
+                    )
+                    :
+                    null
+                }
             </Wrapper>
         </Root>
     )
