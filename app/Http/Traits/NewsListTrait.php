@@ -37,6 +37,13 @@ trait NewsListTrait {
             $news->constructor(0);
         }
 
+        $isPublish = $request->input('is_publish');
+        if ($isPublish === 'true') {
+            $news->is_publish(1);
+        } elseif ($isPublish === 'false') {
+            $news->is_publish(0);
+        }
+
         $video = $request->input('video');
         if ($video !== null) {
             if ($video === 'true') {
