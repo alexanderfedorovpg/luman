@@ -62,6 +62,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/newseditor/work','NewsListEditorController@in_work');
     $group->post('/newseditor/tofix','NewsListEditorController@toFix');
     $group->put('/newseditor/cover','NewsListEditorController@updateCover');
+    $group->put('/newseditor/trigger_vc','NewsListEditorController@triggerVisibleConstructor');
     $group->put('/newseditor/title','NewsListEditorController@updateTitle');
 
     //Пользователи
@@ -86,6 +87,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/group/{groupId}/permiss','GroupController@addPermiss');
     $group->delete('/group/{groupId}/permiss/{permissId}','GroupController@addPermiss');
     $group->get('/group/{id}/users','GroupController@UsersByGroup');
+    $group->get('/group/{id}/permiss','GroupController@PermissByGroup');
 
 
     // Уведомления
@@ -143,6 +145,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->delete('/air/record/{id}','AirRecordController@destroy');
     $group->put('/air/record/publish','AirRecordController@publish');
     $group->post('/air/record/upload','AirRecordController@upload');
+    $group->put('/air/record/trigger_vc','NewsListEditorController@triggerVisibleConstructor');
 
     //Конструктор главной страницы
     $group->get('/homepage','HomepageController@index');

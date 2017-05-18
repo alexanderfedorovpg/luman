@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { dangerouslySetInnerHTML } from 'react'
 import styled from 'styled-components'
 import { FormattedTime, FormattedRelative } from 'react-intl'
 
@@ -154,7 +154,8 @@ function Preview({ data, onClose, delegate, done }) {
                 </div>
             </ImageWrapper>
             <Content>
-                {data.body}
+                {/*{data.body}*/}
+                <div dangerouslySetInnerHTML={{__html: data.body}} />
                 <Btns>
                     <CustomButton primary onClick={e=>delegate()}>
                         <Icon type="arrow-left" />

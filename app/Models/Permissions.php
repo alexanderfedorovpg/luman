@@ -5,10 +5,10 @@ namespace App\Models;;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Groups
+ * Class Peremissions
  * @package App\Models
  */
-class Groups extends Model
+class Permissions extends Model
 {
 
     /**
@@ -16,7 +16,7 @@ class Groups extends Model
      *
      * @var array
      */
-    protected $table = 'groups';
+    protected $table = 'permissions';
 
     /**
      * The attributes that are mass assignable.
@@ -25,13 +25,9 @@ class Groups extends Model
      */
     protected $fillable = [
         'name',
-        'enable',
+        'description',
     ];
 
-    public function permissions()
-    {
-        return $this->belongsToMany(Permissions::class, 'groups_permissions', 'group_id', 'permission_id');
-    }
-
+    protected $hidden = ['pivot'];
 
 }

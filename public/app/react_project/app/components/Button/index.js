@@ -30,6 +30,10 @@ const Button = styled.button`
     outline: 0;
     background: transparent;
 
+    &:active, &:focus {
+        background: transparent;
+    }
+
     &[disabled] {
         color: rgba(51, 51, 51, .4);
         cursor: not-allowed;
