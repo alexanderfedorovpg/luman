@@ -7,7 +7,7 @@ trait NewsListTrait {
 
     public function processing(&$request, &$news) {
         $this->validate($request, [
-            'orderBy' => 'in:id,top',
+            'orderBy' => 'in:id,top,publish_date',
             'orderType' => 'in:asc,desc'
         ]);
 
@@ -50,7 +50,10 @@ trait NewsListTrait {
         if ($orderBy !== null) {
             $orderType = $request->input('orderType') ? $request->input('orderType') : 'ASC';
             $news->orderBy($orderBy , $orderType);
-            $news->orderBy('publish_date' , 'ASC');
+            if ($orderBy !== 'publish_date'){
+                $news->orderBy('publish_date' , 'ASC');
+            }
+
         }
 
         $start = $request->input('start');

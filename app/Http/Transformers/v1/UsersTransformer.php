@@ -40,8 +40,8 @@ class UsersTransformer extends Transformer
             'edited' => $edited
         ];
 
-        $transform['name'] = $user['name'] . ' ' . $user['lastname'];
-        $transform['firstname'] = $user['name'];
+        $transform['name'] = $user['firstname'] . ' ' . $user['lastname'];
+
         
         return $transform;
     }
