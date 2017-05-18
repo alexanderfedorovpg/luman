@@ -189,7 +189,7 @@ class NewsListEditorController extends CmsController
 
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
-            $rules['theses'] = 'required';
+          //  $rules['theses'] = 'required';
 
             $rules['image_main'] = 'numeric';
             $rules['image_preview'] = 'numeric';
@@ -324,7 +324,7 @@ class NewsListEditorController extends CmsController
 
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
-            $rules['theses'] = 'required';
+//            $rules['theses'] = 'required';
 
             $rules['image_main'] = 'numeric';
             $rules['image_preview'] = 'numeric';
