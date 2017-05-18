@@ -55,6 +55,55 @@ const makeRadioButtonsFromGroups = () => createSelector(
     }
 );
 
+const makeSelected = () => createSelector(
+    selectEditionPageDomain(),
+    (page) => page.get('selectedUser')
+);
+
+const selectSelectedUser = createSelector(
+    [makeSelected(), selectUsers],
+    (selected, usersImmutable) => {
+        if (!selected || !usersImmutable) {
+            return null;
+        }
+
+        const users = usersImmutable.toJS();
+
+        return users[selected];
+    }
+);
+
+const makeUserInfo = () => createSelector(
+    selectSelectedUser,
+    (user) => {
+        if (!user) {
+            return {};
+        }
+
+        return {
+            avatar: user.avatar,
+            name: user.name,
+        };
+    }
+);
+
+const makeUserAccount = () => createSelector(
+    selectSelectedUser,
+    (user) => {
+        if (!user) {
+            return {};
+        }
+
+        return {
+            email: user.email,
+            login: user.login,
+            password: null,
+            group: String(user.groups[0]),
+            enabled: user.enabled === 1,
+        };
+    }
+);
+
 /**
  * Default selector used by EditionPage
  */
@@ -69,4 +118,7 @@ export {
     selectEditionPageDomain,
     makeGetUsers,
     makeRadioButtonsFromGroups,
+    makeUserAccount,
+    makeSelected,
+    makeUserInfo,
 };

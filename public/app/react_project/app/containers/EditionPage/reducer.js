@@ -9,7 +9,9 @@ import { fromJS } from 'immutable';
 //     ADD_USER_SUCCESS,
 // } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+    selectedUser: 2,
+});
 
 function editionPageReducer(state = initialState, action) {
     switch (action.type) {

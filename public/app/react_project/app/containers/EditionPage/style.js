@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import Table from 'components/Table';
 import { Wrap, Left, Right } from 'components/Content';
+import TypedBtn from 'components/Button/TypedBtn';
 import { color, padding } from 'constants/style';
+import { rem } from 'utils/style';
 
 export const Wrapper = styled(Wrap)`
     padding-top: 8px;
@@ -30,5 +32,11 @@ export const StyledTable = styled(Table)`
                 font-weight: 600;
             }
         }
+    }
+`;
+
+export const StyledTypedBtn = styled(TypedBtn)`
+    &:not(:last-child) {
+        margin-right: ${rem(6)};
     }
 `;
