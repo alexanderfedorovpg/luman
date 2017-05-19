@@ -39,6 +39,8 @@ export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
     params,
 });
 export const addUser = (data) => axios.post('/user', data);
+export const deleteUser = (id) => axios.delete(`/user/${id}`);
+export const editUser = (id, data) => axios.put(`/user/${id}`, data);
 export const getCurrentUser = () => axios.get('/userprofile');
 export const editUserProfile = (data) => axios.put('/userprofile', data);
 

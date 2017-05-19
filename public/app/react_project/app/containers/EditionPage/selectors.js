@@ -12,14 +12,20 @@ const selectAppDomain = () => (state) => state.get('app');
 /**
  * Other specific selectors
  */
+
+const makeSelected = () => createSelector(
+    selectEditionPageDomain(),
+    (page) => page.get('selectedUser')
+);
+
 const selectUsers = createSelector(
     selectAppDomain(),
     (app) => app.get('users').get('data')
 );
 
 const makeGetUsers = () => createSelector(
-    [selectUsers, makeGetGroups()],
-    (usersImmutable, groupsImmutable) => {
+    [selectUsers, makeGetGroups(), makeSelected()],
+    (usersImmutable, groupsImmutable, selected) => {
         if (!usersImmutable || !groupsImmutable) {
             return [];
         }
@@ -31,11 +37,15 @@ const makeGetUsers = () => createSelector(
             return groups.byId[group].name;
         }
 
-        return Object.values(users).map((user) => ([
-            <User className="table-user" data={{ name: user.name, avatar: user.avatar }} />,
-            user.groups.map(makeGroups).join(', '),
-            user.enabled === 1 ? 'Активен' : <span className="table-blocked">Заблокирован</span>,
-        ]));
+        return Object.values(users).map((user) => ({
+            id: user.id,
+            active: user.id === selected,
+            cells: [
+                <User className="table-user" data={{ name: user.name, avatar: user.avatar }} />,
+                user.groups.map(makeGroups).join(', '),
+                user.enabled === 1 ? 'Активен' : <span className="table-blocked">Заблокирован</span>,
+            ],
+        }));
     }
 );
 
@@ -53,11 +63,6 @@ const makeRadioButtonsFromGroups = () => createSelector(
             label: groups.byId[id].name,
         }));
     }
-);
-
-const makeSelected = () => createSelector(
-    selectEditionPageDomain(),
-    (page) => page.get('selectedUser')
 );
 
 const selectSelectedUser = createSelector(

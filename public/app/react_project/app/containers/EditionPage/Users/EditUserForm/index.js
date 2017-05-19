@@ -20,17 +20,33 @@ import {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EditUserForm extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
     onSubmit(dataImmutable) {
         const data = dataImmutable.toJS();
         data.password = data.password || null;
+
+        this.props.onEdit(data);
     }
 
     render() {
-        const { user, handleSubmit, groups, valid, dirty } = this.props;
+        const {
+            user,
+            handleSubmit,
+            groups,
+            valid,
+            dirty,
+            onClose,
+            onDelete,
+        } = this.props;
 
         return (
             <Form onSubmit={handleSubmit(this.onSubmit)}>
-                <CloseBtn>
+                <CloseBtn onClick={onClose}>
                     <Close width="15" height="15" />
                 </CloseBtn>
                 <StyledUser data={user} />
@@ -77,6 +93,7 @@ class EditUserForm extends PureComponent {
                         block
                         buttonType="cancel"
                         type="button"
+                        onClick={onDelete}
                     >
                         Удалить
                     </StyledTypedBtn>
@@ -97,6 +114,9 @@ class EditUserForm extends PureComponent {
 EditUserForm.propTypes = {
     user: PropTypes.object,
     handleSubmit: PropTypes.func,
+    onClose: PropTypes.func,
+    onDelete: PropTypes.func,
+    onEdit: PropTypes.func,
     groups: PropTypes.array,
     valid: PropTypes.bool,
     dirty: PropTypes.bool,
@@ -131,5 +151,6 @@ const validate = (values) => {
 
 export default reduxForm({
     form: 'editUserForm',
+    enableReinitialize: true,
     validate,
 })(EditUserForm);

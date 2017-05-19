@@ -1,33 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ContentModal from 'components/Modal/ContentModal';
-import { Group } from 'components/Form';
+import ConfirmModal from 'components/Modal/ConfirmModal';
 
 import { MODALS } from '../constants';
-import { StyledBtn } from '../style';
 
 const ConfirmDeleteModal = ({ currentModal, close, onConfirm }) => (
-    <ContentModal
+    <ConfirmModal
         title="Вы уверены, что хотите удалить этот выпуск?"
         contentLabel="Подтверждение удаления выпуска"
         isOpen={currentModal === MODALS.confirmRecordDelete}
-        onRequestClose={close}
-    >
-        <Group horizontal>
-            <StyledBtn
-                onClick={close}
-                buttonType="save"
-            >
-                Передумал удалять
-            </StyledBtn>
-            <StyledBtn
-                onClick={onConfirm}
-                buttonType="cancel"
-            >
-                Да, жажду удалить
-            </StyledBtn>
-        </Group>
-    </ContentModal>
+        onClose={close}
+        onConfirm={onConfirm}
+        cancelText="Передумал удалять"
+        confirmText="Да, жажду удалить"
+    />
 );
 
 ConfirmDeleteModal.propTypes = {

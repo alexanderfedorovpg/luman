@@ -13,11 +13,6 @@ const selectProfilePageDomain = () => (state) => state.get('profilePage');
  * Other specific selectors
  */
 
-const makeSelectedTab = () => createSelector(
-    selectProfilePageDomain(),
-    (page) => page.get('activeTab')
-);
-
 const makeAccountFormInitialValues = () => createSelector(
     getCurrentUserData,
     (userImmutable) => {
@@ -90,7 +85,10 @@ const makeLastActions = () => createSelector(
     (lastActionsImmutable) => {
         const lastActions = lastActionsImmutable.toJS();
 
-        return lastActions.map((action) => lastActionsMap.map((item) => action[item.value]));
+        return lastActions.map((action) => ({
+            id: action.id,
+            cells: lastActionsMap.map((item) => action[item.value]),
+        }));
     }
 );
 
