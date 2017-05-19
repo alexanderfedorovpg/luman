@@ -161,18 +161,10 @@ class Content extends Component {
         this.state = {
             data: this.propsToData(props),
             error: {},
-            delegate: false
         };
 
         this.changeHandlerTarget = ::this.changeHandlerTarget;
         this.changeHandlerEditor = ::this.changeHandlerEditor;
-        this.toggleDelegate = ::this.toggleDelegate;
-    }
-
-    toggleDelegate () {
-        this.setState({
-            delegate: !this.state.delegate
-        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -549,14 +541,3 @@ Content.propTypes = {
 }
 
 export default Content
-
-
-// <<<<<<< Updated upstream
-//                         delegate={{
-//                             toggle: this.toggleDelegate,
-//                             open: this.state.delegate,
-//                             change: this.changeHandlerEditor,
-//                             users: users,
-//                             value: this.state.data.editor
-//                         }}
-// =======

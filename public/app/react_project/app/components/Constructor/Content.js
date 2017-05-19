@@ -1,22 +1,19 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import * as Content from 'components/Content'
+
+import { rem, below } from 'utils/style'
+import { padding } from 'constants/style'
 
 export const Wrap = styled(Content.Wrap)``
 
 export const Left = styled(Content.Left) `
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 41.8%;
+    flex: 0 0 41.8%;
     width: 41.8%;
 `
 
 export const Right = styled(Content.Right)`
-    width: 41.584%;
-    flex-basis: 41.584%;
-    margin-top: -11px;
-    padding-left: 1.5rem;
     flex-grow: 1;
-    padding-left: 1.1875rem;
 `
+    // padding-left: ${rem(19)};

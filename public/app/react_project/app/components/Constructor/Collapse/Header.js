@@ -11,6 +11,8 @@ const Root = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: ${rem(19)};
+    padding-right: ${rem(16)};
 
     ${below('1100px')(css`
         margin-left: rem(-18);

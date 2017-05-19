@@ -29,7 +29,7 @@ export const filters = {
     ],
     supervisor: [
         {
-            title: 'В работе',
+            title: 'Выданы',
             value: 'ASSIGNED'
         },
         {
