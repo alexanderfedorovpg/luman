@@ -9,6 +9,8 @@ use App\Models\Groups;
 use App\Models\HasGroups;
 use App\Http\Transformers\Transformer;
 use App\Models\News;
+use App\Models\Permissions;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class UsersTransformer
@@ -28,18 +30,26 @@ class UsersTransformer extends Transformer
         $hasGroup = HasGroups::where('user_id', '=', $user['id'])->get(['group_id'])->toArray();
 
         $transform['groups'] = $hasGroup ? array_pluck($hasGroup, 'group_id') : [];
+
         $permissions = [];
 
-        if ( is_array($hasGroup) ) {
-            foreach ($hasGroup as $group) {
-                $group = Groups::find($group['group_id']);
-                foreach ($group->permissions as $permission) {
-                    $permissions[] = $permission->toArray();
+        if ( !Auth::user()->isAdmin() ) {
+            if ( is_array($hasGroup) ) {
+                foreach ($hasGroup as $group) {
+                    $group = Groups::find($group['group_id']);
+                    foreach ($group->permissions as $permission) {
+                        $permissions[] = $permission->toArray();
+                    }
+
+
                 }
-
-
             }
         }
+        elseif (Auth::user()->isAdmin()) {
+            $permissions[] = Permissions::all()->toArray();
+        }
+
+
 
         $transform['permissions'] = $permissions;
         unset($transform['avatar_id']);
