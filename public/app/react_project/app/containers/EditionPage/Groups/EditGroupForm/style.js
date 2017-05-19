@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-import ControlsGroup from 'components/Form/ControlsGroup';
 import { rem } from 'utils/style';
+import ControlsGroup from 'components/Form/ControlsGroup';
 
 export const Form = styled.form`
     position: relative;
-
-    margin-top: 8px;
 `;
 
 export const StyledControlsGroup = styled(ControlsGroup)`
-    margin-bottom: ${rem(23)};
+    padding-bottom: ${rem(5)};
+    margin-bottom: ${rem(15)};
+
+    border-bottom: 1px solid #d7d7d7;
 `;

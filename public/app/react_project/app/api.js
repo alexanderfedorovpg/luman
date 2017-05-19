@@ -41,6 +41,7 @@ export const getUser = (id, params) => axios.get(`/user${id ? `/${id}` : ''}`, {
 export const addUser = (data) => axios.post('/user', data);
 export const deleteUser = (id) => axios.delete(`/user/${id}`);
 export const editUser = (id, data) => axios.put(`/user/${id}`, data);
+
 export const getCurrentUser = () => axios.get('/userprofile');
 export const editUserProfile = (data) => axios.put('/userprofile', data);
 
@@ -48,6 +49,12 @@ export const getUsersInGroup = (groupId) => axios.get(`/group/${groupId}/users`)
 export const addUserToGroup = (groupId, userId) => axios.post(`/group/${groupId}/bind/${userId}`);
 export const getGroup = (id) => axios.get(`/group${id ? `/${id}` : ''}`);
 export const getGroups = () => axios.get('/group');
+export const addGroup = (data) => axios.post('/group', data);
+export const editGroup = (id, data) => axios.put(`/group/${id}`, data);
+export const deleteGroup = (id) => axios.delete(`/group/${id}`);
+export const editGroupPermissions = (id, data) => axios.put(`group/${id}/permiss`, data);
+
+export const getPermissionsList = () => axios.get('permission');
 
 // ============================================================================
 

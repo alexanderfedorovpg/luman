@@ -18,6 +18,10 @@ import {
     LOAD_GROUPS_SUCCESS,
     LOAD_GROUPS_FAILURE,
 
+    ADD_GROUP,
+    DELETE_GROUP,
+    EDIT_GROUP,
+
     LOAD_CURRENT_USER,
     LOAD_CURRENT_USER_SUCCESS,
     LOAD_CURRENT_USER_FAILURE,
@@ -202,6 +206,27 @@ export function deleteUser(id) {
 export function editUser(data) {
     return {
         type: EDIT_USER,
+        payload: data,
+    };
+}
+
+export function addGroup(userData) {
+    return {
+        type: ADD_GROUP,
+        payload: userData,
+    };
+}
+
+export function deleteGroup(id) {
+    return {
+        type: DELETE_GROUP,
+        payload: { id },
+    };
+}
+
+export function editGroup(data) {
+    return {
+        type: EDIT_GROUP,
         payload: data,
     };
 }

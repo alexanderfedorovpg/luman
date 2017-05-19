@@ -44,6 +44,9 @@ export const EDIT_USER = 'app/EDIT_USER';
 export const LOAD_GROUPS = 'app/LOAD_GROUPS';
 export const LOAD_GROUPS_SUCCESS = 'app/LOAD_GROUPS_SUCCESS';
 export const LOAD_GROUPS_FAILURE = 'app/LOAD_GROUPS_FAILURE';
+export const ADD_GROUP = 'app/ADD_GROUP';
+export const DELETE_GROUP = 'app/DELETE_GROUP';
+export const EDIT_GROUP = 'app/EDIT_GROUP';
 
 export const LOAD_CURRENT_USER = 'app/LOAD_CURRENT_USER';
 export const LOAD_CURRENT_USER_SUCCESS = 'app/LOAD_CURRENT_USER_SUCCESS';

@@ -13,9 +13,14 @@ const selectAppDomain = () => (state) => state.get('app');
  * Other specific selectors
  */
 
-const makeSelected = () => createSelector(
+const makeSelectedUser = () => createSelector(
     selectEditionPageDomain(),
     (page) => page.get('selectedUser')
+);
+
+const makeSelectedGroup = () => createSelector(
+    selectEditionPageDomain(),
+    (page) => page.get('selectedGroup')
 );
 
 const selectUsers = createSelector(
@@ -23,8 +28,13 @@ const selectUsers = createSelector(
     (app) => app.get('users').get('data')
 );
 
+const selectPermissions = createSelector(
+    selectEditionPageDomain(),
+    (page) => page.get('permissions')
+);
+
 const makeGetUsers = () => createSelector(
-    [selectUsers, makeGetGroups(), makeSelected()],
+    [selectUsers, makeGetGroups(), makeSelectedUser()],
     (usersImmutable, groupsImmutable, selected) => {
         if (!usersImmutable || !groupsImmutable) {
             return [];
@@ -49,6 +59,31 @@ const makeGetUsers = () => createSelector(
     }
 );
 
+const makeGetGroupsTable = () => createSelector(
+    [makeGetGroups(), makeSelectedGroup()],
+    (groupsImmutable, selected) => {
+        if (!groupsImmutable) {
+            return [];
+        }
+
+        const groups = groupsImmutable.toJS();
+
+        return groups.ids.map((id) => {
+            const group = groups.byId[id];
+
+            return {
+                id,
+                active: id === selected,
+                cells: [
+                    <User className="table-user" data={{ name: group.name, letterAvatar: group.name[0] }} />,
+                    group.users.length,
+                    group.enabled === 1 ? 'Активна' : <span className="table-blocked">Заблокирована</span>,
+                ],
+            };
+        });
+    }
+);
+
 const makeRadioButtonsFromGroups = () => createSelector(
     makeGetGroups(),
     (groupsImmutable) => {
@@ -65,8 +100,24 @@ const makeRadioButtonsFromGroups = () => createSelector(
     }
 );
 
+const makeCheckboxesFromPermissions = () => createSelector(
+    selectPermissions,
+    (permissionsImmutable) => {
+        if (!permissionsImmutable) {
+            return [];
+        }
+
+        const permissions = permissionsImmutable.toJS();
+
+        return permissions.map((permission) => ({
+            value: permission.id,
+            label: permission.description,
+        }));
+    }
+);
+
 const selectSelectedUser = createSelector(
-    [makeSelected(), selectUsers],
+    [makeSelectedUser(), selectUsers],
     (selected, usersImmutable) => {
         if (!selected || !usersImmutable) {
             return null;
@@ -109,6 +160,47 @@ const makeUserAccount = () => createSelector(
     }
 );
 
+const selectSelectedGroup = createSelector(
+    [makeSelectedGroup(), makeGetGroups()],
+    (selected, groupsImmutable) => {
+        if (!selected || !groupsImmutable) {
+            return null;
+        }
+
+        const groups = groupsImmutable.toJS();
+
+        return groups.byId[selected];
+    }
+);
+
+const makeGroupInfo = () => createSelector(
+    selectSelectedGroup,
+    (group) => {
+        if (!group) {
+            return {};
+        }
+
+        return {
+            name: group.name,
+            letterAvatar: group.name[0],
+        };
+    }
+);
+
+const makeGroupAccount = () => createSelector(
+    selectSelectedGroup,
+    (group) => {
+        if (!group) {
+            return {};
+        }
+
+        return {
+            permissions: [],
+            enabled: group.enabled === 1,
+        };
+    }
+);
+
 /**
  * Default selector used by EditionPage
  */
@@ -122,8 +214,13 @@ export default makeSelectEditionPage;
 export {
     selectEditionPageDomain,
     makeGetUsers,
+    makeGetGroupsTable,
     makeRadioButtonsFromGroups,
-    makeUserAccount,
-    makeSelected,
+    makeCheckboxesFromPermissions,
+    makeSelectedUser,
+    makeSelectedGroup,
     makeUserInfo,
+    makeUserAccount,
+    makeGroupInfo,
+    makeGroupAccount,
 };

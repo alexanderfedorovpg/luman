@@ -10,18 +10,14 @@ import {
 import { Close } from 'components/Icon/svg';
 import { checkEmail } from 'utils/validate';
 
-import {
-    StyledUser,
-    CloseBtn,
-    StyledTypedBtn,
-} from '../../style';
+import { StyledUser, StyledTypedBtn, CloseBtn } from '../../style';
 import {
     Form,
     StyledControlsGroup,
 } from './style';
 
 // eslint-disable-next-line react/prefer-stateless-function
-class EditUserForm extends PureComponent {
+class EditGroupForm extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -39,7 +35,7 @@ class EditUserForm extends PureComponent {
         const {
             user,
             handleSubmit,
-            groups,
+            permissions,
             valid,
             dirty,
             onClose,
@@ -52,40 +48,9 @@ class EditUserForm extends PureComponent {
                     <Close width="15" height="15" />
                 </CloseBtn>
                 <StyledUser data={user} />
-                <Group sm>
-                    <Field
-                        name="email"
-                        type="email"
-                        block
-                        showError
-                        placeholder="Электронная почта"
-                        component={InputRedux}
-                    />
-                </Group>
-                <Group sm>
-                    <Field
-                        name="login"
-                        block
-                        placeholder="Логин"
-                        component={InputRedux}
-                    />
-                </Group>
-                <Group marginBottom={rem(40)}>
-                    <Field
-                        name="password"
-                        type="password"
-                        block
-                        showError
-                        placeholder="Пароль"
-                        component={InputRedux}
-                    />
-                </Group>
                 <StyledControlsGroup
-                    name="group"
-                    items={groups}
-                    type="radio"
-                    itemWidth="38%"
-                    itemGap="12px"
+                    name="permissions"
+                    items={permissions}
                     showError
                 />
                 <Group marginBottom={rem(38)}>
@@ -93,7 +58,7 @@ class EditUserForm extends PureComponent {
                         type="checkbox"
                         name="enabled"
                         activePosition="left"
-                        labels={['Активен', 'Заблокирован']}
+                        labels={['Активна', 'Заблокирована']}
                         component={SwitchRedux}
                     />
                 </Group>
@@ -120,13 +85,13 @@ class EditUserForm extends PureComponent {
     }
 }
 
-EditUserForm.propTypes = {
+EditGroupForm.propTypes = {
     user: PropTypes.object,
     handleSubmit: PropTypes.func,
     onClose: PropTypes.func,
     onDelete: PropTypes.func,
     onEdit: PropTypes.func,
-    groups: PropTypes.array,
+    permissions: PropTypes.array,
     valid: PropTypes.bool,
     dirty: PropTypes.bool,
 };
@@ -159,7 +124,7 @@ const validate = (values) => {
 };
 
 export default reduxForm({
-    form: 'editUserForm',
+    form: 'editGroupForm',
     enableReinitialize: true,
     validate,
-})(EditUserForm);
+})(EditGroupForm);

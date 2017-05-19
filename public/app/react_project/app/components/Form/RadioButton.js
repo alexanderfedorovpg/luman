@@ -74,6 +74,7 @@ const RadioButton = ({ children, className, checked, ...rest }) => (
     <Wrapper checked={checked} className={className}>
         <Input
             checked={checked}
+            type="radio"
             {...rest}
         />
 

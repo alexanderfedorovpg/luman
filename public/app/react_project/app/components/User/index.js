@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router';
 
 import { rem, ifProp } from 'utils/style';
@@ -16,19 +16,33 @@ const Root = styled.div`
 `
 
 const Pic = styled(Link)`
-    display: block;
     flex-shrink: 0;
     width: 40px;
     height: 40px;
     margin-right: ${rem(12)};
+
     text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    ${ifProp('letter')(css`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-transform: uppercase;
+
+        background-color: #2a2f38;
+    `)}
 `
 
 const Img = styled.img`
     max-width: 100%;
     max-height: 100%;
-
-    border-radius: 50%;
 
     @supports (object-fit: cover) {
         max-width: none;
@@ -49,15 +63,14 @@ export const Name = styled(Link)`
 `
 
 function User({ to, data, children, className }) {
+    const letterAvatar = data.letterAvatar;
     const url = (data.avatar && data.avatar.url) ? data.avatar.url : '';
     return (
         <Root className={className}>
-            <Pic to={to}>
+            <Pic letter={!!letterAvatar} to={to}>
                 {url
-                    ? (
-                        <Img src={url} />
-                    )
-                    : null
+                    ? <Img src={url} />
+                    : letterAvatar || null
                 }
             </Pic>
             {children
