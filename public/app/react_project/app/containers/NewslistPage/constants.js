@@ -10,6 +10,10 @@ export const ACCEPT_ARTICLE = 'app/NewslistPage/ACCEPT_ARTICLE';
 export const ACCEPT_ARTICLE_SUCCESS = 'app/NewslistPage/ACCEPT_ARTICLE_SUCCESS';
 export const ACCEPT_ARTICLE_FAILURE = 'app/NewslistPage/ACCEPT_ARTICLE_FAILURE';
 
+export const DELETE_ARTICLE = 'app/NewslistPage/DELETE_ARTICLE';
+export const DELETE_ARTICLE_SUCCESS = 'app/NewslistPage/DELETE_ARTICLE_SUCCESS';
+export const DELETE_ARTICLE_FAILURE = 'app/NewslistPage/DELETE_ARTICLE_FAILURE';
+
 export const SET_FILTER = 'app/NewslistPage/SET_FILTER';
 
 export const filters = {

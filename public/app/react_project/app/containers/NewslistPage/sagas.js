@@ -4,7 +4,8 @@ import { push } from 'react-router-redux'
 import {
     LOAD_NEWSLIST,
     REJECT_ARTICLE,
-    ACCEPT_ARTICLE
+    ACCEPT_ARTICLE,
+    DELETE_ARTICLE
 } from './constants'
 
 import {
@@ -15,7 +16,10 @@ import {
     articleRejectionError,
 
     articleAccepted,
-    articleAcceptionError
+    articleAcceptionError,
+
+    articleDeleted,
+    articleDeletionError
 } from './actions'
 
 import * as api from 'api'
@@ -61,12 +65,27 @@ export function* acceptArticle({ payload }) {
     }
 }
 
+export function* deleteArticle({ payload }) {
+
+    try {
+        yield call(api.deleteArticle, payload)
+
+        yield put(articleDeleted())
+
+        yield put(push(`/newslist`))
+    } catch (err) {
+        yield put(articleDeletionError(err))
+    }
+}
+
 export function* newslistData() {
     yield takeLatest(LOAD_NEWSLIST, getList)
 
     yield takeEvery(REJECT_ARTICLE, rejectArticle)
 
     yield takeEvery(ACCEPT_ARTICLE, acceptArticle)
+
+    yield takeEvery(DELETE_ARTICLE, deleteArticle)
 }
 
 export default [
