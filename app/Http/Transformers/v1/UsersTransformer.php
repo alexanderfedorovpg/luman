@@ -38,7 +38,8 @@ class UsersTransformer extends Transformer
                 foreach ($hasGroup as $group) {
                     $group = Groups::find($group['group_id']);
                     foreach ($group->permissions as $permission) {
-                        $permissions[] = $permission->toArray();
+
+                        array_push($permissions, $permission->toArray());
                     }
 
 
@@ -46,7 +47,7 @@ class UsersTransformer extends Transformer
             }
         }
         elseif (Auth::user()->isAdmin()) {
-            $permissions[] = Permissions::all()->toArray();
+            $permissions  = Permissions::all()->toArray();
         }
 
 
