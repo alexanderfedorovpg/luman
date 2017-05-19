@@ -229,7 +229,7 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
                                     Сменить редактора
                                 </NavItem>
                                 <NavItem onClick={()=>clearTask(data.id)}>
-                                    Снять задание
+                                    Удалить задание
                                 </NavItem>
                             </Nav>
                         )
