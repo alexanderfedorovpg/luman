@@ -37,12 +37,6 @@ trait NewsListTrait {
             $news->constructor(0);
         }
 
-        $isPublish = $request->input('is_publish');
-        if ($isPublish === 'true') {
-            $news->published(1);
-        } elseif ($isPublish === 'false') {
-            $news->published(0);
-        }
 
         $video = $request->input('video');
         if ($video !== null) {
@@ -57,9 +51,7 @@ trait NewsListTrait {
         if ($orderBy !== null) {
             $orderType = $request->input('orderType') ? $request->input('orderType') : 'ASC';
             $news->orderBy($orderBy , $orderType);
-            if ($orderBy !== 'publish_date'){
-                $news->orderBy('publish_date' , 'ASC');
-            }
+
 
         }
 

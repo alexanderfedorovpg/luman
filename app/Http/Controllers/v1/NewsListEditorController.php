@@ -58,12 +58,22 @@ class NewsListEditorController extends CmsController
             $user_id = $this->user_id;
 
 
+            $isPublish = $request->input('is_publish')?$request->input('is_publish'):0;
+
+
+
+            if ($isPublish === 'true') {
+                $isPublish=1;
+            } elseif ($isPublish === 'false') {
+                $isPublish=0;
+            }
+
             switch ($assigned) {
                 case 'me' :
-                    $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
+                    $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish ];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
+                    $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
                     break;
                 default :
                     $params = false;
