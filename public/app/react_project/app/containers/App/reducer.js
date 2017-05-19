@@ -24,6 +24,8 @@ import {
     LOAD_PROGRAMS_SUCCESS,
     LOAD_GROUPS_SUCCESS,
     ADD_USER,
+    DELETE_USER,
+    EDIT_USER,
 } from './constants';
 
 const initialState = fromJS({
@@ -73,13 +75,24 @@ function AppReducer(state = initialState, action) {
             users = action.payload.reduce((result, item) => ({ ...result, [item.id]: item }), {});
 
             return state
-                .updateIn(['users', 'data'], (data) => data.merge(fromJS(users)));
+                .mergeIn(['users', 'data'], fromJS(users));
 
         case ADD_USER:
             return state
+                .setIn(
+                    ['users', 'data', action.payload.id],
+                    fromJS(action.payload)
+                );
+
+        case DELETE_USER:
+            return state
+                .deleteIn(['users', 'data', String(action.payload.id)]);
+
+        case EDIT_USER:
+            return state
                 .updateIn(
-                    ['users', 'data'],
-                    (usersData) => usersData.set(action.payload.id, fromJS(action.payload))
+                    ['users', 'data', String(action.payload.id)],
+                    (user) => user.merge(fromJS(action.payload))
                 );
 
         case LOAD_RUBRICS_SUCCESS:

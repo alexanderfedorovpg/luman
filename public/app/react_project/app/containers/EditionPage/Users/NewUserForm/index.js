@@ -13,11 +13,21 @@ import { Form, GroupControls } from './style';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class NewUserForm extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onSubmit(data) {
+        this.props.addUser(data.toJS());
+    }
+
     render() {
         const { handleSubmit, groups, valid } = this.props;
 
         return (
-            <Form onSubmit={handleSubmit(this.props.addUser)}>
+            <Form onSubmit={handleSubmit(this.onSubmit)}>
                 <Group sm>
                     <Field
                         block
@@ -116,6 +126,7 @@ const validate = (values) => {
 // eslint-disable-next-line no-class-assign
 NewUserForm = reduxForm({
     form: 'newUserForm',
+    destroyOnUnmount: false,
     validate,
 })(NewUserForm);
 

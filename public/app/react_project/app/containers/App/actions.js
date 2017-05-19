@@ -11,6 +11,8 @@ import {
     LOAD_USERS_FAILURE,
 
     ADD_USER,
+    DELETE_USER,
+    EDIT_USER,
 
     LOAD_GROUPS,
     LOAD_GROUPS_SUCCESS,
@@ -187,5 +189,19 @@ export function addUser(userData) {
     return {
         type: ADD_USER,
         payload: userData,
+    };
+}
+
+export function deleteUser(id) {
+    return {
+        type: DELETE_USER,
+        payload: { id },
+    };
+}
+
+export function editUser(data) {
+    return {
+        type: EDIT_USER,
+        payload: data,
     };
 }

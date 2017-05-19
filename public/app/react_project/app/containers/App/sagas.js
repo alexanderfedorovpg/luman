@@ -97,8 +97,8 @@ function* fetchCurrentUser() {
 
 function* usersData() {
     yield takeLatest(LOAD_EDITORS, fetchEditors);
-    yield takeLatest(LOAD_USERS, fetchCurrentUser);
-    yield takeLatest(LOAD_CURRENT_USER, fetchUsers);
+    yield takeLatest(LOAD_USERS, fetchUsers);
+    yield takeLatest(LOAD_CURRENT_USER, fetchCurrentUser);
 }
 
 export function* fetchRubrics() {
