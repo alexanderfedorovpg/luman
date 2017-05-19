@@ -2,7 +2,7 @@ import React from 'react';
 import { createSelector } from 'reselect';
 import User from 'components/User';
 import { makeGetGroups } from 'containers/App/selectors';
-
+import { historyMap } from './constants';
 /**
  * Direct selector to the editionPage state domain
  */
@@ -201,6 +201,36 @@ const makeGroupAccount = () => createSelector(
     }
 );
 
+const selectHistory = createSelector(
+    selectEditionPageDomain(),
+    (page) => page.get('history')
+);
+
+const makeHistory = () => createSelector(
+    [selectHistory, selectUsers],
+    (historyImmutable, usersImmutable) => {
+        const history = historyImmutable.toJS();
+        const users = usersImmutable.toJS();
+
+        return history.map((action) => ({
+            id: action.id,
+            cells: historyMap.map((item) => {
+                if (item.value === 'user') {
+                    console.log(users);
+                    return users[action.user_id].name;
+                }
+
+                return action[item.value];
+            }),
+        }));
+    }
+);
+
+const makeGetAllHistoryLoaded = () => createSelector(
+    selectEditionPageDomain(),
+    (page) => page.get('allHistoryLoaded'),
+);
+
 /**
  * Default selector used by EditionPage
  */
@@ -223,4 +253,6 @@ export {
     makeUserAccount,
     makeGroupInfo,
     makeGroupAccount,
+    makeHistory,
+    makeGetAllHistoryLoaded,
 };

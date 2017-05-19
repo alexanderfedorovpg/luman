@@ -11,12 +11,16 @@ import {
     SELECT_GROUP,
     DESELECT_GROUP,
     GET_PERMISSIONS_SUCCESS,
+    ALL_HISTORY_LOADED,
+    GET_HISTORY_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({
     selectedUser: null,
     selectedGroup: null,
     permissions: [],
+    history: [],
+    allHistoryLoaded: false,
 });
 
 function editionPageReducer(state = initialState, action) {
@@ -31,6 +35,13 @@ function editionPageReducer(state = initialState, action) {
             return state.set('selectedGroup', null);
         case GET_PERMISSIONS_SUCCESS:
             return state.set('permissions', fromJS(action.payload.permissions));
+        case ALL_HISTORY_LOADED:
+            return state.set('allHistoryLoaded', true);
+        case GET_HISTORY_SUCCESS:
+            return state.update(
+                'history',
+                (history) => history.concat(action.payload.history)
+            );
         default:
             return state;
     }

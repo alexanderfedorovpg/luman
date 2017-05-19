@@ -120,6 +120,10 @@ class Table extends React.PureComponent {
         this.renderTh = this.renderTh.bind(this);
     }
 
+    componentWillMount() {
+        this.sortTable();
+    }
+
     componentWillReceiveProps(newProps) {
         if (newProps.body === this.props.body) {
             return;
@@ -146,8 +150,8 @@ class Table extends React.PureComponent {
         const { sort: { index, direction } } = this.state;
         const newData = [...data].sort((row1, row2) => {
             const toDown = direction === 'down';
-            const a = row1[index] === null ? '' : row1[index];
-            const b = row2[index] === null ? '' : row2[index];
+            const a = row1.cells[index] === null ? '' : row1.cells[index];
+            const b = row2.cells[index] === null ? '' : row2.cells[index];
 
             if (a > b) {
                 return toDown ? -1 : 1;
@@ -160,8 +164,8 @@ class Table extends React.PureComponent {
 
         if (this.props.onSort) {
             this.props.onSort({
-                sortDirection: this.state.sort.direction,
-                sortIndex: this.state.sort.index,
+                sortDirection: direction,
+                sortIndex: index,
             });
         }
 

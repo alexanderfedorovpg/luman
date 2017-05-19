@@ -24,6 +24,10 @@ import {
     DELETE_GROUP_FAILURE,
     EDIT_GROUP,
     EDIT_GROUP_FAILURE,
+    GET_HISTORY,
+    GET_HISTORY_SUCCESS,
+    GET_HISTORY_FAILURE,
+    ALL_HISTORY_LOADED,
 } from './constants';
 
 export function addUser(userData) {
@@ -153,5 +157,31 @@ export function failureEditGroup(error) {
     return {
         type: EDIT_GROUP_FAILURE,
         error,
+    };
+}
+
+export function getHistory() {
+    return {
+        type: GET_HISTORY,
+    };
+}
+
+export function successGetHistory(history) {
+    return {
+        type: GET_HISTORY_SUCCESS,
+        payload: { history },
+    };
+}
+
+export function failureGetHistory(error) {
+    return {
+        type: GET_HISTORY_FAILURE,
+        error,
+    };
+}
+
+export function allHistoryLoaded() {
+    return {
+        type: ALL_HISTORY_LOADED,
     };
 }

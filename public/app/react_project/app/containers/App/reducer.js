@@ -83,7 +83,7 @@ function AppReducer(state = initialState, action) {
         case ADD_USER:
             return state
                 .setIn(
-                    ['users', 'data', action.payload.id],
+                    ['users', 'data', String(action.payload.id)],
                     fromJS(action.payload)
                 );
 
@@ -122,12 +122,12 @@ function AppReducer(state = initialState, action) {
         case ADD_GROUP:
             return state
                 .setIn(
-                    ['groups', 'byId', action.payload.id],
+                    ['groups', 'byId', String(action.payload.id)],
                     fromJS(action.payload)
                 )
                 .updateIn(
                     ['groups', 'ids'],
-                    (groups) => groups.push(action.payload.id)
+                    (groups) => groups.push(String(action.payload.id))
                 );
 
         case DELETE_GROUP:
@@ -135,7 +135,7 @@ function AppReducer(state = initialState, action) {
                 .deleteIn(['groups', 'byId', String(action.payload.id)])
                 .updateIn(
                     ['groups', 'ids'],
-                    (groups) => groups.filter((id) => id !== action.payload.id)
+                    (groups) => groups.filter((id) => String(id) !== String(action.payload.id))
                 );
 
         case EDIT_GROUP:

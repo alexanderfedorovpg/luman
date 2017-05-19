@@ -15,7 +15,7 @@ const Root = styled.div`
     letter-spacing: 0.25px;
 `
 
-const Pic = styled(Link)`
+const Pic = styled(({letter, ...props}) => <Link {...props} />)`
     flex-shrink: 0;
     width: 40px;
     height: 40px;

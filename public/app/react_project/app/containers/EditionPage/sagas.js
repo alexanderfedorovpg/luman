@@ -19,6 +19,9 @@ import {
     ADD_GROUP,
     DELETE_GROUP,
     EDIT_GROUP,
+    GET_HISTORY,
+
+    HISTORY_UPLOAD_LIMIT,
 } from './constants';
 import {
     failureAddUser,
@@ -29,6 +32,9 @@ import {
     failureAddGroup,
     failureDeleteGroup,
     failureEditGroup,
+    successGetHistory,
+    failureGetHistory,
+    allHistoryLoaded,
 } from './actions';
 
 const selectSelectedUser = (state) => state.getIn(['editionPage', 'selectedUser']);
@@ -44,7 +50,7 @@ export function* addUserSaga({ payload }) {
         const data = {
             ...response.data,
             enabled: 1,
-            groups: [payload.group],
+            groups: [parseInt(payload.group, 10)],
         };
 
         yield put(addUser(data));
@@ -86,10 +92,13 @@ export function* editUserSaga({ payload }) {
         yield put(showPreloader());
 
         if (group) {
+            const groupInt = parseInt(group, 10);
             const users = yield select(selectUsers);
 
-            if (users[payload.id].groups.indexOf(group) === -1) {
-                yield call(api.addUserToGroup, group, payload.id);
+            console.log(users[payload.id].groups.indexOf(groupInt) === -1);
+
+            if (users[payload.id].groups.indexOf(groupInt) === -1) {
+                yield call(api.addUserToGroup, groupInt, payload.id);
             }
         }
 
@@ -118,7 +127,11 @@ export function* getPermissionsSaga() {
 export function* addGroupSaga({ payload }) {
     try {
         yield put(showPreloader());
-        const response = yield call(api.addGroup, payload);
+        const data = {
+            ...payload,
+            enabled: 1,
+        };
+        const response = yield call(api.addGroup, data);
 
         yield put(addGroup(response.data));
         yield put(hidePreloader());
@@ -167,6 +180,26 @@ export function* deleteGroupSaga({ payload }) {
     }
 }
 
+const selectHistory = (state) => state.getIn(['editionPage', 'history']).toJS();
+
+export function* getHistorySaga() {
+    try {
+        const loadedHistory = yield select(selectHistory);
+
+        const response = yield call(api.getLogs, {
+            offset: loadedHistory.length,
+            limit: HISTORY_UPLOAD_LIMIT,
+        });
+        yield put(successGetHistory(response.data));
+        if (response.data.length < HISTORY_UPLOAD_LIMIT) {
+            yield put(allHistoryLoaded());
+        }
+    } catch (err) {
+        console.error(err);
+        yield put(failureGetHistory());
+    }
+}
+
 export function* editionPageData() {
     yield takeLatest(ADD_USER, addUserSaga);
     yield takeLatest(DELETE_USER, deleteUserSaga);
@@ -175,6 +208,7 @@ export function* editionPageData() {
     yield takeLatest(ADD_GROUP, addGroupSaga);
     yield takeLatest(DELETE_GROUP, deleteGroupSaga);
     yield takeLatest(EDIT_GROUP, editGroupSaga);
+    yield takeLatest(GET_HISTORY, getHistorySaga);
 }
 
 // All sagas to be loaded
