@@ -83,9 +83,8 @@ class GroupController extends CmsController
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->getMessage());
         }
-        $data=$request->all();
-        $data['enabled']=1;
-        $group = new Group($data);
+
+        $group = new Group($request->all());
         if ($group->save()) {
             return $this->respondCreated(['success' => true]);
         }
@@ -116,10 +115,9 @@ class GroupController extends CmsController
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->getMessage());
         }
-        $data=$request->all();
-        $data['enabled']=1;
 
-        return $this->respondCreated(['success' => $group->update($data)]);
+
+        return $this->respondCreated(['success' => $group->update($request->all())]);
     }
 
     /**
