@@ -6,6 +6,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Transformers\v1\UsersTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Auth;
@@ -109,21 +110,27 @@ class UserController extends CmsController
             return $this->respondNotFound('User is not found');
         }
 
-        try {
-
-            $rules = [
+     try {
+        $validation = Validator::make(
+            $request->all(),
+            [
                 'firstname' => 'max:255',
                 'lastname' => 'max:255',
-                'login' => 'required|max:255|unique:users,login',
-                'email' => 'required|email|unique:users,email',
+                'login' => "max:255|unique:users,login,{$id}",
+                'email' => "email|unique:users,email,{$id}",
                 'need_change_password' => 'boolean',
                 'enabled' => 'boolean',
                 'avatar_id' => 'integer|exists:cdn_files,id'
-            ];
-            $this->validate($request, $rules);
-        } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+            ]
+        );
+        if ($validation->fails()) {
+
+            throw new ValidationException($validation->errors()->all());
         }
+
+     } catch (ValidationException $e) {
+         return $this->respondFail422x($e->validator);
+     }
         $user->update($request->all());
         return $this->respond($this->usersTransformer->transform($user->toArray()));
     }
