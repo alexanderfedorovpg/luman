@@ -81,7 +81,11 @@ const validate = (values) => {
 }
 
 const formPart1 = ({}) => (
-    <Field name="stream" component={InputRedux} block />
+    <Field
+        name="stream"
+        component={InputRedux}
+        placeholder="http://rtvi.com/"
+        block />
 )
 
 const TranslationForm1 = reduxForm({

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 import Header from 'components/Constructor/Collapse/Header';
+import Wrap from 'components/Constructor/Collapse/Wrap';
 import Collapse from 'components/Constructor/Collapse';
 
 import {
@@ -82,7 +83,7 @@ export class CollapseContainer extends PureComponent {
         } = this.props
 
         return (
-            <div>
+            <Wrap>
                 <Header data={data} war={war} onWarModeChange={this.setWarMode} />
                 <Collapse
                     warTitle={warTitle}
@@ -93,7 +94,7 @@ export class CollapseContainer extends PureComponent {
                     onMove={moveItem.bind(this, type)}
                     categories={categories}
                     data={this.groupData()} />
-            </div>
+            </Wrap>
         )
     }
 

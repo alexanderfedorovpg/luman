@@ -102,7 +102,7 @@ class NewslistPage extends Component {
         } = this.props
 
         const contentProps = {
-            news: this.filterNews().filter(v => !+v.is_publish),
+            news: this.filterNews(),
             old: oldNews,
             push
         }
@@ -124,9 +124,9 @@ class NewslistPage extends Component {
                         <ContentSupervisor
                             {...contentProps}
                             clearTask={rejectArticle}
-                            deleteTask={() => { 
+                            deleteTask={() => {
                                 deleteArticle(this.state.selectedId)}}
-                            postMessage={postMessage} 
+                            postMessage={postMessage}
                             toggle={this.toggle}
                             open={this.state.modal}/>
                     </Wrap>
