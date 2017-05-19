@@ -8,7 +8,7 @@ trait NewsListTrait {
     public function processing(&$request, &$news) {
         $this->validate($request, [
             'orderBy' => 'in:id,top,publish_date',
-            'orderType' => 'in:asc,desc'
+            'orderType' => 'in:asc,ASC,desc,DESC'
         ]);
 
         $searchString = $request->input('searchString');

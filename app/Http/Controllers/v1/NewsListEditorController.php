@@ -115,25 +115,9 @@ class NewsListEditorController extends CmsController
 
             $news = News::ModerationMode();
 
-            $searchString = $request->input('searchString');
-            $orderBy = $request->input('orderBy');
 
-            if ($searchString) {
-                $substrings = explode(',', $searchString);
-                $news->substring($substrings);
-            }
 
-            switch ($orderBy) {
-                case 'datetime':
-                    $news->orderBy('created_at', 'asc');
-                    break;
-                case 'top':
-                    $news->orderBy('top', 'desc');
-                    break;
-                default:
-                    break;
-            }
-
+            $this->processing($request, $news);
 
             $news = $news->paginate(DEFAULT_VALUE);
 
