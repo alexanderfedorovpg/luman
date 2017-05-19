@@ -1,7 +1,8 @@
-import { fromJS } from 'immutable'
+import { fromJS, Map } from 'immutable'
 import {
 
-    LOAD_ARTICLE_SUCCESS
+    LOAD_ARTICLE_SUCCESS,
+    CLEAR_ARTICLE
 } from './constants'
 
 const initialState = fromJS({
@@ -17,6 +18,10 @@ function editorPageReducer(state = initialState, action) {
         case LOAD_ARTICLE_SUCCESS:
             return state
                 .setIn(['article', 'data'], fromJS(action.payload))
+
+        case CLEAR_ARTICLE:
+            return state
+                .setIn(['article', 'data'], Map())
 
         default:
             return state;

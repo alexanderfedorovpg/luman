@@ -16,7 +16,7 @@ export const filters = [
     {
         id: 1,
         title: 'По времени',
-        value: 'datetime'
+        value: 'id'
     },
     {
         id: 2,

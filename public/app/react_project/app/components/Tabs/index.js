@@ -66,11 +66,11 @@ export const itemStyle = css`
     `}
 `;
 
-const Item = styled.a`
+export const Item = styled.a`
     ${itemStyle}
 `;
 
-function Tabs({ data, onClick, active }) {
+function Tabs({ className, data, onClick, active }) {
     const idle = () => {};
 
     const clickHandler = (value) => () => {
@@ -80,7 +80,7 @@ function Tabs({ data, onClick, active }) {
     };
 
     return (
-        <Root>
+        <Root className={className}>
             {data.map((value) => (
                 <Item
                     key={value.title}

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import debounce from 'lodash/debounce'
+import { withRouter, Link } from 'react-router'
 
 import {
     Left,
@@ -9,7 +10,15 @@ import {
 } from 'components/Header'
 import Help from 'components/Help'
 import Toggle from 'components/Toggle'
+import { Root as TabsRoot, itemStyle } from 'components/Tabs'
 import { InputIcon } from 'components/Form/Input'
+
+const Tabs = styled(TabsRoot)`
+    margin-right: 15px;
+`
+const TabsItem = styled(({ active, ...rest }) => <Link {...rest} />)`
+    ${itemStyle}
+`
 
 const Form = styled.form`
     display: flex;
@@ -69,11 +78,25 @@ class Header extends PureComponent {
     }
 
     render() {
-        let { filters, moved } = this.props
+        let { filters, moved, router: { isActive } } = this.props
 
         return (
             <Bot moved={moved}>
                 <Left>
+                    <Tabs>
+                        <TabsItem
+                            to="/ready"
+                            active={isActive('/ready', true)}>
+
+                            Готовые
+                        </TabsItem>
+                        <TabsItem
+                            to="/ready/published"
+                            active={isActive('/ready/published')}>
+
+                            Опубликованные
+                        </TabsItem>
+                    </Tabs>
                     <Form onSubmit={this.handleSubmit}>
                         <CustomInput
                             icon="search"
@@ -94,4 +117,4 @@ class Header extends PureComponent {
     }
 }
 
-export default Header
+export default withRouter(Header)

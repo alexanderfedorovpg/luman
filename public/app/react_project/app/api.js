@@ -123,16 +123,28 @@ export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
 });
 
 export const finishArticle = (data) => {
-    const formData = qs.stringify({
-        ...data,
-        action: 'edit',
-    });
 
-    return axios.put('/newseditor/edit', formData, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
+    if (data.id) {
+        return axios.put(
+            '/newseditor/edit',
+            qs.stringify({
+                ...data,
+                action: 'edit',
+            }),
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            }
+        );
+    }
+    else {
+        return axios.post('/newseditor', qs.stringify(data), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        });
+    }
 };
 
 // export const publishArticle = (data) => {
@@ -187,9 +199,9 @@ export const uploadFile = (file) => {
 
 export const getReadyNews = (params) => axios.get('/newseditor/moderated', {
     params: {
-        ...params,
         orderBy: 'id',
-        orderType: 'desc'
+        orderType: 'desc',
+        ...params,
     }
 });
 

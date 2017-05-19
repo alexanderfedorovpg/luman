@@ -48,11 +48,19 @@ function Header({ moved, del, ret, preview, publish, getFormData }) {
             <Left>
                 <Form>
                     <Horizontal>
-                        <CustomButton xs danger onClick={e=>del()}>
+                        <CustomButton
+                            xs danger
+                            disabled={!del}
+                            onClick={e=>del()}>
+
                             <Icon type="delete-reverse" />
                             Удалить
                         </CustomButton>
-                        <CustomButton xs danger onClick={e=>ret()}>
+                        <CustomButton
+                            xs danger
+                            disabled={!ret}
+                            onClick={e=>ret()}>
+
                             <Icon type="arrow-left" />
                             Вернуть на правки
                         </CustomButton>
