@@ -11,6 +11,10 @@ import {
         DELEGATE_ARTICLE_SUCCESS,
         DELEGATE_ARTICLE_FAILURE,
 
+        DELETE_ARTICLE,
+        DELETE_ARTICLE_SUCCESS,
+        DELETE_ARTICLE_FAILURE,
+
         SET_FILTERS
 } from './constants';
 
@@ -78,3 +82,17 @@ export const articleDelegationError = error => ({
     error
 })
 
+export const articleDelete = payload => ({
+    type: DELETE_ARTICLE,
+    payload
+})
+
+export const articleDeleteSuccess = payload => ({
+    type: DELETE_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articleDeletionError = error => ({
+    type: DELETE_ARTICLE_FAILURE,
+    error
+})

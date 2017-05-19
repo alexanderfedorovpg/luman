@@ -298,6 +298,12 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
+            childRoutes: [
+                {
+                    path: '/ready/:type',
+                    name: 'ready-published',
+                },
+            ],
         },
         {
             path: '/editor',

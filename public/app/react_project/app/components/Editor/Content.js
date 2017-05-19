@@ -333,10 +333,12 @@ class Content extends Component {
                 editor: editor.id
             }
         }, () => {
-            delegate({
-                id: article.id,
-                new_editor_id: editor.id
-            })
+            if (article.id) {
+                delegate({
+                    id: article.id,
+                    new_editor_id: editor.id
+                })
+            }
         })
     }
 

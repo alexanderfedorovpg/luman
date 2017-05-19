@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
+import { push } from 'react-router-redux'
 
 import Header from 'components/Ready/Header'
 import Content from 'components/Ready/Content'
@@ -12,6 +13,7 @@ import {
     loadReadyNews,
     publishArticle,
     delegateArticle,
+    articleDelete,
     setFilters
 } from './actions'
 
@@ -31,8 +33,31 @@ class ReadyPage extends PureComponent {
         ))
     }
 
+    filterData() {
+        const { params: { type }, news } = this.props
+
+        switch (type) {
+            case 'published':
+                return news
+                    .filter(v => +v.is_publish)
+                    .sort((a, b) => new Date(b.publish_date) - new Date(a.publish_date))
+
+            default:
+                return news.filter(v => !+v.is_publish)
+        }
+    }
+
     render() {
-        let { news, menuOpen, oldNews, delegate, publish, setFilters } = this.props
+        let {
+            params,
+            menuOpen,
+            oldNews,
+            delegate,
+            publish,
+            pushPath,
+            setFilters,
+            deleteArticle
+        } = this.props
 
         return (
             <div>
@@ -45,10 +70,13 @@ class ReadyPage extends PureComponent {
                     setFilters={setFilters} />
                 <Wrap>
                     <Content
-                        data={news}
+                        data={this.filterData()}
                         old={oldNews}
                         publish={publish}
-                        delegate={delegate} />
+                        published={params.type=='published'}
+                        push={pushPath}
+                        delegate={delegate}
+                        onDelete={deleteArticle} />
                 </Wrap>
             </div>
         )
@@ -75,7 +103,13 @@ const mapDispatchToProps = dispatch => ({
         dispatch(setFilters(filters))
 
         dispatch(loadReadyNews({}))
-    }
+    },
+    pushPath(path) {
+        dispatch(push(path))
+    },
+    deleteArticle(id) {
+        dispatch(articleDelete(id))
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReadyPage)

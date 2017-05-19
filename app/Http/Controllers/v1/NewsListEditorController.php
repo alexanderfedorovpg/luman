@@ -358,13 +358,13 @@ class NewsListEditorController extends CmsController
             $news->sub_title = $sub_title;
             $news->note = $note ? $note : '';
             $news->video_stream = $video_stream;
-            $news->is_publish = true;
+            $news->is_publish = 0;
             $news->publish_date = new \DateTime();
             $news->top = $top;
             $news->body = $body ? $body : '';
 
 
-            $news->moderation = false;
+
 
             $news->original_source_link = $original_source_link ? $original_source_link : '';
 
@@ -374,9 +374,9 @@ class NewsListEditorController extends CmsController
                 $news->keywords = $request->get('keywords');
             }
 
-            if ($request->get('rubrics')) {
-                $rubrics = $request->get('rubrics');
-            }
+                $news->moderation = $request->get('moderation')? $request->get('moderation'):false;
+
+
             if (isset($theses)) {
                 $news->theses = $theses;
             }

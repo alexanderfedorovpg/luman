@@ -72,7 +72,7 @@ export function* deleteArticle({ payload }) {
 
         yield put(articleDeleted(payload))
 
-        yield put(push(`/newslist`))
+        // yield put(push(`/newslist`))
     } catch (err) {
         yield put(articleDeletionError(err))
     }

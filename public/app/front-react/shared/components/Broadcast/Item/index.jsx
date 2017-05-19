@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FormattedTime, FormattedDate } from 'react-intl'
 
-import { ensureAbs } from 'shared/utils/uri'
+import Img from 'components/Img'
 
 import './style.scss'
 
@@ -15,7 +15,7 @@ function FromEnter({ data, big, className }) {
     return (
         <div className={classNames('from-enter', className, { 'from-enter_big': big })}>
             <Link to={`/broadcast/${data.id}`} className="from-enter__link from-enter__link from-enter__link_position">
-                <img className="from-enter__img" src={ensureAbs(video.preview)} alt="" alt="" role="presentation" />
+                <Img className="from-enter__img" src={video.preview} alt="" alt="" role="presentation" />
                 <span className="from-enter__time-keeping">
                     <img className="from-enter__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
                     <span className="from-enter__keeping">

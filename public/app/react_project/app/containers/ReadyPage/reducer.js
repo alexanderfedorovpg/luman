@@ -10,6 +10,8 @@ import {
     LOAD_READY_NEWS_SUCCESS,
     LOAD_READY_NEWS_FAILURE,
 
+    DELETE_ARTICLE_SUCCESS,
+
     SET_FILTERS,
 
     PUBLISH_ARTICLE_SUCCESS
@@ -54,6 +56,17 @@ function readyPageReducer(state = initialState, action) {
             return state.mergeIn(['news', 'search'], action.payload)
 
         case PUBLISH_ARTICLE_SUCCESS:
+            return state
+                .updateIn(['news', 'data'], value => {
+                    return value.update(
+                        value.findIndex(item => item.get('id') == action.payload),
+                        item => item
+                            .set('is_publish', '1')
+                            .set('publish_date', new Date())
+                    )
+                })
+                
+        case DELETE_ARTICLE_SUCCESS:
             return state
                 .updateIn(['news', 'data'], value => {
                     return value.filter(value => value.get('id') !== action.payload)

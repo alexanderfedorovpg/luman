@@ -5,6 +5,8 @@ import Item from './Item'
 import Detail from 'containers/Preview'
 import Modal from 'components/Modal'
 
+import DeleteModal from 'components/DeleteModal'
+
 const Root = styled.div`
     margin-top: -9px;
 
@@ -18,12 +20,22 @@ class Content extends PureComponent {
 
         this.state = {
             modalOpen: false,
-            selected: null
+            selected: null,
+            modalDelete: false,
+            toDelete: null
         }
 
         this.openModal = this.openModal.bind(this)
         this.closeModal = this.closeModal.bind(this)
         this.selectItem = this.selectItem.bind(this)
+        this.toggleDelete = ::this.toggleDelete;
+    }
+
+    toggleDelete(item) {
+        this.setState({
+            modalDelete: !this.state.modalDelete,
+            toDelete: item || null
+        })
     }
 
     openModal() {
@@ -51,20 +63,29 @@ class Content extends PureComponent {
     }
 
     render() {
-        let { data, old, publish, delegate } = this.props
+        let {
+            data,
+            old,
+            publish,
+            push,
+            published,
+            delegate,
+            onDelete
+        } = this.props
         let { selected } = this.state
 
         return (
             <Root>
                 {data
-                    .filter(v => !+v.is_publish)
                     .map(value => (
                         <Item
                             key={value.id}
                             data={value}
+                            push={push}
                             open={this.selectItem}
                             publish={publish}
-                            newItem={old.indexOf(value.id) == -1} />
+                            newItem={old.indexOf(value.id) == -1}
+                            toggleDelete={this.toggleDelete} />
                     ))
                 }
 
@@ -74,13 +95,23 @@ class Content extends PureComponent {
                     onRequestClose={this.closeModal}>
                     <Detail
                         onClose={this.closeModal}
-                        done={publish}
+                        doneTitle={published ? 'Редактировать' : 'Опубликовать'}
+                        done={id => {
+                            published
+                                ? push(`/editor/${id}`)
+                                : publish(id)
+                        }}
                         delegate={params => {
                             delegate(params)
                             this.closeModal()
                         }}
                         data={selected} />
                 </Modal>
+                <DeleteModal
+                    open={this.state.modalDelete}
+                    toggle={this.toggleDelete}
+                    onDelete={() => onDelete(this.state.toDelete)}
+                />
             </Root>
         )
     }

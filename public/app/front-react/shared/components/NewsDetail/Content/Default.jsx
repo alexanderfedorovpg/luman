@@ -3,8 +3,7 @@ import { FormattedRelative } from 'react-intl'
 
 import Socials from 'components/Socials'
 import Rubrics from 'components/Rubrics'
-
-import { ensureAbs } from 'shared/utils/uri'
+import Img from 'components/Img'
 
 function Content({ data, children }) {
 
@@ -21,7 +20,7 @@ function Content({ data, children }) {
                 <div className="news-preview news-preview--wide">
                     <Rubrics data={data.rubrics} />
                     <figure className="news-preview__img">
-                        <img src={ensureAbs(data.image_main)} />
+                        <Img src={data.image_main} />
                         <figcaption className="news-preview__source">
                             {/*Фото: Mc_maxim / Twitter*/}
                         </figcaption>
