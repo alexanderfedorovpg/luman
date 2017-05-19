@@ -130,7 +130,7 @@ class UserController extends CmsController
 
      } catch (ValidationException $e) {
          return $this->respondFail422x($e->validator);
-     }dd($request->all());
+     }
         $user->update($request->all());
         return $this->respond($this->usersTransformer->transform($user->toArray()));
     }
