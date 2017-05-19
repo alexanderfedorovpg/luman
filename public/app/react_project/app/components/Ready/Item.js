@@ -186,7 +186,7 @@ const CloseIcon = styled(Icon)`
     display: none;
 `
 
-function Item({ data, intl, newItem, push, open, publish }) {
+function Item({ data, intl, newItem, push, open, publish, toggleDelete }) {
     let updateDate = data.updated_at
 
         ? intl.formatDate(
@@ -281,7 +281,7 @@ function Item({ data, intl, newItem, push, open, publish }) {
                         }
                     </ButtonContainer>
                 </Right>
-                <CloseIcon className={secretClassName} type="delete-bold" />
+                <CloseIcon onClick={toggleDelete.bind(this, data.id)} className={secretClassName} type="delete-bold" />
             </Wrapper>
         </Root>
     )

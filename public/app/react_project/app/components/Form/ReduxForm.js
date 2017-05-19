@@ -13,6 +13,7 @@ import {
     Dropzone,
     ImageLoader,
     RadioButton,
+    Checkbox,
 } from './';
 
 export const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
@@ -41,12 +42,39 @@ export const TextareaRedux = ({ input, meta: { touched, invalid, valid }, ...pro
     />
 );
 
-export const RadioButtonRedux = ({ input, meta, ...props }) => (
+export const RadioButtonRedux = ({ input, meta, value, ...props }) => (
     <RadioButton
+        {...props}
+        checked={value === input.value}
+        value={value}
+        onChange={() => input.onChange(value)}
+    />
+);
+
+export const SingleCheckboxRedux = ({ input, meta, ...props }) => (
+    <Checkbox
         {...props}
         checked={input.checked}
         value={input.value}
         onChange={(e) => input.onChange(e)}
+    />
+);
+
+export const CheckboxGroupRedux = ({ input, meta, value, ...props }) => (
+    <Checkbox
+        {...props}
+        checked={input.value.indexOf(value) !== -1}
+        value={value}
+        onChange={(e) => {
+            const newValue = [...input.value];
+            if (e.target.checked) {
+                newValue.push(value);
+            } else {
+                newValue.splice(newValue.indexOf(value), 1);
+            }
+
+            return input.onChange(newValue);
+        }}
     />
 );
 

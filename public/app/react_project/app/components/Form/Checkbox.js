@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { icons } from 'components/Icon';
+import { ifProp } from 'utils/style';
 
 const StyledCheckbox = styled.input`
     display: none;
@@ -10,6 +11,7 @@ const StyledCheckbox = styled.input`
         display: inline-block;
         width: ${icons.checkbox.width}px;
         height: ${icons.checkbox.height}px;
+        flex-shrink: 0;
 
         margin-right: 5px;
 
@@ -32,6 +34,17 @@ const StyledCheckbox = styled.input`
 `;
 
 const CheckboxWrapper = styled.label`
+    display: flex;
+    align-items: center;
+
+    font-size: 13px;
+    font-weight: 700;
+    color: #767676;
+
+    ${ifProp('checked')(`
+        color: #333;
+    `)}
+
     &:hover {
         span {
             background-image: url(${icons['checkbox-hover'].data});
@@ -40,9 +53,13 @@ const CheckboxWrapper = styled.label`
 `;
 
 const Checkbox = (props) => {
-    const innerProps = Object.assign({}, props, { children: null, className: null });
+    const innerProps = {
+        ...props,
+        children: null,
+        className: null,
+    };
     return (
-        <CheckboxWrapper className={props.className}>
+        <CheckboxWrapper checked={props.checked} className={props.className}>
             <StyledCheckbox type="checkbox" {...innerProps} />
             <span />
             {props.children}
@@ -53,6 +70,7 @@ const Checkbox = (props) => {
 Checkbox.propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
+    checked: PropTypes.bool,
 };
 
 export default Checkbox;

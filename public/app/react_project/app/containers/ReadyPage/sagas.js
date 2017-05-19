@@ -6,6 +6,7 @@ import {
     LOAD_READY_NEWS,
     PUBLISH_ARTICLE,
     DELEGATE_ARTICLE,
+    DELETE_ARTICLE,
 
     strings
 } from './constants';
@@ -18,7 +19,10 @@ import {
     articleDelegationError,
 
     articlePublished,
-    articlePublishingError
+    articlePublishingError,
+
+    articleDeleteSuccess,
+    articleDeletionError
 } from './actions';
 
 import { selectSearchVars } from './selectors'
@@ -68,12 +72,25 @@ export function* delegateArticle({ payload }) {
     }
 }
 
+export function* deleteArticle({ payload }) {
+    try {
+        yield call(api.deleteArticle, payload)
+
+        yield put(articleDeleteSuccess(payload))
+
+    } catch (err) {
+        yield put(articleDeletionError(err))
+    }
+}
+
 export function* readyData() {
     yield takeLatest(LOAD_READY_NEWS, getNews);
 
     yield takeEvery(PUBLISH_ARTICLE, publishArticle);
 
     yield takeEvery(DELEGATE_ARTICLE, delegateArticle);
+
+    yield takeEvery(DELETE_ARTICLE, deleteArticle)
 }
 
 export default [

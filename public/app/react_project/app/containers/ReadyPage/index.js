@@ -13,6 +13,7 @@ import {
     loadReadyNews,
     publishArticle,
     delegateArticle,
+    articleDelete,
     setFilters
 } from './actions'
 
@@ -54,7 +55,8 @@ class ReadyPage extends PureComponent {
             delegate,
             publish,
             pushPath,
-            setFilters
+            setFilters,
+            deleteArticle
         } = this.props
 
         return (
@@ -73,7 +75,8 @@ class ReadyPage extends PureComponent {
                         publish={publish}
                         published={params.type=='published'}
                         push={pushPath}
-                        delegate={delegate} />
+                        delegate={delegate}
+                        onDelete={deleteArticle} />
                 </Wrap>
             </div>
         )
@@ -103,7 +106,10 @@ const mapDispatchToProps = dispatch => ({
     },
     pushPath(path) {
         dispatch(push(path))
-    }
+    },
+    deleteArticle(id) {
+        dispatch(articleDelete(id))
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReadyPage)

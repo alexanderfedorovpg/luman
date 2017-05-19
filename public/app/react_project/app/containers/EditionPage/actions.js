@@ -13,6 +13,17 @@ import {
     EDIT_USER_FAILURE,
     SELECT_USER,
     DESELECT_USER,
+    SELECT_GROUP,
+    DESELECT_GROUP,
+    GET_PERMISSIONS,
+    GET_PERMISSIONS_SUCCESS,
+    GET_PERMISSIONS_FAILURE,
+    ADD_GROUP,
+    ADD_GROUP_FAILURE,
+    DELETE_GROUP,
+    DELETE_GROUP_FAILURE,
+    EDIT_GROUP,
+    EDIT_GROUP_FAILURE,
 } from './constants';
 
 export function addUser(userData) {
@@ -67,5 +78,80 @@ export function selectUser(id) {
 export function deselectUser() {
     return {
         type: DESELECT_USER,
+    };
+}
+
+export function selectGroup(id) {
+    return {
+        type: SELECT_GROUP,
+        payload: { id },
+    };
+}
+
+export function deselectGroup() {
+    return {
+        type: DESELECT_GROUP,
+    };
+}
+
+export function getPermissions() {
+    return {
+        type: GET_PERMISSIONS,
+    };
+}
+
+export function successGetPermissions(permissions) {
+    return {
+        type: GET_PERMISSIONS_SUCCESS,
+        payload: { permissions },
+    };
+}
+
+export function failureGetPermissions(error) {
+    return {
+        type: GET_PERMISSIONS_FAILURE,
+        error,
+    };
+}
+
+export function addGroup(groupData) {
+    return {
+        type: ADD_GROUP,
+        payload: groupData,
+    };
+}
+
+export function failureAddGroup(error) {
+    return {
+        type: ADD_GROUP_FAILURE,
+        error,
+    };
+}
+
+export function deleteGroup(id) {
+    return {
+        type: DELETE_GROUP,
+        payload: { id },
+    };
+}
+
+export function failureDeleteGroup(error) {
+    return {
+        type: DELETE_GROUP_FAILURE,
+        error,
+    };
+}
+
+export function editGroup(id, data) {
+    return {
+        type: EDIT_GROUP,
+        payload: { id, data },
+    };
+}
+
+export function failureEditGroup(error) {
+    return {
+        type: EDIT_GROUP_FAILURE,
+        error,
     };
 }

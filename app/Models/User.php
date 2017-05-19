@@ -42,6 +42,10 @@ class User extends Model implements AuthenticatableContract
         'api_token',
     ];
 
+    protected $attributes = [
+        'enabled' => '1'
+    ];
+
     public static $rules = [
         'firstname' => 'required|max:255',
         'lastname' => 'max:255',

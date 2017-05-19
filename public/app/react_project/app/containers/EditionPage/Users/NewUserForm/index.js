@@ -9,7 +9,7 @@ import {
 import { rem } from 'utils/style';
 import { checkEmail } from 'utils/validate';
 
-import { Form, GroupControls } from './style';
+import { Form, StyledControlsGroup } from './style';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class NewUserForm extends PureComponent {
@@ -72,7 +72,14 @@ class NewUserForm extends PureComponent {
                         component={InputRedux}
                     />
                 </Group>
-                <GroupControls name="group" items={groups} />
+                <StyledControlsGroup
+                    itemWidth="38%"
+                    itemGap="12px"
+                    type="radio"
+                    name="group"
+                    items={groups}
+                    showError
+                />
                 <Button active={valid} success block>
                     Добавить пользователя
                 </Button>
