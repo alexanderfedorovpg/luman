@@ -118,12 +118,12 @@ class Group extends Model
      */
     public function bindUser(User $user)
     {
-        $userGroup = new UserGroup([
-            'group_id' => $this->id,
-            'user_id' => $user->id
-        ]);
+        $userGroup =   UserGroup::updateOrCreate(
+            ['user_id' => $user->id],
+            ['group_id' => $this->id]
+         );
 
-        return $userGroup->save();
+        return $userGroup;
     }
 
     /**

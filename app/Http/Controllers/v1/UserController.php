@@ -118,8 +118,8 @@ class UserController extends CmsController
                 'lastname' => 'max:255',
                 'login' => "max:255|unique:users,login,{$id}",
                 'email' => "email|unique:users,email,{$id}",
-                'need_change_password' => 'boolean',
-                'enabled' => 'boolean',
+//                'need_change_password' => 'boolean',
+//                'enabled' => 'boolean',
                 'avatar_id' => 'integer|exists:cdn_files,id'
             ]
         );
@@ -130,7 +130,7 @@ class UserController extends CmsController
 
      } catch (ValidationException $e) {
          return $this->respondFail422x($e->validator);
-     }
+     }dd($request->all());
         $user->update($request->all());
         return $this->respond($this->usersTransformer->transform($user->toArray()));
     }
