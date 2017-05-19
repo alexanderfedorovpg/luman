@@ -75,6 +75,7 @@ class Content extends PureComponent {
                     <Detail
                         onClose={this.closeModal}
                         done={publish}
+                        delegate={this.closeModal}
                         data={selected} />
                 </Modal>
             </Root>

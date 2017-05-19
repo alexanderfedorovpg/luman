@@ -6,6 +6,8 @@ import H2 from 'components/H2'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 
+import Delegate from 'components/Delegate';
+
 import { padding, font } from 'constants/style'
 import { ensureAbs } from 'utils/uri'
 
@@ -126,8 +128,10 @@ const CloseButton = styled(Icon)`
     right: 20px;
 `
 
-function Preview({ data, onClose, delegate, done }) {
+function Preview({ data, onClose, delegate, done, doneTitle }) {
     const createDate = data.created_at
+
+    // console.log(delegate);
 
     return (
         <Root>
@@ -165,19 +169,25 @@ function Preview({ data, onClose, delegate, done }) {
             <Content>
                 <div dangerouslySetInnerHTML={{ __html: data.body }} />
                 <Btns>
-                    {/*<CustomButton primary onClick={e=>delegate()}>
+                    <CustomButton primary onClick={e=>delegate.toggle()}>
                         <Icon type="arrow-left" />
                         Передать другому
-                    </CustomButton>*/}
+                    </CustomButton>
                     <CustomButton success onClick={e=> {
                             done(data.id)
                             onClose()
                         }}>
                         <Icon type="arrow-right" />
-                        Опубликовать
+                        {doneTitle || 'Опубликовать'}
                     </CustomButton>
                 </Btns>
             </Content>
+            <Delegate 
+                toggle={delegate.toggle}
+                open={delegate.open}
+                change={delegate.change}
+                users={delegate.users}
+                value={delegate.value} />
         </Root>
     )
 }

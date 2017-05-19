@@ -153,16 +153,6 @@ const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />) `
     `}
 `
 
-const DelegateRoot = styled.div`
-    width: 500px;
-    padding: 30px 1.5rem 79px;
-    margin: auto;
-    font-family: 'Open Sans', Arial, sans-serif;
-    background-color: #fff;
-    height: 100%;
-    overflow-y: auto;
-`
-
 class Content extends Component {
 
     constructor(props) {
@@ -368,6 +358,7 @@ class Content extends Component {
             supervisor,
             preview,
             finish,
+            publish,
             closePreview
         } = this.props
 
@@ -535,10 +526,21 @@ class Content extends Component {
                     <Preview
                         data={this.state.data}
                         onClose={closePreview}
-                        delegate={this.toggleDelegate}
-                        done={() => finish(this.dataToSubmit())} />
+                        delegate={{
+                            toggle: this.toggleDelegate,
+                            open: this.state.delegate,
+                            change: this.changeHandlerEditor,
+                            users: users,
+                            value: this.state.data.editor
+                        }}
+                        doneTitle={supervisor ? 'Опубликовать' : 'Готово'}
+                        done={() => (
+                            supervisor
+                                ? publish(this.dataToSubmit())
+                                : finish(this.dataToSubmit())
+                        )} />
                 </Modal>
-                <Modal
+                {/*<Modal
                     isOpen={this.state.delegate}
                     contentLabel="Сменить редактора"
                     onRequestClose={this.toggleDelegate}>
@@ -555,7 +557,7 @@ class Content extends Component {
                                 Закрыть
                             </Button>
                     </DelegateRoot>
-                </Modal>
+                </Modal>*/}
             </Root>
         )
     }
