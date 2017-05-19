@@ -107,10 +107,16 @@ class GroupController extends CmsController
         }
 
         try {
-            $this->validate($request, Group::$rules);
+            $rules = [
+                'name' => 'max:255',
+                'enabled' => 'boolean'
+            ];
+            $this->validate($request, $rules);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->getMessage());
         }
+        $data=$request->all();
+        $data['enabled']=1;
 
         return $this->respondCreated(['success' => $group->update($request->all())]);
     }

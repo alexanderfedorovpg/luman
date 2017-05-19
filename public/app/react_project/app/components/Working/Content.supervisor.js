@@ -82,7 +82,7 @@ const CancelButton = styled(Button)`
 
 `
 
-function Content({ news, push, old, clearTask, postMessage, toggle, open }) {
+function Content({ news, push, old, clearTask, deleteTask, postMessage, toggle, open }) {
 
     return (
         <Root>
@@ -114,7 +114,10 @@ function Content({ news, push, old, clearTask, postMessage, toggle, open }) {
                                 <Icon type="delete-bold"/>
                                 Отменить
                             </Button>
-                            <Button md success>
+                            <Button md success onClick={(e) => {
+                                    deleteTask();
+                                    toggle();
+                                }}>
                                 <Icon type="arrow-right"/>
                                 Подтвердить
                             </Button>

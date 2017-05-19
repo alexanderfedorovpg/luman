@@ -6,6 +6,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Transformers\v1\UsersTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Auth;
@@ -29,7 +30,7 @@ class UserController extends CmsController
      * UserController constructor.
      * @param UsersTransformer $usersTransformer
      */
-    public function __construct(UsersTransformer  $usersTransformer)
+    public function __construct(UsersTransformer $usersTransformer)
     {
         parent::__construct();
         $this->usersTransformer = $usersTransformer;
@@ -59,7 +60,7 @@ class UserController extends CmsController
             if (!$user) {
                 return $this->respondNotFound('User is not found');
             }
-            
+
             return $this->respond($this->usersTransformer->transform($user->toArray()));
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound($e);
@@ -109,14 +110,27 @@ class UserController extends CmsController
             return $this->respondNotFound('User is not found');
         }
 
-        try {
-            $rules = User::$rules;
-            $rules['email'] = $rules['email'] . ",{$id}";
-            $rules['login'] = $rules['login'] . ",{$id}";
-            $this->validate($request, $rules);
-        } catch (ValidationException $e) {
-            return $this->respondFail422x($e->getMessage());
+     try {
+        $validation = Validator::make(
+            $request->all(),
+            [
+                'firstname' => 'max:255',
+                'lastname' => 'max:255',
+                'login' => "max:255|unique:users,login,{$id}",
+                'email' => "email|unique:users,email,{$id}",
+                'need_change_password' => 'boolean',
+                'enabled' => 'boolean',
+                'avatar_id' => 'integer|exists:cdn_files,id'
+            ]
+        );
+        if ($validation->fails()) {
+
+            throw new ValidationException($validation->errors()->all());
         }
+
+     } catch (ValidationException $e) {
+         return $this->respondFail422x($e->validator);
+     }
         $user->update($request->all());
         return $this->respond($this->usersTransformer->transform($user->toArray()));
     }
@@ -165,8 +179,8 @@ class UserController extends CmsController
                 'email' => "required|email|unique:users,email,{$user->id}",
                 'avatar_id' => 'integer|exists:cdn_files,id',
                 'password' => 'min:6|confirmed',
-                'password_confirmation'=> 'min:6',
-                'need_change_password'=>'in:1,0'
+                'password_confirmation' => 'min:6',
+                'need_change_password' => 'in:1,0'
             ]);
             $requestData = $request->all();
             $password = $request->input('password');

@@ -275,7 +275,6 @@
     "redux-saga": "0.14.0",
     "reselect": "2.5.4",
     "styled-components": "1.1.2",
-    "styled-property": "^1.0.2",
     "warning": "3.0.0",
     "whatwg-fetch": "2.0.1"
   },

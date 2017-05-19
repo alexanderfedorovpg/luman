@@ -1,10 +1,12 @@
-import React, { dangerouslySetInnerHTML } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { FormattedTime, FormattedRelative } from 'react-intl'
 
 import H2 from 'components/H2'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
+import Modal from 'components/Modal'
+import Select from 'components/Editor/Select'
 
 import Delegate from 'components/Delegate';
 
@@ -128,68 +130,95 @@ const CloseButton = styled(Icon)`
     right: 20px;
 `
 
-function Preview({ data, onClose, delegate, done, doneTitle }) {
-    const createDate = data.created_at
+class Preview extends PureComponent {
 
-    // console.log(delegate);
+    constructor(props) {
+        super(props);
 
-    return (
-        <Root>
-            <CloseButton type="delete-lg" onClick={onClose} />
-            <Header>
-                {createDate
-                    ? (
-                        <time>
-                            <FormattedRelative value={createDate} units="day" />
-                            {', '}
-                            <FormattedTime value={createDate} />
-                        </time>
-                    )
-                    : null
-                }
-            </Header>
-            <Title>
-                {data.title}
-            </Title>
-            <ImageWrapper>
-                <div>
-                    <Img>
-                        <img src={ensureAbs(data.image_main)} />
-                    </Img>
-                    <Source>
-                        Источник: Интерфакс
-                    </Source>
-                </div>
-                <div>
-                    <Subtitle>
-                        {data.subtitle}
-                    </Subtitle>
-                </div>
-            </ImageWrapper>
-            <Content>
-                <div dangerouslySetInnerHTML={{ __html: data.body }} />
-                <Btns>
-                    <CustomButton primary onClick={e=>delegate.toggle()}>
-                        <Icon type="arrow-left" />
-                        Передать другому
-                    </CustomButton>
-                    <CustomButton success onClick={e=> {
-                            done(data.id)
-                            onClose()
-                        }}>
-                        <Icon type="arrow-right" />
-                        {doneTitle || 'Опубликовать'}
-                    </CustomButton>
-                </Btns>
-            </Content>
-            <Delegate 
-                toggle={delegate.toggle}
-                open={delegate.open}
-                change={delegate.change}
-                users={delegate.users}
-                value={delegate.value} />
-        </Root>
-    )
+        this.state = {
+            modalOpen: false
+        }
+
+        this.open = ::this.open
+        this.close = ::this.close
+    }
+
+    open() {
+        this.setState({
+            modalOpen: true
+        })
+    }
+
+    close() {
+        this.setState({
+            modalOpen: false
+        })
+    }
+
+    render() {
+        const { data, users, onClose, delegate, done, doneTitle } = this.props
+        const createDate = data.created_at
+
+        return (
+            <Root>
+                <CloseButton type="delete-lg" onClick={onClose} />
+                <Header>
+                    {createDate
+                        ? (
+                            <time>
+                                <FormattedRelative value={createDate} units="day" />
+                                {', '}
+                                <FormattedTime value={createDate} />
+                            </time>
+                        )
+                        : null
+                    }
+                </Header>
+                <Title>
+                    {data.title}
+                </Title>
+                <ImageWrapper>
+                    <div>
+                        <Img>
+                            <img src={ensureAbs(data.image_main)} />
+                        </Img>
+                        <Source>
+                            Источник: Интерфакс
+                        </Source>
+                    </div>
+                    <div>
+                        <Subtitle>
+                            {data.subtitle}
+                        </Subtitle>
+                    </div>
+                </ImageWrapper>
+                <Content>
+                    <div dangerouslySetInnerHTML={{ __html: data.body }} />
+                    <Btns>
+                        <CustomButton primary onClick={this.open}>
+                            <Icon type="arrow-left" />
+                            Передать другому
+                        </CustomButton>
+                        <CustomButton success onClick={e=> {
+                                done(data.id)
+                                onClose()
+                            }}>
+                            <Icon type="arrow-right" />
+                            {doneTitle || 'Опубликовать'}
+                        </CustomButton>
+                    </Btns>
+                </Content>
+                <Delegate
+                    onClose={this.close}
+                    isOpen={this.state.modalOpen}
+                    onChange={value => (
+                        delegate({ id: data.id, new_editor_id: value.id })
+                    )}
+                    users={users}
+                    value={data.editor} />
+            </Root>
+        )
+    }
 }
 
 export default Preview

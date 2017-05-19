@@ -122,7 +122,7 @@ class Chat extends PureComponent {
 
     changeHandler(e) {
         this.setState({
-            message: e.target.value.trim()
+            message: e.target.value
         })
     }
 

@@ -14,7 +14,7 @@ import Icon from 'components/Icon'
 import Rating from 'components/Rating'
 import Tags from 'components/Tags'
 import Modal from 'components/Modal'
-import Preview from 'components/Preview'
+import Preview from 'containers/Preview'
 import Chat from 'containers/Chat'
 import HeaderEditor from './Header.editor'
 import HeaderSupervisor from './Header.supervisor'
@@ -161,18 +161,10 @@ class Content extends Component {
         this.state = {
             data: this.propsToData(props),
             error: {},
-            delegate: false
         };
 
         this.changeHandlerTarget = ::this.changeHandlerTarget;
         this.changeHandlerEditor = ::this.changeHandlerEditor;
-        this.toggleDelegate = ::this.toggleDelegate;
-    }
-
-    toggleDelegate () {
-        this.setState({
-            delegate: !this.state.delegate
-        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -524,15 +516,9 @@ class Content extends Component {
                     onRequestClose={closePreview}>
 
                     <Preview
-                        data={this.state.data}
+                        data={{ ...this.state.data, id: article.id }}
                         onClose={closePreview}
-                        delegate={{
-                            toggle: this.toggleDelegate,
-                            open: this.state.delegate,
-                            change: this.changeHandlerEditor,
-                            users: users,
-                            value: this.state.data.editor
-                        }}
+                        delegate={delegate}
                         doneTitle={supervisor ? 'Опубликовать' : 'Готово'}
                         done={() => (
                             supervisor
@@ -540,24 +526,6 @@ class Content extends Component {
                                 : finish(this.dataToSubmit())
                         )} />
                 </Modal>
-                {/*<Modal
-                    isOpen={this.state.delegate}
-                    contentLabel="Сменить редактора"
-                    onRequestClose={this.toggleDelegate}>
-                    <DelegateRoot>
-                        <h2>Сменить редактора</h2>
-                        <Select
-                            options={users}
-                            onChange={this.changeHandlerEditor}
-                            value={this.state.data.editor} />
-                            <br/>
-                            <br/>
-                            <Button block danger onClick={this.toggleDelegate}>
-                                <Icon type="delete-bold" />
-                                Закрыть
-                            </Button>
-                    </DelegateRoot>
-                </Modal>*/}
             </Root>
         )
     }

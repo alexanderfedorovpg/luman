@@ -27,6 +27,8 @@ class User extends Model implements AuthenticatableContract
         'lastname',
         'email',
         'login',
+        'need_change_password',
+        'enabled',
         'avatar_id'
     ];
 

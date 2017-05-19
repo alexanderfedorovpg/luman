@@ -58,15 +58,25 @@ class NewsListEditorController extends CmsController
             $user_id = $this->user_id;
 
 
+            $isPublish = $request->input('is_publish')?$request->input('is_publish'):0;
+
+
+
+            if ($isPublish === 'true') {
+                $isPublish=1;
+            } elseif ($isPublish === 'false') {
+                $isPublish=0;
+            }
+
             switch ($assigned) {
                 case 'me' :
-                    $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
+                    $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish ];
                     break;
                 case 'all' :
-                    $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => 0];
+                    $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
                     break;
                 default :
-                    $params = false;
+
             }
 
             if (!$params) {
@@ -75,7 +85,9 @@ class NewsListEditorController extends CmsController
 
             $news = null;
             if (Auth::user()->isAdmin()) {
-                $news = News::query();
+                $params = [  'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
+                $news = News::ModerationAllEditor($params);
+
             } else {
                 $news = News::ModerationThisEditor($params);
             }
@@ -105,25 +117,9 @@ class NewsListEditorController extends CmsController
 
             $news = News::ModerationMode();
 
-            $searchString = $request->input('searchString');
-            $orderBy = $request->input('orderBy');
 
-            if ($searchString) {
-                $substrings = explode(',', $searchString);
-                $news->substring($substrings);
-            }
 
-            switch ($orderBy) {
-                case 'datetime':
-                    $news->orderBy('created_at', 'asc');
-                    break;
-                case 'top':
-                    $news->orderBy('top', 'desc');
-                    break;
-                default:
-                    break;
-            }
-
+            $this->processing($request, $news);
 
             $news = $news->paginate(DEFAULT_VALUE);
 

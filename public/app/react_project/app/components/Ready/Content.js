@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import Item from './Item'
-import Detail from 'components/Preview'
+import Detail from 'containers/Preview'
 import Modal from 'components/Modal'
 
 const Root = styled.div`
@@ -51,7 +51,7 @@ class Content extends PureComponent {
     }
 
     render() {
-        let { data, old, publish } = this.props
+        let { data, old, publish, delegate } = this.props
         let { selected } = this.state
 
         return (
@@ -75,7 +75,10 @@ class Content extends PureComponent {
                     <Detail
                         onClose={this.closeModal}
                         done={publish}
-                        delegate={this.closeModal}
+                        delegate={params => {
+                            delegate(params)
+                            this.closeModal()
+                        }}
                         data={selected} />
                 </Modal>
             </Root>

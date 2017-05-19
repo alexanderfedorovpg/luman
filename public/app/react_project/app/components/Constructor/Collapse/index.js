@@ -10,11 +10,11 @@ import { rem } from 'utils/style'
 
 const Root = styled.div`
     margin-top: ${rem(9)};
-    margin-left: ${rem(-19)};
+    height: calc(100% - 32px);
+    overflow-y: auto;
 `
 
 const Group = styled(GroupBase)`
-    // padding-right: ${rem(18)};
     padding-left: ${rem(18)};
     margin-top: 12px;
     margin-bottom: 12px;

@@ -21,6 +21,7 @@ const navClassName = 'super-item-secret'
 const Root = styled.div`
     padding-left: ${padding};
 
+    position:relative;
     cursor: pointer;
 
     &:hover {
@@ -47,7 +48,6 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     padding-top: 20px;
     padding-bottom: 15px;
-    position:relative;
 
     border-bottom: 1px solid #e9e9e9;
 `
@@ -173,9 +173,9 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
         : null
 
     return (
-        <Root onClick={()=>push(`/editor/${data.id}`)}>
+        <Root>
         {/*<Root>*/}
-            <Wrapper>
+            <Wrapper onClick={()=>push(`/editor/${data.id}`)}>
                 <Left>
                     <Header>
                         <CustomRating
@@ -229,7 +229,7 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
                                     Сменить редактора
                                 </NavItem>
                                 <NavItem onClick={()=>clearTask(data.id)}>
-                                    Снять задание
+                                    Удалить задание
                                 </NavItem>
                             </Nav>
                         )
@@ -242,14 +242,14 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
                         )
                     }
                 </Right>
-                {!editor
-                    ? (
-                        <CloseIcon onClick={() => toggle()} className={navClassName} type="delete-bold"/>
-                    )
-                    :
-                    null
-                }
             </Wrapper>
+            {!editor
+                ? (
+                    <CloseIcon onClick={() => toggle.bind(this, data.id)()} className={navClassName} type="delete-bold"/>
+                )
+                :
+                null
+            }
         </Root>
     )
 }

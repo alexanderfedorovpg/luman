@@ -41,7 +41,7 @@ const CustomRight = styled(Right)`
     width: 259px
 `
 
-function Header({ moved, del, delegate, preview, finish, getFormData }) {
+function Header({ moved, del, reject, preview, finish, getFormData }) {
 
     return (
         <Bot moved={moved}>
@@ -52,7 +52,7 @@ function Header({ moved, del, delegate, preview, finish, getFormData }) {
                             <Icon type="delete-reverse" />
                             Удалить
                         </CustomButton>
-                        <CustomButton xs danger onClick={e=>delegate()}>
+                        <CustomButton xs danger onClick={e=>reject()}>
                             <Icon type="arrow-left" />
                             Передать другому
                         </CustomButton>

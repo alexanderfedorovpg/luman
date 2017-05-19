@@ -14,6 +14,8 @@ import {
 
     ACCEPT_ARTICLE_SUCCESS,
 
+    DELETE_ARTICLE_SUCCESS,
+
     SET_FILTER
 } from './constants'
 
@@ -63,6 +65,13 @@ function NewslistPageReducer(state = initialState, action) {
                 .updateIn(['news', 'data'], value => {
                     return value.filter(value => value.get('id') !== action.payload)
                 })
+
+        case DELETE_ARTICLE_SUCCESS:
+            return state
+                .updateIn(['news', 'data'], value => {
+                    console.log(action.payload)
+                    return value.filter(value => value.get('id') !== action.payload)
+                })        
 
         default:
             return state;

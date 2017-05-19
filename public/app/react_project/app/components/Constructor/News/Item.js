@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import styled from 'styled-components'
+import uniqBy from 'lodash/uniqBy'
 
 import DragSourceWrapper from '../DragSource'
 import Rating from 'components/Rating/Item'
@@ -66,7 +67,7 @@ class Item extends Component {
                 <Header>
                     <CustomRating rating={data.top} checked={data.top} />
                     <Rubrics>
-                        {data.rubrics
+                        {uniqBy(data.rubrics, value => value.id)
                             .map(rubric => (
                                 <span key={rubric.id}>
                                     {rubric.name}
