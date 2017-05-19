@@ -29,7 +29,7 @@ class UserController extends CmsController
      * UserController constructor.
      * @param UsersTransformer $usersTransformer
      */
-    public function __construct(UsersTransformer  $usersTransformer)
+    public function __construct(UsersTransformer $usersTransformer)
     {
         parent::__construct();
         $this->usersTransformer = $usersTransformer;
@@ -59,7 +59,7 @@ class UserController extends CmsController
             if (!$user) {
                 return $this->respondNotFound('User is not found');
             }
-            
+
             return $this->respond($this->usersTransformer->transform($user->toArray()));
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound($e);
@@ -110,9 +110,16 @@ class UserController extends CmsController
         }
 
         try {
-            $rules = User::$rules;
-            $rules['email'] = $rules['email'] . ",{$id}";
-            $rules['login'] = $rules['login'] . ",{$id}";
+
+            $rules = [
+                'firstname' => 'max:255',
+                'lastname' => 'max:255',
+                'login' => 'required|max:255|unique:users,login',
+                'email' => 'required|email|unique:users,email',
+                'need_change_password' => 'boolean',
+                'enabled' => 'boolean',
+                'avatar_id' => 'integer|exists:cdn_files,id'
+            ];
             $this->validate($request, $rules);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->getMessage());
@@ -165,8 +172,8 @@ class UserController extends CmsController
                 'email' => "required|email|unique:users,email,{$user->id}",
                 'avatar_id' => 'integer|exists:cdn_files,id',
                 'password' => 'min:6|confirmed',
-                'password_confirmation'=> 'min:6',
-                'need_change_password'=>'in:1,0'
+                'password_confirmation' => 'min:6',
+                'need_change_password' => 'in:1,0'
             ]);
             $requestData = $request->all();
             $password = $request->input('password');
