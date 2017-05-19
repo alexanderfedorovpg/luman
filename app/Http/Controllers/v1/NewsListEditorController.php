@@ -76,7 +76,7 @@ class NewsListEditorController extends CmsController
                     $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
                     break;
                 default :
-                    $params = false;
+
             }
 
             if (!$params) {
@@ -85,7 +85,9 @@ class NewsListEditorController extends CmsController
 
             $news = null;
             if (Auth::user()->isAdmin()) {
-                $news = News::query();
+                $params = [  'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
+                $news = News::ModerationAllEditor($params);
+
             } else {
                 $news = News::ModerationThisEditor($params);
             }

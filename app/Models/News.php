@@ -177,7 +177,11 @@ class News extends Model
         return $query->where(['editor_id' =>$editor_id,'moderation' =>$moderation,'delete' =>$delete,'is_publish' =>$is_publish]);
 
     }
+    public function scopeModerationAllEditor($query, $moderation = true, $delete = 0, $is_publish = 0)
+    {
+        return $query->where([ 'moderation' =>$moderation,'delete' =>$delete,'is_publish' =>$is_publish]);
 
+    }
     /**
      * @param $query
      * @return mixed
