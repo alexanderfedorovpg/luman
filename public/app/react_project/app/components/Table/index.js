@@ -72,12 +72,21 @@ const StyledTable = styled.table`
                 border-bottom: 0;
             }
 
+            &.active {
+                background-color: #f0f0f0;
+
+                td {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+
             &:hover {
                 background-color: #f0f0f0;
                 cursor: pointer;
 
                 td {
-
                     &:after {
                         display: none;
                     }
@@ -186,9 +195,16 @@ class Table extends React.PureComponent {
     }
 
     renderRow(data) {
+        const { onRowClick } = this.props;
+
         return (
-            <tr key={uniqueId()}>
-                {data.map(this.renderCell)}
+            <tr
+                role="button"
+                onClick={(e) => onRowClick(data, e)}
+                key={data.id || uniqueId()}
+                className={data.active ? 'active' : null}
+            >
+                {data.cells.map(this.renderCell)}
             </tr>
         );
     }
@@ -255,6 +271,7 @@ class Table extends React.PureComponent {
 
 Table.defaultProps = {
     columnsWidth: [],
+    onRowClick: () => {},
 };
 
 Table.propTypes = {
@@ -265,6 +282,7 @@ Table.propTypes = {
     sortDirection: PropTypes.oneOf(['up', 'down']),
     sortable: PropTypes.bool,
     onSort: PropTypes.func,
+    onRowClick: PropTypes.func,
     columnsWidth: PropTypes.arrayOf(PropTypes.string),
 };
 

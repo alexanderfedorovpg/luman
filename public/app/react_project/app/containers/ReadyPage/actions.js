@@ -7,6 +7,10 @@ import {
         PUBLISH_ARTICLE_SUCCESS,
         PUBLISH_ARTICLE_FAILURE,
 
+        DELEGATE_ARTICLE,
+        DELEGATE_ARTICLE_SUCCESS,
+        DELEGATE_ARTICLE_FAILURE,
+
         SET_FILTERS
 } from './constants';
 
@@ -58,3 +62,19 @@ export function articlePublishingError(error) {
         error
     };
 }
+
+export const delegateArticle = payload => ({
+    type: DELEGATE_ARTICLE,
+    payload
+})
+
+export const articleDelegated = payload => ({
+    type: DELEGATE_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articleDelegationError = error => ({
+    type: DELEGATE_ARTICLE_FAILURE,
+    error
+})
+

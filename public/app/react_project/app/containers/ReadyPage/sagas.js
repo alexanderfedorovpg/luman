@@ -5,6 +5,7 @@ import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
 import {
     LOAD_READY_NEWS,
     PUBLISH_ARTICLE,
+    DELEGATE_ARTICLE,
 
     strings
 } from './constants';
@@ -12,6 +13,9 @@ import {
 import {
     readyNewsLoaded,
     readyNewsLoadingError,
+
+    articleDelegated,
+    articleDelegationError,
 
     articlePublished,
     articlePublishingError
@@ -52,10 +56,24 @@ export function* publishArticle({ payload }) {
     }
 }
 
+export function* delegateArticle({ payload }) {
+
+    try {
+        yield call(api.delegateArticle, payload)
+
+        yield put(articleDelegated())
+
+    } catch (err) {
+        yield put(articleDelegationError(err))
+    }
+}
+
 export function* readyData() {
     yield takeLatest(LOAD_READY_NEWS, getNews);
 
     yield takeEvery(PUBLISH_ARTICLE, publishArticle);
+
+    yield takeEvery(DELEGATE_ARTICLE, delegateArticle);
 }
 
 export default [

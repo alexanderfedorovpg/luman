@@ -38,6 +38,8 @@ export const LOAD_USERS = 'app/LOAD_USERS';
 export const LOAD_USERS_SUCCESS = 'app/LOAD_USERS_SUCCESS';
 export const LOAD_USERS_FAILURE = 'app/LOAD_USERS_FAILURE';
 export const ADD_USER = 'app/ADD_USER';
+export const DELETE_USER = 'app/DELETE_USER';
+export const EDIT_USER = 'app/EDIT_USER';
 
 export const LOAD_GROUPS = 'app/LOAD_GROUPS';
 export const LOAD_GROUPS_SUCCESS = 'app/LOAD_GROUPS_SUCCESS';
