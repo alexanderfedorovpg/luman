@@ -146,11 +146,18 @@ export const finishArticle = (data) => {
         );
     }
     else {
-        return axios.post('/newseditor', qs.stringify(data), {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        });
+        return axios.post(
+            '/newseditor',
+            qs.stringify({
+                ...data,
+                moderation: 1
+            }),
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            }
+        );
     }
 };
 

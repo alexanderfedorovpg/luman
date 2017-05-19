@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 
+import Img from 'components/Img'
+
 import './style.scss'
 import { ensureAbs } from 'shared/utils/uri'
 
@@ -30,7 +32,7 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
                 : (
                     <span>
                         <a onClick={onPlay} className="general-video__link" />
-                        <img className="general-video__img" src={ensureAbs(data.preview)} alt="" />
+                        <Img className="general-video__img" src={data.preview} alt="" />
                         <div className="general-video__info">
                             <div className="general-video__date general-video__date general-video__date_position">
                                 <img className="general-video__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />

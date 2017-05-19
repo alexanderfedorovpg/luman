@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FormattedRelative } from 'react-intl'
 
-import { ensureAbs, newsLink } from 'shared/utils/uri'
+import { newsLink } from 'shared/utils/uri'
 import MiniNews from 'components/MiniNews'
+import Img from 'components/Img'
 
 import './style.scss'
 
@@ -39,7 +40,7 @@ function renderItem(className, type, data, war, wTitle) {
     return (
         <div className={classNames(`${type}`, className, { [`${type}_war`]: war })}>
             <Link className={`${type}__link`} to={newsLink(data)}></Link>
-            <img className={`${type}__img`} src={ensureAbs(data.image_preview)} alt=" "role="presentation" />
+            <Img className={`${type}__img`} src={data.image_preview} alt=" "role="presentation" />
             <div className={`${type}__info`}>
                 {video
                     ? (

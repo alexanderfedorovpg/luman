@@ -4,7 +4,9 @@ import classNames from 'classnames'
 import dateFormat from 'dateformat'
 import { FormattedRelative } from 'react-intl'
 
-import { ensureAbs, newsLink } from 'shared/utils/uri'
+import Img from 'components/Img'
+
+import { newsLink } from 'shared/utils/uri'
 
 import './style.scss'
 
@@ -12,7 +14,7 @@ function MiniNews({ data, className }) {
 
     return (
         <div className={classNames('mini-news', className)}>
-            <img className="mini-news__img" src={ensureAbs(data.image_preview)} alt="" role="presentation" />
+            <Img className="mini-news__img" src={data.image_preview} alt="" role="presentation" />
             <div className="mini-news__info">
                 <Link
                     className="mini-news__title"
