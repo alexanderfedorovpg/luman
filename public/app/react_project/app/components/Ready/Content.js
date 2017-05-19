@@ -5,6 +5,8 @@ import Item from './Item'
 import Detail from 'containers/Preview'
 import Modal from 'components/Modal'
 
+import DeleteModal from 'components/DeleteModal'
+
 const Root = styled.div`
     margin-top: -9px;
 
@@ -18,12 +20,22 @@ class Content extends PureComponent {
 
         this.state = {
             modalOpen: false,
-            selected: null
+            selected: null,
+            modalDelete: false,
+            toDelete: null
         }
 
         this.openModal = this.openModal.bind(this)
         this.closeModal = this.closeModal.bind(this)
         this.selectItem = this.selectItem.bind(this)
+        this.toggleDelete = ::this.toggleDelete;
+    }
+
+    toggleDelete(item) {
+        this.setState({
+            modalDelete: !this.state.modalDelete,
+            toDelete: item || null
+        })
     }
 
     openModal() {
@@ -51,7 +63,7 @@ class Content extends PureComponent {
     }
 
     render() {
-        let { data, old, publish, delegate } = this.props
+        let { data, old, publish, delegate, onDelete } = this.props
         let { selected } = this.state
 
         return (
@@ -64,7 +76,8 @@ class Content extends PureComponent {
                             data={value}
                             open={this.selectItem}
                             publish={publish}
-                            newItem={old.indexOf(value.id) == -1} />
+                            newItem={old.indexOf(value.id) == -1}
+                            toggleDelete={this.toggleDelete} />
                     ))
                 }
 
@@ -81,6 +94,11 @@ class Content extends PureComponent {
                         }}
                         data={selected} />
                 </Modal>
+                <DeleteModal
+                    open={this.state.modalDelete}
+                    toggle={this.toggleDelete}
+                    onDelete={() => onDelete(this.state.toDelete)}
+                />
             </Root>
         )
     }
