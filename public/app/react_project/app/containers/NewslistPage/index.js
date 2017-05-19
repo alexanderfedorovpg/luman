@@ -12,7 +12,8 @@ import {
     loadNewslist,
     setFilter,
     rejectArticle,
-    acceptArticle
+    acceptArticle,
+    deleteArticle
 } from './actions'
 import { postMessage } from 'containers/App/actions'
 
@@ -37,10 +38,11 @@ class NewslistPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false
+            modal: false,
+            selectedId: null
         };
 
-        this.toggle = this.toggle.bind(this);
+        this.toggle = ::this.toggle;
     }
 
     componentDidMount() {
@@ -78,11 +80,11 @@ class NewslistPage extends Component {
         }
     }
 
-    toggle() {
+    toggle(articleId) {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            selectedId: articleId || null
         });
-        console.log(this.state);
     }
 
     renderContent() {
@@ -92,6 +94,7 @@ class NewslistPage extends Component {
             setFilter,
             rejectArticle,
             acceptArticle,
+            deleteArticle,
             postMessage,
             oldNews,
             user,
@@ -121,6 +124,8 @@ class NewslistPage extends Component {
                         <ContentSupervisor
                             {...contentProps}
                             clearTask={rejectArticle}
+                            deleteTask={() => { 
+                                deleteArticle(this.state.selectedId)}}
                             postMessage={postMessage} 
                             toggle={this.toggle}
                             open={this.state.modal}/>
@@ -179,6 +184,9 @@ const mapDispatchToProps = dispatch => ({
     },
     acceptArticle(id) {
         dispatch(acceptArticle(id))
+    },
+    deleteArticle(id) {
+        dispatch(deleteArticle(id))
     },
     postMessage(room, message) {
         dispatch(postMessage(room, message))

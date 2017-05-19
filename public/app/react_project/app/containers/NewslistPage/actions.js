@@ -11,6 +11,10 @@ import {
     ACCEPT_ARTICLE_SUCCESS,
     ACCEPT_ARTICLE_FAILURE,
 
+    DELETE_ARTICLE,
+    DELETE_ARTICLE_SUCCESS,
+    DELETE_ARTICLE_FAILURE,
+
     SET_FILTER
 } from './constants'
 
@@ -55,6 +59,21 @@ export const articleAccepted = id => ({
 
 export const articleAcceptionError = error => ({
     type: ACCEPT_ARTICLE_FAILURE,
+    error
+})
+
+export const deleteArticle = id => ({
+    type: DELETE_ARTICLE,
+    payload: id
+})
+
+export const articleDeleted = payload => ({
+    type: DELETE_ARTICLE_SUCCESS,
+    payload
+})
+
+export const articleDeletionError = error => ({
+    type: DELETE_ARTICLE_FAILURE,
     error
 })
 
