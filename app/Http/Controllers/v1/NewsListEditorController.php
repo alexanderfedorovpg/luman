@@ -364,7 +364,7 @@ class NewsListEditorController extends CmsController
             $news->body = $body ? $body : '';
 
 
-            $news->moderation = false;
+
 
             $news->original_source_link = $original_source_link ? $original_source_link : '';
 
