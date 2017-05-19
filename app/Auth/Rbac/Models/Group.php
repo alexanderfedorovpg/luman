@@ -36,7 +36,7 @@ class Group extends Model
      */
     public static $rules = [
         'name' => 'required|max:255',
-        'enabled' => 'required|boolean'
+        'enabled' => 'boolean'
     ];
 
     /**
