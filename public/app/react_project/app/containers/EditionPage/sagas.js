@@ -7,19 +7,33 @@ import {
     showPreloader,
     hidePreloader,
     showInfoModal,
+    addGroup,
+    editGroup,
+    deleteGroup,
 } from 'containers/App/actions';
 import {
     ADD_USER,
     DELETE_USER,
     EDIT_USER,
+    GET_PERMISSIONS,
+    ADD_GROUP,
+    DELETE_GROUP,
+    EDIT_GROUP,
 } from './constants';
 import {
     failureAddUser,
     failureDeleteUser,
     failureEditUser,
+    successGetPermissions,
+    failureGetPermissions,
+    failureAddGroup,
+    failureDeleteGroup,
+    failureEditGroup,
 } from './actions';
 
 const selectSelectedUser = (state) => state.getIn(['editionPage', 'selectedUser']);
+const selectUsers = (state) => state.getIn(['app', 'users', 'data']).toJS();
+const selectSelectedGroup = (state) => state.getIn(['editionPage', 'selectedGroup']);
 
 export function* addUserSaga({ payload }) {
     try {
@@ -61,7 +75,7 @@ export function* deleteUserSaga({ payload }) {
 
 export function* editUserSaga({ payload }) {
     try {
-        const data = { ...payload.data };
+        const { group, ...data } = payload.data;
 
         if (data.password === '' || data.password === null) {
             delete data.password;
@@ -69,28 +83,87 @@ export function* editUserSaga({ payload }) {
 
         data.enabled = data.enabled ? 1 : 0;
 
-        if (data.group) {
-            yield call(api.addUserToGroup, data.group, payload.id);
-        }
-
-        data.group = [parseInt(data.group, 10)];
-
         yield put(showPreloader());
-        yield call(api.editUser, payload.id, data);
 
-        if ('password' in data) {
-            delete data.password;
+        if (group) {
+            const users = yield select(selectUsers);
+
+            if (users[payload.id].groups.indexOf(group) === -1) {
+                yield call(api.addUserToGroup, group, payload.id);
+            }
         }
 
-        data.name = `${data.firstName} ${data.lastName}`;
+        const response = yield call(api.editUser, payload.id, data);
 
-        yield put(editUser(data));
+        yield put(editUser(response.data));
         yield put(hidePreloader());
         yield put(showInfoModal('Данные пользователя успешно изменены'));
     } catch (err) {
+        console.error(err);
         yield put(hidePreloader());
         yield put(showInfoModal('Не удалось изменить данные пользователя. Попробуйте еще раз'));
         yield put(failureEditUser(err));
+    }
+}
+
+export function* getPermissionsSaga() {
+    try {
+        const response = yield call(api.getPermissionsList);
+        yield put(successGetPermissions(response.data));
+    } catch (err) {
+        yield put(failureGetPermissions(err));
+    }
+}
+
+export function* addGroupSaga({ payload }) {
+    try {
+        yield put(showPreloader());
+        const response = yield call(api.addGroup, payload);
+
+        yield put(addGroup(response.data));
+        yield put(hidePreloader());
+        yield put(showInfoModal('Группа добавлена'));
+    } catch (err) {
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось добавить группу. Попробуйте еще раз'));
+        yield put(failureAddGroup(err));
+    }
+}
+
+// TO-DO: допилить изменение разрешений
+export function* editGroupSaga({ payload }) {
+    try {
+        const { permissions, ...data } = payload.data;
+
+        data.enabled = data.enabled ? 1 : 0;
+
+        yield put(showPreloader());
+        const response = yield call(api.editGroup, payload.id, data);
+
+        yield put(editGroup(response.data));
+        yield put(hidePreloader());
+        yield put(showInfoModal('Данные группы успешно изменены'));
+    } catch (err) {
+        console.error(err);
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось изменить данные группы. Попробуйте еще раз'));
+        yield put(failureEditGroup(err));
+    }
+}
+
+export function* deleteGroupSaga({ payload }) {
+    try {
+        const id = payload.id ? payload.id : yield select(selectSelectedGroup);
+
+        yield put(showPreloader());
+        yield call(api.deleteGroup, id);
+        yield put(deleteGroup(id));
+        yield put(hidePreloader());
+        yield put(showInfoModal('Группа успешно удалена'));
+    } catch (err) {
+        yield put(hidePreloader());
+        yield put(showInfoModal('Не удалось удалить группу. Возможно ее нельзя удалить, так как в ней есть пользователи'));
+        yield put(failureDeleteGroup(err));
     }
 }
 
@@ -98,6 +171,10 @@ export function* editionPageData() {
     yield takeLatest(ADD_USER, addUserSaga);
     yield takeLatest(DELETE_USER, deleteUserSaga);
     yield takeLatest(EDIT_USER, editUserSaga);
+    yield takeLatest(GET_PERMISSIONS, getPermissionsSaga);
+    yield takeLatest(ADD_GROUP, addGroupSaga);
+    yield takeLatest(DELETE_GROUP, deleteGroupSaga);
+    yield takeLatest(EDIT_GROUP, editGroupSaga);
 }
 
 // All sagas to be loaded

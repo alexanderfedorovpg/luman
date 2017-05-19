@@ -26,6 +26,9 @@ import {
     ADD_USER,
     DELETE_USER,
     EDIT_USER,
+    ADD_GROUP,
+    DELETE_GROUP,
+    EDIT_GROUP,
 } from './constants';
 
 const initialState = fromJS({
@@ -115,6 +118,32 @@ function AppReducer(state = initialState, action) {
 
         case LOAD_GROUPS_SUCCESS:
             return state.set('groups', fromJS(action.payload.groups));
+
+        case ADD_GROUP:
+            return state
+                .setIn(
+                    ['groups', 'byId', action.payload.id],
+                    fromJS(action.payload)
+                )
+                .updateIn(
+                    ['groups', 'ids'],
+                    (groups) => groups.push(action.payload.id)
+                );
+
+        case DELETE_GROUP:
+            return state
+                .deleteIn(['groups', 'byId', String(action.payload.id)])
+                .updateIn(
+                    ['groups', 'ids'],
+                    (groups) => groups.filter((id) => id !== action.payload.id)
+                );
+
+        case EDIT_GROUP:
+            return state
+                .updateIn(
+                    ['groups', 'byId', String(action.payload.id)],
+                    (group) => group.merge(fromJS(action.payload))
+                );
 
         default:
             return state;

@@ -15,7 +15,7 @@ import {
 import {
     makeGetUsers,
     makeRadioButtonsFromGroups,
-    makeSelected,
+    makeSelectedUser,
     makeUserInfo,
     makeUserAccount,
 } from '../selectors';
@@ -54,7 +54,6 @@ class Users extends PureComponent {
     }
 
     editUser(data) {
-        console.log('edit');
         this.props.editUser(this.props.selected, data);
     }
 
@@ -112,7 +111,7 @@ class Users extends PureComponent {
 const mapStateToProps = createStructuredSelector({
     users: makeGetUsers(),
     groups: makeRadioButtonsFromGroups(),
-    selected: makeSelected(),
+    selected: makeSelectedUser(),
     userInfo: makeUserInfo(),
     userAccount: makeUserAccount(),
 });
