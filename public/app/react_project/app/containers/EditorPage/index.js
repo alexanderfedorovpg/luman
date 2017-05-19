@@ -7,6 +7,7 @@ import HeaderSupervisor from 'components/Editor/Header.supervisor'
 import Content from 'components/Editor/Content'
 
 import {
+    clearArticle,
     loadArticle,
     deleteArticle,
     finishArticle,
@@ -44,8 +45,22 @@ class EditorPage extends Component {
         this.closePreview = this.closePreview.bind(this)
     }
 
+    componentWillReceiveProps(nextProps) {
+
+        if (this.props.params.id !== nextProps.params.id) {
+
+            nextProps.clearArticle()
+
+            if (nextProps.params.id) {
+                nextProps.loadArticle(nextProps.params.id)
+            }
+        }
+    }
+
     componentDidMount() {
-        this.props.loadArticle(this.props.params.id)
+        if (this.props.params.id) {
+            this.props.loadArticle(this.props.params.id)
+        }
     }
 
     openPreview() {
@@ -82,11 +97,14 @@ class EditorPage extends Component {
 
         const headerProps = {
             moved: menuOpen,
-            del: deleteArticle.bind(this, article.id),
             preview: this.openPreview
         }
 
-        if (!article.id) return null
+        if (article.id) {
+            headerProps.del = deleteArticle.bind(this, article.id)
+            headerProps.reject = rejectArticle.bind(this, article.id)
+            headerProps.ret = toFixArticle.bind(this, article.id)
+        }
 
         if (checkPermissons(user, ['admin', 'сommissioning-editor'])) {
             return (
@@ -103,7 +121,6 @@ class EditorPage extends Component {
 
                     <HeaderSupervisor
                         {...headerProps}
-                        ret={toFixArticle.bind(this, article.id)}
                         publish={publishArticle} />
                 </Content>
             )
@@ -114,13 +131,12 @@ class EditorPage extends Component {
                     article={article}
                     rubrics={rubrics}
                     chatRoom={params.id}
-                    delegate={rejectArticle.bind(this, article.id)}
+                    delegate={article.id && rejectArticle.bind(this, article.id)}
                     preview={this.state.preview}
                     finish={finishArticle}
                     closePreview={this.closePreview}>
 
                     <HeaderEditor
-                        reject={rejectArticle.bind(this, article.id)}
                         finish={finishArticle}
                         {...headerProps} />
                 </Content>
@@ -153,6 +169,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+    clearArticle() {
+        dispatch(clearArticle())
+    },
     loadArticle(id) {
         dispatch(loadArticle(id))
     },

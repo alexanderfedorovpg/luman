@@ -156,7 +156,7 @@ class Chat extends PureComponent {
     }
 
     render() {
-        let { messages, loading } = this.props
+        let { room, messages, loading } = this.props
 
         return (
             <div>
@@ -168,21 +168,23 @@ class Chat extends PureComponent {
                             : 'Нет сообщений'
                     }
                 </Root>
-                <Send onSubmit={this.submitHandler}>
-                    <label htmlFor="file">
-                        <CustomIcon type="file" />
-                    </label>
-                    <input
-                        id="file"
-                        name="file"
-                        type="file"
-                        multiple
-                        style={{ display: 'none' }} />
-                    <CustomInput
-                        value={this.state.message}
-                        onChange={this.changeHandler}
-                        block />
-                </Send>
+                {room &&
+                    <Send onSubmit={this.submitHandler}>
+                        <label htmlFor="file">
+                            <CustomIcon type="file" />
+                        </label>
+                        <input
+                            id="file"
+                            name="file"
+                            type="file"
+                            multiple
+                            style={{ display: 'none' }} />
+                        <CustomInput
+                            value={this.state.message}
+                            onChange={this.changeHandler}
+                            block />
+                    </Send>
+                }
             </div>
         )
     }

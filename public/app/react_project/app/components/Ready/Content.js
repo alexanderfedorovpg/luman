@@ -63,17 +63,25 @@ class Content extends PureComponent {
     }
 
     render() {
-        let { data, old, publish, delegate, onDelete } = this.props
+        let {
+            data,
+            old,
+            publish,
+            push,
+            published,
+            delegate,
+            onDelete
+        } = this.props
         let { selected } = this.state
 
         return (
             <Root>
                 {data
-                    .filter(v => !+v.is_publish)
                     .map(value => (
                         <Item
                             key={value.id}
                             data={value}
+                            push={push}
                             open={this.selectItem}
                             publish={publish}
                             newItem={old.indexOf(value.id) == -1}
@@ -87,7 +95,12 @@ class Content extends PureComponent {
                     onRequestClose={this.closeModal}>
                     <Detail
                         onClose={this.closeModal}
-                        done={publish}
+                        doneTitle={published ? 'Редактировать' : 'Опубликовать'}
+                        done={id => {
+                            published
+                                ? push(`/editor/${id}`)
+                                : publish(id)
+                        }}
                         delegate={params => {
                             delegate(params)
                             this.closeModal()

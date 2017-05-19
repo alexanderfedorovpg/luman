@@ -1,4 +1,5 @@
 import {
+    CLEAR_ARTICLE,
 
     TO_FIX_ARTICLE,
     TO_FIX_ARTICLE_SUCCESS,
@@ -24,6 +25,10 @@ import {
     DELEGATE_ARTICLE_SUCCESS,
     DELEGATE_ARTICLE_FAILURE
 } from './constants'
+
+export const clearArticle = () => ({
+    type: CLEAR_ARTICLE
+})
 
 export const toFixArticle = payload => ({
     type: TO_FIX_ARTICLE,

@@ -58,7 +58,12 @@ function readyPageReducer(state = initialState, action) {
         case PUBLISH_ARTICLE_SUCCESS:
             return state
                 .updateIn(['news', 'data'], value => {
-                    return value.filter(value => value.get('id') !== action.payload)
+                    return value.update(
+                        value.findIndex(item => item.get('id') == action.payload),
+                        item => item
+                            .set('is_publish', '1')
+                            .set('publish_date', new Date())
+                    )
                 })
                 
         case DELETE_ARTICLE_SUCCESS:

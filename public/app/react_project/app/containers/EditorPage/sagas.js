@@ -102,9 +102,9 @@ export function* publishArticle({ payload }) {
             payload.image_preview = idPreview
         }
 
-        yield call(api.finishArticle, payload)
+        const { data } = yield call(api.finishArticle, payload)
 
-        yield call(api.publishArticle, payload.id)
+        yield call(api.publishArticle, data.id)
 
         toastr.success('Новость опубликована')
 

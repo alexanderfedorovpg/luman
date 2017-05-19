@@ -1,3 +1,4 @@
+export const CLEAR_ARTICLE = 'app/EditorPage/CLEAR_ARTICLE';
 
 export const LOAD_ARTICLE = 'app/EditorPage/LOAD_ARTICLE';
 export const LOAD_ARTICLE_SUCCESS = 'app/EditorPage/LOAD_ARTICLE_SUCCESS';

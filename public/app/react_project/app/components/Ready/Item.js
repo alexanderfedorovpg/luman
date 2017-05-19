@@ -186,7 +186,7 @@ const CloseIcon = styled(Icon)`
     display: none;
 `
 
-function Item({ data, intl, newItem, open, publish, toggleDelete }) {
+function Item({ data, intl, newItem, push, open, publish, toggleDelete }) {
     let updateDate = data.updated_at
 
         ? intl.formatDate(
@@ -259,13 +259,26 @@ function Item({ data, intl, newItem, open, publish, toggleDelete }) {
                             onClick={()=>open(data)}>
                             Предпросмотр
                         </PreviewButton>
-                        <PublishButton
-                            md success
-                            onClick={e=>publish(data.id)}>
+                        {+data.is_publish
+                            ? (
+                                <PublishButton
+                                    md success
+                                    onClick={e=>push(`/editor/${data.id}`)}>
 
-                            <Icon type="arrow-right" />
-                            Опубликовать
-                        </PublishButton>
+                                    <Icon type="arrow-right" />
+                                    Редактировать
+                                </PublishButton>
+                            )
+                            : (
+                                <PublishButton
+                                    md success
+                                    onClick={e=>publish(data.id)}>
+
+                                    <Icon type="arrow-right" />
+                                    Опубликовать
+                                </PublishButton>
+                            )
+                        }
                     </ButtonContainer>
                 </Right>
                 <CloseIcon onClick={toggleDelete.bind(this, data.id)} className={secretClassName} type="delete-bold" />
