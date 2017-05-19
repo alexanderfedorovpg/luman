@@ -114,7 +114,7 @@ export const getArticle = (id) => axios.get(`/newseditor/${id}`);
 
 export const deleteArticle = (id) => axios.delete(`/newseditor/${id}`);
 
-export const delegateArticle = (params) => axios.post('/newseditor/delegate', params);
+export const delegateArticle = (params) => axios.post('/newseditor/delegate', qs.stringify(params));
 
 export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
     id,

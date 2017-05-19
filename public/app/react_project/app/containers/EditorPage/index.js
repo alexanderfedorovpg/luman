@@ -120,7 +120,7 @@ class EditorPage extends Component {
                     closePreview={this.closePreview}>
 
                     <HeaderEditor
-                        delegate={rejectArticle.bind(this, article.id)}
+                        reject={rejectArticle.bind(this, article.id)}
                         finish={finishArticle}
                         {...headerProps} />
                 </Content>
