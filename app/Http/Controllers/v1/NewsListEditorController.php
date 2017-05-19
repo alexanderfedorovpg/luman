@@ -364,7 +364,7 @@ class NewsListEditorController extends CmsController
             $news->body = $body ? $body : '';
 
 
-            $news->moderation = 0;
+
 
             $news->original_source_link = $original_source_link ? $original_source_link : '';
 
@@ -373,9 +373,9 @@ class NewsListEditorController extends CmsController
             if ($request->get('keywords')) {
                 $news->keywords = $request->get('keywords');
             }
-            if ($request->get('moderation')) {
-                $news->moderation = $request->get('moderation');
-            }
+
+                $news->moderation = $request->get('moderation')? $request->get('moderation'):false;
+
 
             if (isset($theses)) {
                 $news->theses = $theses;
