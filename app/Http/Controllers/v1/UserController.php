@@ -80,7 +80,7 @@ class UserController extends CmsController
         try {
             $rules = User::$rules;
             $rules['password'] = 'required|min:6';
-            $rules['password_confirmation']=  'min:6';
+//            $rules['password_confirmation']=  'min:6';
             $this->validate($request, $rules);
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
@@ -88,6 +88,7 @@ class UserController extends CmsController
 
         $user = User::createNew($request->all());
         if ($user) {
+
             return $this->respond($this->usersTransformer->transform($user->toArray()));
         }
 

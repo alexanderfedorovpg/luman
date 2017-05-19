@@ -14,7 +14,7 @@ import Icon from 'components/Icon'
 import Rating from 'components/Rating'
 import Tags from 'components/Tags'
 import Modal from 'components/Modal'
-import Preview from './Preview'
+import Preview from 'components/Preview'
 import Chat from 'containers/Chat'
 import HeaderEditor from './Header.editor'
 import HeaderSupervisor from './Header.supervisor'
@@ -153,16 +153,6 @@ const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />) `
     `}
 `
 
-const DelegateRoot = styled.div`
-    width: 500px;
-    padding: 30px 1.5rem 79px;
-    margin: auto;
-    font-family: 'Open Sans', Arial, sans-serif;
-    background-color: #fff;
-    height: 100%;
-    overflow-y: auto;
-`
-
 class Content extends Component {
 
     constructor(props) {
@@ -242,14 +232,6 @@ class Content extends Component {
             toastr.warning('Выберите рубрики!')
             retFlag = true
         }
-        if (!data.image_main_temp && !article.image_main_id) {
-            toastr.warning('Выберите основное изображение!')
-            retFlag = true
-        }
-        if (!data.image_preview_temp && !article.image_preview_id) {
-            toastr.warning('Выберите превью!')
-            retFlag = true
-        }
         if (!data.top) {
             toastr.warning('Выберите рейтинг!')
             retFlag = true
@@ -258,7 +240,6 @@ class Content extends Component {
             ...error,
             title: !data.title || data.title.length > titleMax,
             subtitle: !data.subtitle || data.subtitle.length > subtitleMax,
-            theses: !data.theses,
         }
 
         if (Object.values(newError).reduce((a, b) => a || b, false)) {
@@ -377,6 +358,7 @@ class Content extends Component {
             supervisor,
             preview,
             finish,
+            publish,
             closePreview
         } = this.props
 
@@ -524,9 +506,9 @@ class Content extends Component {
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
                         <StickyContainer>
-                            <Sticky relative={false}>
+                            <Sticky topOffset={220}>
                                 {
-                                    () => {
+                                    ({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => {
                                         return (
                                             <Chat room={chatRoom} />
                                         )
@@ -544,10 +526,21 @@ class Content extends Component {
                     <Preview
                         data={this.state.data}
                         onClose={closePreview}
-                        delegate={this.toggleDelegate}
-                        done={() => finish(this.dataToSubmit())} />
+                        delegate={{
+                            toggle: this.toggleDelegate,
+                            open: this.state.delegate,
+                            change: this.changeHandlerEditor,
+                            users: users,
+                            value: this.state.data.editor
+                        }}
+                        doneTitle={supervisor ? 'Опубликовать' : 'Готово'}
+                        done={() => (
+                            supervisor
+                                ? publish(this.dataToSubmit())
+                                : finish(this.dataToSubmit())
+                        )} />
                 </Modal>
-                <Modal
+                {/*<Modal
                     isOpen={this.state.delegate}
                     contentLabel="Сменить редактора"
                     onRequestClose={this.toggleDelegate}>
@@ -564,7 +557,7 @@ class Content extends Component {
                                 Закрыть
                             </Button>
                     </DelegateRoot>
-                </Modal>
+                </Modal>*/}
             </Root>
         )
     }

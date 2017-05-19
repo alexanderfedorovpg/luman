@@ -47,7 +47,7 @@ class UsersTransformer extends Transformer
 
         $transform['permissions']=$permissions;
         unset($transform['avatar_id']);
-        if ($user['avatar_id']) {
+        if (isset($user['avatar_id'])) {
             $avatar = CdnFile::where('id', '=', $user['avatar_id'])->get(['url'])->first();
             $transform['avatar'] = [
                 'id' => $user['avatar_id'],

@@ -37,6 +37,6 @@ export const items = [
     // {
     //     link: '/translation',
     //     icon: 'text-edit-ico',
-    //     name: 'Текстовая трансляция',
+    //     name: 'Трансляция',
     // },
 ];

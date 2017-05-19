@@ -1,9 +1,12 @@
 import { take, call, put, select, cancel, takeLatest, takeEvery, fork } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
 
 import {
     LOAD_READY_NEWS,
-    PUBLISH_ARTICLE
+    PUBLISH_ARTICLE,
+
+    strings
 } from './constants';
 
 import {
@@ -40,6 +43,8 @@ export function* publishArticle({ payload }) {
         yield call(api.publishArticle, payload);
 
         yield put(articlePublished(payload));
+
+        toastr.success(strings.articlePublished)
 
         yield fork(getNews, {})
     } catch (err) {

@@ -218,7 +218,10 @@ function Item({ data, intl, newItem, open, publish }) {
                         : null
                     }
                     <UserName>
-                        {data.editor && data.editor.name}
+                        {data.editor
+                            ? data.editor.name
+                            : 'Без автора'
+                        }
                     </UserName>
                 </Left>
                 <Right>

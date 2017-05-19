@@ -145,14 +145,36 @@ export default function createRoutes(store) {
         {
             path: '/feed',
             name: 'feed',
+            onEnter(nextState, replace, callback) {
+                if (this.loadedSagas) {
+                    callback();
+                    return;
+                }
 
+                const importModules = Promise.all([
+                    import('containers/Help/sagas'),
+                    import('containers/FeedPage/sagas'),
+                ]);
+
+                importModules.then(sagas => {
+                    this.loadedSagas = injectSagas(
+                        sagas.reduce((acc, item) => [...acc, ...item.default], []));
+                    callback();
+                });
+
+                importModules.catch(errorLoading);
+            },
+            onLeave() {
+                if (this.loadedSagas) {
+                    this.loadedSagas.forEach((saga) => saga.cancel());
+                    delete this.loadedSagas;
+                }
+            },
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/Help/reducer'),
-                    import('containers/Help/sagas'),
 
                     import('containers/FeedPage/reducer'),
-                    import('containers/FeedPage/sagas'),
                     import('containers/FeedPage'),
                 ]);
 
@@ -161,16 +183,12 @@ export default function createRoutes(store) {
                 importModules.then((results) => {
                     let [
                         helpReducer,
-                        helpSagas,
                         reducer,
-                        sagas,
                         component,
                     ] = results;
 
                     injectReducer('help', helpReducer.default);
                     injectReducer('feedPage', reducer.default);
-                    injectSagas(sagas.default);
-                    injectSagas(helpSagas.default);
 
                     renderRoute(component);
                 });

@@ -7,6 +7,7 @@ import Input from 'components/Form/Input'
 import Icon from 'components/Icon'
 
 import { font } from 'constants/style'
+import { ensureAbs } from 'utils/uri'
 
 const Root = styled.div`
     width: 235px;
@@ -146,7 +147,7 @@ class Chat extends PureComponent {
                     <p>{item.message}</p>
                     {(item.files||[]).map(file => (
                         <div key={file.id}>
-                            <Pic src={`//${file.url}`} />
+                            <Pic src={ensureAbs(file.url)} />
                         </div>
                     ))}
                 </Content>
