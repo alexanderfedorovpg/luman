@@ -24,6 +24,7 @@
     &__img {
         width: inherit;
         height: inherit;
+        object-fit: cover;
     }
 
     &__link {
@@ -153,7 +154,13 @@
         width: inherit;
         height: inherit;
 
-        background-image: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, .1));
+        background: rgba(0, 0, 0, .5);
+
+        transition: background .5s ease-out;
+    }
+
+    &:hover::before {
+        background: rgba(0, 0, 0, .3);
     }
 
     &__time-keeping {
@@ -195,6 +202,8 @@
 
         width: inherit;
         height: inherit;
+
+        object-fit: cover;
     }
 
     &__info {

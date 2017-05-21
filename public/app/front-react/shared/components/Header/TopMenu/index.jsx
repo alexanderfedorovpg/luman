@@ -24,11 +24,11 @@ function TopMenu() {
                             Инфошум
                         </Link>
                     </li>
-                    <li className="top-menu__item">
+                    {/*<li className="top-menu__item">
                         <Link to="/broadcast" className="top-menu__link">
                             Из эфира
                         </Link>
-                    </li>
+                    </li>*/}
                 </ul>
             </nav>
         </div>

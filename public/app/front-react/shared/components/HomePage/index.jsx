@@ -58,7 +58,7 @@ function HomePage({
                         <Noise className="general-news__info-noize" data={noise} />
                     </div>
                 </div>
-                <div className="general-news__right right-col">
+                {/*<div className="general-news__right right-col">
                     <VideoWrapper>
                         <Video
                             data={firstVideo.video_stream}
@@ -67,7 +67,7 @@ function HomePage({
                             className="general-news__general-video" />
                     </VideoWrapper>
                     <EnterOne className="general-news__enter-one" data={secondVideo} />
-                </div>
+                </div>*/}
                 <div className="general-news__left general-news__left_more">
                     <div className="general-news__left-wrapper">
                         <Banner className="general-news__banner" />
@@ -81,12 +81,12 @@ function HomePage({
                 <div className="general-news__middle">
                     <BannerPreview className="general-news__banner-preview" />
                 </div>
-                <div className="general-news__left general-news__left_more">
+                {/*<div className="general-news__left general-news__left_more">
                     <MoreVideo className="general-news__more-video" data={moreVideo} />
                 </div>
                 <div className="general-news__right general-news__right_more">
                     <ListVideo className="general-news__list-video" data={listVideo} />
-                </div>
+                </div>*/}
             </div>
         </div>
     )
