@@ -600,6 +600,7 @@ class NewsListEditorController extends CmsController
 
 
             $news->is_publish = 1;
+            $news->moderation = 1;
 
             if (/* $log_moderation->setPublish() &&*/
             $news->save()
