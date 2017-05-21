@@ -86,6 +86,7 @@ class NewsFeedController extends CmsController
             $toDate = $request->input('toDate');
             $feed->dateFilter($fromDate, $toDate);
 
+            $feed->orderBy('created_at','desc');
 
             $feed = $feed->paginate(DEFAULT_VALUE);
 
