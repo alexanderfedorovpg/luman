@@ -15,7 +15,7 @@ class User extends Model implements AuthenticatableContract
     public static $allow_all_function = [
         'v1.group-index',
         'v1.group-show',
-    ];
+        'v1.user-profile',    ];
 
     /**
      * The attributes that are mass assignable.
