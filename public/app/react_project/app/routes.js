@@ -143,7 +143,7 @@ export default function createRoutes(store) {
             },
         },
         {
-            path: '/feed',
+            path: '/',
             name: 'feed',
             onEnter(nextState, replace, callback) {
                 if (this.loadedSagas) {

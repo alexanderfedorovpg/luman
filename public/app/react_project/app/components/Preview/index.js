@@ -179,9 +179,14 @@ class Preview extends PureComponent {
                 </Title>
                 <ImageWrapper>
                     <div>
-                        <Img>
-                            <img src={ensureAbs(data.image_main)} />
-                        </Img>
+                        {data.image_main ? 
+                            (
+                                <Img>
+                                    <img src={ensureAbs(data.image_main)} />
+                                </Img>
+                            ) :
+                            null
+                        }
                         <Source>
                             Источник: Интерфакс
                         </Source>
