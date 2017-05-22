@@ -36,6 +36,8 @@ import {
     successGetHistory,
     failureGetHistory,
     allHistoryLoaded,
+    successGetGroupPermissions,
+    failureGetGroupPermissions,
 } from './actions';
 
 const selectSelectedUser = (state) => state.getIn(['editionPage', 'selectedUser']);
@@ -123,7 +125,14 @@ export function* editUserSaga({ payload }) {
 export function* getPermissionsSaga() {
     try {
         const response = yield call(api.getPermissionsList);
-        yield put(successGetPermissions(response.data));
+        const data = { byId: {}, ids: [] };
+
+        response.data.forEach((item) => {
+            data.byId[item.id] = item;
+            data.ids.push(item.id);
+        });
+
+        yield put(successGetPermissions(data));
     } catch (err) {
         yield put(failureGetPermissions(err));
     }
@@ -151,9 +160,11 @@ export function* addGroupSaga({ payload }) {
 export function* getGroupPermissions({ payload }) {
     try {
         const response = yield call(api.getGroupPermissions, payload.id);
-        console.log(response.data);
-    } catch (err) {
+        const permissionIds = response.data.map((permission) => permission.id);
 
+        yield put(successGetGroupPermissions(permissionIds));
+    } catch (err) {
+        yield put(failureGetGroupPermissions(err));
     }
 }
 

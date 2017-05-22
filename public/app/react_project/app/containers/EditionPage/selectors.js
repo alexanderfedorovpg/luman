@@ -18,9 +18,14 @@ const makeSelectedUser = () => createSelector(
     (page) => page.get('selectedUser')
 );
 
-const makeSelectedGroup = () => createSelector(
+const selectGroup = createSelector(
     selectEditionPageDomain(),
     (page) => page.get('selectedGroup')
+);
+
+const makeSelectedGroup = () => createSelector(
+    selectGroup,
+    (group) => group.get('id')
 );
 
 const selectUsers = createSelector(
@@ -109,10 +114,14 @@ const makeCheckboxesFromPermissions = () => createSelector(
 
         const permissions = permissionsImmutable.toJS();
 
-        return permissions.map((permission) => ({
-            value: permission.id,
-            label: permission.description,
-        }));
+        return permissions.ids.map((id) => {
+            const permission = permissions.byId[id];
+
+            return {
+                value: permission.id,
+                label: permission.description,
+            };
+        });
     }
 );
 
@@ -161,7 +170,7 @@ const makeUserAccount = () => createSelector(
     }
 );
 
-const selectSelectedGroup = createSelector(
+const getSelectedGroup = createSelector(
     [makeSelectedGroup(), makeGetGroups()],
     (selected, groupsImmutable) => {
         if (!selected || !groupsImmutable) {
@@ -175,7 +184,7 @@ const selectSelectedGroup = createSelector(
 );
 
 const makeGroupInfo = () => createSelector(
-    selectSelectedGroup,
+    getSelectedGroup,
     (group) => {
         if (!group) {
             return {};
@@ -188,15 +197,20 @@ const makeGroupInfo = () => createSelector(
     }
 );
 
+const selectGroupPermissions = createSelector(
+    selectGroup,
+    (group) => group.get('permissions')
+);
+
 const makeGroupAccount = () => createSelector(
-    selectSelectedGroup,
-    (group) => {
+    [getSelectedGroup, selectGroupPermissions],
+    (group, permissions) => {
         if (!group) {
             return {};
         }
 
         return {
-            permissions: [],
+            permissions: permissions.toJS().map((item) => String(item)),
             id: group.id,
             enabled: group.enabled === 1,
         };
