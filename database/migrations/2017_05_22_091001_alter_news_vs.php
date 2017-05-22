@@ -18,7 +18,7 @@ class AlterNewsVs extends Migration
             $table->integer('video_stream_preview')->unsigned()->nullable()->change();
 
 
-            $table->foreign('video_stream_cdn','new_video_stream_cdn')->references('id')->on('cdn_files')
+            $table->foreign('video_stream','new_video_stream_cdn')->references('id')->on('cdn_files')
                 ->onDelete('set null')
                 ->onUpdate('cascade');
 
