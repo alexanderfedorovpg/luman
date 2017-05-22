@@ -52,6 +52,11 @@ class EditUserForm extends PureComponent {
                     <Close width="15" height="15" />
                 </CloseBtn>
                 <StyledUser data={user} />
+                <Field
+                    name="id"
+                    type="hidden"
+                    component="input"
+                />
                 <Group sm>
                     <Field
                         name="email"

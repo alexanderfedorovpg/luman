@@ -26,6 +26,7 @@ class RecordForm extends React.PureComponent {
 
     onSubmit(immutableData) {
         const data = immutableData.toJS();
+        console.log(data);
 
         if (!data.id) {
             this.props.postRecord(data);

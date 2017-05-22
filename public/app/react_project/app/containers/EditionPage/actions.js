@@ -58,10 +58,10 @@ export function failureDeleteUser(error) {
     };
 }
 
-export function editUser(id, data) {
+export function editUser(data) {
     return {
         type: EDIT_USER,
-        payload: { id, data },
+        payload: data,
     };
 }
 
@@ -146,10 +146,10 @@ export function failureDeleteGroup(error) {
     };
 }
 
-export function editGroup(id, data) {
+export function editGroup(data) {
     return {
         type: EDIT_GROUP,
-        payload: { id, data },
+        payload: data,
     };
 }
 

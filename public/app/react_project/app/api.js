@@ -52,6 +52,7 @@ export const getGroups = () => axios.get('/group');
 export const addGroup = (data) => axios.post('/group', data);
 export const editGroup = (id, data) => axios.put(`/group/${id}`, data);
 export const deleteGroup = (id) => axios.delete(`/group/${id}`);
+export const getGroupPermissions = (id) => axios.get(`group/${id}/permiss`);
 export const editGroupPermissions = (id, data) => axios.put(`group/${id}/permiss`, data);
 
 export const getPermissionsList = () => axios.get('permission');

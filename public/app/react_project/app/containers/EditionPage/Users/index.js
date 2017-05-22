@@ -33,7 +33,6 @@ class Users extends PureComponent {
         this.closeDeleteModal = this.closeDeleteModal.bind(this);
         this.openDeleteModal = this.openDeleteModal.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
-        this.editUser = this.editUser.bind(this);
     }
 
     closeDeleteModal() {
@@ -51,10 +50,6 @@ class Users extends PureComponent {
     deleteUser() {
         this.props.deleteUser(this.props.selected);
         this.closeDeleteModal();
-    }
-
-    editUser(data) {
-        this.props.editUser(this.props.selected, data);
     }
 
     render() {
@@ -86,7 +81,7 @@ class Users extends PureComponent {
                                     groups={groups}
                                     onClose={this.props.deselectUser}
                                     onDelete={this.openDeleteModal}
-                                    onEdit={this.editUser}
+                                    onEdit={this.props.editUser}
                                 />
                             ) :
                             (

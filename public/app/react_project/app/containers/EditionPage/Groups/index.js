@@ -34,7 +34,6 @@ class Groups extends PureComponent {
         this.closeDeleteModal = this.closeDeleteModal.bind(this);
         this.openDeleteModal = this.openDeleteModal.bind(this);
         this.deleteGroup = this.deleteGroup.bind(this);
-        this.editGroup = this.editGroup.bind(this);
     }
 
     componentDidMount() {
@@ -60,10 +59,6 @@ class Groups extends PureComponent {
     deleteGroup() {
         this.props.deleteGroup(this.props.selected);
         this.closeDeleteModal();
-    }
-
-    editGroup(data) {
-        this.props.editGroup(this.props.selected, data);
     }
 
     render() {
@@ -95,7 +90,7 @@ class Groups extends PureComponent {
                                     permissions={permissions}
                                     onClose={this.props.deselectGroup}
                                     onDelete={this.openDeleteModal}
-                                    onEdit={this.editGroup}
+                                    onEdit={this.props.editGroup}
                                 />
                             ) :
                             (

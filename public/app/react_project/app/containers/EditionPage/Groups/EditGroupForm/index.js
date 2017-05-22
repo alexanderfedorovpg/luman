@@ -53,6 +53,11 @@ class EditGroupForm extends PureComponent {
                     items={permissions}
                     showError
                 />
+                <Field
+                    name="id"
+                    type="hidden"
+                    component="input"
+                />
                 <Group marginBottom={rem(38)}>
                     <Field
                         type="checkbox"
