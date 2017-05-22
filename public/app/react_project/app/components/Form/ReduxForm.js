@@ -1,4 +1,5 @@
 import React from 'react';
+import { List } from 'immutable';
 import Tags from 'components/Tags';
 import Rating from 'components/Rating';
 import Switch from 'components/Switch';
@@ -66,11 +67,13 @@ export const CheckboxGroupRedux = ({ input, meta, value, ...props }) => (
         checked={input.value.indexOf(value) !== -1}
         value={value}
         onChange={(e) => {
-            const newValue = [...input.value];
+            const oldValue = input.value || List();
+            let newValue;
+
             if (e.target.checked) {
-                newValue.push(value);
+                newValue = oldValue.push(value);
             } else {
-                newValue.splice(newValue.indexOf(value), 1);
+                newValue = oldValue.delete(oldValue.indexOf(value));
             }
 
             return input.onChange(newValue);
