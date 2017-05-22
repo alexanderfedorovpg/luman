@@ -12,7 +12,7 @@ class FileHelper
      * @param \Illuminate\Http\UploadedFile $file
      * @return \App\Models\CdnFile|null
      */
-    public static function uploadFilespotFile(UploadedFile $file)
+    public static function uploadFilespotFile(UploadedFile $file, $info)
     {
         $newName = md5($file->getFilename() . time());
 
@@ -33,11 +33,14 @@ class FileHelper
             ->uploadFile($file->getPathname(), $fullName);
 
         if ($result->getStatusCode() == 200) {
-            $result =  $result->jsonDecode()->object;
+            $result = $result->jsonDecode()->object;
             $cdnFile = new CdnFile([
                 'external_id' => $result->id,
-                'url' => 'http://' . $result->cdn_url,
-                'content_type' => $result->content_type
+                'url' => 'https://' . $result->cdn_url,
+                'content_type' => $result->content_type,
+                'object_source' => $info['object_source'],
+                'object_author' => $info['object_author'],
+                'object_name' => $info['object_name'],
             ]);
 
             $cdnFile->save();

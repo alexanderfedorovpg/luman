@@ -117,6 +117,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 
     //Файлы
     $group->post('/file','FileController@upload');
+    $group->get('/file/{id}','FileController@get');
+    $group->get('/file','FileController@all');
     $group->delete('/file/{id}','FileController@destroy');
 
     //Статистика

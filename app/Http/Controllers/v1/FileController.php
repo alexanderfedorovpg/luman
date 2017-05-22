@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Models\CdnFile;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Helpers\FileHelper;
@@ -29,7 +30,12 @@ class FileController extends CmsController
                 'file' => 'file|required|max:262144',
             ]);
 
-            $cdnFile = FileHelper::uploadFilespotFile($request->file('file'));
+            $info = [
+                'object_source' => $request->input('object_source') ? $request->input('object_source') : null,
+                'object_author' => $request->input('object_author') ? $request->input('object_author') : null,
+                'object_name' => $request->input('object_name') ? $request->input('object_name') : null,
+            ];
+            $cdnFile = FileHelper::uploadFilespotFile($request->file('file'), $info);
             if ($cdnFile) {
                 return $this->respond([
                     'success' => true,
@@ -38,8 +44,8 @@ class FileController extends CmsController
             }
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
-        }  catch (\Exception $e) {
-            return $this->respondFail500x();
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
         }
     }
 
@@ -60,4 +66,26 @@ class FileController extends CmsController
         return $this->respondNotFound('File not found');
     }
 
+    public function get($id)
+    {
+        $cdnFile = CdnFile::find($id);
+        if ($cdnFile) {
+
+            return $this->respond($cdnFile->toArray());
+        }
+
+        return $this->respondNotFound('File not found');
+    }
+
+    public function all()
+    {
+        $cdnFile = CdnFile::paginate(50);
+
+        if ($cdnFile) {
+
+            return $this->respond($cdnFile->toArray());
+        }
+
+        return $this->respondNotFound('Files not found');
+    }
 }

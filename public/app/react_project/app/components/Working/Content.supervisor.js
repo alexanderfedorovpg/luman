@@ -6,6 +6,8 @@ import randomString from 'random-string'
 
 import Modal from 'components/Modal'
 
+import Delegate from 'components/Delegate'
+
 import Item from './Item.supervisor'
 
 import Button from 'components/Button'
@@ -82,7 +84,7 @@ const CancelButton = styled(Button)`
 
 `
 
-function Content({ news, push, old, clearTask, deleteTask, postMessage, toggle, open }) {
+function Content({ news, push, old, clearTask, deleteTask, postMessage, toggle, open, users, delegateOpen, toggleDelegate, user, delegate }) {
 
     return (
         <Root>
@@ -100,8 +102,16 @@ function Content({ news, push, old, clearTask, deleteTask, postMessage, toggle, 
                         postMessage={postMessage}
                         newItem={old.indexOf(value.id) == -1} 
                         toggle={toggle}
-                        open={open}/>
+                        open={open}
+                        delegate={toggleDelegate}/>
                 ))}
+                <Delegate
+                    onClose={toggleDelegate}
+                    users={users}
+                    value={user}
+                    onChange={delegate}
+                    isOpen={delegateOpen}
+                />
                 <Modal
                     isOpen={open}
                     contentLabel="Удалить задание"

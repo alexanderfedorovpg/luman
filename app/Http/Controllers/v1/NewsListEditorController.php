@@ -187,8 +187,11 @@ class NewsListEditorController extends CmsController
             $rules['sub_title'] = 'required|max:140';
           //  $rules['theses'] = 'required';
 
-            $rules['image_main'] = 'numeric';
-            $rules['image_preview'] = 'numeric';
+            $rules['video_stream'] ='integer|exists:cdn_files,id';
+            $rules['video_stream_preview'] ='integer|exists:cdn_files,id';
+            $rules['image_main'] = 'integer|exists:cdn_files,id';
+            $rules['image_preview'] ='integer|exists:cdn_files,id';
+
             $rules['original_source_link'] = 'url';
 
             $this->validate($request,
@@ -203,7 +206,7 @@ class NewsListEditorController extends CmsController
             $top = $request->input('top');
             $note = $request->input('note');
             $video_stream = $request->input('video_stream');
-
+            $video_stream_preview= $request->input('video_stream_preview');
             $body = $request->input('body');
 
 
@@ -267,6 +270,9 @@ class NewsListEditorController extends CmsController
                 if (isset($image_preview)) {
                     $newsEdit->image_preview = $image_preview;
                 }
+                if (isset($video_stream_preview)) {
+                    $newsEdit->video_stream_preview = $video_stream_preview;
+                }
                 if (isset($is_online)) {
                     $newsEdit->is_online = $is_online;
                 }
@@ -320,9 +326,11 @@ class NewsListEditorController extends CmsController
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
 //            $rules['theses'] = 'required';
+            $rules['video_stream'] ='integer|exists:cdn_files,id';
+            $rules['video_stream_preview'] ='integer|exists:cdn_files,id';
+            $rules['image_main'] = 'integer|exists:cdn_files,id';
+            $rules['image_preview'] ='integer|exists:cdn_files,id';
 
-            $rules['image_main'] = 'numeric';
-            $rules['image_preview'] = 'numeric';
             $rules['original_source_link'] = 'url';
 
             $this->validate($request,
@@ -349,7 +357,7 @@ class NewsListEditorController extends CmsController
             $original_source_link = $request->input('original_source_link');
             $moderation = $request->input('moderation');
             $theses = $request->input('theses');
-
+            $video_stream_preview= $request->input('video_stream_preview');
             $news = new News();
 
             $news->editor_id = $editor_id ? $editor_id : null;
@@ -390,6 +398,9 @@ class NewsListEditorController extends CmsController
             }
             if (isset($image_preview)) {
                 $news->image_preview = $image_preview;
+            }
+            if (isset($video_stream_preview)) {
+                $news->video_stream_preview = $video_stream_preview;
             }
             if (isset($is_online)) {
                 $news->is_online = $is_online;

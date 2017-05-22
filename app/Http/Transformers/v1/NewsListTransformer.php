@@ -36,11 +36,50 @@ class NewsListTransformer extends Transformer
         $transform['subtitle'] = $news['sub_title'];
 
 
-        $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->pluck('url')->first();
-        $transform['image_preview'] = $imagePreview;
 
-	    $imageMain = CdnFile::where('id', '=', $news['image_main'])->pluck('url')->first();
-	    $transform['image_main'] = $imageMain;
+
+        if ($news['video_stream']) {
+            $transform['video_stream'] = [
+                'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
+                'id' =>  $news['video_stream'],
+                'duration' => $news['video_stream_duration'],
+                'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                'preview_id' => $news['video_stream_preview'],
+            ];
+        } else {
+            $transform['video_stream'] = null;
+        }
+
+
+        if ($news['image_main']) {
+            $imageMain = CdnFile::where('id', '=', $news['image_main'])->select(['url', 'id'])->first();
+            $transform['image_main'] = [
+                'url' => $imageMain->url,
+                'id' =>  $imageMain->id,
+                'object_source' => $imageMain->object_source,
+                'object_author' => $imageMain->object_source,
+                'object_name' => $imageMain->object_source,
+            ];
+        } else {
+            $transform['image_main'] = null;
+        }
+
+
+        if ($news['image_preview']) {
+            $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select(['url', 'id'])->first();
+            $transform['image_preview'] = [
+                'url' => $imagePreview->url,
+                'id' =>  $imagePreview->id,
+                'object_source' => $imagePreview->object_source,
+                'object_author' => $imagePreview->object_source,
+                'object_name' => $imagePreview->object_source,
+            ];
+        } else {
+            $transform['image_preview'] = null;
+        }
+
+
+
         $transform['cover']=null;
 
 

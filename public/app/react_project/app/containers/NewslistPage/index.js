@@ -13,7 +13,8 @@ import {
     setFilter,
     rejectArticle,
     acceptArticle,
-    deleteArticle
+    deleteArticle,
+    articleDelegate
 } from './actions'
 import { postMessage } from 'containers/App/actions'
 
@@ -24,6 +25,7 @@ import {
 } from './selectors'
 
 import {
+    selectEditors,
     selectCurrentUser,
     selectMenuExpandedStatus
 } from 'containers/App/selectors'
@@ -39,10 +41,14 @@ class NewslistPage extends Component {
         super(props);
         this.state = {
             modal: false,
-            selectedId: null
+            selectedId: null,
+            delegateModal: false,
+            delegateCurrent: null
         };
 
         this.toggle = ::this.toggle;
+        this.toggleDelegate = ::this.toggleDelegate
+        this.delegateArticle = ::this.delegateArticle
     }
 
     componentDidMount() {
@@ -87,6 +93,20 @@ class NewslistPage extends Component {
         });
     }
 
+    toggleDelegate(current, id) {
+        this.setState({
+            delegateModal: !this.state.delegateModal,
+            delegateCurrent: current || null,
+            delegateId: id || null
+        });
+    }
+
+    delegateArticle(params) {
+        this.setState({
+            delegateCurrent: params
+        });
+    }
+
     renderContent() {
         let {
             menuOpen,
@@ -95,11 +115,14 @@ class NewslistPage extends Component {
             rejectArticle,
             acceptArticle,
             deleteArticle,
+            delegateArticle,
             postMessage,
             oldNews,
+            users,
             user,
             push
         } = this.props
+
 
         const contentProps = {
             news: this.filterNews(),
@@ -113,6 +136,17 @@ class NewslistPage extends Component {
             setFilter
         }
 
+        const delegateProps = {
+            user: this.state.delegateCurrent,
+            users: users.toJS(),
+            delegateOpen: this.state.delegateModal,
+            toggleDelegate: this.toggleDelegate,
+            delegate: params => {
+                this.delegateArticle(params);
+                delegateArticle({id: this.state.delegateId, user: params})
+            }
+        }
+
         if (checkPermissons(user, ['admin', 'сommissioning-editor'])) {
             headerProps.filterData = filters.supervisor
 
@@ -123,12 +157,14 @@ class NewslistPage extends Component {
                     <Wrap>
                         <ContentSupervisor
                             {...contentProps}
+                            {...delegateProps}
                             clearTask={rejectArticle}
                             deleteTask={() => {
                                 deleteArticle(this.state.selectedId)}}
                             postMessage={postMessage}
                             toggle={this.toggle}
-                            open={this.state.modal}/>
+                            open={this.state.modal}
+                            />
                     </Wrap>
                 </div>
             )
@@ -167,6 +203,7 @@ class NewslistPage extends Component {
 const mapStateToProps = state => ({
     news: selectNewsList(state),
     oldNews: selectOldIds(state),
+    users: selectEditors(state),
     user: selectCurrentUser(state),
     filter: selectFilter(state),
     menuOpen: selectMenuExpandedStatus(state)
@@ -184,6 +221,9 @@ const mapDispatchToProps = dispatch => ({
     },
     acceptArticle(id) {
         dispatch(acceptArticle(id))
+    },
+    delegateArticle(params) {
+        dispatch(articleDelegate(params))
     },
     deleteArticle(id) {
         dispatch(deleteArticle(id))

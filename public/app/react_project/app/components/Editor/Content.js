@@ -535,7 +535,7 @@ value={this.state.data.body}
                                 >
 
                                     {this.state.data.image_main
-                                        ? <img src={ensureAbs(this.state.data.image_main)} />
+                                        ? <img src={'https:' + ensureAbs(this.state.data.image_main)} />
                                         : (
                                             <span>
                                                 Переместите изображение<br />
@@ -553,7 +553,7 @@ value={this.state.data.body}
                             >
 
                                 {this.state.data.image_preview
-                                    ? <img src={ensureAbs(this.state.data.image_preview)} />
+                                    ? <img src={'https:' + ensureAbs(this.state.data.image_preview)} />
                                     : (
                                         <span>
                                             Переместите изображение<br />
@@ -611,7 +611,7 @@ value={this.state.data.body}
                     <Preview
                         data={{ ...this.state.data, id: article.id }}
                         onClose={closePreview}
-                        delegate={delegate}
+                        delegate={this.changeHandlerEditor}
                         doneTitle={supervisor ? 'Опубликовать' : 'Готово'}
                         done={() => (
                             supervisor

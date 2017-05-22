@@ -16,6 +16,8 @@ import {
 
     DELETE_ARTICLE_SUCCESS,
 
+    DELEGATE_ARTICLE_SUCCESS,
+
     SET_FILTER
 } from './constants'
 
@@ -69,9 +71,20 @@ function NewslistPageReducer(state = initialState, action) {
         case DELETE_ARTICLE_SUCCESS:
             return state
                 .updateIn(['news', 'data'], value => {
-                    console.log(action.payload)
                     return value.filter(value => value.get('id') !== action.payload)
                 })        
+
+        case DELEGATE_ARTICLE_SUCCESS:
+            return state
+                .updateIn(['news', 'data'], value => {
+
+                    return value.update(
+                        value.findIndex(item =>  item.get('id') === action.payload.id),
+                        item => item
+                            .set('editor', action.payload.editor)
+                            .set('editor_id', action.payload.editor.id)
+                    )
+                })
 
         default:
             return state;

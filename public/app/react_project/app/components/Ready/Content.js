@@ -29,6 +29,7 @@ class Content extends PureComponent {
         this.closeModal = this.closeModal.bind(this)
         this.selectItem = this.selectItem.bind(this)
         this.toggleDelete = ::this.toggleDelete;
+        this.delegateArticle = ::this.delegateArticle;
     }
 
     toggleDelete(item) {
@@ -60,6 +61,10 @@ class Content extends PureComponent {
         })
 
         this.openModal()
+    }
+
+    delegateArticle(value) {
+        this.props.delegate({id: this.state.selected.id, new_editor_id: value.id})
     }
 
     render() {
@@ -102,7 +107,7 @@ class Content extends PureComponent {
                                 : publish(id)
                         }}
                         delegate={params => {
-                            delegate(params)
+                            this.delegateArticle(params)
                             this.closeModal()
                         }}
                         data={selected} />

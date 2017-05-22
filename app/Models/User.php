@@ -113,6 +113,8 @@ class User extends Model implements AuthenticatableContract
             return true;
         }
 
+
+
         foreach ($this->groups as $group) {
             $permission = $group->permissions()
                 ->where('name', $permissionName)

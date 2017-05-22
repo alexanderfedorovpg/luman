@@ -16,7 +16,7 @@ class NewsEditorTransformer extends Transformer
         $transform = $news;
 
         $transform['keywords'] = explode(',', $news['keywords']);
-        $transform['rubrics'] = News::find($news['id'])->rubrics()->orderBy('name')->get(['rubrics.id','rubrics.name'])->toArray();
+        $transform['rubrics'] = News::find($news['id'])->rubrics()->orderBy('name')->get(['rubrics.id', 'rubrics.name'])->toArray();
         $transform['editor'] = $this->transformEditor($news['id']);
         $editorComments = $this->transformEditorComments($news['id']);
         $transform['editor_id'] = isset($transform['editor']['id']) ? $transform['editor']['id'] : null;
@@ -33,21 +33,55 @@ class NewsEditorTransformer extends Transformer
             $transform['cover']['cover_id'] = $news['cover_id'];
         }
 
-        $imageMain = CdnFile::where('id', '=', $news['image_main'])->select(['url', 'id'])->first();
-        $transform['image_main'] = $imageMain['url'];
-        $transform['image_main_id'] = $imageMain['id'];
+        if ($news['video_stream']) {
+            $transform['video_stream'] = [
+                'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
+                'id' =>  $news['video_stream'],
+                'duration' => $news['video_stream_duration'],
+                'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                'preview_id' => $news['video_stream_preview'],
+            ];
+        } else {
+            $transform['video_stream'] = null;
+        }
 
-        $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select(['url', 'id'])->first();
-        $transform['image_preview'] = $imagePreview['url'];
-        $transform['image_preview_id'] = $imagePreview['id'];
 
-        $datetime_now = new \DateTime($news['is_publish']?$news['publish_date']:"now");
+        if ($news['image_main']) {
+            $imageMain = CdnFile::where('id', '=', $news['image_main'])->select(['url', 'id'])->first();
+            $transform['image_main'] = [
+                'url' => $imageMain->url,
+                'id' =>  $imageMain->id,
+                'object_source' => $imageMain->object_source,
+                'object_author' => $imageMain->object_source,
+                'object_name' => $imageMain->object_source,
+            ];
+        } else {
+            $transform['image_main'] = null;
+        }
+
+
+        if ($news['image_preview']) {
+            $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select(['url', 'id'])->first();
+            $transform['image_preview'] = [
+                'url' => $imagePreview->url,
+                'id' =>  $imagePreview->id,
+                'object_source' => $imagePreview->object_source,
+                'object_author' => $imagePreview->object_source,
+                'object_name' => $imagePreview->object_source,
+            ];
+        } else {
+            $transform['image_preview'] = null;
+        }
+
+
+
+
+        $datetime_now = new \DateTime($news['is_publish'] ? $news['publish_date'] : "now");
         $time_edit = new \DateTime($news['created_at']);
         $interval = $time_edit->diff($datetime_now);
-        $transform['time_edit']=$interval->format('%D:%H:%I:%S');
+        $transform['time_edit'] = $interval->format('%D:%H:%I:%S');
 
 
-        
         return $transform;
     }
 
@@ -56,10 +90,10 @@ class NewsEditorTransformer extends Transformer
         $transform = $this->transform($news);
         $transform['editorComments'] = $this->transformEditorComments($news['id']);
 
-        $datetime_now = new \DateTime($news['is_publish']?$news['publish_date']:"now");
+        $datetime_now = new \DateTime($news['is_publish'] ? $news['publish_date'] : "now");
         $time_edit = new \DateTime($news['created_at']);
         $interval = $time_edit->diff($datetime_now);
-        $transform['time_edit']=$interval->format('%D:%H:%I:%S');
+        $transform['time_edit'] = $interval->format('%D:%H:%I:%S');
 
         unset($transform['lastEditorComment']);
 
@@ -89,7 +123,7 @@ class NewsEditorTransformer extends Transformer
 
     /**
      * Редактор новости
-     * @param int $newsId  ID новости
+     * @param int $newsId ID новости
      * @param return array
      */
     public function transformEditor($newsId)
