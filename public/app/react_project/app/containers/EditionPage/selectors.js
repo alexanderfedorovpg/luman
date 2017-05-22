@@ -151,6 +151,7 @@ const makeUserAccount = () => createSelector(
         }
 
         return {
+            id: user.id,
             email: user.email,
             login: user.login,
             password: null,
@@ -196,6 +197,7 @@ const makeGroupAccount = () => createSelector(
 
         return {
             permissions: [],
+            id: group.id,
             enabled: group.enabled === 1,
         };
     }
@@ -216,7 +218,6 @@ const makeHistory = () => createSelector(
             id: action.id,
             cells: historyMap.map((item) => {
                 if (item.value === 'user') {
-                    console.log(users);
                     return users[action.user_id].name;
                 }
 

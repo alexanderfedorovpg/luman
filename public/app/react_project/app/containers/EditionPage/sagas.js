@@ -18,6 +18,7 @@ import {
     GET_PERMISSIONS,
     ADD_GROUP,
     DELETE_GROUP,
+    SELECT_GROUP,
     EDIT_GROUP,
     GET_HISTORY,
 
@@ -81,7 +82,7 @@ export function* deleteUserSaga({ payload }) {
 
 export function* editUserSaga({ payload }) {
     try {
-        const { group, ...data } = payload.data;
+        const { group, id, ...data } = payload;
 
         if (data.password === '' || data.password === null) {
             delete data.password;
@@ -91,20 +92,24 @@ export function* editUserSaga({ payload }) {
 
         yield put(showPreloader());
 
+        const user = {
+            ...data,
+            id,
+        };
+
         if (group) {
             const groupInt = parseInt(group, 10);
             const users = yield select(selectUsers);
 
-            console.log(users[payload.id].groups.indexOf(groupInt) === -1);
-
-            if (users[payload.id].groups.indexOf(groupInt) === -1) {
-                yield call(api.addUserToGroup, groupInt, payload.id);
+            if (users[id].groups.indexOf(groupInt) === -1) {
+                yield call(api.addUserToGroup, groupInt, id);
+                user.groups = [groupInt];
             }
         }
 
-        const response = yield call(api.editUser, payload.id, data);
+        const response = yield call(api.editUser, id, data);
 
-        yield put(editUser(response.data));
+        yield put(editUser(user));
         yield put(hidePreloader());
         yield put(showInfoModal('Данные пользователя успешно изменены'));
     } catch (err) {
@@ -143,17 +148,26 @@ export function* addGroupSaga({ payload }) {
     }
 }
 
+export function* getGroupPermissions({ payload }) {
+    try {
+        const response = yield call(api.getGroupPermissions, payload.id);
+        console.log(response.data);
+    } catch (err) {
+
+    }
+}
+
 // TO-DO: допилить изменение разрешений
 export function* editGroupSaga({ payload }) {
     try {
-        const { permissions, ...data } = payload.data;
+        const { permissions, ...data } = payload;
 
         data.enabled = data.enabled ? 1 : 0;
 
         yield put(showPreloader());
-        const response = yield call(api.editGroup, payload.id, data);
+        const response = yield call(api.editGroup, data.id, data);
 
-        yield put(editGroup(response.data));
+        yield put(editGroup(data));
         yield put(hidePreloader());
         yield put(showInfoModal('Данные группы успешно изменены'));
     } catch (err) {
@@ -209,6 +223,7 @@ export function* editionPageData() {
     yield takeLatest(DELETE_GROUP, deleteGroupSaga);
     yield takeLatest(EDIT_GROUP, editGroupSaga);
     yield takeLatest(GET_HISTORY, getHistorySaga);
+    yield takeLatest(SELECT_GROUP, getGroupPermissions);
 }
 
 // All sagas to be loaded
