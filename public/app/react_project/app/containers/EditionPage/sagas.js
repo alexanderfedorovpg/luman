@@ -27,9 +27,11 @@ import {
 import {
     failureAddUser,
     failureDeleteUser,
+    deselectUser,
     failureEditUser,
     successGetPermissions,
     failureGetPermissions,
+    deselectGroup,
     failureAddGroup,
     failureDeleteGroup,
     failureEditGroup,
@@ -73,6 +75,7 @@ export function* deleteUserSaga({ payload }) {
         yield put(showPreloader());
         yield call(api.deleteUser, id);
         yield put(deleteUser(id));
+        yield put(deselectUser());
         yield put(hidePreloader());
         yield put(showInfoModal('Пользователь удалён. Можете забыть про него'));
     } catch (err) {
@@ -138,6 +141,7 @@ export function* getPermissionsSaga() {
     }
 }
 
+// TO-DO: допилить добавление разрешений
 export function* addGroupSaga({ payload }) {
     try {
         yield put(showPreloader());
@@ -196,6 +200,7 @@ export function* deleteGroupSaga({ payload }) {
         yield put(showPreloader());
         yield call(api.deleteGroup, id);
         yield put(deleteGroup(id));
+        yield put(deselectGroup());
         yield put(hidePreloader());
         yield put(showInfoModal('Группа успешно удалена'));
     } catch (err) {

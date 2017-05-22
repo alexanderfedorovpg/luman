@@ -21,6 +21,7 @@ class NewUserForm extends PureComponent {
 
     onSubmit(data) {
         this.props.addUser(data.toJS());
+        this.props.reset();
     }
 
     render() {
@@ -92,6 +93,8 @@ NewUserForm.propTypes = {
     handleSubmit: PropTypes.func,
     addUser: PropTypes.func,
     groups: PropTypes.array,
+    valid: PropTypes.bool,
+    reset: PropTypes.func,
 };
 
 const validate = (values) => {

@@ -20,6 +20,7 @@ class NewGroupForm extends PureComponent {
 
     onSubmit(data) {
         this.props.addGroup(data.toJS());
+        this.props.reset();
     }
 
     render() {
@@ -53,6 +54,7 @@ NewGroupForm.propTypes = {
     addGroup: PropTypes.func,
     permissions: PropTypes.array,
     valid: PropTypes.bool,
+    reset: PropTypes.func,
 };
 
 const validate = (values) => {
@@ -64,7 +66,7 @@ const validate = (values) => {
 
     const permissions = values.get('permissions');
 
-    if (!permissions || !permissions.length) {
+    if (!permissions || !permissions.size) {
         errors.permissions = 'Выберите хотя бы один пункт из списка';
     }
 
