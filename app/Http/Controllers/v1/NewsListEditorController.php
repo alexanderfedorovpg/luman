@@ -215,7 +215,7 @@ class NewsListEditorController extends CmsController
             $is_war_mode = $request->input('is_war_mode');
             $publish_date = $request->input('publish_date');
             $original_source_link = $request->input('original_source_link');
-            $moderation = $request->input('moderation');
+            $moderation = $request->input('moderation')?$request->input('moderation'):0;
             $theses = $request->input('theses');
 
             $newsEdit = News::find(intval($id));
@@ -234,8 +234,6 @@ class NewsListEditorController extends CmsController
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
-
-                $newsEdit->moderation = 0;
 
 
                 $log_moderation = new NewsModerationLogHelper($newsEdit);
