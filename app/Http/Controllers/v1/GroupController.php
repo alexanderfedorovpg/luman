@@ -86,7 +86,7 @@ class GroupController extends CmsController
 
         $group = new Group($request->all());
         if ($group->save()) {
-            return $this->respondCreated(['success' => true]);
+            return $this->respondCreated($this->groupsTransformer->transform($group->toArray()));
         }
 
         return $this->respondFail500x();

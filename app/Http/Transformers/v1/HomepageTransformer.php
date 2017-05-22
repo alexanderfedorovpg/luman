@@ -3,6 +3,7 @@
 namespace App\Http\Transformers\v1;
 
 use App\Http\Transformers\Transformer;
+use App\Models\CdnFile;
 use Illuminate\Database\Eloquent\Collection;
 
 class HomepageTransformer extends Transformer
@@ -35,8 +36,45 @@ class HomepageTransformer extends Transformer
         $transform = [];
         foreach ($newsCollection as $news) {
             $arrNews = $news->news->toArray();
-            $arrNews['image_main'] = $news->news->imageMain ? $news->news->imageMain->url : null;
-            $arrNews['image_preview'] = $news->news->imagePreview ? $news->news->imagePreview->url : null;
+
+            if ($arrNews['video_stream']) {
+                $arrNews['video_stream'] = [
+                    'url' => CdnFile::where('id', '=', $arrNews['video_stream'])->pluck('url')->first(),
+                    'id' =>  $arrNews['video_stream'],
+                    'duration' => $arrNews['video_stream_duration'],
+                    'preview' => CdnFile::where('id', '=', $arrNews['video_stream_preview'])->pluck('url')->first(),
+                ];
+            } else {
+                $arrNews['video_stream'] = null;
+            }
+
+
+            if ($arrNews['image_main']) {
+                $imageMain = CdnFile::where('id', '=', $arrNews['image_main'])->select(['url', 'id'])->first();
+                $arrNews['image_main'] = [
+                    'url' => $imageMain->url,
+                    'id' => $imageMain->id,
+                    'object_source' => $imageMain->object_source,
+                    'object_author' => $imageMain->object_source,
+                    'object_name' => $imageMain->object_source,
+                ];
+            } else {
+                $arrNews['image_main'] = null;
+            }
+
+
+            if ($arrNews['image_preview']) {
+                $imagePreview = CdnFile::where('id', '=', $arrNews['image_preview'])->select(['url', 'id'])->first();
+                $arrNews['image_preview'] = [
+                    'url' => $imagePreview->url,
+                    'id' => $imagePreview->id,
+                    'object_source' => $imagePreview->object_source,
+                    'object_author' => $imagePreview->object_source,
+                    'object_name' => $imagePreview->object_source,
+                ];
+            } else {
+                $arrNews['image_preview'] = null;
+            }
             $transform[] = [
                 'category' => $news->category,
                 'data' => $arrNews,
@@ -57,8 +95,44 @@ class HomepageTransformer extends Transformer
         $transform = [];
         foreach ($infoNoises as $infoNoise) {
             $news = $infoNoise->news->toArray();
-            $news['image_main'] = $infoNoise->news->imageMain ? $infoNoise->news->imageMain->url : null;
-            $news['image_preview'] = $infoNoise->news->imagePreview ? $infoNoise->news->imagePreview->url : null;
+            if ($infoNoise['video_stream']) {
+                $news['video_stream'] = [
+                    'url' => CdnFile::where('id', '=', $infoNoise['video_stream'])->pluck('url')->first(),
+                    'id' =>  $infoNoise['video_stream'],
+                    'duration' => $infoNoise['video_stream_duration'],
+                    'preview' => CdnFile::where('id', '=', $infoNoise['video_stream_preview'])->pluck('url')->first(),
+                ];
+            } else {
+                $news['video_stream'] = null;
+            }
+
+
+            if ($infoNoise['image_main']) {
+                $imageMain = CdnFile::where('id', '=', $infoNoise['image_main'])->select(['url', 'id'])->first();
+                $news['image_main'] = [
+                    'url' => $imageMain->url,
+                    'id' => $imageMain->id,
+                    'object_source' => $imageMain->object_source,
+                    'object_author' => $imageMain->object_source,
+                    'object_name' => $imageMain->object_source,
+                ];
+            } else {
+                $news['image_main'] = null;
+            }
+
+
+            if ($infoNoise['image_preview']) {
+                $imagePreview = CdnFile::where('id', '=', $infoNoise['image_preview'])->select(['url', 'id'])->first();
+                $news['image_preview'] = [
+                    'url' => $imagePreview->url,
+                    'id' => $imagePreview->id,
+                    'object_source' => $imagePreview->object_source,
+                    'object_author' => $imagePreview->object_source,
+                    'object_name' => $imagePreview->object_source,
+                ];
+            } else {
+                $news['image_preview'] = null;
+            }
             $transform[] = [
                 'data' => $news,
                 'top' => $infoNoise->top,
@@ -73,8 +147,44 @@ class HomepageTransformer extends Transformer
         $transform = [];
         foreach ($wars as $war) {
             $news = $war->news->toArray();
-            $news['image_main'] = $war->news->imageMain ? $war->news->imageMain->url : null;
-            $news['image_preview'] = $war->news->imagePreview ? $war->news->imagePreview->url : null;
+            if ($war['video_stream']) {
+                $news['video_stream'] = [
+                    'url' => CdnFile::where('id', '=', $war['video_stream'])->pluck('url')->first(),
+                    'id' =>  $war['video_stream'],
+                    'duration' => $war['video_stream_duration'],
+                    'preview' => CdnFile::where('id', '=', $war['video_stream_preview'])->pluck('url')->first(),
+                ];
+            } else {
+                $news['video_stream'] = null;
+            }
+
+
+            if ($war['image_main']) {
+                $imageMain = CdnFile::where('id', '=', $war['image_main'])->select(['url', 'id'])->first();
+                $news['image_main'] = [
+                    'url' => $imageMain->url,
+                    'id' => $imageMain->id,
+                    'object_source' => $imageMain->object_source,
+                    'object_author' => $imageMain->object_source,
+                    'object_name' => $imageMain->object_source,
+                ];
+            } else {
+                $news['image_main'] = null;
+            }
+
+
+            if ($war['image_preview']) {
+                $imagePreview = CdnFile::where('id', '=', $war['image_preview'])->select(['url', 'id'])->first();
+                $news['image_preview'] = [
+                    'url' => $imagePreview->url,
+                    'id' => $imagePreview->id,
+                    'object_source' => $imagePreview->object_source,
+                    'object_author' => $imagePreview->object_source,
+                    'object_name' => $imagePreview->object_source,
+                ];
+            } else {
+                $news['image_preview'] = null;
+            }
             $transform[] = [
                 'category' => $war->category,
                 'data' => $news,

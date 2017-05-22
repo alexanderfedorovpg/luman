@@ -92,6 +92,16 @@ class News extends Model
         return $this->hasOne(CdnFile::class, 'id', 'image_main');
     }
 
+    public function videoStream()
+    {
+        return $this->hasOne(CdnFile::class, 'id', 'video_stream');
+    }
+
+    public function videoStreamPreview()
+    {
+        return $this->hasOne(CdnFile::class, 'id', 'video_stream_preview');
+    }
+
     /**
      * Превью
      *
@@ -118,7 +128,6 @@ class News extends Model
         }
         return $query;
     }
-
 
 
     /**
@@ -155,6 +164,7 @@ class News extends Model
     {
         return $query->where('to_constructor', '=', $constructor);
     }
+
     /**
      * Чат
      *
@@ -174,14 +184,16 @@ class News extends Model
      */
     public function scopeModerationThisEditor($query, $editor_id, $moderation = true, $delete = 0, $is_publish = 0)
     {
-        return $query->where(['editor_id' =>$editor_id,'moderation' =>$moderation,'delete' =>$delete,'is_publish' =>$is_publish]);
+        return $query->where(['editor_id' => $editor_id, 'moderation' => $moderation, 'delete' => $delete, 'is_publish' => $is_publish]);
 
     }
+
     public function scopeModerationAllEditor($query, $moderation = true, $delete = 0, $is_publish = 0)
     {
-        return $query->where([ 'moderation' =>$moderation,'delete' =>$delete,'is_publish' =>$is_publish]);
+        return $query->where(['moderation' => $moderation, 'delete' => $delete, 'is_publish' => $is_publish]);
 
     }
+
     /**
      * @param $query
      * @return mixed

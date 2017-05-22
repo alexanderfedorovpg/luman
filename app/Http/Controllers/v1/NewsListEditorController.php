@@ -187,9 +187,10 @@ class NewsListEditorController extends CmsController
             $rules['sub_title'] = 'required|max:140';
           //  $rules['theses'] = 'required';
 
-            $rules['image_main'] = 'numeric';
-            $rules['image_preview'] = 'numeric';
-            $rules['video_stream_preview'] = 'numeric';
+            $rules['video_stream'] ='integer|exists:cdn_files,id';
+            $rules['video_stream_preview'] ='integer|exists:cdn_files,id';
+            $rules['image_main'] = 'integer|exists:cdn_files,id';
+            $rules['image_preview'] ='integer|exists:cdn_files,id';
 
             $rules['original_source_link'] = 'url';
 
@@ -325,9 +326,11 @@ class NewsListEditorController extends CmsController
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
 //            $rules['theses'] = 'required';
-            $rules['video_stream_preview'] = 'numeric';
-            $rules['image_main'] = 'numeric';
-            $rules['image_preview'] = 'numeric';
+            $rules['video_stream'] ='integer|exists:cdn_files,id';
+            $rules['video_stream_preview'] ='integer|exists:cdn_files,id';
+            $rules['image_main'] = 'integer|exists:cdn_files,id';
+            $rules['image_preview'] ='integer|exists:cdn_files,id';
+
             $rules['original_source_link'] = 'url';
 
             $this->validate($request,

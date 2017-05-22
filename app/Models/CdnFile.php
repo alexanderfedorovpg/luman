@@ -13,7 +13,7 @@ class CdnFile extends Model
      * @var array
      */
     protected $fillable = [
-        'external_id', 'url', 'content_type'
+        'external_id', 'url', 'content_type','object_source','object_author','object_name'
     ];
 
 }
