@@ -28,7 +28,14 @@ function Delegate({onClose, isOpen, onChange, users, value}) {
             contentLabel="Сменить редактора"
             onRequestClose={onClose}>
             <Root>
-                <h2>Сменить редактора</h2>
+                {value 
+                    ? (
+                        <h2>Сменить редактора</h2>
+                    ) : (
+                        <h2>Назначить редактора</h2>
+                    )
+
+                }
                 <Select
                     options={users}
                     onChange={onChange}

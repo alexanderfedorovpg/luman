@@ -60,7 +60,8 @@
     }
 
     &__title {
-        font: #{rem(18)}/#{rem(22)} $stemBold;
+        font: #{rem(18)}/1.275rem $stemBold;
+        // font: #{rem(18)}/#{rem(22)} $stemBold;
         color: $dark;
         text-decoration: none;
 

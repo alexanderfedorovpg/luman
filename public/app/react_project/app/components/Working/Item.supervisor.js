@@ -230,19 +230,19 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open, deleg
                                 {/*<NavItem onCLick={()=>push(`/editor/${data.id}`)}>
                                     Сменить редактора
                                 </NavItem>*/}
-                                <NavItem onClick={()=> toggle.bind(this, data.id)()}>
-                                    Удалить задание
-                                </NavItem>
-                                {/*<NavItem onClick={()=>clearTask(data.id)}>
+                                {/*<NavItem onClick={()=> toggle.bind(this, data.id)()}>
                                     Удалить задание
                                 </NavItem>*/}
+                                <NavItem onClick={()=>clearTask(data.id)}>
+                                    Удалить задание
+                                </NavItem>
                             </Nav>
                         )
                         : (
                             <Nav className={navClassName}>
-                                <CustomLink to={`/editor/${data.id}`}>
+                                <NavItem onClick={() => delegate.bind(this, data.editor, data.id)()}>
                                     Назначить редактора
-                                </CustomLink>
+                                </NavItem>
                             </Nav>
                         )
                     }

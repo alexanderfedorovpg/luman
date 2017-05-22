@@ -217,7 +217,7 @@ class Preview extends PureComponent {
                     onClose={this.close}
                     isOpen={this.state.modalOpen}
                     onChange={value => (
-                        delegate({ id: data.id, new_editor_id: value.id })
+                        delegate(value)
                     )}
                     users={users}
                     value={data.editor} />
