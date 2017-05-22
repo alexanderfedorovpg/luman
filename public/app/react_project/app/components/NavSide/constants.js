@@ -1,6 +1,6 @@
 export const items = [
     {
-        link: '/feed',
+        link: '/',
         icon: 'feed',
         name: 'Лента',
     },

@@ -58,11 +58,11 @@ function DeleteModal({onDelete, toggle, open}) {
     return (
         <Modal
             isOpen={open}
-            contentLabel="Удалить задание"
+            contentLabel="Удалить публикацию"
             onRequestClose={toggle}>
             <ModalRoot>
                 <ModalTitle>Внимание: удаление!</ModalTitle>
-                <ModalText>Вы уверены, что хотите удалить задание?</ModalText>
+                <ModalText>Вы уверены, что хотите удалить публикацию?</ModalText>
                 <ButtonsWrap>
                     <Button md danger onClick={toggle}>
                         <Icon type="delete-bold"/>
