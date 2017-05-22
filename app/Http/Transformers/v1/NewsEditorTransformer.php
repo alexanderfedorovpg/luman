@@ -39,6 +39,7 @@ class NewsEditorTransformer extends Transformer
                 'id' =>  $news['video_stream'],
                 'duration' => $news['video_stream_duration'],
                 'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                'preview_id' => $news['video_stream_preview'],
             ];
         } else {
             $transform['video_stream'] = null;

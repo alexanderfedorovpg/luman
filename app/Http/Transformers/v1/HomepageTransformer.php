@@ -43,6 +43,7 @@ class HomepageTransformer extends Transformer
                     'id' =>  $arrNews['video_stream'],
                     'duration' => $arrNews['video_stream_duration'],
                     'preview' => CdnFile::where('id', '=', $arrNews['video_stream_preview'])->pluck('url')->first(),
+                    'preview_id' => $arrNews['video_stream_preview'],
                 ];
             } else {
                 $arrNews['video_stream'] = null;
@@ -101,6 +102,7 @@ class HomepageTransformer extends Transformer
                     'id' =>  $infoNoise['video_stream'],
                     'duration' => $infoNoise['video_stream_duration'],
                     'preview' => CdnFile::where('id', '=', $infoNoise['video_stream_preview'])->pluck('url')->first(),
+                    'preview_id' => $infoNoise['video_stream_preview'],
                 ];
             } else {
                 $news['video_stream'] = null;
@@ -153,6 +155,7 @@ class HomepageTransformer extends Transformer
                     'id' =>  $war['video_stream'],
                     'duration' => $war['video_stream_duration'],
                     'preview' => CdnFile::where('id', '=', $war['video_stream_preview'])->pluck('url')->first(),
+                    'preview_id' => $war['video_stream_preview'],
                 ];
             } else {
                 $news['video_stream'] = null;
