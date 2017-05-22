@@ -234,8 +234,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
-
-                $newsEdit->moderation = 0;
+                $newsEdit->moderation=$moderation;
 
 
                 $log_moderation = new NewsModerationLogHelper($newsEdit);

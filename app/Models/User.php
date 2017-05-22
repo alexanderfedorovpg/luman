@@ -15,7 +15,10 @@ class User extends Model implements AuthenticatableContract
     public static $allow_all_function = [
         'v1.group-index',
         'v1.group-show',
-        'v1.user-profile',    ];
+        'v1.user-profile',
+        'v1.rubrics-index',
+        'v1.rubrics-show',
+        ];
 
     /**
      * The attributes that are mass assignable.
@@ -109,6 +112,7 @@ class User extends Model implements AuthenticatableContract
         if (in_array($permissionName, self::$allow_all_function)){
             return true;
         }
+
         foreach ($this->groups as $group) {
             $permission = $group->permissions()
                 ->where('name', $permissionName)
