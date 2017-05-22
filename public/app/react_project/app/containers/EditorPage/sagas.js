@@ -1,7 +1,7 @@
-import { take, call, put, cancel, takeLatest, takeEvery } from 'redux-saga/effects'
-import { push } from 'react-router-redux'
-import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
-
+import { take, call, put, cancel, takeLatest, takeEvery } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
+import { showPreloader, hidePreloader } from 'containers/App/actions';
 import {
     TO_FIX_ARTICLE,
     LOAD_ARTICLE,
@@ -9,7 +9,7 @@ import {
     PUBLISH_ARTICLE,
     DELETE_ARTICLE,
     DELEGATE_ARTICLE,
-} from './constants'
+} from './constants';
 
 import {
     articleLoaded,
@@ -24,9 +24,9 @@ import {
     articlePublishError,
     articleSendedToFix,
     articleToFixError
-} from './actions'
+} from './actions';
 
-import * as api from 'api'
+import * as api from 'api';
 
 export function* getArticle({ payload }) {
 
@@ -64,56 +64,66 @@ export function* delegateArticle({ payload }) {
     }
 }
 
+function* uploadFile(file) {
+    if (!file || Number.isInteger(file)) {
+        return file;
+    }
+
+    const { data: { file: { id } } } = yield call(api.uploadFile, file);
+    return id;
+}
+
+function* uploadFiles(data) {
+    const result = {};
+    const files = ['image_main', 'image_preview', 'video_stream', 'video_stream_preview'];
+    const responses = yield files.map((file) => call(uploadFile, data[file]));
+
+    files.forEach((file, ind) => { result[file] = responses[ind]; });
+
+    return result;
+}
+
 export function* finishArticle({ payload }) {
     try {
-        if (payload.image_main && !Number.isInteger(payload.image_main)) {
-            let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
-            payload.image_main = idMain
-        }
+        yield put(showPreloader());
+        const uploadedFiles = yield call(uploadFiles, payload);
+        const data = { ...payload, ...uploadedFiles };
 
-        if (payload.image_main && !Number.isInteger(payload.image_preview)) {
-            let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
-            payload.image_preview = idPreview
-        }
+        yield call(api.finishArticle, data);
 
-        yield call(api.finishArticle, payload)
+        yield put(hidePreloader());
+        toastr.success('Изменения сохранены');
 
-        toastr.success('Изменения сохранены')
-
-        yield put(articleFinished())
+        yield put(articleFinished());
 
         // yield put(push(`/newslist`))
     } catch (err) {
-        toastr.error('Что-то пошло не так...')
-        yield put(articleFinishError(err))
+        console.error(err);
+        yield put(hidePreloader());
+        toastr.error('Что-то пошло не так...');
+        yield put(articleFinishError(err));
     }
 }
 
 export function* publishArticle({ payload }) {
-
     try {
-        if (payload.image_main && !Number.isInteger(payload.image_main)) {
-            let { data: { file: { id: idMain } } } = yield call(api.uploadFile, payload.image_main)
-            payload.image_main = idMain
-        }
+        yield put(showPreloader());
+        const uploadedFiles = yield call(uploadFiles, payload);
+        const data = { ...payload, ...uploadedFiles };
+        const { data: response } = yield call(api.finishArticle, data);
 
-        if (payload.image_main && !Number.isInteger(payload.image_preview)) {
-            let { data: { file: { id: idPreview } } } = yield call(api.uploadFile, payload.image_preview)
-            payload.image_preview = idPreview
-        }
+        yield call(api.publishArticle, response.id);
 
-        const { data } = yield call(api.finishArticle, payload)
+        yield put(hidePreloader());
+        toastr.success('Новость опубликована');
 
-        yield call(api.publishArticle, data.id)
-
-        toastr.success('Новость опубликована')
-
-        yield put(articlePublished())
+        yield put(articlePublished());
 
         // yield put(push(`/newslist`))
     } catch (err) {
-        toastr.error('Что-то пошло не так...')
-        yield put(articlePublishError(err))
+        yield put(hidePreloader());
+        toastr.error('Что-то пошло не так...');
+        yield put(articlePublishError(err));
     }
 }
 

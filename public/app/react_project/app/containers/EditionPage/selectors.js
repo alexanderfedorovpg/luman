@@ -33,11 +33,6 @@ const selectUsers = createSelector(
     (app) => app.get('users').get('data')
 );
 
-const selectPermissions = createSelector(
-    selectEditionPageDomain(),
-    (page) => page.get('permissions')
-);
-
 const makeGetUsers = () => createSelector(
     [selectUsers, makeGetGroups(), makeSelectedUser()],
     (usersImmutable, groupsImmutable, selected) => {
@@ -103,6 +98,11 @@ const makeRadioButtonsFromGroups = () => createSelector(
             label: groups.byId[id].name,
         }));
     }
+);
+
+const selectPermissions = createSelector(
+    selectEditionPageDomain(),
+    (page) => page.get('permissions')
 );
 
 const makeCheckboxesFromPermissions = () => createSelector(
