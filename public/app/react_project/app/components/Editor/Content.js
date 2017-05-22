@@ -520,7 +520,7 @@ class Content extends Component {
                     <Preview
                         data={{ ...this.state.data, id: article.id }}
                         onClose={closePreview}
-                        delegate={delegate}
+                        delegate={this.changeHandlerEditor}
                         doneTitle={supervisor ? 'Опубликовать' : 'Готово'}
                         done={() => (
                             supervisor
