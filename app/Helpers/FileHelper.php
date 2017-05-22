@@ -38,9 +38,9 @@ class FileHelper
                 'external_id' => $result->id,
                 'url' => 'https://' . $result->cdn_url,
                 'content_type' => $result->content_type,
-                'object_source' => $info->content_type,
-                'object_author' => $info->content_type,
-                'object_name' => $info->content_type,
+                'object_source' => $info['object_source'],
+                'object_author' => $info['object_author'],
+                'object_name' => $info['object_name'],
             ]);
 
             $cdnFile->save();

@@ -45,7 +45,7 @@ class FileController extends CmsController
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
-            return $this->respondFail500x();
+            return $this->respondFail500x($e->getMessage());
         }
     }
 
