@@ -14,8 +14,12 @@ class AlterNewsVs extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->integer('video_stream')->unsigned()->nullable()->change();
-            $table->integer('video_stream_preview')->unsigned()->nullable()->change();
+
+            $table->dropColumn('video_stream');
+            $table->dropColumn('video_stream_preview');
+
+            $table->integer('video_stream')->unsigned()->nullable();
+            $table->integer('video_stream_preview')->unsigned()->nullable();
 
 
             $table->foreign('video_stream','new_video_stream_cdn')->references('id')->on('cdn_files')
