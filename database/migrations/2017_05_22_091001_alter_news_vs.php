@@ -15,11 +15,13 @@ class AlterNewsVs extends Migration
     {
         Schema::table('news', function (Blueprint $table) {
 
-            $table->dropColumn('video_stream');
-            $table->dropColumn('video_stream_preview');
 
-            $table->integer('video_stream')->unsigned()->nullable();
-            $table->integer('video_stream_preview')->unsigned()->nullable();
+
+            DB::statement('UPDATE `news` SET `video_stream` = NULL;');
+            DB::statement('UPDATE `news` SET `video_stream_preview` = NULL;');
+
+            $table->integer('video_stream')->unsigned()->nullable()->change();
+            $table->integer('video_stream_preview')->unsigned()->nullable()->change();
 
 
             $table->foreign('video_stream','new_video_stream_cdn')->references('id')->on('cdn_files')
