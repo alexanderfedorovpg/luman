@@ -12,6 +12,26 @@
         border-bottom: 1px solid $gray;
     }
 
+    &::before {
+        content: '';
+
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+
+        display: block;
+        width: inherit;
+        height: inherit;
+
+        background: rgba(0,0,0,.5);
+        transition: background .5s ease-out;
+    }
+
+    &:hover::before {
+        background: rgba(0,0,0,.5);
+    }
+
     &__info {
         position: relative;
         z-index: 1;
@@ -43,7 +63,7 @@
         color: $dark;
         text-decoration: none;
 
-        // transition: color .5s ease-in-out;
+        transition: color .5s ease-in-out;
     }
 
 
