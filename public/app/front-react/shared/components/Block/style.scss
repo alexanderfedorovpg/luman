@@ -13,12 +13,18 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 0;
 
         display: block;
         width: inherit;
         height: inherit;
 
-        background-color: rgba(0, 0, 0, .5);
+        background: rgba(0,0,0,.5);
+        transition: background .5s ease-out;
+    }
+
+    &:hover::before {
+        background: rgba(0,0,0,.3);
     }
 
     &__img {
