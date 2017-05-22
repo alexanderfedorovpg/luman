@@ -167,16 +167,15 @@ const NavItem = styled.a`${navItemStyles}`
 const CustomLink = styled(Link)`${navItemStyles}`
 const CustomPush = styled(PushNotification)`${navItemStyles}`
 
-function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
+function Item({ data, push, newItem, clearTask, postMessage, toggle, open, delegate }) {
     let editor = data.editor
         ? data.editor
         : null
 
     return (
         <Root>
-        {/*<Root>*/}
-            <Wrapper onClick={()=>push(`/editor/${data.id}`)}>
-                <Left>
+            <Wrapper>
+                <Left onClick={()=>push(`/editor/${data.id}`)}>
                     <Header>
                         <CustomRating
                             rating={data.top}
@@ -225,12 +224,18 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open }) {
                                     send={postMessage.bind(this, data.id)}>
                                     Пуш-уведомление
                                 </CustomPush>
-                                <NavItem onCLick={()=>push(`/editor/${data.id}`)}>
+                                <NavItem onClick={() => delegate.bind(this, data.editor, data.id)()}>
                                     Сменить редактора
                                 </NavItem>
-                                <NavItem onClick={()=>clearTask(data.id)}>
+                                {/*<NavItem onCLick={()=>push(`/editor/${data.id}`)}>
+                                    Сменить редактора
+                                </NavItem>*/}
+                                <NavItem onClick={()=> toggle.bind(this, data.id)()}>
                                     Удалить задание
                                 </NavItem>
+                                {/*<NavItem onClick={()=>clearTask(data.id)}>
+                                    Удалить задание
+                                </NavItem>*/}
                             </Nav>
                         )
                         : (

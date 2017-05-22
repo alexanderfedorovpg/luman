@@ -5,7 +5,8 @@ import {
     LOAD_NEWSLIST,
     REJECT_ARTICLE,
     ACCEPT_ARTICLE,
-    DELETE_ARTICLE
+    DELETE_ARTICLE,
+    DELEGATE_ARTICLE
 } from './constants'
 
 import {
@@ -19,7 +20,10 @@ import {
     articleAcceptionError,
 
     articleDeleted,
-    articleDeletionError
+    articleDeletionError,
+
+    articleDelegated,
+    articleDelegationError
 } from './actions'
 
 import * as api from 'api'
@@ -78,6 +82,24 @@ export function* deleteArticle({ payload }) {
     }
 }
 
+export function* delegateArticle({payload}) {
+
+    try {
+        yield call(api.delegateArticle, {id: payload.id, new_editor_id: payload.user.id})
+
+        payload.editor = {
+            email: payload.user.email,
+            id: payload.user.id,
+            login: payload.user.login
+        }
+
+        yield put(articleDelegated(payload));
+    } catch (err) {
+        yield put(articleDelegationError(err))
+    }
+
+}
+
 export function* newslistData() {
     yield takeLatest(LOAD_NEWSLIST, getList)
 
@@ -86,6 +108,8 @@ export function* newslistData() {
     yield takeEvery(ACCEPT_ARTICLE, acceptArticle)
 
     yield takeEvery(DELETE_ARTICLE, deleteArticle)
+
+    yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
 }
 
 export default [
