@@ -446,7 +446,7 @@ class Content extends Component {
                                     title="Нажмите чтобы выбрать другое изображение">
 
                                     {this.state.data.image_main
-                                        ? <img src={ensureAbs(this.state.data.image_main)} />
+                                        ? <img src={'https:' + ensureAbs(this.state.data.image_main)} />
                                         : (
                                             <span>
                                                 Переместите изображение<br />
@@ -463,7 +463,7 @@ class Content extends Component {
                                 title="Нажмите чтобы выбрать другое изображение">
 
                                 {this.state.data.image_preview
-                                    ? <img src={ensureAbs(this.state.data.image_preview)} />
+                                    ? <img src={'https:' + ensureAbs(this.state.data.image_preview)} />
                                     : (
                                         <span>
                                             Переместите изображение<br />
