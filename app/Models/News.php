@@ -42,6 +42,11 @@ class News extends Model
 
     ];
 
+    public function uri()
+    {
+        return $this->hasOne(NewsUri::class,'news_id','id');
+    }
+
     /**
      * Возвращает связь с комментарими
      *

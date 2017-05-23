@@ -4,6 +4,7 @@ namespace App\Http\Transformers\v1;
 
 use App\Helpers\UrlReplaceHelper;
 use App\Models\News;
+use App\Models\NewsUri;
 use App\Models\User;
 use App\Http\Transformers\Transformer;
 use App\Models\Rubrics;
@@ -91,12 +92,8 @@ class NewsListTransformer extends Transformer
             $transform['cover']['cover_id'] = $news['cover_id'];
         }
 
-        $transform['video_stream'] = $news['video_stream'];
 
-        $transHelper = new UrlReplaceHelper();
-	    $url_title = $transHelper->translate($news['title']);
 
-        $transform['share_link'] = 'https://rtvi.com/news/'. $news['id'].'-'.$url_title;
 
         $transform['editor_id'] = $news['editor_id'];
 
@@ -134,11 +131,17 @@ class NewsListTransformer extends Transformer
      */
     public function transformOneNews($news, $comments)
     {
+
         $transform = $this->transform($news);
         $transform['note'] = $news['note'];
         $transform['body'] = $news['body'];
         $transform['comments'] = $this->transformComments($comments);
 
+        $transHelper = new UrlReplaceHelper();
+        $url_title = $transHelper->translate($news['title']);
+
+        $uri=NewsUri::where('news_id','=',$news['id'])->pluck('uri')->first();
+        $transform['uri'] = $uri?'https://'.$uri:'https://rtvi.com/news/'. $news['id'].'-'.$url_title;
 
         return $transform;
     }

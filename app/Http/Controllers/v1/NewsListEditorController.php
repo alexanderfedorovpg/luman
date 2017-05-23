@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Models\NewsUri;
 use Illuminate\Support\Facades\Auth,
     Illuminate\Http\Request,
     App\Models\News,
@@ -58,19 +59,18 @@ class NewsListEditorController extends CmsController
             $user_id = $this->user_id;
 
 
-            $isPublish = $request->input('is_publish')?$request->input('is_publish'):0;
-
+            $isPublish = $request->input('is_publish') ? $request->input('is_publish') : 0;
 
 
             if ($isPublish === 'true') {
-                $isPublish=1;
+                $isPublish = 1;
             } elseif ($isPublish === 'false') {
-                $isPublish=0;
+                $isPublish = 0;
             }
 
             switch ($assigned) {
                 case 'me' :
-                    $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish ];
+                    $params = ['editor_id' => $user_id, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
                     break;
                 case 'all' :
                     $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
@@ -85,7 +85,7 @@ class NewsListEditorController extends CmsController
 
             $news = null;
             if (Auth::user()->isAdmin()) {
-                $params = [  'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
+                $params = ['moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
                 $news = News::ModerationAllEditor($params);
 
             } else {
@@ -116,7 +116,6 @@ class NewsListEditorController extends CmsController
         try {
 
             $news = News::ModerationMode();
-
 
 
             $this->processing($request, $news);
@@ -185,15 +184,15 @@ class NewsListEditorController extends CmsController
 
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
-          //  $rules['theses'] = 'required';
+            //  $rules['theses'] = 'required';
 
-            $rules['video_stream'] ='integer|exists:cdn_files,id';
-            $rules['video_stream_preview'] ='integer|exists:cdn_files,id';
+            $rules['video_stream'] = 'integer|exists:cdn_files,id';
+            $rules['video_stream_preview'] = 'integer|exists:cdn_files,id';
             $rules['image_main'] = 'integer|exists:cdn_files,id';
-            $rules['image_preview'] ='integer|exists:cdn_files,id';
+            $rules['image_preview'] = 'integer|exists:cdn_files,id';
 
             $rules['original_source_link'] = 'url';
-
+            $rules['uri'] = 'max:255';
             $this->validate($request,
                 $rules
             );
@@ -206,7 +205,7 @@ class NewsListEditorController extends CmsController
             $top = $request->input('top');
             $note = $request->input('note');
             $video_stream = $request->input('video_stream');
-            $video_stream_preview= $request->input('video_stream_preview');
+            $video_stream_preview = $request->input('video_stream_preview');
             $body = $request->input('body');
 
 
@@ -221,13 +220,13 @@ class NewsListEditorController extends CmsController
             $moderation = $request->input('moderation');
             $theses = $request->input('theses');
 
-            $newsEdit = News::find(intval($id));
+            $newsEdit = News::with('uri')->find(intval($id));
 
             if ($newsEdit == null) {
                 return $this->respondNotFound("Элемент не найден");
             }
 
-            if ($newsEdit ) {
+            if ($newsEdit) {
 
                 $newsEdit->title = $title;
                 $newsEdit->sub_title = $sub_title;
@@ -237,7 +236,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
-                $newsEdit->moderation=$moderation;
+                $newsEdit->moderation = $moderation;
 
 
                 $log_moderation = new NewsModerationLogHelper($newsEdit);
@@ -284,6 +283,10 @@ class NewsListEditorController extends CmsController
                     if (isset($rubrics) && is_array($rubrics)) {
                         $newsEdit->rubrics()->sync($rubrics);
                     }
+                    if ($request->input('uri')) {
+
+                        $newsEdit->uri->update(['uri'=> $request->input('uri')]);
+                    }
                     $this->respond($newsEdit);
                     $this->log->setLog('MODERATION_NEWS', $this->user_id, "Successful");
                     return $this->respond(
@@ -326,13 +329,13 @@ class NewsListEditorController extends CmsController
             $rules['title'] = 'required|max:120';
             $rules['sub_title'] = 'required|max:140';
 //            $rules['theses'] = 'required';
-            $rules['video_stream'] ='integer|exists:cdn_files,id';
-            $rules['video_stream_preview'] ='integer|exists:cdn_files,id';
+            $rules['video_stream'] = 'integer|exists:cdn_files,id';
+            $rules['video_stream_preview'] = 'integer|exists:cdn_files,id';
             $rules['image_main'] = 'integer|exists:cdn_files,id';
-            $rules['image_preview'] ='integer|exists:cdn_files,id';
+            $rules['image_preview'] = 'integer|exists:cdn_files,id';
 
             $rules['original_source_link'] = 'url';
-
+            $rules['uri'] = 'max:255';
             $this->validate($request,
                 $rules
             );
@@ -357,7 +360,7 @@ class NewsListEditorController extends CmsController
             $original_source_link = $request->input('original_source_link');
             $moderation = $request->input('moderation');
             $theses = $request->input('theses');
-            $video_stream_preview= $request->input('video_stream_preview');
+            $video_stream_preview = $request->input('video_stream_preview');
             $news = new News();
 
             $news->editor_id = $editor_id ? $editor_id : null;
@@ -371,8 +374,6 @@ class NewsListEditorController extends CmsController
             $news->body = $body ? $body : '';
 
 
-
-
             $news->original_source_link = $original_source_link ? $original_source_link : '';
 
 
@@ -381,7 +382,7 @@ class NewsListEditorController extends CmsController
                 $news->keywords = $request->get('keywords');
             }
 
-                $news->moderation = $request->get('moderation')? $request->get('moderation'):false;
+            $news->moderation = $request->get('moderation') ? $request->get('moderation') : false;
 
 
             if (isset($theses)) {
@@ -412,6 +413,10 @@ class NewsListEditorController extends CmsController
             if ($news->save()) {
                 if (isset($rubrics) && is_array($rubrics)) {
                     $news->rubrics()->attach($rubrics);
+                }
+                if ($request->input('uri')) {
+                    $uri = new NewsUri(['uri' => $request->input('uri')]);
+                    $news->uri()->save($uri);
                 }
                 $this->respond($news);
                 $this->log->setLog('CREATE_NEWS', $this->user_id, "Successful");
@@ -489,7 +494,7 @@ class NewsListEditorController extends CmsController
             $news->editor_id = $new_editor_id;
             $news->moderation = 0;
 
-            if ( $news->save()  ) {
+            if ($news->save()) {
                 $log_moderation = new NewsModerationLogHelper($news);
                 $log_moderation->setModeration();
                 $this->log->setLog('DELEGATE', $this->user_id, "Successful, news id=" . $this->user_id . " delegate [" . $this->user_id . ">" . $new_editor_id . "]");
@@ -497,13 +502,13 @@ class NewsListEditorController extends CmsController
                     ["data" => "delegate"]
                 );
             }
-         $this->log->setLog('DELEGATE', $this->user_id, "Error, news id=" . $this->user_id . " don't delegate  [" . $this->user_id . ">" . $new_editor_id . "]");
+            $this->log->setLog('DELEGATE', $this->user_id, "Error, news id=" . $this->user_id . " don't delegate  [" . $this->user_id . ">" . $new_editor_id . "]");
             throw new \Exception('Error, news don\'t delegate');
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
             $id = $request->input('id');
-           $this->log->setLog('DELEGATE', $this->user_id, "Error 500 news id=" . $id);
+            $this->log->setLog('DELEGATE', $this->user_id, "Error 500 news id=" . $id);
             return $this->respondFail500x($e->getMessage());
         }
     }
