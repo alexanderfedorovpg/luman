@@ -1,14 +1,9 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FormattedTime, FormattedRelative } from 'react-intl';
 
 import H2 from 'components/H2';
-import Button from 'components/Button';
 import Icon from 'components/Icon';
-import Modal from 'components/Modal';
-import Select from 'components/Editor/Select';
-
-import Delegate from 'components/Delegate';
 
 import { padding, font } from 'constants/style';
 
@@ -105,23 +100,6 @@ const Content = styled.div`
     }
 `;
 
-const Btns = styled.div`
-    display: flex;
-    margin-top: 19px;
-`;
-
-const CustomButton = styled(Button)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    margin-right: 12px;
-
-    &:last-child {
-        margin-right: 0;
-    }
-`;
-
 const CloseButton = styled(Icon)`
     cursor: pointer;
     position: absolute;
@@ -129,94 +107,52 @@ const CloseButton = styled(Icon)`
     right: 20px;
 `;
 
-class Preview extends PureComponent {
+const Preview = ({ data, users, onClose, delegate, done, doneTitle }) => {
+    const createDate = data.created_at;
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            modalOpen: false,
-        };
-
-        this.open = ::this.open;
-        this.close = ::this.close;
-    }
-
-    open() {
-        this.setState({
-            modalOpen: true,
-        });
-    }
-
-    close() {
-        this.setState({
-            modalOpen: false,
-        });
-    }
-
-    render() {
-        const { data, users, onClose, delegate, done, doneTitle } = this.props;
-        const createDate = data.created_at;
-
-        return (
-            <Root>
-                <CloseButton type="delete-lg" onClick={onClose} />
-                <Header>
-                    {createDate
-                        ? (
-                            <time>
-                                <FormattedRelative value={createDate} units="day" />
-                                {', '}
-                                <FormattedTime value={createDate} />
-                            </time>
-                        )
-                        : null
+    return (
+        <Root>
+            <CloseButton type="delete-lg" onClick={onClose} />
+            <Header>
+                {createDate
+                    ? (
+                        <time>
+                            <FormattedRelative value={createDate} units="day" />
+                            {', '}
+                            <FormattedTime value={createDate} />
+                        </time>
+                    )
+                    : null
+                }
+            </Header>
+            <Title>
+                {data.title}
+            </Title>
+            <ImageWrapper>
+                <div>
+                    {data.image_main ?
+                        (
+                            <Img>
+                                <img src={data.image_main} alt="" />
+                            </Img>
+                        ) :
+                        null
                     }
-                </Header>
-                <Title>
-                    {data.title}
-                </Title>
-                <ImageWrapper>
-                    <div>
-                        {data.image_main ?
-                            (
-                                <Img>
-                                    <img src={data.image_main} alt="" />
-                                </Img>
-                            ) :
-                            null
-                        }
-                        <Source>
-                            Источник: Интерфакс
-                        </Source>
-                    </div>
-                    <div>
-                        <Subtitle>
-                            {data.subtitle}
-                        </Subtitle>
-                    </div>
-                </ImageWrapper>
-                <Content>
-                    <div dangerouslySetInnerHTML={{ __html: data.body }} />
-                </Content>
-                <Btns>
-                    <CustomButton primary onClick={this.open}>
-                        <Icon type="arrow-left" />
-                        Передать другому
-                    </CustomButton>
-                </Btns>
-                <Delegate
-                    onClose={this.close}
-                    isOpen={this.state.modalOpen}
-                    onChange={(value) => (
-                        delegate(value)
-                    )}
-                    users={users}
-                    value={data.editor}
-                />
-            </Root>
-        );
-    }
-}
+                    <Source>
+                        Источник: Интерфакс
+                    </Source>
+                </div>
+                <div>
+                    <Subtitle>
+                        {data.subtitle}
+                    </Subtitle>
+                </div>
+            </ImageWrapper>
+            <Content>
+                <div dangerouslySetInnerHTML={{ __html: data.body }} />
+            </Content>
+        </Root>
+    );
+};
 
 export default Preview;
