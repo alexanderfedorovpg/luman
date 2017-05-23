@@ -34,6 +34,7 @@ class FileHelper
 
         if ($result->getStatusCode() == 200) {
             $result = $result->jsonDecode()->object;
+
             $cdnFile = new CdnFile([
                 'external_id' => $result->id,
                 'url' => 'https://' . $result->cdn_url,
