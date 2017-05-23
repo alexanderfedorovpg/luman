@@ -59,8 +59,6 @@ class UserController extends CmsController
         try {
             $user = User::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail();
 
-            return $this->respondNotFound('User is not found');
-
 
             return $this->respond($this->usersTransformer->transform($user->toArray()));
         } catch (ModelNotFoundException $e) {

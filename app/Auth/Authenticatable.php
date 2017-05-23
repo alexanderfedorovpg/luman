@@ -21,7 +21,7 @@ trait Authenticatable
     public static function checkAccessByLogin($login, $password)
     {
         $user = static::where('login', $login)->first();
-        if ($user) {
+        if ($user && !$user->is_deleted ) {
             if ($user->checkAuthPassword($password)) {
                 return $user;
             }
@@ -99,5 +99,7 @@ trait Authenticatable
     {
         return (bool)$this->enabled;
     }
+
+
 
 }

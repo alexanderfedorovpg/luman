@@ -32,6 +32,7 @@ class User extends Model implements AuthenticatableContract
         'login',
         'need_change_password',
         'enabled',
+        'is_deleted',
         'avatar_id'
     ];
 
@@ -137,4 +138,6 @@ class User extends Model implements AuthenticatableContract
     {
         return $this->hasOne(CdnFile::class, 'avatar_id');
     }
+
+
 }
