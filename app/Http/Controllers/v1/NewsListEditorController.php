@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Models\CdnFile;
 use App\Models\NewsUri;
 use Illuminate\Support\Facades\Auth,
     Illuminate\Http\Request,
@@ -282,6 +283,28 @@ class NewsListEditorController extends CmsController
                 if ($log_moderation->setEndModeration() && $newsEdit->save()) {
                     if (isset($rubrics) && is_array($rubrics)) {
                         $newsEdit->rubrics()->sync($rubrics);
+                    }
+                    $image_main_r = $request->input('image_main');
+                    $image_main_o = $request->input('image_main_info');
+                    if ($image_main_r && $image_main_o) {
+                        $cdn = CdnFile::find($image_main_r);
+                        if ($cdn) {
+                            $cdn->object_source =$image_main_o['object_source'];
+                            $cdn->object_author =$image_main_o['object_author'];
+                            $cdn->object_name =$image_main_o['object_name'];
+                            $cdn->save();
+                        }
+                    }
+                    $image_preview_r = $request->input('image_preview');
+                    $image_preview_o = $request->input('image_preview_info');
+                    if ($image_preview_r && $image_preview_o) {
+                        $cdn = CdnFile::find($image_main_r);
+                        if ($cdn) {
+                            $cdn->object_source =$image_preview_o['object_source'];
+                            $cdn->object_author =$image_preview_o['object_author'];
+                            $cdn->object_name =$image_preview_o['object_name'];
+                            $cdn->save();
+                        }
                     }
                     if ($request->input('uri')) {
                         if ($newsEdit->uri) {
