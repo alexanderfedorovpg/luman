@@ -327,7 +327,7 @@ class NewsListEditorController extends CmsController
             $rules['top'] = 'required|numeric';
 
             $rules['title'] = 'required|max:120';
-            $rules['sub_title'] = 'required|max:140';
+            $rules['sub_title'] = 'max:140';
 //            $rules['theses'] = 'required';
             $rules['video_stream'] = 'integer|exists:cdn_files,id';
             $rules['video_stream_preview'] = 'integer|exists:cdn_files,id';
