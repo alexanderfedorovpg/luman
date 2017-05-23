@@ -178,7 +178,12 @@ class AirRecordController extends CmsController
                 'file' => 'file|required|max:262144',
             ]);
 
-            $cdnFile = FileHelper::uploadFilespotFile($request->file('file'));
+            $info = [
+                'object_source' => $request->input('object_source') ? $request->input('object_source') : null,
+                'object_author' => $request->input('object_author') ? $request->input('object_author') : null,
+                'object_name' => $request->input('object_name') ? $request->input('object_name') : null,
+            ];
+            $cdnFile = FileHelper::uploadFilespotFile($request->file('file'), $info);
             if ($cdnFile) {
                 return $this->respondCreated([
                     'url' => Configuration::URL_VIDEO_PLAYER . $cdnFile->external_id
