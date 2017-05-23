@@ -127,13 +127,20 @@ const Time = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+
+    // margin-right: 20px;
     margin-bottom: 7px;
     float: left;
 
-    box-sizing: content-box;
-    border: 1px solid rgba(204,204,204,.74);
-    max-width: 50%;
+    // box-sizing: content-box;
+    // border: 1px solid rgba(204,204,204,.74);
+    width: 48%;
+
+    &:not(:first-child) {
+        margin-left: 3%
+    }
 
     img {
         width: 100%;
@@ -162,6 +169,7 @@ class Content extends Component {
         super(props);
 
         this.state = {
+            // gallery: true,
             data: this.propsToData(props),
             error: {},
             videoUploadModalOpen: false,
@@ -210,8 +218,17 @@ class Content extends Component {
             subtitle: props.article.sub_title || '',
             theses: props.article.theses || '',
             keywords: (props.article.keywords || []).join(' ').trim(),
-            image_main: props.article.image_main || '',
-            image_preview: props.article.image_preview || '',
+
+            image_main: (props.article.image_main||{}).url || '',
+            image_main_title: (props.article.image_main||{}).object_name || '',
+            image_main_author: (props.article.image_main||{}).object_author || '',
+            image_main_source: (props.article.image_main||{}).object_source || '',
+
+            image_preview: (props.article.image_preview||{}).url || '',
+            image_preview_title: (props.article.image_preview||{}).object_name || '',
+            image_preview_author: (props.article.image_preview||{}).object_author || '',
+            image_preview_source: (props.article.image_preview||{}).object_source || '',
+
             editor: props.article.editor_id,
         };
     }
@@ -283,11 +300,21 @@ class Content extends Component {
             rubrics: r,
             keywords: data.keywords.trim().replace(/ +/g, ','),
             theses: data.theses,
-            image_main: data.image_main_temp || article.image_main_id,
-            image_preview: data.image_preview_temp || article.image_preview_id,
+            image_main: data.image_main_temp || (article.image_main||{}).id,
+            image_main_info: {
+                object_name: data.image_main_title,
+                object_author: data.image_main_author,
+                object_source: data.image_main_source,
+            },
+            image_preview: data.image_preview_temp || (article.image_preview||{}).id,
+            image_preview_info: {
+                object_name: data.image_preview_title,
+                object_author: data.image_preview_author,
+                object_source: data.image_preview_source,
+            },
             body: data.body,
-            video_stream: data.video.id || data.video.file[0],
-            video_stream_preview: data.videoPreview.id || data.videoPreview.file[0],
+            video_stream: data.video.id || (data.video.file||[])[0],
+            video_stream_preview: data.videoPreview.id || (data.videoPreview.file||[])[0],
         };
     }
 
@@ -521,7 +548,7 @@ class Content extends Component {
                         </Group>
                         <Group>
                             <Rich
-value={this.state.data.body}
+                                value={this.state.data.body}
                                 onChange={this.changeHandlerValue('body')}
                             />
                         </Group>
@@ -535,7 +562,7 @@ value={this.state.data.body}
                                 >
 
                                     {this.state.data.image_main
-                                        ? <img src={'https:' + ensureAbs(this.state.data.image_main)} />
+                                        ? <img src={ensureAbs(this.state.data.image_main)} />
                                         : (
                                             <span>
                                                 Переместите изображение<br />
@@ -544,24 +571,62 @@ value={this.state.data.body}
                                             </span>
                                         )}
                                 </StyledDropzone>
+                                <Input
+                                    placeholder="Название"
+                                    value={this.state.data.image_main_title}
+                                    onChange={this.changeHandlerTarget('image_main_title')}
+                                    block
+                                />
+                                <Input
+                                    placeholder="Автор"
+                                    value={this.state.data.image_main_author}
+                                    onChange={this.changeHandlerTarget('image_main_author')}
+                                    block
+                                />
+                                <Input
+                                    placeholder="Источник"
+                                    value={this.state.data.image_main_source}
+                                    onChange={this.changeHandlerTarget('image_main_source')}
+                                    block
+                                />
                             </ImageContainer>
-                            <StyledDropzone
-                                onDrop={this.onDrop('image_preview')}
-                                multiple={false}
-                                filled={!!this.state.data.image_preview}
-                                title="Нажмите чтобы выбрать другое изображение"
-                            >
+                            <ImageContainer>
+                                <StyledDropzone
+                                    onDrop={this.onDrop('image_preview')}
+                                    multiple={false}
+                                    filled={!!this.state.data.image_preview}
+                                    title="Нажмите чтобы выбрать другое изображение"
+                                >
 
-                                {this.state.data.image_preview
-                                    ? <img src={'https:' + ensureAbs(this.state.data.image_preview)} />
-                                    : (
-                                        <span>
-                                            Переместите изображение<br />
-                                            либо<br />
-                                            кликните для выбора изображения
-                                        </span>
-                                    )}
-                            </StyledDropzone>
+                                    {this.state.data.image_preview
+                                        ? <img src={ensureAbs(this.state.data.image_preview)} />
+                                        : (
+                                            <span>
+                                                Переместите изображение<br />
+                                                либо<br />
+                                                кликните для выбора изображения
+                                            </span>
+                                        )}
+                                </StyledDropzone>
+                                <Input
+                                    placeholder="Название"
+                                    value={this.state.data.image_preview_title}
+                                    onChange={this.changeHandlerTarget('image_preview_title')}
+                                    block
+                                />
+                                <Input
+                                    placeholder="Автор"
+                                    value={this.state.data.image_preview_author}
+                                    onChange={this.changeHandlerTarget('image_preview_author')}
+                                    block
+                                />
+                                <Input
+                                    placeholder="Источник"
+                                    value={this.state.data.image_preview_source}
+                                    onChange={this.changeHandlerTarget('image_preview_source')}
+                                    block
+                                />
+                            </ImageContainer>
                             <div style={{ clear: 'both' }} />
                         </Group>
                         <Group>
@@ -602,6 +667,12 @@ value={this.state.data.body}
                         </StickyContainer>
                     </CustomRight>
                 </Wrap>
+                {/*<ContentModal
+                        isOpen={this.state.gallery}
+                        contentLabel="Галерея изображений"
+                        title="Галерея изображений">
+                        <ImageGallery />
+                </ContentModal>*/}
                 <Modal
                     isOpen={preview}
                     contentLabel="Предпросмотр"
