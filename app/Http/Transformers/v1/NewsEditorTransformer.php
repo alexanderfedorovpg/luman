@@ -3,8 +3,10 @@
 
 namespace App\Http\Transformers\v1;
 
+use App\Helpers\UrlReplaceHelper;
 use App\Http\Transformers\Transformer;
 use App\Models\NewsCommentsEditor;
+use App\Models\NewsUri;
 use App\Models\Rubrics;
 use App\Models\News;
 use App\Models\CdnFile;
@@ -94,7 +96,10 @@ class NewsEditorTransformer extends Transformer
         $time_edit = new \DateTime($news['created_at']);
         $interval = $time_edit->diff($datetime_now);
         $transform['time_edit'] = $interval->format('%D:%H:%I:%S');
-
+         $transHelper = new UrlReplaceHelper();
+        $url_title = $transHelper->translate($news['title']);
+        $uri=NewsUri::where('news_id','=',$news['id'])->pluck('uri')->first();
+        $transform['uri'] = $uri?'https://'.$uri:'https://rtvi.com/news/'. $news['id'].'-'.$url_title;
         unset($transform['lastEditorComment']);
 
         return $transform;
