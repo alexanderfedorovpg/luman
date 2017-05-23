@@ -23,44 +23,40 @@ import {
     articlePublished,
     articlePublishError,
     articleSendedToFix,
-    articleToFixError
+    articleToFixError,
 } from './actions';
 
 import * as api from 'api';
 
 export function* getArticle({ payload }) {
-
     try {
-        const { data } = yield call(api.getArticle, payload)
+        const { data } = yield call(api.getArticle, payload);
 
-        yield put(articleLoaded(data))
+        yield put(articleLoaded(data));
     } catch (err) {
-        yield put(articleLoadingError(err))
+        yield put(articleLoadingError(err));
     }
 }
 
 export function* deleteArticle({ payload }) {
-
     try {
-        yield call(api.deleteArticle, payload)
+        yield call(api.deleteArticle, payload);
 
-        yield put(articleDeleted())
+        yield put(articleDeleted());
 
-        yield put(push(`/newslist`))
+        yield put(push('/newslist'));
     } catch (err) {
-        yield put(articleDeletionError(err))
+        yield put(articleDeletionError(err));
     }
 }
 
 export function* delegateArticle({ payload }) {
-
     try {
-        yield call(api.delegateArticle, payload)
+        yield call(api.delegateArticle, payload);
 
-        yield put(articleDelegated())
-
+        yield put(articleDelegated());
     } catch (err) {
-        yield put(articleDelegationError(err))
+        yield put(articleDelegationError(err));
     }
 }
 
@@ -89,6 +85,8 @@ export function* finishArticle({ payload }) {
         const uploadedFiles = yield call(uploadFiles, payload);
         const data = { ...payload, ...uploadedFiles };
 
+        data.uri = 'rtvi.com/' + translit(data.title);
+
         yield call(api.finishArticle, data);
 
         yield put(hidePreloader());
@@ -107,7 +105,6 @@ export function* finishArticle({ payload }) {
 
 export function* publishArticle({ payload }) {
     try {
-    console.log(payload)
         yield put(showPreloader());
         const uploadedFiles = yield call(uploadFiles, payload);
         const data = { ...payload, ...uploadedFiles };
@@ -122,7 +119,7 @@ export function* publishArticle({ payload }) {
 
         // yield put(push(`/newslist`))
     } catch (err) {
-        console.log(err)
+        console.log(err);
         yield put(hidePreloader());
         toastr.error('Что-то пошло не так...');
         yield put(articlePublishError(err));
@@ -131,28 +128,78 @@ export function* publishArticle({ payload }) {
 
 function* toFixArticle({ payload }) {
     try {
-        yield call(api.toFixArticle, payload)
+        yield call(api.toFixArticle, payload);
 
-        yield put(articleSendedToFix())
+        yield put(articleSendedToFix());
     } catch (err) {
-        yield put(articleToFixError(err))
+        yield put(articleToFixError(err));
     }
 }
 
 export function* articleData() {
-    yield takeLatest(LOAD_ARTICLE, getArticle)
+    yield takeLatest(LOAD_ARTICLE, getArticle);
 
-    yield takeLatest(TO_FIX_ARTICLE, toFixArticle)
+    yield takeLatest(TO_FIX_ARTICLE, toFixArticle);
 
-    yield takeLatest(FINISH_ARTICLE, finishArticle)
+    yield takeLatest(FINISH_ARTICLE, finishArticle);
 
-    yield takeLatest(PUBLISH_ARTICLE, publishArticle)
+    yield takeLatest(PUBLISH_ARTICLE, publishArticle);
 
-    yield takeEvery(DELEGATE_ARTICLE, delegateArticle)
+    yield takeEvery(DELEGATE_ARTICLE, delegateArticle);
 
-    yield takeEvery(DELETE_ARTICLE, deleteArticle)
+    yield takeEvery(DELETE_ARTICLE, deleteArticle);
 }
 
 export default [
-    articleData
-]
+    articleData,
+];
+
+
+function translit(value) {
+    // Символ, на который будут заменяться все спецсимволы
+    let space = '-';
+    // Берем значение из нужного поля и переводим в нижний регистр
+    let text = value.toLowerCase();
+
+    // Массив для транслитерации
+    let transl = {
+        а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh',
+        з: 'z', и: 'i', й: 'j', к: 'k', л: 'l', м: 'm', н: 'n',
+        о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h',
+        ц: 'c', ч: 'ch', ш: 'sh', щ: 'sh', ъ: space, ы: 'y', ь: space, э: 'e', ю: 'yu', я: 'ya',
+        ' ': space, _: space, '`': space, '~': space, '!': space, '@': space,
+        '#': space, $: space, '%': space, '^': space, '&': space, '*': space,
+        '(': space, ')': space, '-': space, '\=': space, '+': space, '[': space,
+        ']': space, '\\': space, '|': space, '/': space, '.': space, ',': space,
+        '{': space, '}': space, '\'': space, '"': space, ';': space, ':': space,
+        '?': space, '<': space, '>': space, '№': space,
+    };
+
+    let result = '';
+    let curent_sim = '';
+
+    for (let i = 0; i < text.length; i++) {
+        // Если символ найден в массиве то меняем его
+        if (transl[text[i]] != undefined) {
+            if (curent_sim != transl[text[i]] || curent_sim != space) {
+                result += transl[text[i]];
+                curent_sim = transl[text[i]];
+            }
+        }
+        // Если нет, то оставляем так как есть
+        else {
+            result += text[i];
+            curent_sim = text[i];
+        }
+    }
+
+    result = TrimStr(result);
+
+    // Выводим результат
+    return result;
+}
+
+function TrimStr(s) {
+    s = s.replace(/^-/, '');
+    return s.replace(/-$/, '');
+}
