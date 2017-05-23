@@ -37,10 +37,12 @@ function renderList(className, type, data) {
 function renderItem(className, type, data, war, wTitle) {
     const video = data.video_stream
 
+    const image = (data.image_preview||{}).url
+
     return (
         <div className={classNames(`${type}`, className, { [`${type}_war`]: war })}>
             <Link className={`${type}__link`} to={newsLink(data)}></Link>
-            <Img className={`${type}__img`} src={data.image_preview} alt=" "role="presentation" />
+            <Img className={`${type}__img`} src={image} alt=" "role="presentation" />
             <div className={`${type}__info`}>
                 {video
                     ? (

@@ -12,10 +12,12 @@ import logo from './blue-rtvi.png'
 
 function BigNews({ data, war, warTitle, className }) {
 
+    const image = (data.image_preview||{}).url
+
     return (
         <div className={classNames('big-news', className)}>
             <Link className="big-news__link" to={newsLink(data)}></Link>
-            <Img className="big-news__img" src={data.image_preview} alt="" role="presentation" />
+            <Img className="big-news__img" src={image} alt="" role="presentation" />
             <div className="big-news__info">
                 <p className="big-news__title">
                     {war

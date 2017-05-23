@@ -30,6 +30,8 @@ class Content extends PureComponent {
             ? data.theses
             : `${data.theses}`.split('\\')
 
+        const image = data.image_preview||{}
+
         return (
             <div>
                 <h1>
@@ -63,10 +65,17 @@ class Content extends PureComponent {
                     <div className="news-preview">
                         <Rubrics data={data.rubrics} />
                         <figure className="news-preview__img">
-                            <Img src={data.image_preview} />
-                            <figcaption className="news-preview__source">
-                                {/*Фото: Mc_maxim / Twitter*/}
-                            </figcaption>
+                            <Img
+                                src={image.url}
+                                title={image.object_name||''}
+                                alt={image.object_name||''} />
+                            {image.object_author && image.object_source
+                                && (
+                                    <figcaption className="news-preview__source">
+                                        Фото: {image.object_author} / {image.object_source}
+                                    </figcaption>
+                                )
+                            }
                         </figure>
                         <p className="news-preview__text">
                             {data.sub_title}

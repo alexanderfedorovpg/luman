@@ -10,9 +10,11 @@ import './style.scss'
 function BlockMini({ data }) {
     if (!data) return null
 
+    const image = (data.image_preview||{}).url
+
     return (
         <div className="block-rectangle-mini">
-            <Img src={data.image_preview} className="block-rectangle-mini__img" />
+            <Img src={image} className="block-rectangle-mini__img" />
             <Link to={newsLink(data)} className="block-rectangle-mini__link">
                 <i className="block-rectangle-mini__points" />
                 <p className="block-rectangle-mini__title">

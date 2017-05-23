@@ -12,9 +12,11 @@ import './style.scss'
 
 function MiniNews({ data, className }) {
 
+    const image = (data.image_preview||{}).url
+
     return (
         <div className={classNames('mini-news', className)}>
-            <Img className="mini-news__img" src={data.image_preview} alt="" role="presentation" />
+            <Img className="mini-news__img" src={image} alt="" role="presentation" />
             <div className="mini-news__info">
                 <Link
                     className="mini-news__title"
