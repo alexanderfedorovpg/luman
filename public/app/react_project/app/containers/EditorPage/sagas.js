@@ -108,6 +108,9 @@ export function* publishArticle({ payload }) {
         yield put(showPreloader());
         const uploadedFiles = yield call(uploadFiles, payload);
         const data = { ...payload, ...uploadedFiles };
+
+        data.uri = 'rtvi.com/' + translit(data.title);
+
         const { data: response } = yield call(api.finishArticle, data);
 
         yield call(api.publishArticle, response.id);

@@ -133,7 +133,7 @@ const Preview = ({ data, users, onClose, delegate, done, doneTitle }) => {
                     {data.image_main ?
                         (
                             <Img>
-                                <img src={data.image_main} alt="" />
+                                <img src={data.image_main.url} alt="" />
                             </Img>
                         ) :
                         null
