@@ -26,7 +26,6 @@ class RecordForm extends React.PureComponent {
 
     onSubmit(immutableData) {
         const data = immutableData.toJS();
-        console.log(data);
 
         if (!data.id) {
             this.props.postRecord(data);
@@ -131,10 +130,6 @@ const validate = (values) => {
 
     if (!values.get('video_url')) {
         errors.video_url = 'Не загружено видео';
-    }
-
-    if (!values.get('image_preview')) {
-        errors.image_preview = 'Не выбрано изображение для превью';
     }
 
     return errors;

@@ -132,7 +132,7 @@ export function* postRecord({ payload }) {
         yield put(showPreloader());
         const [uploadedVideo, uploadedFile] = [
             yield call(api.uploadVideo, payload.video_url[0]),
-            yield call(api.uploadFile, payload.image_preview[0]),
+            payload.image_preview ? yield call(api.uploadFile, payload.image_preview[0]) : null,
         ];
         const type = yield select(getRecordsType);
 
@@ -140,7 +140,7 @@ export function* postRecord({ payload }) {
             ...payload,
             is_full_video: type === 'FULL',
             video_url: uploadedVideo.data.url,
-            image_preview: uploadedFile.data.file.url,
+            image_preview: uploadedFile ? uploadedFile.data.file.url : '',
             is_published: 0,
         };
 
@@ -148,14 +148,10 @@ export function* postRecord({ payload }) {
 
         yield put(hidePreloader());
 
-        if (response.data.success) {
-            data.id = response.data.data.id;
+        data.id = response.data.data.id;
 
-            yield put(successPostRecord(data));
-            yield put(closeModal());
-        } else {
-            throw new Error(response.statusText);
-        }
+        yield put(successPostRecord(data));
+        yield put(closeModal());
     } catch (err) {
         console.error(err);
         yield put(failurePostRecord(err));
