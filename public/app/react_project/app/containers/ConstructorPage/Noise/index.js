@@ -11,6 +11,7 @@ import {
     loadNews,
     itemToMain,
     removeFromMain,
+    removeItemsFromList,
 } from './../actions'
 
 import {
@@ -22,11 +23,6 @@ import {
 } from '../selectors'
 
 export class Noise extends PureComponent {
-
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.loadNewslist()
     }
@@ -41,7 +37,8 @@ export class Noise extends PureComponent {
         let {
             news,
             toMain,
-            removeFromMain
+            removeFromMain,
+            removeItemsFromList,
         } = this.props
 
         const categories = [{
@@ -53,7 +50,11 @@ export class Noise extends PureComponent {
             <Wrap>
                 <Left>
                     <Tabs />
-                    <News data={news} toMain={toMain} />
+                    <News
+                        data={news}
+                        toMain={toMain}
+                        onRemove={removeItemsFromList}
+                    />
                 </Left>
                 <Right>
                     <Collapse
@@ -84,6 +85,9 @@ const mapDispatchToProps = dispatch => ({
     },
     removeFromMain(item) {
         dispatch(removeFromMain(item, 'noise'))
+    },
+    removeItemsFromList(data) {
+        dispatch(removeItemsFromList(data.id, 'news'));
     },
 })
 

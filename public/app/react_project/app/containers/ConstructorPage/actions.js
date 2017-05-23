@@ -20,6 +20,7 @@ import {
     REMOVE_FROM_MAIN,
     MOVE_ITEM,
     CANCEL_CHANGES,
+    REMOVE_ITEM_FROM_LIST,
 
     SET_FILTER,
 
@@ -31,22 +32,22 @@ export const moveItem = (type, source, target) => ({
     payload: {
         type,
         source,
-        target
-    }
-})
+        target,
+    },
+});
 
 export const setOption = (name, value) => ({
     type: SET_OPTION,
     payload: {
         name,
-        value
-    }
-})
+        value,
+    },
+});
 
-export const setFilter = filters => ({
+export const setFilter = (filters) => ({
     type: SET_FILTER,
-    payload: filters
-})
+    payload: filters,
+});
 
 export const itemToMain = (item, type, category, before) => ({
     type: ITEM_TO_MAIN,
@@ -54,79 +55,84 @@ export const itemToMain = (item, type, category, before) => ({
         item,
         type,
         category,
-        before
-    }
-})
+        before,
+    },
+});
 
 export const removeFromMain = (item, type) => ({
     type: REMOVE_FROM_MAIN,
     payload: {
         item,
-        type
-    }
-})
+        type,
+    },
+});
 
-export const chooseCategory = id => ({
+export const chooseCategory = (id) => ({
     type: CHOOSE_CATEGORY,
-    payload: id
-})
+    payload: id,
+});
 
 export const cancelChanges = () => ({
-    type: CANCEL_CHANGES
-})
+    type: CANCEL_CHANGES,
+});
 
 export const loadHomeNews = () => ({
-    type: LOAD_HOME_NEWS
-})
+    type: LOAD_HOME_NEWS,
+});
 
-export const homeNewsLoaded = payload => ({
+export const homeNewsLoaded = (payload) => ({
     type: LOAD_HOME_NEWS_SUCCESS,
-    payload
-})
+    payload,
+});
 
-export const homeNewsLoadingError = error => ({
+export const homeNewsLoadingError = (error) => ({
     type: LOAD_HOME_NEWS_FAILURE,
-    error
-})
+    error,
+});
 
 export const saveChanges = () => ({
-    type: SAVE_CHANGES
-})
+    type: SAVE_CHANGES,
+});
 
-export const changesSaved = payload => ({
+export const changesSaved = (payload) => ({
     type: SAVE_CHANGES_SUCCESS,
-    payload
-})
+    payload,
+});
 
-export const changesSavingError = error => ({
+export const changesSavingError = (error) => ({
     type: SAVE_CHANGES_FAILURE,
-    error
-})
+    error,
+});
 
 export const loadNews = () => ({
-    type: LOAD_NEWS
-})
+    type: LOAD_NEWS,
+});
 
-export const newsLoaded = payload => ({
+export const newsLoaded = (payload) => ({
     type: LOAD_NEWS_SUCCESS,
-    payload
-})
+    payload,
+});
 
-export const newsLoadingError = error => ({
+export const newsLoadingError = (error) => ({
     type: LOAD_NEWS_FAILURE,
-    error
-})
+    error,
+});
 
 export const loadCategories = () => ({
-    type: LOAD_CATEGORIES
-})
+    type: LOAD_CATEGORIES,
+});
 
-export const categoriesLoaded = payload => ({
+export const categoriesLoaded = (payload) => ({
     type: LOAD_CATEGORIES_SUCCESS,
-    payload
-})
+    payload,
+});
 
-export const categoriesLoadingError = error => ({
+export const categoriesLoadingError = (error) => ({
     type: LOAD_CATEGORIES_FAILURE,
-    error
-})
+    error,
+});
+
+export const removeItemsFromList = (id, type) => ({
+    type: REMOVE_ITEM_FROM_LIST,
+    payload: { id, type },
+});

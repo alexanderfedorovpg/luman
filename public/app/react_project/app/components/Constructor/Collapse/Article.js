@@ -132,7 +132,6 @@ class Article extends Component {
         let {
             data,
             onRemove,
-
             style,
             isOver,
             connectDragSource,
@@ -170,7 +169,7 @@ class Article extends Component {
                         <Remove
                             message="Убрать с главной"
                             eventType="hover"
-                            direction="bottom"
+                            direction="left"
                             icon="delete"
                             onClick={e => {
                                 onRemove(data)

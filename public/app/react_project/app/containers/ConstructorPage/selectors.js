@@ -25,14 +25,28 @@ const selectCategories = createSelector(
         .map(value => root.getIn(['categories', 'data', `${value}`])).toJS()
 )
 
-const selectNoise = createSelector(
+const selectHidden = createSelector(
     selectConstructorPageDomain,
-    root => root.getIn(['news', 'data'], List()).toJS().filter(value => value.top <= 3)
+    root => root.getIn(['hidden'], Map())
+)
+
+const selectHiddenNews = createSelector(
+    selectHidden,
+    (hidden) => hidden.get('news', List()).toJS()
+)
+
+const selectNoise = createSelector(
+    [selectConstructorPageDomain, selectHiddenNews],
+    (root, hidden) => root.getIn(['news', 'data'], List()).toJS().filter(
+        (value) => value.top <= 3 && hidden.indexOf(value.id) === -1
+    )
 )
 
 const selectNews = createSelector(
-    selectConstructorPageDomain,
-    root => root.getIn(['news', 'data'], List()).toJS().filter(value => value.top > 3)
+    [selectConstructorPageDomain, selectHiddenNews],
+    (root, hidden) => root.getIn(['news', 'data'], List()).toJS().filter(
+        (value) => value.top > 3 && hidden.indexOf(value.id) === -1
+    )
 )
 
 const selectFilters = createSelector(

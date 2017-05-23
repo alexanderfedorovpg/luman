@@ -12,7 +12,7 @@ import {
 
 import {
     selectFilters,
-    selectHomeNews
+    selectHomeNews,
 } from './selectors';
 
 import {

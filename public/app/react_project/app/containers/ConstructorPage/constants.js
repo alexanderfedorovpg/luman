@@ -19,6 +19,7 @@ export const CHOOSE_CATEGORY = 'app/ConstructorPage/CHOOSE_CATEGORY';
 export const REMOVE_FROM_MAIN = 'app/ConstructorPage/REMOVE_FROM_MAIN';
 export const CANCEL_CHANGES = 'app/ConstructorPage/CANCEL_CHANGES';
 export const MOVE_ITEM = 'app/ConstructorPage/MOVE_ITEM';
+export const REMOVE_ITEM_FROM_LIST = 'app/ConstructorPage/REMOVE_ITEM_FROM_LIST';
 
 export const SET_FILTER = 'app/ConstructorPage/SET_FILTER';
 
