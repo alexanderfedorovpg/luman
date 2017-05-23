@@ -294,7 +294,7 @@ class Content extends Component {
             id: article.id,
             top: data.top,
             title: data.title.slice(0, titleMax),
-            sub_title: data.subtitle.slice(0, subtitleMax),
+            sub_title: data.subtitle,
             editor_id: data.editor,
             rubrics: r,
             keywords: data.keywords.trim().replace(/ +/g, ','),
