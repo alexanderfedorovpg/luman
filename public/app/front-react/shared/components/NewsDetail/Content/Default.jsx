@@ -7,6 +7,8 @@ import Img from 'components/Img'
 
 function Content({ data, children }) {
 
+    const image = data.image_main||{}
+
     return (
         <div>
             <h1>{data.title}</h1>
@@ -20,10 +22,17 @@ function Content({ data, children }) {
                 <div className="news-preview news-preview--wide">
                     <Rubrics data={data.rubrics} />
                     <figure className="news-preview__img">
-                        <Img src={data.image_main} />
-                        <figcaption className="news-preview__source">
-                            {/*Фото: Mc_maxim / Twitter*/}
-                        </figcaption>
+                        <Img
+                            src={image.url}
+                            title={image.object_name||''}
+                            alt={image.object_name||''} />
+                        {image.object_author && image.object_source
+                            && (
+                                <figcaption className="news-preview__source">
+                                    Фото: {image.object_author} / {image.object_source}
+                                </figcaption>
+                            )
+                        }
                     </figure>
                     <p className="news-preview__text">
                         {data.sub_title}
