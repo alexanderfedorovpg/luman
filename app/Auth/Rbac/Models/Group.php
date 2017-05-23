@@ -166,7 +166,7 @@ class Group extends Model
             }
         }
 
-        $this->permissions()->attach($ids);
+        $this->permissions()->sync($ids);
     }
 
     /**

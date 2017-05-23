@@ -219,6 +219,7 @@ class GroupController extends CmsController
             ]);
 
             $group->addPermissions(Permission::findMany($permissions));
+
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->getMessage());
 
