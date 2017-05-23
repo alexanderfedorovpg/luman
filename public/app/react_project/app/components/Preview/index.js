@@ -1,17 +1,16 @@
-import React, { PureComponent } from 'react'
-import styled from 'styled-components'
-import { FormattedTime, FormattedRelative } from 'react-intl'
+import React, { PureComponent } from 'react';
+import styled from 'styled-components';
+import { FormattedTime, FormattedRelative } from 'react-intl';
 
-import H2 from 'components/H2'
-import Button from 'components/Button'
-import Icon from 'components/Icon'
-import Modal from 'components/Modal'
-import Select from 'components/Editor/Select'
+import H2 from 'components/H2';
+import Button from 'components/Button';
+import Icon from 'components/Icon';
+import Modal from 'components/Modal';
+import Select from 'components/Editor/Select';
 
 import Delegate from 'components/Delegate';
 
-import { padding, font } from 'constants/style'
-import { ensureAbs } from 'utils/uri'
+import { padding, font } from 'constants/style';
 
 const Root = styled.div`
     max-width: 908px;
@@ -23,14 +22,14 @@ const Root = styled.div`
 
     height: 100%;
     overflow-y: auto;
-`
+`;
 
 const Header = styled.header`
     font-family: ${font.opensans};
     font-size: 14px;
     font-weight: 400;
     color: #999;
-`
+`;
 
 const Title = styled.h1`
     margin-top: 9px;
@@ -42,7 +41,7 @@ const Title = styled.h1`
 
     color: #333333;
     letter-spacing: -0.15px;
-`
+`;
 
 const ImageWrapper = styled.div`
     display: flex;
@@ -53,7 +52,7 @@ const ImageWrapper = styled.div`
         flex-shrink: 0;
         margin-right: ${padding};
     }
-`
+`;
 
 const Img = styled.div`
     margin-bottom: 5px;
@@ -65,7 +64,7 @@ const Img = styled.div`
         height: auto;
 
     }
-`
+`;
 
 const Source = styled.span`
     margin-left: 2px;
@@ -75,7 +74,7 @@ const Source = styled.span`
     font-weight: 400;
 
     color: #999;
-`
+`;
 
 const Subtitle = styled(H2)`
     padding-right: 19px;
@@ -89,7 +88,7 @@ const Subtitle = styled(H2)`
 
     color: #333333;
     letter-spacing: 0.05px;
-`
+`;
 
 const Content = styled.div`
     padding-top: 19px;
@@ -104,12 +103,12 @@ const Content = styled.div`
     p {
         margin-top: 0;
     }
-`
+`;
 
 const Btns = styled.div`
     display: flex;
     margin-top: 19px;
-`
+`;
 
 const CustomButton = styled(Button)`
     display: flex;
@@ -121,14 +120,14 @@ const CustomButton = styled(Button)`
     &:last-child {
         margin-right: 0;
     }
-`
+`;
 
 const CloseButton = styled(Icon)`
     cursor: pointer;
     position: absolute;
     top: 20px;
     right: 20px;
-`
+`;
 
 class Preview extends PureComponent {
 
@@ -136,28 +135,28 @@ class Preview extends PureComponent {
         super(props);
 
         this.state = {
-            modalOpen: false
-        }
+            modalOpen: false,
+        };
 
-        this.open = ::this.open
-        this.close = ::this.close
+        this.open = ::this.open;
+        this.close = ::this.close;
     }
 
     open() {
         this.setState({
-            modalOpen: true
-        })
+            modalOpen: true,
+        });
     }
 
     close() {
         this.setState({
-            modalOpen: false
-        })
+            modalOpen: false,
+        });
     }
 
     render() {
-        const { data, users, onClose, delegate, done, doneTitle } = this.props
-        const createDate = data.created_at
+        const { data, users, onClose, delegate, done, doneTitle } = this.props;
+        const createDate = data.created_at;
 
         return (
             <Root>
@@ -179,10 +178,10 @@ class Preview extends PureComponent {
                 </Title>
                 <ImageWrapper>
                     <div>
-                        {data.image_main ? 
+                        {data.image_main ?
                             (
                                 <Img>
-                                    <img src={ensureAbs(data.image_main)} />
+                                    <img src={data.image_main} alt="" />
                                 </Img>
                             ) :
                             null
@@ -199,31 +198,25 @@ class Preview extends PureComponent {
                 </ImageWrapper>
                 <Content>
                     <div dangerouslySetInnerHTML={{ __html: data.body }} />
-                    <Btns>
-                        <CustomButton primary onClick={this.open}>
-                            <Icon type="arrow-left" />
-                            Передать другому
-                        </CustomButton>
-                        <CustomButton success onClick={e=> {
-                                done(data.id)
-                                onClose()
-                            }}>
-                            <Icon type="arrow-right" />
-                            {doneTitle || 'Опубликовать'}
-                        </CustomButton>
-                    </Btns>
                 </Content>
+                <Btns>
+                    <CustomButton primary onClick={this.open}>
+                        <Icon type="arrow-left" />
+                        Передать другому
+                    </CustomButton>
+                </Btns>
                 <Delegate
                     onClose={this.close}
                     isOpen={this.state.modalOpen}
-                    onChange={value => (
+                    onChange={(value) => (
                         delegate(value)
                     )}
                     users={users}
-                    value={data.editor} />
+                    value={data.editor}
+                />
             </Root>
-        )
+        );
     }
 }
 
-export default Preview
+export default Preview;
