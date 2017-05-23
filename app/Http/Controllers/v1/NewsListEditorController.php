@@ -284,8 +284,13 @@ class NewsListEditorController extends CmsController
                         $newsEdit->rubrics()->sync($rubrics);
                     }
                     if ($request->input('uri')) {
+                        if ($newsEdit->uri) {
+                            $newsEdit->uri->update(['uri' => $request->input('uri')]);
+                        } else {
+                            $uri = new NewsUri(['uri' => $request->input('uri')]);
+                            $newsEdit->uri()->save($uri);
+                        }
 
-                        $newsEdit->uri->update(['uri'=> $request->input('uri')]);
                     }
                     $this->respond($newsEdit);
                     $this->log->setLog('MODERATION_NEWS', $this->user_id, "Successful");
