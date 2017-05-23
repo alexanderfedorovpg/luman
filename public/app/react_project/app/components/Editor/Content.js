@@ -526,7 +526,7 @@ class Content extends Component {
                                 error={this.state.error.subtitle}
                                 onChange={(e) => {
                                     this.changeHandlerTarget('subtitle')(e);
-                                    this.setError('subtitle', !e.target.value || e.target.value.length > subtitleMax);
+                                    this.setError('subtitle', !e.target.value);
                                 }}
                                 block
                             />
