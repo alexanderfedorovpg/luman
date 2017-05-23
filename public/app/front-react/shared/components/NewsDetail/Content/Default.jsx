@@ -7,7 +7,10 @@ import Img from 'components/Img'
 
 function Content({ data, children }) {
 
-    const image = data.image_main||{}
+    const image = data.image_main || {}
+    const theses = Array.isArray(data.theses)
+            ? data.theses
+            : `${data.theses}`.split('\\');
 
     return (
         <div>
@@ -19,6 +22,18 @@ function Content({ data, children }) {
                 }
             </div>
             <div className="text-bg-gray text-bg-gray--news inner-about__text-bg-gray">
+                {
+                    !!theses.length &&
+                    (
+                        <div className="text-bg-gray__block-text">
+                            {theses.map((v, i) => (
+                                <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
+                                    {v}
+                                </div>
+                            ))}
+                        </div>
+                    )
+                }
                 <div className="news-preview news-preview--wide">
                     <Rubrics data={data.rubrics} />
                     <figure className="news-preview__img">
