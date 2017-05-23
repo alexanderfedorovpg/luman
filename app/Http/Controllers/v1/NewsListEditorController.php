@@ -286,13 +286,16 @@ class NewsListEditorController extends CmsController
                     }
                     $image_main_r = $request->input('image_main');
                     $image_main_o = $request->input('image_main_info');
+
                     if ($image_main_r && $image_main_o) {
-                        $cdn = CdnFile::find($image_main_r);
+                        $cdn = CdnFile::find($image_main_r );
                         if ($cdn) {
+
                             $cdn->object_source =$image_main_o['object_source'];
                             $cdn->object_author =$image_main_o['object_author'];
                             $cdn->object_name =$image_main_o['object_name'];
                             $cdn->save();
+
                         }
                     }
                     $image_preview_r = $request->input('image_preview');
