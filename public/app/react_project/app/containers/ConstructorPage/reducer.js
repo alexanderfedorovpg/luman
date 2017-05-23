@@ -93,7 +93,7 @@ function constructorPageReducer(state = initialState, action) {
             // Если выбрана категория - добавляем итем,
             // если не выбрана, то запоминаем итем для последующего выбора категории
             if (!action.payload.category) {
-                return state.setIn(['temporary', 'item'], fromJS(action.payload));
+                return state.setIn(['temporary', 'item'], fromJS(action.payload))
             }
 
             return state
@@ -103,7 +103,14 @@ function constructorPageReducer(state = initialState, action) {
                     action.payload.category,
                     action.payload.before
                 )
-                ::normalizeRating(action.payload.type);
+                ::normalizeRating(action.payload.type)
+                .updateIn(['news', 'data'], value => {
+                    if (action.payload.type !== 'broadcast') {
+                        return value.filter(value => value.get('id') !== action.payload.item.id);
+                    } else {
+                        return value
+                    }
+                });
 
         case REMOVE_ITEM_FROM_LIST:
             return state.updateIn(

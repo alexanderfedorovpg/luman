@@ -72,6 +72,8 @@ class NewslistPage extends Component {
         let { news, user, filter } = this.props
 
         switch (filter) {
+            case 'DEFAULT':
+                return news
             case 'MY':
                 return news.filter(item => item.editor_id === user.id)
 

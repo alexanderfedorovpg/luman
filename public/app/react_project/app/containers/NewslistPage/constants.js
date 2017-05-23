@@ -23,6 +23,10 @@ export const SET_FILTER = 'app/NewslistPage/SET_FILTER';
 export const filters = {
     editor: [
         {
+            title: 'Все',
+            value: 'DEFAULT'
+        },
+        {
             title: 'Назначенные мне',
             value: 'MY'
         },
@@ -32,6 +36,10 @@ export const filters = {
         }
     ],
     supervisor: [
+        {
+            title: 'Все',
+            value: 'DEFAULT'
+        },
         {
             title: 'Выданы',
             value: 'ASSIGNED'
