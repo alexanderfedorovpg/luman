@@ -1,46 +1,49 @@
-import React, { Component, PropTypes, Children, cloneElement } from 'react'
-import styled from 'styled-components'
-import Dropzone from 'react-dropzone'
-import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
+import React, { Component, PropTypes, Children, cloneElement } from 'react';
+import { fromJS } from 'immutable';
+import styled from 'styled-components';
+import Dropzone from 'react-dropzone';
+import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
 import { StickyContainer, Sticky } from 'react-sticky';
 
-import { Wrap, Left, Right } from 'components/Content'
-import { Group, Textarea, Label } from 'components/Form'
-import Input from 'components/Form/Input'
-import Rich from 'components/Form/Rich'
-import User from 'components/User'
-import Select from './Select'
-import Icon from 'components/Icon'
-import Rating from 'components/Rating'
-import Tags from 'components/Tags'
-import Modal from 'components/Modal'
-import Preview from 'containers/Preview'
-import Chat from 'containers/Chat'
-import HeaderEditor from './Header.editor'
-import HeaderSupervisor from './Header.supervisor'
+import { ifProp } from 'utils/style';
+import { ensureAbs } from 'utils/uri';
+import { font, padding, color } from 'constants/style';
+import { Wrap, Left, Right } from 'components/Content';
+import { Group, Textarea, Label } from 'components/Form';
+import Input from 'components/Form/Input';
+import Rich from 'components/Form/Rich';
+import User from 'components/User';
+import Icon from 'components/Icon';
+import Rating from 'components/Rating';
+import Tags from 'components/Tags';
+import Modal from 'components/Modal';
+import TypedBtn from 'components/Button/TypedBtn';
+import Preview from 'containers/Preview';
+import Chat from 'containers/Chat';
 
-import { ifProp } from 'utils/style'
-import { ensureAbs } from 'utils/uri'
-import { font, padding, color } from 'constants/style'
+import Select from './Select';
+import HeaderEditor from './Header.editor';
+import HeaderSupervisor from './Header.supervisor';
+import VideoUploadModal from './VideoUploadModal';
 
-import Button from 'components/Button'
-
-const titleMax = 120
-const subtitleMax = 140
+const titleMax = 120;
+const subtitleMax = 140;
 
 const Root = styled.div`
     margin-top: 6px;
     padding-left: ${padding}
-`
+`;
 
 const CustomLeft = styled(Left) `
+    margin-top: 0;
     border-right: 0;
-`
+`;
 
 const CustomRight = styled(Right) `
     flex-basis: auto;
-    width: auto;
-`
+    width: 235px;
+    align-self: center;
+`;
 
 const VideoStatus = styled.div`
     font-family: ${font.opensans};
@@ -49,7 +52,7 @@ const VideoStatus = styled.div`
     font-weight: 600;
     letter-spacing: 0.1px;
 
-    width: 235px;
+    width: 100%;
 
     strong {
         color: #434242;
@@ -65,24 +68,24 @@ const VideoStatus = styled.div`
             color: #1f9d29;
         `}
     }
-`
+`;
 
 const CustomIcon = styled(Icon) `
     margin-top: -3px;
     margin-left: 2px;
     margin-right: 5px;
-`
+`;
 
 const Action = styled.div`
     align-items: center;
     margin-top: 21px;
     margin-bottom: -3px;
-`
+`;
 
 const CustomRating = styled(Rating) `
     margin-right: 20px;
     margin-bottom: 21px;
-`
+`;
 
 const TitleField = styled(Textarea) `
     height: 119px;
@@ -95,7 +98,7 @@ const TitleField = styled(Textarea) `
     font-size: 30px;
     line-height: 34px;
     letter-spacing: -0.7px;
-`
+`;
 
 const SubtitleField = styled(Textarea) `
     height: 96px;
@@ -108,20 +111,20 @@ const SubtitleField = styled(Textarea) `
     font-weight: 600;
     line-height: 24px;
     letter-spacing: 0;
-`
+`;
 
 const ThesesField = styled(SubtitleField) `
     font-size: 16px;
     font-weight: 400;
 
     resize: vertical;
-`
+`;
 
 const Time = styled.div`
     margin-top: 10px;
     margin-bottom: 25px;
     font-size: 13px;
-`
+`;
 
 const ImageContainer = styled.div`
     margin-right: 20px;
@@ -136,7 +139,7 @@ const ImageContainer = styled.div`
         width: 100%;
         height: auto
     }
-`
+`;
 
 const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />) `
     display: flex;
@@ -151,7 +154,7 @@ const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />) `
     ${ifProp('filled') `
         border: 0;
     `}
-`
+`;
 
 class Content extends Component {
 
@@ -161,35 +164,47 @@ class Content extends Component {
         this.state = {
             data: this.propsToData(props),
             error: {},
+            videoUploadModalOpen: false,
         };
 
         this.changeHandlerTarget = ::this.changeHandlerTarget;
         this.changeHandlerEditor = ::this.changeHandlerEditor;
+        this.openUploadVideoModal = ::this.openUploadVideoModal;
+        this.closeUploadVideoModal = ::this.closeUploadVideoModal;
+        this.onUploadVideo = ::this.onUploadVideo;
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.article.id !== nextProps.article.id) {
             this.setState({
-                data: this.propsToData(nextProps)
-            })
+                data: this.propsToData(nextProps),
+            });
         }
     }
 
     setError(prop, value) {
-
         this.setState({
             error: {
                 ...this.state.error,
-                [prop]: value
-            }
-        })
+                [prop]: value,
+            },
+        });
     }
 
     propsToData(props) {
+        const video = props.article.video_stream || {};
+
         return {
             top: props.article.top || null,
-            rubrics: (props.article.rubrics || []).map(r => r.name),
-            stream: props.article.video_stream || '',
+            rubrics: (props.article.rubrics || []).map((r) => r.name),
+            video: {
+                id: video.id,
+                file: video.url,
+            },
+            videoPreview: {
+                id: video.preview_id,
+                file: video.preview,
+            },
             body: props.article.body || '',
             title: props.article.title || '',
             subtitle: props.article.sub_title || '',
@@ -197,12 +212,12 @@ class Content extends Component {
             keywords: (props.article.keywords || []).join(' ').trim(),
             image_main: props.article.image_main || '',
             image_preview: props.article.image_preview || '',
-            editor: props.article.editor_id
-        }
+            editor: props.article.editor_id,
+        };
     }
 
     renderLabel(title, string, max) {
-        const limit = max - string.length
+        const limit = max - string.length;
 
         return (
             <Label right light>
@@ -212,53 +227,52 @@ class Content extends Component {
                         : limit
                 } символов
             </Label>
-        )
+        );
     }
 
     validate() {
-        const { data, error } = this.state
-        const { article } = this.props
-        let retFlag = false
+        const { data, error } = this.state;
+        const { article } = this.props;
+        let retFlag = false;
 
         if (!data.rubrics.length) {
-            toastr.warning('Выберите рубрики!')
-            retFlag = true
+            toastr.warning('Выберите рубрики!');
+            retFlag = true;
         }
         if (!data.top) {
-            toastr.warning('Выберите рейтинг!')
-            retFlag = true
+            toastr.warning('Выберите рейтинг!');
+            retFlag = true;
         }
-        let newError = {
+        const newError = {
             ...error,
             title: !data.title || data.title.length > titleMax,
             subtitle: !data.subtitle || data.subtitle.length > subtitleMax,
-        }
+        };
 
         if (Object.values(newError).reduce((a, b) => a || b, false)) {
             this.setState({
-                error: newError
-            })
-            toastr.warning('Заполните обязательные поля!')
-            retFlag = true
+                error: newError,
+            });
+            toastr.warning('Заполните обязательные поля!');
+            retFlag = true;
         }
 
         if (retFlag) {
-            return
-        }
-        else {
-            return true
+            ;
+        }        else {
+            return true;
         }
     }
 
     dataToSubmit() {
-        let { data, error } = this.state
-        let { article, rubrics } = this.props
+        let { data, error } = this.state;
+        let { article, rubrics } = this.props;
 
-        let r = data.rubrics.map(name => (
-            rubrics.find(r => r.name == name).id
-        ))
+        const r = data.rubrics.map((name) => (
+            rubrics.find((r) => r.name == name).id
+        ));
 
-        if (!this.validate()) return
+        if (!this.validate()) return null;
 
         return {
             id: article.id,
@@ -272,43 +286,42 @@ class Content extends Component {
             image_main: data.image_main_temp || article.image_main_id,
             image_preview: data.image_preview_temp || article.image_preview_id,
             body: data.body,
-            video_stream: data.stream
-        }
+            video_stream: data.video.id || data.video.file[0],
+            video_stream_preview: data.videoPreview.id || data.videoPreview.file[0],
+        };
     }
 
     onDrop(prop) {
-        return acceptedFiles => {
+        return (acceptedFiles) => {
             if (acceptedFiles[0]) {
-                let reader = new FileReader()
+                const reader = new FileReader();
 
                 reader.onload = () => {
-
                     this.setState({
                         data: {
                             ...this.state.data,
                             [prop]: reader.result,
-                            [`${prop}_temp`]: acceptedFiles[0]
-                        }
-                    })
-                }
+                            [`${prop}_temp`]: acceptedFiles[0],
+                        },
+                    });
+                };
 
-                reader.readAsDataURL(acceptedFiles[0])
-
+                reader.readAsDataURL(acceptedFiles[0]);
             }
-        }
+        };
     }
 
     changeHandlerTarget(prop) {
-        return e => {
+        return (e) => {
             if (this.state.data[prop] !== e.target.value) {
                 this.setState({
                     data: {
                         ...this.state.data,
-                        [prop]: e.target.value
-                    }
-                })
+                        [prop]: e.target.value,
+                    },
+                });
             }
-        }
+        };
     }
 
     changeHandlerValue(prop) {
@@ -317,29 +330,73 @@ class Content extends Component {
                 this.setState({
                     data: {
                         ...this.state.data,
-                        [prop]: value
-                    }
-                })
+                        [prop]: value,
+                    },
+                });
             }
-        }
+        };
     }
 
     changeHandlerEditor(editor) {
-        const { article, delegate } = this.props
+        const { article, delegate } = this.props;
 
         this.setState({
             data: {
                 ...this.state.data,
-                editor: editor.id
-            }
+                editor: editor.id,
+            },
         }, () => {
             if (article.id) {
                 delegate({
                     id: article.id,
-                    new_editor_id: editor.id
-                })
+                    new_editor_id: editor.id,
+                });
             }
-        })
+        });
+    }
+
+    onUploadVideo(immutableData) {
+        const data = immutableData.toJS();
+        const newData = {
+            ...this.state.data,
+        };
+
+        // Если загрузили новое видео, то обнуляем превью
+        if (data.video && typeof data.video !== 'string') {
+            newData.video = {
+                id: null,
+                file: data.video,
+            };
+
+            newData.videoPreview = {
+                id: null,
+                file: null,
+            };
+        }
+
+        if (data.preview && typeof data.preview !== 'string') {
+            newData.videoPreview = {
+                id: null,
+                file: data.preview,
+            };
+        }
+
+        this.setState({
+            data: newData,
+            videoUploadModalOpen: false,
+        });
+    }
+
+    openUploadVideoModal() {
+        this.setState({
+            videoUploadModalOpen: true,
+        });
+    }
+
+    closeUploadVideoModal() {
+        this.setState({
+            videoUploadModalOpen: false,
+        });
     }
 
     render() {
@@ -353,17 +410,22 @@ class Content extends Component {
             preview,
             finish,
             publish,
-            closePreview
-        } = this.props
+            closePreview,
+            openUploadVideoModal,
+        } = this.props;
+
+        const videoUploadInitialValues = fromJS({
+            video: this.state.data.video.file,
+            preview: this.state.data.videoPreview.file,
+        });
 
         return (
             <Root>
-                {Children.map(this.props.children, child => {
+                {Children.map(this.props.children, (child) => {
                     if (child.type == HeaderEditor || child.type == HeaderSupervisor) {
-                        return cloneElement(child, { getFormData: this.dataToSubmit.bind(this) })
-                    }
-                    else {
-                        return child
+                        return cloneElement(child, { getFormData: this.dataToSubmit.bind(this) });
+                    }                    else {
+                        return child;
                     }
                 })}
                 <header>
@@ -372,16 +434,35 @@ class Content extends Component {
                             <Input
                                 value={this.state.data.stream}
                                 onChange={this.changeHandlerTarget('stream')}
-                                block />
+                                block
+                            />
                         </CustomLeft>
                         <CustomRight>
-                            <VideoStatus ready={article.video_stream}>
-                                <CustomIcon type="text-video-lg" />
-                                <strong>Статус видео:</strong>
-                                <span>
-                                    {article.video_stream ? 'готово' : 'не готово'}
-                                </span>
-                            </VideoStatus>
+                            {
+                                this.state.data.video.file ?
+                                    (
+                                        <VideoStatus
+                                            onClick={this.openUploadVideoModal}
+                                            ready
+                                        >
+                                            <CustomIcon type="text-video-lg" />
+                                            <strong>Статус видео:</strong>
+                                            <span>
+                                                Готово
+                                            </span>
+                                        </VideoStatus>
+                                    )
+                                    :
+                                    (
+                                        <TypedBtn
+                                            block
+                                            onClick={this.openUploadVideoModal}
+                                            buttonType="upload"
+                                        >
+                                            Загрузить видео
+                                        </TypedBtn>
+                                    )
+                            }
                         </CustomRight>
                     </Wrap>
                 </header>
@@ -389,11 +470,13 @@ class Content extends Component {
                     <Wrap>
                         <CustomRating
                             value={this.state.data.top}
-                            onChange={this.changeHandlerValue('top')} />
+                            onChange={this.changeHandlerValue('top')}
+                        />
                         <Tags
-                            data={rubrics.map(r => r.name)}
+                            data={rubrics.map((r) => r.name)}
                             value={this.state.data.rubrics}
-                            onChange={this.changeHandlerValue('rubrics')} />
+                            onChange={this.changeHandlerValue('rubrics')}
+                        />
                     </Wrap>
                 </Action>
                 <Wrap>
@@ -403,22 +486,24 @@ class Content extends Component {
                             <TitleField
                                 value={this.state.data.title}
                                 error={this.state.error.title}
-                                onChange={e => {
-                                    this.changeHandlerTarget('title')(e)
-                                    this.setError('title', !e.target.value || e.target.value.length > titleMax)
+                                onChange={(e) => {
+                                    this.changeHandlerTarget('title')(e);
+                                    this.setError('title', !e.target.value || e.target.value.length > titleMax);
                                 }}
-                                block />
+                                block
+                            />
                         </Group>
                         <Group>
                             {this.renderLabel('Подзаголовок', this.state.data.subtitle, subtitleMax)}
                             <SubtitleField
                                 value={this.state.data.subtitle}
                                 error={this.state.error.subtitle}
-                                onChange={e => {
-                                    this.changeHandlerTarget('subtitle')(e)
-                                    this.setError('subtitle', !e.target.value || e.target.value.length > subtitleMax)
+                                onChange={(e) => {
+                                    this.changeHandlerTarget('subtitle')(e);
+                                    this.setError('subtitle', !e.target.value || e.target.value.length > subtitleMax);
                                 }}
-                                block />
+                                block
+                            />
                         </Group>
                         <Group>
                             <Label right light>
@@ -427,15 +512,18 @@ class Content extends Component {
                             <ThesesField
                                 value={this.state.data.theses}
                                 error={this.state.error.theses}
-                                onChange={e => {
-                                    this.changeHandlerTarget('theses')(e)
-                                    this.setError('theses', !e.target.value)
+                                onChange={(e) => {
+                                    this.changeHandlerTarget('theses')(e);
+                                    this.setError('theses', !e.target.value);
                                 }}
-                                block />
+                                block
+                            />
                         </Group>
                         <Group>
-                            <Rich value={this.state.data.body}
-                                onChange={this.changeHandlerValue('body')} />
+                            <Rich
+value={this.state.data.body}
+                                onChange={this.changeHandlerValue('body')}
+                            />
                         </Group>
                         <Group>
                             <ImageContainer>
@@ -443,7 +531,8 @@ class Content extends Component {
                                     onDrop={this.onDrop('image_main')}
                                     multiple={false}
                                     filled={!!this.state.data.image_main}
-                                    title="Нажмите чтобы выбрать другое изображение">
+                                    title="Нажмите чтобы выбрать другое изображение"
+                                >
 
                                     {this.state.data.image_main
                                         ? <img src={'https:' + ensureAbs(this.state.data.image_main)} />
@@ -460,7 +549,8 @@ class Content extends Component {
                                 onDrop={this.onDrop('image_preview')}
                                 multiple={false}
                                 filled={!!this.state.data.image_preview}
-                                title="Нажмите чтобы выбрать другое изображение">
+                                title="Нажмите чтобы выбрать другое изображение"
+                            >
 
                                 {this.state.data.image_preview
                                     ? <img src={'https:' + ensureAbs(this.state.data.image_preview)} />
@@ -481,12 +571,13 @@ class Content extends Component {
                             <Input
                                 value={this.state.data.keywords}
                                 error={this.state.error.keywords}
-                                onChange={e => {
-                                    this.changeHandlerTarget('keywords')(e)
-                                    this.setError('keywords', !e.target.value)
+                                onChange={(e) => {
+                                    this.changeHandlerTarget('keywords')(e);
+                                    this.setError('keywords', !e.target.value);
                                 }}
                                 placeholder="Ключевые слова"
-                                block />
+                                block
+                            />
                         </Group>
                     </CustomLeft>
                     <CustomRight>
@@ -495,18 +586,17 @@ class Content extends Component {
                                 <Select
                                     options={users}
                                     onChange={this.changeHandlerEditor}
-                                    value={this.state.data.editor} />
+                                    value={this.state.data.editor}
+                                />
                             )
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
                         <StickyContainer>
                             <Sticky topOffset={220}>
                                 {
-                                    ({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => {
-                                        return (
+                                    ({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => (
                                             <Chat room={chatRoom} />
                                         )
-                                    }
                                 }
                             </Sticky>
                         </StickyContainer>
@@ -515,7 +605,8 @@ class Content extends Component {
                 <Modal
                     isOpen={preview}
                     contentLabel="Предпросмотр"
-                    onRequestClose={closePreview}>
+                    onRequestClose={closePreview}
+                >
 
                     <Preview
                         data={{ ...this.state.data, id: article.id }}
@@ -526,10 +617,17 @@ class Content extends Component {
                             supervisor
                                 ? publish(this.dataToSubmit())
                                 : finish(this.dataToSubmit())
-                        )} />
+                        )}
+                    />
                 </Modal>
+                <VideoUploadModal
+                    isOpen={this.state.videoUploadModalOpen}
+                    close={this.closeUploadVideoModal}
+                    onSubmit={this.onUploadVideo}
+                    initialValues={videoUploadInitialValues}
+                />
             </Root>
-        )
+        );
     }
 }
 
@@ -538,8 +636,8 @@ Content.propTypes = {
     rubrics: PropTypes.array.isRequired,
     chatRoom: PropTypes.oneOfType([
         PropTypes.string,
-        PropTypes.number
-    ])
-}
+        PropTypes.number,
+    ]),
+};
 
-export default Content
+export default Content;

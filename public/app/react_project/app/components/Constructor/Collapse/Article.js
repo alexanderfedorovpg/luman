@@ -144,7 +144,7 @@ class Article extends Component {
                 <Root>
                     <Wrap>
                         <Pic>
-                            <img src={ensureAbs(data.image_preview)} />
+                            <img src={data.image_preview ? data.image_preview.url : ''} />
                         </Pic>
                         <div>
                             {data.rubrics

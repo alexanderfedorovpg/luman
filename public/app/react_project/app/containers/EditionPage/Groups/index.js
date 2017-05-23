@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ConfirmModal from 'components/Modal/ConfirmModal';
+import { loadGroups } from 'containers/App/actions';
 
 import { Wrapper, StyledTable, LeftColumn, RightColumn } from '../style';
 import { groupsTableHeader } from '../constants';
@@ -37,6 +38,8 @@ class Groups extends PureComponent {
     }
 
     componentDidMount() {
+        this.props.loadGroups();
+
         if (this.props.permissions.length) {
             return;
         }
@@ -127,6 +130,7 @@ const mapDispatchToProps = (dispatch) => ({
     deleteGroup: (id) => dispatch(deleteGroup(id)),
     editGroup: (id, data) => dispatch(editGroup(id, data)),
     getPermissions: () => dispatch(getPermissions()),
+    loadGroups: () => dispatch(loadGroups()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Groups);

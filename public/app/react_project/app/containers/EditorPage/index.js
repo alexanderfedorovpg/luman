@@ -117,7 +117,8 @@ class EditorPage extends Component {
                     delegate={delegateArticle}
                     closePreview={this.closePreview}
                     users={users.toJS()}
-                    supervisor>
+                    supervisor
+                >
 
                     <HeaderSupervisor
                         {...headerProps}

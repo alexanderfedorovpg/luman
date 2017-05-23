@@ -15,6 +15,8 @@ import {
     DESELECT_USER,
     SELECT_GROUP,
     DESELECT_GROUP,
+    GET_GROUP_PERMISSIONS_SUCCESS,
+    GET_GROUP_PERMISSIONS_FAILURE,
     GET_PERMISSIONS,
     GET_PERMISSIONS_SUCCESS,
     GET_PERMISSIONS_FAILURE,
@@ -101,6 +103,20 @@ export function deselectGroup() {
 export function getPermissions() {
     return {
         type: GET_PERMISSIONS,
+    };
+}
+
+export function successGetGroupPermissions(permissions) {
+    return {
+        type: GET_GROUP_PERMISSIONS_SUCCESS,
+        payload: { permissions },
+    };
+}
+
+export function failureGetGroupPermissions(error) {
+    return {
+        type: GET_GROUP_PERMISSIONS_FAILURE,
+        error,
     };
 }
 

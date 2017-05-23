@@ -27,15 +27,19 @@ import {
 import {
     failureAddUser,
     failureDeleteUser,
+    deselectUser,
     failureEditUser,
     successGetPermissions,
     failureGetPermissions,
+    deselectGroup,
     failureAddGroup,
     failureDeleteGroup,
     failureEditGroup,
     successGetHistory,
     failureGetHistory,
     allHistoryLoaded,
+    successGetGroupPermissions,
+    failureGetGroupPermissions,
 } from './actions';
 
 const selectSelectedUser = (state) => state.getIn(['editionPage', 'selectedUser']);
@@ -71,6 +75,7 @@ export function* deleteUserSaga({ payload }) {
         yield put(showPreloader());
         yield call(api.deleteUser, id);
         yield put(deleteUser(id));
+        yield put(deselectUser());
         yield put(hidePreloader());
         yield put(showInfoModal('Пользователь удалён. Можете забыть про него'));
     } catch (err) {
@@ -123,12 +128,20 @@ export function* editUserSaga({ payload }) {
 export function* getPermissionsSaga() {
     try {
         const response = yield call(api.getPermissionsList);
-        yield put(successGetPermissions(response.data));
+        const data = { byId: {}, ids: [] };
+
+        response.data.forEach((item) => {
+            data.byId[item.id] = item;
+            data.ids.push(item.id);
+        });
+
+        yield put(successGetPermissions(data));
     } catch (err) {
         yield put(failureGetPermissions(err));
     }
 }
 
+// TO-DO: допилить добавление разрешений
 export function* addGroupSaga({ payload }) {
     try {
         yield put(showPreloader());
@@ -151,9 +164,11 @@ export function* addGroupSaga({ payload }) {
 export function* getGroupPermissions({ payload }) {
     try {
         const response = yield call(api.getGroupPermissions, payload.id);
-        console.log(response.data);
-    } catch (err) {
+        const permissionIds = response.data.map((permission) => permission.id);
 
+        yield put(successGetGroupPermissions(permissionIds));
+    } catch (err) {
+        yield put(failureGetGroupPermissions(err));
     }
 }
 
@@ -185,6 +200,7 @@ export function* deleteGroupSaga({ payload }) {
         yield put(showPreloader());
         yield call(api.deleteGroup, id);
         yield put(deleteGroup(id));
+        yield put(deselectGroup());
         yield put(hidePreloader());
         yield put(showInfoModal('Группа успешно удалена'));
     } catch (err) {

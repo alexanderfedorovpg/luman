@@ -10,6 +10,7 @@ import {
     DESELECT_USER,
     SELECT_GROUP,
     DESELECT_GROUP,
+    GET_GROUP_PERMISSIONS_SUCCESS,
     GET_PERMISSIONS_SUCCESS,
     ALL_HISTORY_LOADED,
     GET_HISTORY_SUCCESS,
@@ -17,8 +18,14 @@ import {
 
 const initialState = fromJS({
     selectedUser: null,
-    selectedGroup: null,
-    permissions: [],
+    selectedGroup: {
+        id: null,
+        permissions: [],
+    },
+    permissions: {
+        byId: {},
+        ids: [],
+    },
     history: [],
     allHistoryLoaded: false,
 });
@@ -30,9 +37,11 @@ function editionPageReducer(state = initialState, action) {
         case DESELECT_USER:
             return state.set('selectedUser', null);
         case SELECT_GROUP:
-            return state.set('selectedGroup', action.payload.id);
+            return state.setIn(['selectedGroup', 'id'], action.payload.id);
         case DESELECT_GROUP:
-            return state.set('selectedGroup', null);
+            return state.setIn(['selectedGroup', 'id'], null);
+        case GET_GROUP_PERMISSIONS_SUCCESS:
+            return state.setIn(['selectedGroup', 'permissions'], fromJS(action.payload.permissions));
         case GET_PERMISSIONS_SUCCESS:
             return state.set('permissions', fromJS(action.payload.permissions));
         case ALL_HISTORY_LOADED:
@@ -40,7 +49,7 @@ function editionPageReducer(state = initialState, action) {
         case GET_HISTORY_SUCCESS:
             return state.update(
                 'history',
-                (history) => history.concat(action.payload.history)
+                (history) => history.concat(fromJS(action.payload.history))
             );
         default:
             return state;
