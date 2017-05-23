@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1;
 
 
 use App\Http\Transformers\v1\UsersTransformer;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +44,7 @@ class UserController extends CmsController
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('is_deleted', '=', '0')->get();
 
         return $this->respond($this->usersTransformer->transformCollection($users->toArray()));
     }
@@ -56,16 +57,16 @@ class UserController extends CmsController
     public function show($id)
     {
         try {
-            $user = User::findOrFail($id);
-            if (!$user) {
-                return $this->respondNotFound('User is not found');
-            }
+            $user = User::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail();
+
+            return $this->respondNotFound('User is not found');
+
 
             return $this->respond($this->usersTransformer->transform($user->toArray()));
         } catch (ModelNotFoundException $e) {
-            return $this->respondNotFound($e);
+            return $this->respondNotFound($e->getMessage());
         } catch (\Exception $e) {
-            return $this->respondFail500x($e);
+            return $this->respondFail500x($e>getMessage());
         }
 
     }
@@ -110,27 +111,27 @@ class UserController extends CmsController
             return $this->respondNotFound('User is not found');
         }
 
-     try {
-        $validation = Validator::make(
-            $request->all(),
-            [
-                'firstname' => 'max:255',
-                'lastname' => 'max:255',
-                'login' => "max:255|unique:users,login,{$id}",
-                'email' => "email|unique:users,email,{$id}",
-                'need_change_password' => 'boolean',
-                'enabled' => 'boolean',
-                'avatar_id' => 'integer|exists:cdn_files,id'
-            ]
-        );
-        if ($validation->fails()) {
+        try {
+            $validation = Validator::make(
+                $request->all(),
+                [
+                    'firstname' => 'max:255',
+                    'lastname' => 'max:255',
+                    'login' => "max:255|unique:users,login,{$id}",
+                    'email' => "email|unique:users,email,{$id}",
+                    'need_change_password' => 'boolean',
+                    'enabled' => 'boolean',
+                    'avatar_id' => 'integer|exists:cdn_files,id'
+                ]
+            );
+            if ($validation->fails()) {
 
-            throw new ValidationException($validation->errors()->all());
+                throw new ValidationException($validation->errors()->all());
+            }
+
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->validator);
         }
-
-     } catch (ValidationException $e) {
-         return $this->respondFail422x($e->validator);
-     }
         $user->update($request->all());
         return $this->respond($this->usersTransformer->transform($user->toArray()));
     }
@@ -144,7 +145,9 @@ class UserController extends CmsController
     {
         $user = User::find($id);
         if ($user) {
-            return $this->respond(['success' => $user->delete()]);
+            $user->is_deleted = true;
+            $user->deleted_at = Carbon::now();
+            return $this->respond(['success' => $user->save()]);
         }
 
         return $this->respondNotFound('User is not found');
