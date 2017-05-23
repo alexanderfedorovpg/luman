@@ -76,7 +76,7 @@ class NewsListEditorController extends CmsController
                     $params = ['editor_id' => null, 'moderation' => 0, 'delete' => 0, 'is_publish' => $isPublish];
                     break;
                 default :
-
+                    $params = false;
             }
 
             if (!$params) {
