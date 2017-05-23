@@ -53,7 +53,7 @@ class NewsListTransformer extends Transformer
 
 
         if ($news['image_main']) {
-            $imageMain = CdnFile::where('id', '=', $news['image_main'])->select(['url', 'id'])->first();
+            $imageMain = CdnFile::where('id', '=', $news['image_main'])->select()->first();
             $transform['image_main'] = [
                 'url' => $imageMain->url,
                 'id' =>  $imageMain->id,
@@ -67,7 +67,7 @@ class NewsListTransformer extends Transformer
 
 
         if ($news['image_preview']) {
-            $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select(['url', 'id'])->first();
+            $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select()->first();
             $transform['image_preview'] = [
                 'url' => $imagePreview->url,
                 'id' =>  $imagePreview->id,

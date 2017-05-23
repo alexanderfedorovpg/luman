@@ -49,13 +49,14 @@ class NewsEditorTransformer extends Transformer
 
 
         if ($news['image_main']) {
-            $imageMain = CdnFile::where('id', '=', $news['image_main'])->select(['url', 'id'])->first();
+            $imageMain = CdnFile::where('id', '=', $news['image_main'])->select()->first();
+
             $transform['image_main'] = [
                 'url' => $imageMain->url,
                 'id' =>  $imageMain->id,
                 'object_source' => $imageMain->object_source,
-                'object_author' => $imageMain->object_source,
-                'object_name' => $imageMain->object_source,
+                'object_author' => $imageMain->object_author,
+                'object_name' => $imageMain->object_name,
             ];
         } else {
             $transform['image_main'] = null;
@@ -63,13 +64,14 @@ class NewsEditorTransformer extends Transformer
 
 
         if ($news['image_preview']) {
-            $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select(['url', 'id'])->first();
+            $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select()->first();
+
             $transform['image_preview'] = [
                 'url' => $imagePreview->url,
                 'id' =>  $imagePreview->id,
                 'object_source' => $imagePreview->object_source,
-                'object_author' => $imagePreview->object_source,
-                'object_name' => $imagePreview->object_source,
+                'object_author' => $imagePreview->object_author,
+                'object_name' => $imagePreview->object_name,
             ];
         } else {
             $transform['image_preview'] = null;
