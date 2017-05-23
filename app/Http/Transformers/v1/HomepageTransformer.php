@@ -51,7 +51,7 @@ class HomepageTransformer extends Transformer
 
 
             if ($arrNews['image_main']) {
-                $imageMain = CdnFile::where('id', '=', $arrNews['image_main'])->select(['url', 'id'])->first();
+                $imageMain = CdnFile::where('id', '=', $arrNews['image_main'])->select()->first();
                 $arrNews['image_main'] = [
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
@@ -65,7 +65,7 @@ class HomepageTransformer extends Transformer
 
 
             if ($arrNews['image_preview']) {
-                $imagePreview = CdnFile::where('id', '=', $arrNews['image_preview'])->select(['url', 'id'])->first();
+                $imagePreview = CdnFile::where('id', '=', $arrNews['image_preview'])->select()->first();
                 $arrNews['image_preview'] = [
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,
@@ -110,7 +110,7 @@ class HomepageTransformer extends Transformer
 
 
             if ($infoNoise['image_main']) {
-                $imageMain = CdnFile::where('id', '=', $infoNoise['image_main'])->select(['url', 'id'])->first();
+                $imageMain = CdnFile::where('id', '=', $infoNoise['image_main'])->select()->first();
                 $news['image_main'] = [
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
@@ -124,7 +124,7 @@ class HomepageTransformer extends Transformer
 
 
             if ($infoNoise['image_preview']) {
-                $imagePreview = CdnFile::where('id', '=', $infoNoise['image_preview'])->select(['url', 'id'])->first();
+                $imagePreview = CdnFile::where('id', '=', $infoNoise['image_preview'])->select()->first();
                 $news['image_preview'] = [
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,
@@ -163,7 +163,7 @@ class HomepageTransformer extends Transformer
 
 
             if ($war['image_main']) {
-                $imageMain = CdnFile::where('id', '=', $war['image_main'])->select(['url', 'id'])->first();
+                $imageMain = CdnFile::where('id', '=', $war['image_main'])->select()->first();
                 $news['image_main'] = [
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
@@ -177,7 +177,7 @@ class HomepageTransformer extends Transformer
 
 
             if ($war['image_preview']) {
-                $imagePreview = CdnFile::where('id', '=', $war['image_preview'])->select(['url', 'id'])->first();
+                $imagePreview = CdnFile::where('id', '=', $war['image_preview'])->select()->first();
                 $news['image_preview'] = [
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,

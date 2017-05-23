@@ -263,7 +263,6 @@ class Content extends Component {
         const newError = {
             ...error,
             title: !data.title || data.title.length > titleMax,
-            subtitle: !data.subtitle || data.subtitle.length > subtitleMax,
         };
 
         if (Object.values(newError).reduce((a, b) => a || b, false)) {
