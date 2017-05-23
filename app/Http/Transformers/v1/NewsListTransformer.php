@@ -131,6 +131,7 @@ class NewsListTransformer extends Transformer
      */
     public function transformOneNews($news, $comments)
     {
+
         $transform = $this->transform($news);
         $transform['note'] = $news['note'];
         $transform['body'] = $news['body'];
