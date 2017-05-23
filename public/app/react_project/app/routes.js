@@ -158,7 +158,8 @@ export default function createRoutes(store) {
 
                 importModules.then(sagas => {
                     this.loadedSagas = injectSagas(
-                        sagas.reduce((acc, item) => [...acc, ...item.default], []));
+                        sagas.reduce((acc, item) => [...acc, ...item.default], [])
+                    );
                     callback();
                 });
 
@@ -316,16 +317,15 @@ export default function createRoutes(store) {
 
                 const importModules = Promise.all([
                     import('containers/EditorPage/sagas'),
+                    import('containers/ImageGallery/sagas'),
                     import('containers/NewslistPage/sagas'),
                     import('containers/Chat/sagas'),
                 ]);
 
-                importModules.then(([editorSagas, newslistSagas, chatSagas]) => {
-                    this.loadedSagas = injectSagas([
-                        ...editorSagas.default,
-                        ...newslistSagas.default,
-                        ...chatSagas.default,
-                    ]);
+                importModules.then(sagas => {
+                    this.loadedSagas = injectSagas(
+                        sagas.reduce((acc, item) => [...acc, ...item.default], [])
+                    );
                     callback();
                 });
 
@@ -340,14 +340,22 @@ export default function createRoutes(store) {
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/Chat/reducer'),
+                    import('containers/ImageGallery/reducer'),
                     import('containers/EditorPage/reducer'),
                     import('containers/EditorPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([chatReducer, editorReducer, component]) => {
+                importModules.then((result) => {
+                    const [
+                        chatReducer,
+                        imageGalleryReducer,
+                        editorReducer,
+                        component
+                    ] = result
                     injectReducer('chat', chatReducer.default);
+                    injectReducer('imageGallery', imageGalleryReducer.default);
                     injectReducer('editorPage', editorReducer.default);
 
                     renderRoute(component);

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import randomString from 'random-string'
 import { Link } from 'react-router'
 import { FormattedTime, FormattedDate, injectIntl } from 'react-intl'
 
@@ -12,7 +11,7 @@ import Button from 'components/Button'
 import { rem, ifProp } from 'utils/style'
 import { font, padding } from 'constants/style'
 
-const secretClassName = randomString()
+const secretClassName = 'ready__item'
 
 const Root = styled.div`
     position: relative;

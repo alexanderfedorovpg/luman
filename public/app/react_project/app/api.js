@@ -137,7 +137,7 @@ export const finishArticle = (data) => {
             '/newseditor/edit',
             qs.stringify({
                 ...data,
-                action: 'edit',
+                moderation: 1,
             }),
             {
                 headers: {
@@ -200,18 +200,6 @@ export const acceptArticle = (id) => axios.post('/newseditor/work', {
     id,
 });
 
-export const uploadFile = (file) => {
-    const formData = new FormData();
-
-    formData.append('file', file);
-
-    return axios.post('/file', formData, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    });
-};
-
 export const getReadyNews = (params) => axios.get('/newseditor/moderated', {
     params: {
         orderBy: 'id',
@@ -221,6 +209,35 @@ export const getReadyNews = (params) => axios.get('/newseditor/moderated', {
 });
 
 export const publishArticle = (id) => axios.put(`/newseditor/publish/${id}`);
+
+// =============================================================================
+// File API
+// =============================================================================
+
+export const uploadFile = (file, data = {}) => {
+    const formData = new FormData();
+
+    formData.append('file', file);
+    formData.append('object_name', data.object_name);
+    formData.append('object_author', data.object_author);
+    formData.append('object_source', data.object_source);
+
+    return data.id
+
+        ? axios.put('/file', formData, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })
+
+        : axios.post('/file', formData, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })
+};
+
+export const getFiles = () => axios.get(`/file`);
 
 // =============================================================================
 // Chat API

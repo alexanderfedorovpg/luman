@@ -64,19 +64,19 @@ export function* delegateArticle({ payload }) {
     }
 }
 
-function* uploadFile(file) {
+function* uploadFile(file, info) {
     if (!file || Number.isInteger(file)) {
         return file;
     }
 
-    const { data: { file: { id } } } = yield call(api.uploadFile, file);
+    const { data: { file: { id } } } = yield call(api.uploadFile, file, info);
     return id;
 }
 
 function* uploadFiles(data) {
     const result = {};
     const files = ['image_main', 'image_preview', 'video_stream', 'video_stream_preview'];
-    const responses = yield files.map((file) => call(uploadFile, data[file]));
+    const responses = yield files.map((file) => call(uploadFile, data[file], data[`${file}_info`]));
 
     files.forEach((file, ind) => { result[file] = responses[ind]; });
 
@@ -107,6 +107,7 @@ export function* finishArticle({ payload }) {
 
 export function* publishArticle({ payload }) {
     try {
+    console.log(payload)
         yield put(showPreloader());
         const uploadedFiles = yield call(uploadFiles, payload);
         const data = { ...payload, ...uploadedFiles };
@@ -121,6 +122,7 @@ export function* publishArticle({ payload }) {
 
         // yield put(push(`/newslist`))
     } catch (err) {
+        console.log(err)
         yield put(hidePreloader());
         toastr.error('Что-то пошло не так...');
         yield put(articlePublishError(err));
