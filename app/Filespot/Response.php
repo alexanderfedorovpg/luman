@@ -95,5 +95,7 @@ class Response
     {
         return json_decode($this->response);
     }
-
+    public function toArray() {
+        return json_decode( $this->response, true);
+    }
 }
