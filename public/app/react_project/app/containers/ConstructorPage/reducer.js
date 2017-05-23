@@ -99,6 +99,14 @@ function constructorPageReducer(state = initialState, action) {
                         action.payload.before
                     )
                     ::normalizeRating(action.payload.type)
+                    .updateIn(['news', 'data'], value => {
+                        if (action.payload.type !== 'broadcast') {
+                            return value.filter(value => value.get('id') !== action.payload.item.id);
+                        } else {
+                            return value
+                        }
+                    });
+
             }
 
             return state
