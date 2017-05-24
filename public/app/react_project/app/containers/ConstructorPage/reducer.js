@@ -12,20 +12,17 @@ import {
     CHOOSE_CATEGORY,
     REMOVE_FROM_MAIN,
     CANCEL_CHANGES,
-    REMOVE_ITEM_FROM_LIST,
 
-    LOAD_NEWS,
-    LOAD_NEWS_FAILURE,
-    LOAD_NEWS_SUCCESS,
+    LOAD_ITEMS,
+    LOAD_ITEMS_FAILURE,
+    LOAD_ITEMS_SUCCESS,
+
+    REMOVE_FROM_CONSTRUCTOR_SUCCESS,
 
     SET_FILTER,
 
     SET_OPTION,
 } from './constants';
-
-import {
-    LOAD_PROGRAMS_SUCCESS,
-} from 'containers/ProgramsPage/constants';
 
 const initialState = fromJS({
     filters: {
@@ -44,7 +41,7 @@ const initialState = fromJS({
         news: [],
         records: [],
     },
-    news: {
+    items: {
         search: {},
         loading: false,
         data: [],
@@ -80,14 +77,16 @@ function constructorPageReducer(state = initialState, action) {
                     fromJS(action.payload.reduce((acc, v) => ({ ...acc, [v.id]: v }), {}))
                 );
 
-        case LOAD_NEWS:
-            return state.setIn(['news', 'loading'], true);
+        case LOAD_ITEMS:
+            return state
+                .setIn(['items', 'data'], List())
+                .setIn(['items', 'loading'], true);
 
-        case LOAD_NEWS_SUCCESS:
-            return state.setIn(['news', 'data'], fromJS(action.payload));
+        case LOAD_ITEMS_SUCCESS:
+            return state.setIn(['items', 'data'], fromJS(action.payload));
 
-        case LOAD_NEWS_FAILURE:
-            return state.setIn(['news', 'loading'], false);
+        case LOAD_ITEMS_FAILURE:
+            return state.setIn(['items', 'loading'], false);
 
         case ITEM_TO_MAIN:
             // Если выбрана категория - добавляем итем,
@@ -104,19 +103,13 @@ function constructorPageReducer(state = initialState, action) {
                     action.payload.before
                 )
                 ::normalizeRating(action.payload.type)
-                .updateIn(['news', 'data'], value => {
+                .updateIn(['items', 'data'], value => {
                     if (action.payload.type !== 'broadcast') {
                         return value.filter(value => value.get('id') !== action.payload.item.id);
                     } else {
                         return value
                     }
                 });
-
-        case REMOVE_ITEM_FROM_LIST:
-            return state.updateIn(
-                ['hidden', action.payload.type],
-                (items) => items.push(action.payload.id)
-            );
 
         case CHOOSE_CATEGORY:
             // если выбран итем, то добавляем его в категорию
@@ -144,6 +137,12 @@ function constructorPageReducer(state = initialState, action) {
                         value.getIn(['data', 'id']) == action.payload.item.id)
                     )
                 )
+            );
+
+        case REMOVE_FROM_CONSTRUCTOR_SUCCESS:
+            return state.updateIn(
+                ['items', 'data'],
+                (items) => items.filter((item) => item.get('id') !== action.payload.id)
             );
 
         case CANCEL_CHANGES:
