@@ -149,9 +149,10 @@ export const hideInfoModal = () => ({
     type: HIDE_INFO,
 });
 
-export function loadPrograms() {
+export function loadPrograms(params) {
     return {
         type: LOAD_PROGRAMS,
+        payload: { params }
     };
 }
 
