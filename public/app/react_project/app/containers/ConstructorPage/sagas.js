@@ -130,6 +130,7 @@ export function* getItems({ payload: { type } }) {
         } else {
             const params = {
                 fullVideo: false,
+                constructor: true,
                 search: filters.search,
             };
             const response = yield call(api.getRecords, params);

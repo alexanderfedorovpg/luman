@@ -10,7 +10,6 @@ import RadioButton from './RadioButton';
 import Datepicker from './Datepicker';
 import Dropzone from './Dropzone';
 import ImageLoader from './ImageLoader';
-import Rich from './Rich';
 
 export {
     Select,
@@ -22,7 +21,6 @@ export {
     Datepicker,
     Dropzone,
     ImageLoader,
-    Rich,
 };
 
 export const Horizontal = styled.div`

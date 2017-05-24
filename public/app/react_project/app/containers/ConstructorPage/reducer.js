@@ -46,6 +46,9 @@ const initialState = fromJS({
         loading: false,
         data: [],
     },
+    initialItems: {
+        data: []
+    },
     categories: {
         ids: [],
         data: {},
@@ -83,7 +86,8 @@ function constructorPageReducer(state = initialState, action) {
                 .setIn(['items', 'loading'], true);
 
         case LOAD_ITEMS_SUCCESS:
-            return state.setIn(['items', 'data'], fromJS(action.payload));
+            return state.setIn(['items', 'data'], fromJS(action.payload))
+                .setIn(['initialItems', 'data'], fromJS(action.payload));
 
         case LOAD_ITEMS_FAILURE:
             return state.setIn(['items', 'loading'], false);
@@ -104,11 +108,7 @@ function constructorPageReducer(state = initialState, action) {
                 )
                 ::normalizeRating(action.payload.type)
                 .updateIn(['items', 'data'], value => {
-                    if (action.payload.type !== 'broadcast') {
-                        return value.filter(value => value.get('id') !== action.payload.item.id);
-                    } else {
-                        return value
-                    }
+                    return value.filter(value => value.get('id') !== action.payload.item.id);
                 });
 
         case CHOOSE_CATEGORY:
@@ -146,7 +146,8 @@ function constructorPageReducer(state = initialState, action) {
             );
 
         case CANCEL_CHANGES:
-            return state.setIn(['temporary', 'home'], state.getIn(['home', 'data']));
+            return state.setIn(['temporary', 'home'], state.getIn(['home', 'data']))
+                .setIn(['items', 'data'], state.getIn(['initialItems', 'data']));
 
         case LOCATION_CHANGE:
             return state.setIn(['temporary', 'item'], null);
