@@ -274,8 +274,9 @@ class Content extends Component {
         }
 
         if (retFlag) {
-            ;
-        }        else {
+            return false;
+        }
+        else {
             return true;
         }
     }

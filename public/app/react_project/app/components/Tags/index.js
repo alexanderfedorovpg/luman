@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Input } from '../Form';
-
 import { ifProp, rem } from './../../utils/style';
 import { font } from './../../constants/style';
 
@@ -24,7 +22,7 @@ const Item = styled.div`
     }
 `;
 
-const CustomInput = styled(Input)`
+const CustomInput = styled.input`
     display: none
 `;
 

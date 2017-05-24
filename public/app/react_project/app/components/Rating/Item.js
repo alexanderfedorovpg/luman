@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { Input } from 'components/Form'
-
 import { ifProp, rem } from 'utils/style'
 import { font } from 'constants/style'
 
@@ -43,7 +41,7 @@ const Root = styled.div`
     }
 `
 
-const CustomInput = styled(Input)`
+const CustomInput = styled.input`
     display: none
 `
 

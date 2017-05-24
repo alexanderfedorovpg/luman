@@ -90,7 +90,7 @@ class Header extends Component {
         const noiseCount = (data.noise||[]).length
         const broadcastCount = (data.broadcast||[]).length
 
-        const total = warCount + newsCount + noiseCount + broadcastCount
+        const total = (war ? warCount : 0) + newsCount + noiseCount + broadcastCount
 
         return (
             <Root>

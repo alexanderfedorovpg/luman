@@ -9,13 +9,13 @@ import {
     FileInput,
     Select,
     Datepicker,
-    Rich,
     Textarea,
     Dropzone,
     ImageLoader,
     RadioButton,
     Checkbox,
 } from './';
+import Rich from './Rich'
 
 export const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
     <div>
