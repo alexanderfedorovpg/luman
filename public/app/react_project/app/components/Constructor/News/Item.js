@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import styled from 'styled-components'
 import uniqBy from 'lodash/uniqBy'
+import { font, padding } from 'constants/style'
+
+import Rating from 'components/Rating/Item'
+import IconTip from 'components/IconTip'
 
 import DragSourceWrapper from '../DragSource'
-import Rating from 'components/Rating/Item'
-
-import { font, padding } from 'constants/style'
 
 const CustomRating = styled(Rating) `
     margin-right: .4rem;
@@ -50,6 +51,37 @@ const Attachment = styled.p`
     text-transform: uppercase;
 `
 
+const Remove = styled(IconTip)`
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    z-index: 2;
+
+    display: none;
+
+    cursor: pointer;
+    transform: translateY(-50%);
+
+    .ra-tooltip {
+        z-index: 5;
+        padding: 4px 9px;
+        color: #666;
+        font-family: ${font.opensans};
+        font-size: 11px;
+        font-weight: 400;
+        box-shadow: 1px 1px 5px rgba(0,0,0,.28);
+        background-color: #fff;
+    }
+    .ra-tooltip-message:after {
+        display: none
+    }
+
+    p {
+        color: inherit;
+        padding: 0;
+    }
+`
+
 class Item extends Component {
     constructor(props) {
         super(props);
@@ -60,7 +92,7 @@ class Item extends Component {
     }
 
     render() {
-        const { data, toMain } = this.props;
+        const { data, toMain, onRemove } = this.props;
 
         return (
             <DragSourceWrapper data={data} toMain={toMain}>
@@ -82,6 +114,16 @@ class Item extends Component {
                 <Attachment>
                     1 Фото + 1 Видео
                 </Attachment>
+                <Remove
+                    message="Убрать из списка"
+                    eventType="hover"
+                    direction="bottom"
+                    icon="delete"
+                    onClick={e => {
+                        onRemove(data)
+                        e.stopPropagation()
+                    }}
+                />
             </DragSourceWrapper>
         )
     }

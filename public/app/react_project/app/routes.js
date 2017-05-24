@@ -104,13 +104,11 @@ export default function createRoutes(store) {
 
                 const importModules = Promise.all([
                     import('containers/ConstructorPage/sagas'),
-                    import('containers/ProgramsPage/sagas'),
                 ]);
 
-                importModules.then(([constructorSagas, programSagas]) => {
+                importModules.then(([constructorSagas]) => {
                     this.loadedSagas = injectSagas([
                         ...constructorSagas.default,
-                        ...programSagas.default,
                     ]);
                     callback();
                 });
@@ -125,15 +123,13 @@ export default function createRoutes(store) {
             },
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    import('containers/ProgramsPage/reducer'),
                     import('containers/ConstructorPage/reducer'),
                     import('containers/ConstructorPage'),
                 ]);
 
                 const renderRoute = loadModule(cb);
 
-                importModules.then(([pReducer, cReducer, component]) => {
-                    injectReducer('programsPage', pReducer.default);
+                importModules.then(([cReducer, component]) => {
                     injectReducer('constructorPage', cReducer.default);
 
                     renderRoute(component);

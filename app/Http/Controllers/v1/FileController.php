@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Filespot\FilespotAPI;
 use App\Models\CdnFile;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -27,7 +28,7 @@ class FileController extends CmsController
     {
         try {
             $this->validate($request, [
-                'file' => 'file|required|max:262144',
+                'file' => 'file|required',
             ]);
 
             $info = [
@@ -69,6 +70,7 @@ class FileController extends CmsController
     public function get($id)
     {
         $cdnFile = CdnFile::find($id);
+
         if ($cdnFile) {
 
             return $this->respond($cdnFile->toArray());

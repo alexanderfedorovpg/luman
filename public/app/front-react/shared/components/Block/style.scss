@@ -7,7 +7,7 @@
     width: rem(301);
     height: rem(245);
 
-    &::before {
+    &:not(.block-square_list)::before {
         content: '';
 
         position: absolute;
@@ -23,7 +23,7 @@
         transition: background .5s ease-out;
     }
 
-    &:hover::before {
+    &:not(.block-square_list):hover::before {
         background: rgba(0,0,0,.3);
     }
 

@@ -44,7 +44,7 @@ const makeGetSelected = () => createSelector(
         return {
             news_id: selected,
             title: target.title,
-            image_preview: target.image,
+            image_preview: target.image ? target.image.url : null,
         };
     }
 );

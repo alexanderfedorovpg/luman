@@ -130,7 +130,7 @@ export function* getRecords(action = { payload: {} }) {
 export function* postRecord({ payload }) {
     try {
         yield put(showPreloader());
-        const [uploadedVideo, uploadedFile] = [
+        const [uploadedVideo, uploadedPreview] = [
             yield call(api.uploadVideo, payload.video_url[0]),
             payload.image_preview ? yield call(api.uploadFile, payload.image_preview[0]) : null,
         ];
@@ -140,9 +140,12 @@ export function* postRecord({ payload }) {
             ...payload,
             is_full_video: type === 'FULL',
             video_url: uploadedVideo.data.url,
-            image_preview: uploadedFile ? uploadedFile.data.file.url : '',
             is_published: 0,
         };
+
+        if (uploadedPreview) {
+            data.image_preview = uploadedPreview.data.file.url;
+        }
 
         const response = yield call(api.postRecord, data);
 

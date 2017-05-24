@@ -20,6 +20,7 @@ class AirRecord extends Model
         'theses',
         'publish_date',
         'is_published',
+        'to_constructor',
     ];
 
     /**

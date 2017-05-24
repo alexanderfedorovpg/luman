@@ -35,10 +35,10 @@ export class ConstructorPage extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.loadNewslist()
         this.props.loadCategories()
-        this.props.loadPrograms()
+        this.props.loadPrograms({constructor: true})
     }
 
     render() {
@@ -94,8 +94,8 @@ const mapDispatchToProps = dispatch => ({
     loadNewslist() {
         dispatch(loadHomeNews())
     },
-    loadPrograms() {
-        dispatch(loadPrograms())
+    loadPrograms(params) {
+        dispatch(loadPrograms(params))
     },
     cancelChanges() {
         dispatch(cancelChanges())

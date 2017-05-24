@@ -3,10 +3,6 @@ import {
     LOAD_HOME_NEWS_FAILURE,
     LOAD_HOME_NEWS_SUCCESS,
 
-    LOAD_NEWS,
-    LOAD_NEWS_FAILURE,
-    LOAD_NEWS_SUCCESS,
-
     LOAD_CATEGORIES,
     LOAD_CATEGORIES_FAILURE,
     LOAD_CATEGORIES_SUCCESS,
@@ -21,6 +17,14 @@ import {
     MOVE_ITEM,
     CANCEL_CHANGES,
 
+    REMOVE_FROM_CONSTRUCTOR,
+    REMOVE_FROM_CONSTRUCTOR_SUCCESS,
+    REMOVE_FROM_CONSTRUCTOR_FAILURE,
+
+    LOAD_ITEMS,
+    LOAD_ITEMS_SUCCESS,
+    LOAD_ITEMS_FAILURE,
+
     SET_FILTER,
 
     SET_OPTION,
@@ -31,22 +35,22 @@ export const moveItem = (type, source, target) => ({
     payload: {
         type,
         source,
-        target
-    }
-})
+        target,
+    },
+});
 
 export const setOption = (name, value) => ({
     type: SET_OPTION,
     payload: {
         name,
-        value
-    }
-})
+        value,
+    },
+});
 
-export const setFilter = filters => ({
+export const setFilter = (filters) => ({
     type: SET_FILTER,
-    payload: filters
-})
+    payload: filters,
+});
 
 export const itemToMain = (item, type, category, before) => ({
     type: ITEM_TO_MAIN,
@@ -54,79 +58,95 @@ export const itemToMain = (item, type, category, before) => ({
         item,
         type,
         category,
-        before
-    }
-})
+        before,
+    },
+});
 
 export const removeFromMain = (item, type) => ({
     type: REMOVE_FROM_MAIN,
     payload: {
         item,
-        type
-    }
-})
+        type,
+    },
+});
 
-export const chooseCategory = id => ({
+export const chooseCategory = (id) => ({
     type: CHOOSE_CATEGORY,
-    payload: id
-})
+    payload: id,
+});
 
 export const cancelChanges = () => ({
-    type: CANCEL_CHANGES
-})
+    type: CANCEL_CHANGES,
+});
 
 export const loadHomeNews = () => ({
-    type: LOAD_HOME_NEWS
-})
+    type: LOAD_HOME_NEWS,
+});
 
-export const homeNewsLoaded = payload => ({
+export const homeNewsLoaded = (payload) => ({
     type: LOAD_HOME_NEWS_SUCCESS,
-    payload
-})
+    payload,
+});
 
-export const homeNewsLoadingError = error => ({
+export const homeNewsLoadingError = (error) => ({
     type: LOAD_HOME_NEWS_FAILURE,
-    error
-})
+    error,
+});
 
 export const saveChanges = () => ({
-    type: SAVE_CHANGES
-})
+    type: SAVE_CHANGES,
+});
 
-export const changesSaved = payload => ({
+export const changesSaved = (payload) => ({
     type: SAVE_CHANGES_SUCCESS,
-    payload
-})
+    payload,
+});
 
-export const changesSavingError = error => ({
+export const changesSavingError = (error) => ({
     type: SAVE_CHANGES_FAILURE,
-    error
-})
-
-export const loadNews = () => ({
-    type: LOAD_NEWS
-})
-
-export const newsLoaded = payload => ({
-    type: LOAD_NEWS_SUCCESS,
-    payload
-})
-
-export const newsLoadingError = error => ({
-    type: LOAD_NEWS_FAILURE,
-    error
-})
+    error,
+});
 
 export const loadCategories = () => ({
-    type: LOAD_CATEGORIES
-})
+    type: LOAD_CATEGORIES,
+});
 
-export const categoriesLoaded = payload => ({
+export const categoriesLoaded = (payload) => ({
     type: LOAD_CATEGORIES_SUCCESS,
-    payload
-})
+    payload,
+});
 
-export const categoriesLoadingError = error => ({
+export const categoriesLoadingError = (error) => ({
     type: LOAD_CATEGORIES_FAILURE,
-    error
-})
+    error,
+});
+
+export const removeFromConstructor = (id, type) => ({
+    type: REMOVE_FROM_CONSTRUCTOR,
+    payload: { id, type },
+});
+
+export const successRemoveFromConstructor = (id, type) => ({
+    type: REMOVE_FROM_CONSTRUCTOR_SUCCESS,
+    payload: { id, type },
+});
+
+export const failureRemoveFromConstructor = (error) => ({
+    type: REMOVE_FROM_CONSTRUCTOR_FAILURE,
+    error,
+});
+
+export const loadItems = (type) => ({
+    type: LOAD_ITEMS,
+    payload: { type },
+});
+
+export const successLoadItems = (items) => ({
+    type: LOAD_ITEMS_SUCCESS,
+    payload: items,
+});
+
+export const failureLoadItems = (error) => ({
+    type: LOAD_ITEMS_FAILURE,
+    error,
+});

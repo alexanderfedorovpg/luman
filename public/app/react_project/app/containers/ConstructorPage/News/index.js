@@ -1,17 +1,18 @@
 import React, { PureComponent, PropTypes } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { Wrap, Left, Right } from 'components/Constructor/Content'
-import NewsComponent from 'components/Constructor/News'
-import Tabs from 'components/Constructor/Tabs'
-import Collapse from '../Collapse'
+import { Wrap, Left, Right } from 'components/Constructor/Content';
+import NewsComponent from 'components/Constructor/News';
+import Tabs from 'components/Constructor/Tabs';
+import Collapse from '../Collapse';
 
 import {
-    loadNews,
+    loadItems,
     itemToMain,
     removeFromMain,
-} from '../actions'
+    removeFromConstructor,
+} from '../actions';
 
 import {
     selectNews,
@@ -19,29 +20,24 @@ import {
 } from '../selectors';
 
 import {
-    selectFilters
-} from '../selectors'
+    selectFilters,
+} from '../selectors';
 
 const CollapseWrapp = styled.div`
     position: fixed;
     top: 121px;
     bottom: 0px;
     overflow-y: auto;
-`
+`;
 
 export class News extends PureComponent {
-
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        this.props.loadNewslist()
+        this.props.loadNewslist();
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.filters.search !== nextProps.filters.search) {
-            this.props.loadNewslist()
+            this.props.loadNewslist();
         }
     }
 
@@ -50,31 +46,37 @@ export class News extends PureComponent {
             news,
             categories,
             removeFromMain,
+            removeFromConstructor,
             toMain,
-            location
-        } = this.props
-        const type = location.pathname.split('/').pop()
-        const filteredCategories = categories.filter(v => (
+            location,
+        } = this.props;
+        const type = location.pathname.split('/').pop();
+        const filteredCategories = categories.filter((v) => (
             type == 'news'
                 ? v.mode == null
                 : v.mode == type
-        ))
+        ));
 
         return (
             <Wrap>
                 <Left>
                     <Tabs />
-                    <NewsComponent data={news} toMain={toMain.bind(this, type)} />
+                    <NewsComponent
+                        data={news}
+                        toMain={toMain.bind(this, type)}
+                        onRemove={removeFromConstructor}
+                    />
                 </Left>
                 <Right>
                     <Collapse
                         type={type}
-                        showTitle={type=='war'}
+                        showTitle={type == 'war'}
                         onRemove={removeFromMain.bind(this, type)}
-                        categories={filteredCategories} />
+                        categories={filteredCategories}
+                    />
                 </Right>
             </Wrap>
-        )
+        );
     }
 
 }
@@ -82,22 +84,25 @@ export class News extends PureComponent {
 News.propTypes = {
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     news: selectNews(state),
     filters: selectFilters(state),
     categories: selectCategories(state),
-})
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     loadNewslist() {
-        dispatch(loadNews())
+        dispatch(loadItems('news'));
     },
     toMain(type, item, category, before) {
-        dispatch(itemToMain(item, type, category, before))
+        dispatch(itemToMain(item, type, category, before));
     },
     removeFromMain(type, item) {
-        dispatch(removeFromMain(item, type))
+        dispatch(removeFromMain(item, type));
     },
-})
+    removeFromConstructor(data) {
+        dispatch(removeFromConstructor(data.id, 'news'));
+    },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

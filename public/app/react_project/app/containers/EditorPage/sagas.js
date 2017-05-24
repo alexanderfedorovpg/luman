@@ -85,7 +85,7 @@ export function* finishArticle({ payload }) {
         const uploadedFiles = yield call(uploadFiles, payload);
         const data = { ...payload, ...uploadedFiles };
 
-        data.uri = 'rtvi.com/' + translit(data.title);
+        data.uri = `rtvi.com/${data.id}-${translit(data.title)}`;
 
         yield call(api.finishArticle, data);
 
@@ -108,6 +108,9 @@ export function* publishArticle({ payload }) {
         yield put(showPreloader());
         const uploadedFiles = yield call(uploadFiles, payload);
         const data = { ...payload, ...uploadedFiles };
+
+        data.uri = `rtvi.com/${data.id}-${translit(data.title)}`;
+
         const { data: response } = yield call(api.finishArticle, data);
 
         yield call(api.publishArticle, response.id);
@@ -163,6 +166,10 @@ function translit(value) {
 
     // Массив для транслитерации
     let transl = {
+        А: 'A', Б: 'B', В: 'V', Г: 'G', Д: 'D', Е: 'E', Ё: 'E', Ж: 'ZH',
+        З: 'Z', И: 'I', Й: 'J', К: 'K', Л: 'L', М: 'M', Н: 'N',
+        О: 'O', П: 'P', Р: 'R', С: 'S', Т: 'T', У: 'U', Ф: 'F', Х: 'H',
+        Ц: 'C', Ч: 'CH', Ш: 'SH', Щ: 'SH', Ъ: space, Ы: 'Y', Ь: space, Э: 'E', Ю: 'YU', Я: 'YA',
         а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh',
         з: 'z', и: 'i', й: 'j', к: 'k', л: 'l', м: 'm', н: 'n',
         о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h',

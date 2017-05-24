@@ -2,38 +2,34 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 
-import { Wrap, Left, Right } from 'components/Constructor/Content'
-import News from 'components/Constructor/News'
-import Tabs from 'components/Constructor/Tabs'
-import Collapse from '../Collapse'
+import { Wrap, Left, Right } from 'components/Constructor/Content';
+import News from 'components/Constructor/News';
+import Tabs from 'components/Constructor/Tabs';
+import Collapse from '../Collapse';
 
 import {
-    loadNews,
+    loadItems,
     itemToMain,
     removeFromMain,
-} from './../actions'
+    removeFromConstructor,
+} from './../actions';
 
 import {
-    selectNoise
+    selectNoise,
 } from './../selectors';
 
 import {
-    selectFilters
-} from '../selectors'
+    selectFilters,
+} from '../selectors';
 
 export class Noise extends PureComponent {
-
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        this.props.loadNewslist()
+        this.props.loadNewslist();
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.filters.search !== nextProps.filters.search) {
-            this.props.loadNewslist()
+            this.props.loadNewslist();
         }
     }
 
@@ -41,28 +37,34 @@ export class Noise extends PureComponent {
         let {
             news,
             toMain,
-            removeFromMain
-        } = this.props
+            removeFromMain,
+            removeFromConstructor,
+        } = this.props;
 
         const categories = [{
             id: 1,
-            name: 'Инфошум'
-        }]
+            name: 'Инфошум',
+        }];
 
         return (
             <Wrap>
                 <Left>
                     <Tabs />
-                    <News data={news} toMain={toMain} />
+                    <News
+                        data={news}
+                        toMain={toMain}
+                        onRemove={removeFromConstructor}
+                    />
                 </Left>
                 <Right>
                     <Collapse
                         type={'noise'}
                         onRemove={removeFromMain}
-                        categories={categories} />
+                        categories={categories}
+                    />
                 </Right>
             </Wrap>
-        )
+        );
     }
 
 }
@@ -70,21 +72,24 @@ export class Noise extends PureComponent {
 Noise.propTypes = {
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     news: selectNoise(state),
     filters: selectFilters(state),
-})
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     loadNewslist() {
-        dispatch(loadNews())
+        dispatch(loadItems('news'));
     },
     toMain(item, category, before) {
-        dispatch(itemToMain(item, 'noise', category, before))
+        dispatch(itemToMain(item, 'noise', category, before));
     },
     removeFromMain(item) {
-        dispatch(removeFromMain(item, 'noise'))
+        dispatch(removeFromMain(item, 'noise'));
     },
-})
+    removeFromConstructor(data) {
+        dispatch(removeFromConstructor(data.id, 'news'));
+    },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Noise);Noise
+export default connect(mapStateToProps, mapDispatchToProps)(Noise);Noise;

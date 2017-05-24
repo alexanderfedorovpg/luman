@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedTime, FormattedDate } from 'react-intl';
+import { FormattedDate } from 'react-intl';
 import HashTags from 'components/HashTags';
+
 import {
     Wrapper,
     ImgWrapper,
-    Img,
+    StyledImg,
     ImgOverlay,
     PlayBtn,
     Info,
     RecordDate,
-    Time,
     Program,
     Title,
     Buttons,
@@ -33,7 +33,7 @@ const Record = ({
     return (
         <Wrapper active={active}>
             <ImgWrapper onClick={onPreviewClick} href="#">
-                <Img src={preview} alt="" role="presentation" />
+                <StyledImg src={preview} alt="" role="presentation" />
                 <ImgOverlay className="record-img-overlay">
                     <PlayBtn />
                 </ImgOverlay>

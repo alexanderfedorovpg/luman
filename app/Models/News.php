@@ -26,7 +26,7 @@ class News extends Model
         'video_stream',
         'body',
         'keywords',
-
+        'to_constructor',
         'editor_id',
         'image_main',
         'image_preview',

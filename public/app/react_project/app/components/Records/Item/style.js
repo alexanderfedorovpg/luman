@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { rem, ifProp } from 'utils/style';
 import { YoutubePlayBtn } from 'components/Icon/svg';
 import TypedBtn from 'components/Button/TypedBtn';
+import Img from 'components/Img';
 
 export const activeState = css`
     background-color: #f3f3f3;
@@ -67,7 +68,7 @@ export const ImgWrapper = styled.a`
     }
 `;
 
-export const Img = styled.img`
+export const StyledImg = styled(Img)`
     max-width: 100%;
 
     @supports (object-fit: cover) {
@@ -116,14 +117,6 @@ export const RecordDate = styled.time`
     font-weight: 600;
     color: #666;
     letter-spacing: -.01rem;
-`;
-
-export const Time = styled.span`
-    display: inline-block;
-    margin-left: .2rem;
-
-    font-size: .8rem;
-    color: #999;
 `;
 
 export const Program = styled.a`

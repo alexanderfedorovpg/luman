@@ -295,7 +295,7 @@ class Content extends Component {
             id: article.id,
             top: data.top,
             title: data.title.slice(0, titleMax),
-            sub_title: data.subtitle.slice(0, subtitleMax),
+            sub_title: data.subtitle,
             editor_id: data.editor,
             rubrics: r,
             keywords: data.keywords.trim().replace(/ +/g, ','),
@@ -527,7 +527,7 @@ class Content extends Component {
                                 error={this.state.error.subtitle}
                                 onChange={(e) => {
                                     this.changeHandlerTarget('subtitle')(e);
-                                    this.setError('subtitle', !e.target.value || e.target.value.length > subtitleMax);
+                                    this.setError('subtitle', !e.target.value);
                                 }}
                                 block
                             />
