@@ -20,6 +20,11 @@ export const REMOVE_FROM_CONSTRUCTOR = 'app/ConstructorPage/REMOVE_FROM_CONSTRUC
 export const REMOVE_FROM_CONSTRUCTOR_SUCCESS = 'app/ConstructorPage/REMOVE_FROM_CONSTRUCTOR_SUCCESS';
 export const REMOVE_FROM_CONSTRUCTOR_FAILURE = 'app/ConstructorPage/REMOVE_FROM_CONSTRUCTOR_FAILURE';
 
+export const LOAD_RECORD = 'app/ProgramsPage/LOAD_RECORD';
+export const PENDING_RECORD = 'app/ProgramsPage/PENDING_RECORD';
+export const LOAD_RECORD_SUCCESS = 'app/ProgramsPage/LOAD_RECORD_SUCCESS';
+export const LOAD_RECORD_FAILURE = 'app/ProgramsPage/LOAD_RECORD_FAILURE';
+
 export const LOAD_ITEMS = 'app/ConstructorPage/LOAD_ITEMS';
 export const LOAD_ITEMS_SUCCESS = 'app/ConstructorPage/LOAD_ITEMS_SUCCESS';
 export const LOAD_ITEMS_FAILURE = 'app/ConstructorPage/LOAD_ITEMS_FAILURE';
