@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 import {
     selectNoise,
@@ -10,10 +10,10 @@ import {
     selectTopData,
     selectTopPagination,
     selectTopRubric,
-    makeSelectHomeNewsByCategory
-} from 'selectors/news'
-import { selectRubrics } from 'selectors/rubrics'
-import { selectBroadcast } from 'selectors/broadcast'
+    makeSelectHomeNewsByCategory,
+} from 'selectors/news';
+import { selectRubrics } from 'selectors/rubrics';
+import { selectBroadcast } from 'selectors/broadcast';
 
 import {
     fetchTop,
@@ -21,38 +21,36 @@ import {
     fetchMoreTop,
     fetchNoise,
     fetchRelated,
-    setTopRubric
-} from 'actions/news'
-import { fetch as fetchRecords } from 'actions/broadcast'
+    setTopRubric,
+} from 'actions/news';
+import { fetch as fetchRecords } from 'actions/broadcast';
 
-import Detail from 'components/NewsDetail'
-import News from 'components/News/Page'
+import Detail from 'components/NewsDetail';
+import News from 'components/News/Page';
 
 class NewsPage extends PureComponent {
 
     constructor(props) {
         super(props);
-
     }
 
     componentDidMount() {
-        const { match } = this.props
+        const { match } = this.props;
 
-        this.props.fetchTop()
-        this.props.fetchHome()
-        this.props.fetchNoise()
-        this.props.fetchRecords()
+        this.props.fetchTop();
+        this.props.fetchHome();
+        this.props.fetchNoise();
+        this.props.fetchRecords();
 
         if (match.params.id) {
-            this.fetchItem(match.params.id)
+            this.fetchItem(match.params.id);
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
-
             if (nextProps.match.params.id) {
-                this.fetchItem(nextProps.match.params.id)
+                this.fetchItem(nextProps.match.params.id);
             }
         }
     }
@@ -61,19 +59,19 @@ class NewsPage extends PureComponent {
     // также загружает "новости по теме"
     fetchItem(id) {
         if (!this.getById(id)) {
-            this.props.fetchTop({ id })
+            this.props.fetchTop({ id });
         }
-        this.props.fetchRelated(id)
+        this.props.fetchRelated(id);
     }
 
     getById(id) {
-        const { topData } = this.props
+        const { topData } = this.props;
 
-        return topData[id]
+        return topData[id];
     }
 
     render() {
-        let {
+        const {
             noise,
             news,
             match,
@@ -86,20 +84,20 @@ class NewsPage extends PureComponent {
             currentRubric,
             homeToday,
             homeNow,
-        } = this.props
+        } = this.props;
 
-        const item = this.getById(match.params.id) || {}
+        const item = this.getById(match.params.id) || {};
 
-        const r = [{ id: null, name: 'Все новости' }, ...rubrics]
-        const now = homeNow.map(v => v.news)
-        const today = homeToday.map(v => v.news)
+        const r = [{ id: null, name: 'Все новости' }, ...rubrics];
+        const now = homeNow.map(v => v.news);
+        const today = homeToday.map(v => v.news);
 
         return (
             <div>
                 <Helmet>
                     <title>
                         {match.params.id
-                            ? `Новости - ${item.title||''}`
+                            ? `Новости - ${item.title || ''}`
                             : 'Новости'
                         }
                     </title>
@@ -109,9 +107,11 @@ class NewsPage extends PureComponent {
                     ? (
                         <Detail
                             data={item}
+                            hasVideo={item.top > 3 || item.video_stream}
                             noise={noise}
                             related={relatedNews}
-                            broadcast={broadcast} />
+                            broadcast={broadcast}
+                        />
                     )
                     : (
                         <News
@@ -122,16 +122,17 @@ class NewsPage extends PureComponent {
                             rubrics={r}
                             rubric={currentRubric}
                             onLoadRequest={loadMore}
-                            canLoad={pagination.page < pagination.lastPage} />
+                            canLoad={pagination.page < pagination.lastPage}
+                        />
                     )
                 }
             </div>
-        )
+        );
     }
 }
 
-const selectHomeToday = makeSelectHomeNewsByCategory(2)
-const selectHomeNow = makeSelectHomeNewsByCategory(1)
+const selectHomeToday = makeSelectHomeNewsByCategory(2);
+const selectHomeNow = makeSelectHomeNewsByCategory(1);
 
 const mapStateToProps = state => ({
     noise: selectNoise(state),
@@ -143,32 +144,32 @@ const mapStateToProps = state => ({
     rubrics: selectRubrics(state),
     currentRubric: selectTopRubric(state),
     homeToday: selectHomeToday(state),
-    homeNow: selectHomeNow(state)
-})
+    homeNow: selectHomeNow(state),
+});
 
 const mapDispatchToProps = dispatch => ({
     fetchTop(params) {
-        dispatch(fetchTop(params))
+        dispatch(fetchTop(params));
     },
     fetchNoise(params) {
-        dispatch(fetchNoise(params))
+        dispatch(fetchNoise(params));
     },
     fetchHome() {
-        dispatch(fetchHome())
+        dispatch(fetchHome());
     },
     fetchRelated(id) {
-        dispatch(fetchRelated(id))
+        dispatch(fetchRelated(id));
     },
     fetchRecords() {
-        dispatch(fetchRecords())
+        dispatch(fetchRecords());
     },
     loadMore() {
-        dispatch(fetchMoreTop())
+        dispatch(fetchMoreTop());
     },
     setTopRubric(id) {
-        dispatch(setTopRubric(id))
-        dispatch(fetchTop())
-    }
-})
+        dispatch(setTopRubric(id));
+        dispatch(fetchTop());
+    },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);

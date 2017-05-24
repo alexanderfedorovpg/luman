@@ -3,11 +3,11 @@ import React from 'react'
 import Video from './Video'
 import Default from './Default'
 
-export default function (props) {
+export default function ({ hasVideo, ...props}) {
     if (!props.data) return null
 
     return (
-        props.data.video_stream
+        hasVideo
             ? <Video {...props} />
             : <Default {...props} />
     )

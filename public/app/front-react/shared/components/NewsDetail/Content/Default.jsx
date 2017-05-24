@@ -1,13 +1,12 @@
-import React from 'react'
-import { FormattedRelative } from 'react-intl'
+import React from 'react';
+import { FormattedRelative } from 'react-intl';
 
-import Socials from 'components/Socials'
-import Rubrics from 'components/Rubrics'
-import Img from 'components/Img'
+import Socials from 'components/Socials';
+import Rubrics from 'components/Rubrics';
+import Img from 'components/Img';
 
 function Content({ data, children }) {
-
-    const image = data.image_main || {}
+    const image = data.image_main || {};
     const theses = Array.isArray(data.theses)
             ? data.theses
             : `${data.theses}`.split('\\');
@@ -39,8 +38,9 @@ function Content({ data, children }) {
                     <figure className="news-preview__img">
                         <Img
                             src={image.url}
-                            title={image.object_name||''}
-                            alt={image.object_name||''} />
+                            title={image.object_name || ''}
+                            alt={image.object_name || ''}
+                        />
                         {image.object_author && image.object_source
                             && (
                                 <figcaption className="news-preview__source">
@@ -60,7 +60,7 @@ function Content({ data, children }) {
                 {children}
             </div>
         </div>
-    )
+    );
 }
 
-export default Content
+export default Content;

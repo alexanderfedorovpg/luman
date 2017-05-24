@@ -87,15 +87,19 @@ class BroadcastPage extends PureComponent {
                     ? <Detail
                         data={item}
                         noise={noise}
+                        hasVideo
                         related={relatedNews}
-                        broadcast={broadcast} />
-                    : <Broadcast
+                        broadcast={broadcast}
+                    />
+                    :
+                    <Broadcast
                         broadcast={broadcast}
                         onLoadRequest={loadMore}
                         canLoad={pagination.page < pagination.lastPage}
                         setProgram={setProgram}
                         programs={p}
-                        program={program} />
+                        program={program}
+                    />
                 }
             </div>
         )

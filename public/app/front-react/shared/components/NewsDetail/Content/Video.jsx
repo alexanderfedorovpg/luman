@@ -30,7 +30,7 @@ class Content extends PureComponent {
             ? data.theses
             : `${data.theses}`.split('\\')
 
-        const image = data.image_preview||{}
+        const image = data.image_preview || {};
 
         return (
             <div>
