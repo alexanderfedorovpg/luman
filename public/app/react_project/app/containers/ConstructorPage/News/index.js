@@ -8,10 +8,10 @@ import Tabs from 'components/Constructor/Tabs';
 import Collapse from '../Collapse';
 
 import {
-    loadNews,
+    loadItems,
     itemToMain,
     removeFromMain,
-    removeItemsFromList,
+    removeFromConstructor,
 } from '../actions';
 
 import {
@@ -46,7 +46,7 @@ export class News extends PureComponent {
             news,
             categories,
             removeFromMain,
-            removeItemsFromList,
+            removeFromConstructor,
             toMain,
             location,
         } = this.props;
@@ -64,7 +64,7 @@ export class News extends PureComponent {
                     <NewsComponent
                         data={news}
                         toMain={toMain.bind(this, type)}
-                        onRemove={removeItemsFromList}
+                        onRemove={removeFromConstructor}
                     />
                 </Left>
                 <Right>
@@ -92,7 +92,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     loadNewslist() {
-        dispatch(loadNews());
+        dispatch(loadItems('news'));
     },
     toMain(type, item, category, before) {
         dispatch(itemToMain(item, type, category, before));
@@ -100,8 +100,8 @@ const mapDispatchToProps = (dispatch) => ({
     removeFromMain(type, item) {
         dispatch(removeFromMain(item, type));
     },
-    removeItemsFromList(data) {
-        dispatch(removeItemsFromList(data.id, 'news'));
+    removeFromConstructor(data) {
+        dispatch(removeFromConstructor(data.id, 'news'));
     },
 });
 

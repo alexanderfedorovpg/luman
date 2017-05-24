@@ -1,44 +1,34 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { Wrap, Left, Right } from 'components/Constructor/Content'
-import Records from 'components/Constructor/Records'
-import Tabs from 'components/Constructor/Tabs'
-import Collapse from '../Collapse'
+import { Wrap, Left, Right } from 'components/Constructor/Content';
+import Records from 'components/Constructor/Records';
+import Tabs from 'components/Constructor/Tabs';
 
 import {
-    makeGetProgramsArray
+    makeGetProgramsArray,
 } from 'containers/App/selectors';
-import {
-    searchRecord,
-} from 'containers/ProgramsPage/actions'
-import {
-    selectRecords,
-} from 'containers/ProgramsPage/selectors';
 
+import Collapse from '../Collapse';
 import {
     itemToMain,
     removeFromMain,
-} from '../actions'
-
-
+    loadItems,
+    removeFromConstructor,
+} from '../actions';
 import {
-    selectFilters
-} from '../selectors'
+    selectRecords,
+    selectFilters,
+} from '../selectors';
 
 export class Broadcast extends PureComponent {
-
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillMount() {
-        this.props.loadRecords({ search: this.props.filters.search })
+    componentDidMount() {
+        this.props.loadRecords();
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.filters.search !== nextProps.filters.search) {
-            this.props.loadRecords({ search: nextProps.filters.search })
+            this.props.loadRecords();
         }
     }
 
@@ -47,23 +37,29 @@ export class Broadcast extends PureComponent {
             records,
             toMain,
             programs,
-            removeFromMain
-        } = this.props
+            removeFromMain,
+            removeFromConstructor,
+        } = this.props;
 
         return (
             <Wrap>
                 <Left>
                     <Tabs />
-                    <Records data={records} toMain={toMain} />
+                    <Records
+                        onRemove={removeFromConstructor}
+                        data={records}
+                        toMain={toMain}
+                    />
                 </Left>
                 <Right>
                     <Collapse
                         type={'broadcast'}
                         onRemove={removeFromMain}
-                        categories={programs} />
+                        categories={programs}
+                    />
                 </Right>
             </Wrap>
-        )
+        );
     }
 
 }
@@ -71,22 +67,25 @@ export class Broadcast extends PureComponent {
 Broadcast.propTypes = {
 };
 
-const mapStateToProps = state => ({
-    records: selectRecords(state).toJS(),
-    filters: selectFilters(state),
+const mapStateToProps = (state) => ({
+    records: selectRecords(state),
     programs: makeGetProgramsArray()(state),
-})
+    filters: selectFilters(state),
+});
 
-const mapDispatchToProps = dispatch => ({
-    loadRecords(params) {
-        dispatch(searchRecord(params.search))
+const mapDispatchToProps = (dispatch) => ({
+    loadRecords() {
+        dispatch(loadItems('records'));
     },
     toMain(item, category, before) {
-        dispatch(itemToMain(item, 'broadcast', category, before))
+        dispatch(itemToMain(item, 'broadcast', category, before));
     },
     removeFromMain(item) {
-        dispatch(removeFromMain(item, 'broadcast'))
+        dispatch(removeFromMain(item, 'broadcast'));
     },
-})
+    removeFromConstructor({ id }) {
+        dispatch(removeFromConstructor(id, 'records'));
+    },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Broadcast);

@@ -35,7 +35,7 @@ export class ConstructorPage extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.loadNewslist()
         this.props.loadCategories()
         this.props.loadPrograms()

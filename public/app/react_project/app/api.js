@@ -130,6 +130,8 @@ export const rejectArticle = (id) => axios.post('/newseditor/rejection', {
     id,
 });
 
+export const removeArticleFromConstructor = (id) => axios.put('/newseditor/trigger_vc', { id });
+
 export const finishArticle = (data) => {
 
     if (data.id) {
@@ -315,8 +317,8 @@ export const getRecords = (params) => axios.get('/air/record', {
     params: {
         ...params,
         orderBy: 'publish_date',
-        orderType: 'desc'
-    }
+        orderType: 'desc',
+    },
 });
 export const getRecord = (id) => axios.get(`/air/record/${id}`);
 export const deleteRecord = (id) => axios.delete(`/air/record/${id}`);
@@ -329,6 +331,7 @@ export const uploadVideo = (file) => {
 
     return axios.post('/air/record/upload', data);
 };
+export const removeRecordFromConstructor = (id) => axios.put('/air/record/trigger_vc', { id });
 
 // =============================================================================
 

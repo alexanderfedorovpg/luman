@@ -3,10 +3,6 @@ import {
     LOAD_HOME_NEWS_FAILURE,
     LOAD_HOME_NEWS_SUCCESS,
 
-    LOAD_NEWS,
-    LOAD_NEWS_FAILURE,
-    LOAD_NEWS_SUCCESS,
-
     LOAD_CATEGORIES,
     LOAD_CATEGORIES_FAILURE,
     LOAD_CATEGORIES_SUCCESS,
@@ -20,7 +16,14 @@ import {
     REMOVE_FROM_MAIN,
     MOVE_ITEM,
     CANCEL_CHANGES,
-    REMOVE_ITEM_FROM_LIST,
+
+    REMOVE_FROM_CONSTRUCTOR,
+    REMOVE_FROM_CONSTRUCTOR_SUCCESS,
+    REMOVE_FROM_CONSTRUCTOR_FAILURE,
+
+    LOAD_ITEMS,
+    LOAD_ITEMS_SUCCESS,
+    LOAD_ITEMS_FAILURE,
 
     SET_FILTER,
 
@@ -104,20 +107,6 @@ export const changesSavingError = (error) => ({
     error,
 });
 
-export const loadNews = () => ({
-    type: LOAD_NEWS,
-});
-
-export const newsLoaded = (payload) => ({
-    type: LOAD_NEWS_SUCCESS,
-    payload,
-});
-
-export const newsLoadingError = (error) => ({
-    type: LOAD_NEWS_FAILURE,
-    error,
-});
-
 export const loadCategories = () => ({
     type: LOAD_CATEGORIES,
 });
@@ -132,7 +121,32 @@ export const categoriesLoadingError = (error) => ({
     error,
 });
 
-export const removeItemsFromList = (id, type) => ({
-    type: REMOVE_ITEM_FROM_LIST,
+export const removeFromConstructor = (id, type) => ({
+    type: REMOVE_FROM_CONSTRUCTOR,
     payload: { id, type },
+});
+
+export const successRemoveFromConstructor = (id, type) => ({
+    type: REMOVE_FROM_CONSTRUCTOR_SUCCESS,
+    payload: { id, type },
+});
+
+export const failureRemoveFromConstructor = (error) => ({
+    type: REMOVE_FROM_CONSTRUCTOR_FAILURE,
+    error,
+});
+
+export const loadItems = (type) => ({
+    type: LOAD_ITEMS,
+    payload: { type },
+});
+
+export const successLoadItems = (items) => ({
+    type: LOAD_ITEMS_SUCCESS,
+    payload: items,
+});
+
+export const failureLoadItems = (error) => ({
+    type: LOAD_ITEMS_FAILURE,
+    error,
 });
