@@ -269,7 +269,8 @@ export const getConstructorNews = (params) => axios.get('/newslist', {
     params: {
         ...params,
         orderBy: 'publish_date',
-        orderType: 'desc'
+        orderType: 'desc',
+        constructor: true
     }
 });
 export const saveHomepageNews = (data) => axios.put('/homepage', qs.stringify(data), {
