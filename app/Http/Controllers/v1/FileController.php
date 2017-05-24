@@ -28,7 +28,7 @@ class FileController extends CmsController
     {
         try {
             $this->validate($request, [
-                'file' => 'file|required|max:262144',
+                'file' => 'file|required',
             ]);
 
             $info = [
