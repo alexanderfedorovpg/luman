@@ -47,12 +47,13 @@
 
     &__info {
         position: absolute;
-        bottom: rem(18);
+        bottom: 0;
         left: 0;
 
         width: inherit;
         padding-right: rem(113);
         padding-left: rem(20);
+        padding-bottom: rem(25);
     }
 
     &__img {
