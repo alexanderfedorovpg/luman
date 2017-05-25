@@ -14,9 +14,9 @@ class AirRecord extends Model
     protected $fillable = [
         'program_id',
         'title',
-        'video_url',
+        'video',
         'is_full_video',
-        'image_preview',
+        'video_preview',
         'theses',
         'publish_date',
         'is_published',
@@ -31,12 +31,12 @@ class AirRecord extends Model
     public static $rules = [
         'program_id' => 'required|integer|exists:tv_programs,id',
         'title' => 'required|max:255',
-        'video_url' => 'required',
+        'video' =>  'required:integer|exists:cdn_files,id',
         'is_full_video' => 'boolean',
         'publish_date' => 'date|date_format:Y-m-d H:i:s',
         'theses' => 'string',
         'is_published' => 'boolean',
-        'image_preview' => 'string',
+        'video_preview' =>  'integer|exists:cdn_files,id',
     ];
 
     /**

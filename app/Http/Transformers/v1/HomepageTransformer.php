@@ -207,9 +207,26 @@ class HomepageTransformer extends Transformer
     public function tranformRecords(Collection $records)
     {
         $transform = [];
+
+
         foreach ($records as $record) {
+
+            $air = $record->record->toArray();
+
+            if ($air['video']) {
+                $air['video'] = [
+                    'url' => CdnFile::where('id', '=', $air['video'])->pluck('url')->first(),
+                    'id' =>  $air['video'],
+                    'duration' => $air['video_duration'],
+                    'preview' => CdnFile::where('id', '=', $air['video_preview'])->pluck('url')->first(),
+                    'preview_id' => $air['video_preview'],
+                ];
+            } else {
+                $air['video'] = null;
+            }
+            unset($air["video_preview"]);
             $transform[] = [
-                'data' => $record->record,
+                'data' => $air,
                 'top' => $record->top,
             ];
         }
@@ -218,10 +235,9 @@ class HomepageTransformer extends Transformer
     }
 
     /**
-     * Записи эфиров
-     *
-     * @param \Illuminate\Database\Eloquent\Collection $records
+     * @param Collection $options
      * @return array
+     *
      */
     public function transformOptions(Collection $options)
     {

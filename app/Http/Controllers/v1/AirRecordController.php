@@ -185,8 +185,9 @@ class AirRecordController extends CmsController
             ];
             $cdnFile = FileHelper::uploadFilespotFile($request->file('file'), $info);
             if ($cdnFile) {
-                return $this->respondCreated([
-                    'url' => Configuration::URL_VIDEO_PLAYER . $cdnFile->external_id
+                return $this->respond([
+                    'success' => true,
+                    'file' => $cdnFile->toArray()
                 ]);
             }
 
@@ -217,7 +218,7 @@ class AirRecordController extends CmsController
         } catch (\Exception $e) {
             return $this->respondFail500x($e->getMessage());
         }
-    }
+}
 
 
 }
