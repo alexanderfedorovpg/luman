@@ -1,0 +1,157 @@
+@import "~style/mixins";
+@import "~style/vars";
+@import "~style/fonts";
+// Common styles of the project
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    &:focus {
+        outline: 0;
+    }
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font: #{rem(14)}/ #{rem(21)} $stemReg;
+}
+
+html {
+    font-size: 1vw;
+
+    @include above(1600px) {
+        font-size: 16px;
+    }
+
+    &.war {
+
+        .header::before {
+            background-color: $war;
+        }
+    }
+}
+
+h1 {
+    font: #{rem(36)}/ #{rem(48)} $stemBold;
+    letter-spacing: rem(-.9);
+    color: $enter;
+}
+
+h2 {
+    font: #{rem(24)}/ #{rem(40)} $stemBold;
+    color: $enter;
+}
+
+a {
+    outline: none;
+    cursor: pointer;
+    &:hover {
+        color: $blue;
+    }
+}
+
+main {
+    margin-top: 1px;
+    padding-top: rem(54);
+}
+.war {
+    main {
+        padding-top: rem(113);
+    }
+}
+.container {
+    width: rem(1250);
+    @include margin_x(auto);
+}
+
+.section-title {
+    position: relative;
+    padding-left: rem(24);
+    font-size: rem(16);
+    line-height: rem(30);
+    text-transform: uppercase;
+    letter-spacing: rem(-.7);
+    color: $black;
+    border-bottom: 1px solid $gray;
+
+    &::after,
+    &::before {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+    }
+
+    &::before {
+        z-index: 1;
+        left: 0;
+        top: calc(50% - #{rem(6)});
+        border-bottom: rem(11) solid $blue;
+        border-left: rem(20) solid transparent;
+    }
+
+    &::after {
+        z-index: 0;
+        left: 0;
+        top: calc(50% - #{rem(8)});
+        border-top: rem(11) solid $purple;
+        border-left: rem(20) solid transparent;
+    }
+
+    &_no-border {
+      border-bottom: none;
+    }
+}
+
+.left-col {
+    width: rem(865);
+
+    &_position_relative {
+        position: relative;
+    }
+
+    &_width_inner {
+        width: rem(930);
+    }
+
+}
+
+.middle-col {
+    width: 100%;
+}
+
+.right-col {
+    width: rem(300);
+}
+
+.inner-wrapper {
+
+    .general-video {
+        height: rem(396);
+
+        &::before,
+        .general-video__img,
+        .general-video__link {
+            height: rem(396);
+        }
+    }
+}
+
+.search-page {
+
+    &__p-search {
+        margin-bottom: rem(42);
+    }
+}
+
+
