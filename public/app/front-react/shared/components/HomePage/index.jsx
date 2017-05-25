@@ -20,6 +20,7 @@ import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
 
+import mainVideoPlaceholder from './obzor-main.jpg'
 import './style.scss'
 
 function HomePage({
@@ -58,16 +59,23 @@ function HomePage({
                         <Noise className="general-news__info-noize" data={noise} />
                     </div>
                 </div>
-                {/*<div className="general-news__right right-col">
-                    <VideoWrapper>
-                        <Video
-                            data={firstVideo.video_stream}
-                            playTitle="date"
-                            title="Все ключевые события этого дня"
-                            className="general-news__general-video" />
-                    </VideoWrapper>
+                <div className="general-news__right right-col">
+                    {firstVideo.video_stream
+                        ? (
+                            <VideoWrapper>
+                                <Video
+                                    data={firstVideo.video_stream}
+                                    playTitle="date"
+                                    title="Все ключевые события этого дня"
+                                    className="general-news__general-video" />
+                            </VideoWrapper>
+                        )
+                        : (
+                            <img src={mainVideoPlaceholder} className="general-video__img" />
+                        )
+                    }
                     <EnterOne className="general-news__enter-one" data={secondVideo} />
-                </div>*/}
+                </div>
                 <div className="general-news__left general-news__left_more">
                     <div className="general-news__left-wrapper">
                         <Banner className="general-news__banner" />
