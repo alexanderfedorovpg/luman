@@ -19,7 +19,7 @@ import removeNil from "../../shared/utils/arrays/removeNil";
 
 function registerEnvFile() {
   const DEPLOYMENT = process.env.DEPLOYMENT;
-  const envFile = ".env";
+  const envFile = "./../../../.env.public";
 
   // This is the order in which we will try to resolve an environment configuration
   // file.

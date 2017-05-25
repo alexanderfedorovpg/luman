@@ -1,10 +1,10 @@
 import axios from 'axios';
 import qs from 'qs';
 
-axios.defaults.baseURL = 'http://librorum.rtvi.ddemo.ru/api/v1';
+axios.defaults.baseURL = process.env.API_ENDPOINT;
 
 const publicApi = axios.create({
-    baseURL: 'http://librorum-client.rtvi.ddemo.ru/api/v1/web',
+    baseURL: process.env.API_ENDPOINT_PUBLIC,
 });
 
 // =============================================================================

@@ -78,6 +78,8 @@ module.exports = (options) => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_ENDPOINT: JSON.stringify(process.env.API_ENDPOINT_CMS || 'http://librorum.rtvi.ddemo.ru/api/v1'),
+        API_ENDPOINT_PUBLIC: JSON.stringify(process.env.API_ENDPOINT_PUBLIC || 'http://librorum-client.rtvi.ddemo.ru/api/v1/web'),
       },
     }),
     new webpack.NamedModulesPlugin(),
