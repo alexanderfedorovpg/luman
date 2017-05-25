@@ -54,7 +54,7 @@ export class ConstructorPage extends React.Component {
         return (
             <div className={war ? 'war-mode' : ''}>
 
-                <Helmet title="Конструтор" />
+                <Helmet title="Конструктор" />
 
                 <Header
                     pristine={pristine}
