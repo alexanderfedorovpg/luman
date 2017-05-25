@@ -62,7 +62,7 @@ class Form extends Component {
     getKeywords(props) {
         const keywords = props.data.tags;
 
-        return keywords ? keywords.replace(/,/g, '') : '';
+        return keywords ? keywords.replace(/,/g, ' ') : '';
     }
 
     setValue(prop, value) {
