@@ -7,6 +7,7 @@ import {
     takeLatest,
     takeEvery,
 } from 'redux-saga/effects';
+import omit from 'lodash/omit';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as api from 'api';
 import { getPrograms } from 'containers/App/sagas';
@@ -131,20 +132,20 @@ export function* postRecord({ payload }) {
     try {
         yield put(showPreloader());
         const [uploadedVideo, uploadedPreview] = [
-            yield call(api.uploadVideo, payload.video_url[0]),
-            payload.image_preview ? yield call(api.uploadFile, payload.image_preview[0]) : null,
+            yield call(api.uploadVideo, payload.video[0]),
+            payload.video_preview ? yield call(api.uploadFile, payload.video_preview[0]) : null,
         ];
         const type = yield select(getRecordsType);
 
         const data = {
-            ...payload,
+            ...omit(payload, ['video', 'video_preview']),
             is_full_video: type === 'FULL',
-            video_url: uploadedVideo.data.url,
+            video: uploadedVideo.data.file.id,
             is_published: 0,
         };
 
         if (uploadedPreview) {
-            data.image_preview = uploadedPreview.data.file.url;
+            data.video_preview = uploadedPreview.data.file.id;
         }
 
         const response = yield call(api.postRecord, data);
@@ -152,6 +153,10 @@ export function* postRecord({ payload }) {
         yield put(hidePreloader());
 
         data.id = response.data.data.id;
+        data.video = {
+            url: uploadedVideo.data.file.url,
+            preview: uploadedPreview ? uploadedPreview.data.file.url : null,
+        };
 
         yield put(successPostRecord(data));
         yield put(closeModal());
@@ -165,32 +170,39 @@ export function* postRecord({ payload }) {
 
 export function* editRecord({ payload }) {
     try {
-        const data = {
-            ...payload,
+        const data = omit(payload, ['video', 'video_preview']);
+        const needUploadVideo = typeof payload.video !== 'string';
+        const needUploadPreview = payload.video_preview && typeof payload.video_preview !== 'string';
+        const video = {
+            url: payload.video,
+            preview: payload.video_preview,
         };
 
         yield put(showPreloader());
 
-        if (typeof payload.image_preview !== 'string') {
-            const uploadedFile = yield call(api.uploadFile, payload.image_preview[0]);
-            data.image_preview = uploadedFile.data.file.url;
+        const [uploadedVideo, uploadedPreview] = [
+            needUploadVideo ? yield call(api.uploadVideo, payload.video[0]) : null,
+            needUploadPreview ? yield call(api.uploadFile, payload.video_preview[0]) : null,
+        ];
+
+        if (uploadedPreview) {
+            data.video_preview = uploadedPreview.data.file.id;
+            video.preview = uploadedPreview.data.file.url;
         }
 
-        if (typeof payload.video_url !== 'string') {
-            const uploadedVideo = yield call(api.uploadVideo, payload.video_url[0]);
-            data.video_url = uploadedVideo.data.url;
+        if (uploadedVideo) {
+            data.video = uploadedVideo.data.file.id;
+            video.url = uploadedVideo.data.file.url;
         }
 
-        const response = yield call(api.editRecord, data.id, data);
+        yield call(api.editRecord, data.id, data);
 
+        data.video = video;
+
+        yield put(successEditRecord(data));
         yield put(hidePreloader());
-
-        if (response.data.success) {
-            yield put(successEditRecord(data));
-            yield put(closeModal());
-        } else {
-            throw new Error(response.statusText);
-        }
+        yield put(closeModal());
+        yield put(showInfoModal('Запись успешно отредактирована'));
     } catch (err) {
         console.error(err);
         yield put(failureEditRecord(err));

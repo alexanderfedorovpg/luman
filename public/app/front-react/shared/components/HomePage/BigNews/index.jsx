@@ -38,9 +38,6 @@ function BigNews({ data, war, warTitle, className }) {
                         : null
                     }
                 </p>
-                <p className="big-news__description big-news__position big-news__position_margin">
-                    {data.note}
-                </p>
                 <div className="big-news__logo">
                     <span className="big-news__logo-title">News</span>
                     <img className="big-news__logo" src={logo} alt="" role="presentation" />

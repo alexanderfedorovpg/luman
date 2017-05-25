@@ -74,7 +74,7 @@ class RecordForm extends React.PureComponent {
                         component={DatepickerRedux}
                     />
                     <Field
-                        name="video_url"
+                        name="video"
                         accept="video/*"
                         icon="arrow"
                         placeholder="Выберите видео"
@@ -84,7 +84,7 @@ class RecordForm extends React.PureComponent {
                 <Group md>
                     <Field
                         placeholder="Добавить превью"
-                        name="image_preview"
+                        name="video_preview"
                         accept="image/*"
                         multiple={false}
                         icon
@@ -128,7 +128,7 @@ const validate = (values) => {
         errors.program_id = 'Не выбрана программа';
     }
 
-    if (!values.get('video_url')) {
+    if (!values.get('video')) {
         errors.video_url = 'Не загружено видео';
     }
 

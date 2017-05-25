@@ -144,7 +144,11 @@
             right: rem(12);
             left: auto;
         }
-
     }
 
+    &_no-overlay {
+        &::before {
+            display: none;
+        }
+    }
 }

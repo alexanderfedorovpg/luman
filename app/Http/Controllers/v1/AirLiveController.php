@@ -65,7 +65,7 @@ class AirLiveController extends CmsController
     }
 
     /**
-     * Откдючает прямой эфир
+     * Отключает прямой эфир
      *
      * @return \Illuminate\Http\JsonResponse
      */
