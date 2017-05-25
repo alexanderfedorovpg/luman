@@ -147,7 +147,7 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->delete('/air/record/{id}','AirRecordController@destroy');
     $group->put('/air/record/publish','AirRecordController@publish');
     $group->post('/air/record/upload','AirRecordController@upload');
-    $group->put('/air/record/trigger_vc','NewsListEditorController@triggerVisibleConstructor');
+    $group->put('/air/record/trigger_vc','AirRecordController@triggerVisibleConstructor');
 
     //Конструктор главной страницы
     $group->get('/homepage','HomepageController@index');
