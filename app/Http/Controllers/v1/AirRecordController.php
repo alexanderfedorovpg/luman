@@ -107,7 +107,19 @@ class AirRecordController extends CmsController
     {
         try {
             $record = AirRecord::findOrFail($id);
-            $this->validate($request, AirRecord::$rules);
+
+            $rules = [
+                'program_id' => 'required|integer|exists:tv_programs,id',
+                'title' => 'max:255',
+                'video' =>  'integer|exists:cdn_files,id',
+                'is_full_video' => 'boolean',
+                'publish_date' => 'date|date_format:Y-m-d H:i:s',
+                'theses' => 'string',
+                'is_published' => 'boolean',
+                'video_preview' =>  'integer|exists:cdn_files,id',
+            ];
+
+            $this->validate($request, $rules);
 
             return $this->respondCreated([
                 'success' => $record->update($request->all())

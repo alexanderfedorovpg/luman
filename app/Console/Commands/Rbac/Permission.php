@@ -139,27 +139,27 @@ class Permission extends Command
      *
      * @return array
      */
-    private function permissTags()
-    {
-        return [
-            [
-                'name' => 'v1.tags-index',
-                'description' => 'Список тегов',
-            ],
-            [
-                'name' => 'v1.tags-create',
-                'description' => 'Создание тега',
-            ],
-            [
-                'name' => 'v1.tags-destroy',
-                'description' => 'Удаление тега',
-            ],
-            [
-                'name' => 'v1.tags-show',
-                'description' => 'Вывод тега',
-            ],
-        ];
-    }
+//    private function permissTags()
+//    {
+//        return [
+//            [
+//                'name' => 'v1.tags-index',
+//                'description' => 'Список тегов',
+//            ],
+//            [
+//                'name' => 'v1.tags-create',
+//                'description' => 'Создание тега',
+//            ],
+//            [
+//                'name' => 'v1.tags-destroy',
+//                'description' => 'Удаление тега',
+//            ],
+//            [
+//                'name' => 'v1.tags-show',
+//                'description' => 'Вывод тега',
+//            ],
+//        ];
+//    }
 
     /**
      * Доступы для контроллера \App\Controllers\v1\NewsChatController
@@ -185,19 +185,19 @@ class Permission extends Command
      *
      * @return array
      */
-    public function permissReference()
-    {
-        return [
-            [
-                'name' => 'v1.tags-search',
-                'description' => 'Поиск справки',
-            ],
-            [
-                'name' => 'v1.tags-getPage',
-                'description' => 'Получение страницы спрвки',
-            ],
-        ];
-    }
+//    public function permissReference()
+//    {
+//        return [
+//            [
+//                'name' => 'v1.tags-search',
+//                'description' => 'Поиск справки',
+//            ],
+//            [
+//                'name' => 'v1.tags-getPage',
+//                'description' => 'Получение страницы спрвки',
+//            ],
+//        ];
+//    }
 
 
     /**
@@ -219,6 +219,37 @@ class Permission extends Command
         ];
     }
 
+    public function permissNewsListOnline()
+    {
+        return [
+            [
+                'name' => 'v1.newslistonline-getListOnline',
+                'description' => 'Получить список текущих онлайнов',
+            ],
+            [
+                'name' => 'v1.newslistonline-updateStatusNewsOnline',
+                'description' => 'Изменить статус новости на текстовый онлайн ',
+            ],
+            [
+                'name' => 'v1.newslistonline-addCommentNewsOnline',
+                'description' => 'Добавить комментарий к новостному онлайну',
+            ],
+            [
+                'name' => 'v1.newslistonline-updateCommentNewsOnline',
+                'description' => 'Обновить комментарий  новостного онлайна',
+            ],
+            [
+                'name' => 'v1.newslistonline-deleteCommentNewsOnline',
+                'description' => 'Удалить комментарий новостного онлайна',
+            ],
+            [
+                'name' => 'v1.newslistonline-getListCommentsNewsOnline',
+                'description' => 'Получить список комментариев новостного онлайн  ',
+            ],
+        ];
+    }
+
+
     public function permissNewslisteditor()
     {
         return [
@@ -230,10 +261,67 @@ class Permission extends Command
                 'name' => 'v1.newslisteditor-getOne',
                 'description' => 'Просмотр новости',
             ],
+
+            [
                 'name'=>'v1.newslisteditor-getModerated',
-                'description'=>'Модерирование',
-            [],
-        ];
+                'description'=>'Модерирование'
+             ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-edit',
+                'description' => 'Редактирование новости',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-create',
+                'description' => 'Создание новости',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-delete',
+                'description' => 'Удаление новости',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-delegate',
+                'description' => 'Делегирование новости',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-rejection',
+                'description' => 'Отказаться от новости',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-in_work',
+                'description' => 'В работу',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-publish',
+                'description' => 'Опубликовать',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-toFix',
+                'description' => 'На доработку',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-updateCover',
+                'description' => 'Редактировать обложку новости',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-updateTitle',
+                'description' => 'Обновить заголовк новости',
+            ]
+            ,
+            [
+                'name' => 'v1.newslisteditor-triggerVisibleConstructor',
+                'description' => 'Показать/скрыть в конструторе',
+            ]
+            ];
     }
 
     /**
@@ -310,6 +398,10 @@ class Permission extends Command
                 'name' => 'v1.airLive-onAir',
                 'description' => 'Отправка в прямой эфир'
             ],
+            [
+                'name' => 'v1.airLive-disableAir',
+                'description' => 'Отключает прямой эфир'
+            ],
         ];
     }
 
@@ -343,6 +435,10 @@ class Permission extends Command
             [
                 'name' => 'v1.airRecord-upload',
                 'description' => 'Загрузка записи эфира'
+            ],
+            [
+                'name' => 'v1.airRecord-triggerVisibleConstructor',
+                'description' => 'Скрыть/показать в конструкторе'
             ],
         ];
     }
