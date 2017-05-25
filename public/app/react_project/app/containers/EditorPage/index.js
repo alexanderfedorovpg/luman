@@ -58,8 +58,16 @@ class EditorPage extends Component {
     }
 
     componentDidMount() {
-        if (this.props.params.id) {
-            this.props.loadArticle(this.props.params.id)
+        const { article, params, loadArticle, clearArticle } = this.props
+
+        // если имеющаяся в данный момент новость не та, которую мы
+        // хотим видеть - убираем ее из состояния
+        if (article && (article.id !== params.id)) {
+            clearArticle()
+        }
+
+        if (params.id) {
+            loadArticle(params.id)
         }
     }
 
