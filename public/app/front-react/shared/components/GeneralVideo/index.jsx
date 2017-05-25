@@ -11,10 +11,12 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
     let playText;
 
     if (!data) {
-        return <Img className="general-video__img" src={placeholder} alt="" />;
+        return (
+            <div className="general-video general-video_no-overlay">
+                <img className="general-video__img" src={placeholder} alt="" />
+            </div>
+        );
     }
-
-    console.log(data.duration);
 
     switch (playTitle) {
         case 'date':
