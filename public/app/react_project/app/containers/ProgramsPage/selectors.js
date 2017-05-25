@@ -61,7 +61,7 @@ const makeGetRecords = () => createSelector(
             id: record.id,
             date: record.publish_date,
             title: record.title,
-            preview: record.image_preview,
+            preview: record.video && record.video.preview,
             program: programs.toJS().byId[record.program_id].name,
         }
     ))
@@ -78,7 +78,11 @@ const makeGetSelectedRecord = () => createSelector(
             };
         }
 
-        return target;
+        return {
+            ...target,
+            video: target.video.url,
+            video_preview: target.video.preview,
+        };
     }
 );
 

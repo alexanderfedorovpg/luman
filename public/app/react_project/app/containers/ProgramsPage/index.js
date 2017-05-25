@@ -59,7 +59,7 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
                 <VideoModal
                     currentModal={modal}
                     close={this.props.closeModal}
-                    videoUrl={selectedRecord ? selectedRecord.video_url : null}
+                    videoUrl={selectedRecord ? selectedRecord.video : null}
                 />
             </Wrapper>
         );
