@@ -4,14 +4,16 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+
     &__list {
-
         display: none;
-
-
         &.is-open {
             display: block;
         }
+    }
+
+    &__share{
+        cursor: pointer;
     }
 
     &__ico-link {

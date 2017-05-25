@@ -53,7 +53,7 @@ function Content({ data, children }) {
                         {data.sub_title}
                     </p>
                 </div>
-                <Socials />
+                <Socials shareLink={data.share_link} title={data.title}/>
             </div>
             <div className="inner-about__content">
                 <div dangerouslySetInnerHTML={{ __html: data.body }} />
