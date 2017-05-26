@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { DragSource } from 'react-dnd'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { DragSource } from 'react-dnd';
 
-import DropTarget from './DropTarget'
-import IconTip from 'components/IconTip'
+import DropTarget from './DropTarget';
+import IconTip from 'components/IconTip';
 
-import { rem } from 'utils/style'
-import { font } from 'constants/style'
-import { ensureAbs } from 'utils/uri'
+import { rem } from 'utils/style';
+import { font } from 'constants/style';
+import { ensureAbs } from 'utils/uri';
 
 const Root = styled.div`
     position: relative;
@@ -136,20 +136,26 @@ class Article extends Component {
             isOver,
             connectDragSource,
             connectDropTarget,
-        } = this.props
+        } = this.props;
 
         return connectDragSource(connectDropTarget(
             <div style={style}>
                 <Root>
                     <Wrap>
-                        <Pic>
-                            <img src={ensureAbs((data.image_preview||{}).url||'')} />
-                        </Pic>
+                        {data.video ?
+                            <Pic>
+                                <img role="presentation" src={ensureAbs((data.video || {}).preview || '')} />
+                            </Pic>
+                            :
+                            <Pic>
+                                <img role="presentation" src={ensureAbs((data.image_preview || {}).url || '')} />
+                            </Pic>
+                        }
                         <div>
                             {data.rubrics
                                 ? (
                                     <Rubrics>
-                                        {data.rubrics.map(value => (
+                                        {data.rubrics.map((value) => (
                                             <span>
                                                 {value.name}
                                             </span>
@@ -171,15 +177,16 @@ class Article extends Component {
                             eventType="hover"
                             direction="left"
                             icon="delete"
-                            onClick={e => {
-                                onRemove(data)
-                                e.stopPropagation()
-                            }} />
+                            onClick={(e) => {
+                                onRemove(data);
+                                e.stopPropagation();
+                            }}
+                        />
 
                     </Wrap>
                 </Root>
             </div>
-        ))
+        ));
     }
 }
                 // <Edit
@@ -196,8 +203,8 @@ const source = {
     beginDrag(props) {
         return {
             index: props.index,
-            data: props.data
-        }
+            data: props.data,
+        };
     },
     endDrag(props, monitor) {
         props.onMove(-1)
@@ -210,7 +217,7 @@ const source = {
 const DragSourceDecorator = DragSource('newsItem', source, function (connect, monitor) {
     return {
         connectDragSource: connect.dragSource()
-    }
-})
+    };
+});
 
 export default DragSourceDecorator(DropTarget(Article))
