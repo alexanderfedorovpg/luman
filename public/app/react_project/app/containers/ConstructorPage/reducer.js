@@ -140,6 +140,15 @@ function constructorPageReducer(state = initialState, action) {
             ).updateIn(['items', 'data'], (arr) => {
                 const ar = arr.toJS();
                 ar.push(action.payload.item);
+                ar.sort((a, b) => {
+                    let result = 0;
+                    if (new Date(a.publish_date) > new Date(b.publish_date)) {
+                        result = -1;
+                    } else {
+                        result = 1;
+                    }
+                    return result;
+                });
                 return fromJS(ar);
             });
 
