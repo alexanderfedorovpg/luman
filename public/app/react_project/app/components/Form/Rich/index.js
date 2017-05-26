@@ -54,8 +54,10 @@ class ExtImage extends ImageBlot {
         if (node.nodeName.toLowerCase() == 'img') {
             let figure = document.createElement('figure')
 
-            if (value.src) {
-                node.setAttribute('src', this.sanitize(value.src));
+            node.setAttribute('src', this.sanitize(value.src));
+            if (value.title) {
+                node.setAttribute('alt', value.title);
+                node.setAttribute('title', value.title);
             }
 
             figure.appendChild(node)
@@ -71,6 +73,10 @@ class ExtImage extends ImageBlot {
         else {
             let img = document.createElement('img')
             img.setAttribute('src', this.sanitize(value.src));
+            if (value.title) {
+                img.setAttribute('alt', value.title);
+                img.setAttribute('title', value.title);
+            }
 
             node.appendChild(img);
 

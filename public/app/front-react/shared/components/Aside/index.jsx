@@ -6,6 +6,9 @@ import Noise from 'components/Noise'
 import One from 'components/Broadcast/One'
 import Subscribe from 'components/Subscribe'
 
+import mainVideoPlaceholder from './obzor-inside.jpg'
+import efirPlaceholder from './efir.jpg'
+
 class Aside extends PureComponent {
 
     constructor(props) {
@@ -27,18 +30,29 @@ class Aside extends PureComponent {
     render() {
         const { noise, broadcast, className } = this.props
         const first = broadcast[0] || {}
+        const second = broadcast[1] || {}
 
         return (
             <div className={classNames('right-col', className)}>
-                <Video
-                    data={first.video_stream}
-                    collapsed={!this.state.play}
-                    play={this.state.play}
-                    onPlay={this.play}
-                    playTitle="date"
-                    title="Все ключевые события этого дня" />
+                {first.video_stream
+                    ? (
+                        <Video
+                            data={first.video_stream}
+                            collapsed={!this.state.play}
+                            play={this.state.play}
+                            onPlay={this.play}
+                            playTitle="date"
+                            title="Все ключевые события этого дня" />
+                    )
+                    : (
+                        <img src={mainVideoPlaceholder} className="general-video__img" />
+                    )
+                }
                 <Noise data={noise} />
-                <One data={broadcast[1]}/>
+                {second.video_stream
+                    ? <One data={second}/>
+                    : <img src={efirPlaceholder} className="from-enter enter-one" />
+                }
                 <Subscribe />
             </div>
         )

@@ -19,6 +19,7 @@ import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
 
+import mainVideoPlaceholder from './obzor-main.jpg'
 import './style.scss'
 
 function HomePage({
@@ -76,13 +77,20 @@ function HomePage({
                     </div>
                 </div>
                 <div className="general-news__right right-col">
-                    <VideoWrapper>
-                        <Video
-                            data={firstVideo.video_stream}
-                            playTitle="date"
-                            title="Все ключевые события этого дня"
-                            className="general-news__general-video" />
-                    </VideoWrapper>
+                    {firstVideo.video_stream
+                        ? (
+                            <VideoWrapper>
+                                <Video
+                                    data={firstVideo.video_stream}
+                                    playTitle="date"
+                                    title="Все ключевые события этого дня"
+                                    className="general-news__general-video" />
+                            </VideoWrapper>
+                        )
+                        : (
+                            <img src={mainVideoPlaceholder} className="general-video__img" />
+                        )
+                    }
                     <Group title="Другие новости" margin>
                         {newsBlock.slice(0, 4).map(v => (
                             <MiniNews key={v.id} data={v} className="info-noize__mini-news info-noize__mini-news_war" />

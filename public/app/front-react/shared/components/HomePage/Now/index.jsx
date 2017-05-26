@@ -9,9 +9,6 @@ function Now({ data, className }) {
 
     return (
         <div className={classNames('now', className)}>
-            <p className="now__title section-title">
-                Сейчас
-            </p>
             <div className="now__news">
                 {data.map(value => (
                     <MiniNews data={value} key={value.id} className="now__mini-news" />
