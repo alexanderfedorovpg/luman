@@ -59,7 +59,7 @@ export const PERMISSIONS_MAP = {
         getList: 'v1.rubrics-index',
         getOne: 'v1.rubrics-show',
     },
-    statistic: {
+    stats: {
         getList: 'v1.statistics-CountersAll',
         getOne: 'v1.statistics-get',
     },

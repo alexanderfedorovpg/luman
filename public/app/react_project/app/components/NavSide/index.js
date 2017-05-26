@@ -93,7 +93,7 @@ function NavSide({ expanded, isActive, location, admin, checkPermissions }) {
     function renderItem(item) {
         const { permissions } = item;
 
-        if (!admin && permissions && !checkPermissions(permissions)) {
+        if (!admin && permissions && !checkPermissions(permissions, true)) {
             return null;
         }
 

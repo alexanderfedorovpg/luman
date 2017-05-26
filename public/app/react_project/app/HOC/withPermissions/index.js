@@ -33,10 +33,12 @@ const withPermissions = (WrappedComponent) => {
         /**
          * проверяет разрешения пользователя
          * @param {string} groupName - названия группы разрешений
+         * @param {boolean} [checkAll = true] - нужно ли проверить все разрешения,
+         * или достаточно, чтобы было хотя бы одно
          * @param {[string]} [permissions] - массив с названиями разрешений
          * @return {boolean} - если нет хоть одного разрешения из переданного массива, то false
          */
-        checkPermissions(groupName, permissions) {
+        checkPermissions(groupName, checkAll = true, permissions) {
             const group = PERMISSIONS_MAP[groupName];
 
             if (!group) {
@@ -45,10 +47,14 @@ const withPermissions = (WrappedComponent) => {
 
             permissions = permissions || Object.keys(group); // eslint-disable-line no-param-reassign
 
-            return !permissions.some((perm) => {
+            const result = permissions.some((perm) => {
                 const permName = group[perm];
-                return !this.props.permissions[permName];
+                const hasPermission = this.props.permissions[permName];
+
+                return checkAll ? !hasPermission : hasPermission;
             });
+
+            return checkAll ? !result : result;
         }
 
         render() {

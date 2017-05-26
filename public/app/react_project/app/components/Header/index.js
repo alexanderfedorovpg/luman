@@ -171,7 +171,7 @@ const CustomUserName = styled(UserName)`
     color: #fff;
 `;
 
-function Header({ moved, onToggle, isActive, onLogout, user, admin }) {
+function Header({ moved, onToggle, isActive, onLogout, user, admin, checkPermissions }) {
     return (
         <Wrapper moved={moved}>
             <Top>
@@ -191,16 +191,17 @@ function Header({ moved, onToggle, isActive, onLogout, user, admin }) {
                 <Right>
                     <Action>
                         <nav>
-                            <NavItem to="/stats" active={isActive('/stats')}>
-                                Статистика
-                            </NavItem>
+                            {
+                                checkPermissions('stats', false) &&
+                                <NavItem to="/stats" active={isActive('/stats')}>
+                                    Статистика
+                                </NavItem>
+                            }
                             {
                                 admin &&
-                                (
-                                    <NavItem to="/edition" active={isActive('/edition')}>
-                                        Редакция
-                                    </NavItem>
-                                )
+                                <NavItem to="/edition" active={isActive('/edition')}>
+                                    Редакция
+                                </NavItem>
                             }
                         </nav>
                         <CustomUser to="profile" data={user}>
