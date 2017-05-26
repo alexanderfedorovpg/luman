@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
+import { submit, getFormValues, isValid } from 'redux-form/immutable'
 
 import HeaderEditor from 'components/Editor/Header.editor'
 import HeaderSupervisor from 'components/Editor/Header.supervisor'
@@ -13,9 +14,9 @@ import {
     finishArticle,
     toFixArticle,
     publishArticle,
-    delegateArticle
+    delegateArticle,
+    rejectArticle
 } from './actions'
-import { rejectArticle } from 'containers/NewslistPage/actions'
 
 import { loadEditors } from 'containers/App/actions'
 
@@ -41,8 +42,9 @@ class EditorPage extends Component {
             preview: false
         }
 
-        this.openPreview = this.openPreview.bind(this)
-        this.closePreview = this.closePreview.bind(this)
+        this.openPreview = ::this.openPreview
+        this.closePreview = ::this.closePreview
+        this.submitHandler = ::this.submitHandler
     }
 
     componentWillReceiveProps(nextProps) {
@@ -87,68 +89,109 @@ class EditorPage extends Component {
         })
     }
 
+    submitHandler(cb) {
+    return data => {
+        const values = data.toJS()
+        const { article, rubrics } = this.props;
+
+        cb({
+            id: article.id,
+            top: values.top,
+            title: values.title,
+            sub_title: values.subtitle,
+            editor_id: (values.editor||{}).id,
+            rubrics: values.rubrics,
+            keywords: values.keywords.trim().replace(/ +/g, ','),
+            theses: values.theses,
+            image_main: typeof values.image_main === 'string'
+                ? (article.image_main||{}).id
+                : values.image_main[0],
+            image_main_info: {
+                object_name: values.image_main_title,
+                object_author: values.image_main_author,
+                object_source: values.image_main_source,
+            },
+            image_preview: typeof values.image_preview === 'string'
+                ? (article.image_preview||{}).id
+                : values.image_preview[0],
+            image_preview_info: {
+                object_name: values.image_preview_title,
+                object_author: values.image_preview_author,
+                object_source: values.image_preview_source,
+            },
+            body: values.body,
+            video_stream: values.video.id || (values.video.file||[])[0],
+            video_stream_preview: values.videoPreview.id || (values.videoPreview.file||[])[0],
+        });
+    }
+    }
+
     renderContent() {
         let {
             menuOpen,
             article,
             rubrics,
+            finishArticle,
+            publishArticle,
             delegateArticle,
             deleteArticle,
             rejectArticle,
-            finishArticle,
-            publishArticle,
             toFixArticle,
             params,
             users,
-            user
+            user,
+            formIsValid,
+            formValues,
         } = this.props
+
+        const values = formValues && formValues.toJS()
 
         const headerProps = {
             moved: menuOpen,
-            preview: this.openPreview
+            preview: this.openPreview,
+            onSubmit: this.props.submit,
+            reject: (article.id || formIsValid) && rejectArticle.bind(this, article.id||values)
         }
 
         if (article.id) {
             headerProps.del = deleteArticle.bind(this, article.id)
-            headerProps.reject = rejectArticle.bind(this, article.id)
             headerProps.ret = toFixArticle.bind(this, article.id)
         }
 
         if (checkPermissons(user, ['admin', 'сommissioning-editor'])) {
             return (
-                <Content
-                    article={article}
-                    rubrics={rubrics}
-                    chatRoom={params.id}
-                    preview={this.state.preview}
-                    publish={publishArticle}
-                    delegate={delegateArticle}
-                    closePreview={this.closePreview}
-                    users={users.toJS()}
-                    supervisor
-                >
-
+                <div>
                     <HeaderSupervisor
-                        {...headerProps}
-                        publish={publishArticle} />
-                </Content>
+                        {...headerProps} />
+
+                    <Content
+                        article={article}
+                        rubrics={rubrics}
+                        chatRoom={params.id}
+                        preview={this.state.preview}
+                        delegate={delegateArticle}
+                        closePreview={this.closePreview}
+                        users={users.toJS()}
+                        onSubmit={this.submitHandler(publishArticle)}
+                        supervisor />
+                </div>
             )
         }
         else if (checkPermissons(user, ['editor'])) {
             return (
-                <Content
-                    article={article}
-                    rubrics={rubrics}
-                    chatRoom={params.id}
-                    delegate={article.id && rejectArticle.bind(this, article.id)}
-                    preview={this.state.preview}
-                    finish={finishArticle}
-                    closePreview={this.closePreview}>
-
+                <div>
                     <HeaderEditor
-                        finish={finishArticle}
                         {...headerProps} />
-                </Content>
+
+                    <Content
+                        article={article}
+                        rubrics={rubrics}
+                        chatRoom={params.id}
+                        delegate={article.id && rejectArticle.bind(this, article.id)}
+                        preview={this.state.preview}
+                        onSubmit={this.submitHandler(finishArticle)}
+                        closePreview={this.closePreview} />
+                </div>
             )
         }
         else {
@@ -174,10 +217,15 @@ const mapStateToProps = state => ({
     rubrics: selectRubrics(state),
     users: selectEditors(state),
     user: selectCurrentUser(state),
-    menuOpen: selectMenuExpandedStatus(state)
+    menuOpen: selectMenuExpandedStatus(state),
+    formIsValid: isValid('articleEditorForm')(state),
+    formValues: getFormValues('articleEditorForm')(state)
 })
 
 const mapDispatchToProps = dispatch => ({
+    submit() {
+        dispatch(submit('articleEditorForm'))
+    },
     clearArticle() {
         dispatch(clearArticle())
     },
@@ -201,7 +249,9 @@ const mapDispatchToProps = dispatch => ({
         dispatch(delegateArticle(params))
     },
     rejectArticle(id) {
-        dispatch(rejectArticle(id))
+        if (id) {
+            dispatch(rejectArticle(id))
+        }
     },
     toFixArticle(id) {
         dispatch(toFixArticle(id))

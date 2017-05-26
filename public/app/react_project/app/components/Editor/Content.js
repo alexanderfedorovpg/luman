@@ -1,210 +1,47 @@
-import React, { Component, PropTypes, Children, cloneElement } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { fromJS } from 'immutable';
 import styled from 'styled-components';
-import Dropzone from 'react-dropzone';
-import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
 import { StickyContainer, Sticky } from 'react-sticky';
 
-import { ifProp } from 'utils/style';
-import { ensureAbs } from 'utils/uri';
-import { font, padding, color } from 'constants/style';
-import { Wrap, Left, Right } from 'components/Content';
-import { Group, Textarea, Label } from 'components/Form';
-import Input from 'components/Form/Input';
-import Rich from 'components/Form/Rich';
+import { Wrap } from 'components/Content';
 import User from 'components/User';
-import Icon from 'components/Icon';
-import Rating from 'components/Rating';
-import Tags from 'components/Tags';
 import Modal from 'components/Modal';
-import TypedBtn from 'components/Button/TypedBtn';
 import Preview from 'containers/Preview';
 import Chat from 'containers/Chat';
 
-import Select from './Select';
-import HeaderEditor from './Header.editor';
-import HeaderSupervisor from './Header.supervisor';
-import VideoUploadModal from './VideoUploadModal';
+import {
+    Part1,
+    Part2,
+    Part3,
+    Part4,
+    Part5,
+} from './Form'
+import {
+    Root,
+    Action,
+    Time,
+    Right,
+    Left,
+} from './style'
 
-const titleMax = 120;
-const subtitleMax = 140;
-
-const Root = styled.div`
-    margin-top: 6px;
-    padding-left: ${padding}
-`;
-
-const CustomLeft = styled(Left) `
-    margin-top: 0;
-    border-right: 0;
-`;
-
-const CustomRight = styled(Right) `
-    flex-basis: auto;
-    width: 235px;
-    align-self: center;
-`;
-
-const VideoStatus = styled.div`
-    font-family: ${font.opensans};
-    font-size: 13px;
-    color: #999999;
-    font-weight: 600;
-    letter-spacing: 0.1px;
-
-    width: 100%;
-
-    strong {
-        color: #434242;
-        font-weight: 700;
-
-    }
-
-    span {
-        margin-left: 3px;
-        color: ${color.danger}
-
-        ${ifProp('ready') `
-            color: #1f9d29;
-        `}
-    }
-`;
-
-const CustomIcon = styled(Icon) `
-    margin-top: -3px;
-    margin-left: 2px;
-    margin-right: 5px;
-`;
-
-const Action = styled.div`
-    align-items: center;
-    margin-top: 21px;
-    margin-bottom: -3px;
-`;
-
-const CustomRating = styled(Rating) `
-    margin-right: 20px;
-    margin-bottom: 21px;
-`;
-
-const TitleField = styled(Textarea) `
-    height: 119px;
-    padding-left: 16px;
-    padding-right: 16px;
-
-    font-family: ${font.opensans};
-    font-weight: 400;
-    color: #333333;
-    font-size: 30px;
-    line-height: 34px;
-    letter-spacing: -0.7px;
-`;
-
-const SubtitleField = styled(Textarea) `
-    height: 96px;
-    padding-left: 19px;
-    padding-right: 19px;
-
-    color: #666666;
-    font-family: ${font.opensans};
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: 0;
-`;
-
-const ThesesField = styled(SubtitleField) `
-    font-size: 16px;
-    font-weight: 400;
-
-    resize: vertical;
-`;
-
-const Time = styled.div`
-    margin-top: 10px;
-    margin-bottom: 25px;
-    font-size: 13px;
-`;
-
-const ImageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    // margin-right: 20px;
-    margin-bottom: 7px;
-    float: left;
-
-    // box-sizing: content-box;
-    // border: 1px solid rgba(204,204,204,.74);
-    width: 48%;
-
-    &:not(:first-child) {
-        margin-left: 3%
-    }
-
-    img {
-        width: 100%;
-        height: auto
-    }
-`;
-
-const StyledDropzone = styled(({ filled, ...rest }) => <Dropzone {...rest} />) `
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-    min-height: 243px;
-    border: 2px dashed rgb(102, 102, 102);
-    border-radius: 5px;
-
-    ${ifProp('filled') `
-        border: 0;
-    `}
-`;
-
-class Content extends Component {
+class Content extends PureComponent {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            // gallery: true,
-            data: this.propsToData(props),
-            error: {},
-            videoUploadModalOpen: false,
         };
 
-        this.changeHandlerTarget = ::this.changeHandlerTarget;
-        this.changeHandlerEditor = ::this.changeHandlerEditor;
-        this.openUploadVideoModal = ::this.openUploadVideoModal;
-        this.closeUploadVideoModal = ::this.closeUploadVideoModal;
-        this.onUploadVideo = ::this.onUploadVideo;
+        this.editorChangeHandler = ::this.editorChangeHandler;
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.article.id !== nextProps.article.id) {
-            this.setState({
-                data: this.propsToData(nextProps),
-            });
-        }
-    }
-
-    setError(prop, value) {
-        this.setState({
-            error: {
-                ...this.state.error,
-                [prop]: value,
-            },
-        });
-    }
-
-    propsToData(props) {
+    getInitialData() {
+        const props = this.props;
         const video = props.article.video_stream || {};
 
         return {
             top: props.article.top || null,
-            rubrics: (props.article.rubrics || []).map((r) => r.name),
+            rubrics: (props.article.rubrics || []).map((r) => r.id),
             video: {
                 id: video.id,
                 file: video.url,
@@ -230,200 +67,18 @@ class Content extends Component {
             image_preview_source: (props.article.image_preview||{}).object_source || '',
 
             editor: props.article.editor_id,
-        };
-    }
-
-    renderLabel(title, string, max) {
-        const limit = max - string.length;
-
-        return (
-            <Label right light>
-                <span>{title}</span> : осталось {
-                    limit < 0
-                        ? <span className="out">{limit}</span>
-                        : limit
-                } символов
-            </Label>
-        );
-    }
-
-    validate() {
-        const { data, error } = this.state;
-        const { article } = this.props;
-        let retFlag = false;
-
-        if (!data.rubrics.length) {
-            toastr.warning('Выберите рубрики!');
-            retFlag = true;
-        }
-        if (!data.top) {
-            toastr.warning('Выберите рейтинг!');
-            retFlag = true;
-        }
-        const newError = {
-            ...error,
-            title: !data.title || data.title.length > titleMax,
-        };
-
-        if (Object.values(newError).reduce((a, b) => a || b, false)) {
-            this.setState({
-                error: newError,
-            });
-            toastr.warning('Заполните обязательные поля!');
-            retFlag = true;
-        }
-
-        if (retFlag) {
-            return false;
-        }
-        else {
-            return true;
         }
     }
 
-    dataToSubmit() {
-        let { data, error } = this.state;
-        let { article, rubrics } = this.props;
-
-        const r = data.rubrics.map((name) => (
-            rubrics.find((r) => r.name == name).id
-        ));
-
-        if (!this.validate()) return null;
-
-        return {
-            id: article.id,
-            top: data.top,
-            title: data.title.slice(0, titleMax),
-            sub_title: data.subtitle,
-            editor_id: data.editor,
-            rubrics: r,
-            keywords: data.keywords.trim().replace(/ +/g, ','),
-            theses: data.theses,
-            image_main: data.image_main_temp || (article.image_main||{}).id,
-            image_main_info: {
-                object_name: data.image_main_title,
-                object_author: data.image_main_author,
-                object_source: data.image_main_source,
-            },
-            image_preview: data.image_preview_temp || (article.image_preview||{}).id,
-            image_preview_info: {
-                object_name: data.image_preview_title,
-                object_author: data.image_preview_author,
-                object_source: data.image_preview_source,
-            },
-            body: data.body,
-            video_stream: data.video.id || (data.video.file||[])[0],
-            video_stream_preview: data.videoPreview.id || (data.videoPreview.file||[])[0],
-        };
-    }
-
-    onDrop(prop) {
-        return (acceptedFiles) => {
-            if (acceptedFiles[0]) {
-                const reader = new FileReader();
-
-                reader.onload = () => {
-                    this.setState({
-                        data: {
-                            ...this.state.data,
-                            [prop]: reader.result,
-                            [`${prop}_temp`]: acceptedFiles[0],
-                        },
-                    });
-                };
-
-                reader.readAsDataURL(acceptedFiles[0]);
-            }
-        };
-    }
-
-    changeHandlerTarget(prop) {
-        return (e) => {
-            if (this.state.data[prop] !== e.target.value) {
-                this.setState({
-                    data: {
-                        ...this.state.data,
-                        [prop]: e.target.value,
-                    },
-                });
-            }
-        };
-    }
-
-    changeHandlerValue(prop) {
-        return (value) => {
-            if (this.state.data[prop] !== value) {
-                this.setState({
-                    data: {
-                        ...this.state.data,
-                        [prop]: value,
-                    },
-                });
-            }
-        };
-    }
-
-    changeHandlerEditor(editor) {
+    editorChangeHandler(editor) {
         const { article, delegate } = this.props;
 
-        this.setState({
-            data: {
-                ...this.state.data,
-                editor: editor.id,
-            },
-        }, () => {
-            if (article.id) {
-                delegate({
-                    id: article.id,
-                    new_editor_id: editor.id,
-                });
-            }
-        });
-    }
-
-    onUploadVideo(immutableData) {
-        const data = immutableData.toJS();
-        const newData = {
-            ...this.state.data,
-        };
-
-        // Если загрузили новое видео, то обнуляем превью
-        if (data.video && typeof data.video !== 'string') {
-            newData.video = {
-                id: null,
-                file: data.video,
-            };
-
-            newData.videoPreview = {
-                id: null,
-                file: null,
-            };
+        if (article.id && editor.id) {
+            delegate({
+                id: article.id,
+                new_editor_id: editor.id,
+            });
         }
-
-        if (data.preview && typeof data.preview !== 'string') {
-            newData.videoPreview = {
-                id: null,
-                file: data.preview,
-            };
-        }
-
-        this.setState({
-            data: newData,
-            videoUploadModalOpen: false,
-        });
-    }
-
-    openUploadVideoModal() {
-        this.setState({
-            videoUploadModalOpen: true,
-        });
-    }
-
-    closeUploadVideoModal() {
-        this.setState({
-            videoUploadModalOpen: false,
-        });
     }
 
     render() {
@@ -435,225 +90,34 @@ class Content extends Component {
             users,
             supervisor,
             preview,
-            finish,
-            publish,
             closePreview,
-            openUploadVideoModal,
+            onSubmit
         } = this.props;
-
-        const videoUploadInitialValues = fromJS({
-            video: this.state.data.video.file,
-            preview: this.state.data.videoPreview.file,
-        });
 
         return (
             <Root>
-                {Children.map(this.props.children, (child) => {
-                    if (child.type == HeaderEditor || child.type == HeaderSupervisor) {
-                        return cloneElement(child, { getFormData: this.dataToSubmit.bind(this) });
-                    }                    else {
-                        return child;
-                    }
-                })}
                 <header>
                     <Wrap>
-                        <CustomLeft>
-                            <Input
-                                value={this.state.data.stream}
-                                onChange={this.changeHandlerTarget('stream')}
-                                block
-                            />
-                        </CustomLeft>
-                        <CustomRight>
-                            {
-                                this.state.data.video.file ?
-                                    (
-                                        <VideoStatus
-                                            onClick={this.openUploadVideoModal}
-                                            ready
-                                        >
-                                            <CustomIcon type="text-video-lg" />
-                                            <strong>Статус видео:</strong>
-                                            <span>
-                                                Готово
-                                            </span>
-                                        </VideoStatus>
-                                    )
-                                    :
-                                    (
-                                        <TypedBtn
-                                            block
-                                            onClick={this.openUploadVideoModal}
-                                            buttonType="upload"
-                                        >
-                                            Загрузить видео
-                                        </TypedBtn>
-                                    )
-                            }
-                        </CustomRight>
+                        <Left>
+                            <Part1
+                                onSubmit={onSubmit}
+                                initialValues={this.getInitialData()} />
+                        </Left>
+                        <Right>
+                            <Part2 />
+                        </Right>
                     </Wrap>
                 </header>
                 <Action>
-                    <Wrap>
-                        <CustomRating
-                            value={this.state.data.top}
-                            onChange={this.changeHandlerValue('top')}
-                        />
-                        <Tags
-                            data={rubrics.map((r) => r.name)}
-                            value={this.state.data.rubrics}
-                            onChange={this.changeHandlerValue('rubrics')}
-                        />
-                    </Wrap>
+                    <Part3 rubrics={rubrics} />
                 </Action>
                 <Wrap>
-                    <CustomLeft>
-                        <Group>
-                            {this.renderLabel('Заголовок', this.state.data.title, titleMax)}
-                            <TitleField
-                                value={this.state.data.title}
-                                error={this.state.error.title}
-                                onChange={(e) => {
-                                    this.changeHandlerTarget('title')(e);
-                                    this.setError('title', !e.target.value || e.target.value.length > titleMax);
-                                }}
-                                block
-                            />
-                        </Group>
-                        <Group>
-                            {this.renderLabel('Подзаголовок', this.state.data.subtitle, subtitleMax)}
-                            <SubtitleField
-                                value={this.state.data.subtitle}
-                                error={this.state.error.subtitle}
-                                onChange={(e) => {
-                                    this.changeHandlerTarget('subtitle')(e);
-                                    this.setError('subtitle', !e.target.value);
-                                }}
-                                block
-                            />
-                        </Group>
-                        <Group>
-                            <Label right light>
-                                <span>Тезисы через //</span>
-                            </Label>
-                            <ThesesField
-                                value={this.state.data.theses}
-                                error={this.state.error.theses}
-                                onChange={(e) => {
-                                    this.changeHandlerTarget('theses')(e);
-                                    this.setError('theses', !e.target.value);
-                                }}
-                                block
-                            />
-                        </Group>
-                        <Group>
-                            <Rich
-                                value={this.state.data.body}
-                                onChange={this.changeHandlerValue('body')}
-                            />
-                        </Group>
-                        <Group>
-                            <ImageContainer>
-                                <StyledDropzone
-                                    onDrop={this.onDrop('image_main')}
-                                    multiple={false}
-                                    filled={!!this.state.data.image_main}
-                                    title="Нажмите чтобы выбрать другое изображение"
-                                >
-
-                                    {this.state.data.image_main
-                                        ? <img src={ensureAbs(this.state.data.image_main)} />
-                                        : (
-                                            <span>
-                                                Переместите изображение<br />
-                                                либо<br />
-                                                кликните для выбора изображения
-                                            </span>
-                                        )}
-                                </StyledDropzone>
-                                <Input
-                                    placeholder="Название"
-                                    value={this.state.data.image_main_title}
-                                    onChange={this.changeHandlerTarget('image_main_title')}
-                                    block
-                                />
-                                <Input
-                                    placeholder="Автор"
-                                    value={this.state.data.image_main_author}
-                                    onChange={this.changeHandlerTarget('image_main_author')}
-                                    block
-                                />
-                                <Input
-                                    placeholder="Источник"
-                                    value={this.state.data.image_main_source}
-                                    onChange={this.changeHandlerTarget('image_main_source')}
-                                    block
-                                />
-                            </ImageContainer>
-                            <ImageContainer>
-                                <StyledDropzone
-                                    onDrop={this.onDrop('image_preview')}
-                                    multiple={false}
-                                    filled={!!this.state.data.image_preview}
-                                    title="Нажмите чтобы выбрать другое изображение"
-                                >
-
-                                    {this.state.data.image_preview
-                                        ? <img src={ensureAbs(this.state.data.image_preview)} />
-                                        : (
-                                            <span>
-                                                Переместите изображение<br />
-                                                либо<br />
-                                                кликните для выбора изображения
-                                            </span>
-                                        )}
-                                </StyledDropzone>
-                                <Input
-                                    placeholder="Название"
-                                    value={this.state.data.image_preview_title}
-                                    onChange={this.changeHandlerTarget('image_preview_title')}
-                                    block
-                                />
-                                <Input
-                                    placeholder="Автор"
-                                    value={this.state.data.image_preview_author}
-                                    onChange={this.changeHandlerTarget('image_preview_author')}
-                                    block
-                                />
-                                <Input
-                                    placeholder="Источник"
-                                    value={this.state.data.image_preview_source}
-                                    onChange={this.changeHandlerTarget('image_preview_source')}
-                                    block
-                                />
-                            </ImageContainer>
-                            <div style={{ clear: 'both' }} />
-                        </Group>
-                        <Group>
-                            <Label right light>
-                                Не более 4 слов через пробел
-                            </Label>
-                            <Input
-                                value={this.state.data.keywords}
-                                error={this.state.error.keywords}
-                                onChange={(e) => {
-                                    this.changeHandlerTarget('keywords')(e);
-                                    this.setError('keywords', !e.target.value);
-                                }}
-                                placeholder="Ключевые слова"
-                                block
-                            />
-                        </Group>
-                    </CustomLeft>
-                    <CustomRight>
+                    <Left>
+                        <Part4 />
+                    </Left>
+                    <Right>
                         {supervisor
-                            ? (
-                                <Select
-                                    options={users}
-                                    onChange={this.changeHandlerEditor}
-                                    value={this.state.data.editor}
-                                />
-                            )
+                            ? <Part5 options={users} onChange={this.editorChangeHandler} />
                             : <Time><strong>Новость в работе:</strong></Time>
                         }
                         <StickyContainer>
@@ -665,14 +129,8 @@ class Content extends Component {
                                 }
                             </Sticky>
                         </StickyContainer>
-                    </CustomRight>
+                    </Right>
                 </Wrap>
-                {/*<ContentModal
-                        isOpen={this.state.gallery}
-                        contentLabel="Галерея изображений"
-                        title="Галерея изображений">
-                        <ImageGallery />
-                </ContentModal>*/}
                 <Modal
                     isOpen={preview}
                     contentLabel="Предпросмотр"
@@ -682,21 +140,8 @@ class Content extends Component {
                     <Preview
                         data={{ ...this.state.data, id: article.id }}
                         onClose={closePreview}
-                        delegate={this.changeHandlerEditor}
-                        doneTitle={supervisor ? 'Опубликовать' : 'Готово'}
-                        done={() => (
-                            supervisor
-                                ? publish(this.dataToSubmit())
-                                : finish(this.dataToSubmit())
-                        )}
                     />
                 </Modal>
-                <VideoUploadModal
-                    isOpen={this.state.videoUploadModalOpen}
-                    close={this.closeUploadVideoModal}
-                    onSubmit={this.onUploadVideo}
-                    initialValues={videoUploadInitialValues}
-                />
             </Root>
         );
     }

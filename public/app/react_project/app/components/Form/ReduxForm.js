@@ -1,5 +1,5 @@
 import React from 'react';
-import { List } from 'immutable';
+import { List, fromJS } from 'immutable';
 import Tags from 'components/Tags';
 import Rating from 'components/Rating';
 import Switch from 'components/Switch';
@@ -145,8 +145,8 @@ export const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid }, ...
 export const TagsRedux = ({ input, ...props }) => (
     <Tags
         {...props}
-        value={input.value}
-        onChange={(checked) => input.onChange(checked)}
+        value={input.value.toJS()}
+        onChange={(checked) => input.onChange(fromJS(checked))}
     />
 );
 

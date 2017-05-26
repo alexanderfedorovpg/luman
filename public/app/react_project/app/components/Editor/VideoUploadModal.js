@@ -15,7 +15,7 @@ const StyledBtn = styled(TypedBtn)`
     }
 `;
 
-const RecordFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
+const UploadFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
     <ContentModal
         title="Загрузка видео для новости"
         contentLabel="Добавить видео к новости"
@@ -62,7 +62,7 @@ const RecordFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
     </ContentModal>
 );
 
-RecordFormModal.propTypes = {
+UploadFormModal.propTypes = {
     isOpen: PropTypes.bool,
     close: PropTypes.func,
 };
@@ -81,4 +81,4 @@ export default reduxForm({
     form: 'uploadVideoForNews',
     enableReinitialize: true,
     validate,
-})(RecordFormModal);
+})(UploadFormModal);

@@ -11,6 +11,12 @@ const Root = styled.div`
     margin-top: 0.0625rem;
     margin-left: 0.0625rem;
     border-bottom: 1px solid #e8e8e8;
+    position: fixed;
+    top: 119px;
+    width: 100%;
+    width: 38.8%;
+    background: #fff;
+    z-index: 1000;
 `;
 
 const Item = styled(({ active, ...rest }) => <Link {...rest} />)`

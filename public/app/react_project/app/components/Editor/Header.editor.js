@@ -41,7 +41,7 @@ const CustomRight = styled(Right)`
     width: 259px
 `
 
-function Header({ moved, del, reject, preview, finish, getFormData }) {
+function Header({ moved, del, reject, preview, onSubmit }) {
 
     return (
         <Bot moved={moved}>
@@ -68,11 +68,7 @@ function Header({ moved, del, reject, preview, finish, getFormData }) {
 
                             Предпросмотр
                         </CustomButton>
-                        <CustomButton xs success onClick={e=> {
-                                const data = getFormData()
-
-                                if (data) finish(data)
-                            }}>
+                        <CustomButton xs success onClick={onSubmit}>
 
                             <Icon type="okay" />
                             Готово
