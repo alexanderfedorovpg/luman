@@ -134,10 +134,14 @@ function constructorPageReducer(state = initialState, action) {
                 ['temporary', 'home', action.payload.type],
                 (arr) => (
                     arr.filterNot((value) => (
-                        value.getIn(['data', 'id']) == action.payload.item.id)
+                        value.getIn(['data', 'id']) === action.payload.item.id)
                     )
                 )
-            );
+            ).updateIn(['items', 'data'], (arr) => {
+                const ar = arr.toJS();
+                ar.push(action.payload.item);
+                return fromJS(ar);
+            });
 
         case REMOVE_FROM_CONSTRUCTOR_SUCCESS:
             return state.updateIn(
