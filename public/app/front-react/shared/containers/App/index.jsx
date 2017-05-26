@@ -31,6 +31,7 @@ import { fetchHome } from 'actions/news'
 import { selectWarMode, selectWarTitle } from 'selectors/news'
 
 // import 'normalize.css/normalize.css'
+import './common.scss'
 import './style.scss'
 
 addLocaleData(ruLocaleData)

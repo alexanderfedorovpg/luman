@@ -50,6 +50,13 @@
 
             letter-spacing: rem(-.35);
         }
+        a {
+            outline: none;
+            cursor: pointer;
+            &:hover {
+                color: $blue!important;
+            }
+        }
     }
 
     &__figure-title {
