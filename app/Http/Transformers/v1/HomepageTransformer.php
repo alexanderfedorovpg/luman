@@ -96,21 +96,21 @@ class HomepageTransformer extends Transformer
         $transform = [];
         foreach ($infoNoises as $infoNoise) {
             $news = $infoNoise->news->toArray();
-            if ($infoNoise['video_stream']) {
+            if ($news['video_stream']) {
                 $news['video_stream'] = [
-                    'url' => CdnFile::where('id', '=', $infoNoise['video_stream'])->pluck('url')->first(),
-                    'id' =>  $infoNoise['video_stream'],
-                    'duration' => $infoNoise['video_stream_duration'],
-                    'preview' => CdnFile::where('id', '=', $infoNoise['video_stream_preview'])->pluck('url')->first(),
-                    'preview_id' => $infoNoise['video_stream_preview'],
+                    'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
+                    'id' =>  $news['video_stream'],
+                    'duration' => $news['video_stream_duration'],
+                    'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                    'preview_id' => $news['video_stream_preview'],
                 ];
             } else {
                 $news['video_stream'] = null;
             }
 
 
-            if ($infoNoise['image_main']) {
-                $imageMain = CdnFile::where('id', '=', $infoNoise['image_main'])->select()->first();
+            if ($news['image_main']) {
+                $imageMain = CdnFile::where('id', '=', $news['image_main'])->select()->first();
                 $news['image_main'] = [
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
@@ -123,8 +123,8 @@ class HomepageTransformer extends Transformer
             }
 
 
-            if ($infoNoise['image_preview']) {
-                $imagePreview = CdnFile::where('id', '=', $infoNoise['image_preview'])->select()->first();
+            if ($news['image_preview']) {
+                $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select()->first();
                 $news['image_preview'] = [
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,
@@ -149,21 +149,21 @@ class HomepageTransformer extends Transformer
         $transform = [];
         foreach ($wars as $war) {
             $news = $war->news->toArray();
-            if ($war['video_stream']) {
+            if ($news['video_stream']) {
                 $news['video_stream'] = [
-                    'url' => CdnFile::where('id', '=', $war['video_stream'])->pluck('url')->first(),
-                    'id' =>  $war['video_stream'],
-                    'duration' => $war['video_stream_duration'],
-                    'preview' => CdnFile::where('id', '=', $war['video_stream_preview'])->pluck('url')->first(),
-                    'preview_id' => $war['video_stream_preview'],
+                    'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
+                    'id' =>  $news['video_stream'],
+                    'duration' => $news['video_stream_duration'],
+                    'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                    'preview_id' => $news['video_stream_preview'],
                 ];
             } else {
                 $news['video_stream'] = null;
             }
 
 
-            if ($war['image_main']) {
-                $imageMain = CdnFile::where('id', '=', $war['image_main'])->select()->first();
+            if ($news['image_main']) {
+                $imageMain = CdnFile::where('id', '=', $news['image_main'])->select()->first();
                 $news['image_main'] = [
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
@@ -176,8 +176,8 @@ class HomepageTransformer extends Transformer
             }
 
 
-            if ($war['image_preview']) {
-                $imagePreview = CdnFile::where('id', '=', $war['image_preview'])->select()->first();
+            if ($news['image_preview']) {
+                $imagePreview = CdnFile::where('id', '=', $news['image_preview'])->select()->first();
                 $news['image_preview'] = [
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,

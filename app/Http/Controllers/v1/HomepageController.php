@@ -90,27 +90,31 @@ class HomepageController extends CmsController
             ]);
 
             $news = $request->input('news');
+            HomepageNews::truncate();
             if ($news) {
-                HomepageNews::truncate();
+
                 HomepageNews::insert($news);
             }
 
             $infoNoise = $request->input('info_noise');
+            HomepageInfoNoise::truncate();
             if ($infoNoise) {
-                HomepageInfoNoise::truncate();
+
                 HomepageInfoNoise::insert($infoNoise);
             }
 
             $war = $request->input('war');
+            HomepageWar::truncate();
             if ($war) {
-                HomepageWar::truncate();
+
 
                 HomepageWar::insert($war);
             }
 
             $fromAir = $request->input('from_air');
+            HomepageRecord::truncate();
             if ($fromAir) {
-                HomepageRecord::truncate();
+
                 HomepageRecord::insert($fromAir);
             }
 

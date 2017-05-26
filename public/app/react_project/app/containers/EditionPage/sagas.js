@@ -112,7 +112,7 @@ export function* editUserSaga({ payload }) {
             }
         }
 
-        const response = yield call(api.editUser, id, data);
+        yield call(api.editUser, id, data);
 
         yield put(editUser(user));
         yield put(hidePreloader());
@@ -141,15 +141,16 @@ export function* getPermissionsSaga() {
     }
 }
 
-// TO-DO: допилить добавление разрешений
 export function* addGroupSaga({ payload }) {
     try {
         yield put(showPreloader());
-        const data = {
-            ...payload,
-            enabled: 1,
-        };
+        const { permissions, ...data } = payload;
+
+        data.enabled = 1;
+
         const response = yield call(api.addGroup, data);
+
+        yield call(api.editGroupPermissions, response.data.id, permissions);
 
         yield put(addGroup(response.data));
         yield put(hidePreloader());
@@ -172,15 +173,21 @@ export function* getGroupPermissions({ payload }) {
     }
 }
 
-// TO-DO: допилить изменение разрешений
 export function* editGroupSaga({ payload }) {
     try {
-        const { permissions, ...data } = payload;
-
-        data.enabled = data.enabled ? 1 : 0;
+        const { permissions, id, enabled } = payload;
+        const data = {
+            enabled: enabled ? 1 : 0,
+        };
 
         yield put(showPreloader());
-        const response = yield call(api.editGroup, data.id, data);
+
+        const [editResponse, permissionsResponse] = [
+            yield call(api.editGroup, id, data),
+            yield call(api.editGroupPermissions, id, permissions),
+        ];
+
+        data.id = id;
 
         yield put(editGroup(data));
         yield put(hidePreloader());

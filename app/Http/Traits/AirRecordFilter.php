@@ -18,7 +18,8 @@ trait AirRecordFilter
 
         $constructor = $request->input('constructor');
         if ($constructor === 'true') {
-            $builder->constructor(1);
+            $builder->constructor(1)->NotInHomePage();
+
         } elseif ($constructor === 'false') {
             $builder->constructor(0);
         }
