@@ -1,8 +1,10 @@
-import { take, call, put, cancel, takeLatest, takeEvery } from 'redux-saga/effects';
+import { take, select, call, put, cancel, takeLatest, takeEvery } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter';
 import { showPreloader, hidePreloader } from 'containers/App/actions';
+import { selectCurrentUser } from 'containers/App/selectors';
 import {
+    REJECT_ARTICLE,
     TO_FIX_ARTICLE,
     LOAD_ARTICLE,
     FINISH_ARTICLE,
@@ -12,16 +14,25 @@ import {
 } from './constants';
 
 import {
+
+    articleRejected,
+    articleRejectionError,
+
     articleLoaded,
     articleLoadingError,
+
     articleDeleted,
     articleDeletionError,
+
     articleDelegated,
     articleDelegationError,
+
     articleFinished,
     articleFinishError,
+
     articlePublished,
     articlePublishError,
+
     articleSendedToFix,
     articleToFixError,
 } from './actions';
@@ -139,6 +150,33 @@ function* toFixArticle({ payload }) {
     }
 }
 
+export function* rejectArticle({ payload }) {
+    try {
+        let id = payload
+
+        if (typeof id == 'object') {
+
+            // чтобы пользователь мог отказаться от новости, он должен
+            // быть ее редактором
+            const user = yield select(selectCurrentUser)
+            id.editor_id = user.id
+
+            const { data } = yield call(api.finishArticle, id)
+            id = data.id
+        }
+
+        yield call(api.rejectArticle, id)
+
+        yield put(articleRejected(id))
+
+        yield put(push(`/newslist`))
+
+        yield fork(getList)
+    } catch (err) {
+        yield put(articleRejectionError(err))
+    }
+}
+
 export function* articleData() {
     yield takeLatest(LOAD_ARTICLE, getArticle);
 
@@ -151,6 +189,8 @@ export function* articleData() {
     yield takeEvery(DELEGATE_ARTICLE, delegateArticle);
 
     yield takeEvery(DELETE_ARTICLE, deleteArticle);
+
+    yield takeEvery(REJECT_ARTICLE, rejectArticle);
 }
 
 export default [

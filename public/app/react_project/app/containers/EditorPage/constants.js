@@ -23,3 +23,7 @@ export const PUBLISH_ARTICLE_FAILURE = 'app/EditorPage/PUBLISH_ARTICLE_FAILURE';
 export const TO_FIX_ARTICLE = 'app/EditorPage/TO_FIX_ARTICLE';
 export const TO_FIX_ARTICLE_SUCCESS = 'app/EditorPage/TO_FIX_ARTICLE_SUCCESS';
 export const TO_FIX_ARTICLE_FAILURE = 'app/EditorPage/TO_FIX_ARTICLE_FAILURE';
+
+export const REJECT_ARTICLE = 'app/EditorPage/REJECT_ARTICLE';
+export const REJECT_ARTICLE_SUCCESS = 'app/EditorPage/REJECT_ARTICLE_SUCCESS';
+export const REJECT_ARTICLE_FAILURE = 'app/EditorPage/REJECT_ARTICLE_FAILURE';

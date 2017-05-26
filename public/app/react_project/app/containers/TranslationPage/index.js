@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { submit, getFormValues } from 'redux-form/immutable'
+import { getFormValues } from 'redux-form/immutable'
 import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import {

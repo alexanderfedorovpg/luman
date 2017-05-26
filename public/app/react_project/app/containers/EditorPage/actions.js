@@ -23,11 +23,30 @@ import {
 
     DELEGATE_ARTICLE,
     DELEGATE_ARTICLE_SUCCESS,
-    DELEGATE_ARTICLE_FAILURE
+    DELEGATE_ARTICLE_FAILURE,
+
+    REJECT_ARTICLE,
+    REJECT_ARTICLE_SUCCESS,
+    REJECT_ARTICLE_FAILURE,
 } from './constants'
 
 export const clearArticle = () => ({
     type: CLEAR_ARTICLE
+})
+
+export const rejectArticle = id => ({
+    type: REJECT_ARTICLE,
+    payload: id
+})
+
+export const articleRejected = id => ({
+    type: REJECT_ARTICLE_SUCCESS,
+    payload: id
+})
+
+export const articleRejectionError = error => ({
+    type: REJECT_ARTICLE_FAILURE,
+    error
 })
 
 export const toFixArticle = payload => ({

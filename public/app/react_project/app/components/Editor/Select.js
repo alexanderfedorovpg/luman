@@ -1,13 +1,16 @@
 import React from 'react'
 import FormSelect from 'components/Form/Select'
 
-function Select(props) {
+const Select = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => {
 
     return (
         <FormSelect
             {...props}
+            value={input.value}
+            onChange={option => {
+                input.onChange(option)
+            }}
             labelKey="name"
-            valueKey="id"
             clearable={false}
             placeholder="Выберите редактора"
             labelRenderer={value => (
