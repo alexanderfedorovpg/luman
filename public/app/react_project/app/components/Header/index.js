@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link as ReactLink } from 'react-router';
+import withPermissions from 'HOC/withPermissions';
 
 import Icon from './../Icon';
 import User, { Name as UserName } from './../User';
@@ -170,7 +171,7 @@ const CustomUserName = styled(UserName)`
     color: #fff;
 `;
 
-function Header({ moved, onToggle, isActive, onLogout, user }) {
+function Header({ moved, onToggle, isActive, onLogout, user, admin }) {
     return (
         <Wrapper moved={moved}>
             <Top>
@@ -193,9 +194,14 @@ function Header({ moved, onToggle, isActive, onLogout, user }) {
                             <NavItem to="/stats" active={isActive('/stats')}>
                                 Статистика
                             </NavItem>
-                            <NavItem to="/edition" active={isActive('/edition')}>
-                                Редакция
-                            </NavItem>
+                            {
+                                admin &&
+                                (
+                                    <NavItem to="/edition" active={isActive('/edition')}>
+                                        Редакция
+                                    </NavItem>
+                                )
+                            }
                         </nav>
                         <CustomUser to="profile" data={user}>
                             <CustomUserName to="profile">
@@ -212,4 +218,4 @@ function Header({ moved, onToggle, isActive, onLogout, user }) {
     );
 }
 
-export default Header;
+export default withPermissions(Header);

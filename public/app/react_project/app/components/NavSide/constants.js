@@ -22,16 +22,19 @@ export const items = [
     {
         link: '/constructor',
         icon: 'main',
+        permissions: 'constructor',
         name: 'Главная страница',
     },
     {
         link: '/programs',
         icon: 'tv',
+        permissions: 'records',
         name: 'Программы',
     },
     {
         link: '/live',
         icon: 'live',
+        permissions: 'live',
         name: 'Прямой эфир',
     },
     // {

@@ -77,6 +77,35 @@ const getCurrentUserData = createSelector(
     (app) => app.getIn(['current', 'data'])
 );
 
+const makeSelectUserPermissions = () => createSelector(
+    getCurrentUserData,
+    (userImmutable) => {
+        if (!userImmutable) {
+            return {};
+        }
+
+        const permissions = {};
+
+        userImmutable
+            .get('permissions')
+            .toJS()
+            .forEach((perm) => { permissions[perm.name] = true; });
+
+        return permissions;
+    }
+);
+
+const makeSelectUserGroup = () => createSelector(
+    getCurrentUserData,
+    (userImmutable) => {
+        if (!userImmutable) {
+            return null;
+        }
+
+        return userImmutable.get('groups').toJS()[0];
+    }
+);
+
 const makeSelectPreloader = () => createSelector(
     selectAppDomain(),
     (app) => app.get('preloader')
@@ -128,4 +157,6 @@ export {
     makeGetProgramsArray,
     selectLocationState,
     makeGetGroups,
+    makeSelectUserPermissions,
+    makeSelectUserGroup,
 };

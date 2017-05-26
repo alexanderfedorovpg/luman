@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import Icon from 'components/Icon';
 import Badge from 'components/Badge';
+import withPermissions from 'HOC/withPermissions';
 
 import { ifProp } from 'utils/style';
 import { padding, font } from 'constants/style';
@@ -88,8 +89,14 @@ const NavBadge = styled(Badge)`
     `)}
 `;
 
-function NavSide({ expanded, isActive, location }) {
+function NavSide({ expanded, isActive, location, admin, checkPermissions }) {
     function renderItem(item) {
+        const { permissions } = item;
+
+        if (!admin && permissions && !checkPermissions(permissions)) {
+            return null;
+        }
+
         return (
             <NavItem
                 key={item.link}
@@ -133,4 +140,4 @@ function NavSide({ expanded, isActive, location }) {
     )
 }
 
-export default NavSide
+export default withPermissions(NavSide);

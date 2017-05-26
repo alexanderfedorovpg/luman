@@ -8,10 +8,19 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import withPermissions from 'HOC/withPermissions';
 import makeSelectEditionPage from './selectors';
 import Header from './Header';
 
 export class EditionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    componentWillMount() {
+        const { admin, redirect } = this.props;
+
+        if (!admin) {
+            redirect('/');
+        }
+    }
+
     render() {
         return (
             <div>
@@ -36,4 +45,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditionPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withPermissions(EditionPage));

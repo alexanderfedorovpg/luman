@@ -231,6 +231,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "express": "4.14.0",
     "fontfaceobserver": "2.0.7",
+    "hoist-non-react-statics": "^1.2.0",
     "immutable": "3.8.1",
     "intl": "1.2.5",
     "invariant": "2.2.2",
