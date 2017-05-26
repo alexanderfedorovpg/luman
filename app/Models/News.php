@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Class News
@@ -44,7 +45,7 @@ class News extends Model
 
     public function uri()
     {
-        return $this->hasOne(NewsUri::class,'news_id','id');
+        return $this->hasOne(NewsUri::class, 'news_id', 'id');
     }
 
     /**
@@ -234,6 +235,17 @@ class News extends Model
     public function scopeNewsOnline($query)
     {
         return $query->where('is_online', '=', true);
+    }
+
+    public function scopeNotInHomePage($query)
+    {
+
+        $homepage = HomepageNews::all()->pluck('news_id')
+            ->merge( HomepageWar::all()->pluck('news_id'))
+            ->merge( HomepageInfoNoise::all()->pluck('news_id'));
+
+
+        return $query->whereNotIn('id',$homepage);
     }
 
 }

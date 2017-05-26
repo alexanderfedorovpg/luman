@@ -32,7 +32,7 @@ trait NewsListTrait {
 
         $constructor = $request->input('constructor');
         if ($constructor === 'true') {
-            $news->constructor(1);
+            $news->constructor(1)->NotInHomePage();
         } elseif ($constructor === 'false') {
             $news->constructor(0);
         }
