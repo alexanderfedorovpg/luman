@@ -84,8 +84,14 @@ class GroupController extends CmsController
             return $this->respondFail422x($e->getMessage());
         }
 
-        $group = new Group($request->all());
+        $group = new Group([
+            'name' => $request->name,
+            'enabled' => $request->enabled,
+        ]);
         if ($group->save()) {
+            if ($request->input('permissions') !== null) {
+                $this->addPermiss($request, $group->id);
+            }
             return $this->respondCreated($this->groupsTransformer->transform($group->toArray()));
         }
 
@@ -201,7 +207,6 @@ class GroupController extends CmsController
      */
     public function addPermiss(Request $request, $groupId)
     {
-
         $group = Group::find($groupId);
         if (!$group) {
             return $this->respondNotFound('Group not found');
