@@ -37,7 +37,7 @@ class NewsListController extends CmsController
     public function get(Request $request)
     {
 
-        $news = News::published()->NotInHomePage();
+        $news = News::published();
 
         $this->processing($request, $news);
 

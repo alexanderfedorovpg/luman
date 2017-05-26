@@ -109,4 +109,11 @@ class AirRecord extends Model
         return $query->where('is_published', '=', $isPublished);
     }
 
+    public function scopeNotInHomePage($query)
+    {
+
+        $records = HomepageRecord::all()->pluck('record_id');
+
+        return $query->whereNotIn('id',$records);
+    }
 }
