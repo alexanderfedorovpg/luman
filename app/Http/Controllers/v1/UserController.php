@@ -34,7 +34,7 @@ class UserController extends ApiController
      */
     public function __construct(UsersTransformer $usersTransformer)
     {
-        parent::__construct();
+
         $this->usersTransformer = $usersTransformer;
     }
 
@@ -234,7 +234,7 @@ class UserController extends ApiController
             if (!Auth::user()->isAdmin() || Auth::id()!=$user->id || !Auth::user()->can('v1.user-getStatistic')){
                 return response('Unauthorized.', 401);
             }
-            
+
             $written = News::where('is_publish', '=', true)
                 ->where('editor_id', '=', $user->id)->count();
             $edited = News::where('editor_id', '=', $user->id)->count();
