@@ -115,7 +115,7 @@ class UserController extends ApiController
 
 
 
-        if (Auth::user()->isAdmin() || Auth::id() == $id || Auth::user()->can('v1.user-update')) {
+        if (Auth::user()->isAdmin() || Auth::id() == $id || Auth::user()->can('v1.user-edit')) {
 
 
             $user = User::find($id);
@@ -159,7 +159,7 @@ class UserController extends ApiController
     public function destroy($id)
     {
 
-        if (Auth::user()->isAdmin() || Auth::user()->can('v1.user-destroy')) {
+        if (Auth::user()->isAdmin() || Auth::user()->can('v1.user-delete')) {
 
 
             $user = User::find($id);
