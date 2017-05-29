@@ -88,7 +88,14 @@ const FileInput = ({
     }
 
     return (
-        <Wrapper {...rest} icon={icon} success={success} error={error} hasVal={!!value}>
+        <Wrapper
+            {...rest}
+            icon={icon}
+            success={success}
+            error={error}
+            hasVal={!!value}
+            disabled={disabled}
+        >
             <Input
                 type="file"
                 name={name}

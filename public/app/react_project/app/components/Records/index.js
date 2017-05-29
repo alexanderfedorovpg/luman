@@ -44,13 +44,16 @@ class Records extends React.PureComponent {
     }
 
     renderItem({ id, ...props }) {
+        const canEdit = !!this.props.onRecordEdit;
+        const canDelete = !!this.props.onRecordDelete;
+
         return (
             <Item
                 key={id}
                 {...props}
                 onPreviewClick={(e) => { this.onPreviewClick(e, id); }}
-                onDelete={(e) => { this.onDelete(e, id); }}
-                onEdit={(e) => { this.onEdit(e, id); }}
+                onDelete={canDelete ? (e) => { this.onDelete(e, id); } : null}
+                onEdit={canEdit ? (e) => { this.onEdit(e, id); } : null}
             />
         );
     }

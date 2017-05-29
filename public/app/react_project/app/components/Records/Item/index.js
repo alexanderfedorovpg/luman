@@ -58,10 +58,16 @@ const Record = ({
                 }
             </Info>
             <Buttons className="record-buttons">
-                <StyledBtn buttonType="cancel" className="record-btn" onClick={onDelete}>
-                    Удалить
-                </StyledBtn>
-                <StyledBtn buttonType="edit" className="record-btn" onClick={onEdit} />
+                {
+                    !!onDelete &&
+                    <StyledBtn buttonType="cancel" className="record-btn" onClick={onDelete}>
+                        Удалить
+                    </StyledBtn>
+                }
+                {
+                    !!onEdit &&
+                    <StyledBtn buttonType="edit" className="record-btn" onClick={onEdit} />
+                }
             </Buttons>
         </Wrapper>
     );
