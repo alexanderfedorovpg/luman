@@ -13,18 +13,10 @@ import makeSelectEditionPage from './selectors';
 import Header from './Header';
 
 export class EditionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    componentWillMount() {
-        const { admin, redirect } = this.props;
-
-        if (!admin) {
-            redirect('/');
-        }
-    }
-
     render() {
         return (
             <div>
-                <Header />
+                <Header admin={this.props.admin} />
                 {this.props.children}
             </div>
         );

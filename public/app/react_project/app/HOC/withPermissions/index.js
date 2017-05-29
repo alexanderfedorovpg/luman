@@ -9,8 +9,7 @@ import {
     makeSelectUserPermissions,
     makeSelectUserGroup,
 } from 'containers/App/selectors';
-
-import { PERMISSIONS_MAP } from './constants';
+import makeCheckPermissions, { isAdmin } from 'utils/checkPermissions';
 
 const withPermissions = (WrappedComponent) => {
     function getDisplayName() {
@@ -23,38 +22,11 @@ const withPermissions = (WrappedComponent) => {
             super(props);
 
             this.redirect = ::this.redirect;
-            this.checkPermissions = ::this.checkPermissions;
+            this.checkPermissions = makeCheckPermissions(this.props.permissions);
         }
 
         redirect(path) {
             this.props.router.push(path);
-        }
-
-        /**
-         * проверяет разрешения пользователя
-         * @param {string} groupName - названия группы разрешений
-         * @param {boolean} [checkAll = true] - нужно ли проверить все разрешения,
-         * или достаточно, чтобы было хотя бы одно
-         * @param {[string]} [permissions] - массив с названиями разрешений
-         * @return {boolean} - если нет хоть одного разрешения из переданного массива, то false
-         */
-        checkPermissions(groupName, checkAll = true, permissions) {
-            const group = PERMISSIONS_MAP[groupName];
-
-            if (!group) {
-                return false;
-            }
-
-            permissions = permissions || Object.keys(group); // eslint-disable-line no-param-reassign
-
-            const result = permissions.some((perm) => {
-                const permName = group[perm];
-                const hasPermission = this.props.permissions[permName];
-
-                return checkAll ? !hasPermission : hasPermission;
-            });
-
-            return checkAll ? !result : result;
         }
 
         render() {
@@ -62,7 +34,7 @@ const withPermissions = (WrappedComponent) => {
 
             return (
                 <WrappedComponent
-                    admin={group === 1}
+                    admin={isAdmin(group)}
                     checkPermissions={this.checkPermissions}
                     redirect={this.redirect}
                     {...omit(props, ['router', 'params', 'location', 'routes'])}
