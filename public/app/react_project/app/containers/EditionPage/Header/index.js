@@ -32,7 +32,7 @@ class Header extends React.PureComponent {
             return null;
         }
 
-        if (permissions && !checkPermissions(permissions, true)) {
+        if (permissions && !checkPermissions(permissions.group, false, permissions.items)) {
             return null;
         }
 

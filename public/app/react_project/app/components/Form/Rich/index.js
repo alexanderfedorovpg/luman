@@ -49,7 +49,10 @@ class ExtImage extends ImageBlot {
 
     static create(value) {
         let node = super.create(value);
-        let figcaption = document.createElement('figcaption')
+        let info = document.createElement('figcaption')
+        info.classList.add('photo__info')
+        let title = document.createElement('figcaption')
+        title.classList.add('photo__title')
 
         if (node.nodeName.toLowerCase() == 'img') {
             let figure = document.createElement('figure')
@@ -61,8 +64,10 @@ class ExtImage extends ImageBlot {
             }
 
             figure.appendChild(node)
-            figure.appendChild(figcaption)
-            figcaption.textContent = `Фото: ${value.author} / ${value.source}`
+            figure.appendChild(title)
+            figure.appendChild(info)
+            info.textContent = value.title
+            info.textContent = `Фото: ${value.author} / ${value.source}`
 
             figure.dataset.title = value.title;
             figure.dataset.author = value.author;
@@ -80,13 +85,18 @@ class ExtImage extends ImageBlot {
 
             node.appendChild(img);
 
-            node.appendChild(figcaption)
-            figcaption.textContent = `Фото: ${value.author} / ${value.source}`
+            node.appendChild(title)
+            title.textContent = value.title
+
+            node.appendChild(info)
+            info.textContent = `Фото: ${value.author} / ${value.source}`
 
             node.dataset.title = value.title;
             node.dataset.author = value.author;
             node.dataset.source = value.source;
         }
+
+        node.classList.add('photo')
 
         return node;
     }

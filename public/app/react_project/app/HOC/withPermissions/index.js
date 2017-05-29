@@ -32,14 +32,21 @@ const withPermissions = (WrappedComponent) => {
         }
 
         componentWillReceiveProps(newProps) {
-            console.log(newProps.permissions, this.props.permissions);
+            const admin = isAdmin(newProps.group);
+            const permissionsChanged = newProps.permissions !== this.props.permissions;
 
-            if (newProps.permissions === this.props.permissions) {
-                return;
+            if (permissionsChanged) {
+                this.checkPermissions = makeCheckPermissions(newProps.permissions, admin);
             }
 
-            this.checkPermissions = makeCheckPermissions(this.props.permissions, this.state.admin);
-            this.forceUpdate();
+            if (admin !== this.state.admin) {
+                this.setState({
+                    admin,
+                });
+            // нужны вызвать ререндер, если разрешения изменились
+            } else if (permissionsChanged) {
+                this.forceUpdate();
+            }
         }
 
         redirect(path) {
@@ -52,7 +59,11 @@ const withPermissions = (WrappedComponent) => {
                     admin={this.state.admin}
                     checkPermissions={this.checkPermissions}
                     redirect={this.redirect}
-                    {...omit(this.props, ['router', 'params', 'location', 'routes'])}
+                    {
+                        ...omit(this.props, [
+                            'router', 'params', 'location', 'routes', 'group', 'permissions'
+                        ])
+                    }
                 />
             );
         }
@@ -64,6 +75,7 @@ const withPermissions = (WrappedComponent) => {
         permissions: PropTypes.object,
     };
 
+    // копируем статиечские методы и свойства класса
     hoistNonReactStatic(WithPermissions, WrappedComponent);
 
     WithPermissions.displayName = `WithPermissions(${getDisplayName(WrappedComponent)})`;
