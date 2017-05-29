@@ -14,9 +14,14 @@ import Header from './Header';
 
 export class EditionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render() {
+        const { admin, checkPermissions } = this.props;
+
         return (
             <div>
-                <Header admin={this.props.admin} />
+                <Header
+                    admin={admin}
+                    checkPermissions={checkPermissions}
+                />
                 {this.props.children}
             </div>
         );

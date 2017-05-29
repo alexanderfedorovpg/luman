@@ -1,6 +1,11 @@
 import { PERMISSIONS_MAP } from './constants';
 
-export default function makeCheckPermissions(userPermissions) {
+
+export function isAdmin(group) {
+    return group === 1;
+}
+
+export default function makeCheckPermissions(userPermissions, admin) {
     /**
      * проверяет разрешения пользователя
      * @param {string} groupName - названия группы разрешений
@@ -10,6 +15,11 @@ export default function makeCheckPermissions(userPermissions) {
      * @return {boolean} - если нет хоть одного разрешения из переданного массива, то false
      */
     return function checkPermissions(groupName, checkAll = true, permissions) {
+        // у админа есть все разрешения
+        if (admin) {
+            return true;
+        }
+
         const group = PERMISSIONS_MAP[groupName];
 
         if (!group) {
@@ -27,8 +37,4 @@ export default function makeCheckPermissions(userPermissions) {
 
         return checkAll ? !result : result;
     };
-}
-
-export function isAdmin(group) {
-    return group === 1;
 }

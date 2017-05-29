@@ -89,11 +89,11 @@ const NavBadge = styled(Badge)`
     `)}
 `;
 
-function NavSide({ expanded, isActive, location, admin, checkPermissions }) {
+function NavSide({ expanded, isActive, location, checkPermissions }) {
     function renderItem(item) {
         const { permissions } = item;
 
-        if (!admin && permissions && !checkPermissions(permissions, true)) {
+        if (permissions && !checkPermissions(permissions, true)) {
             return null;
         }
 

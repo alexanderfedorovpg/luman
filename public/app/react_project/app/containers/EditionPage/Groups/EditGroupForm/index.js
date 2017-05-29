@@ -103,26 +103,11 @@ EditGroupForm.propTypes = {
 
 const validate = (values) => {
     const errors = {};
-    const email = values.get('email');
 
-    if (!email) {
-        errors.email = 'Введите адрес электронной почты нового пользователя';
-    } else if (!checkEmail(email)) {
-        errors.email = 'Введите корректный адрес электронной почты';
-    }
+    const permissions = values.get('permissions');
 
-    if (!values.get('login')) {
-        errors.login = 'Введите логин нового пользователя';
-    }
-
-    const pass = values.get('password');
-
-    if (pass && pass.length < 6) {
-        errors.password = 'Пароль должен быть не менее 6 символов';
-    }
-
-    if (!values.get('group')) {
-        errors.group = 'Выберите группу';
+    if (!permissions || !permissions.size) {
+        errors.permissions = 'Выберите хотя бы один пункт из списка';
     }
 
     return errors;

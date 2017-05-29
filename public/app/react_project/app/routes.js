@@ -14,14 +14,22 @@ const loadModule = (cb) => (componentModule) => {
     cb(null, componentModule.default);
 };
 
+const selectPermissions = makeSelectUserPermissions();
+const selectGroup = makeSelectUserGroup();
+
 export default function createRoutes(store) {
     // Create reusable async injectors using getAsyncInjectors factory
     const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
-    const userPermissions = makeSelectUserPermissions()(store.getState());
-    const userGroup = makeSelectUserGroup()(store.getState());
-    const checkPermissions = makeCheckPermissions(userPermissions);
-    const admin = isAdmin(userGroup);
-    const sagasContext = require.context("./containers", true, /sagas.js$/);
+    let userPermissions = selectPermissions(store.getState());
+    let admin = isAdmin(selectGroup(store.getState()));
+
+    store.subscribe(() => {
+        userPermissions = selectPermissions(store.getState());
+        admin = isAdmin(selectGroup(store.getState()));
+    });
+
+    const checkPermissions = (...args) => makeCheckPermissions(userPermissions, admin)(...args);
+    const sagasContext = require.context('./containers', true, /sagas.js$/);
 
     function mountSagas(requestedSagas) {
         return function (nextState, replace, callback) {
@@ -31,10 +39,10 @@ export default function createRoutes(store) {
             }
 
             const importModules = Promise.all(
-                requestedSagas.map(v => sagasContext(v))
+                requestedSagas.map((v) => sagasContext(v))
             );
 
-            importModules.then(sagas => {
+            importModules.then((sagas) => {
                 this.loadedSagas = injectSagas(
                     sagas.reduce((acc, item) => [...acc, ...item.default], [])
                 );
@@ -42,7 +50,7 @@ export default function createRoutes(store) {
             });
 
             importModules.catch(errorLoading);
-        }
+        };
     }
 
     function unmountSagas() {
@@ -53,6 +61,7 @@ export default function createRoutes(store) {
     }
 
     return [
+        // Constructor
         {
             path: '/constructor',
             name: 'constructor',
@@ -151,6 +160,7 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
         },
+        // Feed
         {
             path: '/',
             name: 'feed',
@@ -167,7 +177,7 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then((results) => {
-                    let [
+                    const [
                         helpReducer,
                         reducer,
                         component,
@@ -182,6 +192,7 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
         },
+        // Stats
         {
             path: '/stats',
             name: 'stats',
@@ -203,6 +214,7 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
         },
+        // NewsList
         {
             path: '/newslist',
             name: 'newslist',
@@ -225,6 +237,7 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
         },
+        // Ready
         {
             path: '/ready',
             name: 'ready',
@@ -253,6 +266,7 @@ export default function createRoutes(store) {
                 },
             ],
         },
+        // Editor
         {
             path: '/editor',
             name: 'editor',
@@ -260,7 +274,7 @@ export default function createRoutes(store) {
                 './EditorPage/sagas.js',
                 './ImageGallery/sagas.js',
                 './NewslistPage/sagas.js',
-                './Chat/sagas.js'
+                './Chat/sagas.js',
             ]),
             onLeave: unmountSagas,
             getComponent(nextState, cb) {
@@ -278,8 +292,8 @@ export default function createRoutes(store) {
                         chatReducer,
                         imageGalleryReducer,
                         editorReducer,
-                        component
-                    ] = result
+                        component,
+                    ] = result;
                     injectReducer('chat', chatReducer.default);
                     injectReducer('imageGallery', imageGalleryReducer.default);
                     injectReducer('editorPage', editorReducer.default);
@@ -296,6 +310,7 @@ export default function createRoutes(store) {
                 },
             ],
         },
+        // Programs
         {
             path: '/programs',
             name: 'programsPage',
@@ -314,9 +329,19 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
-            onEnter: mountSagas(['./ProgramsPage/sagas.js']),
+            onEnter(nextState, replace, callback) {
+                if (!checkPermissions('records', false)) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                    callback();
+                    return;
+                }
+
+                mountSagas(['./ProgramsPage/sagas.js'])
+                    .call(this, nextState, replace, callback);
+            },
             onLeave: unmountSagas,
         },
+        // Live
         {
             path: '/live',
             name: 'livePage',
@@ -335,9 +360,19 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
-            onEnter: mountSagas(['./LivePage/sagas.js']),
+            onEnter(nextState, replace, callback) {
+                if (!checkPermissions('live', false)) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                    callback();
+                    return;
+                }
+
+                mountSagas(['./LivePage/sagas.js'])
+                    .call(this, nextState, replace, callback);
+            },
             onLeave: unmountSagas,
         },
+        // CategoriesStats
         {
             path: '/categoriesStatsPage',
             name: 'categoriesStatsPage',
@@ -365,6 +400,7 @@ export default function createRoutes(store) {
                 },
             ],
         },
+        // ArticleUserStats
         {
             path: '/articleUserStatsPage',
             name: 'articleUserStatsPage',
@@ -392,14 +428,15 @@ export default function createRoutes(store) {
                 },
             ],
         },
+        // Translation
         {
             path: '/translation',
             name: 'translation',
             childRoutes: [
                 {
                     path: '/translation/:id',
-                    name: 'translation-detail'
-                }
+                    name: 'translation-detail',
+                },
             ],
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
@@ -422,6 +459,7 @@ export default function createRoutes(store) {
             onEnter: mountSagas(['./TranslationPage/sagas.js', './Chat/sagas.js']),
             onLeave: unmountSagas,
         },
+        // Profile
         {
             path: '/profile',
             name: 'profilePage',
@@ -485,6 +523,7 @@ export default function createRoutes(store) {
             onEnter: mountSagas(['./ProfilePage/sagas.js']),
             onLeave: unmountSagas,
         },
+        // Edition
         {
             path: '/edition',
             name: 'editionPage',
@@ -504,12 +543,17 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
             onEnter(nextState, replace, callback) {
-                // if (!admin) {
-                //     replace({ pathname: '/', state: { redefined: true } });
-                // }
+                if (
+                    !checkPermissions('user', false, ['edit', 'getList']) &&
+                    !checkPermissions('history', true, ['getList'])
+                ) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                    callback();
+                    return;
+                }
 
                 mountSagas(['./EditionPage/sagas.js'])
-                    .call(this, nextState, replace, callback)
+                    .call(this, nextState, replace, callback);
             },
             onLeave: unmountSagas,
             childRoutes: [
@@ -529,6 +573,11 @@ export default function createRoutes(store) {
 
                         importModules.catch(errorLoading);
                     },
+                    onEnter(nextState, replace) {
+                        if (!checkPermissions('user', false, ['edit', 'getList'])) {
+                            replace({ pathname: '/', state: { redefined: true } });
+                        }
+                    },
                 },
                 {
                     path: '/edition/groups',
@@ -545,6 +594,11 @@ export default function createRoutes(store) {
                         });
 
                         importModules.catch(errorLoading);
+                    },
+                    onEnter(nextState, replace) {
+                        if (!admin) {
+                            replace({ pathname: '/', state: { redefined: true } });
+                        }
                     },
                 },
                 {
@@ -563,12 +617,25 @@ export default function createRoutes(store) {
 
                         importModules.catch(errorLoading);
                     },
+                    onEnter(nextState, replace) {
+                        if (!checkPermissions('history', true, ['getList'])) {
+                            replace({ pathname: '/', state: { redefined: true } });
+                        }
+                    },
                 },
             ],
             indexRoute: {
                 onEnter(nextState, replace, callback) {
-                    replace({ pathname: '/edition/users', state: { redefined: true } });
-                    callback();
+                    if (checkPermissions('user', false, ['edit', 'getList'])) {
+                        replace({ pathname: '/edition/users', state: { redefined: true } });
+                        callback();
+                    } else if (checkPermissions('history', true, ['getList'])) {
+                        replace({ pathname: '/edition/journal', state: { redefined: true } });
+                        callback();
+                    } else {
+                        replace({ pathname: '/', state: { redefined: true } });
+                        callback();
+                    }
                 },
             },
         },

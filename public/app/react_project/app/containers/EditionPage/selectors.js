@@ -232,7 +232,8 @@ const makeHistory = () => createSelector(
             id: action.id,
             cells: historyMap.map((item) => {
                 if (item.value === 'user') {
-                    return users[action.user_id].name;
+                    const { firstname, lastname } = action[item.value];
+                    return `${firstname} ${lastname || ''}`;
                 }
 
                 return action[item.value];
