@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ConfirmModal from 'components/Modal/ConfirmModal';
+import withPermissions from 'HOC/withPermissions';
 
 import { Wrapper, StyledTable, LeftColumn, RightColumn } from '../style';
 import { usersTableHeader } from '../constants';
@@ -52,13 +54,58 @@ class Users extends PureComponent {
         this.closeDeleteModal();
     }
 
+    renderEditUserForm() {
+        const {
+            groups,
+            userInfo,
+            userAccount,
+            checkPermissions,
+        } = this.props;
+
+        if (!checkPermissions('user', true, ['edit'])) {
+            return null;
+        }
+
+        return (
+            <EditUserForm
+                user={userInfo}
+                initialValues={userAccount}
+                groups={groups}
+                onClose={this.props.deselectUser}
+                onDelete={this.openDeleteModal}
+                onEdit={this.props.editUser}
+            />
+        );
+    }
+
+    renderNewUserForm() {
+        const {
+            groups,
+            admin,
+        } = this.props;
+
+        if (!admin) {
+            return null;
+        }
+
+        return (
+            <NewUserForm
+                groups={groups}
+                addUser={this.props.addUser}
+            />
+        );
+    }
+
+    renderForm() {
+        return this.props.selected ?
+            this.renderEditUserForm()
+            :
+            this.renderNewUserForm();
+    }
+
     render() {
         const {
             users,
-            groups,
-            selected,
-            userInfo,
-            userAccount,
         } = this.props;
 
         return (
@@ -72,25 +119,7 @@ class Users extends PureComponent {
                     />
                 </LeftColumn>
                 <RightColumn>
-                    {
-                        selected ?
-                            (
-                                <EditUserForm
-                                    user={userInfo}
-                                    initialValues={userAccount}
-                                    groups={groups}
-                                    onClose={this.props.deselectUser}
-                                    onDelete={this.openDeleteModal}
-                                    onEdit={this.props.editUser}
-                                />
-                            ) :
-                            (
-                                <NewUserForm
-                                    groups={groups}
-                                    addUser={this.props.addUser}
-                                />
-                            )
-                    }
+                    {this.renderForm()}
                 </RightColumn>
                 <ConfirmModal
                     isOpen={this.state.deleteModalOpen}
@@ -102,6 +131,21 @@ class Users extends PureComponent {
         );
     }
 }
+
+Users.propTypes = {
+    addUser: PropTypes.func,
+    admin: PropTypes.bool,
+    checkPermissions: PropTypes.func,
+    deleteUser: PropTypes.func,
+    deselectUser: PropTypes.func,
+    editUser: PropTypes.func,
+    groups: PropTypes.array,
+    selected: PropTypes.number,
+    selectUser: PropTypes.func,
+    userAccount: PropTypes.object,
+    userInfo: PropTypes.object,
+    users: PropTypes.array,
+};
 
 const mapStateToProps = createStructuredSelector({
     users: makeGetUsers(),
@@ -119,4 +163,4 @@ const mapDispatchToProps = (dispatch) => ({
     editUser: (id, data) => dispatch(editUser(id, data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(withPermissions(Users));
