@@ -19,8 +19,8 @@ export default function createRoutes(store) {
     const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
     const userPermissions = makeSelectUserPermissions()(store.getState());
     const userGroup = makeSelectUserGroup()(store.getState());
-    const checkPermissions = makeCheckPermissions(userPermissions);
     const admin = isAdmin(userGroup);
+    const checkPermissions = makeCheckPermissions(userPermissions, admin);
 
     return [
         {
@@ -158,7 +158,7 @@ export default function createRoutes(store) {
                     import('containers/FeedPage/sagas'),
                 ]);
 
-                importModules.then(sagas => {
+                importModules.then((sagas) => {
                     this.loadedSagas = injectSagas(
                         sagas.reduce((acc, item) => [...acc, ...item.default], [])
                     );
@@ -184,7 +184,7 @@ export default function createRoutes(store) {
                 const renderRoute = loadModule(cb);
 
                 importModules.then((results) => {
-                    let [
+                    const [
                         helpReducer,
                         reducer,
                         component,
@@ -324,7 +324,7 @@ export default function createRoutes(store) {
                     import('containers/Chat/sagas'),
                 ]);
 
-                importModules.then(sagas => {
+                importModules.then((sagas) => {
                     this.loadedSagas = injectSagas(
                         sagas.reduce((acc, item) => [...acc, ...item.default], [])
                     );
@@ -354,8 +354,8 @@ export default function createRoutes(store) {
                         chatReducer,
                         imageGalleryReducer,
                         editorReducer,
-                        component
-                    ] = result
+                        component,
+                    ] = result;
                     injectReducer('chat', chatReducer.default);
                     injectReducer('imageGallery', imageGalleryReducer.default);
                     injectReducer('editorPage', editorReducer.default);
@@ -391,6 +391,10 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
             onEnter(nextState, replace, callback) {
+                if (!checkPermissions('records', false)) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                }
+
                 if (this.loadedSagas) {
                     callback();
                     return;
@@ -431,6 +435,10 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
             onEnter(nextState, replace, callback) {
+                if (!checkPermissions('live', false)) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                }
+
                 if (this.loadedSagas) {
                     callback();
                     return;
@@ -512,8 +520,8 @@ export default function createRoutes(store) {
             childRoutes: [
                 {
                     path: '/translation/:id',
-                    name: 'translation-detail'
-                }
+                    name: 'translation-detail',
+                },
             ],
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
@@ -544,7 +552,7 @@ export default function createRoutes(store) {
                     import('containers/Chat/sagas'),
                 ]);
 
-                importModules.then(sagas => {
+                importModules.then((sagas) => {
                     this.loadedSagas = injectSagas(
                         sagas.reduce((acc, item) => [...acc, ...item.default], [])
                     );
@@ -661,9 +669,9 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             },
             onEnter(nextState, replace, callback) {
-                // if (!admin) {
-                //     replace({ pathname: '/', state: { redefined: true } });
-                // }
+                if (!checkPermissions('user', false, ['create', 'delete']) || !checkPermissions('history', true, ['getList'])) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                }
 
                 if (this.loadedSagas) {
                     callback();
@@ -702,6 +710,11 @@ export default function createRoutes(store) {
 
                         importModules.catch(errorLoading);
                     },
+                    onEnter(nextState, replace) {
+                        if (!checkPermissions('user', false, ['create', 'delete'])) {
+                            replace({ pathname: '/', state: { redefined: true } });
+                        }
+                    },
                 },
                 {
                     path: '/edition/groups',
@@ -718,6 +731,11 @@ export default function createRoutes(store) {
                         });
 
                         importModules.catch(errorLoading);
+                    },
+                    onEnter(nextState, replace) {
+                        if (!admin) {
+                            replace({ pathname: '/', state: { redefined: true } });
+                        }
                     },
                 },
                 {
@@ -736,12 +754,24 @@ export default function createRoutes(store) {
 
                         importModules.catch(errorLoading);
                     },
+                    onEnter(nextState, replace) {
+                        if (!checkPermissions('history', true, ['getList'])) {
+                            replace({ pathname: '/', state: { redefined: true } });
+                        }
+                    },
                 },
             ],
             indexRoute: {
                 onEnter(nextState, replace, callback) {
-                    replace({ pathname: '/edition/users', state: { redefined: true } });
-                    callback();
+                    if (checkPermissions('user', false, ['create, delete'])) {
+                        replace({ pathname: '/edition/users', state: { redefined: true } });
+                        callback();
+                    } else if (checkPermissions('history', true, ['getList'])) {
+                        replace({ pathname: '/edition/history', state: { redefined: true } });
+                        callback();
+                    } else {
+                        replace({ pathname: '/', state: { redefined: true } });
+                    }
                 },
             },
         },

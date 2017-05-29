@@ -21,8 +21,25 @@ const withPermissions = (WrappedComponent) => {
         constructor(props) {
             super(props);
 
+            const admin = isAdmin(props.group);
+
+            this.state = {
+                admin,
+            };
+
             this.redirect = ::this.redirect;
-            this.checkPermissions = makeCheckPermissions(this.props.permissions);
+            this.checkPermissions = makeCheckPermissions(props.permissions, admin);
+        }
+
+        componentWillReceiveProps(newProps) {
+            console.log(newProps.permissions, this.props.permissions);
+
+            if (newProps.permissions === this.props.permissions) {
+                return;
+            }
+
+            this.checkPermissions = makeCheckPermissions(this.props.permissions, this.state.admin);
+            this.forceUpdate();
         }
 
         redirect(path) {
@@ -30,14 +47,12 @@ const withPermissions = (WrappedComponent) => {
         }
 
         render() {
-            const { group, ...props } = this.props;
-
             return (
                 <WrappedComponent
-                    admin={isAdmin(group)}
+                    admin={this.state.admin}
                     checkPermissions={this.checkPermissions}
                     redirect={this.redirect}
-                    {...omit(props, ['router', 'params', 'location', 'routes'])}
+                    {...omit(this.props, ['router', 'params', 'location', 'routes'])}
                 />
             );
         }

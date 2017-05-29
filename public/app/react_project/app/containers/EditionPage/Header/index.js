@@ -25,9 +25,14 @@ class Header extends React.PureComponent {
     }
 
     renderLink(link) {
-        const { router, admin } = this.props;
+        const { router, admin, checkPermissions } = this.props;
+        const { permissions, onlyAdmin } = link;
 
-        if (link.onlyAdmin && !admin) {
+        if (onlyAdmin && !admin) {
+            return null;
+        }
+
+        if (permissions && !checkPermissions(permissions, true)) {
             return null;
         }
 

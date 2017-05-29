@@ -171,7 +171,7 @@ const CustomUserName = styled(UserName)`
     color: #fff;
 `;
 
-function Header({ moved, onToggle, isActive, onLogout, user, admin, checkPermissions }) {
+function Header({ moved, onToggle, isActive, onLogout, user, checkPermissions }) {
     return (
         <Wrapper moved={moved}>
             <Top>
@@ -198,7 +198,10 @@ function Header({ moved, onToggle, isActive, onLogout, user, admin, checkPermiss
                                 </NavItem>
                             }
                             {
-                                admin &&
+                                (
+                                    checkPermissions('user', false, ['create', 'delete']) ||
+                                    checkPermissions('history', true, ['getList'])
+                                ) &&
                                 <NavItem to="/edition" active={isActive('/edition')}>
                                     Редакция
                                 </NavItem>
