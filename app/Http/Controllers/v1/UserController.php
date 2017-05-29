@@ -114,6 +114,7 @@ class UserController extends ApiController
     {
 
 
+
         if (Auth::user()->isAdmin() || Auth::id() == $id || Auth::user()->can('v1.user-update')) {
 
 
