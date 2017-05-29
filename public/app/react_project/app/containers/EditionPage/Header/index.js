@@ -25,7 +25,12 @@ class Header extends React.PureComponent {
     }
 
     renderLink(link) {
-        const { router } = this.props;
+        const { router, admin } = this.props;
+
+        if (link.onlyAdmin && !admin) {
+            return null;
+        }
+
         return (
             <StyledLink key={link.href} to={link.href} active={router.isActive(link.href)}>
                 {link.label}

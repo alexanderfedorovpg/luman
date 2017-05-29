@@ -38,6 +38,7 @@ export const tabs = [
     {
         href: '/edition/groups',
         label: 'Группы',
+        onlyAdmin: true,
     },
     {
         href: '/edition/journal',
