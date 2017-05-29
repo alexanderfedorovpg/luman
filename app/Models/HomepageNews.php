@@ -26,7 +26,7 @@ class HomepageNews extends Model
      */
     public function category()
     {
-        return $this->hasONe(HomepageNewsCategory::class, 'id', 'category_id');
+        return $this->hasOne(HomepageNewsCategory::class, 'id', 'category_id');
     }
 
     /**

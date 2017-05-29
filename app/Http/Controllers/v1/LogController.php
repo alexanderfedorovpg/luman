@@ -7,6 +7,7 @@ use App\Http\Traits\LogFilter;
 use App\Models\Log;
 use App\Http\Transformers\v1\LogTransformer;
 use Auth;
+use Mockery\Exception;
 
 /**
  * Контроллер логов
@@ -39,14 +40,21 @@ class LogController extends CmsController
      */
     public function getAll(Request $request)
     {
+        try {
         $filter = $this->filter($request, Log::query());
         if ($request->input('userId')) {
             $filter->where('user_id', '=', $request->input('userId'));
         }
-        $logs = $filter->get();
+        $logs = $filter->with(array('user'=>function($query){
+            $query->select('id','firstname', 'lastname');
+        }))->get();
         return $this->respond(
             $this->logTransformer->transformCollection($logs->toArray())
         );
+        }
+        catch (Exception $e) {
+            $this->respondFail500x($e->getMessage());
+        }
     }
 
     /**
@@ -57,10 +65,14 @@ class LogController extends CmsController
     public function getCurrentUser(Request $request)
     {
         $user = Auth::user();
-        $logs = $this->filter($request, Log::where('user_id', '=', $user->id))->get();
+        $logs = $this->filter($request, Log::with(array('user'=>function($query){
+            $query->select('id','firstname', 'lastname');
+        }))->where('user_id', '=', $user->id))->get();
 
         return $this->respond(
             $this->logTransformer->transformCollection($logs->toArray())
         );
     }
+
+
 }

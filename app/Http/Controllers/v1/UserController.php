@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 
+use App\Http\Controllers\ApiController;
 use App\Http\Transformers\v1\UsersTransformer;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,7 +19,7 @@ use App\Models\News;
  * Контроллер управления пользователя
  * @package App\Http\Controllers\v1\Cms
  */
-class UserController extends CmsController
+class UserController extends ApiController
 {
 
 
@@ -57,6 +58,7 @@ class UserController extends CmsController
     public function show($id)
     {
         try {
+
             $user = User::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail();
 
 
@@ -78,6 +80,12 @@ class UserController extends CmsController
     public function create(Request $request)
     {
         try {
+
+            if (!Auth::user()->isAdmin()){
+                return response('Unauthorized.', 401);
+            }
+
+
             $rules = User::$rules;
             $rules['password'] = 'required|min:6';
 //            $rules['password_confirmation']=  'min:6';
@@ -104,6 +112,11 @@ class UserController extends CmsController
      */
     public function update(Request $request, $id)
     {
+        if (!Auth::user()->isAdmin() || Auth::id()!=$id || !Auth::user()->can('v1.user-update')){
+            return response('Unauthorized.', 401);
+        }
+
+
         $user = User::find($id);
         if (!$user) {
             return $this->respondNotFound('User is not found');
@@ -141,6 +154,11 @@ class UserController extends CmsController
      */
     public function destroy($id)
     {
+
+        if (!Auth::user()->isAdmin() || Auth::id()!=$id || !Auth::user()->can('v1.user-destroy')){
+            return response('Unauthorized.', 401);
+        }
+
         $user = User::find($id);
         if ($user) {
             $user->is_deleted = true;
@@ -171,6 +189,11 @@ class UserController extends CmsController
     public function editProfile(Request $request)
     {
         $user = Auth::user();
+
+
+        if (!Auth::user()->isAdmin() || Auth::id()!=$user->id || !Auth::user()->can('v1.user-editProfile')){
+            return response('Unauthorized.', 401);
+        }
 
         try {
             $this->validate($request, [
@@ -204,7 +227,14 @@ class UserController extends CmsController
     public function getStatistic($userId)
     {
         try {
+
+
             $user = User::findOrFail($userId);
+
+            if (!Auth::user()->isAdmin() || Auth::id()!=$user->id || !Auth::user()->can('v1.user-getStatistic')){
+                return response('Unauthorized.', 401);
+            }
+            
             $written = News::where('is_publish', '=', true)
                 ->where('editor_id', '=', $user->id)->count();
             $edited = News::where('editor_id', '=', $user->id)->count();
