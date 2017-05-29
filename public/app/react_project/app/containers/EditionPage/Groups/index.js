@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ConfirmModal from 'components/Modal/ConfirmModal';
@@ -66,7 +67,7 @@ class Groups extends PureComponent {
 
     render() {
         const {
-            users,
+            groups,
             permissions,
             selected,
             groupInfo,
@@ -78,7 +79,7 @@ class Groups extends PureComponent {
                 <LeftColumn>
                     <StyledTable
                         header={groupsTableHeader}
-                        body={users}
+                        body={groups}
                         onRowClick={this.props.selectGroup}
                         columnsWidth={['45%', '35%']}
                     />
@@ -115,8 +116,23 @@ class Groups extends PureComponent {
     }
 }
 
+Groups.propTypes = {
+    addGroup: PropTypes.func,
+    deleteGroup: PropTypes.func,
+    deselectGroup: PropTypes.func,
+    editGroup: PropTypes.func,
+    getPermissions: PropTypes.func,
+    groupAccount: PropTypes.object,
+    groupInfo: PropTypes.object,
+    groups: PropTypes.array,
+    loadGroups: PropTypes.func,
+    permissions: PropTypes.array,
+    selected: PropTypes.number,
+    selectGroup: PropTypes.func,
+};
+
 const mapStateToProps = createStructuredSelector({
-    users: makeGetGroupsTable(),
+    groups: makeGetGroupsTable(),
     permissions: makeCheckboxesFromPermissions(),
     selected: makeSelectedGroup(),
     groupInfo: makeGroupInfo(),
