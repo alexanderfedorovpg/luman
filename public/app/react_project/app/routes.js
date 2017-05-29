@@ -21,6 +21,36 @@ export default function createRoutes(store) {
     const userGroup = makeSelectUserGroup()(store.getState());
     const checkPermissions = makeCheckPermissions(userPermissions);
     const admin = isAdmin(userGroup);
+    const sagasContext = require.context("./containers", true, /sagas.js$/);
+
+    function mountSagas(requestedSagas) {
+        return function (nextState, replace, callback) {
+            if (this.loadedSagas) {
+                callback();
+                return;
+            }
+
+            const importModules = Promise.all(
+                requestedSagas.map(v => sagasContext(v))
+            );
+
+            importModules.then(sagas => {
+                this.loadedSagas = injectSagas(
+                    sagas.reduce((acc, item) => [...acc, ...item.default], [])
+                );
+                callback();
+            });
+
+            importModules.catch(errorLoading);
+        }
+    }
+
+    function unmountSagas() {
+        if (this.loadedSagas) {
+            this.loadedSagas.forEach((saga) => saga.cancel());
+            delete this.loadedSagas;
+        }
+    }
 
     return [
         {
@@ -102,31 +132,8 @@ export default function createRoutes(store) {
                     callback();
                 },
             },
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = Promise.all([
-                    import('containers/ConstructorPage/sagas'),
-                ]);
-
-                importModules.then(([constructorSagas]) => {
-                    this.loadedSagas = injectSagas([
-                        ...constructorSagas.default,
-                    ]);
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./ConstructorPage/sagas.js']),
+            onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/ConstructorPage/reducer'),
@@ -147,32 +154,8 @@ export default function createRoutes(store) {
         {
             path: '/',
             name: 'feed',
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = Promise.all([
-                    import('containers/Help/sagas'),
-                    import('containers/FeedPage/sagas'),
-                ]);
-
-                importModules.then(sagas => {
-                    this.loadedSagas = injectSagas(
-                        sagas.reduce((acc, item) => [...acc, ...item.default], [])
-                    );
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./Help/sagas.js', './FeedPage/sagas.js']),
+            onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/Help/reducer'),
@@ -223,27 +206,8 @@ export default function createRoutes(store) {
         {
             path: '/newslist',
             name: 'newslist',
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = System.import('containers/NewslistPage/sagas');
-
-                importModules.then((sagas) => {
-                    this.loadedSagas = injectSagas(sagas.default);
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./NewslistPage/sagas.js']),
+            onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/NewslistPage/reducer'),
@@ -264,27 +228,8 @@ export default function createRoutes(store) {
         {
             path: '/ready',
             name: 'ready',
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = System.import('containers/ReadyPage/sagas');
-
-                importModules.then((sagas) => {
-                    this.loadedSagas = injectSagas(sagas.default);
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./ReadyPage/sagas.js']),
+            onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/ReadyPage/reducer'),
@@ -311,34 +256,13 @@ export default function createRoutes(store) {
         {
             path: '/editor',
             name: 'editor',
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = Promise.all([
-                    import('containers/EditorPage/sagas'),
-                    import('containers/ImageGallery/sagas'),
-                    import('containers/NewslistPage/sagas'),
-                    import('containers/Chat/sagas'),
-                ]);
-
-                importModules.then(sagas => {
-                    this.loadedSagas = injectSagas(
-                        sagas.reduce((acc, item) => [...acc, ...item.default], [])
-                    );
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas([
+                './EditorPage/sagas.js',
+                './ImageGallery/sagas.js',
+                './NewslistPage/sagas.js',
+                './Chat/sagas.js'
+            ]),
+            onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     import('containers/Chat/reducer'),
@@ -390,27 +314,8 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = System.import('containers/ProgramsPage/sagas');
-
-                importModules.then((sagas) => {
-                    this.loadedSagas = injectSagas(sagas.default);
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./ProgramsPage/sagas.js']),
+            onLeave: unmountSagas,
         },
         {
             path: '/live',
@@ -430,27 +335,8 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = System.import('containers/LivePage/sagas');
-
-                importModules.then((sagas) => {
-                    this.loadedSagas = injectSagas(sagas.default);
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./LivePage/sagas.js']),
+            onLeave: unmountSagas,
         },
         {
             path: '/categoriesStatsPage',
@@ -533,32 +419,8 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = Promise.all([
-                    import('containers/TranslationPage/sagas'),
-                    import('containers/Chat/sagas'),
-                ]);
-
-                importModules.then(sagas => {
-                    this.loadedSagas = injectSagas(
-                        sagas.reduce((acc, item) => [...acc, ...item.default], [])
-                    );
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./TranslationPage/sagas.js', './Chat/sagas.js']),
+            onLeave: unmountSagas,
         },
         {
             path: '/profile',
@@ -620,27 +482,8 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
             },
-            onEnter(nextState, replace, callback) {
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = System.import('containers/ProfilePage/sagas');
-
-                importModules.then((sagas) => {
-                    this.loadedSagas = injectSagas(sagas.default);
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
-            },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onEnter: mountSagas(['./ProfilePage/sagas.js']),
+            onLeave: unmountSagas,
         },
         {
             path: '/edition',
@@ -665,26 +508,10 @@ export default function createRoutes(store) {
                 //     replace({ pathname: '/', state: { redefined: true } });
                 // }
 
-                if (this.loadedSagas) {
-                    callback();
-                    return;
-                }
-
-                const importModules = System.import('containers/EditionPage/sagas');
-
-                importModules.then((sagas) => {
-                    this.loadedSagas = injectSagas(sagas.default);
-                    callback();
-                });
-
-                importModules.catch(errorLoading);
+                mountSagas(['./EditionPage/sagas.js'])
+                    .call(this, nextState, replace, callback)
             },
-            onLeave() {
-                if (this.loadedSagas) {
-                    this.loadedSagas.forEach((saga) => saga.cancel());
-                    delete this.loadedSagas;
-                }
-            },
+            onLeave: unmountSagas,
             childRoutes: [
                 {
                     path: '/edition/users',
@@ -756,3 +583,4 @@ export default function createRoutes(store) {
         },
     ];
 }
+
