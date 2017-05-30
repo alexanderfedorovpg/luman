@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedDate, FormattedTime } from 'react-intl';
+import { FormattedRelative, FormattedTime } from 'react-intl';
 import {
     Wrapper,
     LeftColumn,
@@ -43,12 +43,7 @@ const NewsItem = ({ active, date, rubric, rating, title, hashTags, actionBtn, ac
                     !!date &&
                     <time dateTime={date}>
                         <StyledDate>
-                            <FormattedDate
-                                value={dateObj}
-                                year="numeric"
-                                month="long"
-                                day="2-digit"
-                            />
+                            <FormattedRelative value={dateObj} />
                         </StyledDate>
                         <StyledTime>
                             <FormattedTime value={dateObj} />

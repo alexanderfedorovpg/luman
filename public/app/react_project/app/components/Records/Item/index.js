@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedDate } from 'react-intl';
+import { FormattedRelative } from 'react-intl';
 import HashTags from 'components/HashTags';
 
 import {
@@ -42,12 +42,7 @@ const Record = ({
                 {
                     !!date &&
                     <RecordDate dateTime={date}>
-                        <FormattedDate
-                            value={dateObj}
-                            year="numeric"
-                            month="long"
-                            day="2-digit"
-                        />
+                        <FormattedRelative value={dateObj} />
                     </RecordDate>
                 }
                 <Program href="#">{program}</Program>
