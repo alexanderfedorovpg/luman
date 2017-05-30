@@ -24,7 +24,7 @@ function Content({ data, children }) {
                 {
                     !!theses.length &&
                     (
-                        <div className="text-bg-gray__block-text">
+                        <div className="text-bg-gray__block-text active">
                             {theses.map((v, i) => (
                                 <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
                                     {v}

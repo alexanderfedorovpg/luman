@@ -63,8 +63,8 @@ class Content extends PureComponent {
                         left
                         data={data.video_stream} />
                     <div className="news-preview">
-                        <Rubrics data={data.rubrics} />
-                        <figure className="news-preview__img">
+                        <Rubrics data={data.rubrics} className={!this.state.play ? 'active' : ''} />
+                        <figure className={classNames("news-preview__img", {'news-preview__img_play' : this.state.play})}>
                             <Img
                                 src={image.url}
                                 title={image.object_name||''}
