@@ -64,10 +64,10 @@ class App extends Component {
                             <Route exact path="/" component={HomePage} />
 
                             <Route exact path="/noise" component={NoisePage} />
-                            <Route path="/noise/:id" component={NoisePage} />
+                            <Route path="/noise/:code" component={NoisePage} />
 
                             <Route exact path="/news" component={NewsPage} />
-                            <Route path="/news/:id" component={NewsPage} />
+                            <Route path="/news/:code" component={NewsPage} />
 
                             <Route exact path="/broadcast" component={BroadcastPage} />
                             <Route path="/broadcast/:id" component={BroadcastPage} />

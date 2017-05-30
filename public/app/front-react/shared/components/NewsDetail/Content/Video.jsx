@@ -5,6 +5,7 @@ import { FormattedRelative } from 'react-intl'
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
+import Socials from 'components/Socials';
 
 class Content extends PureComponent {
 
@@ -81,6 +82,7 @@ class Content extends PureComponent {
                             {data.sub_title}
                         </p>
                     </div>
+                    <Socials shareLink={data.share_link} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
                     <div dangerouslySetInnerHTML={{ __html: data.body }} />

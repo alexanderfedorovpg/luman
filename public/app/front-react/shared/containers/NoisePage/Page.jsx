@@ -33,20 +33,33 @@ class NoisePage extends PureComponent {
         this.props.fetchNoise()
         this.props.fetchRecords()
 
-        if (match.params.id) {
-            this.fetchItem(match.params.id)
+        if (match.params.code) {
+            this.fetchItem(this.getId())
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.match.params.id !== nextProps.match.params.id) {
+        if (this.props.match.params.code !== nextProps.match.params.code) {
 
-            if (nextProps.match.params.id) {
-                this.fetchItem(nextProps.match.params.id)
+            if (nextProps.match.params.code) {
+                this.fetchItem(this.getId(nextProps.match.params.code))
             }
         }
     }
 
+    /**
+     * вернет ид новости
+     */
+    getId(code = false) {
+        const { match } = this.props;
+        if(code) return +code.match(/^(\d)+/)[0]
+        if (match.params.code){
+            let id = +match.params.code.match(/^(\d)+/)[0]
+            return id
+        }else{
+            return null;
+        }
+    }
     // загружает новость, если ее нет в списке
     // также загружает "новости по теме"
     fetchItem(id) {
@@ -72,20 +85,20 @@ class NoisePage extends PureComponent {
             pagination
         } = this.props
 
-        const item = this.getById(match.params.id)
+        const item = this.getById(this.getId())
 
         return (
             <div>
                 <Helmet>
                     <title>
-                        {match.params.id
+                        {match.params.code
                             ? `Инфошум - ${item.title||''}`
                             : 'Инфошум'
                         }
                     </title>
                 </Helmet>
 
-                {match.params.id
+                {match.params.code
                     ? (
                         <Detail
                             data={item}
