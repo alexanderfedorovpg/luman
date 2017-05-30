@@ -9,7 +9,7 @@ export const ensureAbs = (url = '') => (
 export const newsLink = article => (
     article
         ? article.top > 4
-            ? `/news/${article.id}`
-            : `/noise/${article.id}`
+            ? `/news/${article.code}`
+            : `/noise/${article.code}`
         : ''
 )

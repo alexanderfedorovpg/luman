@@ -5,6 +5,7 @@ import { FormattedRelative } from 'react-intl'
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
+import Socials from 'components/Socials';
 
 class Content extends PureComponent {
 
@@ -63,8 +64,8 @@ class Content extends PureComponent {
                         left
                         data={data.video_stream} />
                     <div className="news-preview">
-                        <Rubrics data={data.rubrics} />
-                        <figure className="news-preview__img">
+                        <Rubrics data={data.rubrics} className={!this.state.play ? 'active' : ''} />
+                        <figure className={classNames("news-preview__img", {'news-preview__img_play' : this.state.play})}>
                             <Img
                                 src={image.url}
                                 title={image.object_name||''}
@@ -81,6 +82,7 @@ class Content extends PureComponent {
                             {data.sub_title}
                         </p>
                     </div>
+                    <Socials shareLink={data.share_link} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
                     <div dangerouslySetInnerHTML={{ __html: data.body }} />

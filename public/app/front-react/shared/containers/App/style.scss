@@ -328,8 +328,20 @@ main {
             background-image: url(/content/text-bg-gray/text-block2.png);
 
             &_play {
-                left: 2.7%
+                left: 69.4%;
+
+                &:before {
+                    left: -25px;
+                    transform: scale(-1, 1);
+                }
+
+                &:after {
+                    left: -26px;
+                    transform: scale(-1, 1);
+                }
+
             }
+
         }
         &__text {
             margin-bottom: rem(18);
