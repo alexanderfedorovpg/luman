@@ -8,6 +8,7 @@ import {
     SAVE_CHANGES,
     REMOVE_FROM_CONSTRUCTOR,
     LOAD_ITEMS,
+    GET_ONLINE,
 
     strings,
 } from './constants';
@@ -33,6 +34,9 @@ import {
 
     successLoadItems,
     failureLoadItems,
+
+    onlineLoaded,
+    onlineLoadingError,
 } from './actions';
 
 
@@ -104,6 +108,16 @@ export function* getCategories() {
     }
 }
 
+export function* getOnline() {
+    try {
+        const { data: { data } } = yield call(api.getPublicOnline);
+
+        yield put(onlineLoaded(data));
+    } catch (err) {
+        yield put(onlineLoadingError(err));
+    }
+}
+
 export function* removeFromConstructor({ payload: { id, type } }) {
     try {
         if (type === 'news') {
@@ -149,6 +163,7 @@ export function* constructorData() {
     yield takeLatest(LOAD_CATEGORIES, getCategories);
     yield takeLatest(SAVE_CHANGES, saveHomeNews);
     yield takeLatest(LOAD_ITEMS, getItems);
+    yield takeLatest(GET_ONLINE, getOnline);
     yield takeEvery(REMOVE_FROM_CONSTRUCTOR, removeFromConstructor);
 }
 

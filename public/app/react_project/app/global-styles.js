@@ -17,6 +17,10 @@ injectGlobal`
     // font Nexa without Cyrillic
     ${fontFace('Nexa', 'hinted-HelveticaNeueCyr-Bold', 700, 'normal', ['woff', 'woff2'])}
 
+    // font ???
+    ${fontFace('StemText', 'StemText-Regular', 400, 'normal', ['woff', 'woff2'])}
+    ${fontFace('StemText', 'StemText-Bold', 700, 'normal', ['woff', 'woff2'])}
+
     *,
     *::before,
     *::after {

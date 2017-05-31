@@ -112,7 +112,8 @@ class Header extends Component {
             onSearchChange,
             onSave,
             onCancel,
-            onFilterChange
+            onFilterChange,
+            onPreview
         } = this.props
 
         return (
@@ -134,7 +135,9 @@ class Header extends Component {
                         <Icon type="arrow-left" />
                         Отменить изменения
                     </CustomButton>
-                    <CustomButton xs primary>
+                    <CustomButton
+                        xs primary
+                        onClick={onPreview}>
 
                         Предпросмотр
                     </CustomButton>

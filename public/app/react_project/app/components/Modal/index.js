@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
-import Icon from 'components/Icon';
 import { rem, ifProp } from 'utils/style';
 
 const defaultStyles = {
@@ -27,6 +26,7 @@ const defaultStyles = {
         paddingLeft: 0,
         backgroundColor: 'transparent',
         borderColor: 'transparent',
+        borderRadius: 0,
     },
 };
 
@@ -43,17 +43,6 @@ export const ModalContent = styled.div`
     box-shadow: 1px 1px 4px rgba(0, 0, 0, .16);
     background-color: #fff;
 `;
-
-const CloseIcon = styled(Icon)`
-    position: absolute;
-    top: 14px;
-    right: 14px;
-`;
-
-export const CloseBtn = ({ onClick }) => <CloseIcon type="delete-lg" onClick={onClick} />;
-CloseBtn.propTypes = {
-    onClick: PropTypes.func,
-};
 
 function Modal({ style = {}, ...props}) {
     const innerProps = {
