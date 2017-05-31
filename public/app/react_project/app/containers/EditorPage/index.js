@@ -90,40 +90,40 @@ class EditorPage extends Component {
     }
 
     submitHandler(cb) {
-    return data => {
-        const values = data.toJS()
-        const { article, rubrics } = this.props;
+        return data => {
+            const values = data.toJS()
+            const { article, rubrics } = this.props;
 
-        cb({
-            id: article.id,
-            top: values.top,
-            title: values.title,
-            sub_title: values.subtitle,
-            editor_id: (values.editor||{}).id,
-            rubrics: values.rubrics,
-            keywords: values.keywords.trim().replace(/ +/g, ','),
-            theses: values.theses,
-            image_main: typeof values.image_main === 'string'
-                ? (article.image_main||{}).id
-                : values.image_main[0],
-            image_main_info: {
-                object_name: values.image_main_title,
-                object_author: values.image_main_author,
-                object_source: values.image_main_source,
-            },
-            image_preview: typeof values.image_preview === 'string'
-                ? (article.image_preview||{}).id
-                : values.image_preview[0],
-            image_preview_info: {
-                object_name: values.image_preview_title,
-                object_author: values.image_preview_author,
-                object_source: values.image_preview_source,
-            },
-            body: values.body,
-            video_stream: values.video.id || (values.video.file||[])[0],
-            video_stream_preview: values.videoPreview.id || (values.videoPreview.file||[])[0],
-        });
-    }
+            cb({
+                id: article.id,
+                top: values.top,
+                title: values.title,
+                sub_title: values.subtitle,
+                editor_id: (values.editor||{}).id,
+                rubrics: values.rubrics,
+                keywords: values.keywords.trim().replace(/ +/g, ','),
+                theses: values.theses,
+                image_main: typeof values.image_main === 'string'
+                    ? (article.image_main||{}).id
+                    : values.image_main[0],
+                image_main_info: {
+                    object_name: values.image_main_title,
+                    object_author: values.image_main_author,
+                    object_source: values.image_main_source,
+                },
+                image_preview: typeof values.image_preview === 'string'
+                    ? (article.image_preview||{}).id
+                    : values.image_preview[0],
+                image_preview_info: {
+                    object_name: values.image_preview_title,
+                    object_author: values.image_preview_author,
+                    object_source: values.image_preview_source,
+                },
+                body: values.body,
+                video_stream: values.video.id || (values.video.file||[])[0],
+                video_stream_preview: values.videoPreview.id || (values.videoPreview.file||[])[0],
+            });
+        }
     }
 
     renderContent() {

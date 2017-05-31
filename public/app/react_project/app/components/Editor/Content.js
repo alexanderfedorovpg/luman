@@ -66,7 +66,7 @@ class Content extends PureComponent {
             image_preview_author: (props.article.image_preview||{}).object_author || '',
             image_preview_source: (props.article.image_preview||{}).object_source || '',
 
-            editor: props.article.editor_id,
+            editor: this.props.users.find(v => v.id === props.article.editor_id),
         }
     }
 

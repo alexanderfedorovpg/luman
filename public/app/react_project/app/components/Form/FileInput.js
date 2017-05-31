@@ -102,7 +102,7 @@ const FileInput = ({
                 accept={accept}
                 required={required}
                 disabled={disabled}
-                onChange={onChange}
+                onChange={e => e.target.files.length && onChange(e)}
             />
             {
                 !!icon &&
