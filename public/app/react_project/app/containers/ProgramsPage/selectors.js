@@ -80,8 +80,8 @@ const makeGetSelectedRecord = () => createSelector(
 
         return {
             ...target,
-            video: target.video.url,
-            video_preview: target.video.preview,
+            video: target.video ? target.video.url : null,
+            video_preview: target.video ? target.video.preview : null,
         };
     }
 );

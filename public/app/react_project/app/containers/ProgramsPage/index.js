@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+import withPermissions from 'HOC/withPermissions';
 
 import makeSelectProgramsPage, {
     makeGetSelectedRecord,
@@ -33,21 +34,26 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
     }
 
     render() {
-        const { selectedRecord } = this.props;
+        const { selectedRecord, checkPermissions } = this.props;
         const { modal, pendingToDelete } = this.props.ProgramsPage;
 
         return (
             <Wrapper>
                 <Helmet title="Список программ" />
-                <Header />
-                <Content>
-                    <ProgramsFilter />
-                    <Records />
-                </Content>
+                <Header checkPermissions={checkPermissions} />
+                {
+                    checkPermissions('records', true, ['getList']) &&
+                    <Content>
+                        <ProgramsFilter />
+                        <Records checkPermissions={checkPermissions} />
+                    </Content>
+                }
 
                 <RecordFormModal
                     currentModal={modal}
                     close={this.props.closeModal}
+                    canUploadVideo={checkPermissions('records', true, ['upload'])}
+                    canUploadFile={checkPermissions('file', true, ['upload'])}
                 />
 
                 <ConfirmDeleteModal
@@ -67,11 +73,12 @@ export class ProgramsPage extends React.PureComponent { // eslint-disable-line r
 }
 
 ProgramsPage.propTypes = {
-    openPage: PropTypes.func,
-    deleteRecord: PropTypes.func,
+    checkPermissions: PropTypes.func,
     closeModal: PropTypes.func,
-    selectedRecord: PropTypes.object,
+    deleteRecord: PropTypes.func,
+    openPage: PropTypes.func,
     ProgramsPage: PropTypes.object,
+    selectedRecord: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -87,4 +94,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProgramsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withPermissions(ProgramsPage));

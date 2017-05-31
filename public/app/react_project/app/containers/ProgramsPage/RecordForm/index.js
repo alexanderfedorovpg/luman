@@ -45,7 +45,7 @@ class RecordForm extends React.PureComponent {
     }
 
     render() {
-        const { programs, handleSubmit, valid, dirty } = this.props;
+        const { programs, handleSubmit, valid, dirty, canUploadFile, canUploadVideo } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -77,6 +77,7 @@ class RecordForm extends React.PureComponent {
                         name="video"
                         accept="video/*"
                         icon="arrow"
+                        disabled={!canUploadVideo}
                         placeholder="Выберите видео"
                         component={FileInputRedux}
                     />
@@ -86,6 +87,7 @@ class RecordForm extends React.PureComponent {
                         placeholder="Добавить превью"
                         name="video_preview"
                         accept="image/*"
+                        disabled={!canUploadFile}
                         multiple={false}
                         icon
                         size="s"
@@ -129,7 +131,7 @@ const validate = (values) => {
     }
 
     if (!values.get('video')) {
-        errors.video_url = 'Не загружено видео';
+        errors.video = 'Не загружено видео';
     }
 
     return errors;
@@ -142,13 +144,15 @@ RecordForm = reduxForm({
 })(RecordForm);
 
 RecordForm.propTypes = {
+    canUploadFile: PropTypes.bool,
+    canUploadVideo: PropTypes.bool,
+    dirty: PropTypes.bool,
+    editRecord: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    onCancel: PropTypes.func,
+    postRecord: PropTypes.func,
     programs: PropTypes.arrayOf(PropTypes.object),
     reset: PropTypes.func,
-    onCancel: PropTypes.func,
-    handleSubmit: PropTypes.func,
-    postRecord: PropTypes.func,
-    editRecord: PropTypes.func,
-    dirty: PropTypes.bool,
     valid: PropTypes.bool,
 };
 

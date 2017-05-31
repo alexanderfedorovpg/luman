@@ -30,7 +30,7 @@ const Wrapper = styled.label`
 
     border: 1px solid rgba(204, 204, 204, 0.74);
     border-radius: 0;
-    cursor: pointer;
+    cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
 
     &:hover {
         .image-loader-overlay {
@@ -113,8 +113,9 @@ const ImageLoader = ({
     <Wrapper
         overlay={value ? overlay : false}
         success={success}
+        disabled={disabled}
         error={error}
-        title={overlay ? '' : 'Нажмите чтобы выбрать другое изображение'}
+        title={(overlay || disabled) ? '' : 'Нажмите чтобы выбрать другое изображение'}
         {...rest}
     >
         <Input

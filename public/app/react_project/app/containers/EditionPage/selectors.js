@@ -2,6 +2,7 @@ import React from 'react';
 import { createSelector } from 'reselect';
 import User from 'components/User';
 import { makeGetGroups } from 'containers/App/selectors';
+import { isAdmin } from 'utils/checkPermissions';
 import { historyMap } from './constants';
 /**
  * Direct selector to the editionPage state domain
@@ -43,19 +44,31 @@ const makeGetUsers = () => createSelector(
         const users = usersImmutable.toJS();
         const groups = groupsImmutable.toJS();
 
-        function makeGroups(group) {
+        function makeGroupName(group) {
+            if (!group) {
+                return '';
+            }
+
             return groups.byId[group].name;
         }
 
-        return Object.values(users).map((user) => ({
-            id: user.id,
-            active: user.id === selected,
-            cells: [
-                <User className="table-user" data={{ name: user.name, avatar: user.avatar }} />,
-                user.groups.map(makeGroups).join(', '),
-                user.enabled === 1 ? 'Активен' : <span className="table-blocked">Заблокирован</span>,
-            ],
-        }));
+        return Object.values(users).reduce((result, user) => {
+            const group = user.groups[0];
+
+            if (!isAdmin(group)) {
+                result.push({
+                    id: user.id,
+                    active: user.id === selected,
+                    cells: [
+                        <User className="table-user" data={{ name: user.name, avatar: user.avatar }} />,
+                        makeGroupName(group),
+                        user.enabled === 1 ? 'Активен' : <span className="table-blocked">Заблокирован</span>,
+                    ],
+                });
+            }
+
+            return result;
+        }, []);
     }
 );
 
@@ -68,19 +81,23 @@ const makeGetGroupsTable = () => createSelector(
 
         const groups = groupsImmutable.toJS();
 
-        return groups.ids.map((id) => {
+        return groups.ids.reduce((result, id) => {
             const group = groups.byId[id];
 
-            return {
-                id,
-                active: id === selected,
-                cells: [
-                    <User className="table-user" data={{ name: group.name, letterAvatar: group.name[0] }} />,
-                    group.users.length,
-                    group.enabled === 1 ? 'Активна' : <span className="table-blocked">Заблокирована</span>,
-                ],
-            };
-        });
+            if (!isAdmin(id)) {
+                result.push({
+                    id,
+                    active: id === selected,
+                    cells: [
+                        <User className="table-user" data={{ name: group.name, letterAvatar: group.name[0] }} />,
+                        group.users.length,
+                        group.enabled === 1 ? 'Активна' : <span className="table-blocked">Заблокирована</span>,
+                    ],
+                });
+            }
+
+            return result;
+        }, []);
     }
 );
 
@@ -223,16 +240,16 @@ const selectHistory = createSelector(
 );
 
 const makeHistory = () => createSelector(
-    [selectHistory, selectUsers],
-    (historyImmutable, usersImmutable) => {
+    selectHistory,
+    (historyImmutable) => {
         const history = historyImmutable.toJS();
-        const users = usersImmutable.toJS();
 
         return history.map((action) => ({
             id: action.id,
             cells: historyMap.map((item) => {
                 if (item.value === 'user') {
-                    return users[action.user_id].name;
+                    const { firstname, lastname } = action[item.value];
+                    return `${firstname} ${lastname || ''}`;
                 }
 
                 return action[item.value];

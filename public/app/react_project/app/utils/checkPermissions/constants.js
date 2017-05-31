@@ -70,8 +70,7 @@ export const PERMISSIONS_MAP = {
         getOne: 'v1.tags-show',
     },
     user: {
-        create: 'v1.user-create',
-        delete: 'v1.user-delete',
+        edit: 'v1.user-edit',
         getList: 'v1.user-index',
         getOne: 'v1.user-show',
     },

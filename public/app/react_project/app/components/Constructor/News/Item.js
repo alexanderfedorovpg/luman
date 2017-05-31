@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import uniqBy from 'lodash/uniqBy';
 import moment from 'moment';
-import { FormattedDate } from 'react-intl';
+import { FormattedRelative } from 'react-intl';
 import { font, padding } from 'constants/style';
 
 import Rating from 'components/Rating/Item';
@@ -48,7 +48,7 @@ const Footer = styled.footer`
     justify-content: space-between;
 `;
 
-const Date = styled.time`
+const StyledDate = styled.time`
     font-size: 12px;
     font-weight: 400;
     color: #666;
@@ -129,14 +129,12 @@ class Item extends Component {
                     <Attachment>
                         1 Фото + 1 Видео
                     </Attachment>
-                    <Date dateTime={moment(data.publish_date).format('YYYY-MM-DD')}>
-                        <FormattedDate
-                            value={data.publish_date}
-                            day="numeric"
-                            month="long"
-                            year="numeric"
-                        />
-                    </Date>
+                    {
+                        !!Date.parse(data.publish_date) &&
+                        <StyledDate dateTime={moment(data.publish_date).format('YYYY-MM-DD')}>
+                            <FormattedRelative value={data.publish_date} />
+                        </StyledDate>
+                    }
                 </Footer>
                 <Remove
                     message="Убрать из списка"

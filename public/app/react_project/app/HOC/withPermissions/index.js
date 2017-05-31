@@ -21,8 +21,32 @@ const withPermissions = (WrappedComponent) => {
         constructor(props) {
             super(props);
 
+            const admin = isAdmin(props.group);
+
+            this.state = {
+                admin,
+            };
+
             this.redirect = ::this.redirect;
-            this.checkPermissions = makeCheckPermissions(this.props.permissions);
+            this.checkPermissions = makeCheckPermissions(props.permissions, admin);
+        }
+
+        componentWillReceiveProps(newProps) {
+            const admin = isAdmin(newProps.group);
+            const permissionsChanged = newProps.permissions !== this.props.permissions;
+
+            if (permissionsChanged) {
+                this.checkPermissions = makeCheckPermissions(newProps.permissions, admin);
+            }
+
+            if (admin !== this.state.admin) {
+                this.setState({
+                    admin,
+                });
+            // нужны вызвать ререндер, если разрешения изменились
+            } else if (permissionsChanged) {
+                this.forceUpdate();
+            }
         }
 
         redirect(path) {
@@ -30,14 +54,16 @@ const withPermissions = (WrappedComponent) => {
         }
 
         render() {
-            const { group, ...props } = this.props;
-
             return (
                 <WrappedComponent
-                    admin={isAdmin(group)}
+                    admin={this.state.admin}
                     checkPermissions={this.checkPermissions}
                     redirect={this.redirect}
-                    {...omit(props, ['router', 'params', 'location', 'routes'])}
+                    {
+                        ...omit(this.props, [
+                            'router', 'params', 'location', 'routes', 'group', 'permissions'
+                        ])
+                    }
                 />
             );
         }
@@ -49,6 +75,7 @@ const withPermissions = (WrappedComponent) => {
         permissions: PropTypes.object,
     };
 
+    // копируем статиечские методы и свойства класса
     hoistNonReactStatic(WithPermissions, WrappedComponent);
 
     WithPermissions.displayName = `WithPermissions(${getDisplayName(WrappedComponent)})`;

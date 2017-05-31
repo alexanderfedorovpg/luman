@@ -34,6 +34,10 @@ export const tabs = [
     {
         href: '/edition/users',
         label: 'Пользователи',
+        permissions: {
+            group: 'user',
+            items: ['edit', 'getList'],
+        },
     },
     {
         href: '/edition/groups',
@@ -43,6 +47,9 @@ export const tabs = [
     {
         href: '/edition/journal',
         label: 'Журнал',
+        permissions: {
+            group: 'history',
+        },
     },
 ];
 
