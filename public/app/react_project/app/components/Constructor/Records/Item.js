@@ -1,10 +1,12 @@
-import React, { Component, PropTypes } from 'react'
-import styled from 'styled-components'
+import React, { Component, PropTypes } from 'react';
+import styled from 'styled-components';
+import { FormattedRelative } from 'react-intl';
+import moment from 'moment';
 
-import { font, padding } from 'constants/style'
-import IconTip from 'components/IconTip'
+import { font, padding } from 'constants/style';
+import IconTip from 'components/IconTip';
 
-import DragSourceWrapper from '../DragSource'
+import DragSourceWrapper from '../DragSource';
 
 const Title = styled.span`
     font-family: ${font.opensans};
@@ -16,7 +18,7 @@ const Title = styled.span`
     font-size: 19px;
     line-height: 24px;
     letter-spacing: -0.15px;
-`
+`;
 
 const Attachment = styled.p`
     margin-top: 7px;
@@ -27,7 +29,19 @@ const Attachment = styled.p`
     color: #666;
     letter-spacing: -0.7px;
     text-transform: uppercase;
-`
+`;
+
+const StyledDate = styled.time`
+    font-size: 12px;
+    font-weight: 400;
+    color: #666;
+`;
+
+const Footer = styled.footer`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
 
 const Remove = styled(IconTip)`
     position: absolute;
@@ -58,8 +72,9 @@ const Remove = styled(IconTip)`
         color: inherit;
         padding: 0;
     }
-`
+`;
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Item extends Component {
     static propTypes = {
         data: PropTypes.object.isRequired,
@@ -74,22 +89,30 @@ class Item extends Component {
                 <Title>
                     {data.title}
                 </Title>
-                <Attachment>
-                    1 Фото + 1 Видео
-                </Attachment>
+                <Footer>
+                    <Attachment>
+                        1 Фото + 1 Видео
+                    </Attachment>
+                    {
+                        !!Date.parse(data.publish_date) &&
+                        <StyledDate dateTime={moment(data.publish_date).format('YYYY-MM-DD')}>
+                            <FormattedRelative value={data.publish_date} />
+                        </StyledDate>
+                    }
+                </Footer>
                 <Remove
                     message="Убрать из списка"
                     eventType="hover"
                     direction="bottom"
                     icon="delete"
-                    onClick={e => {
-                        onRemove(data)
-                        e.stopPropagation()
+                    onClick={(e) => {
+                        onRemove(data);
+                        e.stopPropagation();
                     }}
                 />
             </DragSourceWrapper>
-        )
+        );
     }
 }
 
-export default Item
+export default Item;

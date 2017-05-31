@@ -5,10 +5,31 @@ import Delta from 'quill-delta'
 
 import ContentModal from 'components/Modal/ContentModal'
 import ImageUploadForm from './Form'
+import extendImageBlot from './imageBlot'
 
 import * as api from 'api'
 
 import 'quill/dist/quill.snow.css'
+
+extendImageBlot(Quill)
+
+const Root = styled.div`
+    .ql-laquo:after {
+        content: "«";
+    }
+
+    .ql-raquo:after {
+        content: "»";
+    }
+
+    .ql-aquos:after {
+        content: "«»";
+    }
+
+    .ql-em-dash:after {
+        content: "—";
+    }
+`
 
 const toolbarContainer = [
     [
@@ -32,91 +53,9 @@ const toolbarContainer = [
     ],
     [
         'clean'
-    ]
+    ],
+    ['laquo', 'raquo', 'aquos', 'em-dash']
 ];
-
-const modules = {
-    toolbar: {
-        container: toolbarContainer,
-        handlers: {}
-    },
-};
-
-
-const ImageBlot = Quill.import('formats/image')
-
-class ExtImage extends ImageBlot {
-
-    static create(value) {
-        let node = super.create(value);
-        let info = document.createElement('figcaption')
-        info.classList.add('photo__info')
-        let title = document.createElement('figcaption')
-        title.classList.add('photo__title')
-
-        if (node.nodeName.toLowerCase() == 'img') {
-            let figure = document.createElement('figure')
-
-            node.setAttribute('src', this.sanitize(value.src));
-            if (value.title) {
-                node.setAttribute('alt', value.title);
-                node.setAttribute('title', value.title);
-            }
-
-            figure.appendChild(node)
-            figure.appendChild(title)
-            figure.appendChild(info)
-            info.textContent = value.title
-            info.textContent = `Фото: ${value.author} / ${value.source}`
-
-            figure.dataset.title = value.title;
-            figure.dataset.author = value.author;
-            figure.dataset.source = value.source;
-
-            node = figure
-        }
-        else {
-            let img = document.createElement('img')
-            img.setAttribute('src', this.sanitize(value.src));
-            if (value.title) {
-                img.setAttribute('alt', value.title);
-                img.setAttribute('title', value.title);
-            }
-
-            node.appendChild(img);
-
-            node.appendChild(title)
-            title.textContent = value.title
-
-            node.appendChild(info)
-            info.textContent = `Фото: ${value.author} / ${value.source}`
-
-            node.dataset.title = value.title;
-            node.dataset.author = value.author;
-            node.dataset.source = value.source;
-        }
-
-        node.classList.add('photo')
-
-        return node;
-    }
-
-    static value(domNode) {
-        const img = domNode.nodeName.toLowerCase() == 'img'
-            ? domNode
-            : domNode.querySelector('img')
-
-        return {
-            src: img.getAttribute('src'),
-            title: domNode.dataset.title,
-            author: domNode.dataset.author,
-            source: domNode.dataset.source,
-        };
-    }
-}
-ExtImage.tagName = 'FIGURE';
-
-Quill.register('formats/image', ExtImage, true)
 
 class Rich extends PureComponent {
 
@@ -131,6 +70,9 @@ class Rich extends PureComponent {
         this.closeModal = ::this.closeModal
         this.submitHandler = ::this.submitHandler
         this.toolbarImageHandler = ::this.toolbarImageHandler
+        this.toolbarLaquoHandler = ::this.toolbarLaquoHandler
+        this.toolbarRaquoHandler = ::this.toolbarRaquoHandler
+        this.toolbarEmDashHandler = ::this.toolbarEmDashHandler
     }
 
     openModal() {
@@ -145,15 +87,40 @@ class Rich extends PureComponent {
         })
     }
 
-    getModulesConfig() {
-        return {
-            toolbar: {
-                container: toolbarContainer,
-                handlers: {
-                    image: value => {
-                    }
-                }
-            }
+    insertText(text) {
+        const editor = this.quill.getEditor()
+
+        var range = editor.getSelection();
+        if (range) {
+            editor.insertText(range.index, text);
+            editor.setSelection(range.index+1);
+        }
+    }
+
+    toolbarLaquoHandler(value) {
+        this.insertText('«')
+    }
+
+    toolbarRaquoHandler(value) {
+        this.insertText('»')
+    }
+
+    toolbarEmDashHandler(value) {
+        this.insertText('—')
+    }
+
+    // у этой функции quill'овский контекст,
+    // т.е. this == quill instance
+    toolbarAquosHandler(value) {
+        const { quill } = this
+
+        var range = quill.getSelection();
+        if (range) {
+            // +1 т.к. после вставки левой кавычки индекс
+            // правой должен увеличиться на 1
+            quill.insertText(range.index, '«');
+            quill.insertText(range.index+range.length+1, '»');
+            quill.setSelection(range.index+1, range.length);
         }
     }
 
@@ -202,9 +169,8 @@ class Rich extends PureComponent {
 
     render() {
 
-
         return (
-            <div>
+            <Root>
                 <ReactQuill
                     ref={(el) => { this.quill = el }}
                     {...this.props}
@@ -212,7 +178,11 @@ class Rich extends PureComponent {
                         toolbar: {
                             container: toolbarContainer,
                             handlers: {
-                                image: this.toolbarImageHandler
+                                image: this.toolbarImageHandler,
+                                laquo: this.toolbarLaquoHandler,
+                                raquo: this.toolbarRaquoHandler,
+                                aquos: this.toolbarAquosHandler,
+                                'em-dash': this.toolbarEmDashHandler,
                             }
                         },
                     }} />
@@ -225,7 +195,7 @@ class Rich extends PureComponent {
 
                     <ImageUploadForm onSubmit={this.submitHandler} />
                 </ContentModal>
-            </div>
+            </Root>
         )
     }
 }

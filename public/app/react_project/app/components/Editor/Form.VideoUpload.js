@@ -55,6 +55,8 @@ class VideoUpload extends PureComponent {
             videoPreview.id.input.onChange(null);
             videoPreview.file.input.onChange(values.preview);
         }
+
+        this.closeModal();
     }
 
     render() {

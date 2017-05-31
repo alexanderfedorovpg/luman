@@ -131,9 +131,9 @@ export function* getRecords(action = { payload: {} }) {
 export function* postRecord({ payload }) {
     try {
         yield put(showPreloader());
-        const [uploadedVideo, uploadedPreview] = [
-            yield call(api.uploadVideo, payload.video[0]),
-            payload.video_preview ? yield call(api.uploadFile, payload.video_preview[0]) : null,
+        const [uploadedVideo, uploadedPreview] = yield [
+            call(api.uploadVideo, payload.video[0]),
+            payload.video_preview ? call(api.uploadFile, payload.video_preview[0]) : null,
         ];
         const type = yield select(getRecordsType);
 
@@ -180,9 +180,9 @@ export function* editRecord({ payload }) {
 
         yield put(showPreloader());
 
-        const [uploadedVideo, uploadedPreview] = [
-            needUploadVideo ? yield call(api.uploadVideo, payload.video[0]) : null,
-            needUploadPreview ? yield call(api.uploadFile, payload.video_preview[0]) : null,
+        const [uploadedVideo, uploadedPreview] = yield [
+            needUploadVideo ? call(api.uploadVideo, payload.video[0]) : null,
+            needUploadPreview ? call(api.uploadFile, payload.video_preview[0]) : null,
         ];
 
         if (uploadedPreview) {
