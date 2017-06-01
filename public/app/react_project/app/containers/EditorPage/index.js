@@ -166,6 +166,7 @@ class EditorPage extends Component {
 
                     <Content
                         article={article}
+                        formValues={this.props.formValues}
                         rubrics={rubrics}
                         chatRoom={params.id}
                         preview={this.state.preview}
@@ -185,6 +186,7 @@ class EditorPage extends Component {
 
                     <Content
                         article={article}
+                        formValues={this.props.formValues}
                         rubrics={rubrics}
                         chatRoom={params.id}
                         delegate={article.id && rejectArticle.bind(this, article.id)}

@@ -1,0 +1,116 @@
+.general-video {
+    position: relative;
+    overflow: hidden;
+    transition: height .3s;
+    height: 37.0625rem;
+}
+.general-video::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 18.75rem;
+    height: 37.0625rem;
+    background-color: rgba(0, 0, 0, 0.32);
+}
+.general-video_play::before {
+    display: none;
+}
+.general-video_collapsed {
+    height: 24.75rem;
+}
+.general-video iframe {
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+.general-video__date {
+    margin-left: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    color: #fff;
+}
+.general-video__img {
+    width: 18.75rem;
+    object-fit: cover;
+    object-position: top;
+}
+.general-video__info {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 18.75rem;
+}
+.general-video__link {
+    cursor: pointer;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 18.75rem;
+    height: 37.0625rem;
+}
+.general-video__title {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    display: block;
+    width: 15.625rem;
+    padding-right: 4.6875rem;
+    padding-left: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    color: #fff;
+    background-color: #243647;
+}
+.general-video__date_position {
+    position: relative;
+    margin-bottom: 0.6875rem;
+}
+.general-video__span {
+    position: absolute;
+    top: calc(50% - 0.5625rem);
+    left: 31px;
+}
+.general-video__ico {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+.general-video__logo {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    width: 8.5625rem;
+    height: 4.9375rem;
+    background-image: url(./purple-rtvi.png);
+    background-size: contain;
+}
+.general-video__logo-title {
+    position: absolute;
+    z-index: 1;
+    top: 0.3125rem;
+    left: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+.general-video_left .general-video__logo {
+    right: auto;
+    left: 0;
+    width: 9.1875rem;
+    height: 5.3125rem;
+    background-image: url(./green-rtvi-left.png);
+}
+.general-video_left .general-video__logo-title {
+    top: 0.5rem;
+    right: 0.75rem;
+    left: auto;
+}
+.general-video_no-overlay::before {
+    display: none;
+}

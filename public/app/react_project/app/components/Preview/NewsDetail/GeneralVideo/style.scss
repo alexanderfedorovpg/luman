@@ -1,0 +1,154 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.general-video {
+    position: relative;
+    overflow: hidden;
+    transition: height .3s;
+
+    height: rem(593);
+
+    &::before {
+        content: '';
+
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+
+        display: block;
+        width: rem(300);
+        height: rem(593);
+
+        background-color: rgba(0, 0, 0, .32);
+    }
+    &_play::before {
+        display: none;
+    }
+
+    &_collapsed {
+        height: rem(396);
+    }
+
+    iframe {
+        border: none;
+        height: 100%;
+        width: 100%;
+    }
+
+    &__date {
+        margin-left: rem(18);
+
+        font-size: rem(16);
+        line-height: rem(18);
+        color: $white;
+    }
+
+    &__img {
+        width: rem(300);
+
+        object-fit: cover;
+        object-position: top;
+    }
+
+    &__info {
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+
+        width: rem(300);
+    }
+
+    &__link {
+        cursor: pointer;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+
+        width: rem(300);
+        height: rem(593);
+    }
+
+    &__title {
+        @include padding_y(#{rem(10)});
+        display: block;
+        width: rem(250);
+        padding-right: rem(75);
+        padding-left: rem(18);
+
+        font-size: rem(16);
+        line-height: rem(18);
+        color: $white;
+
+        background-color: $dark;
+    }
+
+    &__date_position {
+        position: relative;
+
+        margin-bottom: rem(11);
+    }
+
+    &__span {
+        position: absolute;
+        top: calc(50% - #{rem(9)});
+        left: 31px;
+    }
+
+    &__ico {
+        width: rem(36);
+        height: rem(36);
+    }
+
+    &__logo {
+        position: absolute;
+        z-index: 0;
+        right: 0;
+        bottom: 0;
+
+        display: inline-block;
+        width: rem(137);
+        height: rem(79);
+        background-image: url(./purple-rtvi.png);
+        background-size: contain;
+    }
+
+    &__logo-title {
+        position: absolute;
+        z-index: 1;
+        top: rem(5);
+        left: rem(4);
+
+        font-size: rem(16);
+        line-height: rem(18);
+        color: $white;
+        text-transform: uppercase;
+    }
+
+    &_left {
+
+        .general-video__logo {
+            right: auto;
+            left: 0;
+
+            width: rem(147);
+            height: rem(85);
+
+            background-image: url(./green-rtvi-left.png);
+        }
+
+        .general-video__logo-title {
+            top: rem(8);
+            right: rem(12);
+            left: auto;
+        }
+    }
+
+    &_no-overlay {
+        &::before {
+            display: none;
+        }
+    }
+}

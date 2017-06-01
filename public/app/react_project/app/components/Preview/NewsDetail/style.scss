@@ -1,0 +1,303 @@
+$bg-gray: #253646;
+$white: #fff;
+$purple: #a03761;
+$gray: #ccc;
+$gray-dirty: #77808f;
+$gray-light: #eeeff1;
+$black: #282828;
+$blue: #00a5b6;
+$dark: #243647;
+$gray-date: #999;
+$dark-blue: #0f7686;
+$zero: #000;
+$enter: #243746;
+$copyright: #c9e2f7;
+$category-title: #993366;
+$category-border: #3f4142;
+$bg-text: #eaecee;
+$crumb: #019bab;
+$bg-square: #817f7f;
+$war: #cc0000;
+$box: #50687b;
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+    $src: null;
+
+    $extmods: (
+            eot: "?",
+            svg: "#" + str-replace($name, " ", "_")
+    );
+
+    $formats: (
+            otf: "opentype",
+            ttf: "truetype"
+    );
+
+    @each $ext in $exts {
+        $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+        $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+        $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+    }
+
+    @font-face {
+        font-family: quote($name);
+        font-style: $style;
+        font-weight: $weight;
+        src: $src;
+    }
+}
+@function rem($num) {
+    $strip-unit: $num / ($num * 0 + 1);
+    @return $strip-unit / 16 * 1rem;
+}
+
+@include font-face('StemText Regular', './fonts/StemText-Regular', normal, $exts: woff woff2 ttf);
+@include font-face('StemText Bold', './fonts/StemText-Bold', normal, $exts: woff woff2 ttf);
+$stemReg: 'StemText Regular', sans-serif;
+$stemBold: 'StemText Bold', sans-serif;
+
+.inner-about {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-between;
+        margin-bottom: rem(60);
+    }
+
+    &__enter-one {
+        margin-top: rem(31);
+    }
+
+    &__info-noize {
+        margin-top: rem(22);
+    }
+
+    &__enter-one--nopad .from-enter__info {
+        width: 100%;
+        padding-right: 6.7%;
+        padding-left: 0;
+    }
+
+    &__text-bg-gray {
+        position: relative;
+
+        margin-top: rem(20);
+        margin-bottom: rem(100);
+
+        transform: translateX(-17%);
+    }
+
+    &__left {
+        margin-top: rem(-15);
+    }
+
+    &__content {
+        padding-left: rem(82);
+        margin-top: rem(30);
+
+        color: $enter;
+
+        p {
+            margin-bottom: rem(21);
+
+            letter-spacing: rem(-.35);
+        }
+        a {
+            outline: none;
+            cursor: pointer;
+            &:hover {
+                color: $blue!important;
+            }
+        }
+    }
+
+    &__figure-title {
+        padding-left: rem(20);
+        margin-top: rem(51);
+        margin-bottom: rem(15);
+
+        letter-spacing: rem(-.5);
+    }
+
+    &__box-preview {
+        width: rem(782);
+        height: rem(289);
+        margin-left: rem(81);
+
+        background-color: $box;
+
+        &_position {
+            position: relative;
+        }
+    }
+
+    &__box-img {
+        width: inherit;
+        height: inherit;
+    }
+
+    &__box-text {
+        width: rem(356);
+        height: rem(172);
+        padding: #{rem(50)} #{rem(48) #{rem(28)} #{rem(25)}};
+
+        font: #{rem(16)}/ #{rem(24)} $stemBold;
+        color: $white;
+        letter-spacing: rem(-.8);
+
+        /*background-image: url(/content/about/box-text.png);*/
+        background-position: center;
+        background-size: cover;
+
+        &_position {
+            position: absolute;
+            top: rem(-72);
+            right: rem(-36);
+        }
+    }
+
+    &__title {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        padding-right: rem(30);
+    }
+
+    &__copy {
+        margin-top: rem(22);
+
+        font-family: $stemReg;
+        font-size: rem(12);
+        color: $blue;
+        text-decoration: none;
+    }
+
+    &__new-content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: rem(5);
+        &__message {
+            margin-right: rem(22);
+
+            font-family: $stemReg;
+            font-size: rem(12);
+            line-height: rem(14);
+            color: $gray-date;
+        }
+    }
+
+    .inner-about__enter-one--no-category {
+        .from-enter__category-link {
+            display: none;
+        }
+    }
+
+    &_margin {
+        margin-top: rem(54);
+    }
+
+}
+
+.inner-default {
+    // margin-top: rem(11);
+    h1 {
+        margin-top: rem(4);
+
+        line-height: rem(39);
+    }
+
+    .inner-about__content {
+        position: relative;
+
+        margin-top: rem(30);
+
+        > p {
+            letter-spacing: rem(-0.35);
+        }
+
+    }
+
+    .social-links {
+        position: absolute;
+        top: 100%;
+        left: rem(180);
+
+        margin-top: rem(-32);
+    }
+    .social-links--pad {
+        left: rem(196);
+    }
+
+    .inner-about__date {
+        margin-top: rem(2);
+
+        font-family: $stemReg;
+        font-size: rem(12);
+
+        color: $gray-date;
+    }
+
+
+}
+
+.news-preview {
+    width: rem(351);
+    padding-top: rem(18);
+    figure {
+        margin: 0;
+    }
+    &__img {
+        margin-top: rem(16);
+        margin-bottom: rem(42);
+        img {
+            display: block;
+            width: rem(351);
+            height: rem(234);
+            object-fit: cover;
+        }
+    }
+    &__source {
+        margin-top: rem(3);
+
+        font-family: $stemReg;
+        font-size: rem(11);
+        color: $gray-date;
+    }
+    &__text {
+        padding-right: rem(20);
+
+        font-family: $stemBold;
+        font-size: rem(16);
+        line-height: rem(24);
+        color: $enter;
+        letter-spacing: rem(-0.45);
+    }
+
+    &--wide {
+        width: rem(783);
+        padding-top: rem(12);
+
+        &.news-preview .news-preview {
+
+            &__img {
+                margin-top: rem(11);
+                margin-bottom: rem(17);
+                img {
+                    width: rem(783);
+                    height: rem(381);
+                }
+            }
+
+            &__text {
+                font-size: rem(18);
+            }
+
+        }
+    }
+
+}
+
