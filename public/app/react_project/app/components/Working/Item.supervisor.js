@@ -7,6 +7,7 @@ import Rating from 'components/Rating/Item'
 import User from 'components/User'
 import Status from 'components/Status'
 import Icon from 'components/Icon'
+import withPermissions from 'HOC/withPermissions'
 
 import Modal from 'components/Modal'
 
@@ -167,7 +168,17 @@ const NavItem = styled.a`${navItemStyles}`
 const CustomLink = styled(Link)`${navItemStyles}`
 const CustomPush = styled(PushNotification)`${navItemStyles}`
 
-function Item({ data, push, newItem, clearTask, postMessage, toggle, open, delegate }) {
+function Item({
+    data,
+    push,
+    newItem,
+    clearTask,
+    postMessage,
+    toggle,
+    open,
+    delegate,
+    checkPermissions
+}) {
     let editor = data.editor
         ? data.editor
         : null
@@ -175,7 +186,10 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open, deleg
     return (
         <Root>
             <Wrapper>
-                <Left onClick={()=>push(`/editor/${data.id}`)}>
+                <Left onClick={() => {
+                        checkPermissions('news', true, ['getOne', 'edit'])
+                        && push(`/editor/${data.id}`)
+                    }}>
                     <Header>
                         <CustomRating
                             rating={data.top}
@@ -224,21 +238,19 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open, deleg
                                     send={postMessage.bind(this, data.id)}>
                                     Пуш-уведомление
                                 </CustomPush>
-                                <NavItem onClick={() => delegate.bind(this, data.editor, data.id)()}>
-                                    Сменить редактора
-                                </NavItem>
-                                {/*<NavItem onCLick={()=>push(`/editor/${data.id}`)}>
-                                    Сменить редактора
-                                </NavItem>*/}
-                                {/*<NavItem onClick={()=> toggle.bind(this, data.id)()}>
-                                    Удалить задание
-                                </NavItem>*/}
-                                <NavItem onClick={()=>clearTask(data.id)}>
-                                    Удалить задание
-                                </NavItem>
+                                {checkPermissions('news', false, ['delegate']) && (
+                                    <NavItem onClick={() => delegate.bind(this, data.editor, data.id)()}>
+                                        Сменить редактора
+                                    </NavItem>
+                                )}
+                                {checkPermissions('news', false, ['delete']) && (
+                                    <NavItem onClick={()=>clearTask(data.id)}>
+                                        Удалить задание
+                                    </NavItem>
+                                )}
                             </Nav>
                         )
-                        : (
+                        : checkPermissions('news', false, ['delegate']) && (
                             <Nav className={navClassName}>
                                 <NavItem onClick={() => delegate.bind(this, data.editor, data.id)()}>
                                     Назначить редактора
@@ -259,7 +271,7 @@ function Item({ data, push, newItem, clearTask, postMessage, toggle, open, deleg
     )
 }
 
-export default Item
+export default withPermissions(Item)
 
 function formatTimeHelper(str) {
     let [day, hour, min, sec] = str.split(':')

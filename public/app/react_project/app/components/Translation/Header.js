@@ -38,7 +38,7 @@ const CustomRight = styled(Right)`
     width: 259px;
 `
 
-function Header({ moved, onDelete, onEdit, onSubmit }) {
+function Header({ moved, onDelete, onEdit, onSubmit, onTurnOff }) {
 
     return (
         <Bot moved={moved}>
@@ -50,7 +50,9 @@ function Header({ moved, onDelete, onEdit, onSubmit }) {
                         <Icon type="delete-bold" />
                         Удалить
                     </CustomButton>
-                    <CustomButton xs danger>
+                    <CustomButton
+                        onClick={onTurnOff}
+                        xs danger>
                         Выключить
                     </CustomButton>
                     <CustomButton

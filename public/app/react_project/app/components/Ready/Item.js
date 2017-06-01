@@ -7,6 +7,7 @@ import Rating from 'components/Rating/Item';
 import { titleWrapper } from 'components/Working/style';
 import Icon from 'components/Icon';
 import Button from 'components/Button';
+import withPermissions from 'HOC/withPermissions'
 
 import { rem, ifProp } from 'utils/style';
 import { font, padding } from 'constants/style';
@@ -178,7 +179,16 @@ const CloseIcon = styled(Icon)`
     display: none;
 `;
 
-function Item({ data, intl, newItem, push, open, publish, toggleDelete }) {
+function Item({
+    data,
+    intl,
+    newItem,
+    push,
+    open,
+    publish,
+    toggleDelete,
+    checkPermissions
+}) {
     return (
         <Root>
             <Wrapper>
@@ -238,7 +248,7 @@ function Item({ data, intl, newItem, push, open, publish, toggleDelete }) {
                             Предпросмотр
                         </PreviewButton>
                         {+data.is_publish
-                            ? (
+                            ? checkPermissions('news', true, ['getOne', 'edit']) && (
                                 <PublishButton
                                     md success
                                     onClick={(e) => push(`/editor/${data.id}`)}
@@ -261,10 +271,12 @@ function Item({ data, intl, newItem, push, open, publish, toggleDelete }) {
                         }
                     </ButtonContainer>
                 </Right>
-                <CloseIcon onClick={toggleDelete.bind(this, data.id)} className={secretClassName} type="delete-bold" />
+                {checkPermissions('news', false, ['delete']) && (
+                    <CloseIcon onClick={toggleDelete.bind(this, data.id)} className={secretClassName} type="delete-bold" />
+                )}
             </Wrapper>
         </Root>
     );
 }
 
-export default injectIntl(Item);
+export default withPermissions(injectIntl(Item));

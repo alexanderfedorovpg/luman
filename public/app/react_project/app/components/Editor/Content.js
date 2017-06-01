@@ -49,6 +49,8 @@ class Content extends PureComponent {
             videoPreview: {
                 id: video.preview_id,
                 file: video.preview,
+                author: video.preview_author,
+                source: video.preview_source,
             },
             body: props.article.body || '',
             title: props.article.title || '',
@@ -66,7 +68,7 @@ class Content extends PureComponent {
             image_preview_author: (props.article.image_preview||{}).object_author || '',
             image_preview_source: (props.article.image_preview||{}).object_source || '',
 
-            editor: this.props.users.find(v => v.id === props.article.editor_id),
+            editor: (this.props.users||[]).find(v => v.id === props.article.editor_id),
         }
     }
 

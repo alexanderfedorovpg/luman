@@ -21,7 +21,7 @@ import Video from './Shared/Video'
 
 import { rem } from 'utils/style'
 import { color } from 'constants/style'
-import videoPlaceholderSrc from './obzor-main.jpg'
+import videoPlaceholderSrc from './obzor-main-new.jpg'
 
 const Root = styled.div`
     margin-top: 1px;

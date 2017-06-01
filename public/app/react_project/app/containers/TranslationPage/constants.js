@@ -26,6 +26,10 @@ export const SAVE_COVER = 'app/TranslationPage/SAVE_COVER';
 export const SAVE_COVER_SUCCESS = 'app/TranslationPage/SAVE_COVER_SUCCESS';
 export const SAVE_COVER_FAILURE = 'app/TranslationPage/SAVE_COVER_FAILURE';
 
+export const TOGGLE_ONLINE = 'app/TranslationPage/TOGGLE_ONLINE';
+export const TOGGLE_ONLINE_SUCCESS = 'app/TranslationPage/TOGGLE_ONLINE_SUCCESS';
+export const TOGGLE_ONLINE_FAILURE = 'app/TranslationPage/TOGGLE_ONLINE_FAILURE';
+
 export const SET_COMMENTS_ACTION = 'app/TranslationPage/SET_COMMENTS_ACTION';
 export const SET_COMMENT_EDIT = 'app/TranslationPage/SET_COMMENT_EDIT';
 
@@ -42,4 +46,8 @@ export const strings = {
     commentDeleted: 'Комментарий удален',
     commentAdded: 'Комментарий сохранен',
     commentEdited: 'Комментарий обновлен',
+
+    onlineTurnedOff: 'Трансляция выключена',
+
+    error: 'Что-то пошло не так...'
 }

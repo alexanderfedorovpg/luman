@@ -38,7 +38,7 @@ class VideoUpload extends PureComponent {
         const values = data.toJS();
         const {
             video,
-            videoPreview
+            videoPreview,
         } = this.props;
 
         // Если загрузили новое видео, то обнуляем превью
@@ -48,12 +48,13 @@ class VideoUpload extends PureComponent {
 
             videoPreview.id.input.onChange(null);
             videoPreview.file.input.onChange(null);
-
         }
 
         if (values.preview && typeof values.preview !== 'string') {
             videoPreview.id.input.onChange(null);
             videoPreview.file.input.onChange(values.preview);
+            videoPreview.author.input.onChange(values.author);
+            videoPreview.source.input.onChange(values.source);
         }
 
         this.closeModal();
@@ -64,6 +65,8 @@ class VideoUpload extends PureComponent {
         const initialValues = {
             video: video.file.input.value,
             preview: videoPreview.file.input.value,
+            author: videoPreview.author.input.value,
+            source: videoPreview.source.input.value,
         };
 
         return (

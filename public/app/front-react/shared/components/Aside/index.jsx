@@ -6,7 +6,7 @@ import Noise from 'components/Noise'
 import One from 'components/Broadcast/One'
 import Subscribe from 'components/Subscribe'
 
-import mainVideoPlaceholder from './obzor-inside.jpg'
+import mainVideoPlaceholder from './obzor-inside-new.jpg'
 import efirPlaceholder from './efir.jpg'
 
 class Aside extends PureComponent {

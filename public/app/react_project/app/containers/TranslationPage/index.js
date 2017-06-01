@@ -18,6 +18,7 @@ import {
 } from './selectors'
 
 import {
+    toggleOnline,
     loadOnline,
     loadComments,
     addComment,
@@ -51,6 +52,7 @@ class TranslationPage extends PureComponent {
         this.applyAction = ::this.applyAction
         this.openModal = ::this.openModal
         this.closeModal = ::this.closeModal
+        this.turnOffOnline = ::this.turnOffOnline
     }
 
     componentDidMount() {
@@ -159,6 +161,14 @@ class TranslationPage extends PureComponent {
         toastr.info(strings.chooseCommentForDelete)
     }
 
+    turnOffOnline() {
+        const item = this.getById(this.props.params.id)
+
+        if (!item) return
+
+        this.props.toggleOnline(item.id)
+    }
+
     render() {
         const {
             menuOpen,
@@ -168,7 +178,8 @@ class TranslationPage extends PureComponent {
             submit,
             addComment,
             deleteComment,
-            edited
+            edited,
+
         } = this.props
         const item = this.getById(params.id) || {}
 
@@ -184,6 +195,7 @@ class TranslationPage extends PureComponent {
                                 moved={menuOpen}
                                 onDelete={this.setDeleteAction}
                                 onEdit={this.setEditAction}
+                                onTurnOff={this.turnOffOnline}
                                 onSubmit={this.submitHandler} />
                             <Detail
                                 data={item}
@@ -217,6 +229,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+    toggleOnline(id) {
+        dispatch(toggleOnline(id))
+    },
     fetchOnline(id) {
         dispatch(loadOnline(id))
     },

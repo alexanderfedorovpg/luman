@@ -17,6 +17,7 @@ export const items = [
     {
         link: '/ready',
         icon: 'ready',
+        permissions: 'ready',
         name: 'Готово',
     },
     {

@@ -1,10 +1,12 @@
-import { take, call, put, cancel, takeLatest, takeEvery, select } from 'redux-saga/effects'
+import { take, call, fork, put, cancel, takeLatest, takeEvery, select } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import { selectLocationState } from 'containers/App/selectors';
+import { showPreloader, hidePreloader } from 'containers/App/actions';
 import { toastrEmitter as toastr } from 'react-redux-toastr/lib/toastrEmitter'
 
 import {
     LOAD_ONLINE,
+    TOGGLE_ONLINE,
 
     LOAD_COMMENTS,
     ADD_COMMENT,
@@ -18,6 +20,9 @@ import {
 } from './constants'
 
 import {
+    onlineToggled,
+    onlineTogglingError,
+
     onlineLoaded,
     onlineLoadingError,
 
@@ -134,6 +139,27 @@ export function* saveTitle({ payload }) {
     }
 }
 
+export function* toggleOnline({ payload }) {
+
+    try {
+        yield put(showPreloader());
+        const { data } = yield call(api.toggleOnlineStatus, payload)
+
+        yield put(onlineToggled(data))
+
+        yield fork(getArticleList)
+
+        toastr.success(strings.onlineTurnedOff)
+        yield put(push(`/translation`))
+
+        yield put(hidePreloader());
+    } catch (err) {
+        toastr.error(strings.error)
+        yield put(hidePreloader());
+        yield put(onlineTogglingError(err))
+    }
+}
+
 export function* saveCover({ payload }) {
 
     try {
@@ -155,6 +181,8 @@ export function* onlineData() {
             ? call(getArticle, payload)
             : call(getArticleList)
     })
+
+    yield takeLatest(TOGGLE_ONLINE, toggleOnline)
 
     yield takeLatest(LOAD_COMMENTS, getComments)
 

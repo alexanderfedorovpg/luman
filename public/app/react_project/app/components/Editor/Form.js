@@ -44,6 +44,8 @@ function Part2Component({}) {
                 'video.file',
                 'videoPreview.id',
                 'videoPreview.file',
+                'videoPreview.author',
+                'videoPreview.source',
             ]}
             component={VideoUpload} />
     )

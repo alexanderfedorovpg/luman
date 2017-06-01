@@ -1,4 +1,8 @@
 import {
+    TOGGLE_ONLINE,
+    TOGGLE_ONLINE_SUCCESS,
+    TOGGLE_ONLINE_FAILURE,
+
     LOAD_ONLINE,
     LOAD_ONLINE_SUCCESS,
     LOAD_ONLINE_FAILURE,
@@ -39,6 +43,21 @@ export const setCommentsAction = payload => ({
 export const setCommentEdit = payload => ({
     type: SET_COMMENT_EDIT,
     payload
+})
+
+export const toggleOnline = payload => ({
+    type: TOGGLE_ONLINE,
+    payload
+})
+
+export const onlineToggled = payload => ({
+    type: TOGGLE_ONLINE_SUCCESS,
+    payload
+})
+
+export const onlineTogglingError = error => ({
+    type: TOGGLE_ONLINE_FAILURE,
+    error
 })
 
 export const loadOnline = payload => ({

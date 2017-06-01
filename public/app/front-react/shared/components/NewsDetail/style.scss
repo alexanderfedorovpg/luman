@@ -3,6 +3,17 @@
 
 .inner-about {
 
+    &__video-info {
+        height: 100%;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-right: rem(10);
+        padding-bottom: rem(32);
+        color: $gray-dirty;
+    }
+
     &__container {
         display: flex;
         flex-direction: row;
