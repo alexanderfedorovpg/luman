@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
+import stubImage from './stub.png'
+
 import {
     selectNoise,
     selectRelated,
@@ -19,6 +21,9 @@ import { fetch, fetchMore, setProgram } from 'actions/broadcast'
 
 import Detail from 'components/NewsDetail'
 import Broadcast from 'components/Broadcast/Page'
+import BroadcastStub from 'components/Broadcast/Page/stub.jsx'
+
+const SHOW_STUB = true; // показываем заглушку
 
 class BroadcastPage extends PureComponent {
 
@@ -77,32 +82,43 @@ class BroadcastPage extends PureComponent {
         const item = this.getById(match.params.id) || {}
         const p = [{ id: null, name: 'Все сразу' }, ...programs]
 
-        return (
-            <div>
-                <Helmet>
-                    <title>Из эфира</title>
-                </Helmet>
+        if(SHOW_STUB){
+            return (
+                <div>
+                    <Helmet>
+                        <title>Из эфира</title>
+                    </Helmet>
+                    <BroadcastStub stubImage={stubImage}/>
+                </div>
+            )
+        }else{
+            return (
+                <div>
+                    <Helmet>
+                        <title>Из эфира</title>
+                    </Helmet>
 
-                {match.params.id
-                    ? <Detail
-                        data={item}
-                        noise={noise}
-                        hasVideo
-                        related={relatedNews}
-                        broadcast={broadcast}
-                    />
-                    :
-                    <Broadcast
-                        broadcast={broadcast}
-                        onLoadRequest={loadMore}
-                        canLoad={pagination.page < pagination.lastPage}
-                        setProgram={setProgram}
-                        programs={p}
-                        program={program}
-                    />
-                }
-            </div>
-        )
+                    {match.params.id
+                        ? <Detail
+                            data={item}
+                            noise={noise}
+                            hasVideo
+                            related={relatedNews}
+                            broadcast={broadcast}
+                        />
+                        :
+                        <Broadcast
+                            broadcast={broadcast}
+                            onLoadRequest={loadMore}
+                            canLoad={pagination.page < pagination.lastPage}
+                            setProgram={setProgram}
+                            programs={p}
+                            program={program}
+                        />
+                    }
+                </div>
+            )
+        }
     }
 }
 

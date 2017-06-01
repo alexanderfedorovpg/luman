@@ -60,6 +60,11 @@
         }
     }
 
+    &__margin-top-bottom {
+        margin-bottom: rem(30);
+        height: rem(60);
+    }
+
     &__left {
         margin-top: rem(-9);
     }
