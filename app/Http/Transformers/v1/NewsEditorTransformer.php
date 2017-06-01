@@ -44,8 +44,8 @@ class NewsEditorTransformer extends Transformer
                 'preview' => $preview['url'],
                 'preview_id' => $news['video_stream_preview'],
                 'preview_source' => $preview['object_source'],
-                'preview_author' => $preview['object_source'],
-                'preview_name' => $preview['object_source'],
+                'preview_author' => $preview['object_author'],
+                'preview_name' => $preview['object_name'],
             ];
         } else {
             $transform['video_stream'] = null;
