@@ -122,6 +122,10 @@ class EditorPage extends Component {
                 body: values.body,
                 video_stream: values.video.id || (values.video.file||[])[0],
                 video_stream_preview: values.videoPreview.id || (values.videoPreview.file||[])[0],
+                video_stream_preview_info: {
+                    object_author: values.videoPreview.author,
+                    object_source: values.videoPreview.source,
+                },
             });
         }
     }

@@ -141,7 +141,18 @@ export default function createRoutes(store) {
                     callback();
                 },
             },
-            onEnter: mountSagas(['./ConstructorPage/sagas.js']),
+            onEnter(nextState, replace, callback) {
+                if (
+                    !checkPermissions('constructor', true, ['getCategories', 'getList'])
+                ) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                    callback();
+                    return;
+                }
+
+                mountSagas(['./ConstructorPage/sagas.js'])
+                    .call(this, nextState, replace, callback);
+            },
             onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
@@ -218,7 +229,18 @@ export default function createRoutes(store) {
         {
             path: '/newslist',
             name: 'newslist',
-            onEnter: mountSagas(['./NewslistPage/sagas.js']),
+            onEnter(nextState, replace, callback) {
+                if (
+                    !checkPermissions('news', false, ['getList'])
+                ) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                    callback();
+                    return;
+                }
+
+                mountSagas(['./NewslistPage/sagas.js'])
+                    .call(this, nextState, replace, callback);
+            },
             onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
@@ -241,7 +263,18 @@ export default function createRoutes(store) {
         {
             path: '/ready',
             name: 'ready',
-            onEnter: mountSagas(['./ReadyPage/sagas.js']),
+            onEnter(nextState, replace, callback) {
+                if (
+                    !checkPermissions('ready', false, ['moderate'])
+                ) {
+                    replace({ pathname: '/', state: { redefined: true } });
+                    callback();
+                    return;
+                }
+
+                mountSagas(['./ReadyPage/sagas.js'])
+                    .call(this, nextState, replace, callback);
+            },
             onLeave: unmountSagas,
             getComponent(nextState, cb) {
                 const importModules = Promise.all([

@@ -20,7 +20,7 @@ import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
 
-import mainVideoPlaceholder from './obzor-main.jpg'
+import mainVideoPlaceholder from './obzor-main-new.jpg'
 import './style.scss'
 
 function HomePage({

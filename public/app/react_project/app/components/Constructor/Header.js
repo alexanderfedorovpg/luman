@@ -12,6 +12,7 @@ import {
 import Icon from 'components/Icon'
 import Help from 'containers/Help'
 import Button from 'components/Button'
+import withPermissions from 'HOC/withPermissions'
 
 import { padding, font } from 'constants/style'
 
@@ -113,8 +114,11 @@ class Header extends Component {
             onSave,
             onCancel,
             onFilterChange,
-            onPreview
+            onPreview,
+            checkPermissions
         } = this.props
+
+        const canEdit = checkPermissions('constructor', false, ['edit'])
 
         return (
             <ConstructorBot moved={moved}>
@@ -143,8 +147,9 @@ class Header extends Component {
                     </CustomButton>
                     <CustomButton
                         xs success
+                        disabled={!canEdit}
                         active={!pristine}
-                        onClick={e=>onSave()}>
+                        onClick={e => canEdit && onSave()}>
 
                         <Icon type="okay" />
                         Опубликовать
@@ -155,4 +160,4 @@ class Header extends Component {
     }
 }
 
-export default Header
+export default withPermissions(Header)

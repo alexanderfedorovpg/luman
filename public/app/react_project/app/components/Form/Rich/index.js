@@ -31,32 +31,6 @@ const Root = styled.div`
     }
 `
 
-const toolbarContainer = [
-    [
-        { 'header': [1, 2, 3, 4, 5, 6, false] },
-        'bold',
-        'italic',
-        'underline',
-        'link',
-    ],
-    [
-        { 'list': 'ordered' },
-        { 'list': 'bullet' },
-    ],
-    [
-        'image',
-        'video'
-    ],
-    [
-        'code-block',
-        'blockquote',
-    ],
-    [
-        'clean'
-    ],
-    ['laquo', 'raquo', 'aquos', 'em-dash']
-];
-
 class Rich extends PureComponent {
 
     constructor(props) {
@@ -171,12 +145,50 @@ class Rich extends PureComponent {
 
         return (
             <Root>
+                <div id="toolbar">
+                    <div className="ql-formats">
+                        <select className="ql-header">
+                            <option value="1" />
+                            <option value="2" />
+                            <option value="3" />
+                            <option value="4" />
+                            <option value="5" />
+                            <option value="6" />
+                            <option />
+                        </select>
+                        <button className="ql-bold" />
+                        <button className="ql-italic" />
+                        <button className="ql-underline" />
+                        <button className="ql-link" />
+                    </div>
+                    <div className="ql-formats">
+                        <button className="ql-list" value="ordered" />
+                        <button className="ql-list" value="bullet" />
+                    </div>
+                    <div className="ql-formats">
+                        <button className="ql-image" />
+                        <button className="ql-video" />
+                    </div>
+                    <div className="ql-formats">
+                        <button className="ql-code-block" />
+                        <button className="ql-blockquote" />
+                    </div>
+                    <div className="ql-formats">
+                        <button className="ql-clean" />
+                    </div>
+                    <div className="ql-formats">
+                        <button className="ql-laquo" />
+                        <button className="ql-raquo" />
+                        <button className="ql-aquos" title="Ctrl + Shift + 2" />
+                        <button className="ql-em-dash" />
+                    </div>
+                </div>
                 <ReactQuill
                     ref={(el) => { this.quill = el }}
                     {...this.props}
                     modules={{
                         toolbar: {
-                            container: toolbarContainer,
+                            container: '#toolbar',
                             handlers: {
                                 image: this.toolbarImageHandler,
                                 laquo: this.toolbarLaquoHandler,
@@ -185,6 +197,21 @@ class Rich extends PureComponent {
                                 'em-dash': this.toolbarEmDashHandler,
                             }
                         },
+                        keyboard: {
+                            bindings: {
+                                insertAquos: {
+                                    key: '2',
+                                    shiftKey: true,
+                                    shortKey: true,
+                                    handler: this.toolbarAquosHandler
+                                },
+                                insertEmDash: {
+                                    key: '-',
+                                    shiftKey: true,
+                                    handler: this.toolbarEmDashHandler
+                                },
+                            }
+                        }
                     }} />
 
                 <ContentModal

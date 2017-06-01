@@ -79,7 +79,8 @@ export class CollapseContainer extends PureComponent {
             onRemove,
             moveItem,
             categories,
-            data
+            data,
+            push
         } = this.props
 
         return (
@@ -93,7 +94,8 @@ export class CollapseContainer extends PureComponent {
                     onRemove={onRemove}
                     onMove={moveItem.bind(this, type)}
                     categories={categories}
-                    data={this.groupData()} />
+                    data={this.groupData()}
+                    push={push}/>
             </Wrap>
         )
     }
@@ -119,6 +121,9 @@ const mapDispatchToProps = dispatch => ({
     },
     moveItem(type, source, target) {
         dispatch(moveItem(type, source, target))
+    },
+    push(path) {
+        dispatch(push(path))
     }
 })
 

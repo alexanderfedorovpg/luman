@@ -220,9 +220,9 @@ export const uploadFile = (file, data = {}) => {
     const formData = new FormData();
 
     formData.append('file', file);
-    formData.append('object_name', data.object_name);
-    formData.append('object_author', data.object_author);
-    formData.append('object_source', data.object_source);
+    formData.append('object_name', data.object_name || '');
+    formData.append('object_author', data.object_author || '');
+    formData.append('object_source', data.object_source || '');
 
     return data.id
 
@@ -307,6 +307,7 @@ export const putArticleTitle = data => axios.put(`/newseditor/title`, qs.stringi
         'Content-Type': 'application/x-www-form-urlencoded',
     },
 });
+export const toggleOnlineStatus = id => axios.get(`/news/online/setstatus/${id}`);
 export const getPublicOnline = () => publicApi.get('/news/comments');
 // =============================================================================
 

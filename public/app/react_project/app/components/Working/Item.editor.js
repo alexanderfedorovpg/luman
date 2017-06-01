@@ -7,6 +7,8 @@ import randomString from 'random-string'
 import Rating from 'components/Rating/Item'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
+import withPermissions from 'HOC/withPermissions'
+
 import { titleWrapper } from './style'
 
 import { font } from 'constants/style'
@@ -184,7 +186,7 @@ const CloseContainer = styled.div`
     cursor: pointer;
 `
 
-function Item({ data, newItem, reject, accept }) {
+function Item({ data, newItem, reject, accept, checkPermissions }) {
 
     return (
         <Root>
@@ -238,19 +240,23 @@ function Item({ data, newItem, reject, accept }) {
                     }
                 </Tags>
                 <ButtonContainer className={secretClassName}>
-                    <CustomButton
-                        md danger
-                        onClick={()=>reject(data.id)}>
+                    {checkPermissions('news', false, ['reject']) && (
+                        <CustomButton
+                            md danger
+                            onClick={()=>reject(data.id)}>
 
-                        Отказаться
-                    </CustomButton>
-                    <CustomButton
-                        md success
-                        onClick={()=>accept(data.id)}>
+                            Отказаться
+                        </CustomButton>
+                    )}
+                    {checkPermissions('news', false, ['toWork']) && (
+                        <CustomButton
+                            md success
+                            onClick={()=>accept(data.id)}>
 
-                        <Icon type="arrow-right" />
-                        В работу
-                    </CustomButton>
+                            <Icon type="arrow-right" />
+                            В работу
+                        </CustomButton>
+                    )}
                 </ButtonContainer>
                 <CloseContainer className={secretClassName}>
                     <Icon type="delete-reverse" />
@@ -260,4 +266,4 @@ function Item({ data, newItem, reject, accept }) {
     )
 }
 
-export default Item
+export default withPermissions(Item)

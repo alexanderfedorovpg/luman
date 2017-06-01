@@ -5,7 +5,7 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import ContentModal from 'components/Modal/ContentModal';
 import TypedBtn from 'components/Button/TypedBtn';
 import { Group } from 'components/Form';
-import { FileInputRedux, ImageLoaderRedux } from 'components/Form/ReduxForm';
+import { FileInputRedux, ImageLoaderRedux, InputRedux } from 'components/Form/ReduxForm';
 
 const StyledBtn = styled(TypedBtn)`
     flex-grow: 1;
@@ -14,6 +14,14 @@ const StyledBtn = styled(TypedBtn)`
         margin-right: 5px;
     }
 `;
+
+const GroupTop = styled(Group)`
+    align-items: flex-start;
+`
+
+const GroupWide = styled(Group)`
+    flex-grow: 1;
+`
 
 const UploadFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
     <ContentModal
@@ -33,9 +41,8 @@ const UploadFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
                     component={FileInputRedux}
                 />
             </Group>
-            <Group md>
+            <GroupTop md horizontal>
                 <Field
-                    block
                     placeholder="Выберите превью для видео"
                     name="preview"
                     accept="image/*"
@@ -44,7 +51,21 @@ const UploadFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
                     size="s"
                     component={ImageLoaderRedux}
                 />
-            </Group>
+                <GroupWide>
+                    <Field
+                        block
+                        placeholder="Автор"
+                        name="author"
+                        component={InputRedux}
+                    />
+                    <Field
+                        block
+                        placeholder="Источник"
+                        name="source"
+                        component={InputRedux}
+                    />
+                </GroupWide>
+            </GroupTop>
             <Group horizontal>
                 <StyledBtn
                     buttonType="cancel"

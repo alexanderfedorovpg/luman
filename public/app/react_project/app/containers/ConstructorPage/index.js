@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
+import { push } from 'react-router-redux';
 
 import Header from 'components/Constructor/Header';
 import Modal from './Preview/Modal';
@@ -145,6 +146,9 @@ const mapDispatchToProps = dispatch => ({
     cancelChanges() {
         dispatch(cancelChanges())
     },
-})
+    push(path) {
+        dispatch(push(path));
+    },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConstructorPage);
