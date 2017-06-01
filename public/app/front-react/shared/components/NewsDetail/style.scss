@@ -61,6 +61,10 @@
         & figure {
             position: relative;
             img {
+
+                width: 100%;
+                object-fit: cover;
+
                 position: relative;
                 z-index: 2;
             }
@@ -68,8 +72,8 @@
             figcaption {
                 margin-top: 0.1875rem;
                 font-family: "StemText Regular", sans-serif;
-                font-size: 0.6875rem;
-                color: #999;
+                font-size: rem(12);
+                color: #9fa0a2;
                 z-index: 2;
                 position: relative;
             }
@@ -83,7 +87,8 @@
                 position: absolute;
                 background: #eaecee;
                 top: 0px;
-                left: -50.2%;
+                // left: -50.2%;
+                left: calc(100% - 887px);
                 z-index: 1;
             }
         }
@@ -223,6 +228,9 @@
 .news-preview {
     width: rem(351);
     padding-top: rem(18);
+
+    position: relative;
+
     &__img {
         margin-top: rem(16);
         margin-bottom: rem(42);

@@ -34,7 +34,7 @@ class Content extends PureComponent {
         const image = data.image_preview || {};
 
         return (
-            <div>
+            <div className={classNames('inner-about__inner-wrap', {'inner-about__inner-wrap_play' : this.state.play})}>
                 <h1>
                     {data.title}
                 </h1>
