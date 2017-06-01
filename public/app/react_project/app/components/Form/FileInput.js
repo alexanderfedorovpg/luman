@@ -88,14 +88,21 @@ const FileInput = ({
     }
 
     return (
-        <Wrapper {...rest} icon={icon} success={success} error={error} hasVal={!!value}>
+        <Wrapper
+            {...rest}
+            icon={icon}
+            success={success}
+            error={error}
+            hasVal={!!value}
+            disabled={disabled}
+        >
             <Input
                 type="file"
                 name={name}
                 accept={accept}
                 required={required}
                 disabled={disabled}
-                onChange={onChange}
+                onChange={e => e.target.files.length && onChange(e)}
             />
             {
                 !!icon &&

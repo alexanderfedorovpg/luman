@@ -24,6 +24,10 @@ export const inputCSS = css`
         opacity: 1;
     }
 
+    ${ifProp('disabled')(css`
+        cursor: not-allowed;
+    `)}
+
     ${ifProp('success')(css`
         border-color: ${color.success};
     `)}

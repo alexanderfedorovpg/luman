@@ -4,6 +4,9 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 
 import Header from 'components/Constructor/Header';
+import Modal from './Preview/Modal';
+import PreviewDefault from './Preview/Default';
+import PreviewWar from './Preview/War';
 
 import {
     loadPrograms
@@ -11,6 +14,7 @@ import {
 
 import {
     loadCategories,
+    loadOnline,
     loadHomeNews,
     cancelChanges,
     removeFromMain,
@@ -21,7 +25,9 @@ import {
 import {
     selectCategories,
     selectWarMode,
-    selectPristine
+    selectPristine,
+    selectHomeNews,
+    selectOnline,
 } from './selectors';
 
 import {
@@ -33,12 +39,32 @@ export class ConstructorPage extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            previewOpen: false
+        }
+
+        this.openPreview = ::this.openPreview
+        this.closePreview = ::this.closePreview
     }
 
     componentDidMount() {
+        this.props.loadOnline()
         this.props.loadNewslist()
         this.props.loadCategories()
         this.props.loadPrograms({constructor: true})
+    }
+
+    openPreview() {
+        this.setState({
+            previewOpen: true
+        })
+    }
+
+    closePreview() {
+        this.setState({
+            previewOpen: false
+        })
     }
 
     render() {
@@ -48,7 +74,9 @@ export class ConstructorPage extends React.Component {
             cancelChanges,
             setFilter,
             saveChanges,
-            pristine
+            pristine,
+            home,
+            online
         } = this.props;
 
         return (
@@ -60,10 +88,22 @@ export class ConstructorPage extends React.Component {
                     pristine={pristine}
                     onSave={saveChanges}
                     moved={menuOpen}
+                    onPreview={this.openPreview}
                     onCancel={cancelChanges}
                     onFilterChange={setFilter} />
 
                 {this.props.children}
+
+                <Modal
+                    contentLabel="Предпросмотр"
+                    isOpen={this.state.previewOpen}
+                    onRequestClose={this.closePreview}>
+
+                    {war
+                        ? <PreviewWar data={home} online={online.toJS()} />
+                        : <PreviewDefault data={home} />
+                    }
+                </Modal>
             </div>
         )
     }
@@ -78,7 +118,9 @@ const mapStateToProps = state => ({
     menuOpen: selectMenuExpandedStatus(state),
     categories: selectCategories(state),
     war: selectWarMode(state),
-    pristine: selectPristine(state)
+    pristine: selectPristine(state),
+    home: selectHomeNews(state),
+    online: selectOnline(state),
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -87,6 +129,9 @@ const mapDispatchToProps = dispatch => ({
     },
     setFilter(filters) {
         dispatch(setFilter(filters));
+    },
+    loadOnline() {
+        dispatch(loadOnline())
     },
     loadCategories() {
         dispatch(loadCategories())

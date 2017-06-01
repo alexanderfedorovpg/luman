@@ -139,6 +139,8 @@ main {
 .inner-wrapper {
     margin-top: 2.6875rem;
 
+    position: relative;
+
     // .general-video {
         // height: rem(396);
 
@@ -148,6 +150,21 @@ main {
     //         height: rem(396);
     //     }
     // }
+
+    &_play {
+        &:before {
+            content: '';
+            display: block;
+            background: rgba(0,0,0,.7);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            top:0px;
+            bottom: 0px;
+        }
+    }
 }
 .inner-default {
     h1 {
@@ -328,8 +345,21 @@ main {
             background-image: url(/content/text-bg-gray/text-block2.png);
 
             &_play {
-                left: 2.7%
+                left: 69.4%;
+
+                &:before {
+                    left: -25px;
+                    transform: scale(-1, 1);
+                }
+
+                &:after {
+                    left: -26px;
+                    transform: scale(-1, 1);
+                    width: calc(100% + #{rem(29.5)});
+                }
+
             }
+
         }
         &__text {
             margin-bottom: rem(18);

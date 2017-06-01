@@ -24,7 +24,7 @@ function Content({ data, children }) {
                 {
                     !!theses.length &&
                     (
-                        <div className="text-bg-gray__block-text">
+                        <div className="text-bg-gray__block-text active">
                             {theses.map((v, i) => (
                                 <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
                                     {v}
@@ -53,7 +53,7 @@ function Content({ data, children }) {
                         {data.sub_title}
                     </p>
                 </div>
-                <Socials shareLink={data.share_link} title={data.title}/>
+                <Socials shareLink={data.uri} title={data.title}/>
             </div>
             <div className="inner-about__content">
                 <div dangerouslySetInnerHTML={{ __html: data.body }} />

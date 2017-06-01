@@ -66,6 +66,11 @@ const selectPristine = createSelector(
     (root) => root.getIn(['temporary', 'home']) == root.getIn(['home', 'data'])
 );
 
+const selectOnline = createSelector(
+    selectConstructorPageDomain,
+    (root) => root.getIn(['online', 'data'])
+);
+
 export {
     selectConstructorPageDomain,
     selectCategories,
@@ -77,4 +82,5 @@ export {
     selectWarTitle,
     selectPristine,
     selectRecords,
+    selectOnline,
 };

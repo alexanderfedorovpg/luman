@@ -47,37 +47,49 @@ class Header extends React.PureComponent {
     }
 
     render() {
-        const { menuOpen, canSave, recordsType } = this.props;
+        const { menuOpen, canSave, recordsType, checkPermissions } = this.props;
         const activeType = (recordsTypes.find((item) => item.value === recordsType) || {}).title;
 
         return (
             <Bot moved={menuOpen}>
                 <Left>
-                    <Tabs
-                        data={recordsTypes}
-                        onClick={this.props.setRecordsType}
-                        active={activeType}
-                    />
-                    <Buttons>
-                        <StyledBtn md buttonType="upload" onClick={this.openAddRecordModal} />
-                        <StyledBtn
-                            md
-                            buttonType="save"
-                            active={canSave}
-                            disabled={!canSave}
-                            onClick={this.onSaveClick}
+                    {
+                        checkPermissions('records', true, ['getList']) &&
+                        <Tabs
+                            data={recordsTypes}
+                            onClick={this.props.setRecordsType}
+                            active={activeType}
                         />
+                    }
+                    <Buttons>
+                        {
+                            checkPermissions('records', true, ['create']) &&
+                            <StyledBtn md buttonType="upload" onClick={this.openAddRecordModal} />
+                        }
+                        {
+                            checkPermissions('records', false, ['create', 'delete', 'edit']) &&
+                            <StyledBtn
+                                md
+                                buttonType="save"
+                                active={canSave}
+                                disabled={!canSave}
+                                onClick={this.onSaveClick}
+                            />
+                        }
                     </Buttons>
                 </Left>
                 <Right>
-                    <FormHorizontal>
-                        <Search
-                            placeholder="Поиск по программам"
-                            block
-                            onChange={(e) => this.searchRecords(e.target.value)}
-                            icon="search"
-                        />
-                    </FormHorizontal>
+                    {
+                        checkPermissions('records', true, ['getList']) &&
+                        <FormHorizontal>
+                            <Search
+                                placeholder="Поиск по программам"
+                                block
+                                onChange={(e) => this.searchRecords(e.target.value)}
+                                icon="search"
+                            />
+                        </FormHorizontal>
+                    }
                 </Right>
             </Bot>
         );
@@ -85,13 +97,14 @@ class Header extends React.PureComponent {
 }
 
 Header.propTypes = {
-    recordsType: PropTypes.string,
+    canSave: PropTypes.bool,
+    checkPermissions: PropTypes.func,
+    menuOpen: PropTypes.bool,
     openModal: PropTypes.func,
     publishRecords: PropTypes.func,
-    setRecordsType: PropTypes.func,
+    recordsType: PropTypes.string,
     search: PropTypes.func,
-    canSave: PropTypes.bool,
-    menuOpen: PropTypes.bool,
+    setRecordsType: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

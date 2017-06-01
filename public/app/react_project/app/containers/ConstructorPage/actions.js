@@ -1,4 +1,8 @@
 import {
+    GET_ONLINE,
+    GET_ONLINE_FAILURE,
+    GET_ONLINE_SUCCESS,
+
     LOAD_HOME_NEWS,
     LOAD_HOME_NEWS_FAILURE,
     LOAD_HOME_NEWS_SUCCESS,
@@ -77,6 +81,20 @@ export const chooseCategory = (id) => ({
 
 export const cancelChanges = () => ({
     type: CANCEL_CHANGES,
+});
+
+export const loadOnline = () => ({
+    type: GET_ONLINE,
+});
+
+export const onlineLoaded = (payload) => ({
+    type: GET_ONLINE_SUCCESS,
+    payload,
+});
+
+export const onlineLoadingError = (error) => ({
+    type: GET_ONLINE_FAILURE,
+    error,
 });
 
 export const loadHomeNews = () => ({

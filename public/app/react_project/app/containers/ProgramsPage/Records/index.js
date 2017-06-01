@@ -17,38 +17,44 @@ import {
 } from '../actions';
 import { Preloader } from './style';
 
-const Records = ({ loading, allUploaded, records, ...props }) => (
-    <div>
-        {
-            !!records &&
-            <RecordsList
-                onPreviewClick={props.playVideo}
-                onRecordEdit={props.startEditRecord}
-                onRecordDelete={props.deleteRecord}
-                items={records}
-            />
-        }
-        {
-            loading ?
-                <Preloader>Загрузка...</Preloader> :
-                !allUploaded &&
-                <Waypoint
-                    bottomOffset="-50%"
-                    scrollableAncestor={window}
-                    onEnter={() => props.loadRecords(false)}
+const Records = ({ loading, allUploaded, records, checkPermissions, ...props }) => {
+    const canDelete = checkPermissions('records', true, ['delete']);
+    const canEdit = checkPermissions('records', true, ['edit']);
+
+    return (
+        <div>
+            {
+                !!records &&
+                <RecordsList
+                    onPreviewClick={props.playVideo}
+                    onRecordEdit={canEdit ? props.startEditRecord : null}
+                    onRecordDelete={canDelete ? props.deleteRecord : null}
+                    items={records}
                 />
-        }
-    </div>
-);
+            }
+            {
+                loading ?
+                    <Preloader>Загрузка...</Preloader> :
+                    !allUploaded &&
+                    <Waypoint
+                        bottomOffset="-50%"
+                        scrollableAncestor={window}
+                        onEnter={() => props.loadRecords(false)}
+                    />
+            }
+        </div>
+    );
+};
 
 Records.propTypes = {
-    records: RecordsList.propTypes.items,
-    playVideo: PropTypes.func,
-    loadRecords: PropTypes.func,
-    startEditRecord: PropTypes.func,
-    deleteRecord: PropTypes.func,
     allUploaded: PropTypes.bool,
+    checkPermissions: PropTypes.func,
+    deleteRecord: PropTypes.func,
     loading: PropTypes.bool,
+    loadRecords: PropTypes.func,
+    playVideo: PropTypes.func,
+    records: RecordsList.propTypes.items,
+    startEditRecord: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

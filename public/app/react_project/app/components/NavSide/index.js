@@ -89,11 +89,11 @@ const NavBadge = styled(Badge)`
     `)}
 `;
 
-function NavSide({ expanded, isActive, location, checkPermissions }) {
+function NavSide({ expanded, isActive, location, checkPermissions, live }) {
     function renderItem(item) {
         const { permissions } = item;
 
-        if (permissions && !checkPermissions(permissions, true)) {
+        if (permissions && !checkPermissions(permissions, false)) {
             return null;
         }
 
@@ -105,6 +105,7 @@ function NavSide({ expanded, isActive, location, checkPermissions }) {
                 active={isActive(item.link)}
             >
                 <Icon type={item.icon} active={isActive(item.link)} />
+
                 <Name expanded={expanded}>
                     {item.name}
                 </Name>
@@ -124,6 +125,24 @@ function NavSide({ expanded, isActive, location, checkPermissions }) {
 
             {/* пока нет иконки активной, иначе ошибки сыпятся*/}
             <NavItem
+                to={'/live'}
+                expanded={expanded}
+                active={isActive('/live')}
+            >
+                <Icon type="live" />
+                <Name expanded={expanded}>
+                    Прямой эфир
+                </Name>
+                {live
+                    ? <NavBadge expanded={expanded} success>
+                            on
+                        </NavBadge>
+                    : <NavBadge expanded={expanded} danger>
+                            off
+                        </NavBadge>
+                }
+            </NavItem>
+            <NavItem
                 to={'/translation'}
                 expanded={expanded}
                 active={isActive('/translation')}
@@ -132,8 +151,8 @@ function NavSide({ expanded, isActive, location, checkPermissions }) {
                 <Name expanded={expanded}>
                     Трансляция
                 </Name>
-                <NavBadge expanded={expanded} success>
-                    8
+                <NavBadge expanded={expanded} danger>
+                    off
                 </NavBadge>
             </NavItem>
         </Wrapper>

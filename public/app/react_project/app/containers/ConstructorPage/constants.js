@@ -29,6 +29,10 @@ export const LOAD_ITEMS = 'app/ConstructorPage/LOAD_ITEMS';
 export const LOAD_ITEMS_SUCCESS = 'app/ConstructorPage/LOAD_ITEMS_SUCCESS';
 export const LOAD_ITEMS_FAILURE = 'app/ConstructorPage/LOAD_ITEMS_FAILURE';
 
+export const GET_ONLINE = 'app/ConstructorPage/GET_ONLINE';
+export const GET_ONLINE_SUCCESS = 'app/ConstructorPage/GET_ONLINE_SUCCESS';
+export const GET_ONLINE_FAILURE = 'app/ConstructorPage/GET_ONLINE_FAILURE';
+
 export const SET_FILTER = 'app/ConstructorPage/SET_FILTER';
 
 export const SET_OPTION = 'app/ConstructorPage/SET_OPTION';

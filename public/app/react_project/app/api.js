@@ -307,6 +307,7 @@ export const putArticleTitle = data => axios.put(`/newseditor/title`, qs.stringi
         'Content-Type': 'application/x-www-form-urlencoded',
     },
 });
+export const getPublicOnline = () => publicApi.get('/news/comments');
 // =============================================================================
 
 // =============================================================================

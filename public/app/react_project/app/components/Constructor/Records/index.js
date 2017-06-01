@@ -1,11 +1,16 @@
 import React, { PropTypes } from 'react'
+import styled from 'styled-components'
 
 import Item from './Item'
+
+const Wrapper = styled.div`
+    padding-top: 25px;
+`
 
 function Records({ data, toMain, onRemove }) {
 
     return (
-        <div>
+        <Wrapper>
             {data.map(value => (
                 <Item
                     key={value.id}
@@ -14,7 +19,7 @@ function Records({ data, toMain, onRemove }) {
                     onRemove={onRemove}
                 />
             ))}
-        </div>
+        </Wrapper>
     )
 }
 

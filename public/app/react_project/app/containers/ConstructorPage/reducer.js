@@ -7,6 +7,8 @@ import {
 
     LOAD_CATEGORIES_SUCCESS,
 
+    GET_ONLINE_SUCCESS,
+
     ITEM_TO_MAIN,
     MOVE_ITEM,
     CHOOSE_CATEGORY,
@@ -53,6 +55,9 @@ const initialState = fromJS({
         ids: [],
         data: {},
     },
+    online: {
+        data: []
+    }
 });
 
 function constructorPageReducer(state = initialState, action) {
@@ -89,8 +94,12 @@ function constructorPageReducer(state = initialState, action) {
             return state.setIn(['items', 'data'], fromJS(action.payload))
                 .setIn(['initialItems', 'data'], fromJS(action.payload));
 
+
         case LOAD_ITEMS_FAILURE:
             return state.setIn(['items', 'loading'], false);
+
+        case GET_ONLINE_SUCCESS:
+            return state.setIn(['online', 'data'], fromJS(action.payload));
 
         case ITEM_TO_MAIN:
             // Если выбрана категория - добавляем итем,
