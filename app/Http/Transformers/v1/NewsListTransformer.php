@@ -40,12 +40,16 @@ class NewsListTransformer extends Transformer
 
 
         if ($news['video_stream']) {
+            $preview=CdnFile::where('id', '=', $news['video_stream_preview'])->first();
             $transform['video_stream'] = [
                 'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
                 'id' =>  $news['video_stream'],
                 'duration' => $news['video_stream_duration'],
-                'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                'preview' => $preview['url'],
                 'preview_id' => $news['video_stream_preview'],
+                'preview_source' => $preview['object_source'],
+                'preview_author' => $preview['object_author'],
+                'preview_name' => $preview['object_name'],
             ];
         } else {
             $transform['video_stream'] = null;
@@ -58,8 +62,8 @@ class NewsListTransformer extends Transformer
                 'url' => $imageMain->url,
                 'id' =>  $imageMain->id,
                 'object_source' => $imageMain->object_source,
-                'object_author' => $imageMain->object_source,
-                'object_name' => $imageMain->object_source,
+                'object_author' => $imageMain->object_author,
+                'object_name' => $imageMain->object_name,
             ];
         } else {
             $transform['image_main'] = null;
@@ -72,8 +76,8 @@ class NewsListTransformer extends Transformer
                 'url' => $imagePreview->url,
                 'id' =>  $imagePreview->id,
                 'object_source' => $imagePreview->object_source,
-                'object_author' => $imagePreview->object_source,
-                'object_name' => $imagePreview->object_source,
+                'object_author' => $imagePreview->object_author,
+                'object_name' => $imagePreview->object_name,
             ];
         } else {
             $transform['image_preview'] = null;

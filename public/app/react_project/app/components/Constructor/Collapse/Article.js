@@ -136,6 +136,7 @@ class Article extends Component {
             isOver,
             connectDragSource,
             connectDropTarget,
+            push
         } = this.props;
 
         return connectDragSource(connectDropTarget(
@@ -164,9 +165,16 @@ class Article extends Component {
                                 )
                                 : null
                             }
-                            <Title>
-                                {data.title}
-                            </Title>
+                            {data.video ?
+                                <Title>
+                                    {data.title}
+                                </Title>
+                                :
+                                <Title onClick={e => push(`/editor/${data.id}`)}>
+                                    {data.title}
+                                </Title>
+
+                            }
                             <Media>
                                 1 ФОТО + 1 ВИДЕО
                             </Media>

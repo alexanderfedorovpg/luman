@@ -32,7 +32,8 @@ import {
     loadGroups,
 } from './actions';
 
-import { selectCurrentUser } from './selectors';
+import { selectCurrentUser, getLive } from './selectors';
+// import { makeGetLiveState } from 'containers/LivePage/selectors';
 import Preloader from './Preloader';
 import InfoModal from './InfoModal';
 
@@ -42,6 +43,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 
     static propTypes = {
         children: React.PropTypes.node,
+        live: React.PropTypes.bool,
     };
 
     componentWillMount() {
@@ -68,7 +70,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     }
 
     render() {
-        let { menuOpen, toggleMenu, closeMenu, router, token, currentUser } = this.props;
+        let { menuOpen, toggleMenu, closeMenu, router, token, currentUser, live } = this.props;
 
         return token && currentUser
             ? <Root onClick={closeMenu}>
@@ -83,6 +85,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
                     expanded={menuOpen}
                     location={router.location}
                     isActive={router.isActive}
+                    live={live}
                 />
                 <Content moved={menuOpen}>
                     {React.Children.toArray(this.props.children)}
@@ -99,6 +102,7 @@ const mapStateToProps = (state) => ({
     currentUser: selectCurrentUser(state),
     menuOpen: state.get('app').get('menuOpen'),
     token: state.get('app').get('api-token'),
+    live: state.get('livePage') ? state.get('livePage').get('live') : false,
 });
 
 const mapDispatchToProps = (dispatch) => ({

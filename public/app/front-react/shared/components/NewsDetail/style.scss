@@ -44,6 +44,16 @@
         margin-bottom: rem(100);
 
         transform: translateX(-17%);
+
+        .inner-default &_play.text-bg-gray {
+            // position: relative;
+            z-index: 4;
+            background-color: #4c4c4c;
+
+            .social-links {
+                opacity: .5;
+            }
+        }
     }
 
     &__left {
@@ -72,6 +82,10 @@
         & figure {
             position: relative;
             img {
+
+                width: 100%;
+                object-fit: cover;
+
                 position: relative;
                 z-index: 2;
             }
@@ -79,8 +93,8 @@
             figcaption {
                 margin-top: 0.1875rem;
                 font-family: "StemText Regular", sans-serif;
-                font-size: 0.6875rem;
-                color: #999;
+                font-size: rem(12);
+                color: #9fa0a2;
                 z-index: 2;
                 position: relative;
             }
@@ -94,7 +108,8 @@
                 position: absolute;
                 background: #eaecee;
                 top: 0px;
-                left: -50.2%;
+                // left: -50.2%;
+                left: calc(100% - 887px);
                 z-index: 1;
             }
         }
@@ -234,6 +249,23 @@
 .news-preview {
     width: rem(351);
     padding-top: rem(18);
+
+    position: relative;
+
+    &_play .breadcrumbs {
+        display: none;
+    }
+
+    &_play:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        // background-color: #eaecee;
+        background-color: #4c4c4c;
+    }
+
     &__img {
         margin-top: rem(16);
         margin-bottom: rem(42);
@@ -242,15 +274,6 @@
             width: rem(351);
             height: rem(234);
             object-fit: cover;
-        }
-
-        &_play:before {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background-color: #eaecee;
         }
 
     }
@@ -293,5 +316,20 @@
         }
     }
 
+}
+
+.inner-about-video_overlay {
+    position: absolute;
+    left: calc(100% - 896px);
+    top: -47px;
+    background: rgba(0,0,0,.7);
+    /* background: #673AB7; */
+    z-index: 2;
+
+    display: none;
+
+    &.is-active {
+        display: block;
+    }
 }
 

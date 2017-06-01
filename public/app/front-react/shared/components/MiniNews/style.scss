@@ -24,13 +24,13 @@
         width: 100%;
         height: 100%;
 
-        background: rgba(0,0,0,.5);
+        background: rgba(0,0,0,.7);
         transition: all .5s ease-out;
     }
 
     .now__news &:hover::before {
         opacity: 1;
-        background: rgba(0,0,0,.5);
+        background: rgba(0,0,0,.7);
     }
 
     &__info {

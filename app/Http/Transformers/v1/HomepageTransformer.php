@@ -38,12 +38,16 @@ class HomepageTransformer extends Transformer
             $arrNews = $news->news->toArray();
 
             if ($arrNews['video_stream']) {
+                $preview=CdnFile::where('id', '=', $arrNews['video_stream_preview'])->first();
                 $arrNews['video_stream'] = [
                     'url' => CdnFile::where('id', '=', $arrNews['video_stream'])->pluck('url')->first(),
                     'id' =>  $arrNews['video_stream'],
                     'duration' => $arrNews['video_stream_duration'],
-                    'preview' => CdnFile::where('id', '=', $arrNews['video_stream_preview'])->pluck('url')->first(),
+                    'preview' => $preview['url'],
                     'preview_id' => $arrNews['video_stream_preview'],
+                    'preview_source' => $preview['object_source'],
+                    'preview_author' => $preview['object_author'],
+                    'preview_name' => $preview['object_name'],
                 ];
             } else {
                 $arrNews['video_stream'] = null;
@@ -56,8 +60,8 @@ class HomepageTransformer extends Transformer
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
                     'object_source' => $imageMain->object_source,
-                    'object_author' => $imageMain->object_source,
-                    'object_name' => $imageMain->object_source,
+                    'object_author' => $imageMain->object_author,
+                    'object_name' => $imageMain->object_name,
                 ];
             } else {
                 $arrNews['image_main'] = null;
@@ -70,8 +74,8 @@ class HomepageTransformer extends Transformer
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,
                     'object_source' => $imagePreview->object_source,
-                    'object_author' => $imagePreview->object_source,
-                    'object_name' => $imagePreview->object_source,
+                    'object_author' => $imagePreview->object_author,
+                    'object_name' => $imagePreview->object_name,
                 ];
             } else {
                 $arrNews['image_preview'] = null;
@@ -97,12 +101,16 @@ class HomepageTransformer extends Transformer
         foreach ($infoNoises as $infoNoise) {
             $news = $infoNoise->news->toArray();
             if ($news['video_stream']) {
+                $preview=CdnFile::where('id', '=', ['video_stream_preview'])->first();
                 $news['video_stream'] = [
                     'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
                     'id' =>  $news['video_stream'],
                     'duration' => $news['video_stream_duration'],
-                    'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                    'preview' => $preview['url'],
                     'preview_id' => $news['video_stream_preview'],
+                    'preview_source' => $preview['object_source'],
+                    'preview_author' => $preview['object_author'],
+                    'preview_name' => $preview['object_name'],
                 ];
             } else {
                 $news['video_stream'] = null;
@@ -115,8 +123,8 @@ class HomepageTransformer extends Transformer
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
                     'object_source' => $imageMain->object_source,
-                    'object_author' => $imageMain->object_source,
-                    'object_name' => $imageMain->object_source,
+                    'object_author' => $imageMain->object_author,
+                    'object_name' => $imageMain->object_name,
                 ];
             } else {
                 $news['image_main'] = null;
@@ -129,8 +137,8 @@ class HomepageTransformer extends Transformer
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,
                     'object_source' => $imagePreview->object_source,
-                    'object_author' => $imagePreview->object_source,
-                    'object_name' => $imagePreview->object_source,
+                    'object_author' => $imagePreview->object_author,
+                    'object_name' => $imagePreview->object_name,
                 ];
             } else {
                 $news['image_preview'] = null;
@@ -150,12 +158,16 @@ class HomepageTransformer extends Transformer
         foreach ($wars as $war) {
             $news = $war->news->toArray();
             if ($news['video_stream']) {
+                $preview=CdnFile::where('id', '=',  ['video_stream_preview'])->first();
                 $news['video_stream'] = [
                     'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
                     'id' =>  $news['video_stream'],
                     'duration' => $news['video_stream_duration'],
-                    'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                    'preview' => $preview['url'],
                     'preview_id' => $news['video_stream_preview'],
+                    'preview_source' => $preview['object_source'],
+                    'preview_author' => $preview['object_author'],
+                    'preview_name' => $preview['object_name'],
                 ];
             } else {
                 $news['video_stream'] = null;
@@ -168,8 +180,8 @@ class HomepageTransformer extends Transformer
                     'url' => $imageMain->url,
                     'id' => $imageMain->id,
                     'object_source' => $imageMain->object_source,
-                    'object_author' => $imageMain->object_source,
-                    'object_name' => $imageMain->object_source,
+                    'object_author' => $imageMain->object_author,
+                    'object_name' => $imageMain->object_name,
                 ];
             } else {
                 $news['image_main'] = null;
@@ -182,8 +194,8 @@ class HomepageTransformer extends Transformer
                     'url' => $imagePreview->url,
                     'id' => $imagePreview->id,
                     'object_source' => $imagePreview->object_source,
-                    'object_author' => $imagePreview->object_source,
-                    'object_name' => $imagePreview->object_source,
+                    'object_author' => $imagePreview->object_author,
+                    'object_name' => $imagePreview->object_name,
                 ];
             } else {
                 $news['image_preview'] = null;
@@ -214,12 +226,16 @@ class HomepageTransformer extends Transformer
             $air = $record->record->toArray();
 
             if ($air['video']) {
+                $imagePreview = CdnFile::where('id', '=', $air['video_preview'])->select()->first();
                 $air['video'] = [
                     'url' => CdnFile::where('id', '=', $air['video'])->pluck('url')->first(),
                     'id' =>  $air['video'],
                     'duration' => $air['video_duration'],
                     'preview' => CdnFile::where('id', '=', $air['video_preview'])->pluck('url')->first(),
                     'preview_id' => $air['video_preview'],
+                    'preview_source' => $imagePreview['object_source'],
+                    'preview_author' => $imagePreview['object_source'],
+                    'preview_name' => $imagePreview['object_source'],
                 ];
             } else {
                 $air['video'] = null;

@@ -34,7 +34,8 @@ class Collapse extends React.Component {
             data,
             choose,
             onMove,
-            onRemove
+            onRemove,
+            push
         } = this.props
 
         return (
@@ -58,7 +59,8 @@ class Collapse extends React.Component {
                             choose={choose}
                             onMove={onMove}
                             onRemove={onRemove}
-                            data={data[cat.id]} />
+                            data={data[cat.id]}
+                            push={push} />
                     )
                 })}
             </Root>

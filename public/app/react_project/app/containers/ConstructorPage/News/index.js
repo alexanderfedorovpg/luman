@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux'
 
 import { Wrap, Left, Right } from 'components/Constructor/Content';
 import NewsComponent from 'components/Constructor/News';
@@ -49,6 +50,7 @@ export class News extends PureComponent {
             removeFromConstructor,
             toMain,
             location,
+            push
         } = this.props;
         const type = location.pathname.split('/').pop();
         const filteredCategories = categories.filter((v) => (
@@ -65,12 +67,14 @@ export class News extends PureComponent {
                         data={news}
                         toMain={toMain.bind(this, type)}
                         onRemove={removeFromConstructor}
+                        push={push}
                     />
                 </Left>
                 <Right>
                     <Collapse
                         type={type}
                         showTitle={type == 'war'}
+                        push={push}
                         onRemove={removeFromMain.bind(this, type)}
                         categories={filteredCategories}
                     />
@@ -102,6 +106,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     removeFromConstructor(data) {
         dispatch(removeFromConstructor(data.id, 'news'));
+    },
+    push(path) {
+        dispatch(push(path));
     },
 });
 

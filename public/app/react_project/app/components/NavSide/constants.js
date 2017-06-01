@@ -32,12 +32,13 @@ export const items = [
         permissions: 'records',
         name: 'Программы',
     },
-    {
-        link: '/live',
-        icon: 'live',
-        permissions: 'live',
-        name: 'Прямой эфир',
-    },
+    // {
+    //     link: '/live',
+    //     icon: 'live',
+    //     permissions: 'live',
+    //     liveIcon: 'live',
+    //     name: 'Прямой эфир',
+    // },
     // {
     //     link: '/translation',
     //     icon: 'text-edit-ico',

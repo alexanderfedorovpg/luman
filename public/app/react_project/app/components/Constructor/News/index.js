@@ -7,7 +7,7 @@ const Wrapper = styled.div`
     padding-top: 25px;
 `
 
-function News({ data, toMain, onRemove }) {
+function News({ data, toMain, onRemove, push }) {
 
     return (
         <Wrapper>
@@ -17,6 +17,7 @@ function News({ data, toMain, onRemove }) {
                     toMain={toMain}
                     data={value}
                     onRemove={onRemove}
+                    push={push}
                 />
             ))}
         </Wrapper>
