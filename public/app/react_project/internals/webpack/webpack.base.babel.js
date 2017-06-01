@@ -3,8 +3,14 @@
  */
 
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+var appDirectory = fs.realpathSync(process.cwd());
+function resolveApp(relativePath) {
+    return path.resolve(appDirectory, relativePath);
+}
 
 module.exports = (options) => ({
   entry: options.entry,
@@ -27,6 +33,10 @@ module.exports = (options) => ({
       test: /\.css$/,
       include: /node_modules/,
       loaders: ['style-loader', 'css-loader'],
+    },{
+        test: /\.css$/,
+        include: resolveApp('app'),
+        loaders: ['style-loader', 'css-loader'],
     },{
       test: /\.scss$/,
       exclude: /node_modules/,
