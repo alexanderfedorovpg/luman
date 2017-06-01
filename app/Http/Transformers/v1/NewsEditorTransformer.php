@@ -36,12 +36,16 @@ class NewsEditorTransformer extends Transformer
         }
 
         if ($news['video_stream']) {
+            $preview=CdnFile::where('id', '=', $news['video_stream_preview'])->first();
             $transform['video_stream'] = [
                 'url' => CdnFile::where('id', '=', $news['video_stream'])->pluck('url')->first(),
                 'id' =>  $news['video_stream'],
                 'duration' => $news['video_stream_duration'],
-                'preview' => CdnFile::where('id', '=', $news['video_stream_preview'])->pluck('url')->first(),
+                'preview' => $preview['url'],
                 'preview_id' => $news['video_stream_preview'],
+                'preview_source' => $preview['object_source'],
+                'preview_author' => $preview['object_source'],
+                'preview_name' => $preview['object_source'],
             ];
         } else {
             $transform['video_stream'] = null;
