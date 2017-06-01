@@ -13,16 +13,57 @@ class Content extends PureComponent {
         super(props);
 
         this.state = {
-            play: false
+            play: false,
+            overlay: {
+                width: '0px',
+                height: '0px'
+            }
         }
 
         this.play = this.play.bind(this)
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
+        this.stop = this.stop.bind(this);
+    }
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions() {
+        this.setState({
+            overlay: {
+                width: `${window.innerWidth}px`,
+                height: `${document.body.scrollHeight}px`
+            }
+        });
     }
 
     play() {
         this.setState({
             play: true
         })
+    }
+
+    stop(e) {
+        console.log(e.target.classList);
+        if (e.target.classList.value.indexOf('inner-about__text-bg-gray') > -1) {
+            if (e.target.classList.value.indexOf('inner-about__text-bg-gray_play') > -1) {
+                this.setState({
+                    play: false
+                })
+            }
+        } else {
+            if (e.target.classList.value.indexOf('general-video') < 0) {
+                this.setState({
+                    play: false
+                })
+            }
+        }
     }
 
     render() {
@@ -34,7 +75,8 @@ class Content extends PureComponent {
         const image = data.image_preview || {};
 
         return (
-            <div className={classNames('inner-about__inner-wrap', {'inner-about__inner-wrap_play' : this.state.play})}>
+            <div>
+                <div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div>
                 <h1>
                     {data.title}
                 </h1>
@@ -44,7 +86,7 @@ class Content extends PureComponent {
                         : null
                     }
                 </div>
-                <div className="text-bg-gray text-bg-gray--news inner-about__text-bg-gray">
+                <div onClick={e => this.stop(e)} className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
                     {theses.length
                         ? (
                             <div className={classNames('text-bg-gray__block-text', { 'text-bg-gray__block-text_play': this.state.play })}>
@@ -63,9 +105,9 @@ class Content extends PureComponent {
                         onPlay={this.play}
                         left
                         data={data.video_stream} />
-                    <div className="news-preview">
+                    <div className={classNames("news-preview", {'news-preview_play' : this.state.play})}>
                         <Rubrics data={data.rubrics} className={!this.state.play ? 'active' : ''} />
-                        <figure className={classNames("news-preview__img", {'news-preview__img_play' : this.state.play})}>
+                        <figure className="news-preview__img">
                             <Img
                                 src={image.url}
                                 title={image.object_name||''}
