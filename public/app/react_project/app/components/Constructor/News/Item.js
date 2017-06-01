@@ -106,7 +106,7 @@ class Item extends Component {
     }
 
     render() {
-        const { data, toMain, onRemove } = this.props;
+        const { data, toMain, onRemove, push } = this.props;
 
         return (
             <DragSourceWrapper data={data} toMain={toMain}>
@@ -122,7 +122,7 @@ class Item extends Component {
                         }
                     </Rubrics>
                 </Header>
-                <Title>
+                <Title onClick={(e) => push(`/editor/${data.id}`)}>
                     {data.title}
                 </Title>
                 <Footer>

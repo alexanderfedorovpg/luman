@@ -72,8 +72,6 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     render() {
         let { menuOpen, toggleMenu, closeMenu, router, token, currentUser, live } = this.props;
 
-        console.log(live);
-
         return token && currentUser
             ? <Root onClick={closeMenu}>
                 <Header

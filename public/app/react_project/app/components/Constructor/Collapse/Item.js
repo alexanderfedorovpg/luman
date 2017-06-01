@@ -116,7 +116,7 @@ class CollapseItem extends React.Component {
     }
 
     renderList() {
-        let { data, onRemove, category } = this.props
+        let { data, onRemove, category, push } = this.props
 
         return data.map((value, index) => (
             <Article
@@ -127,7 +127,8 @@ class CollapseItem extends React.Component {
                 onMove={this.setPlaceholder}
                 onChange={this.onMove}
                 onRemove={onRemove}
-                data={value} />
+                data={value}
+                push={push} />
         ))
     }
 
