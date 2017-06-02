@@ -16,8 +16,14 @@
         bottom: 0;
         left: 0;
 
-        width: rem(1247);
-        height: rem(143);
+        @include above($tabletLandscape) {
+            width: 100%;
+        }
+
+        @include above($desktop) {
+            width: rem(1247);
+            height: rem(143);
+        }
     }
 
     &__left-part,
@@ -25,7 +31,13 @@
         position: relative;
         z-index: 1;
 
-        padding-top: rem(47);
+        @include above($tabletLandscape) {
+            padding-top: rem(24);
+        }
+
+        @include above($desktop) {
+            padding-top: rem(47);
+        }
     }
 
     &__left-part {
@@ -34,8 +46,16 @@
 
     &__right-part {
         box-sizing: content-box;
-        width: rem(736);
-        padding-right: rem(197);
+
+        @include above($tabletLandscape) {
+            width: rem(282);
+            padding-right: 0;
+        }
+
+        @include above($desktop) {
+            width: rem(736);
+            padding-right: rem(197);
+        }
     }
 
     &__title-group {
@@ -57,7 +77,11 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
-        width: rem(736);
+
+
+        @include above($desktop) {
+            width: rem(736);
+        }
     }
 
     &__subtitle-programm {
@@ -82,6 +106,14 @@
 
     &__delimeter {
 
+        @include above($tabletLandscape) {
+            display: none;
+        }
+
+        @include above($desktop) {
+            display: block;
+        }
+
         img {
             box-sizing: content-box;
             width: rem(25);
@@ -105,5 +137,13 @@
 
     &__part-time {
         margin-top: rem(12);
+
+        @include above($tabletLandscape) {
+            display: none;
+        }
+
+        @include above($desktop) {
+            display: block;
+        }
     }
 }

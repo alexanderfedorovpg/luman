@@ -6,8 +6,6 @@
     overflow: hidden;
     transition: height .3s;
 
-    height: rem(593);
-
     &::before {
         content: '';
 
@@ -22,6 +20,15 @@
 
         background-color: rgba(0, 0, 0, .32);
     }
+
+    @include above($tabletLandscape) {
+        height: rem(530);
+    }
+
+    @include above($desktop) {
+        height: rem(593);
+    }
+
     &_play::before {
         display: none;
     }

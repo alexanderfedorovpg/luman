@@ -1,4 +1,5 @@
 @import "~style/mixins";
+@import "~style/vars";
 
 .general-news {
 
@@ -12,7 +13,15 @@
     }
     // удалить позже
     &__left {
-        width: rem(915);
+
+
+        @include above($tabletLandscape) {
+            width: rem(615);
+        }
+
+        @include above($desktop) {
+            width: rem(915);
+        }
     }
 
     &__left_more {
@@ -20,7 +29,15 @@
     }
 
     &__middle {
-        width: 100%;
+
+        @include above($tabletLandscape) {
+            width: rem(615);
+        }
+
+        @include above($desktop) {
+            width: 100%;
+        }
+
     }
 
     &__right {
@@ -31,6 +48,18 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        @include below($mobile) {
+            flex-wrap: wrap;
+        }
+
+        @include above($tablet) {
+            flex-wrap: wrap;
+        }
+
+        @include above($desktop) {
+            flex-wrap: nowrap;
+        }
 
         &.two-wrapper {
             margin-top: rem(16);
@@ -60,6 +89,11 @@
         min-height: rem(505);
         padding-top: rem(11);
         overflow: hidden;
+
+        @include below($tabletLandscape) {
+            width: 100%;
+            min-height: inherit;
+        }
     }
 
     &__info-noize {
@@ -161,8 +195,16 @@
     }
 
     &__banner-preview {
-        height: rem(145);
-        margin-top: rem(-20);
+
+
+        @include above($tabletLandscape) {
+            height: rem(122.5);
+        }
+
+        @include above($desktop) {
+            height: rem(145);
+            margin-top: rem(-21);
+        }
 
         &_war {
             margin-top: rem(-22);

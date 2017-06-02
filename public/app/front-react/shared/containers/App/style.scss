@@ -24,9 +24,20 @@ body {
 }
 
 html {
-    font-size: 1vw;
 
-    @include above(1600px) {
+    @include below($mobile) {
+        font-size: 5vw;
+    }
+
+    @include above($tablet) {
+        font-size: 2.222222222222222vw;
+    }
+
+    @include above($tabletLandscape) {
+        font-size: 1.544401544401544vw;
+    }
+
+    @include above($desktop) {
         font-size: 16px;
     }
 }
@@ -61,11 +72,29 @@ main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .container {
-    width: rem(1250);
     @include margin_x(auto);
+
+    @include below($mobile) {
+        width: 100%;
+        @include padding_x(#{rem(10)});
+    }
+
+    @include above($tablet) {
+        width: rem(615);
+    }
+
+    @include above($tabletLandscape) {
+        width: rem(930);
+    }
+
+    @include above($desktop) {
+        width: rem(1250);
+    }
+
 }
 
 .section-title {

@@ -4,9 +4,6 @@
 .big-news {
     position: relative;
 
-    width: rem(617);
-    height: rem(505);
-
     &::before {
         content: '';
 
@@ -28,6 +25,17 @@
     &:hover::before {
         background: rgba(0,0,0,.3);
     }
+
+    @include above($tablet) {
+        width: rem(615);
+        height: rem(395);
+    }
+
+    @include above($desktop) {
+        width: rem(617);
+        height: rem(505);
+    }
+
 
     &__link {
         content: '';
