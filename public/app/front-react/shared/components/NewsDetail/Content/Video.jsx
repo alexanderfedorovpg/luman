@@ -99,14 +99,14 @@ class Content extends PureComponent {
                         )
                         : null
                     }
-                    {(true || data.video_stream.preview_source) && (
+                    {(data.video_stream.preview_author || data.video_stream.preview_source) && (
                         <div className="inner-about__video-info">
                             <div>
                                 Фото:
                             </div>
-                            {data.video_stream.id}
-                            {' / '}
-                            {data.video_stream.id}
+                            {data.video_stream.preview_author}
+                            {data.video_stream.preview_author && data.video_stream.preview_source && ' / '}
+                            {data.video_stream.preview_source}
                         </div>
                     )}
                     <Video
