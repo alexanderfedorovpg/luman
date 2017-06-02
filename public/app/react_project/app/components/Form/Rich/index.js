@@ -177,10 +177,10 @@ class Rich extends PureComponent {
                         <button className="ql-clean" />
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-laquo" />
-                        <button className="ql-raquo" />
-                        <button className="ql-aquos" title="Ctrl + Shift + 2" />
-                        <button className="ql-em-dash" />
+                        <button className="ql-laquo" title="Ctrl + 2" />
+                        <button className="ql-raquo" title="Ctrl + 3" />
+                        <button className="ql-aquos" title="Ctrl + 4" />
+                        <button className="ql-em-dash" title="Ctrl + 1" />
                     </div>
                 </div>
                 <ReactQuill
@@ -199,16 +199,25 @@ class Rich extends PureComponent {
                         },
                         keyboard: {
                             bindings: {
-                                insertAquos: {
+                                insertEmDash: {
+                                    key: '1',
+                                    shortKey: true,
+                                    handler: this.toolbarEmDashHandler
+                                },
+                                insertLaquo: {
                                     key: '2',
-                                    shiftKey: true,
+                                    shortKey: true,
+                                    handler: this.toolbarLaquoHandler
+                                },
+                                insertRaquo: {
+                                    key: '3',
+                                    shortKey: true,
+                                    handler: this.toolbarRaquoHandler
+                                },
+                                insertAquos: {
+                                    key: '4',
                                     shortKey: true,
                                     handler: this.toolbarAquosHandler
-                                },
-                                insertEmDash: {
-                                    key: '-',
-                                    shiftKey: true,
-                                    handler: this.toolbarEmDashHandler
                                 },
                             }
                         }
