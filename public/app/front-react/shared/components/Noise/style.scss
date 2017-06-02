@@ -17,6 +17,10 @@
 
         line-height: rem(34);
         text-decoration: none;
+
+        .icon {
+            display: none;
+        }
     }
 
     &__mini-news {

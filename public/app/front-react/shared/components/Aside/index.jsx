@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import Video from 'components/GeneralVideo'
 import Noise from 'components/Noise'
-import One from 'components/Broadcast/One'
+import FromEnter from 'components/Broadcast/One'
 import Subscribe from 'components/Subscribe'
 
 import mainVideoPlaceholder from './obzor-inside-new.jpg'
@@ -30,7 +30,7 @@ class Aside extends PureComponent {
     render() {
         const { noise, broadcast, className } = this.props
         const first = broadcast[0] || {}
-        const second = broadcast[1] || {}
+        const rest = broadcast.slice(1)
 
         return (
             <div className={classNames('right-col', className)}>
@@ -49,8 +49,8 @@ class Aside extends PureComponent {
                     )
                 }
                 <Noise data={noise} />
-                {second.video_stream
-                    ? <One data={second}/>
+                {rest.length
+                    ? <FromEnter data={rest}/>
                     : <img src={efirPlaceholder} className="from-enter enter-one" />
                 }
                 <Subscribe />

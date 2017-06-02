@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 
 import MiniNews from 'components/MiniNews'
+import ScissorsIcon from 'components/Icon/Scissors'
 
 import './style.scss'
 
@@ -10,7 +11,7 @@ function Noise({ data, className }) {
     return (
         <div className={classNames('info-noize', className)}>
             <p className="info-noize__title section-title">
-                Инфошум
+                Инфошум <ScissorsIcon />
             </p>
             <div className="info-noize__wrapper">
                 {data.slice(0, 5).map(value => (

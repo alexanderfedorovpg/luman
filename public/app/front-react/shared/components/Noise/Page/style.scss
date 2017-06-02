@@ -11,9 +11,7 @@
         justify-content: space-between;
         margin-bottom: rem(65);
     }
-&__left {
-    width: rem(940) !important;
-}
+
     &__list-mini {
         width: rem(300);
 
@@ -27,13 +25,26 @@
     }
 
     &__list {
-        margin-top: rem(30);
+        padding-top: rem(30);
+        padding-right: rem(10);
         margin-bottom: rem(30);
+
+        position: relative;
+
+        border-top: 2px dashed $gray-dirty;
+        border-right: 2px dashed $gray-dirty;
+
+        .icon_scissors {
+            position: absolute;
+            top: -11px;
+            right: 20px;
+            fill: $gray-dirty;
+        }
     }
 
     &__row {
-        @include margin_x(#{rem(-7.5)});
-        @include margin_y(#{rem(-11.5)});
+        // @include margin_x(#{rem(-7.5)});
+        // @include margin_y(#{rem(-11.5)});
         transition: height .3s;
         display: flex;
         flex-direction: column;
@@ -42,9 +53,12 @@
         height: rem(1105);}
 
     &__item {
-        @include margin_x(#{rem(7.5)});
-        @include margin_y(#{rem(11.5)})
-    ;}
+        margin-bottom: rem(11.5);
+    }
+
+    &__gutter-sizer {
+        width: rem(9);
+    }
 
     &__mini-news {
         padding-top: rem(10);
@@ -92,6 +106,7 @@
 
     &__title-block {
         padding-bottom: rem(10);
+        border-bottom: 0;
     }
 
     &__general-video {

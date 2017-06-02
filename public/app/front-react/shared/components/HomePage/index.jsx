@@ -38,7 +38,6 @@ function HomePage({
 
     const videoNews = broadcast.map(v => v.record)
     const firstVideo = videoNews[0] || {}
-    const secondVideo = videoNews[1] || {}
 
     const moreVideo = videoNews.slice(2, 5)
     const listVideo = videoNews.slice(5, 8)
@@ -74,7 +73,7 @@ function HomePage({
                             <img src={mainVideoPlaceholder} className="general-video__img" />
                         )
                     }
-                    <EnterOne className="general-news__enter-one" data={secondVideo} />
+                    <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
                 </div>
                 <div className="general-news__left general-news__left_more">
                     <div className="general-news__left-wrapper">

@@ -10,6 +10,10 @@
 
     background-color: $bg-gray;
 
+    .icon_info {
+        margin-top: rem(5);
+    }
+
     &_war:before {
         content: '';
 
@@ -43,7 +47,6 @@
     &__right-part {
         display: flex;
         justify-content: flex-end;
-        flex: 1;
     }
 
     &__part-wrapper {
@@ -62,7 +65,7 @@
         position: relative;
 
         width: rem(138);
-        margin-right: rem(28);
+        margin-right: rem(15);
         margin-left: rem(38);
 
         .logo__img {
