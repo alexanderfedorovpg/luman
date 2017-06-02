@@ -3,6 +3,7 @@ import Title from 'components/Title'
 import Aside from 'containers/Aside'
 
 import './style.scss'
+import './stub.scss'
 
 class Broadcast extends Component {
 
