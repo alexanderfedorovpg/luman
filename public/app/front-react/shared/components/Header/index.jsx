@@ -5,9 +5,11 @@ import { withRouter } from 'react-router-dom';
 import Burger from 'components/Burger';
 import RSS from 'components/RSS';
 import Search from 'components/Search';
+import InfoIcon from 'components/Icon/Info';
 
 import Logo from './Logo';
 import TopMenu from './TopMenu';
+import Rates from './Rates';
 import Alarm from './Alarm';
 
 import './style.scss';
@@ -32,7 +34,9 @@ function Header({ war, warTitle, history }) {
                 <div className="header__left-part">
                     <div className="header__part-wrapper">
                         <Logo war={war} />
+                        <InfoIcon width="18px" height="18px" />
                         <TopMenu />
+                        <Rates />
                     </div>
                 </div>
                 <div className="header__right-part">

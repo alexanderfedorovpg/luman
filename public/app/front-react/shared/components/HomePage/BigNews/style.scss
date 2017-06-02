@@ -16,14 +16,13 @@
         width: inherit;
         height: inherit;
 
-        background: rgba(0,0,0,.7);
-        transition: background .5s ease-out;
-
-        // background-image: linear-gradient(to bottom, rgba(0, 0, 0, .21), rgba(0, 0, 0, .53));
+        background: #000;
+        opacity: .5;
+        transition: opacity .5s ease-out;
     }
 
     &:hover::before {
-        background: rgba(0,0,0,.3);
+        opacity: .7;
     }
 
     @include above($tablet) {

@@ -7,6 +7,7 @@ import Block from 'components/Block'
 import BlockBorder from 'components/Block/Border'
 import MiniNews from 'components/MiniNews'
 import Aside from 'containers/Aside'
+import ScissorIcon from 'components/Icon/Scissors'
 
 import './style.scss'
 
@@ -66,8 +67,10 @@ class Noise extends PureComponent {
             <Masonry
                 className={'noize-all__row'}
                 options={{
-                    columnWidth: '.noize-all__item'
+                    columnWidth: '.noize-all__item',
+                    gutter: '.noize-all__gutter-sizer',
                 }}>
+                <div className="noize-all__gutter-sizer"></div>
                 {items.map((v, i) => (
                     <div key={i} className="noize-all__item">
                         {v}
@@ -89,6 +92,7 @@ class Noise extends PureComponent {
                                 Инфошум
                             </Title>
                             <div className="noize-all__list">
+                                <ScissorIcon />
                                 {this.renderData(noise.slice(0))}
                             </div>
                             {canLoad

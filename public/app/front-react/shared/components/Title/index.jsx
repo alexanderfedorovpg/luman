@@ -1,9 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import InlineSVG from 'components/InlineSVG'
+import IconInfo from 'components/Icon/Info'
 
-import icon from './info.svg'
 import './style.scss'
 
 function Title({ children, className }) {
@@ -12,7 +11,7 @@ function Title({ children, className }) {
         <div className={classNames('title-block', className)}>
             <h1 className="title-block__title">
                 {children}
-                <InlineSVG src={icon} className="icon icon_info title-block__ico title-block__ico_info" />
+                <IconInfo className="title-block__ico title-block__ico_info" />
             </h1>
         </div>
     )

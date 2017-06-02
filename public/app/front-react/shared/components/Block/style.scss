@@ -4,7 +4,7 @@
 .block-square {
     position: relative;
 
-    width: rem(301);
+    width: rem(300);
     height: rem(245);
 
     &:not(.block-square_list)::before {
@@ -19,12 +19,12 @@
         width: inherit;
         height: inherit;
 
-        background: rgba(0,0,0,.7);
+        background: rgba(0,0,0,.5);
         transition: background .5s ease-out;
     }
 
     &:not(.block-square_list):hover::before {
-        background: rgba(0,0,0,.3);
+        background: rgba(0,0,0,.7);
     }
 
     &__img {
@@ -166,7 +166,7 @@
     }
 
     &:hover::before {
-        background: rgba(0, 0, 0, .3);
+        background: rgba(0, 0, 0, .7);
     }
 
     &__time-keeping {

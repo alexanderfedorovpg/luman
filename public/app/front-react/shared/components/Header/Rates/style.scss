@@ -1,0 +1,25 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.rates {
+    padding-top: rem(6);
+    margin-left: rem(100);
+
+    &__item {
+        display: inline-block;
+        margin-right: rem(15);
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__name {
+        color: $gray-dirty;
+        margin-right: rem(5);
+    }
+
+    &__value {
+        color: $white;
+    }
+}

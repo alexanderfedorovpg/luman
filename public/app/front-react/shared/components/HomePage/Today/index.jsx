@@ -11,12 +11,6 @@ function Today({ data, className, war }) {
 
     return (
         <div className={classNames('per-day', className)}>
-            {!war && (
-                    <p className="per-day__title section-title">
-                        Главное за последние сутки
-                    </p>
-                )
-            }
             <Block data={first} war={war} rectangle />
             <div className="per-day__wrapper per-day__wrapper per-day__wrapper_margin">
                 {rest.map(value => (

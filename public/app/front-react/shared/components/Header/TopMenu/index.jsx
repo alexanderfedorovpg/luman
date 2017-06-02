@@ -10,11 +10,6 @@ function TopMenu() {
             <nav className="top-menu__nav">
                 <ul className="top-menu__ul">
                     <li className="top-menu__item">
-                        <Link to="/" className="top-menu__link">
-                            Главное
-                        </Link>
-                    </li>
-                    <li className="top-menu__item">
                         <Link to="/news" className="top-menu__link">
                             Новости
                         </Link>

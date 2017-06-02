@@ -86,7 +86,7 @@ class News extends Component {
                             <Title>
                                 Новости
                             </Title>
-                            <Tabs data={rubrics} active={rubric} onChange={setRubric} />
+                            { /*<Tabs data={rubrics} active={rubric} onChange={setRubric} /> */}
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row">
                                     <Block data={now[0]} rectangle className="news-one-line__block-rectangle" />

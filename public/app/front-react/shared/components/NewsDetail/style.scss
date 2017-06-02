@@ -90,13 +90,19 @@
                 z-index: 2;
             }
 
-            figcaption {
+            .photo__info {
                 margin-top: 0.1875rem;
                 font-family: "StemText Regular", sans-serif;
                 font-size: rem(12);
                 color: #9fa0a2;
                 z-index: 2;
                 position: relative;
+            }
+
+            .photo__title {
+                color: #243746;
+                position: relative;
+                z-index: 2;
             }
 
             &:after {
@@ -332,4 +338,3 @@
         display: block;
     }
 }
-
