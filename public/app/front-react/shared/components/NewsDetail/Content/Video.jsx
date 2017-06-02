@@ -50,7 +50,6 @@ class Content extends PureComponent {
     }
 
     stop(e) {
-        console.log(e.target.classList);
         if (e.target.classList.value.indexOf('inner-about__text-bg-gray') > -1) {
             if (e.target.classList.value.indexOf('inner-about__text-bg-gray_play') > -1) {
                 this.setState({
