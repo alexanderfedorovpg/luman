@@ -99,7 +99,7 @@ class EditorPage extends Component {
                 top: values.top,
                 title: values.title,
                 sub_title: values.subtitle,
-                editor_id: (values.editor||{}).id,
+                editor_id: (values.editor||this.props.user).id,
                 rubrics: values.rubrics,
                 keywords: values.keywords.trim().replace(/ +/g, ','),
                 theses: values.theses,
