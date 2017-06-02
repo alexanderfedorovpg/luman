@@ -60,16 +60,17 @@ export default Quill => {
         }
 
         static value(domNode) {
-            const img = domNode.nodeName.toLowerCase() == 'img'
-                ? domNode
-                : domNode.querySelector('img')
-
-            return {
-                src: img.getAttribute('src'),
-                title: domNode.dataset.title,
-                author: domNode.dataset.author,
-                source: domNode.dataset.source,
-            };
+            if(domNode.nodeName.toLowerCase() == 'img'){
+                const img = domNode.nodeName.toLowerCase() == 'img'
+                    ? domNode
+                    : domNode.querySelector('img')
+                return {
+                    src: img.getAttribute('src'),
+                    title: domNode.dataset.title,
+                    author: domNode.dataset.author,
+                    source: domNode.dataset.source,
+                };
+            }
         }
     }
     ExtImage.tagName = 'FIGURE';

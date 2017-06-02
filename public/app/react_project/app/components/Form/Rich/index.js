@@ -6,12 +6,20 @@ import Delta from 'quill-delta'
 import ContentModal from 'components/Modal/ContentModal'
 import ImageUploadForm from './Form'
 import extendImageBlot from './imageBlot'
+import extendHtmlBlot from './htmlBlot'
+import FormAddHtml from './FormAddHtml'
+import TweetEmbed from 'react-tweet-embed'
 
 import * as api from 'api'
 
 import 'quill/dist/quill.snow.css'
 
-extendImageBlot(Quill)
+/**
+ * некий валидатор, который использует редактор, чтобы распознать html,
+ * который в него закинули и применить к нему особые инструкции
+ */
+extendImageBlot(Quill);
+extendHtmlBlot(Quill);
 
 const Root = styled.div`
     .ql-laquo:after {
@@ -29,6 +37,10 @@ const Root = styled.div`
     .ql-em-dash:after {
         content: "—";
     }
+    
+    .ql-html:after {
+        content: "html";
+    }
 `
 
 class Rich extends PureComponent {
@@ -37,27 +49,39 @@ class Rich extends PureComponent {
         super(props);
 
         this.state = {
-            modalOpen: false
+            modalImageOpen: false,
+            modalHtmlOpen:  false
         }
 
-        this.openModal = ::this.openModal
-        this.closeModal = ::this.closeModal
-        this.submitHandler = ::this.submitHandler
+        this.openImageModal = ::this.openImageModal
+        this.closeImageModal = ::this.closeImageModal
+
+        this.openAddHtmlModal = ::this.openAddHtmlModal
+        this.closeAddHtmlModal = ::this.closeAddHtmlModal
+
+        this.submitHandlerImage = ::this.submitHandlerImage
+        this.submitHandlerHtml = ::this.submitHandlerHtml
+
         this.toolbarImageHandler = ::this.toolbarImageHandler
         this.toolbarLaquoHandler = ::this.toolbarLaquoHandler
         this.toolbarRaquoHandler = ::this.toolbarRaquoHandler
         this.toolbarEmDashHandler = ::this.toolbarEmDashHandler
+        this.toolbarAddHtmlHandler = ::this.toolbarAddHtmlHandler
+
+        this.customMatcherFigure = ::this.customMatcherFigure
     }
 
-    openModal() {
+    openImageModal() {
         this.setState({
-            modalOpen: true
+            ...this.state,
+            modalImageOpen: true
         })
     }
 
-    closeModal() {
+    openAddHtmlModal() {
         this.setState({
-            modalOpen: false
+            ...this.state,
+            modalHtmlOpen: true
         })
     }
 
@@ -67,7 +91,7 @@ class Rich extends PureComponent {
         var range = editor.getSelection();
         if (range) {
             editor.insertText(range.index, text);
-            editor.setSelection(range.index+1);
+            editor.setSelection(range.index + 1);
         }
     }
 
@@ -86,31 +110,49 @@ class Rich extends PureComponent {
     // у этой функции quill'овский контекст,
     // т.е. this == quill instance
     toolbarAquosHandler(value) {
-        const { quill } = this
+        const {quill} = this
 
         var range = quill.getSelection();
         if (range) {
             // +1 т.к. после вставки левой кавычки индекс
             // правой должен увеличиться на 1
             quill.insertText(range.index, '«');
-            quill.insertText(range.index+range.length+1, '»');
-            quill.setSelection(range.index+1, range.length);
+            quill.insertText(range.index + range.length + 1, '»');
+            quill.setSelection(range.index + 1, range.length);
         }
     }
 
-    toolbarImageHandler(value) {
-        this.openModal();
+    closeAddHtmlModal() {
+        this.setState({
+            ...this.state,
+            modalHtmlOpen: false
+        })
+    }
+
+    closeImageModal() {
+        this.setState({
+            ...this.state,
+            modalImageOpen: false
+        })
+    }
+
+    toolbarImageHandler() {
+        this.openImageModal();
+    }
+
+    toolbarAddHtmlHandler() {
+        this.openAddHtmlModal();
     }
 
     uploadImage(image, data, cb) {
         api.uploadFile(
             image,
             {
-                object_name: data.title,
+                object_name:   data.title,
                 object_author: data.author,
                 object_source: data.source
             }
-        ).then(({ data: { file } }) => cb(file.url))
+        ).then(({data: {file}}) => cb(file.url))
     }
 
     addImage(data, cb) {
@@ -122,27 +164,54 @@ class Rich extends PureComponent {
                     new Delta()
                         .retain(range.index)
                         .delete(range.length)
-                        .insert({ image: { src: result, ...data }}),
+                        .insert({image: {src: result, ...data}}),
                     'user'
                 );
-
                 cb();
             });
         }
     }
 
-    submitHandler(data) {
+    submitHandlerImage(data) {
         const values = data.toJS()
         this.addImage(
             values,
             () => {
-                this.closeModal()
+                this.closeImageModal()
             }
         )
     }
-
+    submitHandlerHtml(data) {
+        const values = data.toJS()
+        this.addHtml(
+            values,
+            () => {
+                this.closeImageModal()
+            }
+        )
+    }
+    addHtml(data, cb) {
+        console.log('addHtml', data);
+        let html = data.html;
+        let editor = this.quill.getEditor();
+        let range = editor.getSelection(true);
+        editor.updateContents(
+            new Delta()
+                .retain(range.index)
+                .delete(range.length)
+                .insert({html: html}),
+            'user'
+        );
+        //editor.clipboard.dangerouslyPasteHTML(range.index, html)
+        cb();
+    }
+    customMatcherFigure(data,value,value2){
+        console.log('data',data);
+        console.log('value',value);
+        this.quill.insertEmbed(10, 'html', 'http://quilljs.com/images/cloud.png');
+        //return value;
+    }
     render() {
-
         return (
             <Root>
                 <div id="toolbar">
@@ -182,6 +251,9 @@ class Rich extends PureComponent {
                         <button className="ql-aquos" title="Ctrl + Shift + 2" />
                         <button className="ql-em-dash" />
                     </div>
+                    <div className="ql-formats">
+                        <button className="ql-html" />
+                    </div>
                 </div>
                 <ReactQuill
                     ref={(el) => { this.quill = el }}
@@ -195,6 +267,7 @@ class Rich extends PureComponent {
                                 raquo: this.toolbarRaquoHandler,
                                 aquos: this.toolbarAquosHandler,
                                 'em-dash': this.toolbarEmDashHandler,
+                                html:      this.toolbarAddHtmlHandler,
                             }
                         },
                         keyboard: {
@@ -215,12 +288,18 @@ class Rich extends PureComponent {
                     }} />
 
                 <ContentModal
-                    isOpen={this.state.modalOpen}
-                    onRequestClose={this.closeModal}
+                    isOpen={this.state.modalImageOpen}
+                    onRequestClose={this.closeImageModal}
                     title="Выберите изображение"
                     contentLabel="Выберите изображение">
-
-                    <ImageUploadForm onSubmit={this.submitHandler} />
+                    <ImageUploadForm onSubmit={this.submitHandlerImage}/>
+                </ContentModal>
+                <ContentModal
+                    isOpen={this.state.modalHtmlOpen}
+                    onRequestClose={this.closeAddHtmlModal}
+                    title="Добавить html"
+                    contentLabel="Добавьте html">
+                    <FormAddHtml onSubmit={this.submitHandlerHtml}/>
                 </ContentModal>
             </Root>
         )
