@@ -238,7 +238,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
                 $newsEdit->moderation = $moderation;
-
+                $newsEdit->editor_id = $editor_id?$editor_id:$this->user_id;
 
                 $log_moderation = new NewsModerationLogHelper($newsEdit);
 
@@ -319,7 +319,7 @@ class NewsListEditorController extends CmsController
 
                     }
                     $this->respond($newsEdit);
-                    $this->log->setLog('MODERATION_NEWS', $this->user_id, "Successful");
+                   $this->log->setLog('MODERATION_NEWS', $this->user_id, "Successful");
                     return $this->respond(
                         $newsEdit->toArray()
                     );
@@ -333,7 +333,7 @@ class NewsListEditorController extends CmsController
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);
         } catch (\Exception $e) {
-            $this->log->setLog('MODERATION_NEWS', $this->user_id, "Error 500");
+          $this->log->setLog('MODERATION_NEWS', $this->user_id, "Error 500");
             return $this->respondFail500x([$e->getMessage()]);
         }
     }

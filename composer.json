@@ -9,7 +9,9 @@
         "laravel/lumen-framework": "5.4.*",
         "vlucas/phpdotenv": "~2.2",
         "vluzrmos/tinker": "^1.3",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "predis/predis": "^1.1",
+        "illuminate/redis": "^5.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Observers\CacheClearObserver;
 
 /**
  * Class HomepageRecord
@@ -20,6 +21,11 @@ class HomepageRecord extends Model
         'record_id', 'top',
     ];
 
+
+    protected $events = [
+        'saved' => CacheClearObserver::class,       
+    ];
+    
     /**
      * Видеозапись
      *

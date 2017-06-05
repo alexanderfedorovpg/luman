@@ -338,3 +338,64 @@
         display: block;
     }
 }
+
+.scissors {
+    position: absolute;
+    height: rem(56);
+    width: rem(110);
+    /* padding: 1.4375rem 1.8125rem 2.0625rem 1.5rem; */
+    background-color: #a13461;
+    color: #fff;
+    padding: rem(10);
+
+    text-transform: uppercase;
+
+    right: rem(-40);
+
+    z-index: 1;
+
+    &__icon {
+        background-image: url(/content/noise/scissors.png);
+        height: rem(20);
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: rem(-15);
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            width: 78%;
+            height: 0.125rem;
+            border-top: rem(2) dashed #fff;
+            bottom: rem(9);
+            left: rem(23);
+        }
+
+    }
+
+    &:after, &:before {
+        content: ' ';
+        position: absolute;
+    }
+
+    &:after {
+        top: 100%;
+        left: -28%;
+        width: calc(100% + 1.9375rem);
+        height: 1.2rem;
+        margin-top: -0.0625rem;
+        background-image: linear-gradient(-15deg, transparent 0.8625rem, #a13461 0.925rem);
+    }
+
+    &:before {
+        top: 0;
+        left: -27%;
+        width: 2rem;
+        height: 100%;
+        margin-left: -0.0625rem;
+        background-image: linear-gradient(110deg, transparent 0.9625rem, #a13461 1.025rem);
+    }
+
+}

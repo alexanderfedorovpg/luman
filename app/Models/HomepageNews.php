@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Observers\CacheClearObserver;
 
 /**
  * Class HomepageNews
@@ -19,6 +20,10 @@ class HomepageNews extends Model
         'news_id', 'category_id', 'top',
     ];
 
+    protected $events = [
+        'saved' => CacheClearObserver::class,       
+    ];
+
     /**
      * Категория
      *
@@ -26,7 +31,7 @@ class HomepageNews extends Model
      */
     public function category()
     {
-        return $this->hasOne(HomepageNewsCategory::class, 'id', 'category_id');
+        return $this->hasONe(HomepageNewsCategory::class, 'id', 'category_id');
     }
 
     /**
