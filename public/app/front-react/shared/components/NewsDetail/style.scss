@@ -115,8 +115,27 @@
                 background: #eaecee;
                 top: 0px;
                 // left: -50.2%;
-                left: calc(100% - 887px);
                 z-index: 1;
+                left: calc(55% - 897px);
+                width: 78.125rem;
+
+                @include below($mobile) {
+                    width: 100%;
+                }
+
+                @include above($tablet) {
+                    width: rem(615);
+                }
+
+                @include above($tabletLandscape) {
+                    width: rem(930);
+                    left: -18.8%;
+                }
+
+                @include above($desktop) {
+                    width: rem(1250);
+                    left: -59.6%;
+                }
             }
         }
     }
@@ -326,15 +345,76 @@
 
 .inner-about-video_overlay {
     position: absolute;
-    left: calc(100% - 896px);
-    top: -47px;
+    left: calc(100% - 1085px);
+    top: -57px;
     background: rgba(0,0,0,.7);
     /* background: #673AB7; */
-    z-index: 2;
+    z-index: 4;
 
     display: none;
 
     &.is-active {
         display: block;
     }
+}
+
+.scissors {
+    position: absolute;
+    height: rem(56);
+    width: rem(110);
+    /* padding: 1.4375rem 1.8125rem 2.0625rem 1.5rem; */
+    background-color: #a13461;
+    color: #fff;
+    padding: rem(10);
+
+    text-transform: uppercase;
+
+    right: rem(-40);
+
+    z-index: 1;
+
+    &__icon {
+        background-image: url(/content/noise/scissors.png);
+        height: rem(20);
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: rem(-15);
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            width: 78%;
+            height: 0.125rem;
+            border-top: rem(2) dashed #fff;
+            bottom: rem(9);
+            left: rem(23);
+        }
+
+    }
+
+    &:after, &:before {
+        content: ' ';
+        position: absolute;
+    }
+
+    &:after {
+        top: 100%;
+        left: -28%;
+        width: calc(100% + 1.9375rem);
+        height: 1.2rem;
+        margin-top: -0.0625rem;
+        background-image: linear-gradient(-15deg, transparent 0.8625rem, #a13461 0.925rem);
+    }
+
+    &:before {
+        top: 0;
+        left: -27%;
+        width: 2rem;
+        height: 100%;
+        margin-left: -0.0625rem;
+        background-image: linear-gradient(110deg, transparent 0.9625rem, #a13461 1.025rem);
+    }
+
 }
