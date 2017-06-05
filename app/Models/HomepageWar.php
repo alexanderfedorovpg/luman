@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Observers\CacheClearObserver;
 
 /**
  * Class HomepageWar
@@ -26,6 +27,11 @@ class HomepageWar extends Model
      */
     public $table = 'homepage_war';
 
+
+    protected $events = [
+        'saved' => CacheClearObserver::class,       
+    ];
+    
     /**
      * Новость
      *

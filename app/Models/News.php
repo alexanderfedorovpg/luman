@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use App\Models\Observers\NewsObserver;
 
 /**
  * Class News
@@ -41,6 +42,10 @@ class News extends Model
     public static $rules = [
         'id' => 'integer|exists:news,id',
 
+    ];
+
+    protected $events = [
+        'saved' => NewsObserver::class,       
     ];
 
     public function uri()

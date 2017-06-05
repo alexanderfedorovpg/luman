@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Observers\CacheClearObserver;
 
 /**
  * Class HomepageOption
@@ -20,6 +21,10 @@ class HomepageOption extends Model
         'value'
     ];
 
+
+    protected $events = [
+        'saved' => CacheClearObserver::class,       
+    ];
     /**
      * The primary key for the model.
      *

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Observers\CacheClearObserver;
+
 
 class AirRecord extends Model
 {
@@ -21,6 +23,10 @@ class AirRecord extends Model
         'publish_date',
         'is_published',
         'to_constructor',
+    ];
+
+    protected $events = [
+        'saved' => CacheClearObserver::class,       
     ];
 
     /**
