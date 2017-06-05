@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import './style.scss'
 
@@ -10,19 +10,19 @@ function TopMenu() {
             <nav className="top-menu__nav">
                 <ul className="top-menu__ul">
                     <li className="top-menu__item">
-                        <Link to="/news" className="top-menu__link">
+                        <NavLink activeClassName="selected" to="/news" className="top-menu__link">
                             Новости
-                        </Link>
+                        </NavLink>
                     </li>
                     <li className="top-menu__item">
-                        <Link to="/noise" className="top-menu__link">
+                        <NavLink activeClassName="selected" to="/noise" className="top-menu__link">
                             Инфошум
-                        </Link>
+                        </NavLink>
                     </li>
                     <li className="top-menu__item">
-                        <Link to="/broadcast" className="top-menu__link">
+                        <NavLink activeClassName="selected" to="/broadcast" className="top-menu__link">
                             Из эфира
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
