@@ -238,7 +238,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->top = $top;
                 $newsEdit->body = $body;
                 $newsEdit->moderation = $moderation;
-                $newsEdit->editor_id = $editor_id;
+                $newsEdit->editor_id = $editor_id?$editor_id:$this->user_id;
 
                 $log_moderation = new NewsModerationLogHelper($newsEdit);
 
