@@ -255,6 +255,10 @@ main {
         background: $bg-text;
     }
 
+    &.inner-about__text-bg-gray_play:before {
+        background-color: #4c4c4c;
+    }
+
     &__block-text {
         position: absolute;
         bottom: rem(-72);
@@ -478,4 +482,3 @@ main {
     margin-bottom: rem(30);
 }
 }
-@import "./common";

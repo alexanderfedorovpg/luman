@@ -4,6 +4,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Observers\CacheClearObserver;
 
 /**
  * Class NewsRelated
@@ -28,6 +29,10 @@ class NewsComments extends Model
         'video_stream_preview',
     ];
 
+    protected $events = [
+        'saved' => CacheClearObserver::class,       
+    ];
+    
     /**
      * Правила
      *

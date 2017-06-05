@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Observers\CacheClearObserver;
 /**
  * Class HomepageInfoNoise
  * @package \App\Models
@@ -25,6 +25,10 @@ class HomepageInfoNoise extends Model
      * @var string
      */
     public $table = 'homepage_info_noise';
+
+    protected $events = [
+        'saved' => CacheClearObserver::class,       
+    ];
 
     /**
      * Новость

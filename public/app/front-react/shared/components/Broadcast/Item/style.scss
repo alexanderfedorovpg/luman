@@ -2,19 +2,59 @@
 @import "~style/vars";
 
 .from-enter {
+    position: relative;
+
     width: rem(300);
+    height: rem(245);
+
+    &:not(.block-square_list)::before {
+        content: '';
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+
+        display: block;
+        width: inherit;
+        height: inherit;
+
+        background: rgba(0,0,0,.5);
+        transition: background .5s ease-out;
+    }
+
+    &:not(.block-square_list):hover::before {
+        background: rgba(0,0,0,.7);
+    }
 
     &__info {
-        padding-top: rem(15);
-        padding-left: rem(17);
+        position: absolute;
+        z-index: 1;
+        bottom: rem(9);
+        left: 0;
+
+        width: rem(280);
+        padding-left: rem(20);
     }
 
     &__link {
-        font: #{rem(14)}/#{rem(20)} $stemBold;
-        color: $enter;
-        text-decoration: none;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
 
-        cursor: pointer;
+        display: block;
+        width: inherit;
+        height: inherit;
+    }
+
+    &__title {
+        margin-bottom: rem(3);
+
+        font: #{rem(18)}/#{rem(21)} $stemBold;
+        color: $white;
+        letter-spacing: rem(-.9);
+        letter-spacing: rem(-.9);
     }
 
     &__img {
@@ -52,12 +92,19 @@
     }
 
     &_big {
-        width: rem(600);
+        width: rem(615);
+        height: rem(490);
 
         .from-enter {
 
-            &__link {
-                font-size: #{rem(28)};
+            &__info {
+                width: auto;
+                padding-right: rem(20);
+            }
+
+            &__title {
+                font-size: rem(28);
+                line-height: rem(28);
             }
 
             &__img {

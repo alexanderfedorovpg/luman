@@ -69,6 +69,10 @@
             flex-wrap: nowrap;
         }
 
+        .info-noize {
+            margin-left: rem(14);
+        }
+
         &.two-wrapper {
 
             @include above($tablet) {
