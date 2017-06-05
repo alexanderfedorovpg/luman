@@ -115,8 +115,27 @@
                 background: #eaecee;
                 top: 0px;
                 // left: -50.2%;
-                left: calc(100% - 887px);
                 z-index: 1;
+                left: calc(55% - 897px);
+                width: 78.125rem;
+
+                @include below($mobile) {
+                    width: 100%;
+                }
+
+                @include above($tablet) {
+                    width: rem(615);
+                }
+
+                @include above($tabletLandscape) {
+                    width: rem(930);
+                    left: -18.8%;
+                }
+
+                @include above($desktop) {
+                    width: rem(1250);
+                    left: -59.6%;
+                }
             }
         }
     }
