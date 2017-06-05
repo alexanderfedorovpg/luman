@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Masonry from 'react-masonry-component'
 
 import Title from 'components/Title'
 import Tabs from 'components/Tabs'
@@ -16,27 +15,32 @@ import BannerPreview from 'components/HomePage/BannerPreview'
 import RandomNews from 'components/HomePage/RandomNews'
 import MoreNews from 'components/HomePage/MoreNews'
 import LoadMore from 'components/LoadMore'
-import Aside from 'containers/Aside'
+import Video from 'components/Aside/Video'
 
 import './style.scss'
 
 class Broadcast extends Component {
 
-    renderAdditionalData(data) {
-
+    renderItems(data) {
         return (
-            <Masonry
-                className={'news-top__row'}
-                options={{
-                    gutter: 10
-                }}>
-                {data.map((v, i) => (
-                    <div key={i} className="news-top__row-item">
-                        <Item data={v} />
-                    </div>
-                ))}
-            </Masonry>
+            <div className="news-one-line__row">
+                <Item data={data[0]} />
+                <Item data={data[1]} />
+                <Item data={data[2]} />
+                <Item data={data[3]} />
+            </div>
         )
+    }
+
+    renderAdditionalData(data) {
+        let items = []
+        let values = [...data]
+
+        while (data.length) {
+            items = items.push(this.renderItems(values.splice(0, 4)))
+        }
+
+        return items
     }
 
     render() {
@@ -63,55 +67,50 @@ class Broadcast extends Component {
                             <Title>
                                 Из эфира
                             </Title>
-                            <Tabs data={programs} active={program} onChange={setProgram} />
+                            {/*<Tabs data={programs} active={program} onChange={setProgram} />*/}
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row" style={{ marginBottom: 30 }}>
                                     <Item data={data[0]} big />
-                                    <Group title="Популярное">
-                                        <List data={data.slice(1, 4)} className="broadcast__popular" />
-                                    </Group>
+                                    <List data={data.slice(1, 5)} className="broadcast__popular" />
                                 </div>
                                 <div className="news-one-line__row">
-                                    <Item data={data[4]} />
                                     <Item data={data[5]} />
                                     <Item data={data[6]} />
-                                </div>
-                            </div>
-                            <Banner className="news-top__banner" />
-                            <div className="news-one-line news-top__news-one-line">
-                                <div className="news-one-line__row">
                                     <Item data={data[7]} />
-                                    <Item data={data[8]} />
-                                    <Item data={data[9]} />
                                 </div>
                             </div>
                         </div>
-                        <Aside />
+                        <div className="right-col">
+                            <Video data={{}} />
+                        </div>
                         <div className="news-top__middle middle-col">
                             <BannerPreview className="news-top__banner-preview" />
                         </div>
-                        <div className="news-top__left left-col left-col left-col_width_inner">
-                            <div className="news-one-line news-top__news-one-line">
-                                <div className="news-one-line__row">
-                                    <Item data={data[10]} />
-                                    <Item data={data[11]} />
-                                    <Item data={data[12]} />
-                                </div>
-                            </div>
-                            {this.renderAdditionalData(data.slice(16))}
-                            {canLoad
-                                ? (
-                                    <LoadMore onClick={onLoadRequest}>
-                                        Больше новостей
-                                    </LoadMore>
-                                )
-                                : null
-                            }
+                        <div className="news-one-line__row">
+                            <Item data={data[8]} />
+                            <Item data={data[9]} />
+                            <Item data={data[10]} />
+                            <Item data={data[11]} />
                         </div>
-                        <div className="news-top__right right-col">
-                            <Subscribe className="news-top__subscribe" />
-                            <List data={data.slice(13, 16)} />
+                        <div className="news-one-line__row">
+                            <Banner className="news-top__banner" />
+                            <Subscribe />
                         </div>
+                        <div className="news-one-line__row">
+                            <Item data={data[12]} />
+                            <Item data={data[13]} />
+                            <Item data={data[14]} />
+                            <Item data={data[15]} />
+                        </div>
+                        {this.renderAdditionalData(data.slice(16))}
+                        {canLoad
+                            ? (
+                                <LoadMore onClick={onLoadRequest}>
+                                    Больше новостей
+                                </LoadMore>
+                            )
+                            : null
+                        }
                     </div>
                 </div>
             </div>

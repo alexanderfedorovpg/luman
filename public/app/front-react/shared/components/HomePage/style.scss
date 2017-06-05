@@ -61,6 +61,10 @@
             flex-wrap: nowrap;
         }
 
+        .info-noize {
+            margin-left: rem(14);
+        }
+
         &.two-wrapper {
             margin-top: rem(16);
 
@@ -96,32 +100,6 @@
     }
 
     .info-noize {
-        width: rem(300);
-        margin-left: rem(14);
-        border: 2px dashed $gray-dirty;
-        position: relative;
-
-        &__title {
-            position: absolute;
-            left: -2px;
-            top: -15px;
-            border-bottom: 0;
-            background: $white;
-        }
-
-        &__wrapper {
-            margin-top: rem(30);
-            padding-left: rem(14);
-            padding-right: rem(14);
-        }
-
-        .icon_scissors {
-            fill: $gray-dirty;
-            display: block;
-            position: absolute;
-            top: 4px;
-            right: -100%;
-        }
 
         &_right-block {
             padding-left: 0;
