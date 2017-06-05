@@ -32,6 +32,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         padding-top: rem(5);
         padding-bottom: rem(5);
 
@@ -47,12 +48,27 @@
     &__right-part {
         display: flex;
         justify-content: flex-end;
+
+        @include below($mobile) {
+            width: 50%;
+        }
     }
 
     &__part-wrapper {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
         height: 100%;
+
+        @include below($mobile) {
+            width: 50%;
+
+
+            .icon_info {
+                display: none;
+            }
+        }
     }
 
     &__burger {
@@ -64,12 +80,20 @@
     &__logo {
         position: relative;
 
-        width: rem(138);
+        width: 138px;
         margin-right: rem(15);
-        margin-left: rem(38);
+        margin-top: rem(-23);
 
-        .logo__img {
-            width: rem(138);
+        @include below($mobile) {
+            margin-left: rem(30);
+        }
+
+        @include above($tablet) {
+            margin-left: rem(13);
+        }
+
+        @include above($desktop) {
+            margin-left: rem(38);
         }
     }
 

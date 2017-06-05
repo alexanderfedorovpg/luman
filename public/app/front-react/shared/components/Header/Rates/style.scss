@@ -5,6 +5,10 @@
     padding-top: rem(6);
     margin-left: rem(100);
 
+    @include below($mobile) {
+        display: none;
+    }
+
     &__item {
         display: inline-block;
         margin-right: rem(15);

@@ -1,4 +1,5 @@
 @import "~style/mixins";
+@import "~style/vars";
 
 .per-day {
 
@@ -12,6 +13,15 @@
        display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        @include below($mobile) {
+            flex-wrap: wrap;
+            width: 100%;
+
+            .block-square:not(:first-child) {
+                margin-top: rem(14);
+            }
+        }
     }
 
     &__wrapper_margin {
