@@ -25,7 +25,7 @@ const values = {
     apiEndpoint: true,
   },
 
-  apiEndpoint: EnvVars.string('API_ENDPOINT_PUBLIC', 'http://librorum-client.rtvi.ddemo.ru/api/v1/web'),
+  apiEndpoint: EnvVars.string('API_ENDPOINT_PUBLIC', 'https://fapi.prod.rtvi.com/api/v1/web'),
 
   // The host on which the server should run.
   host: EnvVars.string('HOST', '127.0.0.1'),

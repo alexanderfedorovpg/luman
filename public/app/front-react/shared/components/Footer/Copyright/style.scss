@@ -5,7 +5,14 @@
 
     &__text {
         font-size: rem(11);
-        line-height: rem(17);
         color: fade-out($copyright, .38);
+
+        @include below($mobile) {
+            line-height: rem(24);
+        }
+
+        @include above($tablet) {
+            line-height: rem(17);
+        }
     }
 }

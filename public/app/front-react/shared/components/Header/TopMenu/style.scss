@@ -4,6 +4,10 @@
 .top-menu {
     margin-left: rem(30);
 
+    @include below($mobile) {
+        display: none;
+    }
+
     &__nav {
         height: 100%;
     }

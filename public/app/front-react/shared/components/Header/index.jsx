@@ -33,6 +33,7 @@ function Header({ war, warTitle, history }) {
             <div className="header__container container">
                 <div className="header__left-part">
                     <div className="header__part-wrapper">
+                        <Burger />
                         <Logo war={war} />
                         <InfoIcon width="18px" height="18px" />
                         <TopMenu />
@@ -41,6 +42,7 @@ function Header({ war, warTitle, history }) {
                 </div>
                 <div className="header__right-part">
                     <RSS />
+                    <InfoIcon width="18px" height="18px" />
                     <Search
                         onSearch={onSearch}
                         classNames={{ root: 'header__search' }}

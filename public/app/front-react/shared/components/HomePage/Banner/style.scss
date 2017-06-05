@@ -10,9 +10,13 @@
 
         text-align: center;
 
-        background-image: url(./where-view.png);
+        background-image: url(./where-view_mobile.jpg);
         background-position: center;
         background-size: cover;
+
+        @include above($desktop) {
+            background-image: url(./where-view.png);
+        }
     }
 
     &__title {

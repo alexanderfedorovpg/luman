@@ -5,7 +5,7 @@
     position: relative;
 
     width: rem(300);
-    height: rem(245);
+    height: rem(250);
 
     &:not(.block-square_list)::before {
         content: '';
@@ -59,7 +59,6 @@
 
         font: #{rem(18)}/#{rem(21)} $stemBold;
         color: $white;
-        letter-spacing: rem(-.9);
         letter-spacing: rem(-.9);
     }
 
@@ -148,6 +147,10 @@
     width: rem(617);
     height: rem(250);
 
+    @include below($mobile) {
+        width: 100%;
+    }
+
     &::before {
         content: '';
 
@@ -218,13 +221,28 @@
         bottom: rem(2);
         left: 0;
 
-        width: rem(345);
         padding-left: rem(19);
+
+        @include below($mobile) {
+            width: rem(230);
+        }
+
+        @include above($tablet) {
+            width: rem(345);
+        }
     }
 
     &__title {
         font: #{rem(24)}/#{rem(26)} $stemBold;
         color: $white;
+
+        @include above($tabletLandscape) {
+            margin-bottom: rem(7);
+        }
+
+        @include above($desktop) {
+            margin-bottom: 0;
+        }
     }
 
     &__title_font_small {

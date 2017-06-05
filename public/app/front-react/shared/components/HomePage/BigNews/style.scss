@@ -25,6 +25,11 @@
         opacity: .7;
     }
 
+    @include below($mobile) {
+        width: rem(300);
+        height: rem(200);
+    }
+
     @include above($tablet) {
         width: rem(615);
         height: rem(395);
@@ -60,7 +65,19 @@
         width: inherit;
         padding-right: rem(113);
         padding-left: rem(20);
-        padding-bottom: rem(25);
+
+        @include above($tablet) {
+            padding-right: rem(148);
+            padding-bottom: rem(22);
+        }
+
+        @include above($tabletLandscape) {
+            padding-bottom: rem(21);
+        }
+
+        @include above($desktop) {
+            padding-bottom: rem(25);
+        }
     }
 
     &__img {
@@ -71,24 +88,67 @@
 
     &__title {
         font-family: $stemBold;
-        font-size: rem(36);
-        line-height: rem(42);
         color: $white;
+
+        @include above($tablet) {
+            margin-bottom: rem(16);
+            font-size: rem(30);
+            line-height: rem(30);
+        }
+
+        @include above($tabletLandscape) {
+            margin-bottom: rem(13);
+            font-size: rem(30);
+            line-height: rem(30);
+        }
+
+        @include above($desktop) {
+            margin-bottom: 0;
+            font-size: rem(36);
+            line-height: rem(42);
+        }
     }
 
     &__time-add {
-        font-size: rem(12);
-        line-height: rem(42);
         color: $gray;
+
+        @include above($tablet) {
+            font-size: rem(10);
+            line-height: rem(14);
+        }
+
+        @include above($tabletLandscape) {
+            font-size: rem(10);
+            line-height: rem(18);
+        }
+
+        @include above($desktop) {
+            font-size: rem(12);
+            line-height: rem(42);
+        }
     }
 
     &__time-update {
-        margin-top: rem(-15);
 
-        font-size: rem(12);
-        line-height: rem(18);
         color: $purple;
         letter-spacing: rem(-.7);
+
+        @include above($tablet) {
+            font-size: rem(10);
+            line-height: rem(14);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: 0;
+            font-size: rem(10);
+            line-height: rem(14);
+        }
+
+        @include above($desktop) {
+            margin-top: rem(-15);
+            font-size: rem(12);
+            line-height: rem(18);
+        }
     }
 
     &__description {
@@ -123,6 +183,11 @@
         display: inline-block;
         width: rem(146);
         height: rem(83);
+
+        @include below($mobile) {
+            width: rem(88);
+            height: rem(50);
+        }
     }
 
     &__logo-title {
@@ -131,9 +196,17 @@
         top: rem(8);
         left: rem(14);
 
-        font-size: rem(16);
-        line-height: rem(18);
         color: $white;
         text-transform: uppercase;
+
+        @include below($mobile) {
+            font-size: rem(10);
+            line-height: rem(11);
+        }
+
+        @include above($tablet) {
+            font-size: rem(16);
+            line-height: rem(18);
+        }
     }
 }

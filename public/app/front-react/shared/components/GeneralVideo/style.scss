@@ -16,9 +16,13 @@
 
         display: block;
         width: rem(300);
-        height: rem(593);
+        height: inherit;
 
         background-color: rgba(0, 0, 0, .32);
+    }
+
+    @include above($tablet) {
+        height: rem(505);
     }
 
     @include above($tabletLandscape) {
