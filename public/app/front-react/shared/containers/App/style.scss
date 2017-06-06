@@ -256,7 +256,7 @@ main {
     }
 
     &.inner-about__text-bg-gray_play:before {
-        background-color: #4c4c4c;
+        visibility: hidden;
     }
 
     &__block-text {
@@ -382,14 +382,14 @@ main {
                 left: 69.4%;
 
                 &:before {
-                    left: -25px;
+                    left: -31px;
                     transform: scale(-1, 1);
                 }
 
                 &:after {
-                    left: -26px;
+                    left: -31.7px;
                     transform: scale(-1, 1);
-                    width: calc(100% + #{rem(29.5)});
+                    width: calc(100% + 1.94375rem);
                 }
 
             }

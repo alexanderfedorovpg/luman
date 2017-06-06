@@ -48,7 +48,7 @@
         .inner-default &_play.text-bg-gray {
             // position: relative;
             z-index: 4;
-            background-color: #4c4c4c;
+            background-color: rgba(36, 55, 70, 0);
 
             .social-links {
                 opacity: .5;
@@ -277,6 +277,11 @@
 
     position: relative;
 
+
+    &_play {
+        visibility: hidden;
+    }
+
     &_play .breadcrumbs {
         display: none;
     }
@@ -288,7 +293,7 @@
         height: 100%;
         position: absolute;
         // background-color: #eaecee;
-        background-color: #4c4c4c;
+        background-color: rgba(36, 55, 70, 0.6);
     }
 
     &__img {
@@ -347,7 +352,8 @@
     position: absolute;
     left: calc(100% - 1085px);
     top: -57px;
-    background: rgba(0,0,0,.7);
+    // background: rgba(0,0,0,.7);
+    background-color: rgba(36, 55, 70, 0.6);
     /* background: #673AB7; */
     z-index: 4;
 
