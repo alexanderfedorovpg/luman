@@ -8,6 +8,14 @@
         display: none;
     }
 
+    @include above($tablet) {
+        margin-left: rem(22);
+    }
+
+    @include above($tabletLandscape) {
+        margin-left: rem(21);
+    }
+
     &__nav {
         height: 100%;
     }

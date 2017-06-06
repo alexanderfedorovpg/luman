@@ -10,6 +10,23 @@
         align-content: stretch;
         justify-content: space-between;
         margin-bottom: rem(65);
+
+        @include above($tablet) {
+            width: rem(637);
+
+            .right-col {
+                display: none;
+            }
+        }
+
+        @include above($tabletLandscape) {
+            width: rem(930);
+        }
+
+        @include above($desktop) {
+            width: rem(1250);
+            .right-col {display: block;}
+        }
     }
 
     &__list-mini {
