@@ -19,22 +19,8 @@
         }
 
         @include above($desktop) {
-            margin-top: rem(5);
+            //margin-top: rem(5);
         }
-    }
-
-    &_war:before {
-        content: '';
-
-        display: block;
-        width: 100%;
-        height: rem(70);
-
-        background-color: $war;
-    }
-
-    &_margin + main {
-        margin-top: 2.6875rem;
     }
 
     &__container {
@@ -57,10 +43,10 @@
     &__right-part {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
 
         @include below($mobile) {
             width: 50%;
-            align-items: center;
         }
     }
 
@@ -155,6 +141,31 @@
     &__event {
         font: #{rem(24)} / #{rem(40)} $stemBold;
         color: $white;
+    }
+
+    &_war:before {
+        content: '';
+
+        display: block;
+        width: 100%;
+        height: rem(70);
+
+        background-color: $war;
+    }
+
+    &_margin + main {
+        margin-top: 2.6875rem;
+    }
+
+    &_open-search {
+
+        @include below($mobile) {
+
+            .logo__img {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
     }
 
 }

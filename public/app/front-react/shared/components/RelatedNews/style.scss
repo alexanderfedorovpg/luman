@@ -2,7 +2,19 @@
 @import "~style/vars";
 
 .similar-news {
-    margin-top: rem(33);
+
+    @include above($tablet) {
+        margin-top: rem(52);
+    }
+
+    @include above($tabletLandscape) {
+        margin-top: rem(60);
+    }
+
+    @include above($desktop) {
+        margin-top: rem(33);
+    }
+
     .similar-news__title {
         padding-left: rem(25);
         margin-bottom: rem(14);
@@ -11,11 +23,20 @@
         letter-spacing: rem(-0.8);
 
         border-bottom: 0;
+
+        @include above($tabletLandscape) {
+            margin-left: rem(-53);
+            margin-bottom: rem(9);
+        }
     }
 
     &__row {
         display: flex;
         align-items: flex-start;
+
+        @include above($tabletLandscape) {
+            margin-left: rem(-52);
+        }
     }
 
     &__col-l {
@@ -30,6 +51,7 @@
 
             width: auto;
             height: auto;
+            display: none;
         }
 
         &__info {
@@ -95,10 +117,24 @@
 
     &--wide {
         .random-news__block-square_list {
-            width: rem(405);
+
+            @include above($tabletLandscape) {
+                width: 100%;
+            }
+
+            @include above($desktop) {
+                width: rem(405);
+            }
         }
         .random-news__block-square .mini-news {
-            width: rem(405);
+
+            @include above($tabletLandscape) {
+                width: 100%;
+            }
+
+            @include above($desktop) {
+                width: rem(405);
+            }
         }
         .random-news__block-square_list .mini-news__title {
             margin-top: rem(-2);

@@ -5,7 +5,14 @@
     position: relative;
 
     width: rem(300);
-    height: rem(245);
+
+    @include above($tabletLandscape) {
+        height: auto;
+    }
+
+    @include above($desktop) {
+        height: rem(245);
+    }
 
     &:not(.block-square_list)::before {
         content: '';

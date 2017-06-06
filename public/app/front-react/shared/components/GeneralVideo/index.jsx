@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Img from 'components/Img';
 import { ensureAbs } from 'shared/utils/uri';
 
+
 import './style.scss';
 import placeholder from './instead_video.jpg';
 
@@ -51,6 +52,7 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
                             <div className="general-video__info">
                                 <div className="general-video__date general-video__date general-video__date_position">
                                     {data.url ?
+
                                         <img onClick={onPlay} className="general-video__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
                                         :
                                         <img className="general-video__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
