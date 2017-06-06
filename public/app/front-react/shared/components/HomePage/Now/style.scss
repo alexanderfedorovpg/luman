@@ -95,6 +95,10 @@
 
         .mini-news__info {
             transform: translateX(#{rem(18)});
+
+            @include above($tablet) {
+                width: rem(270);
+            }
         }
 
         .mini-news__title {

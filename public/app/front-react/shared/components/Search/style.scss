@@ -2,27 +2,42 @@
 @import "~style/vars";
 
 .search {
-    width: 100%;
     height: rem(33);
     margin-left: rem(20);
 
     color: rgba(255, 255, 255, .42);
 
+    @include below($mobile) {
+        width: auto;
+        margin-left: 0;
+    }
+
+    @include above($tablet) {
+        width: rem(100);
+    }
+
+    @include above($desktop) {
+        width: 100%;
+    }
+
     &_open {
 
         .search__input-text {
             flex: 1;
-
             padding-right: rem(15);
             padding-left: rem(15);
-
-            font-family: $stemReg;
             font-size: rem(14);
+            font-family: $stemReg;
             line-height: rem(33);
             color: #666666;
             text-align: left;
 
             background-color: #fff;
+
+            @include below($mobile) {
+                width: auto;
+                @include padding_x(#{rem(15)});
+            }
         }
     }
 
@@ -30,6 +45,10 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+
+        @include below($mobile) {
+            position: relative;
+        }
     }
 
     &__input-text {
@@ -52,6 +71,13 @@
 
         &::-ms-clear {
             display: none;
+        }
+
+        @include below($mobile) {
+            position: absolute;
+            right: 100%;
+            width: 0;
+            @include padding_x(0);
         }
     }
 

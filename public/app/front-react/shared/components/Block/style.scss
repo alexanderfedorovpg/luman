@@ -224,7 +224,7 @@
         padding-left: rem(19);
 
         @include below($mobile) {
-            width: rem(230);
+           padding-right: rem(15);
         }
 
         @include above($tablet) {
@@ -235,6 +235,11 @@
     &__title {
         font: #{rem(24)}/#{rem(26)} $stemBold;
         color: $white;
+
+        @include below($mobile) {
+            font-size: rem(18);
+            line-height: rem(21);
+        }
 
         @include above($tabletLandscape) {
             margin-bottom: rem(7);
