@@ -47,7 +47,6 @@ class Content extends PureComponent {
         this.setState({
             play: true
         })
-        React.render('<div id="video-overlay"></div>', document.body);
     }
 
     stop(e) {
