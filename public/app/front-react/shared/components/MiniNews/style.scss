@@ -6,6 +6,10 @@
     padding-bottom: rem(15);
     overflow: hidden;
 
+    @include above($tablet) {
+        padding-top: rem(25);
+    }
+
     @include above($tabletLandscape) {
         padding-top: rem(22);
     }

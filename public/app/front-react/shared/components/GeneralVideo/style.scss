@@ -21,12 +21,15 @@
         background-color: rgba(0, 0, 0, .32);
     }
 
+
     @include above($tablet) {
         height: rem(505);
+        margin-top: rem(17);
     }
 
     @include above($tabletLandscape) {
         height: rem(530);
+        margin-top: 0;
     }
 
     @include above($desktop) {
@@ -60,6 +63,14 @@
 
         object-fit: cover;
         object-position: top;
+
+        @include above($tablet) {
+            margin-top: rem(17);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: 0;
+        }
     }
 
     &__info {
