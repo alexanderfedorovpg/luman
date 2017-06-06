@@ -30,7 +30,7 @@
     &__left_more {
 
         @include above($tabletLandscape) {
-            margin-top: rem(-122);
+            margin-top: rem(-60);
         }
 
         @include above($desktop) {
@@ -40,6 +40,10 @@
     }
 
     &__middle {
+
+        @include above($tablet) {
+            width: 100%;
+        }
 
         @include above($tabletLandscape) {
             width: rem(615);
@@ -147,6 +151,7 @@
         @include below($mobile) {
             width: 100%;
             margin-top: rem(33);
+            margin-left: 0;
         }
 
         @include above($tablet) {
@@ -256,6 +261,14 @@
     &__banner {
         width: 100%;
         margin-top: rem(24);
+
+        @include above($tablet) {
+            display: none;
+        }
+
+        @include above($tabletLandscape) {
+            display: block;
+        }
     }
 
     &__subscribe {
@@ -263,6 +276,14 @@
     }
 
     &__random-news {
+
+        @include below($mobile) {
+            margin-top: rem(7);
+        }
+
+        @include above($tablet) {
+            margin-top: rem(18);
+        }
 
         @include above($tabletLandscape) {
             margin-top: rem(15);
@@ -283,6 +304,10 @@
 
     &__more-news {
         margin-top: rem(23);
+
+        @include below($mobile) {
+            margin-top: 0;
+        }
 
         &_war {
             margin-top: rem(24);

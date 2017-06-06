@@ -22,6 +22,10 @@
     }
 
 
+    @include below($mobile) {
+        margin-top: rem(15);
+    }
+
     @include above($tablet) {
         height: rem(505);
         margin-top: rem(17);
@@ -61,8 +65,9 @@
     &__img {
         width: rem(300);
 
-        object-fit: cover;
-        object-position: top;
+        @include below($mobile) {
+            margin-top: rem(15);
+        }
 
         @include above($tablet) {
             margin-top: rem(17);
@@ -70,6 +75,11 @@
 
         @include above($tabletLandscape) {
             margin-top: 0;
+        }
+
+        @include above($mobile) {
+            object-fit: cover;
+            object-position: top;
         }
     }
 

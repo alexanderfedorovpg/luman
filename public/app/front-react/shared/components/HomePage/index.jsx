@@ -47,7 +47,6 @@ function HomePage({
                 <div className="general-news__left">
                     <div className="general-news__left-wrapper">
                         <BigNews className="general-news__big-news" data={now[0]||{}} />
-                        <Now data={now.slice(1, 5)} className="general-news__now" />
                         <MediaQuery maxDeviceWidth="719px">
                             <Video
                                 data={firstVideo}
@@ -56,6 +55,7 @@ function HomePage({
                                 main
                                 className="general-news__general-video" />
                         </MediaQuery>
+                        <Now data={now.slice(1, 5)} className="general-news__now" />
                         <MediaQuery minDeviceWidth="720px" maxDeviceWidth="1035px">
                             <Video
                                 data={firstVideo}

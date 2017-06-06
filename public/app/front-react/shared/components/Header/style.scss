@@ -11,7 +11,16 @@
     background-color: $bg-gray;
 
     .icon_info {
-        margin-top: rem(5);
+        width: rem(18);
+        height: rem(18);
+
+        @include above($tablet) {
+            margin-top: 0;
+        }
+
+        @include above($desktop) {
+            margin-top: rem(5);
+        }
     }
 
     &_war:before {
@@ -51,6 +60,7 @@
 
         @include below($mobile) {
             width: 50%;
+            align-items: center;
         }
     }
 
@@ -72,6 +82,7 @@
     }
 
     &__burger {
+        margin-top: rem(-19);
         padding-top: rem(15);
 
         cursor: pointer;
@@ -80,7 +91,7 @@
     &__logo {
         position: relative;
 
-        width: 138px;
+        width: rem(138);
         margin-right: rem(15);
         margin-top: rem(-23);
 
