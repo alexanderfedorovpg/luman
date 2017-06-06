@@ -20,7 +20,7 @@ function* getBroadcastItem(id) {
     try {
         const { data } = yield call(axios.get, `${endpoint}/air/record/${id}`)
 
-        yield put(fetched([data]))
+        yield put(fetched({data: [data]}))
     }
     catch (e) {
         yield put(fetchError(e))
