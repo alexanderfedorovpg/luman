@@ -289,4 +289,34 @@
     &__popular {
         width: #{rem(300)}
     }
+
+    &__mini-news {
+        @include padding_y(0);
+        border-bottom: none !important;
+
+        &:not(:first-child) {
+            margin-top: rem(11);
+        }
+
+        &:first-child {
+
+            .mini-news__title {
+                font-family: $stemBold;
+                font-size: rem(21);
+                line-height: rem(21);
+                letter-spacing: rem(-0.2);
+            }
+        }
+
+        .mini-news__title {
+            display: inline-block;
+
+            font-size: rem(14);
+            line-height: rem(18);
+        }
+
+        .mini-news__date {
+            margin-top: rem(-5);
+        }
+    }
 }

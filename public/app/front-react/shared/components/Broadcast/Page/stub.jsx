@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
+
 import Title from 'components/Title'
-import Aside from 'containers/Aside'
+import Group from 'components/Group'
+import Video from 'components/Aside/Video'
+import MiniNews from 'components/MiniNews'
 
 import './stub.scss'
 
 class Broadcast extends Component {
 
     render() {
+        const { nowNews } = this.props
+
         return (
             <div className="inner-wrapper">
                 <div className="news-top">
@@ -17,7 +22,14 @@ class Broadcast extends Component {
                             </Title>
                             <img style={{height: '615px'}} src={this.props.stubImage}/>
                         </div>
-                        <Aside />
+                        <div className="right-col">
+                            <Video data={{}} />
+                            <Group title="Главные новости" margin>
+                                {nowNews.map(v => (
+                                    <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
+                                ))}
+                            </Group>
+                        </div>
                     </div>
                 </div>
             </div>
