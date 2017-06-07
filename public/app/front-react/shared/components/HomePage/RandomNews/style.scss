@@ -63,8 +63,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-top: -7px;
-        margin-bottom: -7px;
+        margin-top: rem(-7);
+        margin-bottom: rem(-7);
     }
 
     &__block {
