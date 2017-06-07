@@ -283,82 +283,84 @@
 
     .inner-default {
 
-        &.news-detail {
-            // margin-top: rem(11);
-            h1 {
+        // margin-top: rem(11);
+        h1 {
 
-                line-height: rem(39);
+            line-height: rem(39);
 
-                @include above($tablet) {
-                    margin-top: rem(-13);
-                }
-
-                @include above($tabletLandscape) {
-                    margin-top: rem(-9);
-                }
-
-                @include above($desktop) {
-                    margin-top: rem(4);
-                }
+            @include above($tablet) {
+                margin-top: rem(-13);
             }
 
-            .inner-about__content {
-                position: relative;
-
-                margin-top: rem(30);
-
-                > p {
-                    letter-spacing: rem(-0.35);
-                }
-
+            @include above($tabletLandscape) {
+                margin-top: rem(-9);
             }
 
-            .social-links {
-                position: absolute;
-                top: 100%;
-                left: rem(180);
-
-                margin-top: rem(-32);
+            @include above($desktop) {
+                margin-top: rem(4);
             }
-            .social-links--pad {
+        }
+
+        .inner-about__content {
+            position: relative;
+
+            margin-top: rem(30);
+
+            > p {
+                letter-spacing: rem(-0.35);
+            }
+
+        }
+
+        .social-links {
+            position: absolute;
+            top: 100%;
+            left: rem(180);
+
+            margin-top: rem(-32);
+        }
+
+        .social-links--pad {
+
+            @include below($mobile) {
+                left: 0;
+            }
+
+            @include above($tablet) {
+                left: rem(120);
+            }
+
+            @include above($desktop) {
                 left: rem(196);
+            }
+        }
 
-                @include below($mobile) {
-                    left: 0;
-                }
+        .inner-about__date {
+            margin-top: rem(2);
 
-                @include above($tablet) {
-                    left: rem(120);
-                }
+            font-family: $stemReg;
+            font-size: rem(12);
+
+            color: $gray-date;
+
+            @include above($tablet) {
+                margin-top: rem(8);
             }
 
-            .inner-about__date {
+            @include above($tabletLandscape) {
+                margin-top: rem(10);
+            }
+
+            @include above($desktop) {
                 margin-top: rem(2);
-
-                font-family: $stemReg;
-                font-size: rem(12);
-
-                color: $gray-date;
-
-                @include above($tablet) {
-                    margin-top: rem(8);
-                }
-
-                @include above($tabletLandscape) {
-                    margin-top: rem(10);
-                }
-
-                @include above($desktop) {
-                    margin-top: rem(2);
-                }
             }
+        }
 
-            .right-col {
-                display: none;
+        .right-col {
+            display: none;
 
-                @include above($tabletLandscape) {
-                    display: block;
-                }
+            @include above($tabletLandscape) {
+                display: block;
             }
         }
     }

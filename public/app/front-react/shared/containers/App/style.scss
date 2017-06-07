@@ -278,6 +278,14 @@ main {
     }
     .social-links--pad {
         left: rem(196);
+
+        @include below($mobile) {
+            left: 0;
+        }
+
+        @include above($tablet) {
+            left: rem(120);
+        }
     }
 
     .inner-about__date {
@@ -581,6 +589,7 @@ main {
             }
 
             &__ico {
+                display: inline;
 
                 @include below($mobile) {
                     width: rem(96);

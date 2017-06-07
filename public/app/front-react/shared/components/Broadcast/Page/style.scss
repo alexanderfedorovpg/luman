@@ -4,6 +4,7 @@
 .news-top_broadcast {
 
     .news-top {
+
         &__row {
             display: flex;
             flex-direction: column;
@@ -102,6 +103,11 @@
 
         &__banner {
             margin-top: rem(9);
+
+            @include below($tabletMax) {
+                width: rem(300);
+            }
+
         }
 
         &__plots-week {
@@ -125,12 +131,15 @@
             margin-top: rem(14);
             margin-bottom: rem(28);
 
-            &_broadcast {
-
-                @include below($tabletLandscapeMax) {
-                    height: auto;
-                }
+            @include below($tabletLandscapeMax) {
+                height: auto;
             }
+
+            @include below($tabletMax) {
+                margin-top: rem(-4);
+                margin-bottom: rem(15);
+            }
+
         }
 
         &__random-news {
@@ -140,6 +149,10 @@
 
         &__subscribe {
             margin-top: rem(42);
+
+            @include below($mobile) {
+                margin-top: rem(20);
+            }
         }
 
         &__more-news {
@@ -158,6 +171,7 @@
         }
 
         &__middle_ether {
+            width: 100%;
 
             @include below($tabletLandscapeMax) {
                 width: rem(615);
@@ -198,6 +212,37 @@
 
                     @include below($tabletMax) {
                         margin-bottom: rem(19);
+                    }
+                }
+            }
+
+            &_banners {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                @include below($tabletMax) {
+                    margin-top: rem(-12);
+                    margin-bottom: rem(21);
+                }
+            }
+
+            &_after-preview {
+
+                @include below($tabletMax) {
+
+                    .from-enter {
+                        margin-bottom: rem(20);
+                    }
+                }
+            }
+
+            &_after-banners {
+
+                @include below($tabletMax) {
+
+                    .from-enter {
+                        margin-bottom: rem(20);
                     }
                 }
             }
@@ -341,6 +386,10 @@
 
             .list-video__item {
                 width: 50%;
+
+                @include below($mobile) {
+                    width: 100%;
+                }
             }
         }
 

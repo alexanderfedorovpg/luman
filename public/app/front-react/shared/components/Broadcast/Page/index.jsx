@@ -81,17 +81,19 @@ class Broadcast extends Component {
                                     <Item data={data[7]} />
                                 </div>
                                 <MediaQuery maxDeviceWidth="1599px">
-                                    <BannerPreview className="news-top__banner-preview news-top__banner-preview_broadcast" />
+                                    <BannerPreview className="news-top__banner-preview" />
                                 </MediaQuery>
                             </div>
                         </div>
                         <div className="right-col">
-                            <Video data={{}} />
-                            <Group title="Главные новости" margin>
-                                {nowNews.map(v => (
-                                    <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
-                                ))}
-                            </Group>
+                            <MediaQuery minDeviceWidth="1036px">
+                                <Video data={{}} />
+                                <Group title="Главные новости" margin>
+                                    {nowNews.map(v => (
+                                        <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
+                                    ))}
+                                </Group>
+                            </MediaQuery>
                             <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
                                 <div className="news-one-line__row">
                                     <Banner className="news-top__banner" />
@@ -101,11 +103,11 @@ class Broadcast extends Component {
                         </div>
                         <MediaQuery minDeviceWidth="1600px">
                             <div className="news-top__middle middle-col">
-                                <BannerPreview className="news-top__banner-preview news-top__banner-preview_broadcast" />
+                                <BannerPreview className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
-                        <div className="news-top__middle_ether">
-                            <div className="news-one-line__row">
+                        <div className="news-top__middle_ether news-top__middle_ether">
+                            <div className="news-one-line__row news-one-line__row_after-preview">
                                 <Item data={data[8]} />
                                 <Item data={data[9]} />
                                 <Item data={data[10]} />
@@ -118,8 +120,14 @@ class Broadcast extends Component {
                                 <Subscribe />
                             </div>
                         </MediaQuery>
+                        <MediaQuery maxDeviceWidth="1035px">
+                            <div className="news-one-line__row news-one-line__row_banners">
+                                <Banner className="news-top__banner" />
+                                <Subscribe className="news-top__subscribe" />
+                            </div>
+                        </MediaQuery>
                         <div className="news-top__middle_ether">
-                            <div className="news-one-line__row">
+                            <div className="news-one-line__row news-one-line__row_after-banners">
                                 <Item data={data[12]} />
                                 <Item data={data[13]} />
                                 <Item data={data[14]} />

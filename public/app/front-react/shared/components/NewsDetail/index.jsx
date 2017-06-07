@@ -14,8 +14,8 @@ import './style.scss'
 function Detail({ data, noise, now, related, broadcast, hasVideo }) {
 
     return (
-        <div className="inner-wrapper">
-            <div className="inner-about inner-wrapper inner-default news-detail">
+        <div className="inner-wrapper news-detail">
+            <div className="inner-about inner-wrapper inner-default">
                 <div className="inner-about__container container">
                     <div className="left left-col left-col_position_relative">
                         <Content hasVideo={hasVideo} data={data}>
