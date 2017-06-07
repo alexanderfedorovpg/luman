@@ -53,6 +53,7 @@
         }
 
         @include below($mobile) {
+            height: rem(115);
 
             &:not(:first-child) {
                 margin-top: rem(18);

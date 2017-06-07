@@ -224,6 +224,7 @@
         padding-left: rem(19);
 
         @include below($mobile) {
+            bottom: rem(20);
            padding-right: rem(15);
         }
 
@@ -260,10 +261,18 @@
         font-size: rem(12);
         line-height: rem(42);
         color: $gray;
+
+        @include below($mobile) {
+            line-height: normal;
+        }
     }
 
     &__time-upadate {
         color: $purple;
+
+        @include below($mobile) {
+            display: block;
+        }
     }
 
     &__live-tag {
