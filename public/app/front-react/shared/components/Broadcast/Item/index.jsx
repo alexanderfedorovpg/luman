@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'

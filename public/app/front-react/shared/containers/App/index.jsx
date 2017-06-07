@@ -20,6 +20,7 @@ import HomePage from 'containers/HomePage'
 import NoisePage from 'containers/NoisePage'
 import NewsPage from 'containers/NewsPage'
 import BroadcastPage from 'containers/BroadcastPage'
+import BroadcastProgramsPage from 'containers/BroadcastPage/ProgramsPage'
 import AboutPage from 'containers/AboutPage'
 import HowPage from 'containers/HowPage'
 import SearchPage from 'containers/SearchPage'
@@ -76,6 +77,8 @@ class App extends Component {
                             <Route exact path="/how" component={HowPage} />
 
                             <Route exact path="/search" component={SearchPage} />
+
+                            <Route exact path="/programs" component={BroadcastProgramsPage} />
 
                             <Route component={HomePage} />
                         </Switch>

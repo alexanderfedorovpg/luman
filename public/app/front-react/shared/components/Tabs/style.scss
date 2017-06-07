@@ -21,7 +21,7 @@
     &__ul {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin-top: rem(6);
 
         font-size: 0;
@@ -29,6 +29,8 @@
 
     &__item {
         position: relative;
+        
+        margin-right: 15px;
 
         display: inline-block;
 
