@@ -28,11 +28,20 @@
 
             @include above($tabletLandscape) {
                 width: rem(930);
+
+                .left-col_width_inner {
+                    width: rem(620);
+                }
+
+                .right-col {display: block;}
             }
 
             @include above($desktop) {
                 width: rem(1250);
-                .right-col {display: block;}
+
+                .left-col_width_inner {
+                    width: rem(930);
+                }
             }
        }
     }
