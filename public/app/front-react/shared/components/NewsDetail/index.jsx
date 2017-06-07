@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Noise from 'components/Noise'
 import Group from 'components/Group'
@@ -35,6 +36,10 @@ function Detail({ data, noise, now, related, broadcast, hasVideo }) {
             </div>
         </div>
     )
+}
+
+Detail.propTypes = {
+    now: PropTypes.array
 }
 
 export default Detail

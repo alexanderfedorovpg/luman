@@ -7,6 +7,7 @@ import {
     selectNoiseData,
     selectNoisePagination,
     selectRelated,
+    makeSelectHomeNewsByCategory
 } from 'selectors/news'
 import { selectBroadcast } from 'selectors/broadcast'
 
@@ -82,7 +83,8 @@ class NoisePage extends PureComponent {
             match,
             relatedNews,
             broadcast,
-            pagination
+            pagination,
+            now
         } = this.props
 
         const item = this.getById(this.getId())
@@ -103,6 +105,7 @@ class NoisePage extends PureComponent {
                         <Detail
                             data={item}
                             noise={noise}
+                            now={now.map(v => v.news)}
                             related={relatedNews}
                             broadcast={broadcast} />
                     )
@@ -118,12 +121,15 @@ class NoisePage extends PureComponent {
     }
 }
 
+const selectHomeNow = makeSelectHomeNewsByCategory(1);
+
 const mapStateToProps = state => ({
     noise: selectNoise(state),
     noiseData: selectNoiseData(state),
     pagination: selectNoisePagination(state),
     relatedNews: selectRelated(state),
-    broadcast: selectBroadcast(state)
+    broadcast: selectBroadcast(state),
+    now: selectHomeNow(state),
 })
 
 const mapDispatchToProps = dispatch => ({
