@@ -12,6 +12,12 @@
         margin-bottom: rem(65);
 
        &.container {
+            @include below($mobile) {
+                .right-col {
+                    display: none;
+                }
+            }
+
             @include above($tablet) {
                 width: rem(637);
 
