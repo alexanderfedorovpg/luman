@@ -5,14 +5,8 @@
     position: relative;
 
     width: rem(300);
-
-    @include above($tabletLandscape) {
-        height: auto;
-    }
-
-    @include above($desktop) {
-        height: rem(245);
-    }
+    height: rem(250);
+    margin-bottom: rem(13);
 
     &:not(.block-square_list)::before {
         content: '';
@@ -42,6 +36,10 @@
 
         width: rem(280);
         padding-left: rem(20);
+
+        @include below($tabletMax) {
+            bottom: rem(21);
+        }
     }
 
     &__link {
@@ -60,7 +58,6 @@
 
         font: #{rem(18)}/#{rem(21)} $stemBold;
         color: $white;
-        letter-spacing: rem(-.9);
         letter-spacing: rem(-.9);
     }
 
@@ -102,6 +99,10 @@
         width: rem(615);
         height: rem(490);
 
+        @include below($tabletMax) {
+            height: rem(450);
+        }
+
         .from-enter {
 
             &__info {
@@ -112,6 +113,11 @@
             &__title {
                 font-size: rem(28);
                 line-height: rem(28);
+
+                @include below($tabletMax) {
+                    font-size: rem(24);
+                    line-height: rem(26);
+                }
             }
 
             &__img {
@@ -143,10 +149,9 @@
     }
 
     &__category {
-        // margin-top: rem(22);
-
+        margin-top: rem(22);
         font-size: rem(12);
-        line-height: rem(42);
+        line-height: rem(18);
         color: $blue;
         text-transform: uppercase;
     }

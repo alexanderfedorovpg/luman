@@ -81,7 +81,7 @@ class News extends Component {
 
         return (
             <div className="inner-wrapper">
-                <div className="news-top">
+                <div className="news-top news-top_all-news">
                     <div className="news-top__container container">
                         <div className="news-top__left left-col left-col left-col_width_inner">
                             <Title>

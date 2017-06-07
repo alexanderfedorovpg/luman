@@ -20,6 +20,15 @@
 
         &:not(:first-child) {
             margin-top: rem(19);
+
+            @include below($tabletLandscapeMax) {
+                margin-top: 0;
+            }
+        }
+
+        @include below($tabletLandscapeMax) {
+            margin-bottom: rem(25);
+            padding-right: rem(10);
         }
     }
 

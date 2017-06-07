@@ -177,6 +177,14 @@ main {
 
     &_width_inner {
         width: rem(930);
+
+        @include below($tabletLandscapeMax) {
+            width: rem(613);
+        }
+
+        @include below($tabletMax) {
+            width: 100%;
+        }
     }
 
 }
