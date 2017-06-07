@@ -68,7 +68,7 @@ class Broadcast extends Component {
                             <Title>
                                 Из эфира
                             </Title>
-                            {/*<Tabs data={programs} active={program} onChange={setProgram} />*/}
+                            <Tabs data={programs} active={program} onChange={setProgram} />
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row" style={{ marginBottom: 30 }}>
                                     <Item data={data[0]} big />
