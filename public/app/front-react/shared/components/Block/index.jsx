@@ -47,7 +47,7 @@ function renderItem(className, type, data, war, wTitle) {
                 {video
                     ? (
                         <div className={`${type}__time-keeping`}>
-                            <img className={`${type}__ico`} src="/content/video-ico/video-ico.png" alt="" role="presentation" />
+                            <img className={`${type}__ico`} src="/content/video-ico/play_time.svg" alt="" role="presentation" />
                             <span className={`${type}__keeping`}>{video.duration}</span>
                         </div>
                     )
