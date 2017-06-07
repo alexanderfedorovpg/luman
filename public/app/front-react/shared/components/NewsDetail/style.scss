@@ -306,6 +306,10 @@
         @include below($mobile) {
             left: 0;
         }
+
+        @include above($tablet) {
+            left: rem(120);
+        }
     }
 
     .inner-about__date {
@@ -346,6 +350,7 @@
 
     @include below($mobile) {
         width: 100%;
+        padding-top: rem(15);
     }
 
     @include above($tablet) {
@@ -382,6 +387,7 @@
 
         @include below($mobile) {
             margin-bottom: rem(16);
+            margin-top: rem(10);
         }
 
         @include above($tablet) {
@@ -401,6 +407,7 @@
 
             @include below($mobile) {
                 width: 100%;
+                height: rem(200);
             }
 
             @include above($tablet) {
