@@ -46,10 +46,14 @@
         align-content: stretch;
         justify-content: space-between;
         margin-bottom: rem(65);
+
+        &.no-flex {
+            display: block;
+        }
     }
 
     &__news-one-line {
-        margin-top: rem(25);
+        margin-top: rem(-60);
 
         .block-square__info {
             bottom: rem(10) !important;
@@ -58,6 +62,7 @@
         .block-square__title {
             margin-bottom: 0 !important;
         }
+
     }
 
     &__margin-top-bottom {
@@ -155,6 +160,14 @@
 
 .news-one-line {
 
+    & .from-enter_big {
+        height: rem(387);
+    }
+
+    &__item-bottom .from-enter{
+        align-self: flex-end;
+    }
+
     &__row {
         // @include margin_y(#{rem(-7)});
         margin-bottom: rem(14);
@@ -197,6 +210,39 @@
         .block-square__info {
             bottom: rem(8);
         }
+    }
+
+    &__date {
+
+        .button {
+            color: #00a5b6;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+
+        height: 49px;
+        font-size: 14px;
+
+        color: #243746;
+        text-transform: uppercase;
+
+        &-wrap {
+            padding-top: 93px;
+        }
+
+        &-items {
+            display: flex;
+            justify-content: space-between;
+
+            & .from-enter:first-child {
+                margin-right: 18px;
+            }
+        }
+
     }
 }
 
@@ -289,4 +335,95 @@
     &__popular {
         width: #{rem(300)}
     }
+}
+
+
+.news-header {
+
+    &__title {
+
+        padding-top: rem(25);
+
+        background-color: #778091;
+        height: rem(70);
+
+        color: #fff;
+        font-size: rem(36);
+        text-transform: uppercase;
+
+        &-logo {
+            height: rem(124);
+            width: rem(214);
+            
+            background-image: url(/content/rtvi/show-rtvi.png);
+            background-size: cover;
+
+            position: absolute;
+            left: 49.1%;
+            top: -25px;
+        }
+
+    }
+
+    &__container {
+        position: relative;
+    }
+
+    &__content {
+        padding-top: rem(20);
+        font-size: rem(15);
+        line-height: rem(26);
+
+        background-image: url(/content/broadcast/programs-bg.png);
+
+        &-container {
+            margin-bottom: rem(45);
+            width: 38.4375rem;
+
+            position: relative;
+
+            &:after {
+                content: ' ';
+                display: block;
+                
+                background-image: url(/content/broadcast/liza.png);
+                background-repeat: no-repeat;
+                background-position: top center;
+                background-size: cover;
+
+                width: rem(412);
+                height: rem(500);
+
+                position: absolute;
+                top: rem(-232);
+                right: rem(-579);
+
+            }
+        }
+
+    }
+
+    &__tabs {
+        width: rem(615);
+        
+        border-top: rem(1) solid #b9babc;
+        padding: rem(15) 0 rem(80);
+
+        &_item {
+            display: inline-block;
+
+            font-size: rem(14);
+            text-transform: uppercase;
+            color: #00a5b6;
+            font-weight: bold;
+
+            margin-right: rem(15);
+
+            &.active {
+                color: #9f305a;
+            }
+        }
+    }
+
+
 }
