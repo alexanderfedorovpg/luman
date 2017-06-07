@@ -43,10 +43,12 @@
 
         @include above($tablet) {
             width: 100%;
+            margin-top: rem(4);
         }
 
         @include above($tabletLandscape) {
             width: rem(615);
+            margin-top: 0;
         }
 
         @include above($desktop) {
@@ -188,15 +190,16 @@
         }
 
         &__wrapper {
-            padding-left: rem(14);
-            padding-right: rem(14);
+            @include padding_x(#{rem(14)});
 
             @include above($tablet) {
                 margin-top: rem(37);
+                padding-left: rem(19);
             }
 
             @include above($tabletLandscape) {
                 margin-top: rem(31);
+                @include padding_x(#{rem(14)})
             }
 
             @include above($desktop) {
@@ -211,6 +214,14 @@
             top: 4px;
             right: -140%;
             background-color: $white;
+
+            @include above($tablet) {
+                right: -125%;
+            }
+
+            @include above($tabletLandscape) {
+                right: -140%;
+            }
         }
 
         &_right-block {
@@ -375,4 +386,3 @@
         }
     }
 }
-

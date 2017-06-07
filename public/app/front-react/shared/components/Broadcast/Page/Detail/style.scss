@@ -12,18 +12,6 @@
         padding-right: rem(10);
         padding-bottom: rem(32);
         color: $gray-dirty;
-
-        @include below($mobile) {
-            display: none;
-        }
-
-        @include above($tablet) {
-            display: none;
-        }
-
-        @include above($desktop) {
-            display: flex;
-        }
     }
 
     &__container {
@@ -33,6 +21,13 @@
         align-content: stretch;
         justify-content: space-between;
         margin-bottom: rem(60);
+    }
+
+    &__subtitle {
+        padding-right: rem(20);
+        font-size: rem(18);
+        font-family: $stemBold;
+        width: rem(780);
     }
 
     &__enter-one {
@@ -57,14 +52,10 @@
 
         transform: translateX(-17%);
 
-        @include below($mobile) {
-            transform: translateX(0);
-        }
-
         .inner-default &_play.text-bg-gray {
             // position: relative;
             z-index: 4;
-            background-color: rgba(36, 55, 70, 0);
+            background-color: #4c4c4c;
 
             .social-links {
                 opacity: .5;
@@ -77,28 +68,10 @@
     }
 
     &__content {
-        margin-top: rem(30);
         margin-left: rem(82);
+        margin-top: rem(30);
+
         color: $enter;
-
-        @include below($mobile) {
-            margin-left: 0;
-            margin-top: rem(24);
-        }
-
-        @include above($tablet) {
-            margin-left: rem(69);
-            margin-top: rem(24);
-        }
-
-        @include above($tabletLandscape) {
-            margin-left: rem(64);
-            margin-top: rem(22);
-        }
-
-        @include above($desktop) {
-            margin-left: rem(82);
-        }
 
         p {
             margin-bottom: rem(21);
@@ -266,20 +239,9 @@
 .inner-default {
     // margin-top: rem(11);
     h1 {
+        margin-top: rem(4);
 
         line-height: rem(39);
-
-        @include above($tablet) {
-            margin-top: rem(-13);
-        }
-
-        @include above($tabletLandscape) {
-            margin-top: rem(-9);
-        }
-
-        @include above($desktop) {
-            margin-top: rem(4);
-        }
     }
 
     .inner-about__content {
@@ -302,14 +264,6 @@
     }
     .social-links--pad {
         left: rem(196);
-
-        @include below($mobile) {
-            left: 0;
-        }
-
-        @include above($tablet) {
-            left: rem(120);
-        }
     }
 
     .inner-about__date {
@@ -319,27 +273,9 @@
         font-size: rem(12);
 
         color: $gray-date;
-
-        @include above($tablet) {
-            margin-top: rem(8);
-        }
-
-        @include above($tabletLandscape) {
-            margin-top: rem(10);
-        }
-
-        @include above($desktop) {
-            margin-top: rem(2);
-        }
     }
 
-    .right-col {
-        display: none;
 
-        @include above($tabletLandscape) {
-            display: block;
-        }
-    }
 }
 
 .news-preview {
@@ -347,25 +283,6 @@
     padding-top: rem(18);
 
     position: relative;
-
-    @include below($mobile) {
-        width: 100%;
-        padding-top: rem(15);
-    }
-
-    @include above($tablet) {
-        width: rem(225);
-        padding-top: rem(14);
-    }
-
-    @include above($desktop) {
-        width: rem(351);
-    }
-
-
-    &_play {
-        visibility: hidden;
-    }
 
     &_play .breadcrumbs {
         display: none;
@@ -378,47 +295,17 @@
         height: 100%;
         position: absolute;
         // background-color: #eaecee;
-        background-color: rgba(36, 55, 70, 0.6);
+        background-color: #4c4c4c;
     }
 
     &__img {
         margin-top: rem(16);
         margin-bottom: rem(42);
-
-        @include below($mobile) {
-            margin-bottom: rem(16);
-            margin-top: rem(10);
-        }
-
-        @include above($tablet) {
-            margin-top: rem(9);
-            margin-bottom: rem(29);
-        }
-
-        @include above($tabletLandscape) {
-            margin-top: rem(16);
-        }
-
         img {
             display: block;
             width: rem(351);
             height: rem(234);
             object-fit: cover;
-
-            @include below($mobile) {
-                width: 100%;
-                height: rem(200);
-            }
-
-            @include above($tablet) {
-                width: rem(225);
-                height: rem(150);
-            }
-
-            @include above($desktop) {
-                width: rem(351);
-                height: rem(234);
-            }
         }
 
     }
@@ -463,12 +350,40 @@
 
 }
 
+.broadcast {
+
+    &__general-video {
+        margin-bottom: rem(30);
+        margin-right: 0 !important;
+        height: rem(443) !important;
+        width: rem(780) !important;
+
+        .general-video__title {
+            justify-content: flex-start !important;
+            padding-left: rem(125) !important;
+        }
+        .general-video__date {
+            margin-left: rem(160);
+            margin-bottom: rem(13) !important;
+        }
+    }
+
+    &__text-bg-gray {
+        flex-direction: column;
+        justify-content: flex-start !important;
+        align-items: flex-end !important;
+
+        .text-bg-gray__block-text_play {
+            left: 102.4% !important;
+        }
+    }
+}
+
 .inner-about-video_overlay {
     position: absolute;
     left: calc(100% - 1085px);
     top: -57px;
-    // background: rgba(0,0,0,.7);
-    background-color: rgba(36, 55, 70, 0.6);
+    background: rgba(0,0,0,.7);
     /* background: #673AB7; */
     z-index: 4;
 

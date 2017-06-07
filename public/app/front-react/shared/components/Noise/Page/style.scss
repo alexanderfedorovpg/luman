@@ -10,6 +10,40 @@
         align-content: stretch;
         justify-content: space-between;
         margin-bottom: rem(65);
+
+       &.container {
+            @include below($mobile) {
+                .right-col {
+                    display: none;
+                }
+            }
+
+            @include above($tablet) {
+                width: rem(637);
+
+                .right-col {
+                    display: none;
+                }
+            }
+
+            @include above($tabletLandscape) {
+                width: rem(930);
+
+                .left-col_width_inner {
+                    width: rem(620);
+                }
+
+                .right-col {display: block;}
+            }
+
+            @include above($desktop) {
+                width: rem(1250);
+
+                .left-col_width_inner {
+                    width: rem(930);
+                }
+            }
+       }
     }
 
     &__list-mini {

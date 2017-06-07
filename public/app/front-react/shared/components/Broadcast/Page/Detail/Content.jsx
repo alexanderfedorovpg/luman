@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
-import { FormattedRelative } from 'react-intl'
+import { FormattedRelative, injectIntl } from 'react-intl'
 
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
@@ -47,6 +47,7 @@ class Content extends PureComponent {
         this.setState({
             play: true
         })
+        React.render('<div id="video-overlay"></div>', document.body);
     }
 
     stop(e) {
@@ -66,12 +67,18 @@ class Content extends PureComponent {
     }
 
     render() {
-        const { data, children } = this.props
+        const { data, intl, children } = this.props
         const theses = Array.isArray(data.theses)
             ? data.theses
             : `${data.theses}`.split('\\')
 
-        const image = data.image_preview || {};
+        const date = Date.parse(data.publish_date) && intl.formatDate(
+            data.publish_date,
+            {
+                month: 'long',
+                day: '2-digit'
+            }
+        )
 
         return (
             <div>
@@ -85,53 +92,26 @@ class Content extends PureComponent {
                         : null
                     }
                 </div>
-                <div onClick={e => this.stop(e)} className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
-                    {theses.length
-                        ? (
-                            <div className={classNames('text-bg-gray__block-text', { 'text-bg-gray__block-text_play': this.state.play })}>
-                                {theses.map((v, i) => (
-                                    <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
-                                        {v}
-                                    </div>
-                                ))}
-                            </div>
-                        )
-                        : null
-                    }
-                    {data.video_stream && (data.video_stream.preview_author || data.video_stream.preview_source) && (
-                        <div className="inner-about__video-info">
-                            <div>
-                                Фото:
-                            </div>
-                            {data.video_stream.preview_author}
-                            {data.video_stream.preview_author && data.video_stream.preview_source && ' / '}
-                            {data.video_stream.preview_source}
+                <div onClick={e => this.stop(e)} className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray broadcast__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
+                    {theses.length && (
+                        <div className={classNames('text-bg-gray__block-text', { 'text-bg-gray__block-text_play': this.state.play })}>
+                            {theses.map((v, i) => (
+                                <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
+                                    {v}
+                                </div>
+                            ))}
                         </div>
                     )}
                     <Video
-                        className="general-news__general-video"
+                        className="broadcast__general-video"
                         play={this.state.play}
                         onPlay={this.play}
+                        title={`${(data.program||{}).name} ${date}`}
                         left
                         data={data.video_stream} />
-                    <div className={classNames("news-preview", {'news-preview_play' : this.state.play})}>
-                        <Rubrics data={data.rubrics} className={!this.state.play ? 'active' : ''} />
-                        <figure className="news-preview__img">
-                            <Img
-                                src={image.url}
-                                title={image.object_name||''}
-                                alt={image.object_name||''} />
-                            {image.object_author && image.object_source
-                                && (
-                                    <figcaption className="news-preview__source">
-                                        Фото: {image.object_author} / {image.object_source}
-                                    </figcaption>
-                                )
-                            }
-                        </figure>
-                        <p className="news-preview__text">
-                            {data.sub_title}
-                        </p>
+
+                    <div className="inner-about__subtitle">
+                        {data.sub_title}
                     </div>
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
@@ -144,4 +124,4 @@ class Content extends PureComponent {
     }
 }
 
-export default Content
+export default injectIntl(Content)

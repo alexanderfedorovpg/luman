@@ -49,6 +49,7 @@ class Broadcast extends Component {
             programs,
             program,
             setProgram,
+            nowNews,
             onLoadRequest,
             canLoad
         } = this.props
@@ -82,6 +83,11 @@ class Broadcast extends Component {
                         </div>
                         <div className="right-col">
                             <Video data={{}} />
+                            <Group title="Главные новости" margin>
+                                {nowNews.map(v => (
+                                    <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
+                                ))}
+                            </Group>
                         </div>
                         <div className="news-top__middle middle-col">
                             <BannerPreview className="news-top__banner-preview" />

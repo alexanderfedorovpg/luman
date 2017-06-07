@@ -7,6 +7,7 @@ import stubImage from './stub.png'
 import {
     selectNoise,
     selectRelated,
+    makeSelectHomeNewsByCategory
 } from 'selectors/news'
 import {
     selectProgram,
@@ -19,7 +20,7 @@ import { selectPrograms } from 'selectors/programs'
 import { fetchNoise, fetchRelated } from 'actions/news'
 import { fetch, fetchMore, setProgram } from 'actions/broadcast'
 
-import Detail from 'components/NewsDetail'
+import Detail from 'components/Broadcast/Page/Detail'
 import Broadcast from 'components/Broadcast/Page'
 import BroadcastStub from 'components/Broadcast/Page/stub.jsx'
 
@@ -71,11 +72,10 @@ class BroadcastPage extends PureComponent {
         let {
             match,
             broadcast,
-            noise,
-            relatedNews,
             program,
             programs,
             pagination,
+            nowNews,
             setProgram,
             loadMore
         } = this.props
@@ -88,39 +88,40 @@ class BroadcastPage extends PureComponent {
                     <Helmet>
                         <title>Из эфира</title>
                     </Helmet>
-                    <BroadcastStub stubImage={stubImage}/>
-                </div>
-            )
-        }else{
-            return (
-                <div>
-                    <Helmet>
-                        <title>Из эфира</title>
-                    </Helmet>
-
-                    {match.params.id
-                        ? <Detail
-                            data={item}
-                            noise={noise}
-                            hasVideo
-                            related={relatedNews}
-                            broadcast={broadcast}
-                        />
-                        :
-                        <Broadcast
-                            broadcast={broadcast}
-                            onLoadRequest={loadMore}
-                            canLoad={pagination.page < pagination.lastPage}
-                            setProgram={setProgram}
-                            programs={p}
-                            program={program}
-                        />
-                    }
+                    <BroadcastStub
+                        stubImage={stubImage}
+                        nowNews={nowNews.map(v => v.news)} />
                 </div>
             )
         }
+
+        return (
+            <div>
+                <Helmet>
+                    <title>Из эфира</title>
+                </Helmet>
+
+                {match.params.id
+                    ? <Detail
+                        data={item}
+                        nowNews={nowNews.map(v => v.news)}
+                    />
+                    : <Broadcast
+                        nowNews={nowNews.map(v => v.news)}
+                        broadcast={broadcast}
+                        onLoadRequest={loadMore}
+                        canLoad={pagination.page < pagination.lastPage}
+                        setProgram={setProgram}
+                        programs={p}
+                        program={program}
+                    />
+                }
+            </div>
+        )
     }
 }
+
+const selectNowNews = makeSelectHomeNewsByCategory(1)
 
 const mapStateToProps = state => ({
     broadcast: selectBroadcast(state),
@@ -128,8 +129,7 @@ const mapStateToProps = state => ({
     programs: selectPrograms(state),
     program: selectProgram(state),
     pagination: selectPagination(state),
-    relatedNews: selectRelated(state),
-    noise: selectNoise(state),
+    nowNews: selectNowNews(state),
 })
 
 const mapDispatchToProps = dispatch => ({

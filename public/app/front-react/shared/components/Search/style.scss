@@ -1,3 +1,4 @@
+
 @import "~style/mixins";
 @import "~style/vars";
 
@@ -16,7 +17,7 @@
         width: rem(100);
     }
 
-    @include above($desktop) {
+    @include above($tabletLandscape) {
         width: 100%;
     }
 
@@ -35,20 +36,31 @@
             background-color: #fff;
 
             @include below($mobile) {
-                width: auto;
+                width: rem(365);
                 @include padding_x(#{rem(15)});
+            }
+
+            @include above($tablet) {
+                position: absolute;
+                right: rem(20);
+                width: rem(440);
+            }
+
+            @include above($tabletLandscape) {
+                width: rem(755);
+            }
+
+            @include above($desktop) {
+                width: rem(1050);
             }
         }
     }
 
     &__form {
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-
-        @include below($mobile) {
-            position: relative;
-        }
     }
 
     &__input-text {
@@ -119,4 +131,3 @@
         background-size: cover;
     }
 }
-
