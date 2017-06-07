@@ -3,6 +3,10 @@
 
 .news-top {
 
+    &__full {
+        width: 100%;
+    }
+
     &__row {
         display: flex;
         flex-direction: column;

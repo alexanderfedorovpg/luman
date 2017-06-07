@@ -65,11 +65,11 @@ class Broadcast extends Component {
             <div className="inner-wrapper">
                 <div className="news-top">
                     <div className="news-top__container container">
-                        <div className="news-top__left">
+                        <div className="news-top__left news-top__full">
                             <Title>
                                 Из эфира
                             </Title>
-                            <Tabs data={programs} active={program} onChange={setProgram} />
+                            <Tabs data={programs.splice(0, 6)} active={program} onChange={setProgram} />
                         </div>
                     </div>
                     <div className="news-header">
