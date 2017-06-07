@@ -36,7 +36,7 @@
             background-color: #fff;
 
             @include below($mobile) {
-                width: rem(365);
+                width: rem(243);
                 @include padding_x(#{rem(15)});
             }
 

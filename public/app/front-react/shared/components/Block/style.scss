@@ -234,7 +234,9 @@
     }
 
     &__title {
-        font: #{rem(24)}/#{rem(26)} $stemBold;
+        font-family: $stemBold;
+        font-size: rem(18);
+        line-height: rem(21);
         color: $white;
 
         @include below($mobile) {
@@ -244,6 +246,8 @@
 
         @include above($tabletLandscape) {
             margin-bottom: rem(7);
+            font-size: rem(24);
+            line-height: rem(26);
         }
 
         @include above($desktop) {

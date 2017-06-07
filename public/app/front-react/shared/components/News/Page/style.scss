@@ -51,6 +51,14 @@
     &__news-one-line {
         margin-top: rem(25);
 
+        @include above($tablet) {
+            margin-top: rem(22);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(25);
+        }
+
         .block-square__info {
             bottom: rem(10) !important;
         }
@@ -62,6 +70,18 @@
 
     &__left {
         margin-top: rem(-9);
+
+        @include below($mobile) {
+            width: 100%;
+        }
+
+        @include above($tabletLandscape) {
+            width: rem(613);
+        }
+
+        @include above($desktop) {
+            width: rem(930);
+        }
     }
 
     &__info-noize {
@@ -94,6 +114,24 @@
 
     &__banner {
         margin-top: rem(47);
+
+        @include below($mobile) {
+            margin-top: rem(20);
+        }
+
+        @include above($tablet) {
+            width: rem(300);
+            margin-top: 0;
+        }
+
+        @include above($tabletLandscape) {
+            width: 100%;
+            margin-top: rem(20);
+        }
+
+        @include above($desktop) {
+            margin-top: rem(47);
+        }
     }
 
     &__plots-week {
@@ -107,23 +145,100 @@
     &__per-day {
         margin-top: rem(37);
 
+        @include below($mobile) {
+            margin-top: rem(20);
+        }
+
+        @include above($tablet) {
+            margin-top: rem(7);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(37);
+        }
+
+        .per-day__title {
+
+            @include below($mobile) {
+                display: none;
+            }
+
+            @include above($tablet) {
+                display: none;
+            }
+
+            @include above($tabletLandscape) {
+                display: block;
+            }
+        }
+
         .block-square__title {
             margin-bottom: rem(3) !important;
+        }
+
+        .per-day__wrapper {
+            flex-wrap: wrap;
         }
     }
 
     &__banner-preview {
         height: rem(142);
-        margin-top: rem(14);
+
+        @include below($mobile) {
+            margin-top: rem(15);
+            height: auto;
+        }
+
+        @include above($tablet) {
+            margin-top: rem(15);
+            height: auto;
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: 0;
+        }
+
+        @include above($desktop) {
+            margin-top: rem(14);
+        }
     }
 
     &__random-news {
         margin-top: rem(57);
         margin-bottom: rem(20);
+
+        @include below($mobile) {
+            margin-top: rem(27);
+        }
+
+        @include above($tablet) {
+            margin-top: rem(20);
+        }
+
+        @include above($desktop) {
+            margin-top: rem(57);
+        }
     }
 
     &__subscribe {
         margin-top: rem(42);
+
+        @include below($mobile) {
+            margin-top: rem(20);
+        }
+
+        @include above($tablet) {
+            width: rem(300);
+            margin-top: rem(-9);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(10);
+        }
+
+        @include above($desktop) {
+            margin-top: rem(42);
+        }
     }
 
     &__more-news {
@@ -141,9 +256,25 @@
         }
     }
 
+    &__links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        @include above($tablet) {
+            margin-top: rem(23);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: 0;
+        }
+    }
+
     &_margin {
         margin-top: rem(51);
     }
+
 }
 
 
@@ -155,16 +286,36 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
+
+        @include above($tablet) {
+            @include margin_y(#{rem(-11)});
+        }
+
+        @include above($tabletLandscape) {
+            @include margin_y(#{rem(-7)});
+        }
     }
 
     &__block-rectangle {
         @include margin_y(#{rem(7)});
         width: rem(617);
-        height: rem(245);
+        height: rem(250);
+
+        @include below($mobile) {
+            width: rem(300);
+        }
+
+        @include above($tablet) {
+            @include margin_y(#{rem(11)});
+        }
+
+        @include above($tabletLandscape) {
+            @include margin_y(#{rem(7)});
+        }
 
         .block-rectangle__link,
         .block-rectangle__img {
-            height: rem(245);
+            height: inherit;
         }
     }
 
@@ -175,6 +326,14 @@
     &__block-square {
         @include margin_y(#{rem(7)});
         width: rem(300);
+
+        @include above($tablet) {
+            @include margin_y(#{rem(11)});
+        }
+
+        @include above($tabletLandscape) {
+            @include margin_y(#{rem(7)});
+        }
 
         &::before,
         .block-square__img,
