@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Noise from 'components/Noise'
 import Group from 'components/Group'
@@ -25,7 +26,7 @@ function Detail({ data, noise, now, related, broadcast, hasVideo }) {
                         <div className="right-col">
                             <Video data={{}} />
                             <Group title="Главные новости" margin>
-                                <Block data={(now||[])[0]} />
+                                <Block data={now[0]} />
                                 {now.slice(1, 5).map(v => (
                                     <MiniNews key={v.id} data={v} className="info-noize__mini-news" />
                                 ))}
@@ -37,6 +38,10 @@ function Detail({ data, noise, now, related, broadcast, hasVideo }) {
             </div>
         </div>
     )
+}
+
+Detail.propTypes = {
+    now: PropTypes.array
 }
 
 export default Detail
