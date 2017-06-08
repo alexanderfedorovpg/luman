@@ -7,16 +7,19 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        align-content: stretch;
         justify-content: space-between;
+        align-content: flex-start;
         margin-bottom: rem(60);
     }
     // удалить позже
     &__left {
 
+        @include below($mobile) {
+            width: 100%;
+        }
 
         @include above($tabletLandscape) {
-            width: rem(615);
+            width: rem(613);
         }
 
         @include above($desktop) {
@@ -25,13 +28,27 @@
     }
 
     &__left_more {
-        width: rem(932);
+
+        @include above($tabletLandscape) {
+            margin-top: rem(-60);
+        }
+
+        @include above($desktop) {
+            width: rem(932);
+            margin-top: 0;
+        }
     }
 
     &__middle {
 
+        @include above($tablet) {
+            width: 100%;
+            margin-top: rem(4);
+        }
+
         @include above($tabletLandscape) {
             width: rem(615);
+            margin-top: 0;
         }
 
         @include above($desktop) {
@@ -51,6 +68,8 @@
 
         @include below($mobile) {
             flex-wrap: wrap;
+            justify-content: flex-start;
+            width: 100%;
         }
 
         @include above($tablet) {
@@ -61,8 +80,23 @@
             flex-wrap: nowrap;
         }
 
+        .info-noize {
+            margin-left: rem(14);
+        }
+
         &.two-wrapper {
-            margin-top: rem(16);
+
+            @include above($tablet) {
+                margin-top: rem(19);
+            }
+
+            @include above($tabletLandscape) {
+                margin-top: rem(3);
+            }
+
+            @include above($desktop) {
+                margin-top: rem(16);
+            }
 
             &_war {
                 margin-top: rem(12);
@@ -86,33 +120,91 @@
     }
 
     &__now {
-        min-height: rem(505);
         overflow: hidden;
 
-        @include below($tabletLandscape) {
+        @include below($mobile) {
+            width: rem(300);
+            margin-top: rem(18);
+        }
+
+        @include above($tablet) {
+            width: rem(299);
+            min-height: inherit;
+            margin-top: rem(17);
+        }
+
+        @include above($tabletLandscape) {
             width: 100%;
             min-height: inherit;
+            margin-top: rem(16);
         }
+
+        @include above($desktop) {
+            min-height: rem(505);
+        }
+
     }
 
     .info-noize {
         width: rem(300);
-        margin-left: rem(14);
         border: 2px dashed $gray-dirty;
         position: relative;
+
+        @include below($mobile) {
+            width: 100%;
+            margin-top: rem(33);
+            margin-left: 0;
+        }
+
+        @include above($tablet) {
+            margin-top: rem(44);
+            margin-left: 0;
+            padding-bottom: rem(37);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(20);
+            padding-bottom: rem(7);
+        }
+
+        @include above($desktop) {
+            margin-left: rem(14);
+            margin-top: 0;
+        }
+
+        &:hover {
+
+            .info-noize__title {
+                color: $blue;
+            }
+        }
 
         &__title {
             position: absolute;
             left: -2px;
             top: -15px;
+            padding-right: rem(10);
             border-bottom: 0;
             background: $white;
+            transition: all .5s ease;
         }
 
         &__wrapper {
-            margin-top: rem(30);
-            padding-left: rem(14);
-            padding-right: rem(14);
+            @include padding_x(#{rem(14)});
+
+            @include above($tablet) {
+                margin-top: rem(37);
+                padding-left: rem(19);
+            }
+
+            @include above($tabletLandscape) {
+                margin-top: rem(31);
+                @include padding_x(#{rem(14)})
+            }
+
+            @include above($desktop) {
+                margin-top: rem(30);
+            }
         }
 
         .icon_scissors {
@@ -120,7 +212,16 @@
             display: block;
             position: absolute;
             top: 4px;
-            right: -100%;
+            right: -140%;
+            background-color: $white;
+
+            @include above($tablet) {
+                right: -125%;
+            }
+
+            @include above($tabletLandscape) {
+                right: -140%;
+            }
         }
 
         &_right-block {
@@ -171,6 +272,14 @@
     &__banner {
         width: 100%;
         margin-top: rem(24);
+
+        @include above($tablet) {
+            display: none;
+        }
+
+        @include above($tabletLandscape) {
+            display: block;
+        }
     }
 
     &__subscribe {
@@ -178,7 +287,22 @@
     }
 
     &__random-news {
-        margin-top: rem(26);
+
+        @include below($mobile) {
+            margin-top: rem(7);
+        }
+
+        @include above($tablet) {
+            margin-top: rem(18);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(15);
+        }
+
+        @include above($desktop) {
+            margin-top: rem(26);
+        }
 
         &_war {
             margin-top: rem(29);
@@ -191,6 +315,10 @@
 
     &__more-news {
         margin-top: rem(23);
+
+        @include below($mobile) {
+            margin-top: 0;
+        }
 
         &_war {
             margin-top: rem(24);
@@ -240,6 +368,11 @@
 
     &__per-day {
 
+        @include below($mobile) {
+            width: 100%;
+            margin-top: rem(20);
+        }
+
         &_war {
             margin-top: 11px;
         }
@@ -253,4 +386,3 @@
         }
     }
 }
-

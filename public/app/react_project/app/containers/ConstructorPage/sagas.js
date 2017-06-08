@@ -75,7 +75,7 @@ export function* saveHomeNews() {
                 top: v.top,
             })),
             from_air: data.broadcast.map((v) => ({
-                record_id: v.data.id,
+                news_id: v.data.id,
                 top: v.top,
             })),
             info_noise: data.noise.map((v) => ({
@@ -143,7 +143,6 @@ export function* getItems({ payload: { type } }) {
             data = response.data;
         } else {
             const params = {
-                fullVideo: false,
                 constructor: true,
                 search: filters.search,
             };

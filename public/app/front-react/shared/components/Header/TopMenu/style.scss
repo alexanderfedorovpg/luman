@@ -4,6 +4,18 @@
 .top-menu {
     margin-left: rem(30);
 
+    @include below($mobile) {
+        display: none;
+    }
+
+    @include above($tablet) {
+        margin-left: rem(22);
+    }
+
+    @include above($tabletLandscape) {
+        margin-left: rem(21);
+    }
+
     &__nav {
         height: 100%;
     }
@@ -33,5 +45,8 @@
         color: $white;
         text-decoration: none;
         text-transform: uppercase;
+    }
+    &__link.selected {
+        color: #a03761;
     }
 }

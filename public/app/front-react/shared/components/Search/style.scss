@@ -1,38 +1,70 @@
+
 @import "~style/mixins";
 @import "~style/vars";
 
 .search {
-    width: 100%;
     height: rem(33);
     margin-left: rem(20);
 
     color: rgba(255, 255, 255, .42);
 
+    @include below($mobile) {
+        width: auto;
+        margin-left: 0;
+    }
+
+    @include above($tablet) {
+        width: rem(100);
+    }
+
+    @include above($tabletLandscape) {
+        width: 100%;
+    }
+
     &_open {
 
         .search__input-text {
             flex: 1;
-
             padding-right: rem(15);
             padding-left: rem(15);
-
-            font-family: $stemReg;
             font-size: rem(14);
+            font-family: $stemReg;
             line-height: rem(33);
             color: #666666;
             text-align: left;
 
             background-color: #fff;
+
+            @include below($mobile) {
+                width: rem(243);
+                @include padding_x(#{rem(15)});
+            }
+
+            @include above($tablet) {
+                position: absolute;
+                right: rem(20);
+                width: rem(440);
+            }
+
+            @include above($tabletLandscape) {
+                width: rem(755);
+            }
+
+            @include above($desktop) {
+                width: rem(1050);
+            }
         }
     }
 
     &__form {
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
     }
 
     &__input-text {
+        width: rem(100);
         height: rem(33);
         // padding-right: rem(9);
 
@@ -52,6 +84,13 @@
 
         &::-ms-clear {
             display: none;
+        }
+
+        @include below($mobile) {
+            position: absolute;
+            right: 100%;
+            width: 0;
+            @include padding_x(0);
         }
     }
 
@@ -93,4 +132,3 @@
         background-size: cover;
     }
 }
-

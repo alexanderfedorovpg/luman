@@ -9,16 +9,38 @@
         height: rem(99);
 
         text-align: center;
+        text-decoration: none;
 
-        background-image: url(./where-view.png);
+        background-image: url(./where-view_mobile.jpg);
         background-position: center;
         background-size: cover;
+
+        @include above($tablet) {
+            padding-top: rem(26);
+        }
+
+        @include above($desktop) {
+            background-image: url(./where-view.png);
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     &__title {
-        font: #{rem(24)}/#{rem(26)} $stemBold;
+        font-family: $stemBold;
+        line-height: rem(26);
         color: $white;
         text-transform: uppercase;
+
+        @include above($tablet) {
+            font-size: rem(18);
+        }
+
+        @include above($tabletLandscape) {
+            font-size: rem(24);
+        }
     }
 
     &__subtitle {

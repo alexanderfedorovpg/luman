@@ -2,7 +2,15 @@
 @import "~style/vars";
 
 .list-video {
-    width: rem(275);
+    width: 100%;
+
+    @include below($tablet) {
+        width: rem(300);
+    }
+
+    @include above($tabletLandscape) {
+        width: rem(275);
+    }
 
     &__item {
         display: flex;
@@ -12,6 +20,15 @@
 
         &:not(:first-child) {
             margin-top: rem(19);
+
+            @include below($tabletLandscapeMax) {
+                margin-top: 0;
+            }
+        }
+
+        @include below($tabletLandscapeMax) {
+            margin-bottom: rem(25);
+            padding-right: rem(10);
         }
     }
 

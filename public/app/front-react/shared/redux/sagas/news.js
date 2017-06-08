@@ -23,7 +23,11 @@ import {
 
     fetchOnline,
     onlineFetched,
-    onlineFetchError
+    onlineFetchError,
+
+    fetchComments,
+    commentsFetched,
+    commentsFetchError
 } from 'actions/news'
 
 import {
@@ -183,6 +187,18 @@ export default function* news() {
         }
         catch (e) {
             yield put(homeFetchError(e))
+        }
+    })
+
+    yield takeEvery(fetchComments.getType(), function* ({ payload }) {
+
+        try {
+            const { data } = yield call(axios.get, `${endpoint}/news/${payload}/comments`)
+
+            yield put(commentsFetched(data))
+        }
+        catch (e) {
+            yield put(commentsFetchError(e))
         }
     })
 }

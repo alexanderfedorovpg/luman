@@ -1,11 +1,7 @@
 @import "~style/mixins";
+@import "~style/vars";
 
 .random-news {
-
-    &__block-square,
-    &__block-rectangle {
-        height: rem(245);
-    }
 
     &__block-square {
 
@@ -67,13 +63,22 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-top: -7px;
-        margin-bottom: -7px;
+        margin-top: rem(-7);
+        margin-bottom: rem(-7);
     }
 
     &__block {
         margin-top: rem(8);
         margin-bottom: rem(7);
+
+        @include above($tablet) {
+            @include margin_y(#{rem(10)});
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(8);
+            margin-bottom: rem(7);
+        }
     }
 
     &__more-goods {
@@ -86,5 +91,4 @@
         height: auto;
     }
 }
-
 

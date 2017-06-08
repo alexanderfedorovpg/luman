@@ -119,6 +119,7 @@ class NewsPage extends PureComponent {
                             data={item}
                             hasVideo={item.top > 3 || item.video_stream}
                             noise={noise}
+                            now={now}
                             related={relatedNews}
                             broadcast={broadcast}
                         />

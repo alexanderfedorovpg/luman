@@ -23,3 +23,7 @@ export const homeFetchError = createAction('FETCH_HOME_NEWS_FAILURE')
 export const fetchOnline = createAction('FETCH_ONLINE_NEWS')
 export const onlineFetched = createAction('FETCH_ONLINE_NEWS_SUCCESS')
 export const onlineFetchError = createAction('FETCH_ONLINE_NEWS_FAILURE')
+
+export const fetchComments = createAction('FETCH_ONLINE_COMMENTS')
+export const commentsFetched = createAction('FETCH_ONLINE_COMMENTS_SUCCESS')
+export const commentsFetchError = createAction('FETCH_ONLINE_COMMENTS_FAILURE')

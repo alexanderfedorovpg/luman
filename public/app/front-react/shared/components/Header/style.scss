@@ -11,27 +11,23 @@
     background-color: $bg-gray;
 
     .icon_info {
-        margin-top: rem(5);
-    }
+        width: rem(18);
+        height: rem(18);
 
-    &_war:before {
-        content: '';
+        @include above($tablet) {
+            margin-top: 0;
+        }
 
-        display: block;
-        width: 100%;
-        height: rem(70);
-
-        background-color: $war;
-    }
-
-    &_margin + main {
-        margin-top: 2.6875rem;
+        @include above($desktop) {
+            //margin-top: rem(5);
+        }
     }
 
     &__container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         padding-top: rem(5);
         padding-bottom: rem(5);
 
@@ -47,15 +43,32 @@
     &__right-part {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+
+        @include below($mobile) {
+            width: 50%;
+        }
     }
 
     &__part-wrapper {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
         height: 100%;
+
+        @include below($mobile) {
+            width: 50%;
+
+
+            .icon_info {
+                display: none;
+            }
+        }
     }
 
     &__burger {
+        margin-top: rem(-19);
         padding-top: rem(15);
 
         cursor: pointer;
@@ -66,10 +79,18 @@
 
         width: rem(138);
         margin-right: rem(15);
-        margin-left: rem(38);
+        margin-top: rem(-23);
 
-        .logo__img {
-            width: rem(138);
+        @include below($mobile) {
+            margin-left: rem(30);
+        }
+
+        @include above($tablet) {
+            margin-left: rem(13);
+        }
+
+        @include above($desktop) {
+            margin-left: rem(38);
         }
     }
 
@@ -120,6 +141,31 @@
     &__event {
         font: #{rem(24)} / #{rem(40)} $stemBold;
         color: $white;
+    }
+
+    &_war:before {
+        content: '';
+
+        display: block;
+        width: 100%;
+        height: rem(70);
+
+        background-color: $war;
+    }
+
+    &_margin + main {
+        margin-top: 2.6875rem;
+    }
+
+    &_open-search {
+
+        @include below($mobile) {
+
+            .logo__img {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
     }
 
 }

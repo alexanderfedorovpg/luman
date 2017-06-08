@@ -13,20 +13,20 @@ function FromEnter({ data, big, className }) {
     const video = data.video_stream || {}
 
     return (
-        <div className={classNames(`block-square`, className)}>
-            <Link className="block-square__link" to={`/broadcast/${data.id}`}></Link>
+        <div className={classNames(`from-enter`, {'from-enter_big': big}, className)}>
+            <Link className="from-enter__link" to={`/broadcast/${data.id}`}></Link>
             <Img className="block-square__img" src={video.preview} alt=" "role="presentation" />
-            <div className="block-square__info">
+            <div className="from-enter__info">
                 {video
                     ? (
                         <div className="block-square__time-keeping">
-                            <img className="block-square__ico" src="/content/video-ico/video-ico.png" alt="" role="presentation" />
+                            <img className="block-square__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
                             <span className="block-square__keeping">{video.duration}</span>
                         </div>
                     )
                     : null
                 }
-                <p className="block-square__title">
+                <p className="from-enter__title">
                     {data.title}
                 </p>
                 <p className="from-enter__category">

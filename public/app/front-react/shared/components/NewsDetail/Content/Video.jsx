@@ -98,7 +98,7 @@ class Content extends PureComponent {
                         )
                         : null
                     }
-                    {(data.video_stream.preview_author || data.video_stream.preview_source) && (
+                    {data.video_stream && (data.video_stream.preview_author || data.video_stream.preview_source) && (
                         <div className="inner-about__video-info">
                             <div>
                                 Фото:

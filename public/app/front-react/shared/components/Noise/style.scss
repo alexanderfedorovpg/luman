@@ -2,9 +2,31 @@
 @import "~style/vars";
 
 .info-noize {
+    width: rem(300);
+    border: 2px dashed $gray-dirty;
+    position: relative;
+
+    .icon_scissors {
+        fill: $gray-dirty;
+        display: block;
+        position: absolute;
+        top: 4px;
+        right: -100%;
+
+        @include above($tabletLandscape) {
+            right: -146%;
+        }
+
+        @include above($desktop) {
+            right: -100%;
+        }
+    }
 
     &__wrapper {
-       margin-top: rem(17);
+        margin-top: rem(30);
+        padding-left: rem(14);
+        padding-right: rem(14);
+        padding-bottom: rem(14);
 
         &_about {
             margin-top: rem(18);
@@ -12,15 +34,16 @@
     }
 
     &__title {
+        position: absolute;
+        left: -2px;
+        top: -15px;
+        border-bottom: 0;
+        background: $white;
         display: block;
         padding-left: rem(28);
 
         line-height: rem(34);
         text-decoration: none;
-
-        .icon {
-            display: none;
-        }
     }
 
     &__mini-news {
@@ -69,6 +92,17 @@
 
         &_right-war {
 
+        }
+    }
+
+    &__news-detail {
+
+        @include above($tabletLandscape) {
+            margin-top: rem(56) !important;
+        }
+
+        @include above($desktop) {
+            margin-top: rem(30) !important;
         }
     }
 

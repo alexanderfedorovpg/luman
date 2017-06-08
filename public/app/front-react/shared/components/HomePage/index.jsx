@@ -1,4 +1,5 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 import classNames from 'classnames'
 
 import BigNews from './BigNews'
@@ -9,8 +10,7 @@ import Noise from 'components/Noise'
 import Group from 'components/Group'
 import Block from 'components/Block'
 import MiniNews from 'components/MiniNews'
-import Video from 'components/GeneralVideo'
-import VideoWrapper from 'components/GeneralVideo/Wrapper'
+import Video from 'components/Aside/Video'
 import EnterOne from 'components/Broadcast/One'
 import Banner from './Banner'
 import RandomNews from './RandomNews'
@@ -20,7 +20,6 @@ import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
 
-import mainVideoPlaceholder from './obzor-main-new.jpg'
 import './style.scss'
 
 function HomePage({
@@ -48,46 +47,99 @@ function HomePage({
                 <div className="general-news__left">
                     <div className="general-news__left-wrapper">
                         <BigNews className="general-news__big-news" data={now[0]||{}} />
+                        <MediaQuery maxDeviceWidth="719px">
+                            <Video
+                                data={firstVideo}
+                                playTitle="date"
+                                title="Все ключевые события этого дня"
+                                main
+                                className="general-news__general-video" />
+                        </MediaQuery>
                         <Now data={now.slice(1, 5)} className="general-news__now" />
+                        <MediaQuery minDeviceWidth="720px" maxDeviceWidth="1035px">
+                            <Video
+                                data={firstVideo}
+                                playTitle="date"
+                                title="Все ключевые события этого дня"
+                                main
+                                className="general-news__general-video" />
+                        </MediaQuery>
                     </div>
                     <div className="general-news__left-wrapper two-wrapper">
                         <Today
                             data={todayNews}
                             className="general-news__per-day" />
 
-                        <Noise className="general-news__info-noize" data={noise} />
+                        <MediaQuery minDeviceWidth="1600px">
+                            {low => (
+                                <MediaQuery maxDeviceWidth="1035px">
+                                    {high => (low || high) &&
+                                        <Noise className="general-news__info-noize" data={noise} />
+                                    }
+                                </MediaQuery>
+                            )}
+                        </MediaQuery>
+                        <MediaQuery minDeviceWidth="720px" maxDeviceWidth="1035px">
+                            <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
+                        </MediaQuery>
                     </div>
                 </div>
                 <div className="general-news__right right-col">
-                    {firstVideo.video_stream
-                        ? (
-                            <VideoWrapper>
-                                <Video
-                                    data={firstVideo.video_stream}
-                                    playTitle="date"
-                                    title="Все ключевые события этого дня"
-                                    className="general-news__general-video" />
-                            </VideoWrapper>
-                        )
-                        : (
-                            <img src={mainVideoPlaceholder} className="general-video__img" />
-                        )
-                    }
-                    <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
-                </div>
-                <div className="general-news__left general-news__left_more">
-                    <div className="general-news__left-wrapper">
+                    <MediaQuery minDeviceWidth="1036px">
+                        <Video
+                            data={firstVideo}
+                            playTitle="date"
+                            title="Все ключевые события этого дня"
+                            main
+                            className="general-news__general-video" />
+                    </MediaQuery>
+
+                    <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
+                        <Noise className="general-news__info-noize" data={noise} />
                         <Banner className="general-news__banner" />
+                    </MediaQuery>
+
+                    <MediaQuery minDeviceWidth="1036px">
+                        {low => (
+                            <MediaQuery maxDeviceWidth="719px">
+                                {high => (low || high) &&
+                                    <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
+                                }
+                            </MediaQuery>
+                        )}
+                    </MediaQuery>
+                </div>
+                <MediaQuery maxDeviceWidth="1035px" minDeviceWidth="720px">
+                    <div className="general-news__middle">
+                        <BannerPreview className="general-news__banner-preview" />
                     </div>
+                </MediaQuery>
+                <div className="general-news__left general-news__left_more">
+                    <MediaQuery minDeviceWidth="1600px">
+                        {low => (
+                            <MediaQuery minDeviceWidth="720px" maxDeviceWidth="1035px">
+                                {high => (low || high)
+                                    ? <div className="general-news__left-wrapper">
+                                        <Banner className="general-news__banner" />
+                                    </div>
+                                    : <BannerPreview className="general-news__banner-preview" />
+                                }
+                            </MediaQuery>
+                        )}
+                    </MediaQuery>
                     <RandomNews className="general-news__random-news" data={randomNews} />
                 </div>
                 <div className="general-news__right general-news__right_more">
-                    <Subscribe className="general-news__subscribe"/>
+                    <MediaQuery minDeviceWidth="1600px">
+                        <Subscribe className="general-news__subscribe"/>
+                    </MediaQuery>
                     <MoreNews className="general-news__more-news" data={moreNews} />
                 </div>
-                <div className="general-news__middle">
-                    <BannerPreview className="general-news__banner-preview" />
-                </div>
+                <MediaQuery minDeviceWidth="1600px">
+                    <div className="general-news__middle">
+                        <BannerPreview className="general-news__banner-preview" />
+                    </div>
+                </MediaQuery>
                 {/*<div className="general-news__left general-news__left_more">
                     <MoreVideo className="general-news__more-video" data={moreVideo} />
                 </div>

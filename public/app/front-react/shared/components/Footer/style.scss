@@ -14,25 +14,85 @@
     }
 
     &__copyright {
-        margin-top: rem(4);
+
+        @include below($mobile) {
+            width: 50%;
+            margin-top: rem(-20);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(4);
+        }
     }
 
     &__logo-footer {
-        margin-top: -66px;
+
+        @include below($mobile) {
+            margin-top: rem(-51);
+        }
+
+        @include above($tablet) {
+            margin-top: rem(-72);
+        }
+
+        @include above($tabletLandscape) {
+            margin-top: rem(-66);
+        }
     }
 
     &__left-part {
-        width: rem(126);
+
+        @include below($mobile) {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        @include above($tablet) {
+            width: 100%;
+        }
+
+        @include above($tabletLandscape) {
+            width: rem(126);
+        }
     }
 
     &__middle-part {
-        width: rem(377);
-        margin-left: rem(41);
+
+        @include below($mobile) {
+            width: 100%;
+        }
+
+        @include above($tablet) {
+            width: 50%;
+            margin-left: 0;
+        }
+
+        @include above($tabletLandscape) {
+            width: rem(377);
+            margin-left: rem(41);
+        }
     }
 
     &__right-part {
-        width: rem(255);
-        margin-left: rem(89);
+
+        @include below($mobile) {
+            display: none;
+        }
+
+        @include above($tablet) {
+            width: 50%;
+            margin-left: 0;
+            padding-left: rem(9);
+            padding-top: rem(4);
+        }
+
+        @include above($tabletLandscape) {
+            width: rem(255);
+            margin-left: rem(89);
+            padding-left: 0;
+            padding-top: 0;
+        }
     }
 
     &__col-menu {
@@ -46,10 +106,19 @@
 
             &:nth-of-type(odd) {
                 width: 61%;
+
+                @include below($mobile) {
+                    width: 47%;
+                    padding-right: rem(5);
+                }
             }
 
             &:nth-of-type(even) {
                 width: 39%;
+
+                @include below($mobile) {
+                    width: 37%;
+                }
             }
         }
     }

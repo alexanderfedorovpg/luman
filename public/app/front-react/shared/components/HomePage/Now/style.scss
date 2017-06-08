@@ -3,8 +3,10 @@
 
 .now {
     width: rem(299);
-    padding-left: rem(14);
 
+    @include above($desktop) {
+        padding-left: rem(14);
+    }
     // background-color: $gray-light;
 
     &__title {
@@ -14,11 +16,23 @@
     &__news {
         padding-right: 1px;
         // margin-top: rem(15);
+
+        @include above($tabletLandscape) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        @include above($desktop) {
+            display: block;
+        }
     }
 
 
 
     &__mini-news {
+        display: flex;
+        align-items: center;
         padding-right: rem(20);
 
         &::before {
@@ -38,6 +52,32 @@
 
         }
 
+        @include below($mobile) {
+            height: rem(115);
+
+            &:not(:first-child) {
+                margin-top: rem(18);
+            }
+        }
+
+
+        @include above($tablet) {
+            width: rem(300);
+            height: rem(115);
+
+            &:not(:last-child) {
+                margin-bottom: rem(16);
+            }
+        }
+
+        @include above($desktop) {
+            display: block;
+
+            &:not(:last-child) {
+                margin-bottom:  rem(14);
+            }
+        }
+
         &:hover {
 
             .mini-news__title {
@@ -49,10 +89,6 @@
             }
         }
 
-        &:not(:last-child) {
-            margin-bottom:  rem(14);
-        }
-
         .mini-news__img {
             opacity: 1;
             visibility: visible;
@@ -60,6 +96,10 @@
 
         .mini-news__info {
             transform: translateX(#{rem(18)});
+
+            @include above($tablet) {
+                width: rem(270);
+            }
         }
 
         .mini-news__title {

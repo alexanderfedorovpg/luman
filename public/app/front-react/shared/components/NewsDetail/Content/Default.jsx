@@ -1,5 +1,7 @@
 import React from 'react';
 import { FormattedRelative } from 'react-intl';
+import classNames from 'classnames'
+import ScissorsIcon from 'components/Icon/Scissors';
 
 import Socials from 'components/Socials';
 import Rubrics from 'components/Rubrics';
@@ -20,7 +22,16 @@ function Content({ data, children }) {
                     : null
                 }
             </div>
-            <div className="text-bg-gray text-bg-gray--news inner-about__text-bg-gray">
+            <div className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors' : data.top < 6})}>
+                { data.top < 6 &&
+                    (
+                        <div className="scissors">
+                            Инфошум
+                            <div className="scissors__icon">
+                            </div>
+                        </div>
+                    )
+                }
                 {
                     !!theses.length &&
                     (
