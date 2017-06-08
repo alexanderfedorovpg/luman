@@ -80,13 +80,13 @@ class Broadcast extends Component {
                                     <Item data={data[6]} />
                                     <Item data={data[7]} />
                                 </div>
-                                <MediaQuery maxDeviceWidth="1599px">
+                                <MediaQuery maxWidth="1599px">
                                     <BannerPreview className="news-top__banner-preview" />
                                 </MediaQuery>
                             </div>
                         </div>
                         <div className="right-col">
-                            <MediaQuery minDeviceWidth="1036px">
+                            <MediaQuery minWidth="1036px">
                                 <Video data={{}} />
                                 <Group title="Главные новости" margin>
                                     {nowNews.map(v => (
@@ -94,14 +94,14 @@ class Broadcast extends Component {
                                     ))}
                                 </Group>
                             </MediaQuery>
-                            <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
+                            <MediaQuery minWidth="1036px" maxWidth="1599px">
                                 <div className="news-one-line__row">
                                     <Banner className="news-top__banner" />
                                     <Subscribe />
                                 </div>
                             </MediaQuery>
                         </div>
-                        <MediaQuery minDeviceWidth="1600px">
+                        <MediaQuery minWidth="1600px">
                             <div className="news-top__middle middle-col">
                                 <BannerPreview className="news-top__banner-preview" />
                             </div>
@@ -114,13 +114,13 @@ class Broadcast extends Component {
                                 <Item data={data[11]} />
                             </div>
                         </div>
-                        <MediaQuery minDeviceWidth="1600px">
+                        <MediaQuery minWidth="1600px">
                             <div className="news-one-line__row">
                                 <Banner className="news-top__banner" />
                                 <Subscribe />
                             </div>
                         </MediaQuery>
-                        <MediaQuery maxDeviceWidth="1035px">
+                        <MediaQuery maxWidth="1035px">
                             <div className="news-one-line__row news-one-line__row_banners">
                                 <Banner className="news-top__banner" />
                                 <Subscribe className="news-top__subscribe" />
