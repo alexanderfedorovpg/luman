@@ -32,6 +32,11 @@
         }
     }
 
+    &__link {
+        text-decoration: none;
+        color: transparent;
+    }
+
     &__title {
         font-family: $stemBold;
         line-height: rem(26);
