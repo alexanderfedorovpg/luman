@@ -123,7 +123,7 @@ class News extends Component {
                                 <BannerPreview className="news-top__banner-preview" />
                             </MediaQuery>
 
-                            <MediaQuery minDeviceWidth="1036px" maxDEviceWidth="1599px">
+                            <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
                                 <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
                                 {this.renderAdditionalData(data.slice(11))}
                                 {canLoad
