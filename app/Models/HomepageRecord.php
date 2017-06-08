@@ -18,21 +18,31 @@ class HomepageRecord extends Model
      * @var array
      */
     protected $fillable = [
-        'record_id', 'top',
+        'news_id', 'top',
     ];
 
 
     protected $events = [
         'saved' => CacheClearObserver::class,       
     ];
-    
+
     /**
-     * Видеозапись
+     * Категория
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function record()
+    public function category()
     {
-        return $this->hasOne(AirRecord::class, 'id', 'record_id');
+        return $this->hasONe(HomepageNewsCategory::class, 'id', 'category_id');
+    }
+
+    /**
+     * Новость
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function news()
+    {
+        return $this->hasOne(News::class, 'id', 'news_id');
     }
 }

@@ -35,6 +35,8 @@ class News extends Model
         'is_online',
         'moderation',
         'theses',
+        'program_id',
+        'is_full_video',
     ];
 
     protected $hidden = ['pivot'];
@@ -167,7 +169,7 @@ class News extends Model
      */
     public function scopePublished($query, $published = true)
     {
-        return $query->where('is_publish', '=', $published);
+        return $query->where('is_publish', '=', $published)->where('delete','=','0');
     }
 
 
@@ -175,6 +177,12 @@ class News extends Model
     {
         return $query->where('to_constructor', '=', $constructor);
     }
+
+    public function scopeAirRecords($query)
+    {
+        return $query->whereNotNull('program_id');
+    }
+
 
     /**
      * Чат
