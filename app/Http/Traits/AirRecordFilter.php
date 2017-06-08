@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use App\Models\NewsComments;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\AirRecord;
@@ -45,7 +46,7 @@ trait AirRecordFilter
         }
 
         if ($offset !== null && $limit === null) {
-            $limit = AirRecord::count();
+            $limit = NewsComments::count();
             $builder->take($limit);
         }
 
