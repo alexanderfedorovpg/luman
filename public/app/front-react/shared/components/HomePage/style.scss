@@ -15,7 +15,7 @@
     &__left {
 
         @include below($mobile) {
-            width: 100%;
+            width: rem(300);
         }
 
         @include above($tabletLandscape) {
@@ -152,7 +152,7 @@
         position: relative;
 
         @include below($mobile) {
-            width: 100%;
+            width: rem(300);
             margin-top: rem(33);
             margin-left: 0;
         }
