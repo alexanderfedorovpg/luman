@@ -4,6 +4,7 @@ namespace App\Http\Transformers\v1;
 
 use App\Http\Transformers\Transformer;
 use App\Models\CdnFile;
+use App\Models\News;
 use App\Models\TvProgram;
 use App\Models\Rubrics;
 
@@ -12,19 +13,19 @@ class AirRecordTransformer extends Transformer
     public function transform($record)
     {
         $transform = $record;
-        if ($record['video']) {
+        if ($record['video_stream']) {
             $transform['video'] = [
-                'url' => CdnFile::where('id', '=', $record['video'])->pluck('url')->first(),
-                'id' => $record['video'],
-                'duration' => $record['video_duration'],
-                'preview' => CdnFile::where('id', '=', $record['video_preview'])->pluck('url')->first(),
-                'preview_id' => $record['video_preview'],
+                'url' => CdnFile::where('id', '=', $record['video_stream'])->pluck('url')->first(),
+                'id' => $record['video_stream'],
+                'duration' => $record['video_stream_duration'],
+                'preview' => CdnFile::where('id', '=', $record['video_stream_preview'])->pluck('url')->first(),
+                'preview_id' => $record['video_stream_preview'],
             ];
         } else {
             $transform['video'] = null;
         }
-        unset($transform["video_preview"]);
-        $transform['is_full_video'] = (bool)$record['is_full_video'];
+        unset($transform["video_stream_preview"]);
+        $transform['rubrics'] = News::find($record['id'])->rubrics()->orderBy('name')->get(['rubrics.id','rubrics.name'])->toArray();
         return $transform;
     }
 

@@ -37,12 +37,12 @@ class NewsListEditorController extends CmsController
      * NewsListController constructor.
      * @param \App\Http\Transformers\v1\NewsEditorTransformer $newsEditorTransformer
      */
-    public function __construct(NewsEditorTransformer $newsEditorTransformer)
+    public function __construct()
     {
         parent::__construct();
         $this->user_id = Auth::id();
         $this->log = new LogController();
-        $this->newsEditorTransformer = $newsEditorTransformer;
+        $this->newsEditorTransformer = new NewsEditorTransformer;
     }
 
     /**
@@ -186,11 +186,11 @@ class NewsListEditorController extends CmsController
             $rules['title'] = 'required|max:120';
 
             //  $rules['theses'] = 'required';
-
-            $rules['video_stream'] = 'integer|exists:cdn_files,id';
-            $rules['video_stream_preview'] = 'integer|exists:cdn_files,id';
-            $rules['image_main'] = 'integer|exists:cdn_files,id';
-            $rules['image_preview'] = 'integer|exists:cdn_files,id';
+            $rules['program_id'] = 'integer|exists:tv_programs,id';
+            $rules['video_stream'] = 'exists:cdn_files,id';
+            $rules['video_stream_preview'] = 'numeric|exists:cdn_files,id';
+            $rules['image_main'] = 'numeric|exists:cdn_files,id';
+            $rules['image_preview'] = 'numeric|exists:cdn_files,id';
 
             $rules['original_source_link'] = 'url';
             $rules['uri'] = 'max:255';
@@ -364,7 +364,7 @@ class NewsListEditorController extends CmsController
             $rules['video_stream_preview'] = 'integer|exists:cdn_files,id';
             $rules['image_main'] = 'integer|exists:cdn_files,id';
             $rules['image_preview'] = 'integer|exists:cdn_files,id';
-
+            $rules['program_id'] = 'integer|exists:tv_programs,id';
             $rules['original_source_link'] = 'url';
             $rules['uri'] = 'max:255';
             $this->validate($request,

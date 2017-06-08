@@ -122,33 +122,55 @@ class News extends Component {
                             <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
                                 <BannerPreview className="news-top__banner-preview" />
                             </MediaQuery>
+
+                            <MediaQuery minDeviceWidth="1036px" maxDEviceWidth="1599px">
+                                <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
+                                {this.renderAdditionalData(data.slice(11))}
+                                {canLoad
+                                    ? (
+                                        <LoadMore onClick={onLoadRequest}>
+                                            Больше новостей
+                                        </LoadMore>
+                                    )
+                                    : null
+                                }
+                            </MediaQuery>
+
                         </div>
                         <MediaQuery minDeviceWidth="1036px">
                             <Aside />
+                            <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
+                                <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
+                            </MediaQuery>
                         </MediaQuery>
                         <MediaQuery minDeviceWidth="1600px">
                             <div className="news-top__middle middle-col">
                                 <BannerPreview className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
-                        <div className="news-top__left left-col left-col left-col_width_inner">
-                            <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
-                            {this.renderAdditionalData(data.slice(11))}
-                            {canLoad
-                                ? (
-                                    <LoadMore onClick={onLoadRequest}>
-                                        Больше новостей
-                                    </LoadMore>
-                                )
-                                : null
-                            }
-                        </div>
+
+                        <MediaQuery minDeviceWidth="1600px">
+                            <div className="news-top__left left-col left-col left-col_width_inner">
+                                <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
+                                {this.renderAdditionalData(data.slice(11))}
+                                {canLoad
+                                    ? (
+                                        <LoadMore onClick={onLoadRequest}>
+                                            Больше новостей
+                                        </LoadMore>
+                                    )
+                                    : null
+                                }
+                            </div>
+                        </MediaQuery>
                         <MediaQuery minDeviceWidth="1036px">
                             <div className="news-top__right right-col">
                                 <MediaQuery minDeviceWidth="1600px">
                                     <Subscribe className="news-top__subscribe" />
                                 </MediaQuery>
-                                <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
+                                <MediaQuery minDeviceWidth="1600px">
+                                    <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
+                                </MediaQuery>
                             </div>
                         </MediaQuery>
                     </div>

@@ -30,7 +30,7 @@
     &__left_more {
 
         @include above($tabletLandscape) {
-            margin-top: rem(-60);
+           //- margin-top: rem(-60);
         }
 
         @include above($desktop) {
@@ -141,6 +141,7 @@
 
         @include above($desktop) {
             min-height: rem(505);
+            margin-top: 0;
         }
 
     }
@@ -326,6 +327,7 @@
     }
 
     &__enter-one {
+        width: rem(300);
         margin-top: rem(30);
     }
 

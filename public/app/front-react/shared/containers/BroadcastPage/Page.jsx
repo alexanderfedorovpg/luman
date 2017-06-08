@@ -24,7 +24,7 @@ import Detail from 'components/Broadcast/Page/Detail'
 import Broadcast from 'components/Broadcast/Page'
 import BroadcastStub from 'components/Broadcast/Page/stub.jsx'
 
-const SHOW_STUB = false; // показываем заглушку
+const SHOW_STUB = true; // показываем заглушку
 
 class BroadcastPage extends PureComponent {
 

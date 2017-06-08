@@ -4,7 +4,11 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Group, Label } from 'components/Form';
-import { SelectRedux, InputRedux, ImageLoaderRedux } from 'components/Form/ReduxForm';
+import {
+    SelectRedux,
+    InputRedux,
+    RatingRedux
+} from 'components/Form/ReduxForm';
 
 import { StyledBtn } from '../style';
 import { makeGetProgramsAsOptions, makeGetSelectedRecord } from '../selectors';
@@ -13,6 +17,7 @@ import {
     StyledFileInput as FileInputRedux,
     StyledDatepicker as DatepickerRedux,
     StyledTextarea as TextareaRedux,
+    StyledImageLoader as ImageLoaderRedux,
 } from './style';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -82,7 +87,7 @@ class RecordForm extends React.PureComponent {
                         component={FileInputRedux}
                     />
                 </Group>
-                <Group md>
+                <Group md horizontal align="top">
                     <Field
                         placeholder="Добавить превью"
                         name="video_preview"
@@ -92,6 +97,10 @@ class RecordForm extends React.PureComponent {
                         icon
                         size="s"
                         component={ImageLoaderRedux}
+                    />
+                    <Field
+                        name="top"
+                        component={RatingRedux}
                     />
                 </Group>
                 <Group marginBottom="40px">
@@ -132,6 +141,10 @@ const validate = (values) => {
 
     if (!values.get('video')) {
         errors.video = 'Не загружено видео';
+    }
+
+    if (!values.get('top')) {
+        errors.top = 'Укажите рейтинг';
     }
 
     return errors;
