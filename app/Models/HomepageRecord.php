@@ -18,7 +18,7 @@ class HomepageRecord extends Model
      * @var array
      */
     protected $fillable = [
-        'news_id', 'top',
+        'news_id', 'category_id', 'top',
     ];
 
 
