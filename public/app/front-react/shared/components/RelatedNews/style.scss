@@ -23,6 +23,10 @@
 
         border-bottom: 0;
 
+        @include below($mobile) {
+            margin-bottom: rem(10);
+        }
+
         @include above($tablet) {
             margin-left: rem(-70);
             margin-bottom: rem(10);
@@ -41,6 +45,10 @@
     &__row {
         display: flex;
         align-items: flex-start;
+
+        @include below($mobile) {
+            flex-wrap: wrap;
+        }
 
         @include above($tablet) {
             margin-left: rem(-67);
@@ -64,6 +72,9 @@
 
     &__col-r {
 
+        @include below($mobile) {
+            margin-top: rem(9);
+        }
     }
 
     .block-square {
@@ -145,7 +156,7 @@
     &--wide {
 
         @include below($mobile) {
-            margin-top: rem(61);
+            margin-top: rem(36);
         }
 
         .random-news__block-square_list {

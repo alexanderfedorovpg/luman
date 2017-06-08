@@ -11,6 +11,14 @@
 
     border-bottom: 1px solid $gray;
 
+    @include above($tablet) {
+        padding-bottom: rem(20);
+    }
+
+    @include above($tabletLandscape) {
+        padding-bottom: rem(3);
+    }
+
     &__ico {
         display: inline-block;
 

@@ -290,6 +290,7 @@
         }
 
         &__ico {
+            display: inline;
             width: 2.5rem;
             height: 2.5rem;
         }
@@ -537,7 +538,7 @@
             font-family: $stemBold;
             font-size: 14px;
             text-transform: uppercase;
-            
+
         }
     }
 }

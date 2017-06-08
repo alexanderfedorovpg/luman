@@ -1,3 +1,4 @@
+
 @import "~style/mixins";
 @import "~style/vars";
 
@@ -35,7 +36,7 @@
             background-color: #fff;
 
             @include below($mobile) {
-                width: rem(365);
+                width: rem(243);
                 @include padding_x(#{rem(15)});
             }
 
@@ -63,6 +64,7 @@
     }
 
     &__input-text {
+        width: rem(100);
         height: rem(33);
         // padding-right: rem(9);
 
@@ -130,4 +132,3 @@
         background-size: cover;
     }
 }
-

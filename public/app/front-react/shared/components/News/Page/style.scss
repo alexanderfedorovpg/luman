@@ -1,277 +1,437 @@
 @import "~style/mixins";
 @import "~style/vars";
 
-.news-top {
+.news-top_all-news {
 
-    &__row {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: flex-start;
+    .news-top {
 
-        &-item {
-            margin-bottom: rem(20);
-            width: rem(300);
+        &__row {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: flex-start;
+
+            &-item {
+                margin-bottom: rem(20);
+                width: rem(300);
+            }
         }
-    }
-    &__mini-news {
-        padding-top: rem(10);
-        padding-bottom: 0;
+        &__mini-news {
+            padding-top: rem(10);
+            padding-bottom: 0;
 
-        border-bottom: none !important;
+            border-bottom: none !important;
 
-        &:nth-of-type(1) {
-            padding-top: 0;
-            margin-top: rem(-4);
-        }
+            &:nth-of-type(1) {
+                padding-top: 0;
+                margin-top: rem(-4);
+            }
 
-        .mini-news__title {
-            display: inline-block;
+            .mini-news__title {
+                display: inline-block;
 
-            font-size: rem(14);
-            line-height: rem(19);
-        }
+                font-size: rem(14);
+                line-height: rem(19);
+            }
 
-        .mini-news__date {
-            margin-top: rem(-4);
+            .mini-news__date {
+                margin-top: rem(-4);
 
-            font-size: 12px;
-        }
-    }
-
-    &__container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: stretch;
-        justify-content: space-between;
-        margin-bottom: rem(65);
-    }
-
-    &__news-one-line {
-        margin-top: rem(25);
-
-        .block-square__info {
-            bottom: rem(10) !important;
-        }
-
-        .block-square__title {
-            margin-bottom: 0 !important;
-        }
-    }
-
-    &__left {
-        margin-top: rem(-9);
-    }
-
-    &__info-noize {
-        margin-top: rem(23);
-
-        .info-noize__wrapper {
-            margin-top: rem(19);
-        }
-
-        .info-noize__mini-news {
-
-            &:first-child {
-
-                .mini-news__title {
-                    line-height: rem(22) !important;
-                }
+                font-size: 12px;
             }
         }
 
-        .mini-news__title {
-            letter-spacing: rem(-.5);
+        &__container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: stretch;
+            justify-content: space-between;
+            margin-bottom: rem(65);
         }
-    }
 
-    &__enter-one {
-        position: relative;
+        &__news-one-line {
+            margin-top: rem(25);
 
-        margin-top: rem(30);
-    }
+            @include above($tablet) {
+                margin-top: rem(22);
+            }
 
-    &__banner {
-        margin-top: rem(47);
-    }
+            @include above($tabletLandscape) {
+                margin-top: rem(25);
+            }
 
-    &__plots-week {
-        margin-top: rem(24);
+            .block-square__info {
+                bottom: rem(10) !important;
+            }
 
-        .block-rectangle-mini__points {
-            margin-right: rem(10);
-        }
-    }
-
-    &__per-day {
-        margin-top: rem(37);
-
-        .block-square__title {
-            margin-bottom: rem(3) !important;
-        }
-    }
-
-    &__banner-preview {
-        height: rem(142);
-        margin-top: rem(14);
-    }
-
-    &__random-news {
-        margin-top: rem(57);
-        margin-bottom: rem(20);
-    }
-
-    &__subscribe {
-        margin-top: rem(42);
-    }
-
-    &__more-news {
-        margin-top: rem(17);
-
-        .mini-news {
-
-            &:not(:first-child) {
-                margin-top: rem(17);
-
-                .mini-news__title {
-                    line-height: rem(18);
-                }
+            .block-square__title {
+                margin-bottom: 0 !important;
             }
         }
-    }
 
-    &_margin {
-        margin-top: rem(51);
-    }
-}
+        &__left {
+            margin-top: rem(-9);
 
+            @include below($mobile) {
+                width: 100%;
+            }
 
-.news-one-line {
+            @include above($tabletLandscape) {
+                width: rem(613);
+            }
 
-    &__row {
-        @include margin_y(#{rem(-7)});
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    &__block-rectangle {
-        @include margin_y(#{rem(7)});
-        width: rem(617);
-        height: rem(245);
-
-        .block-rectangle__link,
-        .block-rectangle__img {
-            height: rem(245);
-        }
-    }
-
-    .block-rectangle__info {
-        bottom: rem(6);
-    }
-
-    &__block-square {
-        @include margin_y(#{rem(7)});
-        width: rem(300);
-
-        &::before,
-        .block-square__img,
-        .block-square__link {
-            width: rem(300);
+            @include above($desktop) {
+                width: rem(930);
+            }
         }
 
-        .block-square__title {
-            letter-spacing: rem(-.2);
+        &__info-noize {
+            margin-top: rem(23);
+
+            .info-noize__wrapper {
+                margin-top: rem(19);
+            }
+
+            .info-noize__mini-news {
+
+                &:first-child {
+
+                    .mini-news__title {
+                        line-height: rem(22) !important;
+                    }
+                }
+            }
+
+            .mini-news__title {
+                letter-spacing: rem(-.5);
+            }
         }
 
-        .block-square__info {
-            bottom: rem(8);
-        }
-    }
-}
-
-.plots-week {
-
-    &__list {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-}
-
-.per-day {
-
-    &__title {
-        line-height: rem(32);
-
-        border-bottom: none;
-    }
-
-    &__wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    &__wrapper_margin {
-        margin-top: rem(17);
-    }
-
-    .block-square {
-
-        .block-square__info {
-            width: rem(250);
-        }
-
-        .block-square__title {
-            margin-bottom: 0;
-
-            letter-spacing: rem(-.2);
-        }
-    }
-
-    &__block-square {
-
-        .block-square__info {
-            bottom: rem(19);
-        }
-
-        .block-square__title {
-            margin-bottom: rem(42);
-        }
-
-        .block-square__title-war {
+        &__enter-one {
             position: relative;
 
-            display: inline-block;
+            margin-top: rem(30);
+        }
 
-            font: #{rem(12)}/#{rem(24)} $stemReg;
-            color: $white;
-            text-transform: uppercase;
+        &__banner {
+            margin-top: rem(47);
 
-            &::before {
-                content: '';
+            @include below($mobile) {
+                margin-top: rem(20);
+            }
 
-                position: absolute;
-                z-index: -1;
-                top: 0;
-                left: rem(-25);
+            @include above($tablet) {
+                width: rem(300);
+                margin-top: 0;
+            }
 
-                display: block;
-                width: calc(100% + #{rem(48)});
-                height: 100%;
+            @include above($tabletLandscape) {
+                width: 100%;
+                margin-top: rem(20);
+            }
 
-                background-color: $war;
-                transform: skew(-30deg);
+            @include above($desktop) {
+                margin-top: rem(47);
+            }
+        }
+
+        &__plots-week {
+            margin-top: rem(24);
+
+            .block-rectangle-mini__points {
+                margin-right: rem(10);
+            }
+        }
+
+        &__per-day {
+            margin-top: rem(37);
+
+            @include below($mobile) {
+                margin-top: rem(20);
+            }
+
+            @include above($tablet) {
+                margin-top: rem(7);
+            }
+
+            @include above($tabletLandscape) {
+                margin-top: rem(37);
+            }
+
+            .per-day__title {
+
+                @include below($mobile) {
+                    display: none;
+                }
+
+                @include above($tablet) {
+                    display: none;
+                }
+
+                @include above($tabletLandscape) {
+                    display: block;
+                }
+            }
+
+            .block-square__title {
+                margin-bottom: rem(3) !important;
+            }
+
+            .per-day__wrapper {
+                flex-wrap: wrap;
+            }
+        }
+
+        &__banner-preview {
+            height: rem(142);
+
+            @include below($mobile) {
+                margin-top: rem(15);
+                height: auto;
+            }
+
+            @include above($tablet) {
+                margin-top: rem(15);
+                height: auto;
+            }
+
+            @include above($tabletLandscape) {
+                margin-top: 0;
+            }
+
+            @include above($desktop) {
+                margin-top: rem(14);
+            }
+        }
+
+        &__random-news {
+            margin-top: rem(57);
+            margin-bottom: rem(20);
+
+            @include below($mobile) {
+                margin-top: rem(27);
+            }
+
+            @include above($tablet) {
+                margin-top: rem(20);
+            }
+
+            @include above($desktop) {
+                margin-top: rem(57);
+            }
+        }
+
+        &__subscribe {
+            margin-top: rem(42);
+
+            @include below($mobile) {
+                margin-top: rem(20);
+            }
+
+            @include above($tablet) {
+                width: rem(300);
+                margin-top: rem(-9);
+            }
+
+            @include above($tabletLandscape) {
+                margin-top: rem(10);
+            }
+
+            @include above($desktop) {
+                margin-top: rem(42);
+            }
+        }
+
+        &__more-news {
+            margin-top: rem(17);
+
+            .mini-news {
+
+                &:not(:first-child) {
+                    margin-top: rem(17);
+
+                    .mini-news__title {
+                        line-height: rem(18);
+                    }
+                }
+            }
+        }
+
+        &__links {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            @include above($tablet) {
+                margin-top: rem(23);
+            }
+
+            @include above($tabletLandscape) {
+                margin-top: 0;
+            }
+        }
+
+        &_margin {
+            margin-top: rem(51);
+        }
+    }
+
+    .news-one-line {
+
+        &__row {
+            @include margin_y(#{rem(-7)});
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            @include above($tablet) {
+                @include margin_y(#{rem(-11)});
+            }
+
+            @include above($tabletLandscape) {
+                @include margin_y(#{rem(-7)});
+            }
+        }
+
+        &__block-rectangle {
+            @include margin_y(#{rem(7)});
+            width: rem(617);
+            height: rem(250);
+
+            @include below($mobile) {
+                width: rem(300);
+            }
+
+            @include above($tablet) {
+                @include margin_y(#{rem(11)});
+            }
+
+            @include above($tabletLandscape) {
+                @include margin_y(#{rem(7)});
+            }
+
+            .block-rectangle__link,
+            .block-rectangle__img {
+                height: inherit;
+            }
+        }
+
+        .block-rectangle__info {
+            bottom: rem(6);
+        }
+
+        &__block-square {
+            @include margin_y(#{rem(7)});
+            width: rem(300);
+
+            @include above($tablet) {
+                @include margin_y(#{rem(11)});
+            }
+
+            @include above($tabletLandscape) {
+                @include margin_y(#{rem(7)});
+            }
+
+            &::before,
+            .block-square__img,
+            .block-square__link {
+                width: rem(300);
+            }
+
+            .block-square__title {
+                letter-spacing: rem(-.2);
+            }
+
+            .block-square__info {
+                bottom: rem(8);
             }
         }
     }
 
-    &__block-rectangle {
+    .plots-week {
 
+        &__list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
     }
 
+    .per-day {
+
+        &__title {
+            line-height: rem(32);
+
+            border-bottom: none;
+        }
+
+        &__wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        &__wrapper_margin {
+            margin-top: rem(17);
+        }
+
+        .block-square {
+
+            .block-square__info {
+                width: rem(250);
+            }
+
+            .block-square__title {
+                margin-bottom: 0;
+
+                letter-spacing: rem(-.2);
+            }
+        }
+
+        &__block-square {
+
+            .block-square__info {
+                bottom: rem(19);
+            }
+
+            .block-square__title {
+                margin-bottom: rem(42);
+            }
+
+            .block-square__title-war {
+                position: relative;
+
+                display: inline-block;
+
+                font: #{rem(12)}/#{rem(24)} $stemReg;
+                color: $white;
+                text-transform: uppercase;
+
+                &::before {
+                    content: '';
+
+                    position: absolute;
+                    z-index: -1;
+                    top: 0;
+                    left: rem(-25);
+
+                    display: block;
+                    width: calc(100% + #{rem(48)});
+                    height: 100%;
+
+                    background-color: $war;
+                    transform: skew(-30deg);
+                }
+            }
+        }
+
+        &__block-rectangle {
+
+        }
+
+    }
 }

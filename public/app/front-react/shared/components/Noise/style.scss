@@ -12,6 +12,14 @@
         position: absolute;
         top: 4px;
         right: -100%;
+
+        @include above($tabletLandscape) {
+            right: -146%;
+        }
+
+        @include above($desktop) {
+            right: -100%;
+        }
     }
 
     &__wrapper {
@@ -84,6 +92,17 @@
 
         &_right-war {
 
+        }
+    }
+
+    &__news-detail {
+
+        @include above($tabletLandscape) {
+            margin-top: rem(56) !important;
+        }
+
+        @include above($desktop) {
+            margin-top: rem(30) !important;
         }
     }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Masonry from 'react-masonry-component'
+import MediaQuery from 'react-responsive'
 
 import Title from 'components/Title'
 import Tabs from 'components/Tabs'
@@ -80,7 +81,7 @@ class News extends Component {
 
         return (
             <div className="inner-wrapper">
-                <div className="news-top">
+                <div className="news-top news-top_all-news">
                     <div className="news-top__container container">
                         <div className="news-top__left left-col left-col left-col_width_inner">
                             <Title>
@@ -96,7 +97,12 @@ class News extends Component {
                                     <Block data={now[4]} className="news-one-line__block-square" />
                                 </div>
                             </div>
-                            <Banner className="news-top__banner" />
+                            <MediaQuery minDeviceWidth="1600px">
+                                <Banner className="news-top__banner" />
+                            </MediaQuery>
+                            <MediaQuery maxDeviceWidth="1035px">
+                                <BannerPreview className="news-top__banner-preview" />
+                            </MediaQuery>
                             <div className="per-day news-top__per-day">
                                 <p className="per-day__title section-title">
                                     Главное за последние сутки
@@ -107,11 +113,24 @@ class News extends Component {
                                     <Block data={today[2]} className="news-one-line__block-square" />
                                 </div>
                             </div>
+                            <MediaQuery maxDeviceWidth="1035px">
+                                <div className="news-top__links">
+                                    <Banner className="news-top__banner" />
+                                    <Subscribe className="news-top__subscribe" />
+                                </div>
+                            </MediaQuery>
+                            <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
+                                <BannerPreview className="news-top__banner-preview" />
+                            </MediaQuery>
                         </div>
-                        <Aside />
-                        <div className="news-top__middle middle-col">
-                            <BannerPreview className="news-top__banner-preview" />
-                        </div>
+                        <MediaQuery minDeviceWidth="1036px">
+                            <Aside />
+                        </MediaQuery>
+                        <MediaQuery minDeviceWidth="1600px">
+                            <div className="news-top__middle middle-col">
+                                <BannerPreview className="news-top__banner-preview" />
+                            </div>
+                        </MediaQuery>
                         <div className="news-top__left left-col left-col left-col_width_inner">
                             <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
                             {this.renderAdditionalData(data.slice(11))}
@@ -124,10 +143,14 @@ class News extends Component {
                                 : null
                             }
                         </div>
-                        <div className="news-top__right right-col">
-                            <Subscribe className="news-top__subscribe" />
-                            <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
-                        </div>
+                        <MediaQuery minDeviceWidth="1036px">
+                            <div className="news-top__right right-col">
+                                <MediaQuery minDeviceWidth="1600px">
+                                    <Subscribe className="news-top__subscribe" />
+                                </MediaQuery>
+                                <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
+                            </div>
+                        </MediaQuery>
                     </div>
                 </div>
             </div>
