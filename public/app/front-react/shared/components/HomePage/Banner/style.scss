@@ -9,6 +9,7 @@
         height: rem(99);
 
         text-align: center;
+        text-decoration: none;
 
         background-image: url(./where-view_mobile.jpg);
         background-position: center;
@@ -20,6 +21,10 @@
 
         @include above($desktop) {
             background-image: url(./where-view.png);
+        }
+
+        &:hover {
+            text-decoration: none;
         }
     }
 
