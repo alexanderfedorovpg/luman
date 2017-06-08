@@ -212,17 +212,10 @@
             fill: $gray-dirty;
             display: block;
             position: absolute;
-            top: 4px;
-            right: -140%;
+            top: rem(-10);
+            right: rem(20);
             background-color: $white;
 
-            @include above($tablet) {
-                right: -125%;
-            }
-
-            @include above($tabletLandscape) {
-                right: -140%;
-            }
         }
 
         &_right-block {
