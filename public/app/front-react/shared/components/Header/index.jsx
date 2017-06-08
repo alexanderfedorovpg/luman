@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
 import { withRouter } from 'react-router-dom';
@@ -15,8 +15,21 @@ import Alarm from './Alarm';
 
 import './style.scss';
 
-function Header({ war, warTitle, history }) {
-    function onSearch(query) {
+class Header extends PureComponent {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            searchOpen: false
+        }
+
+        this.onSearch = this.onSearch.bind(this);
+        this.setSearchOpen = this.setSearchOpen.bind(this);
+    }
+
+    onSearch(query) {
+        const { history } = this.props;
         const location = {
             pathname: '/search',
             search: `?query=${query}`,
@@ -25,39 +38,58 @@ function Header({ war, warTitle, history }) {
         history.push(location);
     }
 
-    return (
-        <header className={classNames('header', { header_war: war })}>
-            {war
-                ? <Alarm data={warTitle} />
-                : null
-            }
-            <div className="header__container container">
-                <div className="header__left-part">
-                    <div className="header__part-wrapper">
+    setSearchOpen(value) {
+        if (this.state.searchOpen !== value) {
+            this.setState({
+                searchOpen: value
+            })
+        }
+    }
+
+    render() {
+        const { war, warTitle } = this.props;
+
+        return (
+            <header
+                className={classNames('header', {
+                    header_war: war,
+                    'header_open-search': this.state.searchOpen
+                })}
+            >
+                {war
+                    ? <Alarm data={warTitle} />
+                    : null
+                }
+                <div className="header__container container">
+                    <div className="header__left-part">
+                        <div className="header__part-wrapper">
+                            <MediaQuery maxDeviceWidth="719px">
+                                <Burger />
+                            </MediaQuery>
+                            <Logo war={war} />
+                            <InfoIcon width="18px" height="18px" />
+                            <TopMenu />
+                            <MediaQuery minDeviceWidth="1600px">
+                                <Rates />
+                            </MediaQuery>
+                        </div>
+                    </div>
+                    <div className="header__right-part">
+                        <RSS />
                         <MediaQuery maxDeviceWidth="719px">
-                            <Burger />
+                            <InfoIcon width="18px" height="18px" />
                         </MediaQuery>
-                        <Logo war={war} />
-                        <InfoIcon width="18px" height="18px" />
-                        <TopMenu />
-                        <MediaQuery minDeviceWidth="1600px">
-                            <Rates />
-                        </MediaQuery>
+                        <Search
+                            open={this.state.searchOpen}
+                            setOpen={this.setSearchOpen}
+                            onSearch={this.onSearch}
+                            classNames={{ root: 'header__search' }}
+                        />
                     </div>
                 </div>
-                <div className="header__right-part">
-                    <RSS />
-                    <MediaQuery maxDeviceWidth="719px">
-                        <InfoIcon width="18px" height="18px" />
-                    </MediaQuery>
-                    <Search
-                        onSearch={onSearch}
-                        classNames={{ root: 'header__search' }}
-                    />
-                </div>
-            </div>
-        </header>
-    )
+            </header>
+        )
+    }
 }
 
 export default withRouter(Header);
