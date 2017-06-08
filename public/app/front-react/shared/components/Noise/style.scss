@@ -10,8 +10,9 @@
         fill: $gray-dirty;
         display: block;
         position: absolute;
-        top: rem(10);
+        top: rem(6);
         right: -100%;
+        background-color: $white;
 
         @include above($tabletLandscape) {
             right: -146%;
@@ -34,7 +35,7 @@
     }
 
     &__title {
-        position: absolute;
+        position: absolute !important;
         left: rem(-2);
         top: rem(-18);
         border-bottom: 0;

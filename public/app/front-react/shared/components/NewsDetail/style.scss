@@ -72,6 +72,8 @@
                     opacity: .5;
                 }
             }
+
+
         }
 
         &__left {
@@ -132,7 +134,7 @@
                     }
 
                     @include below($tabletMax) {
-                        width: 100%;
+                        width: rem(300);
                     }
                 }
 
@@ -159,25 +161,24 @@
                 &:after {
                     content: ' ';
                     display: block;
-                    /* width: 10000px; */
-                    /*width: 64.9375rem;*/
+                    width: rem(1338);
                     height: 100%;
                     position: absolute;
                     z-index: 0;
                     background: #eaecee;
-                    top: 0px;
-                    // left: -50.2%;
-                    //left: calc(55% - 897px);
-                    width: rem(1338);
+                    top: 0;
+
                     transform: translateX(-47.5%);
 
                     @include below($tabletLandscapeMax) {
-                        width: rem(887);
+                        width: rem(1021);
+                        transform: translateX(-54.5%);
                     }
 
                    @include below($mobile) {
-                        width: rem(534);
-                    }
+                        width: rem(571);
+                       transform: translateX(-47.5%);
+                   }
                 }
             }
         }
@@ -354,6 +355,13 @@
                 display: block;
             }
         }
+
+        .general-video {
+
+            @include below($mobile) {
+                margin-top: 0;
+            }
+        }
     }
 
     .news-preview {
@@ -457,21 +465,38 @@
             width: rem(783);
             padding-top: rem(12);
 
+            @include below($tabletLandscapeMax) {
+                width: rem(615);
+            }
+
+            @include below($tabletMax) {
+                width: rem(546);
+            }
+
+            @include below($mobile) {
+                width: rem(300);
+            }
+
             &.news-preview .news-preview {
 
                 &__img {
                     margin-top: rem(11);
                     margin-bottom: rem(17);
+
                     img {
                         width: rem(783);
                         height: rem(381);
 
-                        @include below($mobile) {
-                            width: rem(300);
+                        @include below($tabletLandscapeMax) {
+                            width: rem(615);
                         }
 
                         @include below($tabletMax) {
+                            width: rem(546);
+                        }
 
+                        @include below($mobile) {
+                            width: rem(300);
                         }
                     }
                 }
