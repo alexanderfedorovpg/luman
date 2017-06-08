@@ -46,11 +46,20 @@ export const Group = styled.div`
         margin-bottom: 20px;
     `}
 
-    ${ifProp('horizontal')`
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    `}
+    ${({ horizontal, align }) => {
+        if (!horizontal) return '';
+
+        const alignments = {
+            top: 'flex-start',
+            center: 'center'
+        };
+
+        return `
+            display: flex;
+            align-items: ${alignments[align]||'center'};
+            justify-content: flex-start;
+        `
+    }}
 `;
 
 export const Label = styled.label`

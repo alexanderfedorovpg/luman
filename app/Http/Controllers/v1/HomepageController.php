@@ -61,7 +61,7 @@ class HomepageController extends CmsController
      */
     public function update(Request $request)
     {
-        //var_dump($request->all()); exit();
+
         try {
 
 
@@ -81,7 +81,7 @@ class HomepageController extends CmsController
                 'war.*.top' => 'required|integer',
 
                 'from_air' => 'array',
-                'from_air.*.record_id' => 'required|integer|exists:air_records,id',
+                'from_air.*.news_id' => 'required|integer|exists:news,id',
                 'from_air.*.top' => 'required|integer',
 
                 'is_war_mode' => 'in:0,1',

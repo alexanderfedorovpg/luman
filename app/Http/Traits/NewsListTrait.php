@@ -69,5 +69,18 @@ trait NewsListTrait {
             $limit = News::count() - $start;
             $news->take($limit);
         }
+
+
+        $programId = $request->input('programId');
+        if ($programId) {
+            $news->where('program_id', '=', $programId);
+        }
+
+        if ($request->input('fullVideo') === 'true') {
+            $news->fullVideo();
+        } elseif ($request->input('fullVideo') === 'false') {
+            $news->fullVideo(false);
+        }
+
     }
 }

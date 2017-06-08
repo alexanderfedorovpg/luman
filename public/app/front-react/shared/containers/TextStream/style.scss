@@ -1,0 +1,59 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.text-stream {
+
+    .text-bg-gray__title {
+        margin-bottom: rem(22);
+        margin-left: rem(4);
+    }
+
+    .text-bg-gray--primary {
+        margin-top: rem(23);
+        .list-default {
+            margin-left: rem(5);
+            p {
+                font-family: $stemBold;
+                font-size: rem(16);
+                line-height: rem(16);
+                color: $enter;
+                letter-spacing: rem(-0.17);
+            }
+        }
+        .list-default__item {
+            &:before {
+                position: relative;
+                top: rem(-3);
+            }
+        }
+    }
+
+    .left-col {
+        width: 56.0625rem;
+    }
+
+    .inner-about__content {
+        padding-top: rem(3);
+        padding-left: 0;
+    }
+
+    .breadcrumb-named {
+        margin-right: rem(30);
+        margin-left: rem(85);
+    }
+
+    .more-goods {
+        padding-left: rem(85);
+        margin-top: rem(-11);
+        &:before,
+        &:after {
+            top: 57%;
+
+            width: calc( 100% - #{rem(115)} );
+        }
+        &__more-text {
+            padding-left: rem(1);
+        }
+    }
+
+}

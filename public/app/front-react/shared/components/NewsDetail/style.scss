@@ -1,6 +1,11 @@
 @import "~style/mixins";
 @import "~style/vars";
 
+<<<<<<< HEAD
+.inner-default {
+    // margin-top: rem(11);
+    h1 {
+=======
 .news-detail {
 
     .inner-about {
@@ -253,6 +258,7 @@
             color: $blue;
             text-decoration: none;
         }
+>>>>>>> b9116d2dcc658e3ab859e15423d3ebdc7b8c1294
 
         &__new-content {
             display: flex;

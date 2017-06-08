@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Http\Transformers\v1\NewsEditorTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Http\Transformers\v1\AirRecordTransformer;
-use App\Models\AirRecord;
+use App\Models\News;
 use App\Http\Traits\AirRecordFilter;
 use App\Helpers\FileHelper;
 use App\Filespot\Configuration;
@@ -42,7 +44,7 @@ class AirRecordController extends CmsController
      */
     public function index(Request $request)
     {
-        $records = $this->filter($request, AirRecord::query())->get();
+        $records = $this->filter($request, News::query())->AirRecords()->where('delete','=','0')->get();
 
         return $this->respond(
             $this->recordTransformer->transformCollection($records->toArray())
@@ -58,7 +60,7 @@ class AirRecordController extends CmsController
     public function show($id)
     {
         try {
-            $record = AirRecord::findOrFail($id);
+            $record = News::findOrFail($id);
             if ($record) {
                 return $this->respond(
                     $this->recordTransformer->transform($record->toArray())
@@ -77,23 +79,20 @@ class AirRecordController extends CmsController
      */
     public function create(Request $request)
     {
-        try {
-            $this->validate($request, AirRecord::$rules);
-        } catch (ValidationException $e) {
-            return $this->respondFail422x($e->response->original);
-        }
 
-        $record = new AirRecord($request->all());
-        if ($record->save()) {
-            return $this->respondCreated([
-                'success' => true,
-                'data' => [
-                    'id' => $record->id
-                ]
-            ]);
-        }
+        $this->validate($request, [
+            'program_id' => 'required|integer|exists:tv_programs,id',
+        ]);
 
-        return $this->respondFail500x();
+//        $request->request->add(['video_stream'=> $request->input('video')]);
+//        $request->request->add(['video_stream_preview'=>  $request->input('video_preview')]);
+        $editor_id =$request->input('editor_id');
+
+        $request->request->add( ['editor_id'=> $editor_id?$editor_id:Auth::id()] );
+
+        $news = new NewsListEditorController();
+        $result = $news->create($request);
+        return $this->respond($result->original);
     }
 
     /**
@@ -105,31 +104,22 @@ class AirRecordController extends CmsController
      */
     public function update(Request $request, $id)
     {
-        try {
-            $record = AirRecord::findOrFail($id);
 
-            $rules = [
-                'program_id' => 'required|integer|exists:tv_programs,id',
-                'title' => 'max:255',
-                'video' =>  'integer|exists:cdn_files,id',
-                'is_full_video' => 'boolean',
-                'publish_date' => 'date|date_format:Y-m-d H:i:s',
-                'theses' => 'string',
-                'is_published' => 'boolean',
-                'video_preview' =>  'integer|exists:cdn_files,id',
-            ];
 
-            $this->validate($request, $rules);
+        $this->validate($request, [
+            'program_id' => 'required|integer|exists:tv_programs,id',
+        ]);
 
-            return $this->respondCreated([
-                'success' => $record->update($request->all())
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return $this->respondNotFound('Air record not found');
-        } catch (ValidationException $e) {
-            return $this->respondFail422x($e->response->original);
-        }
+        $request->request->add(['id' => $id]);
+        $editor_id =$request->input('editor_id');
 
+        $request->request->add( ['editor_id'=> $editor_id?$editor_id:Auth::id()] );
+
+        $news = new NewsListEditorController();
+
+
+       $result = $news->edit($request);
+        return $this->respond($result->original);
     }
 
     /**
@@ -140,13 +130,11 @@ class AirRecordController extends CmsController
      */
     public function destroy($id)
     {
-        try {
-            $record = AirRecord::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return $this->respondNotFound('Air record not found');
-        }
 
-        return $this->respond(['success' => $record->delete()]);
+        $news = new NewsListEditorController();
+        $result=$news->delete($id);
+
+        return $this->respond($result->original);
     }
 
     /**
@@ -157,24 +145,10 @@ class AirRecordController extends CmsController
      */
     public function publish(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'records' => 'array',
-                'records.*' => 'integer|exists:air_records,id'
-            ]);
 
-            $records = $request->input('records');
-            if (!$records) {
-                $records = [];
-            }
-
-            return $this->respondCreated([
-                'success' => (bool)AirRecord::publish($records)
-            ]);
-
-        } catch (ValidationException $e) {
-            return $this->respondFail422x($e->response->original);
-        }
+        $news = new NewsListEditorController();
+        $result=$news->publish($request, $request->input('id'));
+        return $this->respond($result->original);
     }
 
     /**
@@ -213,24 +187,9 @@ class AirRecordController extends CmsController
 
     public function triggerVisibleConstructor(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'id' => 'required:exists:air_records,id',
-            ]);
-            $id = $request->input('id');
-
-            $rec = AirRecord::findOrfail($id);
-            $rec->to_constructor = !$rec->to_constructor;
-
-            if ($rec->save()) {
-                return $this->respond($rec->toArray());
-            } else {
-                return $this->respondNotFound();
-            }
-        } catch (\Exception $e) {
-            return $this->respondFail500x($e->getMessage());
-        }
-}
+        $news = new NewsListEditorController();
+        $news->triggerVisibleConstructor($request);
+    }
 
 
 }
