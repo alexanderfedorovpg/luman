@@ -5,17 +5,33 @@ import Helmet from 'react-helmet';
 import Video from 'components/Aside/Video';
 import Socials from 'components/Socials';
 import Timeline from 'components/Timeline';
+import Tabs from 'components/Tabs';
+import Group from 'components/Group';
+import Block from 'components/Block';
+import MiniNews from 'components/MiniNews';
 
 import {
     fetchOnline,
-    fetchComments
+    fetchComments,
 } from 'actions/news'
 
 import {
-    selectOnline
+    selectOnline,
+    makeSelectHomeNewsByCategory
 } from 'selectors/news'
 
 import './style.scss';
+
+const orders = [
+    {
+        id: 1,
+        name: 'Самые новые'
+    },
+    {
+        id: -1,
+        name: 'Самые первые'
+    }
+];
 
 // eslint-disable-next-line react/prefer-stateless-function
 class TextStream extends PureComponent {
@@ -24,12 +40,14 @@ class TextStream extends PureComponent {
         super(props);
 
         this.state = {
-            autoupdate: false
+            autoupdate: false,
+            order: 1
         }
 
         this.toggleAutoupdate = this.toggleAutoupdate.bind(this)
         this.queueUpdate = this.queueUpdate.bind(this)
         this.reloadComments = this.reloadComments.bind(this)
+        this.onOrderChange = this.onOrderChange.bind(this)
     }
 
     componentDidMount() {
@@ -43,7 +61,6 @@ class TextStream extends PureComponent {
     }
 
     queueUpdate() {
-        console.log(this)
         if (this.state.autoupdate) {
             this.reloadComments()
         }
@@ -73,8 +90,20 @@ class TextStream extends PureComponent {
         })
     }
 
+    onOrderChange(v) {
+        if (v !== this.state.order) {
+            this.setState({
+                order: v
+            })
+        }
+    }
+
     render() {
-        const { online } = this.props;
+        const { online, now, other } = this.props;
+
+        const comments = (online.comments||[]).sort((a, b) => (
+            this.state.order * (new Date(b.publish_date) - new Date(a.publish_date))
+        ))
 
         return (
             <div>
@@ -85,7 +114,7 @@ class TextStream extends PureComponent {
                 <div className="inner-about inner-wrapper inner-default text-stream">
                     <div className="inner-about__container container">
                         <div className="inner-about__left left-col left-col_position_relative">
-                            <div className="inner-about__title">
+                            <div className="inner-about__title text-stream__title">
                                 <h1>
                                     {online.title}
                                 </h1>
@@ -94,6 +123,9 @@ class TextStream extends PureComponent {
                                 </a>
                             </div>
                             <div className="text-bg-gray text-bg-gray--primary inner-about__text-bg-gray">
+                                {online.cover && (
+                                    <img src={online.cover.cover_url} style={{ display: 'none' }} />
+                                )}
                                 <h2 className>Главное</h2>
                                 <ul className="list-default list">
                                     {(online.theses||[]).map((v, i) => (
@@ -116,16 +148,11 @@ class TextStream extends PureComponent {
                                         <div className="breadcrumb-named__sort-by">
                                             Cначала
                                         </div>
-                                        <div className="breadcrumb">
-                                            <ul className="breadcrumb__ul">
-                                                <li className="breadcrumb__item breadcrumb__item breadcrumb__item_active">
-                                                    <a className="breadcrumb__link" href="javascript:void(0)">Самые новые</a>
-                                                </li>
-                                                <li className="breadcrumb__item">
-                                                    <a className="breadcrumb__link" href="javascript:void(0)">Самые первые</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <Tabs
+                                            data={orders}
+                                            active={this.state.order}
+                                            onChange={this.onOrderChange}
+                                        />
                                     </div>
                                     <div className="inner-about__new-content">
                                         <div className="checkbox-round">
@@ -139,11 +166,23 @@ class TextStream extends PureComponent {
                                         </div>
                                     </div>
                                 </div>
-                                <Timeline data={online.comments} />
+                                <Timeline data={comments} />
                             </div>
                         </div>
                         <div className="inner-about__right right-col">
                             <Video data={{}} />
+                            <Group title="Главные новости" margin>
+                                <Block data={now[0]} />
+                                {now.slice(1, 5).map(v => (
+                                    <MiniNews key={v.id} data={v} className="info-noize__mini-news" />
+                                ))}
+                            </Group>
+                            <Group title="Другие новости" margin>
+                                <Block data={other[0]} />
+                                {other.slice(1, 4).map(v => (
+                                    <MiniNews key={v.id} data={v} className="info-noize__mini-news" />
+                                ))}
+                            </Group>
                         </div>
                     </div>
                 </div>
@@ -152,8 +191,13 @@ class TextStream extends PureComponent {
     }
 }
 
+const selectHomeOther = makeSelectHomeNewsByCategory(3);
+const selectHomeNow = makeSelectHomeNewsByCategory(1);
+
 const mapStateToProps = state => ({
-    online: selectOnline(state)[0] || {}
+    online: selectOnline(state)[0] || {},
+    now: selectHomeNow(state).map(v => v.news),
+    other: selectHomeOther(state).map(v => v.news)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,6 +3,10 @@
 
 .text-stream {
 
+    &__title {
+
+    }
+
     .text-bg-gray__title {
         margin-bottom: rem(22);
         margin-left: rem(4);
@@ -56,4 +60,13 @@
         }
     }
 
+}
+
+.war .text-stream {
+
+    &__title h1,
+    .timeline__time,
+    .timeline__item:hover {
+        color: $war;
+    }
 }
