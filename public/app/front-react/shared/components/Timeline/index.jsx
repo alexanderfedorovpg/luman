@@ -9,12 +9,12 @@ function Timeline({ data }) {
 
     return (
         <div className="timeline">
-            {data && data.map(v => (
-                <div className="timeline__item" key={v.id}>
+            {data && data.map((v, i) => (
+                <div className="timeline__item" key={i}>
                     <div className="timeline__date">
                         <time className="timeline__time">
                             <FormattedTime
-                                value={Date.now()}
+                                value={v.publish_date}
                                 hour="2-digit"
                                 minute="2-digit"
                             />
@@ -22,7 +22,7 @@ function Timeline({ data }) {
                     </div>
                     <div className="timeline__cnt">
                         <p className="timeline__title">
-                            title
+                            {v.body}
                         </p>
                     </div>
                     <Socials />

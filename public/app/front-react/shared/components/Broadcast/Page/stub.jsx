@@ -17,7 +17,7 @@ class Broadcast extends Component {
                 <div className="news-top">
                     <div className="news-top__container container">
                         <div className="news-top__left left-col left-col left-col_width_inner">
-                            <Title className="news-top__margin-top-bottom">
+                            <Title className="news-top__margin-top-bottom" anchor="broadcast">
                                 Из эфира
                             </Title>
                             <img style={{height: '615px'}} src={this.props.stubImage}/>

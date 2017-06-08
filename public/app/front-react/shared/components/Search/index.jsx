@@ -17,7 +17,6 @@ class Search extends React.PureComponent {
         this.onInputFocus = this.onInputFocus.bind(this);
 
         this.state = {
-            open: false,
             query: '',
         };
     }
@@ -29,9 +28,9 @@ class Search extends React.PureComponent {
             this.props.onSearch(this.state.query);
 
             this.setState({
-                query: '',
                 open: false,
             });
+            (this.props.setOpen||(()=>{}))(false);
         }
     }
 
@@ -42,7 +41,7 @@ class Search extends React.PureComponent {
     }
 
     onSubmitClick(e) {
-        if (this.state.open) {
+        if (this.props.open) {
             return;
         }
 
@@ -51,21 +50,17 @@ class Search extends React.PureComponent {
     }
 
     onInputFocus() {
-        this.setState({
-            open: true,
-        });
+        this.props.setOpen(true);
     }
 
     handleClickOutside() {
-        this.setState({
-            open: false,
-        });
+        this.props.setOpen(false);
     }
 
     render() {
         const { classNames } = this.props;
         const rootClasses = cn(['search', classNames.root, {
-            search_open: this.state.open,
+            search_open: this.props.open,
         }]);
 
         return (
@@ -100,7 +95,9 @@ Search.defaultProps = {
 };
 
 Search.propTypes = {
+    open: PropTypes.bool,
     onSearch: PropTypes.func,
+    setSearch: PropTypes.func,
     classNames: PropTypes.shape({
         root: PropTypes.string,
     }),

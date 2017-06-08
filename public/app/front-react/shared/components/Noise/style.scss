@@ -10,16 +10,10 @@
         fill: $gray-dirty;
         display: block;
         position: absolute;
-        top: rem(10);
-        right: -100%;
+        top: rem(-10);
+        right: rem(25);
+        background-color: $white;
 
-        @include above($tabletLandscape) {
-            right: -146%;
-        }
-
-        @include above($desktop) {
-            right: -100%;
-        }
     }
 
     &__wrapper {
@@ -34,10 +28,10 @@
     }
 
     &__title {
-        position: absolute;
+        position: absolute !important;
         left: rem(-2);
         top: rem(-18);
-        border-bottom: 0;
+        border-bottom: 0 !important;
         background: $white;
         display: block;
         padding-left: rem(28);

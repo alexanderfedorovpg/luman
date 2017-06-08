@@ -236,10 +236,6 @@
     margin-top: rem(7);
     margin-bottom: 0;
 
-    @include below($mobile) {
-        height: auto;
-    }
-
     &.text-bg-gray .text-bg-gray {
 
         &__block-text {
@@ -354,4 +350,215 @@
     padding-bottom: rem(68);
     padding-left: rem(195);
     margin-bottom: rem(30);
+}
+
+
+
+.how-watch {
+    padding-bottom: rem(50);
+    padding-left: rem(82);
+    margin-top: rem(-10);
+    .left-col {
+        padding-right: rem(82);
+    }
+    h1 {
+        margin-top: rem(0);
+        margin-bottom: rem(30);
+        margin-left: rem(-83);
+    }
+    h2 {
+        padding-bottom: 0;
+        padding-left: rem(2);
+        margin-top: rem(19);
+        margin-bottom: rem(15);
+        margin-left: rem(-63);
+
+        font-family: $stemBold;
+        font-size: rem(24);
+        color: $enter;
+        letter-spacing: rem(-0.4);
+    }
+    p {
+        letter-spacing: rem(-0.35);
+    }
+    .text-cols {
+        margin-bottom: rem(32);
+        p {
+            line-height: rem(24);
+        }
+    }
+    &__item:not(:first-child) {
+        padding-top: rem(65)
+    }
+
+    &__list {
+        &__item {
+            margin-bottom: rem(22);
+            h4 {
+                font-family: $stemReg;
+                font-size: rem(14);
+                font-weight: 700;
+                color: $purple;
+            }
+            p {
+
+            }
+            a {
+                color: $blue;
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__distribution {
+        margin-top: rem(38);
+        .text-cols {
+            margin-top: rem(20);
+        }
+    }
+    &__hotel {
+        padding-right: rem(5);
+        margin-top: rem(41);
+        h4 {
+            margin-top: rem(19);
+
+            font-family: $stemBold;
+            font-size: rem(14);
+            color: $enter;
+            letter-spacing: rem(-0.15);
+            text-transform: uppercase;
+        }
+    }
+
+    &__contacts {
+        padding-right: rem(200);
+        a {
+            color: $blue;
+            text-decoration: none;
+        }
+    }
+
+    &__region {
+        margin-top: rem(50);
+        h2 {
+            margin-bottom: rem(16);
+        }
+    }
+
+    &__form {
+        position: relative;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding-top: rem(42);
+        padding-right: rem(37);
+        padding-bottom: rem(42);
+        padding-left: rem(29);
+
+        border: 1px solid #ccc;
+        .col-l,
+        .col-r {
+            width: 46%;
+        }
+        .input {
+            padding-bottom: rem(4);
+        }
+        .form-group {
+            margin-bottom: rem(31);
+        }
+        .btn-submit {
+            // display: none;
+            position: absolute;
+            right: rem(36);
+            bottom: rem(-33);
+
+            width: rem(155);
+            height: rem(75);
+            padding-bottom: rem(4);
+
+            font-family: $stemBold;
+            font-size: rem(16);
+            color: #e9ebed;
+            letter-spacing: rem(-0.3);
+            text-transform: uppercase;
+
+            border: 0;
+            background: url(/content/how/red-btn.png) no-repeat;
+            background-size: cover;
+            cursor: pointer;
+            outline: 0;
+        }
+    }
+
+}
+.text-cols {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    > p {
+        width: 48.05%;
+        padding-right: 4%;
+    }
+}
+
+.subtitle-border {
+    border-bottom: 1px solid #ccc;
+}
+
+
+.subtitle-order {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(15);
+    color: $enter;
+    font-family: $stemReg;
+    font-size: rem(14);
+    letter-spacing: -0.14px;
+    text-transform: uppercase;
+    .dig {
+        position: relative;
+        margin-right: rem(11);
+        // @include bg($subtitle-order);
+        // background-image: url('%=static=%svg-sprite/{{imgName}}');
+        background-image: url(/content/how/subtitle-order.png);
+        font-style: normal;
+        width: 36px;
+        height: 38px;
+        // background-size: 80px,76px;
+        background-repeat: no-repeat;
+        font-style: normal;
+        &:before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            content: attr(data-subtitle-order);
+            color: $white;
+            font-family: $stemBold;
+            font-size: 14px;
+            text-transform: uppercase;
+
+        }
+    }
+}
+
+
+.input {
+    outline: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #cccccc;
+    color: #50687b;
+    @include placeholder {
+        color: #50687b;
+    }
+    font-family: $stemReg;
+    font-size: rem(16);
+    line-height: rem(18);
+    letter-spacing: rem(-0.4);
+}
+.input-block {
+    width: 100%;
 }

@@ -6,6 +6,8 @@ import Route from 'react-router-dom/Route'
 import withRouter from 'react-router-dom/withRouter'
 import { IntlProvider } from 'react-intl'
 import Helmet from 'react-helmet'
+import ScrollableAnchor from 'react-scrollable-anchor'
+
 import { createStructuredSelector } from 'reselect'
 
 import { addLocaleData } from 'react-intl'
@@ -25,6 +27,7 @@ import AboutPage from 'containers/AboutPage'
 import HowPage from 'containers/HowPage'
 import SearchPage from 'containers/SearchPage'
 import TextStream from 'containers/TextStream'
+import InfoPage from 'containers/InfoPage'
 
 import { fetch as fetchRubrics } from 'actions/rubrics'
 import { fetch as fetchPrograms } from 'actions/programs'
@@ -45,11 +48,16 @@ class App extends Component {
     }
 
     render() {
-        const { warMode, warTitle, match } = this.props
+        const { warMode, warTitle, location } = this.props
+
+        const war = warMode && (
+            location.pathname === '/' ||
+            location.pathname.search('/text-stream') === 0
+        )
 
         return (
             <IntlProvider locale="ru">
-                <div className={classNames('root', { war: match.isExact && warMode })}>
+                <div className={classNames('root', { war })}>
                     <Helmet>
                         <html lang="ru" />
                         <meta charSet="utf-8" />
@@ -59,7 +67,7 @@ class App extends Component {
                         <meta name="HandheldFriendly" content="true" />
                     </Helmet>
 
-                    <Header war={match.isExact && warMode} warTitle={warTitle} />
+                    <Header war={war} warTitle={warTitle} />
 
                     <main>
                         <Switch>
@@ -82,6 +90,8 @@ class App extends Component {
                             <Route exact path="/text-stream" component={TextStream} />
 
                             <Route exact path="/programs" component={BroadcastProgramsPage} />
+
+                            <Route exact path="/info-page" component={InfoPage} />
 
                             <Route component={HomePage} />
                         </Switch>

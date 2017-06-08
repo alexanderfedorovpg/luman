@@ -11,7 +11,7 @@ function NowWar({ data, className }) {
 
     return (
         <div className={classNames('now-war', className)}>
-            <Link to={'#'} className="now-war__title">
+            <Link to="/text-stream" className="now-war__title">
                 {data.title}
             </Link>
             <div className="now-war__live now-war__live now-war__live_margin">
@@ -27,7 +27,7 @@ function NowWar({ data, className }) {
                     ))
                 }
             </div>
-            <Link to={'#'} className="now-war__translate-link">
+            <Link to="/text-stream" className="now-war__translate-link">
                 Следить за онлайн-трансляцией
             </Link>
         </div>

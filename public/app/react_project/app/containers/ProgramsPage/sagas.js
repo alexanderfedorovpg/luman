@@ -229,15 +229,9 @@ export function* publishRecords() {
         const records = yield select(getUnpublishedRecords);
         const ids = records.map((record) => record.id);
 
-        const response = yield call(api.publishRecords, { records: ids });
-
+        yield call(api.publishRecords, { records: ids });
         yield put(hidePreloader());
-
-        if (response.data.success) {
-            yield put(successPublishRecords(ids));
-        } else {
-            throw new Error(response.statusText);
-        }
+        yield put(successPublishRecords(ids));
     } catch (err) {
         console.error(err);
         yield put(failurePublishRecords(err));
