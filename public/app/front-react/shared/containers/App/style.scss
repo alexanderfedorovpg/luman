@@ -472,6 +472,7 @@ main {
 
         @include below($mobile) {
             flex-wrap: wrap;
+            height: auto;
             justify-content: flex-start;
             //flex-direction: column;
             padding-bottom: rem(50);

@@ -34,20 +34,20 @@ function Header({ war, warTitle, history }) {
             <div className="header__container container">
                 <div className="header__left-part">
                     <div className="header__part-wrapper">
-                        <MediaQuery maxDeviceWidth="719px">
+                        <MediaQuery maxWidth="719px">
                             <Burger />
                         </MediaQuery>
                         <Logo war={war} />
                         <InfoIcon width="18px" height="18px" />
                         <TopMenu />
-                        <MediaQuery minDeviceWidth="1600px">
+                        <MediaQuery minWidth="1600px">
                             <Rates />
                         </MediaQuery>
                     </div>
                 </div>
                 <div className="header__right-part">
                     <RSS />
-                    <MediaQuery maxDeviceWidth="719px">
+                    <MediaQuery maxWidth="719px">
                         <InfoIcon width="18px" height="18px" />
                     </MediaQuery>
                     <Search

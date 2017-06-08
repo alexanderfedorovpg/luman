@@ -20,6 +20,7 @@
         }
 
         @include above($tablet) {
+            width: rem(300);
             padding-top: rem(26);
         }
 

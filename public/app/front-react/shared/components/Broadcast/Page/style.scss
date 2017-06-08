@@ -148,7 +148,11 @@
         }
 
         &__subscribe {
-            margin-top: rem(42);
+            margin-top: 0;
+
+            @include below($tabletLandscapeMax) {
+                margin-top: rem(20);
+            }
 
             @include below($tabletMax) {
                 margin-top: 0;

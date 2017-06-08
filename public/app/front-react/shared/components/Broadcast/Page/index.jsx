@@ -97,7 +97,7 @@ class Broadcast extends Component {
                             <MediaQuery minWidth="1036px" maxWidth="1599px">
                                 <div className="news-one-line__row">
                                     <Banner className="news-top__banner" />
-                                    <Subscribe />
+                                    <Subscribe className="news-top__subscribe" />
                                 </div>
                             </MediaQuery>
                         </div>
@@ -117,7 +117,7 @@ class Broadcast extends Component {
                         <MediaQuery minWidth="1600px">
                             <div className="news-one-line__row">
                                 <Banner className="news-top__banner" />
-                                <Subscribe />
+                                <Subscribe className="news-top__subscribe" />
                             </div>
                         </MediaQuery>
                         <MediaQuery maxWidth="1035px">

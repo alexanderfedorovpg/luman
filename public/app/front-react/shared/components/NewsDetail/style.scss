@@ -76,6 +76,19 @@
 
         }
 
+        .text-bg-gray {
+
+            &--news {
+
+                .general-video {
+
+                    @include below($mobile) {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+
         &__left {
             margin-top: rem(-15);
         }
