@@ -524,6 +524,20 @@
         &.is-active {
             display: block;
         }
+
+        @include below($mobile) {
+            left: calc(100% - 1085px);
+            top: -57px;
+        }
+
+        @include below($tablet) {
+            left: rem(-57);
+            top: rem(-73);
+        }
+
+        @include below($tabletLandscape) {
+            left: rem(-59);
+        }
     }
 
     .scissors {

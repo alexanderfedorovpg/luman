@@ -66,7 +66,7 @@ class Broadcast extends Component {
                 <div className="news-top news-top_broadcast">
                     <div className="news-top__container container">
                         <div className="news-top__left left-col left-col left-col_width_inner">
-                            <Title>
+                            <Title anchor="broadcast">
                                 Из эфира
                             </Title>
                             <Tabs data={programs} active={program} onChange={setProgram} />

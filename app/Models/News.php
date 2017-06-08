@@ -180,7 +180,13 @@ class News extends Model
 
     public function scopeAirRecords($query)
     {
-        return $query->whereNotNull('program_id');
+        $query->whereHas('rubrics', function ($subQuery)   {
+            $subQuery->where('rubrics.name', 'like', "%из эфира%");
+        });
+
+        return $query;
+        //
+        //return $query->whereNotNull('program_id');
     }
 
 
@@ -255,7 +261,8 @@ class News extends Model
 
         $homepage = HomepageNews::all()->pluck('news_id')
             ->merge( HomepageWar::all()->pluck('news_id'))
-            ->merge( HomepageInfoNoise::all()->pluck('news_id'));
+            ->merge( HomepageInfoNoise::all()->pluck('news_id'))
+        ->merge( HomepageRecord::all()->pluck('news_id'));
 
 
         return $query->whereNotIn('id',$homepage);

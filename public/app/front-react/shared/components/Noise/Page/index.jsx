@@ -88,7 +88,7 @@ class Noise extends PureComponent {
                 <div className="noize-all">
                     <div className="noize-all__container container">
                         <div className="noize-all__left left-col left-col left-col_width_inner">
-                            <Title className="noize-all__title-block">
+                            <Title className="noize-all__title-block" anchor="noise">
                                 Инфошум
                             </Title>
                             <div className="noize-all__list">
