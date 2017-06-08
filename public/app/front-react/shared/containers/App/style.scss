@@ -24,17 +24,18 @@ body {
 }
 
 html {
+    font-size: 16px;
 
     @include below($mobile) {
-        font-size: 5vw;
+        //font-size: 5vw;
     }
 
     @include above($tablet) {
-        font-size: 2.222222222222222vw;
+        //font-size: 2.222222222222222vw;
     }
 
     @include above($tabletLandscape) {
-        font-size: 1.544401544401544vw;
+        //font-size: 1.544401544401544vw;
     }
 
     @include above($desktop) {
@@ -95,7 +96,7 @@ main {
     @include margin_x(auto);
 
     @include below($mobile) {
-        width: 100%;
+        width: rem(320);
         @include padding_x(#{rem(10)});
     }
 
@@ -423,11 +424,11 @@ main {
         }
 
         &__title {
-            margin-bottom: 24px;
+            margin-bottom: rem(24);
 
             font-family: $stemBold;
-            font-size: 24px;
-            line-height: 21px;
+            font-size: rem(24);
+            line-height: rem(21);
             color: $purple;
         }
 
@@ -445,7 +446,7 @@ main {
             padding-top: rem(8);
 
             font-family: $stemBold;
-            font-size: 16px;
+            font-size: rem(16);
             color: $white;
             text-decoration: none;
             text-transform: uppercase;
@@ -465,6 +466,7 @@ main {
         display: flex;
         align-items: flex-start;
         justify-content: flex-end;
+        flex-wrap: wrap;
         margin-top: rem(7);
         margin-bottom: 0;
 
@@ -501,7 +503,7 @@ main {
 
                 @include below($mobile) {
                     top: rem(19);
-                    width: 100%;
+                    width: rem(300);
                     padding-left: rem(38);
                     padding-top: rem(31);
                     text-align: right;
@@ -521,12 +523,12 @@ main {
                     left: 69.4%;
 
                     &:before {
-                        left: -31px;
+                        left: rem(-31);
                         transform: scale(-1, 1);
                     }
 
                     &:after {
-                        left: -31.7px;
+                        left: rem(-31.7);
                         transform: scale(-1, 1);
                         width: calc(100% + 1.94375rem);
                     }
@@ -550,7 +552,7 @@ main {
             margin-right: rem(24);
 
             @include below($mobile) {
-                width: 100%;
+                width: rem(300);
             }
 
             @include above($tablet) {
