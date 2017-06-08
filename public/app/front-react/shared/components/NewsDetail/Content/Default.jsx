@@ -25,7 +25,7 @@ function Content({ data, children }) {
             <div className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors' : data.top < 6})}>
                 { data.top < 6 &&
                     (
-                        <div className="scissors">
+                        <div className="scissors scissors_noize">
                             Инфошум
                             <div className="scissors__icon">
                             </div>

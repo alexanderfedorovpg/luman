@@ -311,6 +311,7 @@
 
             @include above($tabletLandscape) {
                 @include margin_y(#{rem(7)});
+                width: rem(613);
             }
 
             .block-rectangle__link,

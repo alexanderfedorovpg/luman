@@ -474,6 +474,14 @@
                     img {
                         width: rem(783);
                         height: rem(381);
+
+                        @include below($mobile) {
+                            width: rem(300);
+                        }
+
+                        @include below($tabletMax) {
+
+                        }
                     }
                 }
 
@@ -559,6 +567,13 @@
             height: 100%;
             margin-left: -0.0625rem;
             background-image: linear-gradient(110deg, transparent 0.9625rem, #a13461 1.025rem);
+        }
+
+        &_noize {
+
+            @include below($mobile) {
+                right: 0;
+            }
         }
 
     }

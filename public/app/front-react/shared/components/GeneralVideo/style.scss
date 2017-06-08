@@ -64,6 +64,8 @@
 
     &__img {
         width: rem(300);
+        object-fit: cover;
+        object-position: bottom;
 
         @include below($mobile) {
             margin-top: rem(15);
@@ -71,15 +73,16 @@
 
         @include above($tablet) {
             margin-top: rem(17);
+            height: rem(505);
         }
 
         @include above($tabletLandscape) {
             margin-top: 0;
+            height: rem(531);
         }
 
-        @include above($mobile) {
-            object-fit: cover;
-            object-position: top;
+        @include above($tabletLandscape) {
+            height: rem(593);
         }
     }
 
