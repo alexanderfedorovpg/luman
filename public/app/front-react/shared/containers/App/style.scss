@@ -241,6 +241,7 @@ main {
         }
     }
 }
+
 .inner-default {
 
     h1 {
@@ -400,6 +401,7 @@ main {
             position: absolute;
             right: rem(-32);
             bottom: rem(-22);
+            cursor: pointer;
 
             display: flex;
             align-items: center;
@@ -594,5 +596,328 @@ main {
         padding-bottom: rem(68);
         padding-left: rem(195);
         margin-bottom: rem(30);
+    }
+}
+
+.inner-about {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-between;
+        margin-bottom: rem(60);
+    }
+
+    &__enter-one {
+        margin-top: rem(31);
+    }
+
+    &__info-noize {
+        margin-top: rem(22);
+    }
+
+    &__enter-one--nopad .from-enter__info {
+        width: 100%;
+        padding-right: 6.7%;
+        padding-left: 0;
+    }
+
+    &__text-bg-gray {
+        position: relative;
+
+        margin-top: rem(20);
+        margin-bottom: rem(100);
+
+        transform: translateX(-17%);
+    }
+
+    &__left {
+        margin-top: rem(-15);
+    }
+
+    &__content {
+        padding-left: rem(82);
+        margin-top: rem(30);
+
+        color: $enter;
+
+        p {
+            margin-bottom: rem(21);
+
+            letter-spacing: rem(-.35);
+        }
+    }
+
+    &__figure-title {
+        padding-left: rem(20);
+        margin-top: rem(51);
+        margin-bottom: rem(15);
+
+        letter-spacing: rem(-.5);
+    }
+
+    &__box-preview {
+        width: rem(782);
+        height: rem(289);
+        margin-left: rem(81);
+
+        background-color: $box;
+
+        &_position {
+            position: relative;
+        }
+    }
+
+    &__box-img {
+        width: inherit;
+        height: inherit;
+    }
+
+    &__box-text {
+        width: rem(356);
+        height: rem(172);
+        padding: #{rem(50)} #{rem(48) #{rem(28)} #{rem(25)}};
+
+        font: #{rem(16)}/ #{rem(24)} $stemBold;
+        color: $white;
+        letter-spacing: rem(-.8);
+
+        background-image: url(/content/about/box-text.png);
+        background-position: center;
+        background-size: cover;
+
+        &_position {
+            position: absolute;
+            top: rem(-72);
+            right: rem(-36);
+        }
+    }
+
+    &__title {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        padding-right: rem(30);
+    }
+
+    &__copy {
+        margin-top: rem(22);
+
+        font-family: $stemReg;
+        font-size: rem(12);
+        color: $blue;
+        text-decoration: none;
+    }
+
+    &__new-content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: rem(5);
+        &__message {
+            margin-right: rem(22);
+
+            font-family: $stemReg;
+            font-size: rem(12);
+            line-height: rem(14);
+            color: $gray-date;
+        }
+    }
+
+    .inner-about__enter-one--no-category {
+        .from-enter__category-link {
+            display: none;
+        }
+    }
+
+    &_margin {
+        margin-top: rem(54);
+    }
+
+}
+
+.list-default {
+    &__item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: rem(17);
+        list-style: none;
+        &:before {
+            margin-right: rem(5);
+            content: '—';
+            color: #cc0000;
+            font-family: $stemReg;
+            font-size: rem(14);
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.radio-round,
+.checkbox-round {
+    position: relative;
+    input {
+      &[type='radio'], &[type='checkbox'] {
+        display: none;
+      }
+      &[type='radio'] + label, &[type='checkbox'] + label {
+        position: relative;
+        display: block;
+        padding-left: rem(24);
+        cursor: pointer;
+      }
+      &[type='checkbox'] + label:before, &[type='radio'] + label:before {
+        width: rem(20);
+        height: rem(20);
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      &[type='radio'],
+      &[type='checkbox'] {
+        + label:before {
+          content: '';
+          background-image: url('/general/round-unchecked.svg');
+          background-size: 100%;
+        }
+        &:checked + label:before {
+          content: '';
+          background-image: url('/general/round-checked.svg');
+          background-size: 100%;
+        }
+      }
+
+    }
+
+}
+
+.breadcrumb-named {
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #cccccc;
+
+    &__sort {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: rem(14);
+
+        &-by {
+            font-family: $stemReg;
+            font-size: rem(16);
+            color: $enter;
+        }
+    }
+
+    .breadcrumb {
+        margin-top: rem(3);
+        margin-left: rem(13);
+        &:after {
+            display: none;
+        }
+        &__ul {
+            justify-content: flex-start;
+            margin-top: 0;
+        }
+        &__item {
+            margin-right: rem(19);
+            &:before {
+                bottom: rem(0);
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        &__link {
+            line-height: 1;
+        }
+        &__item_active a {
+            color: $enter;
+        }
+    }
+
+}
+
+.breadcrumb {
+    position: relative;
+
+    &::after {
+        content: '';
+
+        position: absolute;
+        bottom: rem(6);
+        left: 0;
+
+        display: block;
+        width: 100%;
+        height: 1px;
+
+        background-color: $gray;
+    }
+
+    &__ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: rem(6);
+
+        font-size: 0;
+    }
+
+    &__item {
+        position: relative;
+
+        display: inline-block;
+
+        &::before {
+            content: '';
+
+            position: absolute;
+            z-index: 1;
+            bottom: rem(6);
+            left: 0;
+
+            width: 100%;
+            height: rem(4);
+
+            background-color: transparent;
+        }
+
+        &:hover {
+            color: $enter;
+
+            &::before {
+                background-color: $purple;
+            }
+
+            .breadcrumbs__link {
+                color: $enter;
+            }
+        }
+
+        &_active {
+            color: $enter;
+
+            &::before {
+                background-color: $purple;
+            }
+
+            .breadcrumb__link {
+                color: $enter;
+            }
+        }
+    }
+
+    &__link {
+        font: #{rem(16)} / #{rem(40)} $stemBold;
+        color: $crumb;
+        text-decoration: none;
     }
 }
