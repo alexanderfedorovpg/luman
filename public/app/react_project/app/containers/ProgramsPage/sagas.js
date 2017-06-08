@@ -109,7 +109,8 @@ export function* getRecords(action = { payload: {} }) {
             params.search = search;
         }
 
-        params.fullVideo = type === 'FULL';
+        // params.fullVideo = type === 'FULL';
+
         // Если нужно заменить текущие записи на новые, то offset равен 0
         // если добавить, то offset равен количеству уже загруженных записей
         params.offset = replace ? 0 : offset;
@@ -152,7 +153,7 @@ export function* postRecord({ payload }) {
 
         yield put(hidePreloader());
 
-        data.id = response.data.data.id;
+        data.id = response.data.id;
         data.video = {
             url: uploadedVideo.data.file.url,
             preview: uploadedPreview ? uploadedPreview.data.file.url : null,
