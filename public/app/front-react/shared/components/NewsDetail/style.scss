@@ -134,7 +134,7 @@
                     }
 
                     @include below($tabletMax) {
-                        width: rem(300);
+                        width: 100%;
                     }
                 }
 
@@ -512,11 +512,9 @@
 
     .inner-about-video_overlay {
         position: absolute;
-        left: calc(100% - 1085px);
-        top: -57px;
-        // background: rgba(0,0,0,.7);
+        left: calc(100% - #{rem(1085)});
+        top: rem(-57);
         background-color: rgba(36, 55, 70, 0.6);
-        /* background: #673AB7; */
         z-index: 4;
 
         display: none;
@@ -526,7 +524,7 @@
         }
 
         @include below($mobile) {
-            left: calc(100% - 1085px);
+            left: calc(100% - #{rem(1085)});
             top: -57px;
         }
 

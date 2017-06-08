@@ -11,8 +11,9 @@ function Noise({ data, className }) {
     return (
         <div className={classNames('info-noize', className)}>
             <p className="info-noize__title section-title">
-                Инфошум <ScissorsIcon />
+                Инфошум
             </p>
+            <ScissorsIcon />
             <div className="info-noize__wrapper">
                 {data.slice(0, 5).map(value => (
                     <MiniNews data={value} key={value.id} className="info-noize__mini-news" />

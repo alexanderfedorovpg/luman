@@ -47,7 +47,7 @@ function HomePage({
                 <div className="general-news__left">
                     <div className="general-news__left-wrapper">
                         <BigNews className="general-news__big-news" data={now[0]||{}} />
-                        <MediaQuery maxDeviceWidth="719px">
+                        <MediaQuery maxWidth="719px">
                             <Video
                                 data={firstVideo}
                                 playTitle="date"
@@ -56,7 +56,7 @@ function HomePage({
                                 className="general-news__general-video" />
                         </MediaQuery>
                         <Now data={now.slice(1, 5)} className="general-news__now" />
-                        <MediaQuery minDeviceWidth="720px" maxDeviceWidth="1035px">
+                        <MediaQuery minWidth="720px" maxWidth="1035px">
                             <Video
                                 data={firstVideo}
                                 playTitle="date"
@@ -70,22 +70,22 @@ function HomePage({
                             data={todayNews}
                             className="general-news__per-day" />
 
-                        <MediaQuery minDeviceWidth="1600px">
+                        <MediaQuery minWidth="1600px">
                             {low => (
-                                <MediaQuery maxDeviceWidth="1035px">
+                                <MediaQuery maxWidth="1035px">
                                     {high => (low || high) &&
                                         <Noise className="general-news__info-noize" data={noise} />
                                     }
                                 </MediaQuery>
                             )}
                         </MediaQuery>
-                        <MediaQuery minDeviceWidth="720px" maxDeviceWidth="1035px">
+                        <MediaQuery minWidth="720px" maxWidth="1035px">
                             <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
                         </MediaQuery>
                     </div>
                 </div>
                 <div className="general-news__right right-col">
-                    <MediaQuery minDeviceWidth="1036px">
+                    <MediaQuery minWidth="1036px">
                         <Video
                             data={firstVideo}
                             playTitle="date"
@@ -94,14 +94,14 @@ function HomePage({
                             className="general-news__general-video" />
                     </MediaQuery>
 
-                    <MediaQuery minDeviceWidth="1036px" maxDeviceWidth="1599px">
+                    <MediaQuery minWidth="1036px" maxWidth="1599px">
                         <Noise className="general-news__info-noize" data={noise} />
                         <Banner className="general-news__banner" />
                     </MediaQuery>
 
-                    <MediaQuery minDeviceWidth="1036px">
+                    <MediaQuery minWidth="1036px">
                         {low => (
-                            <MediaQuery maxDeviceWidth="719px">
+                            <MediaQuery maxWidth="719px">
                                 {high => (low || high) &&
                                     <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
                                 }
@@ -109,15 +109,15 @@ function HomePage({
                         )}
                     </MediaQuery>
                 </div>
-                <MediaQuery maxDeviceWidth="1035px" minDeviceWidth="720px">
+                <MediaQuery maxWidth="1035px" minWidth="720px">
                     <div className="general-news__middle">
                         <BannerPreview className="general-news__banner-preview" />
                     </div>
                 </MediaQuery>
                 <div className="general-news__left general-news__left_more">
-                    <MediaQuery minDeviceWidth="1600px">
+                    <MediaQuery minWidth="1600px">
                         {low => (
-                            <MediaQuery minDeviceWidth="720px" maxDeviceWidth="1035px">
+                            <MediaQuery minWidth="720px" maxWidth="1035px">
                                 {high => (low || high)
                                     ? <div className="general-news__left-wrapper">
                                         <Banner className="general-news__banner" />
@@ -130,12 +130,12 @@ function HomePage({
                     <RandomNews className="general-news__random-news" data={randomNews} />
                 </div>
                 <div className="general-news__right general-news__right_more">
-                    <MediaQuery minDeviceWidth="1600px">
+                    <MediaQuery minWidth="1600px">
                         <Subscribe className="general-news__subscribe"/>
                     </MediaQuery>
                     <MoreNews className="general-news__more-news" data={moreNews} />
                 </div>
-                <MediaQuery minDeviceWidth="1600px">
+                <MediaQuery minWidth="1600px">
                     <div className="general-news__middle">
                         <BannerPreview className="general-news__banner-preview" />
                     </div>
