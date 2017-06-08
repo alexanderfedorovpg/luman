@@ -10,7 +10,7 @@
         fill: $gray-dirty;
         display: block;
         position: absolute;
-        top: 4px;
+        top: rem(10);
         right: -100%;
 
         @include above($tabletLandscape) {
@@ -35,8 +35,8 @@
 
     &__title {
         position: absolute;
-        left: -2px;
-        top: -15px;
+        left: rem(-2);
+        top: rem(-18);
         border-bottom: 0;
         background: $white;
         display: block;
@@ -96,6 +96,13 @@
     }
 
     &__news-detail {
+
+        .info-noize__title {
+            position: absolute;
+            padding-left: rem(24);
+            line-height: rem(30);
+            border-bottom: 0;
+        }
 
         @include above($tabletLandscape) {
             margin-top: rem(56) !important;

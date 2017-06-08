@@ -148,7 +148,7 @@
     height: rem(250);
 
     @include below($mobile) {
-        width: 100%;
+        width: rem(300);
     }
 
     &::before {

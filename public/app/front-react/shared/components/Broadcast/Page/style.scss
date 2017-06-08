@@ -150,6 +150,10 @@
         &__subscribe {
             margin-top: rem(42);
 
+            @include below($tabletMax) {
+                margin-top: 0;
+            }
+
             @include below($mobile) {
                 margin-top: rem(20);
             }
@@ -385,7 +389,14 @@
             }
 
             .list-video__item {
-                width: 50%;
+
+                @include below($tabletLandscapeMax) {
+                    width: 100%;
+                }
+
+                @include below($tabletMax) {
+                    width: 50%;
+                }
 
                 @include below($mobile) {
                     width: 100%;

@@ -74,7 +74,7 @@
             margin-top: rem(-9);
 
             @include below($mobile) {
-                width: 100%;
+                width: rem(300);
             }
 
             @include above($tabletLandscape) {
@@ -264,6 +264,10 @@
             justify-content: space-between;
             flex-wrap: wrap;
 
+            @include below($mobile) {
+                width: rem(300);
+            }
+
             @include above($tablet) {
                 margin-top: rem(23);
             }
@@ -311,6 +315,7 @@
 
             @include above($tabletLandscape) {
                 @include margin_y(#{rem(7)});
+                width: rem(613);
             }
 
             .block-rectangle__link,
