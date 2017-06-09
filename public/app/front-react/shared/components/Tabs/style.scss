@@ -85,6 +85,7 @@
 
         @include below($tabletLandscapeMax) {
             line-height: rem(11);
+            margin-right: rem(5);
         }
 
         &_active {
@@ -155,7 +156,6 @@
         &_header .breadcrumb__link {
             @include below($tabletLandscapeMax) {
                 line-height: rem(33);
-                margin-right: rem(5);
             }
         }
 
