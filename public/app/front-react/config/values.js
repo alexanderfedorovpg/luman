@@ -79,7 +79,7 @@ const values = {
     connectSrc: [],
     defaultSrc: [],
     fontSrc: ['data:', 'https://fonts.googleapis.com/css', 'https://fonts.gstatic.com'],
-    imgSrc: ['*'],
+    imgSrc: ['data:', '*'],
     mediaSrc: ['*'],
     manifestSrc: [],
     objectSrc: [],
@@ -87,10 +87,17 @@ const values = {
       // Allow scripts from https://cdn.polyfill.io so that we can import the
       // polyfill.
       'https://cdn.polyfill.io',
+      'http://connect.facebook.net',
+      'https://platform.twitter.com',
+      'http://platform.twitter.com',
+      'http://platform.instagram.com',
+      'https://api.instagram.com',
+      'https://cdn.syndication.twimg.com',
     ],
     styleSrc: [
       'https://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css',
       'https://fonts.googleapis.com/css',
+      'http://platform.twitter.com',
     ],
   },
 

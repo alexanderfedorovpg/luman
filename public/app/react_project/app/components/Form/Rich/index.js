@@ -1,24 +1,33 @@
-import React, { PureComponent } from 'react'
+import React, {PureComponent} from 'react'
 import styled from 'styled-components'
-import ReactQuill, { Quill } from 'react-quill'
+import ReactQuill, {Quill} from 'react-quill'
 import Delta from 'quill-delta'
 
+import {isUrl} from 'utils/uri'
 import ContentModal from 'components/Modal/ContentModal'
-import ImageUploadForm from './Form'
-import extendImageBlot from './imageBlot'
-import extendHtmlBlot from './htmlBlot'
-import FormAddHtml from './FormAddHtml'
-import TweetEmbed from 'react-tweet-embed'
 
 import * as api from 'api'
-
 import 'quill/dist/quill.snow.css'
 
+import ImageUploadForm from './forms/ImageUploadForm'
+import AddEmbedForm from './forms/AddEmbedForm'
+import AddHTMLForm from './forms/AddHTMLForm'
+
+import addEmbed from './widgets/AddEmbed'
+
+import extendImageBlot from './blots/imageBlot'
+import extendTwitterBlot from './blots/TwitterBlot'
+import extendInstagramBlot from './blots/InstagramBlot'
+import extendFacebookBlot from './blots/FacebookBlot'
+import extendHtmlBlot from './blots/HtmlBlot'
 /**
  * некий валидатор, который использует редактор, чтобы распознать html,
  * который в него закинули и применить к нему особые инструкции
  */
 extendImageBlot(Quill);
+extendTwitterBlot(Quill);
+extendInstagramBlot(Quill);
+extendFacebookBlot(Quill);
 extendHtmlBlot(Quill);
 
 const Root = styled.div`
@@ -38,6 +47,12 @@ const Root = styled.div`
         content: "—";
     }
     
+    .ql-embed:after {
+        content: "embed";
+    }
+    .ql-html {
+        margin-left:50px;
+    }
     .ql-html:after {
         content: "html";
     }
@@ -50,38 +65,24 @@ class Rich extends PureComponent {
 
         this.state = {
             modalImageOpen: false,
-            modalHtmlOpen:  false
+            modalAddHTML: false,
+            modalAddEmbed:  false
         }
 
         this.openImageModal = ::this.openImageModal
         this.closeImageModal = ::this.closeImageModal
-
-        this.openAddHtmlModal = ::this.openAddHtmlModal
-        this.closeAddHtmlModal = ::this.closeAddHtmlModal
-
         this.submitHandlerImage = ::this.submitHandlerImage
-        this.submitHandlerHtml = ::this.submitHandlerHtml
-
         this.toolbarImageHandler = ::this.toolbarImageHandler
         this.toolbarLaquoHandler = ::this.toolbarLaquoHandler
         this.toolbarRaquoHandler = ::this.toolbarRaquoHandler
         this.toolbarEmDashHandler = ::this.toolbarEmDashHandler
-        this.toolbarAddHtmlHandler = ::this.toolbarAddHtmlHandler
 
-        this.customMatcherFigure = ::this.customMatcherFigure
     }
 
     openImageModal() {
         this.setState({
             ...this.state,
             modalImageOpen: true
-        })
-    }
-
-    openAddHtmlModal() {
-        this.setState({
-            ...this.state,
-            modalHtmlOpen: true
         })
     }
 
@@ -122,13 +123,6 @@ class Rich extends PureComponent {
         }
     }
 
-    closeAddHtmlModal() {
-        this.setState({
-            ...this.state,
-            modalHtmlOpen: false
-        })
-    }
-
     closeImageModal() {
         this.setState({
             ...this.state,
@@ -140,9 +134,6 @@ class Rich extends PureComponent {
         this.openImageModal();
     }
 
-    toolbarAddHtmlHandler() {
-        this.openAddHtmlModal();
-    }
 
     uploadImage(image, data, cb) {
         api.uploadFile(
@@ -181,111 +172,121 @@ class Rich extends PureComponent {
             }
         )
     }
-    submitHandlerHtml(data) {
-        const values = data.toJS()
-        this.addHtml(
-            values,
-            () => {
-                this.closeImageModal()
-            }
-        )
+
+    openAddEmbedModal = () => this.setState({ ...this.state, modalAddEmbed: true})
+    closeAddEmbedModal = () => this.setState({ ...this.state, modalAddEmbed: false})
+
+    openAddHTMLModal = () => this.setState({ ...this.state, modalAddHTML: true})
+    closeAddHTMLModal = () => this.setState({ ...this.state, modalAddHTML: false})
+
+    /**
+     * вызовется при добавлении юрл
+     * @param data
+     */
+    submitHandlerAddEmbedModal = (data) => {
+        let quill = this.quill.getEditor();
+        let range = quill.getSelection(true).index;
+        let url = data.toJS().url;
+        addEmbed(quill, url, range, this.closeAddEmbedModal);
     }
-    addHtml(data, cb) {
-        console.log('addHtml', data);
-        let html = data.html;
-        let editor = this.quill.getEditor();
-        let range = editor.getSelection(true);
-        editor.updateContents(
+
+    /**
+     * вызовется при добавлении html
+     * @param data
+     */
+    submitHandlerAddHTMLModal = (data) => {
+        data = data.toJS();
+        let quill = this.quill.getEditor();
+        let range = quill.getSelection(true).index;
+        quill.updateContents(
             new Delta()
-                .retain(range.index)
-                .delete(range.length)
-                .insert({html: html}),
-            'user'
+                .retain(range)
+                .insert({html: data.html}),
+            'api'
         );
-        //editor.clipboard.dangerouslyPasteHTML(range.index, html)
-        cb();
+        this.closeAddHTMLModal();
     }
-    customMatcherFigure(data,value,value2){
-        console.log('data',data);
-        console.log('value',value);
-        this.quill.insertEmbed(10, 'html', 'http://quilljs.com/images/cloud.png');
-        //return value;
-    }
+
     render() {
         return (
             <Root>
+                <div id="fb-root"></div>
                 <div id="toolbar">
                     <div className="ql-formats">
                         <select className="ql-header">
-                            <option value="1" />
-                            <option value="2" />
-                            <option value="3" />
-                            <option value="4" />
-                            <option value="5" />
-                            <option value="6" />
+                            <option value="1"/>
+                            <option value="2"/>
+                            <option value="3"/>
+                            <option value="4"/>
+                            <option value="5"/>
+                            <option value="6"/>
                             <option />
                         </select>
-                        <button className="ql-bold" />
-                        <button className="ql-italic" />
-                        <button className="ql-underline" />
-                        <button className="ql-link" />
+                        <button className="ql-bold"/>
+                        <button className="ql-italic"/>
+                        <button className="ql-underline"/>
+                        <button className="ql-link"/>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-list" value="ordered" />
-                        <button className="ql-list" value="bullet" />
+                        <button className="ql-list" value="ordered"/>
+                        <button className="ql-list" value="bullet"/>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-image" />
-                        <button className="ql-video" />
+                        <button className="ql-image"/>
+                        <button className="ql-video"/>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-code-block" />
-                        <button className="ql-blockquote" />
+                        <button className="ql-code-block"/>
+                        <button className="ql-blockquote"/>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-clean" />
+                        <button className="ql-clean"/>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-laquo" />
-                        <button className="ql-raquo" />
-                        <button className="ql-aquos" title="Ctrl + Shift + 2" />
-                        <button className="ql-em-dash" />
+                        <button className="ql-laquo"/>
+                        <button className="ql-raquo"/>
+                        <button className="ql-aquos" title="Ctrl + Shift + 2"/>
+                        <button className="ql-em-dash"/>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-html" />
+                        <button className="ql-embed"/>
+                        <button className="ql-html"/>
                     </div>
                 </div>
                 <ReactQuill
-                    ref={(el) => { this.quill = el }}
+                    ref={(el) => {
+                        this.quill = el
+                    }}
                     {...this.props}
                     modules={{
-                        toolbar: {
+                        toolbar:  {
                             container: '#toolbar',
-                            handlers: {
-                                image: this.toolbarImageHandler,
-                                laquo: this.toolbarLaquoHandler,
-                                raquo: this.toolbarRaquoHandler,
-                                aquos: this.toolbarAquosHandler,
+                            handlers:  {
+                                image:     this.toolbarImageHandler,
+                                laquo:     this.toolbarLaquoHandler,
+                                raquo:     this.toolbarRaquoHandler,
+                                aquos:     this.toolbarAquosHandler,
                                 'em-dash': this.toolbarEmDashHandler,
-                                html:      this.toolbarAddHtmlHandler,
+                                embed:     this.openAddEmbedModal,
+                                html:     this.openAddHTMLModal,
                             }
                         },
                         keyboard: {
                             bindings: {
-                                insertAquos: {
-                                    key: '2',
+                                insertAquos:  {
+                                    key:      '2',
                                     shiftKey: true,
                                     shortKey: true,
-                                    handler: this.toolbarAquosHandler
+                                    handler:  this.toolbarAquosHandler
                                 },
                                 insertEmDash: {
-                                    key: '-',
+                                    key:      '-',
                                     shiftKey: true,
-                                    handler: this.toolbarEmDashHandler
+                                    handler:  this.toolbarEmDashHandler
                                 },
                             }
                         }
-                    }} />
+                    }}/>
 
                 <ContentModal
                     isOpen={this.state.modalImageOpen}
@@ -295,11 +296,18 @@ class Rich extends PureComponent {
                     <ImageUploadForm onSubmit={this.submitHandlerImage}/>
                 </ContentModal>
                 <ContentModal
-                    isOpen={this.state.modalHtmlOpen}
-                    onRequestClose={this.closeAddHtmlModal}
-                    title="Добавить html"
-                    contentLabel="Добавьте html">
-                    <FormAddHtml onSubmit={this.submitHandlerHtml}/>
+                    isOpen={this.state.modalAddEmbed}
+                    onRequestClose={this.closeAddEmbedModal}
+                    title="Вставьте url"
+                    contentLabel="Вставьте url">
+                    <AddEmbedForm onSubmit={this.submitHandlerAddEmbedModal}/>
+                </ContentModal>
+                <ContentModal
+                    isOpen={this.state.modalAddHTML}
+                    onRequestClose={this.closeAddHTMLModal}
+                    title="Вставьте html"
+                    contentLabel="Вставьте html">
+                    <AddHTMLForm onSubmit={this.submitHandlerAddHTMLModal}/>
                 </ContentModal>
             </Root>
         )

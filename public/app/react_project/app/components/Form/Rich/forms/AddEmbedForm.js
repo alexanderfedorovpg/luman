@@ -1,12 +1,12 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
 
-import Textarea from 'components/Form/Textarea'
+import Input from 'components/Form/Input'
 import Button from 'components/Button/TypedBtn'
 
-const TextareaRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
+const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
     <div>
-        <Textarea
+        <Input
             {...props}
             success={touched && valid && !props.disabled}
             error={touched && invalid && !props.disabled}
@@ -20,15 +20,15 @@ const TextareaRedux = ({ input, meta: { touched, invalid, valid, error }, showEr
 );
 
 
-const AddHtmlForm = ({ handleSubmit, reset, valid }) => {
+const AddEmbedForm = ({ handleSubmit, reset, valid }) => {
 
     return (
         <div>
             <Field
-                name="html"
+                name="url"
                 block
-                placeholder="html"
-                component={TextareaRedux} />
+                placeholder="url"
+                component={InputRedux} />
             <Button
                 onClick={() => {
                     handleSubmit();
@@ -44,13 +44,13 @@ const AddHtmlForm = ({ handleSubmit, reset, valid }) => {
 }
 
 export default reduxForm({
-    form: 'richEditorAddHtmlForm',
+    form: 'richEditorAddEmbedForm',
     validate(data) {
         let errors = {};
         const values = data.toJS();
-        if (!values.html) {
-            errors.html = 'Вставьте html';
+        if (!values.url) {
+            errors.url = 'Вставьте url';
         }
         return errors
     }
-})(AddHtmlForm)
+})(AddEmbedForm)
