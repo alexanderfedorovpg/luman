@@ -488,10 +488,6 @@ main {
             margin-top: rem(14);
         }
 
-        @include above($tabletLandscape) {
-            min-height: rem(673);
-        }
-
         &.text-bg-gray .text-bg-gray {
 
             &__block-text {
