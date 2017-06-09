@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
 
 import Input from 'components/Form/Input'
-import ImageLoader from 'components/Form/ImageLoader'
+import FileInput from 'components/Form/FileInput'
 import Button from 'components/Button/TypedBtn'
 
 const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
@@ -20,8 +20,8 @@ const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError
     </div>
 );
 
-const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
-    <ImageLoader
+const FileInputRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
+    <FileInput
         {...props}
         success={touched && valid && !props.disabled}
         error={touched && invalid && !props.disabled}
@@ -34,10 +34,12 @@ function UploadForm({ handleSubmit, reset }) {
     return (
         <div>
             <Field
-                name="image"
-                accept="image/*"
-                icon
-                component={ImageLoaderRedux} />
+                block
+                name="video"
+                accept="video/*"
+                icon="arrow"
+                placeholder="Выберите видео"
+                component={FileInputRedux} />
             <Field
                 name="title"
                 block
@@ -55,8 +57,9 @@ function UploadForm({ handleSubmit, reset }) {
                 component={InputRedux} />
             <Button
                 onClick={() => {
-                    handleSubmit();
-                    reset();
+                    if (!handleSubmit()) {
+                        reset();
+                    }
                 }}
                 block success
                 buttonType="upload">
@@ -68,15 +71,15 @@ function UploadForm({ handleSubmit, reset }) {
 }
 
 export default reduxForm({
-    form: 'richEditorImageUploadForm',
+    form: 'richEditorVideoUploadForm',
     validate(data) {
         let errors = {};
         const values = data.toJS();
 
-        if (!values.image) {
-            errors.image = 'Выберите изображение для загрузки';
+        if (!values.video) {
+            errors.video = 'Выберите видео для загрузки';
         }
 
         return errors
-    }
+    },
 })(UploadForm)
