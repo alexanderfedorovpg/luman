@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Helmet from 'react-helmet'
-import { submit, getFormValues, isValid } from 'redux-form/immutable'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
+import { submit, getFormValues, isValid } from 'redux-form/immutable';
 
-import HeaderEditor from 'components/Editor/Header.editor'
-import HeaderSupervisor from 'components/Editor/Header.supervisor'
-import Content from 'components/Editor/Content'
+import HeaderEditor from 'components/Editor/Header.editor';
+import HeaderSupervisor from 'components/Editor/Header.supervisor';
+import Content from 'components/Editor/Content';
 
 import {
     clearArticle,
@@ -15,23 +15,23 @@ import {
     toFixArticle,
     publishArticle,
     delegateArticle,
-    rejectArticle
-} from './actions'
+    rejectArticle,
+} from './actions';
 
-import { loadEditors } from 'containers/App/actions'
+import { loadEditors } from 'containers/App/actions';
 
 import {
-    selectArticle
-} from './selectors'
-import { selectRubrics } from 'containers/App/selectors'
+    selectArticle,
+} from './selectors';
+import { selectRubrics, makeGetProgramsAsOptions } from 'containers/App/selectors';
 
 import {
     selectEditors,
     selectCurrentUser,
-    selectMenuExpandedStatus
-} from 'containers/App/selectors'
+    selectMenuExpandedStatus,
+} from 'containers/App/selectors';
 
-import { checkPermissons } from 'utils/permissons'
+import { checkPermissons } from 'utils/permissons';
 
 class EditorPage extends Component {
 
@@ -39,59 +39,57 @@ class EditorPage extends Component {
         super(props);
 
         this.state = {
-            preview: false
-        }
+            preview: false,
+        };
 
-        this.openPreview = ::this.openPreview
-        this.closePreview = ::this.closePreview
-        this.submitHandler = ::this.submitHandler
+        this.openPreview = ::this.openPreview;
+        this.closePreview = ::this.closePreview;
+        this.submitHandler = ::this.submitHandler;
     }
 
     componentWillReceiveProps(nextProps) {
-
         if (this.props.params.id !== nextProps.params.id) {
-
-            nextProps.clearArticle()
+            nextProps.clearArticle();
 
             if (nextProps.params.id) {
-                nextProps.loadArticle(nextProps.params.id)
+                nextProps.loadArticle(nextProps.params.id);
             }
         }
     }
 
     componentDidMount() {
-        const { article, params, loadArticle, clearArticle } = this.props
+        const { article, params, loadArticle, clearArticle } = this.props;
 
         // если имеющаяся в данный момент новость не та, которую мы
         // хотим видеть - убираем ее из состояния
         if (article && (article.id !== params.id)) {
-            clearArticle()
+            clearArticle();
         }
 
         if (params.id) {
-            loadArticle(params.id)
+            loadArticle(params.id);
         }
     }
 
     openPreview() {
-        if (this.state.preview) return
+        if (this.state.preview) return;
 
         this.setState({
-            preview: true
-        })
+            preview: true,
+        });
     }
 
     closePreview() {
-        if (!this.state.preview) return
+        if (!this.state.preview) return;
 
         this.setState({
-            preview: false
-        })
+            preview: false,
+        });
     }
 
     submitHandler(cb) {
-        return data => {
-            const values = data.toJS()
+        return (data) => {
+            const values = data.toJS();
             const { article, rubrics } = this.props;
 
             cb({
@@ -99,12 +97,12 @@ class EditorPage extends Component {
                 top: values.top,
                 title: values.title,
                 sub_title: values.subtitle,
-                editor_id: (values.editor||this.props.user).id,
+                editor_id: (values.editor || this.props.user).id,
                 rubrics: values.rubrics,
                 keywords: values.keywords.trim().replace(/ +/g, ','),
                 theses: values.theses,
                 image_main: typeof values.image_main === 'string'
-                    ? (article.image_main||{}).id
+                    ? (article.image_main || {}).id
                     : values.image_main[0],
                 image_main_info: {
                     object_name: values.image_main_title,
@@ -112,7 +110,7 @@ class EditorPage extends Component {
                     object_source: values.image_main_source,
                 },
                 image_preview: typeof values.image_preview === 'string'
-                    ? (article.image_preview||{}).id
+                    ? (article.image_preview || {}).id
                     : values.image_preview[0],
                 image_preview_info: {
                     object_name: values.image_preview_title,
@@ -120,53 +118,56 @@ class EditorPage extends Component {
                     object_source: values.image_preview_source,
                 },
                 body: values.body,
-                video_stream: values.video.id || (values.video.file||[])[0],
-                video_stream_preview: values.videoPreview.id || (values.videoPreview.file||[])[0],
+                program_id: values.program_id,
+                video_stream: values.video.id || (values.video.file || [])[0],
+                video_stream_preview: values.videoPreview.id || (values.videoPreview.file || [])[0],
                 video_stream_preview_info: {
                     object_author: values.videoPreview.author,
                     object_source: values.videoPreview.source,
                 },
             });
-        }
+        };
     }
 
     renderContent() {
-        let {
-            menuOpen,
+        const {
             article,
-            rubrics,
-            finishArticle,
-            publishArticle,
             delegateArticle,
             deleteArticle,
-            rejectArticle,
-            toFixArticle,
-            params,
-            users,
-            user,
+            finishArticle,
             formIsValid,
             formValues,
-        } = this.props
+            menuOpen,
+            params,
+            programs,
+            publishArticle,
+            rejectArticle,
+            rubrics,
+            toFixArticle,
+            user,
+            users,
+        } = this.props;
 
-        const values = formValues && formValues.toJS()
+        const values = formValues && formValues.toJS();
 
         const headerProps = {
             moved: menuOpen,
             preview: this.openPreview,
             onSubmit: this.props.submit,
-            reject: (article.id || formIsValid) && rejectArticle.bind(this, article.id||values)
-        }
+            reject: (article.id || formIsValid) && rejectArticle.bind(this, article.id || values),
+        };
 
         if (article.id) {
-            headerProps.del = deleteArticle.bind(this, article.id)
-            headerProps.ret = toFixArticle.bind(this, article.id)
+            headerProps.del = deleteArticle.bind(this, article.id);
+            headerProps.ret = toFixArticle.bind(this, article.id);
         }
 
         if (checkPermissons(user, ['admin', 'сommissioning-editor'])) {
             return (
                 <div>
                     <HeaderSupervisor
-                        {...headerProps} />
+                        {...headerProps}
+                    />
 
                     <Content
                         article={article}
@@ -174,94 +175,98 @@ class EditorPage extends Component {
                         rubrics={rubrics}
                         chatRoom={params.id}
                         preview={this.state.preview}
+                        programs={programs}
                         delegate={delegateArticle}
                         closePreview={this.closePreview}
                         users={users.toJS()}
                         onSubmit={this.submitHandler(publishArticle)}
-                        supervisor />
+                        supervisor
+                    />
                 </div>
-            )
-        }
-        else if (checkPermissons(user, ['editor'])) {
+            );
+        }        else if (checkPermissons(user, ['editor'])) {
             return (
                 <div>
                     <HeaderEditor
-                        {...headerProps} />
+                        {...headerProps}
+                    />
 
                     <Content
                         article={article}
                         formValues={this.props.formValues}
                         rubrics={rubrics}
+                        programs={programs}
                         chatRoom={params.id}
                         delegate={article.id && rejectArticle.bind(this, article.id)}
                         preview={this.state.preview}
                         onSubmit={this.submitHandler(finishArticle)}
-                        closePreview={this.closePreview} />
+                        closePreview={this.closePreview}
+                    />
                 </div>
-            )
+            );
         }
-        else {
-            return null
-        }
+
+        return null;
     }
 
     render() {
-
         return (
             <div>
                 <Helmet
-                    title="Правки" />
+                    title="Правки"
+                />
 
                 {this.renderContent()}
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     article: selectArticle(state),
     rubrics: selectRubrics(state),
     users: selectEditors(state),
     user: selectCurrentUser(state),
     menuOpen: selectMenuExpandedStatus(state),
     formIsValid: isValid('articleEditorForm')(state),
-    formValues: getFormValues('articleEditorForm')(state)
-})
+    formValues: getFormValues('articleEditorForm')(state),
+    programs: makeGetProgramsAsOptions()(state),
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     submit() {
-        dispatch(submit('articleEditorForm'))
+        dispatch(submit('articleEditorForm'));
     },
     clearArticle() {
-        dispatch(clearArticle())
+        dispatch(clearArticle());
     },
     loadArticle(id) {
-        dispatch(loadArticle(id))
+        dispatch(loadArticle(id));
     },
     finishArticle(data) {
         if (data) {
-            dispatch(finishArticle(data))
+            dispatch(finishArticle(data));
         }
     },
     publishArticle(data) {
         if (data) {
-            dispatch(publishArticle(data))
+            dispatch(publishArticle(data));
         }
     },
     deleteArticle(id) {
-        dispatch(deleteArticle(id))
+        dispatch(deleteArticle(id));
     },
     delegateArticle(params) {
-        dispatch(delegateArticle(params))
+        dispatch(delegateArticle(params));
     },
     rejectArticle(id) {
         if (id) {
-            dispatch(rejectArticle(id))
+            dispatch(rejectArticle(id));
         }
     },
     toFixArticle(id) {
-        dispatch(toFixArticle(id))
-    }
-})
+        dispatch(toFixArticle(id));
+    },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditorPage)
+export default connect(mapStateToProps, mapDispatchToProps)(EditorPage);

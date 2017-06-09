@@ -29,26 +29,6 @@ const makeSelectProgramsNames = () => createSelector(
     ]
 );
 
-const makeGetProgramsAsOptions = () => createSelector(
-    makeSelectPrograms(),
-    (programsMap) => {
-        const programs = programsMap.toJS();
-
-        if (!programs || !programs.ids || !programs.byId) {
-            return [];
-        }
-
-        return programs.ids.map((id) => {
-            const program = programs.byId[id];
-
-            return {
-                label: program.name,
-                value: id,
-            };
-        });
-    }
-);
-
 const makeGetSelectedProgram = () => createSelector(
     selectProgramsPageDomain(),
     (state) => state.get('selectedProgram')
@@ -121,7 +101,6 @@ export {
     selectRecords,
     makeSelectProgramsNames,
     makeGetRecords,
-    makeGetProgramsAsOptions,
     makeGetSelectedRecord,
     makeCheckCanSave,
     makeGetRecordsType,
