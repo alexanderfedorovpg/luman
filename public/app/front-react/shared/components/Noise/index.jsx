@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 
+import { Link } from 'react-router-dom';
+
 import MiniNews from 'components/MiniNews'
 import ScissorsIcon from 'components/Icon/Scissors'
 
@@ -10,9 +12,9 @@ function Noise({ data, className }) {
 
     return (
         <div className={classNames('info-noize', className)}>
-            <p className="info-noize__title section-title">
+            <Link className="info-noize__title section-title" to='/noise'>
                 Инфошум
-            </p>
+            </Link>
             <ScissorsIcon />
             <div className="info-noize__wrapper">
                 {data.slice(0, 5).map(value => (

@@ -63,10 +63,6 @@ class Header extends React.PureComponent {
                     }
                     <Buttons>
                         {
-                            checkPermissions('records', true, ['create']) &&
-                            <StyledBtn md buttonType="upload" onClick={this.openAddRecordModal} />
-                        }
-                        {
                             checkPermissions('records', false, ['create', 'delete', 'edit']) &&
                             <StyledBtn
                                 md

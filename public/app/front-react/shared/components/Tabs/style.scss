@@ -16,6 +16,10 @@
         height: 1px;
 
         background-color: $gray;
+
+        @include below($tabletLandscapeMax) {
+            bottom: rem(0);
+        }
     }
 
     &__ul {
@@ -34,6 +38,17 @@
 
         display: inline-block;
 
+        @include below($mobile) {
+
+        }
+
+
+
+        @include above($desktop) {
+
+        }
+
+
         &::before {
             content: '';
 
@@ -46,6 +61,10 @@
             height: rem(4);
 
             background-color: transparent;
+
+            @include below($tabletLandscapeMax) {
+                bottom: rem(0);
+            }
         }
 
         &:hover {
@@ -58,6 +77,15 @@
             .breadcrumbs__link {
                 color: $enter;
             }
+        }
+
+        @include above($desktop) {
+            line-height: rem(40);
+        }
+
+        @include below($tabletLandscapeMax) {
+            line-height: rem(11);
+            margin-right: rem(5);
         }
 
         &_active {
@@ -75,16 +103,94 @@
 
     &__link {
         font: #{rem(16)} $stemBold;
+        line-height: inherit;
         color: $crumb;
         cursor: pointer;
         text-decoration: none;
+    }
 
-        @include above($desktop) {
-            line-height: rem(40);
-        }
-
-        @include below($tabletLandscapeMax) {
-            line-height: rem(18);
+    &__burger {
+        position: relative;
+        margin-right: 15px;
+        display: inline-block;
+        z-index: 8;
+        padding-top: 13px;
+        cursor: pointer;
+        @include below($desktop) {
+            padding-top: 4px;
         }
     }
+
+    &__toggle {
+        position: absolute;
+        top: -7px;
+        background: #fff;
+        width: 66%;
+        z-index: 8;
+        padding: 11px;
+        border: 1px solid #ccc;
+
+
+        @include below($desktop) {
+            width: 100%;
+        }
+        
+        // @include above($desktop) {
+        //     width: 66%;
+        // }
+
+        img {
+            float: right;
+            cursor: pointer;
+            @include below($tabletLandscapeMax) {
+                padding-top: rem(12);
+            }
+        }
+
+
+        &_header {
+            position: relative;
+            margin-left: 21px;
+        }
+
+        &_header .breadcrumb__link {
+            @include below($tabletLandscapeMax) {
+                line-height: rem(33);
+            }
+        }
+
+        &_header:after {
+            content: '';
+            position: absolute;
+            bottom: 0.375rem;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+        }
+        
+    }
+
+    &__toggle &__ul {
+        justify-content: space-between;
+        flex-flow: column wrap;
+        align-content: flex-start;
+        height: 158px;
+        width: 100%;
+        overflow: auto;
+        @include below($desktop) {
+            height: initial;
+        }
+    }
+
+    &__toggle &__ul &__item {
+        flex: 0 0 2px;
+        align-self: flex-start;
+        display: block;
+        margin: 0 20px;
+    }
+
+
+
 }

@@ -208,6 +208,21 @@
                 @include below($tabletMax) {
                     margin-bottom: rem(6);
                 }
+
+                .from-enter {
+
+                    &_big {
+
+                        @include below($tabletMax) {
+                            height: rem(450);
+                        }
+
+                        @include below($mobile) {
+                            height: auto;
+                            
+                        }
+                    }
+                }
             }
 
             &_item-top {

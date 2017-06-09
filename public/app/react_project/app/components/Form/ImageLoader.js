@@ -81,7 +81,7 @@ const Input = styled.input`
 `;
 
 const PlaceholderWrapper = styled.div`
-    padding: 0 ${rem(5)};
+    padding: ${rem(5)};
 `;
 
 const Icon = styled(Camera)`

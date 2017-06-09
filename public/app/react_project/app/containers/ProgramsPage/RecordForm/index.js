@@ -7,12 +7,13 @@ import { Group, Label } from 'components/Form';
 import {
     SelectRedux,
     InputRedux,
-    RatingRedux
+    RatingRedux,
 } from 'components/Form/ReduxForm';
+import { makeGetProgramsAsOptions } from 'containers/App/selectors';
 
 import { StyledBtn } from '../style';
-import { makeGetProgramsAsOptions, makeGetSelectedRecord } from '../selectors';
-import { postRecord, editRecord } from '../actions';
+import { makeGetSelectedRecord } from '../selectors';
+import { editRecord } from '../actions';
 import {
     StyledFileInput as FileInputRedux,
     StyledDatepicker as DatepickerRedux,
@@ -31,12 +32,7 @@ class RecordForm extends React.PureComponent {
 
     onSubmit(immutableData) {
         const data = immutableData.toJS();
-
-        if (!data.id) {
-            this.props.postRecord(data);
-        } else {
-            this.props.editRecord(data);
-        }
+        this.props.editRecord(data);
     }
 
     onCancelClick(e) {
@@ -163,7 +159,6 @@ RecordForm.propTypes = {
     editRecord: PropTypes.func,
     handleSubmit: PropTypes.func,
     onCancel: PropTypes.func,
-    postRecord: PropTypes.func,
     programs: PropTypes.arrayOf(PropTypes.object),
     reset: PropTypes.func,
     valid: PropTypes.bool,
@@ -174,4 +169,4 @@ const mapStateToProps = createStructuredSelector({
     initialValues: makeGetSelectedRecord(),
 });
 
-export default connect(mapStateToProps, { postRecord, editRecord })(RecordForm);
+export default connect(mapStateToProps, { editRecord })(RecordForm);

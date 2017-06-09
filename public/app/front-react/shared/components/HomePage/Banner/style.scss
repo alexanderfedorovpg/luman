@@ -25,6 +25,7 @@
         }
 
         @include above($desktop) {
+            width: rem(932);
             background-image: url(./where-view.png);
         }
 

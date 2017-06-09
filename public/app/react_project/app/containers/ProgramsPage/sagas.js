@@ -2,13 +2,10 @@ import {
     call,
     put,
     select,
-    take,
-    cancel,
     takeLatest,
     takeEvery,
 } from 'redux-saga/effects';
 import omit from 'lodash/omit';
-import { LOCATION_CHANGE } from 'react-router-redux';
 import * as api from 'api';
 import { getPrograms } from 'containers/App/sagas';
 import { showPreloader, hidePreloader, showInfoModal } from 'containers/App/actions';
@@ -17,8 +14,6 @@ import {
     failureDeleteRecord,
     successLoadRecords,
     failureLoadRecords,
-    successPostRecord,
-    failurePostRecord,
     successEditRecord,
     failureEditRecord,
     successPublishRecords,
@@ -34,7 +29,6 @@ import {
     DELETE_RECORD,
     LOAD_RECORDS,
     PENDING_RECORDS,
-    POST_RECORD,
     EDIT_RECORD,
     RECORDS_LIMIT,
     START_EDIT_RECORD,
@@ -129,46 +123,6 @@ export function* getRecords(action = { payload: {} }) {
     }
 }
 
-export function* postRecord({ payload }) {
-    try {
-        yield put(showPreloader());
-        const [uploadedVideo, uploadedPreview] = yield [
-            call(api.uploadVideo, payload.video[0]),
-            payload.video_preview ? call(api.uploadFile, payload.video_preview[0]) : null,
-        ];
-        const type = yield select(getRecordsType);
-
-        const data = {
-            ...omit(payload, ['video', 'video_preview']),
-            is_full_video: type === 'FULL',
-            video: uploadedVideo.data.file.id,
-            is_published: 0,
-        };
-
-        if (uploadedPreview) {
-            data.video_preview = uploadedPreview.data.file.id;
-        }
-
-        const response = yield call(api.postRecord, data);
-
-        yield put(hidePreloader());
-
-        data.id = response.data.id;
-        data.video = {
-            url: uploadedVideo.data.file.url,
-            preview: uploadedPreview ? uploadedPreview.data.file.url : null,
-        };
-
-        yield put(successPostRecord(data));
-        yield put(closeModal());
-    } catch (err) {
-        console.error(err);
-        yield put(failurePostRecord(err));
-        yield put(hidePreloader());
-        yield put(showInfoModal('Не удалось добавить запись. Попробуйте еще раз'));
-    }
-}
-
 export function* editRecord({ payload }) {
     try {
         const data = omit(payload, ['video', 'video_preview']);
@@ -252,7 +206,6 @@ export function* programsData() {
     yield takeLatest(LOAD_RECORDS, getRecords);
     yield takeLatest(SET_RECORDS_TYPE, getRecords);
     yield takeLatest(CHANGE_PROGRAM, getRecords);
-    yield takeEvery(POST_RECORD, postRecord);
     yield takeEvery(EDIT_RECORD, editRecord);
     yield takeLatest(START_EDIT_RECORD, startEditRecord);
     yield takeLatest(SEARCH_RECORD, getRecords, { payload: { replace: true } });

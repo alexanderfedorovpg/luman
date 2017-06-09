@@ -8,15 +8,14 @@ import {
     RichRedux,
 } from 'components/Form/ReduxForm';
 import { Horizontal, Group, Label } from 'components/Form';
-import VideoUpload from './Form.VideoUpload'
-import SpecialSelect from './Select'
+import VideoUpload from './Form.VideoUpload';
+import SpecialSelect from './Select';
 
 import {
     RatingRedux,
     ImageLoaderRedux,
     Title,
     Subtitle,
-    Theses,
     ImageRow,
     ImageCell,
 } from './style';
@@ -24,53 +23,54 @@ import {
 const titleMax = 120;
 const subtitleMax = 140;
 
-function Part1Component({}) {
-
+function Part1Component() {
     return (
         <Field
             name="stream"
             component={InputRedux}
             placeholder="http://rtvi.com/"
-            block />
-    )
+            block
+        />
+    );
 }
 
-function Part2Component({}) {
-
+function Part2Component({ programs }) {
     return (
         <Fields
             names={[
                 'video.id',
                 'video.file',
+                'video.program_id',
                 'videoPreview.id',
                 'videoPreview.file',
                 'videoPreview.author',
                 'videoPreview.source',
             ]}
-            component={VideoUpload} />
-    )
+            programs={programs}
+            component={VideoUpload}
+        />
+    );
 }
 
 
-
 function Part3Component({ rubrics }) {
-
     return (
         <Horizontal>
             <Field
                 name="top"
-                component={RatingRedux} />
+                component={RatingRedux}
+            />
 
             <Field
                 name="rubrics"
                 data={rubrics}
-                component={TagsRedux} />
+                component={TagsRedux}
+            />
         </Horizontal>
-    )
+    );
 }
 
 function Part4Component(props) {
-
     return (
         <div>
             <Field
@@ -78,25 +78,29 @@ function Part4Component(props) {
                 title="Заголовок"
                 limit={titleMax}
                 component={LabeledTitle}
-                block />
+                block
+            />
 
             <Field
                 name="subtitle"
                 title="Подзаголовок"
                 limit={subtitleMax}
                 component={LabeledSubtitle}
-                block />
+                block
+            />
 
             <Field
                 name="theses"
                 title="Тезисы через //"
                 component={LabeledSubtitle}
-                block />
+                block
+            />
 
             <Group>
                 <Field
                     name="body"
-                    component={RichRedux} />
+                    component={RichRedux}
+                />
             </Group>
 
             <ImageRow>
@@ -105,25 +109,29 @@ function Part4Component(props) {
                         name="image_main"
                         component={ImageLoaderRedux}
                         placeholder="Выберите основное изображение"
-                        icon />
+                        icon
+                    />
 
                     <Field
                         name="image_main_title"
                         component={InputRedux}
                         placeholder="Название"
-                        block />
+                        block
+                    />
 
                     <Field
                         name="image_main_author"
                         component={InputRedux}
                         placeholder="Автор"
-                        block />
+                        block
+                    />
 
                     <Field
                         name="image_main_source"
                         component={InputRedux}
                         placeholder="Источник"
-                        block />
+                        block
+                    />
 
                 </ImageCell>
                 <ImageCell>
@@ -131,25 +139,29 @@ function Part4Component(props) {
                         name="image_preview"
                         component={ImageLoaderRedux}
                         placeholder="Выберите превью"
-                        icon />
+                        icon
+                    />
 
                     <Field
                         name="image_preview_title"
                         component={InputRedux}
                         placeholder="Название"
-                        block />
+                        block
+                    />
 
                     <Field
                         name="image_preview_author"
                         component={InputRedux}
                         placeholder="Автор"
-                        block />
+                        block
+                    />
 
                     <Field
                         name="image_preview_source"
                         component={InputRedux}
                         placeholder="Источник"
-                        block />
+                        block
+                    />
 
                 </ImageCell>
             </ImageRow>
@@ -159,50 +171,47 @@ function Part4Component(props) {
                 description="Не более 4 слов через пробел"
                 placeholder="Ключевые слова"
                 component={LabeledInput}
-                block />
+                block
+            />
         </div>
-    )
+    );
 }
 
 function Part5Component(props) {
-
     return (
         <Field
             name="editor"
             component={SpecialSelect}
-            {...props} />
-    )
+            {...props}
+        />
+    );
 }
 
-const LabeledTitle = labeledInput(Title)
-const LabeledSubtitle = labeledInput(Subtitle)
-const LabeledInput = labeledInput(InputRedux)
+const LabeledTitle = labeledInput(Title);
+const LabeledSubtitle = labeledInput(Subtitle);
+const LabeledInput = labeledInput(InputRedux);
 
 function labeledInput(WrappedComponent) {
-
-    return ({ input, title, description, limit, ...props }) => {
-
-        return (
-            <Group>
-                <LabelLimited value={input.value} limit={limit}>
-                    {title &&
-                        <span>
-                            {title}
-                        </span>
-                    }
-                    {description}
-                </LabelLimited>
-                <WrappedComponent input={input} {...props} />
-            </Group>
-        )
-    }
+    return ({ input, title, description, limit, ...props }) => (
+        <Group>
+            <LabelLimited value={input.value} limit={limit}>
+                {title &&
+                    <span>
+                        {title}
+                    </span>
+                }
+                {description}
+            </LabelLimited>
+            <WrappedComponent input={input} {...props} />
+        </Group>
+    );
 }
 
 function LabelLimited({ children, value, limit }) {
-    let leftText = ''
+    let leftText = '';
 
     if (limit) {
-        const left = limit - value.length
+        const left = limit - value.length;
 
         leftText = `
             : осталось ${
@@ -210,7 +219,7 @@ function LabelLimited({ children, value, limit }) {
                     ? <span className="out">{left}</span>
                     : left
             } символов
-        `
+        `;
     }
 
     return (
@@ -218,12 +227,12 @@ function LabelLimited({ children, value, limit }) {
             {children}
             {leftText}
         </Label>
-    )
+    );
 }
 
-const validate = data => {
+const validate = (data) => {
     const values = data.toJS();
-    let errors = {};
+    const errors = {};
 
     if (!values.rubrics.length) {
         errors.rubrics = 'Выберите рубрики!';
@@ -235,39 +244,38 @@ const validate = data => {
 
     if (!values.title) {
         errors.title = 'Введите заголовок!';
-    }
-    else if (values.title.length > titleMax) {
+    } else if (values.title.length > titleMax) {
         errors.title = `Заголовок не должен превышать ${titleMax} символов!`;
     }
 
-    return errors
-}
+    return errors;
+};
 
 export const Part1 = reduxForm({
     form: 'articleEditorForm',
     validate,
     enableReinitialize: true,
     onSubmitFail: (errors, ttt, info) => {
-        let key
+        let key;
 
         for (key in errors) {
-            toastr.warning(errors[key])
+            toastr.warning(errors[key]);
         }
-    }
-})(Part1Component)
+    },
+})(Part1Component);
 
 export const Part2 = reduxForm({
-    form: 'articleEditorForm'
-})(Part2Component)
+    form: 'articleEditorForm',
+})(Part2Component);
 
 export const Part3 = reduxForm({
-    form: 'articleEditorForm'
-})(Part3Component)
+    form: 'articleEditorForm',
+})(Part3Component);
 
 export const Part4 = reduxForm({
-    form: 'articleEditorForm'
-})(Part4Component)
+    form: 'articleEditorForm',
+})(Part4Component);
 
 export const Part5 = reduxForm({
-    form: 'articleEditorForm'
-})(Part5Component)
+    form: 'articleEditorForm',
+})(Part5Component);
