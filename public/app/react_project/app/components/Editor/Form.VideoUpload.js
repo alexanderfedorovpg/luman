@@ -14,12 +14,12 @@ class VideoUpload extends PureComponent {
         super(props);
 
         this.state = {
-            modalOpen: false
-        }
+            modalOpen: false,
+        };
 
-        this.openModal = ::this.openModal
-        this.closeModal = ::this.closeModal
-        this.submitHandler = ::this.submitHandler
+        this.openModal = ::this.openModal;
+        this.closeModal = ::this.closeModal;
+        this.submitHandler = ::this.submitHandler;
     }
 
     openModal() {
@@ -61,7 +61,7 @@ class VideoUpload extends PureComponent {
     }
 
     render() {
-        const { video, videoPreview } = this.props
+        const { video, videoPreview } = this.props;
         const initialValues = {
             video: video.file.input.value,
             preview: videoPreview.file.input.value,
@@ -75,7 +75,8 @@ class VideoUpload extends PureComponent {
                     ? (
                         <VideoStatus
                             onClick={this.openModal}
-                            ready>
+                            ready
+                        >
 
                             <Icon type="text-video-lg" />
                             <strong>Статус видео:</strong>
@@ -88,7 +89,8 @@ class VideoUpload extends PureComponent {
                         <TypedBtn
                             block
                             onClick={this.openModal}
-                            buttonType="upload">
+                            buttonType="upload"
+                        >
 
                             Загрузить видео
                         </TypedBtn>
@@ -98,10 +100,11 @@ class VideoUpload extends PureComponent {
                     isOpen={this.state.modalOpen}
                     close={this.closeModal}
                     onSubmit={this.submitHandler}
-                    initialValues={initialValues} />
+                    initialValues={initialValues}
+                />
             </div>
-        )
+        );
     }
 }
 
-export default VideoUpload
+export default VideoUpload;

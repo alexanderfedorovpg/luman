@@ -8,6 +8,7 @@ import Modal from './';
 
 const Title = styled(H2)`
     margin-top: 0;
+    margin-bottom: ${rem(15)};;
 `;
 
 const ModalContent = styled.div`

@@ -29,6 +29,10 @@ const Root = styled.div`
     .ql-em-dash:after {
         content: "—";
     }
+
+    .ql-toolbar.ql-toolbar {
+        border-bottom: none;
+    }
 `
 
 class Rich extends PureComponent {
