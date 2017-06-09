@@ -22,7 +22,7 @@ import extendImageBlot from './blots/imageBlot'
 import extendTwitterBlot from './blots/TwitterBlot'
 import extendInstagramBlot from './blots/InstagramBlot'
 import extendFacebookBlot from './blots/FacebookBlot'
-import extendHtmlBlot from './blots/HtmlBlot'
+import extendHtmlBlot from './blots/HTMLBlot'
 import extendVideoBlot from './blots/videoBlot'
 /**
  * некий валидатор, который использует редактор, чтобы распознать html,
@@ -51,7 +51,7 @@ const Root = styled.div`
     .ql-em-dash:after {
         content: "—";
     }
-    
+
     .ql-embed:after {
         content: "embed";
     }

@@ -117,10 +117,6 @@ const validate = (values) => {
         errors.video = 'Выберите видео';
     }
 
-    if (!values.get('program_id')) {
-        errors.program_id = 'Выберите передачу';
-    }
-
     return errors;
 };
 

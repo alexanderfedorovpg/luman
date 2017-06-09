@@ -62,16 +62,9 @@ export function* deleteRecord({ payload }) {
         yield put(showPreloader());
         yield put(closeModal());
 
-        const response = yield call(api.deleteRecord, payload.id);
-
+        yield call(api.deleteRecord, payload.id);
         yield put(hidePreloader());
-
-        if (response.data.success) {
-            yield put(successDeleteRecord(payload.id));
-            yield put(closeModal());
-        } else {
-            throw new Error(response.statusText);
-        }
+        yield put(successDeleteRecord(payload.id));
     } catch (err) {
         console.error(err);
         yield put(failureDeleteRecord(err));
