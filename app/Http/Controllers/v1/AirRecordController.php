@@ -84,8 +84,8 @@ class AirRecordController extends CmsController
             'program_id' => 'required|integer|exists:tv_programs,id',
         ]);
 
-        $request->request->add(['video_stream'=> $request->input('video')]);
-        $request->request->add(['video_stream_preview'=>  $request->input('video_preview')]);
+//        $request->request->add(['video_stream'=> $request->input('video')]);
+//        $request->request->add(['video_stream_preview'=>  $request->input('video_preview')]);
         $editor_id =$request->input('editor_id');
 
         $request->request->add( ['editor_id'=> $editor_id?$editor_id:Auth::id()] );

@@ -2,7 +2,6 @@
 @import "~style/vars";
 
 .rates {
-    padding-top: rem(6);
     margin-left: rem(100);
 
     @include below($mobile) {

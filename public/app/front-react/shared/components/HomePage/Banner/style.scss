@@ -20,6 +20,7 @@
         }
 
         @include above($tablet) {
+            width: rem(300);
             padding-top: rem(26);
         }
 
@@ -30,6 +31,11 @@
         &:hover {
             text-decoration: none;
         }
+    }
+
+    &__link {
+        text-decoration: none;
+        color: transparent;
     }
 
     &__title {

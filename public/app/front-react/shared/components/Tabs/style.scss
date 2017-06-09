@@ -74,10 +74,14 @@
     }
 
     &__link {
-        font: #{rem(16)} / #{rem(40)} $stemBold;
+        font: #{rem(16)} $stemBold;
         color: $crumb;
         cursor: pointer;
         text-decoration: none;
+
+        @include above($desktop) {
+            line-height: rem(40);
+        }
 
         @include below($tabletLandscapeMax) {
             line-height: rem(18);

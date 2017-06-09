@@ -48,12 +48,16 @@ class App extends Component {
     }
 
     render() {
-        const { warMode, warTitle, match } = this.props
-        
+        const { warMode, warTitle, location } = this.props
+
+        const war = warMode && (
+            location.pathname === '/' ||
+            location.pathname.search('/text-stream') === 0
+        )
 
         return (
             <IntlProvider locale="ru">
-                <div className={classNames('root', { war: match.isExact && warMode })}>
+                <div className={classNames('root', { war })}>
                     <Helmet>
                         <html lang="ru" />
                         <meta charSet="utf-8" />
@@ -63,7 +67,7 @@ class App extends Component {
                         <meta name="HandheldFriendly" content="true" />
                     </Helmet>
 
-                    <Header war={match.isExact && warMode} warTitle={warTitle} />
+                    <Header war={war} warTitle={warTitle} />
 
                     <main>
                         <Switch>
