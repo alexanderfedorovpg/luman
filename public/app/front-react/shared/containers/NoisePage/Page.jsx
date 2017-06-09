@@ -99,15 +99,16 @@ class NoisePage extends PureComponent {
                         }
                     </title>
                 </Helmet>
-
                 {match.params.code
                     ? (
-                        <Detail
-                            data={item}
-                            noise={noise}
-                            now={now.map(v => v.news)}
-                            related={relatedNews}
-                            broadcast={broadcast} />
+                        <div className="news-detail_noize">
+                            <Detail
+                                data={item}
+                                noise={noise}
+                                now={now.map(v => v.news)}
+                                related={relatedNews}
+                                broadcast={broadcast} />
+                        </div>
                     )
                     : (
                         <Noise

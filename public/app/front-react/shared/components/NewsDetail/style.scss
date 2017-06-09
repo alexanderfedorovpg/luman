@@ -622,10 +622,26 @@
 
         &_noize {
 
+            @include below($tabletMax) {
+                right: rem(-13);
+                top: rem(-12);
+                width: rem(98);
+                height: rem(40);
+            }
+
             @include below($mobile) {
                 right: 0;
             }
+
+            .scissors__icon {
+                position: relative;
+                z-index: 1;
+            }
         }
+
+    }
+
+    &_noize {
 
     }
 }
