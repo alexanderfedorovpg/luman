@@ -78,6 +78,24 @@ class Content extends PureComponent {
         }
     }
 
+    onContentClick(e) {
+        const target = e.target
+
+        if (!target.classList.contains('video__preview')) return;
+
+        const parent = target.parentNode;
+        const src = parent.dataset.src;
+
+        if (!src) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', src);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', true);
+
+        parent.replaceChild(iframe, target);
+    }
+
     render() {
         const { data, children } = this.props
         const theses = Array.isArray(data.theses)
@@ -149,7 +167,10 @@ class Content extends PureComponent {
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
-                    <div dangerouslySetInnerHTML={{ __html: data.body }} />
+                    <div
+                        dangerouslySetInnerHTML={{ __html: data.body }}
+                        onClick={this.onContentClick}
+                    />
                     {children}
                 </div>
             </div>
