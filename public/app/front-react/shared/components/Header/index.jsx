@@ -63,20 +63,20 @@ class Header extends PureComponent {
                 <div className="header__container container">
                     <div className="header__left-part">
                         <div className="header__part-wrapper">
-                            <MediaQuery maxDeviceWidth="719px">
+                            <MediaQuery maxDeviceWidth="614px">
                                 <Burger />
                             </MediaQuery>
                             <Logo war={war} />
                             <InfoIcon width="18px" height="18px" />
                             <TopMenu />
-                            <MediaQuery minDeviceWidth="1600px">
+                            <MediaQuery minDeviceWidth="1300px">
                                 <Rates />
                             </MediaQuery>
                         </div>
                     </div>
                     <div className="header__right-part">
                         <RSS />
-                        <MediaQuery maxDeviceWidth="719px">
+                        <MediaQuery maxDeviceWidth="614px">
                             <InfoIcon width="18px" height="18px" />
                         </MediaQuery>
                         <Search

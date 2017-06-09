@@ -24,7 +24,7 @@ function Detail({ data, nowNews }) {
                         <Group title="Главные новости" margin>
                             <Block data={nowNews[0]} />
                             {nowNews.slice(1, 5).map(v => (
-                                <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
+                                <MiniNews key={v.id} data={v} className="broadcast__mini-news info-noize__mini-news" />
                             ))}
                         </Group>
                         <Subscribe />

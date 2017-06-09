@@ -345,6 +345,11 @@
 
 .broadcast {
 
+
+    &__mini-news:not(:last-child) {
+        border-bottom: none;
+    }
+
     &__general-video {
         margin-bottom: rem(30);
         margin-right: 0 !important;
@@ -410,7 +415,6 @@
             .text-bg-gray--news {
 
                 height: auto;
-                min-height: rem(573);
 
                 @include below($tabletLandscapeMax) {
                     width: rem(598);
