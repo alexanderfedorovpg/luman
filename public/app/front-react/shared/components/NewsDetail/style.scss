@@ -68,12 +68,12 @@
                 transform: translateX(0);
             }
 
-            .inner-default &_play.text-bg-gray {
+            &_play.text-bg-gray {
                 // position: relative;
                 z-index: 4;
-                background-color: rgba(36, 55, 70, 0);
+                background-color: rgba(36, 55, 70, 0.2);
 
-                .social-links {
+                & .social-links {
                     opacity: .5;
                 }
             }
@@ -198,10 +198,10 @@
                         transform: translateX(-47.5%);
                     }
 
-                   @include below($mobile) {
+                    @include below($mobile) {
                         width: rem(571);
-                       transform: translateX(-47.5%);
-                   }
+                        transform: translateX(-47.5%);
+                    }
                 }
             }
         }
@@ -546,10 +546,6 @@
             display: block;
         }
 
-        @include below($mobile) {
-            left: calc(100% - #{rem(1085)});
-            top: -57px;
-        }
 
         @include below($tablet) {
             left: rem(-57);
@@ -557,7 +553,11 @@
         }
 
         @include below($tabletLandscape) {
-            left: rem(-59);
+            left: rem(-235);
+        }
+        @include below($mobile) {
+            left: rem(-214);
+            top: -57px;
         }
     }
 

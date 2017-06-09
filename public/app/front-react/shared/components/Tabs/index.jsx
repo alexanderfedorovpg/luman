@@ -19,9 +19,20 @@ class Tabs extends Component {
 
         this.state = {
             toggle: false,
+            count: 0
         }
 
         this.toggle = this.toggle.bind(this);
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    }
+    
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
     toggle() {
@@ -30,12 +41,32 @@ class Tabs extends Component {
         })
     }
 
+    updateWindowDimensions() {
+        let count = 0;
+//         $mobile: 719px;
+// $tablet: 720px;
+// $tabletMax: 1035px;
+// $tabletLandscape: 1036px;
+// $tabletLandscapeMax: 1599px;
+// $desktop: 1600px;
+        if (window.innerWidth <= 720) {
+            count = 2;
+        } else if (window.innerWidth <= 1035) {
+            count = 4;
+        } else if (window.innerWidth > 1035) {
+            count = 6
+        }
+        this.setState({
+            count: count,
+        });
+    }
+
 
     render() {
 
         const { data, active, onChange, classNames } = this.props;
         let topData = data;
-        topData = topData.slice(0, 6);
+        topData = topData.slice(0, this.state.count);
         
 
 
