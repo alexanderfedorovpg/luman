@@ -1,15 +1,33 @@
-import React from 'react';
-import { FormattedRelative } from 'react-intl';
+import React, {PureComponent} from 'react';
 import classNames from 'classnames'
 import ScissorsIcon from 'components/Icon/Scissors';
+import {FormattedRelative} from 'react-intl';
+import RenderSocialWidgets from './RenderSocialWidgets'
 
 import Socials from 'components/Socials';
 import Rubrics from 'components/Rubrics';
 import Img from 'components/Img';
 
-function Content({ data, children }) {
-    const image = data.image_main || {};
-    const theses = Array.isArray(data.theses)
+class Content extends PureComponent {
+    replaceWidgets() {
+        if (this._timer) clearTimeout(this._timer);
+        this._timer = setTimeout(() => {
+            RenderSocialWidgets()
+        }, 1000)
+    }
+
+    componentDidMount() {
+        this.replaceWidgets()
+    }
+
+    componentDidUpdate() {
+        this.replaceWidgets()
+    }
+
+    render() {
+        const {data, children} = this.props;
+        const image = data.image_main || {};
+        const theses = Array.isArray(data.theses)
             ? data.theses
             : `${data.theses}`.split('\\');
 
@@ -58,20 +76,21 @@ function Content({ data, children }) {
                                     Фото: {image.object_author} / {image.object_source}
                                 </figcaption>
                             )
-                        }
-                    </figure>
-                    <p className="news-preview__text">
-                        {data.sub_title}
-                    </p>
+                            }
+                        </figure>
+                        <p className="news-preview__text">
+                            {data.sub_title}
+                        </p>
+                    </div>
+                    <Socials shareLink={data.uri} title={data.title}/>
                 </div>
-                <Socials shareLink={data.uri} title={data.title}/>
+                <div className="inner-about__content">
+                    <div dangerouslySetInnerHTML={{__html: data.body}}/>
+                    {children}
+                </div>
             </div>
-            <div className="inner-about__content">
-                <div dangerouslySetInnerHTML={{ __html: data.body }} />
-                {children}
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Content;

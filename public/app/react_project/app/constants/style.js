@@ -20,6 +20,7 @@ export const color = {
 }
 
 export const height = '36px'
+export const heightTextarea = '200px'
 
 export const padding = rem(24);
 
