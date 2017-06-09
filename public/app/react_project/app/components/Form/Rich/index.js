@@ -1,17 +1,22 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import ReactQuill, { Quill } from 'react-quill'
-import Delta from 'quill-delta'
+import Delta from 'quill-delta';
+import { connect } from 'react-redux';
 
-import ContentModal from 'components/Modal/ContentModal'
-import ImageUploadForm from './Form'
-import extendImageBlot from './imageBlot'
+import ContentModal from 'components/Modal/ContentModal';
+import ImageUploadForm from './ImageUploadForm';
+import VideoUploadForm from './VideoUploadForm';
+import addImageBlot from './imageBlot';
+import addVideoBlot from './videoBlot';
+import { showPreloader, hidePreloader } from 'containers/App/actions';
 
-import * as api from 'api'
+import * as api from 'api';
 
-import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.snow.css';
 
-extendImageBlot(Quill)
+addImageBlot(Quill);
+addVideoBlot(Quill);
 
 const Root = styled.div`
     .ql-laquo:after {
@@ -41,27 +46,27 @@ class Rich extends PureComponent {
         super(props);
 
         this.state = {
-            modalOpen: false
+            imageModalOpen: false,
+            videoModalOpen: false
         }
 
-        this.openModal = ::this.openModal
-        this.closeModal = ::this.closeModal
-        this.submitHandler = ::this.submitHandler
-        this.toolbarImageHandler = ::this.toolbarImageHandler
-        this.toolbarLaquoHandler = ::this.toolbarLaquoHandler
-        this.toolbarRaquoHandler = ::this.toolbarRaquoHandler
-        this.toolbarEmDashHandler = ::this.toolbarEmDashHandler
     }
 
-    openModal() {
+    openModal = (type) => {
         this.setState({
-            modalOpen: true
+            [`${type}ModalOpen`]: true
         })
     }
 
-    closeModal() {
+    closeImageModal = () => {
         this.setState({
-            modalOpen: false
+            imageModalOpen: false
+        })
+    }
+
+    closeVideoModal = () => {
+        this.setState({
+            videoModalOpen: false
         })
     }
 
@@ -75,15 +80,15 @@ class Rich extends PureComponent {
         }
     }
 
-    toolbarLaquoHandler(value) {
+    toolbarLaquoHandler = (value) => {
         this.insertText('«')
     }
 
-    toolbarRaquoHandler(value) {
+    toolbarRaquoHandler = (value) => {
         this.insertText('»')
     }
 
-    toolbarEmDashHandler(value) {
+    toolbarEmDashHandler = (value) => {
         this.insertText('—')
     }
 
@@ -102,31 +107,40 @@ class Rich extends PureComponent {
         }
     }
 
-    toolbarImageHandler(value) {
-        this.openModal();
+    toolbarImageHandler = (value) => {
+        this.openModal('image');
     }
 
-    uploadImage(image, data, cb) {
+    toolbarVideoHandler = (value) => {
+        this.openModal('video');
+    }
+
+    uploadFile(f, data, cb) {
+        this.props.showPreloader();
+
         api.uploadFile(
-            image,
+            f,
             {
                 object_name: data.title,
                 object_author: data.author,
                 object_source: data.source
             }
-        ).then(({ data: { file } }) => cb(file.url))
+        ).then(({ data: { file } }) => {
+            cb(file.url);
+            this.props.hidePreloader();
+        })
     }
 
     addImage(data, cb) {
         if (data.image != null && data.image[0] != null) {
-            this.uploadImage(data.image[0], data, (result) => {
+            this.uploadFile(data.image[0], data, (result) => {
                 let editor = this.quill.getEditor();
                 let range = editor.getSelection(true);
                 editor.updateContents(
                     new Delta()
                         .retain(range.index)
                         .delete(range.length)
-                        .insert({ image: { src: result, ...data }}),
+                        .insert({ 'ext-image': { src: result, ...data }}),
                     'user'
                 );
 
@@ -135,12 +149,40 @@ class Rich extends PureComponent {
         }
     }
 
-    submitHandler(data) {
+    addVideo(data, cb) {
+        if (data.video != null && data.video[0] != null) {
+            this.uploadFile(data.video[0], data, (result) => {
+                let editor = this.quill.getEditor();
+                let range = editor.getSelection(true);
+                editor.updateContents(
+                    new Delta()
+                        .retain(range.index)
+                        .delete(range.length)
+                        .insert({ 'ext-video': { src: result, ...data }}),
+                    'user'
+                );
+
+                cb();
+            });
+        }
+    }
+
+    submitImageHandler = (data) => {
         const values = data.toJS()
         this.addImage(
             values,
             () => {
-                this.closeModal()
+                this.closeImageModal()
+            }
+        )
+    }
+
+    submitVideoHandler = (data) => {
+        const values = data.toJS()
+        this.addVideo(
+            values,
+            () => {
+                this.closeVideoModal()
             }
         )
     }
@@ -195,6 +237,7 @@ class Rich extends PureComponent {
                             container: '#toolbar',
                             handlers: {
                                 image: this.toolbarImageHandler,
+                                video: this.toolbarVideoHandler,
                                 laquo: this.toolbarLaquoHandler,
                                 raquo: this.toolbarRaquoHandler,
                                 aquos: this.toolbarAquosHandler,
@@ -228,16 +271,25 @@ class Rich extends PureComponent {
                     }} />
 
                 <ContentModal
-                    isOpen={this.state.modalOpen}
-                    onRequestClose={this.closeModal}
+                    isOpen={this.state.imageModalOpen}
+                    onRequestClose={this.closeImageModal}
                     title="Выберите изображение"
                     contentLabel="Выберите изображение">
 
-                    <ImageUploadForm onSubmit={this.submitHandler} />
+                    <ImageUploadForm onSubmit={this.submitImageHandler} />
+                </ContentModal>
+
+                <ContentModal
+                    isOpen={this.state.videoModalOpen}
+                    onRequestClose={this.closeVideoModal}
+                    title="Выберите видео"
+                    contentLabel="Выберите видео">
+
+                    <VideoUploadForm onSubmit={this.submitVideoHandler} />
                 </ContentModal>
             </Root>
         )
     }
 }
 
-export default Rich
+export default connect(null, { showPreloader, hidePreloader })(Rich)

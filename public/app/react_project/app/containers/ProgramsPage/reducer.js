@@ -12,7 +12,6 @@ import {
     PENDING_RECORDS,
     DELETE_RECORD_SUCCESS,
     EDIT_RECORD_SUCCESS,
-    POST_RECORD_SUCCESS,
     PUBLISH_RECORDS_SUCCESS,
     SEARCH_RECORD,
     OPEN_MODAL,
@@ -78,13 +77,6 @@ function programsPageReducer(state = initialState, action) {
                     (records) => records.filter((record) => record.get('id') !== action.payload.id)
                 )
                 .set('pendingToDelete', null);
-
-        case POST_RECORD_SUCCESS:
-            return state
-                .update(
-                    'records',
-                    (records) => records.unshift(fromJS(action.payload))
-                );
 
         case EDIT_RECORD_SUCCESS:
             recordInd = state.get('records').findIndex(

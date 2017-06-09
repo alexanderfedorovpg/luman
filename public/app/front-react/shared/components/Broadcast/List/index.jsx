@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { FormattedDate } from 'react-intl'
+import { Link } from 'react-router-dom'
 
 import './style.scss'
 
@@ -12,9 +13,9 @@ function ListVideo({ data, className }) {
                 <div key={value.id} className="list-video__item">
                     <img className="list-video__ico-play" src="/content/video-ico/video-ico-blue.png" alt="" role="presentation" />
                     <div className="list-video__info">
-                        <a className="list-video__title" href="javascript:void(0)">
+                        <Link className="list-video__title" to={`/broadcast/${value.id}`}>
                             {value.title}
-                        </a>
+                        </Link>
                         <p className="list-video__category">
                             {`${value.program.name} `}
                             <span className="list-video__time-add">

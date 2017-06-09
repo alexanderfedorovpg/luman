@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import classNames from 'classnames'
 import { FormattedRelative } from 'react-intl'
 
@@ -7,7 +7,7 @@ import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
 import Socials from 'components/Socials';
 
-class Content extends PureComponent {
+class Content extends Component {
 
     constructor(props) {
         super(props);
@@ -63,6 +63,24 @@ class Content extends PureComponent {
                 })
             }
         }
+    }
+
+    onContentClick(e) {
+        const target = e.target
+
+        if (!target.classList.contains('video__preview')) return;
+
+        const parent = target.parentNode;
+        const src = parent.dataset.src;
+
+        if (!src) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', src);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', true);
+
+        parent.replaceChild(iframe, target);
     }
 
     render() {
@@ -136,7 +154,10 @@ class Content extends PureComponent {
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
-                    <div dangerouslySetInnerHTML={{ __html: data.body }} />
+                    <div
+                        dangerouslySetInnerHTML={{ __html: data.body }}
+                        onClick={this.onContentClick}
+                    />
                     {children}
                 </div>
             </div>
