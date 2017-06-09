@@ -784,6 +784,28 @@ class NewsListEditorController extends CmsController
         }
     }
 
+    public function updateTheses(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+                'theses' => 'required|string',
+            ]);
+            $id = $request->input('id');
+            $request->input('id');
+            $news = News::findOrfail($id);
+            $news->title = $request->input('theses');
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
     public function triggerVisibleConstructor(Request $request)
     {
         try {
