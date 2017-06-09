@@ -622,20 +622,29 @@
 
         &_noize {
 
-            @include below($tabletMax) {
-                right: rem(-13);
-                top: rem(-12);
-                width: rem(98);
-                height: rem(40);
+            &:after {
+
+                @include below($tabletMax) {
+                    left: rem(-25);
+                    width: calc(100% + #{rem(25)});
+                }
             }
 
-            @include below($mobile) {
-                right: 0;
+            @include below($tabletMax) {
+                right: rem(-13);
+                top: rem(12);
+                width: rem(98);
+                height: rem(40);
+                padding: rem(6);
             }
 
             .scissors__icon {
                 position: relative;
                 z-index: 1;
+
+                @include below($tabletMax) {
+                    left: rem(-21);
+                }
             }
         }
 
@@ -643,5 +652,42 @@
 
     &_noize {
 
+        .news-preview--wide {
+
+            &.news-preview  {
+
+                .news-preview__img {
+                    height: rem(335);
+
+                    @include below($mobile) {
+                        height: auto;
+                    }
+
+                    img {
+                        height: inherit;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+
+        .inner-default  {
+
+            .inner-about {
+
+                &__content {
+                    margin-left: rem(80);
+                    padding-left: 0;
+
+                    @include below($tabletLandscapeMax) {
+                        margin-left: 0;
+                    }
+
+                    @include below($mobile) {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
     }
 }

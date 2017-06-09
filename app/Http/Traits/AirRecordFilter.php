@@ -12,9 +12,13 @@ trait AirRecordFilter
     public function filter(Request $request, Builder $builder)
     {
         if ($request->input('fullVideo') === 'true') {
-            $builder->fullVideo();
+            $builder->whereHas('rubrics', function ($subQuery)   {
+                $subQuery->where('rubrics.name', 'like', "%передача%");
+            });
         } elseif ($request->input('fullVideo') === 'false') {
-            $builder->fullVideo(false);
+            $builder->whereHas('rubrics', function ($subQuery)   {
+                $subQuery->where('rubrics.name', 'like', "%из эфира%");
+            });;
         }
 
         $constructor = $request->input('constructor');
