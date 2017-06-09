@@ -25,10 +25,6 @@ export const PENDING_RECORD = 'app/ProgramsPage/PENDING_RECORD';
 export const LOAD_RECORD_SUCCESS = 'app/ProgramsPage/LOAD_RECORD_SUCCESS';
 export const LOAD_RECORD_FAILURE = 'app/ProgramsPage/LOAD_RECORD_FAILURE';
 
-export const POST_RECORD = 'app/ProgramsPage/POST_RECORD';
-export const POST_RECORD_SUCCESS = 'app/ProgramsPage/POST_RECORD_SUCCESS';
-export const POST_RECORD_FAILURE = 'app/ProgramsPage/POST_RECORD_FAILURE';
-
 export const WANT_DELETE_RECORD = 'app/ProgramsPage/WANT_DELETE_RECORD';
 export const DELETE_RECORD = 'app/ProgramsPage/DELETE_RECORD';
 export const DELETE_RECORD_SUCCESS = 'app/ProgramsPage/DELETE_RECORD_SUCCESS';

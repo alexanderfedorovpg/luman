@@ -37,7 +37,7 @@ class Content extends Component {
     updateWindowDimensions() {
         this.setState({
             overlay: {
-                width: `${window.innerWidth}px`,
+                width: `${window.innerWidth + 1000}px`,
                 height: `${document.body.scrollHeight}px`
             }
         });

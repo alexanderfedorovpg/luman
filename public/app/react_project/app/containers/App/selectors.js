@@ -121,6 +121,26 @@ const makeSelectPrograms = () => createSelector(
     (app) => app.get('programs')
 );
 
+const makeGetProgramsAsOptions = () => createSelector(
+    makeSelectPrograms(),
+    (programsMap) => {
+        const programs = programsMap.toJS();
+
+        if (!programs || !programs.ids || !programs.byId) {
+            return [];
+        }
+
+        return programs.ids.map((id) => {
+            const program = programs.byId[id];
+
+            return {
+                label: program.name,
+                value: id,
+            };
+        });
+    }
+);
+
 const makeGetGroups = () => createSelector(
     selectAppDomain(),
     (app) => app.get('groups')
@@ -142,21 +162,22 @@ const makeGetProgramsArray = () => createSelector(
 const selectLocationState = makeSelectLocationState()
 
 export {
-    selectEditors,
-    selectUsers,
-    selectCurrentUser,
     getCurrentUserData,
-    selectUsersMap,
+    makeGetGroups,
+    makeGetProgramsArray,
+    makeGetProgramsAsOptions,
+    makeSelectInfo,
+    makeSelectLocationState,
+    makeSelectPreloader,
+    makeSelectPrograms,
+    makeSelectUserGroup,
+    makeSelectUserPermissions,
+    selectCurrentUser,
+    selectEditors,
+    selectLocationState,
+    selectMenuExpandedStatus,
     selectRubrics,
     selectRubricsList,
-    makeSelectLocationState,
-    selectMenuExpandedStatus,
-    makeSelectPreloader,
-    makeSelectInfo,
-    makeSelectPrograms,
-    makeGetProgramsArray,
-    selectLocationState,
-    makeGetGroups,
-    makeSelectUserPermissions,
-    makeSelectUserGroup,
+    selectUsers,
+    selectUsersMap,
 };

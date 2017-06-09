@@ -12,7 +12,7 @@ function EnterOne({ data, className }) {
 
     return (
         <div className={classNames('enter-one enter-one__no-border', className)}>
-            <p className="enter-one__title section-title">
+            <p className="from-enter__title section-title">
                 Из эфира
             </p>
             <FromEnter data={first} />

@@ -5,7 +5,12 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import ContentModal from 'components/Modal/ContentModal';
 import TypedBtn from 'components/Button/TypedBtn';
 import { Group } from 'components/Form';
-import { FileInputRedux, ImageLoaderRedux, InputRedux } from 'components/Form/ReduxForm';
+import {
+    FileInputRedux,
+    ImageLoaderRedux,
+    InputRedux,
+    SelectRedux,
+} from 'components/Form/ReduxForm';
 
 const StyledBtn = styled(TypedBtn)`
     flex-grow: 1;
@@ -17,13 +22,20 @@ const StyledBtn = styled(TypedBtn)`
 
 const GroupTop = styled(Group)`
     align-items: flex-start;
-`
+`;
 
 const GroupWide = styled(Group)`
+    margin-left: 5px;
     flex-grow: 1;
-`
 
-const UploadFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
+    > * {
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+    }
+`;
+
+const UploadFormModal = ({ isOpen, close, programs, valid, dirty, handleSubmit }) => (
     <ContentModal
         title="Загрузка видео для новости"
         contentLabel="Добавить видео к новости"
@@ -39,6 +51,16 @@ const UploadFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
                     icon="arrow"
                     placeholder="Выберите видео"
                     component={FileInputRedux}
+                />
+            </Group>
+            <Group md>
+                <Field
+                    placeholder="Программа"
+                    searchable={false}
+                    clearable={false}
+                    name="program_id"
+                    options={programs}
+                    component={SelectRedux}
                 />
             </Group>
             <GroupTop md horizontal>
@@ -93,6 +115,10 @@ const validate = (values) => {
 
     if (!values.get('video')) {
         errors.video = 'Выберите видео';
+    }
+
+    if (!values.get('program_id')) {
+        errors.program_id = 'Выберите передачу';
     }
 
     return errors;

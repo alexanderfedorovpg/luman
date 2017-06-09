@@ -15,9 +15,6 @@ import {
     LOAD_RECORDS,
     LOAD_RECORDS_SUCCESS,
     LOAD_RECORDS_FAILURE,
-    POST_RECORD,
-    POST_RECORD_SUCCESS,
-    POST_RECORD_FAILURE,
     EDIT_RECORD,
     EDIT_RECORD_SUCCESS,
     EDIT_RECORD_FAILURE,
@@ -107,13 +104,6 @@ export function failureLoadRecords(error) {
     return {
         type: LOAD_RECORDS_FAILURE,
         error,
-    };
-}
-
-export function postRecord(payload) {
-    return {
-        type: POST_RECORD,
-        payload,
     };
 }
 
