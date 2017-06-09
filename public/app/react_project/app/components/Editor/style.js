@@ -4,8 +4,8 @@ import {
     RatingRedux as RatingReduxBase,
     TextareaRedux as TextareaReduxBase,
     ImageLoaderRedux as ImageLoaderReduxBase,
-} from 'components/Form/ReduxForm'
-import { Group as GroupBase } from 'components/Form'
+} from 'components/Form/ReduxForm';
+import { Group as GroupBase } from 'components/Form';
 import {
     Left as LeftBase,
     Right as RightBase,
@@ -26,7 +26,7 @@ export const Title = styled(TextareaReduxBase)`
     font-size: 30px;
     line-height: 34px;
     letter-spacing: -0.7px;
-`
+`;
 
 export const Subtitle = styled(TextareaReduxBase)`
     height: 96px;
@@ -39,24 +39,24 @@ export const Subtitle = styled(TextareaReduxBase)`
     font-weight: 600;
     line-height: 24px;
     letter-spacing: 0;
-`
+`;
 
 export const Theses = styled(Subtitle)`
     font-size: 16px;
     font-weight: 400;
 
     resize: vertical;
-`
+`;
 
 export const RatingRedux = styled(RatingReduxBase)`
     margin-right: 20px;
     margin-bottom: 21px;
-`
+`;
 
 export const ImageRow = styled(GroupBase)`
     display: flex;
     justify-content: space-between;
-`
+`;
 
 export const ImageCell = styled.div`
     display: flex;
@@ -74,11 +74,17 @@ export const ImageCell = styled.div`
         width: 100%;
         height: auto
     }
+
+    > * {
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+    }
 `;
 
 export const ImageLoaderRedux = styled(ImageLoaderReduxBase)`
     min-height: 243px;
-`
+`;
 
 export const Root = styled.div`
     margin-top: 6px;

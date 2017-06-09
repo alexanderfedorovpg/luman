@@ -1,82 +1,68 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form/immutable'
+import React from 'react';
+import { Field, reduxForm } from 'redux-form/immutable';
 
-import Input from 'components/Form/Input'
-import ImageLoader from 'components/Form/ImageLoader'
-import Button from 'components/Button/TypedBtn'
+import Button from 'components/Button/TypedBtn';
+import { Group } from '../index';
+import { InputRedux, ImageLoaderRedux } from '../ReduxForm';
 
-const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
-    <div>
-        <Input
-            {...props}
-            success={touched && valid && !props.disabled}
-            error={touched && invalid && !props.disabled}
-            value={input.value}
-            onChange={(e) => input.onChange(e)} />
-        {
-            touched && showError && error &&
-            <Label light error>{error}</Label>
-        }
-    </div>
-);
-
-const ImageLoaderRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
-    <ImageLoader
-        {...props}
-        success={touched && valid && !props.disabled}
-        error={touched && invalid && !props.disabled}
-        value={input.value}
-        onChange={(e) => input.onChange(e.target.files)} />
-);
-
-function UploadForm({ handleSubmit, reset }) {
-
+function UploadForm({ handleSubmit }) {
     return (
-        <div>
-            <Field
-                name="image"
-                accept="image/*"
-                icon
-                component={ImageLoaderRedux} />
-            <Field
-                name="title"
-                block
-                placeholder="Название"
-                component={InputRedux} />
-            <Field
-                name="author"
-                block
-                placeholder="Автор"
-                component={InputRedux} />
-            <Field
-                name="source"
-                block
-                placeholder="Источник"
-                component={InputRedux} />
-            <Button
-                onClick={() => {
-                    handleSubmit();
-                    reset();
-                }}
-                block success
-                buttonType="upload">
-
-                Загрузить
-            </Button>
-        </div>
-    )
+        <form onSubmit={handleSubmit}>
+            <Group marginBottom="5px">
+                <Field
+                    name="image"
+                    accept="image/*"
+                    icon
+                    component={ImageLoaderRedux}
+                />
+            </Group>
+            <Group marginBottom="5px">
+                <Field
+                    name="title"
+                    block
+                    placeholder="Название"
+                    component={InputRedux}
+                />
+            </Group>
+            <Group marginBottom="5px">
+                <Field
+                    name="author"
+                    block
+                    placeholder="Автор"
+                    component={InputRedux}
+                />
+            </Group>
+            <Group sm>
+                <Field
+                    name="source"
+                    block
+                    placeholder="Источник"
+                    component={InputRedux}
+                />
+            </Group>
+            <Group>
+                <Button
+                    block
+                    success
+                    buttonType="upload"
+                >
+                    Загрузить
+                </Button>
+            </Group>
+        </form>
+    );
 }
 
 export default reduxForm({
     form: 'richEditorImageUploadForm',
     validate(data) {
-        let errors = {};
+        const errors = {};
         const values = data.toJS();
 
         if (!values.image) {
             errors.image = 'Выберите изображение для загрузки';
         }
 
-        return errors
-    }
-})(UploadForm)
+        return errors;
+    },
+})(UploadForm);
