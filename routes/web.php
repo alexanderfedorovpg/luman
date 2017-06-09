@@ -62,6 +62,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->post('/newseditor/work','NewsListEditorController@in_work');
     $group->post('/newseditor/tofix','NewsListEditorController@toFix');
     $group->put('/newseditor/cover','NewsListEditorController@updateCover');
+    $group->put('/newseditor/theses','NewsListEditorController@updateTheses');
+
     $group->put('/newseditor/trigger_vc','NewsListEditorController@triggerVisibleConstructor');
     $group->put('/newseditor/title','NewsListEditorController@updateTitle');
 

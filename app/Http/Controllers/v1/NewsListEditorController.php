@@ -4,6 +4,8 @@ namespace App\Http\Controllers\v1;
 
 use App\Models\CdnFile;
 use App\Models\NewsUri;
+use App\Models\Rubrics;
+use App\Models\TvProgram;
 use Illuminate\Support\Facades\Auth,
     Illuminate\Http\Request,
     App\Models\News,
@@ -282,7 +284,14 @@ class NewsListEditorController extends CmsController
 
                 if ($log_moderation->setEndModeration() && $newsEdit->save()) {
                     if (isset($rubrics) && is_array($rubrics)) {
-                        $newsEdit->rubrics()->sync($rubrics);
+                         $newsEdit->rubrics()->sync($rubrics);
+                        if (Rubrics::whereIn('id',$rubrics)->pluck('name')->contains(function ($value, $key) {
+                            return mb_strtolower($value) == 'из эфира';
+                        })) {
+                            $newsEdit->program_id=TvProgram::first()->id;
+                            $newsEdit->save();
+                        }
+
                     }
                     $image_main_r = $request->input('image_main');
                     $image_main_o = $request->input('image_main_info');
@@ -416,6 +425,9 @@ class NewsListEditorController extends CmsController
             $news->moderation = $request->get('moderation') ? $request->get('moderation') : false;
 
 
+            if ($request->get('rubrics')) {
+                $rubrics = $request->get('rubrics');
+            }
             if (isset($theses)) {
                 $news->theses = $theses;
             }
@@ -442,8 +454,15 @@ class NewsListEditorController extends CmsController
             }
 
             if ($news->save()) {
+
                 if (isset($rubrics) && is_array($rubrics)) {
-                    $news->rubrics()->attach($rubrics);
+                     $news->rubrics()->attach($rubrics);
+                    if (Rubrics::whereIn('id',$rubrics)->pluck('name')->contains(function ($value, $key) {
+                        return mb_strtolower($value) == 'из эфира';
+                    })) {
+                        $news->program_id=TvProgram::first()->id;
+                        $news->save();
+                    }
                 }
                 if ($request->input('uri')) {
                     $uri = new NewsUri(['uri' => $request->input('uri')]);
@@ -754,6 +773,28 @@ class NewsListEditorController extends CmsController
             $request->input('id');
             $news = News::findOrfail($id);
             $news->title = $request->input('title');
+
+            if ($news->save()) {
+                return $this->respond($news->toArray());
+            } else {
+                return $this->respondNotFound();
+            }
+        } catch (\Exception $e) {
+            return $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    public function updateTheses(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+                'theses' => 'required|string',
+            ]);
+            $id = $request->input('id');
+            $request->input('id');
+            $news = News::findOrfail($id);
+            $news->title = $request->input('theses');
 
             if ($news->save()) {
                 return $this->respond($news->toArray());

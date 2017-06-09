@@ -36,7 +36,7 @@ class News extends Model
         'moderation',
         'theses',
         'program_id',
-        'is_full_video',
+
     ];
 
     protected $hidden = ['pivot'];
