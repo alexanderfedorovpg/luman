@@ -61,7 +61,7 @@ class VideoUpload extends PureComponent {
     }
 
     render() {
-        const { video, videoPreview } = this.props;
+        const { video, videoPreview, programs } = this.props;
         const initialValues = {
             video: video.file.input.value,
             preview: videoPreview.file.input.value,
@@ -99,6 +99,7 @@ class VideoUpload extends PureComponent {
                 <VideoUploadModal
                     isOpen={this.state.modalOpen}
                     close={this.closeModal}
+                    programs={programs}
                     onSubmit={this.submitHandler}
                     initialValues={initialValues}
                 />

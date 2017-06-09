@@ -200,12 +200,13 @@ export default [
 
 function translit(value) {
     // Символ, на который будут заменяться все спецсимволы
-    let space = '-';
+    const space = '-';
     // Берем значение из нужного поля и переводим в нижний регистр
-    let text = value.toLowerCase();
+    const text = value.toLowerCase();
 
     // Массив для транслитерации
-    let transl = {
+    /* eslint-disable */
+    const transl = {
         А: 'A', Б: 'B', В: 'V', Г: 'G', Д: 'D', Е: 'E', Ё: 'E', Ж: 'ZH',
         З: 'Z', И: 'I', Й: 'J', К: 'K', Л: 'L', М: 'M', Н: 'N',
         О: 'O', П: 'P', Р: 'R', С: 'S', Т: 'T', У: 'U', Ф: 'F', Х: 'H',
@@ -221,22 +222,23 @@ function translit(value) {
         '{': space, '}': space, '\'': space, '"': space, ';': space, ':': space,
         '?': space, '<': space, '>': space, '№': space,
     };
+    /* eslint-enable */
 
     let result = '';
-    let curent_sim = '';
+    let curentSym = '';
 
     for (let i = 0; i < text.length; i++) {
         // Если символ найден в массиве то меняем его
         if (transl[text[i]] != undefined) {
-            if (curent_sim != transl[text[i]] || curent_sim != space) {
+            if (curentSym != transl[text[i]] || curentSym != space) {
                 result += transl[text[i]];
-                curent_sim = transl[text[i]];
+                curentSym = transl[text[i]];
             }
         }
         // Если нет, то оставляем так как есть
         else {
             result += text[i];
-            curent_sim = text[i];
+            curentSym = text[i];
         }
     }
 

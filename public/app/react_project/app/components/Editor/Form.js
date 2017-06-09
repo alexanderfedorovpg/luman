@@ -34,17 +34,19 @@ function Part1Component() {
     );
 }
 
-function Part2Component() {
+function Part2Component({ programs }) {
     return (
         <Fields
             names={[
                 'video.id',
                 'video.file',
+                'video.program_id',
                 'videoPreview.id',
                 'videoPreview.file',
                 'videoPreview.author',
                 'videoPreview.source',
             ]}
+            programs={programs}
             component={VideoUpload}
         />
     );
