@@ -363,11 +363,93 @@
 
     &__text-bg-gray {
         flex-direction: column;
-        justify-content: flex-start !important;
-        align-items: flex-end !important;
+        justify-content: flex-start;
+        align-items: flex-end;
 
         .text-bg-gray__block-text_play {
-            left: 102.4% !important;
+            left: 102.4%;
+        }
+    }
+
+    &_detail {
+
+        .right-col {
+
+            @include below($tabletMax) {
+                display: none;
+            }
+        }
+
+        .inner-about {
+
+            &__content {
+                margin-left: 0;
+                padding-left: 0;
+            }
+
+            &__subtitle {
+
+                @include below($mobile) {
+                    margin-top: rem(25);
+                }
+            }
+        }
+
+        .text-bg-gray--news {
+
+            height: auto;
+            min-height: rem(573);
+
+            @include below($tabletLandscapeMax) {
+                width: rem(598);
+                transform: translateX(0);
+            }
+
+            @include below($mobile) {
+                width: rem(300);
+            }
+
+            .general-video {
+                height: rem(425) !important;
+                margin-top: 0;
+
+                @include below($tabletMax) {
+                    height: rem(335) !important;
+                }
+
+                @include below($mobile) {
+                    width: rem(300) !important;
+                    height: auto !important;
+                    margin-right: 0 !important;
+                }
+
+                &__img {
+                    width: 100%;
+                }
+
+                &__date {
+                    text-align: left;
+                }
+
+                &__ico {
+                    width: rem(55);
+                    height: rem(55);
+
+                    @include below($tabletMax) {
+                        width: rem(96);
+                        height: rem(96);
+                    }
+                }
+
+                &__span {
+                    top: calc(50% - #{rem(12.5)});
+                    left: rem(40);
+
+                    @include below($tabletMax) {
+                        left: rem(70);
+                    }
+                }
+            }
         }
     }
 }

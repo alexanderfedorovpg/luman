@@ -12,7 +12,7 @@ import './style.scss'
 function Detail({ data, nowNews }) {
 
     return (
-        <div className="inner-wrapper">
+        <div className="inner-wrapper broadcast_detail">
             <div className="inner-about inner-wrapper inner-default">
                 <div className="inner-about__container container">
                     <div className="inner-about__container container">

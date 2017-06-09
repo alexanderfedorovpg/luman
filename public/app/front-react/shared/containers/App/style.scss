@@ -469,6 +469,7 @@ main {
 
         display: flex;
         align-items: flex-start;
+        flex-direction: row;
         justify-content: flex-end;
         flex-wrap: wrap;
         margin-top: rem(7);
@@ -488,7 +489,7 @@ main {
         }
 
         @include above($tabletLandscape) {
-            height: rem(673);
+            min-height: rem(673);
         }
 
         &.text-bg-gray .text-bg-gray {
