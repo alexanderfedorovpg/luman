@@ -13,10 +13,6 @@
         margin-left: 0;
     }
 
-    @include above($tablet) {
-        width: rem(100);
-    }
-
     @include above($tabletLandscape) {
         width: 100%;
     }
