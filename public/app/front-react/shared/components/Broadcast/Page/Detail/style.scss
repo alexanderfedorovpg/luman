@@ -395,6 +395,16 @@
             }
         }
 
+        .text-bg-gray {
+
+            &__block-text {
+
+                @include between($tablet, $tabletLandscapeMax) {
+                    left: -9%;
+                }
+            }
+        }
+
         .text-bg-gray--news {
 
             height: auto;
