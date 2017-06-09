@@ -1,9 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form/immutable';
 
 import Button from 'components/Button/TypedBtn';
 import { Group } from '../index';
-import { InputRedux, ImageLoaderRedux } from '../ReduxForm';
+import InputRedux from '../ReduxForm/InputRedux';
+import ImageLoaderRedux from '../ReduxForm/ImageLoaderRedux';
+
+const StyledImageLoader = styled(ImageLoaderRedux)`
+    min-height: 100px;
+`;
 
 function UploadForm({ handleSubmit }) {
     return (
@@ -13,7 +19,7 @@ function UploadForm({ handleSubmit }) {
                     name="image"
                     accept="image/*"
                     icon
-                    component={ImageLoaderRedux}
+                    component={StyledImageLoader}
                 />
             </Group>
             <Group marginBottom="5px">

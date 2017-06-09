@@ -30,7 +30,7 @@ const Root = styled.div`
         content: "—";
     }
 
-    .ql-toolbar {
+    .ql-toolbar.ql-toolbar {
         border-bottom: none;
     }
 `
