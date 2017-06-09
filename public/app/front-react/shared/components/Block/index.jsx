@@ -68,10 +68,14 @@ function renderItem(className, type, data, war, wTitle) {
                                 ? <FormattedRelative value={data.publish_date} />
                                 : null
                             }
+                            {Date.parse(data.updated_at) && Date.parse(data.publish_date)
+                                ? ' / '
+                                : ''
+                            }
                             {Date.parse(data.updated_at)
                                 ? (
                                     <span className={`${type}__time-upadate`}>
-                                        / Обновлено <FormattedRelative value={data.updated_at} />
+                                        Обновлено <FormattedRelative value={data.updated_at} />
                                     </span>
                                 )
                                 : null

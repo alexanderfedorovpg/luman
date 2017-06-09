@@ -212,15 +212,19 @@ main {
 
     position: relative;
 
-    // .general-video {
-        // height: rem(396);
+    .general-video {
+        height: rem(396);
 
-    //     &::before,
-    //     .general-video__img,
-    //     .general-video__link {
-    //         height: rem(396);
-    //     }
-    // }
+        &::before,
+        .general-video__img,
+        .general-video__link {
+            height: inherit;
+        }
+    }
+
+    .general-video__img {
+        height: rem(396);
+    }
 
     &_play {
         &:before {
@@ -730,6 +734,11 @@ main {
     &__content {
         padding-left: rem(82);
         margin-top: rem(30);
+
+        @include below($tabletMax) {
+            padding-left: rem(67);
+            margin-top: rem(26);
+        }
 
         color: $enter;
 

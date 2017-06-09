@@ -59,6 +59,11 @@
 
             transform: translateX(-17%);
 
+            @include below($tabletMax) {
+                margin-top: rem(15);
+                margin-bottom: rem(16);
+            }
+
             @include below($mobile) {
                 transform: translateX(0);
             }
@@ -105,7 +110,7 @@
             }
 
             @include above($tablet) {
-                margin-left: rem(69);
+                margin-left: 0;
                 margin-top: rem(24);
             }
 
@@ -186,6 +191,11 @@
                     @include below($tabletLandscapeMax) {
                         width: rem(1021);
                         transform: translateX(-54.5%);
+                    }
+
+                    @include below($tabletMax) {
+                        width: rem(1046);
+                        transform: translateX(-47.5%);
                     }
 
                    @include below($mobile) {
@@ -294,7 +304,7 @@
             line-height: rem(39);
 
             @include above($tablet) {
-                margin-top: rem(-13);
+                margin-top: rem(-15);
             }
 
             @include above($tabletLandscape) {

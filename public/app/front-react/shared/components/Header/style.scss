@@ -14,8 +14,13 @@
         width: rem(18);
         height: rem(18);
 
+        @include below($mobile) {
+            margin-right: rem(3);
+        }
+
         @include above($tablet) {
             margin-top: 0;
+            margin-left: rem(-11);
         }
 
         @include above($desktop) {
