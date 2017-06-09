@@ -155,6 +155,7 @@
         &_header .breadcrumb__link {
             @include below($tabletLandscapeMax) {
                 line-height: rem(33);
+                margin-right: rem(5);
             }
         }
 
