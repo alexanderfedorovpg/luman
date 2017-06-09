@@ -405,62 +405,66 @@
             }
         }
 
-        .text-bg-gray--news {
+        .inner-wrapper {
 
-            height: auto;
-            min-height: rem(573);
+            .text-bg-gray--news {
 
-            @include below($tabletLandscapeMax) {
-                width: rem(598);
-                transform: translateX(0);
-            }
+                height: auto;
+                min-height: rem(573);
 
-            @include below($mobile) {
-                width: rem(300);
-            }
-
-            .general-video {
-                height: rem(425) !important;
-                margin-top: 0;
-
-                @include below($tabletMax) {
-                    height: rem(335) !important;
+                @include below($tabletLandscapeMax) {
+                    width: rem(598);
+                    transform: translateX(0);
                 }
 
                 @include below($mobile) {
-                    width: rem(300) !important;
-                    height: auto !important;
-                    margin-right: 0 !important;
+                    width: rem(300);
                 }
 
-                &__img {
-                    width: 100%;
-                }
-
-                &__date {
-                    text-align: left;
-                }
-
-                &__ico {
-                    width: rem(55);
-                    height: rem(55);
+                .general-video {
+                    height: rem(425) !important;
+                    margin-top: 0;
 
                     @include below($tabletMax) {
-                        width: rem(96);
-                        height: rem(96);
+                        height: rem(335) !important;
                     }
-                }
 
-                &__span {
-                    top: calc(50% - #{rem(12.5)});
-                    left: rem(40);
+                    @include below($mobile) {
+                        width: rem(300) !important;
+                        height: auto !important;
+                        margin-right: 0 !important;
+                    }
 
-                    @include below($tabletMax) {
-                        left: rem(70);
+                    &__img {
+                        width: 100%;
+                    }
+
+                    &__date {
+                        text-align: left;
+                    }
+
+                    &__ico {
+                        width: rem(55);
+                        height: rem(55);
+
+                        @include below($tabletMax) {
+                            width: rem(96);
+                            height: rem(96);
+                        }
+                    }
+
+                    &__span {
+                        top: calc(50% - #{rem(12.5)});
+                        left: rem(40);
+
+                        @include below($tabletMax) {
+                            left: rem(70);
+                        }
                     }
                 }
             }
         }
+
     }
 }
 
