@@ -20,7 +20,14 @@ const GroupTop = styled(Group)`
 `
 
 const GroupWide = styled(Group)`
+    margin-left: 5px;
     flex-grow: 1;
+
+    > * {
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+    }
 `
 
 const UploadFormModal = ({ isOpen, close, valid, dirty, handleSubmit }) => (
