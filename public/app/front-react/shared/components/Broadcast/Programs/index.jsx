@@ -69,7 +69,7 @@ class Broadcast extends Component {
                             <Title>
                                 Из эфира
                             </Title>
-                            <Tabs data={programs.splice(0, 6)} active={program} onChange={setProgram} />
+                            <Tabs data={programs} active={program} onChange={setProgram} />
                         </div>
                     </div>
                     <div className="news-header">
