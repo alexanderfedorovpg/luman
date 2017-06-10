@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 
 import classNames from 'classnames'
-import { FormattedRelative } from 'react-intl'
+// import { FormattedRelative } from 'react-intl'
 
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'

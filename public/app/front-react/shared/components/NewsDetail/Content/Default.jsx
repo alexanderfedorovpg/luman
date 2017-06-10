@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import ScissorsIcon from 'components/Icon/Scissors';
 import {FormattedRelative} from 'react-intl';
 import RenderSocialWidgets from './RenderSocialWidgets'
+import FormatDate from 'components/FormatDate';
 
 import Socials from 'components/Socials';
 import Rubrics from 'components/Rubrics';
@@ -38,7 +39,7 @@ class Content extends PureComponent {
             <h1>{data.title}</h1>
             <div className="inner-about__date">
                 {Date.parse(data.publish_date)
-                    ? <FormattedRelative value={data.publish_date} />
+                    ? <FormatDate value={data.publish_date} />
                     : null
                 }
             </div>
