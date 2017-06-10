@@ -7,6 +7,7 @@ import RSS from 'components/RSS';
 import Search from 'components/Search';
 import InfoIcon from 'components/Icon/Info';
 import MediaQuery from 'react-responsive'
+import { Link } from 'react-router-dom';
 
 import Logo from './Logo';
 import TopMenu from './TopMenu';
@@ -83,7 +84,9 @@ class Header extends PureComponent {
                                     <Burger toggle={this.toggleMenu} active={this.state.toggleMenu}/>
                                 </MediaQuery>
                                 <Logo war={war} />
-                                <InfoIcon width="18px" height="18px" />
+                                <Link to='/info-page#broadcast'>
+                                    <InfoIcon width="18px" height="18px" />
+                                </Link>
                                 <TopMenu />
                                 <MediaQuery minDeviceWidth="1300px">
                                     <Rates />

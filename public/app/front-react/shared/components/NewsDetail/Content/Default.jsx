@@ -30,6 +30,8 @@ class Content extends PureComponent {
         const theses = Array.isArray(data.theses)
             ? data.theses
             : `${data.theses}`.split('\\');
+        
+        // data.body = data.body.replace('undefined', '');
 
     return (
         <div>
