@@ -87,9 +87,16 @@
 
                 .general-video {
 
+                    margin-top: 0px;
+
                     @include below($mobile) {
                         margin-right: 0;
                     }
+                    
+                }
+
+                .inner-about__video-info {
+                    align-self: flex-end;
                 }
             }
         }
