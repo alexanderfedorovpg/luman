@@ -11,7 +11,7 @@ function FormatDate({value}) {
     const now = new Date();
 
     function getDate () {
-        if (now.getTime() - date.getTime() <= 172800000) {
+        if (now.getTime() - date.getTime() >= 172800000) {
             // return (
             //     <span>{date.toLocaleDateString()} {date.getHours()}:{date.getMinutes()}</span>
             // )
