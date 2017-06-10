@@ -134,10 +134,9 @@ class Content extends PureComponent {
                             <div>
                                 Фото:
                             </div>
-                            {data.video_stream.preview_author && data.video_stream.preview_source ? data.video_stream.preview_author + ' / ' data.video_stream.preview_source : null}
-                            {data.video_stream.preview_author && !data.video_stream.preview_source ? data.video_stream.preview_author : data.video_stream.preview_source}
-                            {/*data.video_stream.preview_author && data.video_stream.preview_source && ' / '*/}
-                            {/*data.video_stream.preview_source*/}
+                            {data.video_stream.preview_author}
+                            {data.video_stream.preview_author && data.video_stream.preview_source && ' / '}
+                            {data.video_stream.preview_source}
                         </div>
                     )}
                     <Video
