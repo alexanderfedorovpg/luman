@@ -1,0 +1,9 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.format-date {
+
+    & span {
+        margin-right: rem(5);
+    }
+}

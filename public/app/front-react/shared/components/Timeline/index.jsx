@@ -1,5 +1,7 @@
 import React from 'react';
-import { FormattedTime } from 'react-intl';
+// import { FormattedTime } from 'react-intl';
+
+import FormatDate from 'components/FormatDate';
 
 import Socials from 'components/Socials';
 
@@ -13,11 +15,7 @@ function Timeline({ data }) {
                 <div className="timeline__item" key={i}>
                     <div className="timeline__date">
                         <time className="timeline__time">
-                            <FormattedTime
-                                value={v.publish_date}
-                                hour="2-digit"
-                                minute="2-digit"
-                            />
+                            <FormatDate value={v.publish_date} />
                         </time>
                     </div>
                     <div className="timeline__cnt">

@@ -8,6 +8,7 @@ import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
 import Socials from 'components/Socials';
 import RenderSocialWidgets from './RenderSocialWidgets'
+import FormatDate from 'components/FormatDate';
 
 class Content extends PureComponent {
 
@@ -112,7 +113,7 @@ class Content extends PureComponent {
                 </h1>
                 <div className="inner-about__date">
                     {Date.parse(data.publish_date)
-                        ? <FormattedRelative value={data.publish_date} />
+                        ? <FormatDate value={data.publish_date} />
                         : null
                     }
                 </div>
