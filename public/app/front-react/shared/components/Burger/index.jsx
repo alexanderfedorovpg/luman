@@ -1,11 +1,12 @@
 import React from 'react'
+import classNames from 'classnames';
 
 import './style.scss'
 
-function Burger() {
+function Burger({toggle, active}) {
 
     return (
-        <div className="burger header__burger">
+        <div onClick={toggle} className={classNames("burger header__burger", {'burger-active' : active})}>
             <div className="burger__element">
             </div>
         </div>

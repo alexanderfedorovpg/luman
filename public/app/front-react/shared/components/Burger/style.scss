@@ -13,6 +13,8 @@
         background-color: $white;
         cursor: pointer;
 
+        transition: background .2s ease-in-out;
+
         &::before,
         &::after {
             content: '';
@@ -29,10 +31,26 @@
 
         &::before {
             top: rem(-7);
+            transition: transform .3s ease-in-out, top .2s ease-in-out;
         }
 
         &::after {
+            transition: transform .3s ease-in-out, top .2s ease-in-out;
             bottom: rem(-7);
+        }
+    }
+
+    &-active &__element {
+        background: transparent;
+        
+        &::before {
+            top: rem(-1);
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            top: rem(-1);
+            transform: rotate(-45deg);
         }
     }
 }
