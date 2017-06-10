@@ -131,7 +131,7 @@ class Content extends PureComponent {
                     }
                     {data.video_stream && (data.video_stream.preview_author || data.video_stream.preview_source) && (
                         <div className="inner-about__video-info">
-                            {data.video_stream.preview_author && data.video_stream.preview_source ?
+                            {data.video_stream.preview_author !== 'undefined' && data.video_stream.preview_source !== 'undefined' ?
                                 <div>
                                     <div>
                                         Фото:
