@@ -11,6 +11,7 @@ import Group from 'components/Group'
 import Block from 'components/Block'
 import MiniNews from 'components/MiniNews'
 import Video from 'components/Aside/Video'
+import AsideVideo from './AsideVideo'
 import EnterOne from 'components/Broadcast/One'
 import Banner from './Banner'
 import RandomNews from './RandomNews'
@@ -40,6 +41,8 @@ function HomePage({
 
     const moreVideo = videoNews.slice(2, 5)
     const listVideo = videoNews.slice(5, 8)
+    
+    // const todayVideos = today;
 
     return (
         <div className="general-news">
@@ -48,7 +51,7 @@ function HomePage({
                     <div className="general-news__left-wrapper">
                         <BigNews className="general-news__big-news" data={now[0]||{}} />
                         <MediaQuery maxWidth="614px">
-                            <Video
+                            <AsideVideo
                                 data={firstVideo}
                                 playTitle="date"
                                 title="Все ключевые события этого дня"
@@ -57,7 +60,7 @@ function HomePage({
                         </MediaQuery>
                         <Now data={now.slice(1, 5)} className="general-news__now" />
                         <MediaQuery minWidth="615px" maxWidth="929px">
-                            <Video
+                            <AsideVideo
                                 data={firstVideo}
                                 playTitle="date"
                                 title="Все ключевые события этого дня"
@@ -86,11 +89,12 @@ function HomePage({
                 </div>
                 <div className="general-news__right right-col">
                     <MediaQuery minWidth="930px">
-                        <Video
+                        <AsideVideo
                             data={firstVideo}
                             playTitle="date"
                             title="Все ключевые события этого дня"
                             main
+                            videos={todayNews}
                             className="general-news__general-video" />
                     </MediaQuery>
 
