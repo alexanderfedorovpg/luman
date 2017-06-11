@@ -43,7 +43,8 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
         >
             {
                 play ?
-                    <iframe src={ensureAbs(data.url)} />
+                    <video style={{width: 100 + '%'}} controls="controls" src={ensureAbs(data.url)} autoPlay />
+                    
                     :
                     (
                         <span>

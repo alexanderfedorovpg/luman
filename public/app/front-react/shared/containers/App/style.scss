@@ -45,7 +45,7 @@ html {
 
 h1 {
     font: #{rem(36)}/ #{rem(48)} $stemBold;
-    letter-spacing: rem(-.9);
+    // letter-spacing: rem(-.9);
     color: $enter;
 
     @include below($mobile) {
@@ -120,7 +120,7 @@ main {
     font-size: rem(16);
     line-height: rem(30);
     text-transform: uppercase;
-    letter-spacing: rem(-.7);
+    // letter-spacing: rem(-.7);
     color: $black;
     border-bottom: 1px solid $gray;
 
@@ -271,7 +271,7 @@ main {
         margin-top: rem(30);
 
         > p {
-            letter-spacing: rem(-0.35);
+            // letter-spacing: rem(-0.35);
         }
 
     }
@@ -357,7 +357,7 @@ main {
             padding: #{rem(24)} 0 #{rem(30)} #{rem(41)};
 
             text-align: right;
-            letter-spacing: rem(-.8);
+            // letter-spacing: rem(-.8);
 
             background-color: #a13461;
             background-image: url(/content/text-bg-gray/text-block.png);
@@ -543,7 +543,7 @@ main {
 
                 font-size: rem(15);
                 line-height: rem(18);
-                letter-spacing: rem(-0.75);
+                // letter-spacing: rem(-0.75);
             }
 
         }
@@ -742,7 +742,7 @@ main {
         p {
             margin-bottom: rem(21);
 
-            letter-spacing: rem(-.35);
+            // letter-spacing: rem(-.35);
         }
     }
 
@@ -751,7 +751,7 @@ main {
         margin-top: rem(51);
         margin-bottom: rem(15);
 
-        letter-spacing: rem(-.5);
+        // letter-spacing: rem(-.5);
     }
 
     &__box-preview {
@@ -778,7 +778,7 @@ main {
 
         font: #{rem(16)}/ #{rem(24)} $stemBold;
         color: $white;
-        letter-spacing: rem(-.8);
+        // letter-spacing: rem(-.8);
 
         background-image: url(/content/about/box-text.png);
         background-position: center;
