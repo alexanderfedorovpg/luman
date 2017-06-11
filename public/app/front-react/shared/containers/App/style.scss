@@ -521,18 +521,21 @@ main {
                 }
 
                 &_play {
-                    opacity: .5;
-                    left: 69.4%;
 
-                    &:before {
-                        left: rem(-31);
-                        transform: scale(-1, 1);
-                    }
+                    @include above($tablet) {
+                        opacity: .5;
+                        left: 69.4%;
 
-                    &:after {
-                        left: rem(-31.7);
-                        transform: scale(-1, 1);
-                        width: calc(100% + 1.94375rem);
+                        &:before {
+                            left: rem(-31);
+                            transform: scale(-1, 1);
+                        }
+
+                        &:after {
+                            left: rem(-31.7);
+                            transform: scale(-1, 1);
+                            width: calc(100% + 1.94375rem);
+                        }
                     }
 
                 }
