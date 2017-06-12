@@ -45,7 +45,7 @@ class Header extends PureComponent {
 
     toggleMenu() {
         console.log('toggle menu');
-        
+
         this.setState({
             toggleMenu: !this.state.toggleMenu
         })
@@ -64,7 +64,7 @@ class Header extends PureComponent {
 
         return (
             <div>
-                <MediaQuery maxDeviceWidth="614px">
+                <MediaQuery maxWidth="614px">
                     <SideMenu active={this.state.toggleMenu} toggle={this.toggleMenu}/>
                 </MediaQuery>
                 <header
@@ -80,23 +80,25 @@ class Header extends PureComponent {
                     <div className="header__container container">
                         <div className="header__left-part">
                             <div className="header__part-wrapper">
-                                <MediaQuery maxDeviceWidth="614px">
+                                <MediaQuery maxWidth="614px">
                                     <Burger toggle={this.toggleMenu} active={this.state.toggleMenu}/>
                                 </MediaQuery>
                                 <Logo war={war} />
-                                <Link to='/info-page#broadcast'>
+                                <Link to="/info-page">
                                     <InfoIcon width="18px" height="18px" />
                                 </Link>
                                 <TopMenu />
-                                <MediaQuery minDeviceWidth="1300px">
+                                <MediaQuery minWidth="1300px">
                                     <Rates />
                                 </MediaQuery>
                             </div>
                         </div>
                         <div className="header__right-part">
                             <RSS />
-                            <MediaQuery maxDeviceWidth="614px">
-                                <InfoIcon width="18px" height="18px" />
+                            <MediaQuery maxWidth="614px">
+                                <Link to="/info-page">
+                                    <InfoIcon width="18px" height="18px" />
+                                </Link>
                             </MediaQuery>
                             <Search
                                 open={this.state.searchOpen}
