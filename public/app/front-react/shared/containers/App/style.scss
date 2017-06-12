@@ -635,6 +635,7 @@ main {
 
                 @include above($desktop) {
                     margin-bottom: rem(29);
+                    text-align: left;
                 }
             }
 
