@@ -150,7 +150,7 @@ main {
     }
 
     &_no-border {
-      border-bottom: none;
+        border-bottom: none;
     }
 }
 
@@ -517,7 +517,7 @@ main {
                 }
 
                 @include above($tabletLandscape) {
-                    width: rem(225);
+                    width: rem(268);
                 }
 
                 &_play {
