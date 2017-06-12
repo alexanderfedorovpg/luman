@@ -55,10 +55,9 @@ class AsideVideo extends PureComponent {
 
     render() {
         const { data, className, main, videos } = this.props
+        
 
-        const first = videos[0];
-
-        return first.video_stream
+        return data.video_stream
             ? (
                 <div
                     className={classNames(
@@ -79,10 +78,10 @@ class AsideVideo extends PureComponent {
                             (
                                 <span>
                                     <a onClick={this.play} className="general-video__link" />
-                                    <Img className="general-video__img" src={first.video_stream.preview} alt="" />
+                                    <Img className="general-video__img" src={data.preview} alt="" />
                                     <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
-                                            {first.video_stream.url ?
+                                            {data.url ?
 
                                                 <img onClick={this.play} className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
                                                 :
