@@ -345,7 +345,9 @@ main {
         }
 
         &.inner-about__text-bg-gray_play:before {
-            visibility: hidden;
+            @include above($mobile) {
+                visibility: hidden;
+            }
         }
 
         &__block-text {

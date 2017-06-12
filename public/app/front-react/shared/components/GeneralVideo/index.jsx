@@ -43,7 +43,7 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
         >
             {
                 play ?
-                    <video style={{width: 100 + '%'}} controls="controls" src={ensureAbs(data.url)} autoPlay />
+                    <video id="videoStream" style={{width: 100 + '%', height: 100 + '%'}} controls="controls" src={ensureAbs(data.url)} autoPlay />
                     
                     :
                     (
