@@ -31,13 +31,13 @@ function HomePage({
     broadcast,
 }) {
 
-    const todayNews = today.slice(0)
+    const todayNews = today.slice(0) || {}
 
     const randomNews = other.slice(0, 7)
     const moreNews = other.slice(7, 13)
 
     const videoNews = broadcast.map(v => v.record)
-    const firstVideo = videoNews[0] || {}
+    const firstVideo = now[0] || {}
 
     const moreVideo = videoNews.slice(2, 5)
     const listVideo = videoNews.slice(5, 8)
@@ -94,7 +94,7 @@ function HomePage({
                             playTitle="date"
                             title="Все ключевые события этого дня"
                             main
-                            videos={todayNews}
+                            videos={now}
                             className="general-news__general-video" />
                     </MediaQuery>
 

@@ -32,13 +32,17 @@ class AsideVideo extends PureComponent {
             const videoSource = this.props.videos;
             let i = 0;
             const videoCount = videoSource.length;
-            const etotPidor = this.refs.wrapp.childNodes[0];
+            const videoNode = this.refs.wrapp.childNodes[0];
             function videoPlay(videoNum) {
-                etotPidor.setAttribute("src", ensureAbs(videoSource[videoNum].video_stream.url));
-                etotPidor.load();
-                etotPidor.play();
+                if (videoSource[videoNum].video_stream.url) {
+                    videoNode.setAttribute("src", ensureAbs(videoSource[videoNum].video_stream.url));
+                    videoNode.load();
+                    videoNode.play();
+                } else {
+                    myHandler();
+                }
             }
-            etotPidor.addEventListener('ended', myHandler, false);
+            videoNode.addEventListener('ended', myHandler, false);
             videoPlay(0);
             
             function myHandler() {
@@ -55,6 +59,7 @@ class AsideVideo extends PureComponent {
 
     render() {
         const { data, className, main, videos } = this.props
+        
 
         return data.video_stream
             ? (
@@ -77,7 +82,7 @@ class AsideVideo extends PureComponent {
                             (
                                 <span>
                                     <a onClick={this.play} className="general-video__link" />
-                                    <Img className="general-video__img" src={data.preview} alt="" />
+                                    <Img className="general-video__img" src={data.video_stream.preview} alt="" />
                                     <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
                                             {data.url ?
