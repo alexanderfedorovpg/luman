@@ -573,6 +573,7 @@
         }
 
         @include above($mobile) {
+            background-color: transparent;
         }
         
 
