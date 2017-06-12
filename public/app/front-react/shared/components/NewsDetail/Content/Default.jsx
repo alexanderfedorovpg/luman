@@ -32,7 +32,9 @@ class Content extends PureComponent {
             ? data.theses
             : `${data.theses}`.split('\\');
         
-        // data.body = data.body.replace('undefined', '');
+        if (data.body && data.body.indexOf('undefined', '') > -1) {
+            data.body = data.body.replace('undefined', '');
+        }
 
     return (
         <div>

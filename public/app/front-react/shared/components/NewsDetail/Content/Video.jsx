@@ -61,6 +61,17 @@ class Content extends PureComponent {
         this.setState({
             play: true
         })
+
+        setTimeout(() => {
+            const video = document.getElementById('videoStream');
+
+            video.addEventListener('ended', () => {
+                this.setState({
+                    play: false
+                })
+            }, false);
+
+        }, 0)
     }
 
     stop(e) {

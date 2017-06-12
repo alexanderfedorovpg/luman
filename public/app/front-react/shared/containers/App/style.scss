@@ -345,7 +345,9 @@ main {
         }
 
         &.inner-about__text-bg-gray_play:before {
-            visibility: hidden;
+            @include above($mobile) {
+                visibility: hidden;
+            }
         }
 
         &__block-text {
@@ -635,6 +637,7 @@ main {
 
                 @include above($desktop) {
                     margin-bottom: rem(29);
+                    text-align: left;
                 }
             }
 
