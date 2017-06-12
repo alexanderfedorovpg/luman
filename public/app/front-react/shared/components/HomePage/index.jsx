@@ -37,7 +37,7 @@ function HomePage({
     const moreNews = other.slice(7, 13)
 
     const videoNews = broadcast.map(v => v.record)
-    const firstVideo = videoNews[0] || {}
+    const firstVideo = now[0] || {}
 
     const moreVideo = videoNews.slice(2, 5)
     const listVideo = videoNews.slice(5, 8)
