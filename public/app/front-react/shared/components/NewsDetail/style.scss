@@ -557,13 +557,6 @@
 
         display: none;
 
-        &.is-active {
-            @include above($mobile) {
-                display: block;
-            }
-        }
-
-
         @include below($tablet) {
             left: rem(-57);
             top: rem(-73);
@@ -572,10 +565,14 @@
         @include below($tabletLandscape) {
             left: rem(-235);
         }
-        @include below($mobile) {
-            left: rem(-214);
-            top: -57px;
+
+        
+        &.is-active {
+            @include above($mobile) {
+                display: block;
+            }
         }
+
     }
 
     .scissors {
