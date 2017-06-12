@@ -34,6 +34,7 @@
         display: flex;
         align-items: center;
         padding-right: rem(20);
+        max-width: 100%;
 
         &::before {
             content: '';
