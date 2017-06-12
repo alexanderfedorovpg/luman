@@ -566,6 +566,11 @@
             left: rem(-235);
         }
 
+        @include above($mobile) {
+            &.is-active {
+                display: block;
+            }
+        }
         
         &.is-active {
             @include above($mobile) {
