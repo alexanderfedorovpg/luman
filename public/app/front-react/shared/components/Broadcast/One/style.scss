@@ -16,10 +16,8 @@
     }
 
     &__title {
-
-        @include below($mobile) {
-            border-bottom: none;
-        }
+        text-decoration: none;
+        border-bottom: none;
     }
 
 }
