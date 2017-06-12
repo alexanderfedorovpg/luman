@@ -14,7 +14,7 @@ function EnterOne({ data, className }) {
 
     return (
         <div className={classNames('enter-one enter-one__no-border', className)}>
-            <Link to='/broadcast' className="from-enter__title section-title">
+            <Link to="/broadcast" className="enter-one__title section-title">
                 Из эфира
             </Link>
             <FromEnter data={first} />
