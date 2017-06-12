@@ -15,11 +15,12 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
-import localforage from 'localforage'
+import localforage from 'localforage';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContextProvider } from 'react-dnd';
-import { fromJS } from 'immutable'
+import { fromJS } from 'immutable';
 import ReduxToastr from 'react-redux-toastr/lib/ReduxToastr';
+
 import 'normalize.css';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 
