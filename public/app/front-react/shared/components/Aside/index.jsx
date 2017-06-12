@@ -7,20 +7,50 @@ import Noise from 'components/Noise'
 import FromEnter from 'components/Broadcast/One'
 import Subscribe from 'components/Subscribe'
 import Banner from 'components/HomePage/Banner'
+import MiniNews from 'components/MiniNews'
+import Group from 'components/Group'
+import Block from 'components/Block'
 
 import efirPlaceholder from './efir.jpg'
+import './style.scss';
 
-function Aside({ noise, broadcast, className }) {
-    const first = broadcast[0] || {}
-    const rest = broadcast.slice(1)
+function Aside({ noise, broadcast, top, className }) {
+    const showBroadcast = !!broadcast && !!broadcast.length;
+    const showNoise = !!noise && !!noise.length;
+    const showTop = !!top && !!top.length;
+    const broadcastVideos = showBroadcast ? broadcast.slice(1) : [];
 
     return (
         <div className={classNames('right-col', className)}>
-            <Video data={first} />
-            <Noise data={noise} />
-            {rest.length
-                ? <FromEnter data={rest}/>
-                : <img src={efirPlaceholder} className="from-enter enter-one" />
+            {
+                showBroadcast &&
+                <Video data={broadcast[0]} />
+            }
+            {
+                showNoise &&
+                <Noise data={noise} />
+            }
+            <MediaQuery minWidth="930px">
+                <div className="aside__video">
+                    <Video data={{}} />
+                </div>
+                {
+                    showTop &&
+                    <Group title="Главные новости" margin>
+                        <Block data={top[0]} />
+                        {top.map((v, ind) => {
+                            if (ind === 0) {
+                                return null;
+                            }
+                            return <MiniNews key={v.id} data={v} className="aside__mini-news" />
+                        })}
+                    </Group>
+                }
+            </MediaQuery>
+            {
+                (showBroadcast && broadcastVideos.length)
+                ? <FromEnter data={broadcastVideos} />
+                : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
             }
             <Subscribe className="news-top__subscribe" />
             <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1299px">

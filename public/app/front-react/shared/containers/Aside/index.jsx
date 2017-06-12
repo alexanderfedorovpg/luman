@@ -1,26 +1,33 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { selectHomeNoise, selectHomeBroadcast } from 'selectors/news'
+import {
+    selectHomeNoise,
+    selectHomeBroadcast,
+    makeSelectHomeNewsByCategory,
+} from 'selectors/news'
 
 import Content from 'components/Aside'
 
 class Aside extends PureComponent {
 
     render() {
-        const { noise, broadcast } = this.props
+        const { noise, broadcast, top } = this.props
 
         return (
             <Content
-                noise={noise.map(v=>v.news)}
-                broadcast={broadcast.map(v=>v.record)} />
+                noise={noise ? noise.map(v => v.news) : null}
+                top={top ? top.map(v => v.news) : null}
+                broadcast={broadcast ? broadcast.map(v => v.record) : null}
+            />
         )
     }
 }
 
-const mapStateToProps = state => ({
-    noise: selectHomeNoise(state),
-    broadcast: selectHomeBroadcast(state)
+const mapStateToProps = (state, ownProps) => ({
+    noise: ownProps.noise !== undefined ? ownProps.noise : selectHomeNoise(state),
+    broadcast: ownProps.broadcast !== undefined ? ownProps.broadcast : selectHomeBroadcast(state),
+    top: ownProps.top !== undefined ? ownProps.top : makeSelectHomeNewsByCategory(1)(state),
 })
 
 const mapDispatchToProps = dispatch => ({

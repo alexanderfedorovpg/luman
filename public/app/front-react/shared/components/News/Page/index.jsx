@@ -138,7 +138,7 @@ class News extends Component {
 
                         </div>
                         <MediaQuery minWidth="930px">
-                            <Aside />
+                            <Aside top={[]} />
                             <MediaQuery minWidth="930px" maxWidth="1299px">
                                 <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                             </MediaQuery>
