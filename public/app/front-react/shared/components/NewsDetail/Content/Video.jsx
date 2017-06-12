@@ -110,9 +110,13 @@ class Content extends PureComponent {
 
     render() {
         const { data, children } = this.props
-        const theses = Array.isArray(data.theses)
-            ? data.theses
-            : `${data.theses}`.split('\\')
+        let theses = [];
+
+        if (data.theses) {
+            theses = Array.isArray(data.theses)
+                ? data.theses
+                : `${data.theses}`.split('\\');
+        }
 
         const image = data.image_preview || {};
 

@@ -28,10 +28,14 @@ class Content extends PureComponent {
     render() {
         const {data, children} = this.props;
         const image = data.image_main || {};
-        const theses = Array.isArray(data.theses)
-            ? data.theses
-            : `${data.theses}`.split('\\');
-        
+        let theses = [];
+
+        if (data.theses) {
+            theses = Array.isArray(data.theses)
+                ? data.theses
+                : `${data.theses}`.split('\\');
+        }
+
         if (data.body && data.body.indexOf('undefined', '') > -1) {
             data.body = data.body.replace('undefined', '');
         }
