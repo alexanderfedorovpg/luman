@@ -70,13 +70,14 @@
 
             &_play.text-bg-gray {
                 // position: relative;
-                @include above($mobile) {
-                    z-index: 4;
-                    background-color: rgba(36, 55, 70, 0.2);
+                z-index: 4;
+                background-color: rgba(36, 55, 70, 0.2);
 
-                    & .social-links {
-                        opacity: .5;
-                    }
+                & .social-links {
+                    opacity: .5;
+                }
+                @include above($mobile) {
+                
                 }
             }
 
@@ -418,19 +419,19 @@
 
 
         &_play {
-            @include above($mobile) {
+            @include below($tablet) {
                 visibility: hidden;
             }
         }
 
         &_play .breadcrumbs {
-            @include above($mobile) {
+            @include below($tablet) {
                 display: none;
             }
         }
 
         &_play:before {
-            @include above($mobile) {
+            @include below($tablet) {
                 content: '';
                 display: block;
                 width: 100%;
@@ -438,6 +439,7 @@
                 position: absolute;
                 // background-color: #eaecee;
                 background-color: rgba(36, 55, 70, 0.6);
+                // display: none;
             }
         }
 
