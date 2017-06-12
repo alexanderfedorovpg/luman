@@ -431,7 +431,7 @@
         }
 
         &_play:before {
-            @include below($tablet) {
+            @include above($tablet) {
                 content: '';
                 display: block;
                 width: 100%;
