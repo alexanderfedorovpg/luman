@@ -10,10 +10,8 @@ const NewsDetail = ({data, hasVideo}) => {
         <div className="inner-wrapper">
             <div className="inner-about inner-wrapper inner-default">
                 <div className="inner-about__container container">
-                    <div className="inner-about__container container">
-                        <div className="left left-col left-col_position_relative">
-                            <Content hasVideo={hasVideo} data={data}/>
-                        </div>
+                    <div className="left left-col left-col_position_relative">
+                        <Content hasVideo={hasVideo} data={data}/>
                     </div>
                 </div>
             </div>
