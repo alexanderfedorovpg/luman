@@ -67,8 +67,9 @@ class Noise extends PureComponent {
             <Masonry
                 className={'noize-all__row'}
                 options={{
-                    columnWidth: '.noize-all__item',
-                    gutter: '.noize-all__gutter-sizer',
+                    columnWidth: 274,
+                    gutter: 37,
+                    // gutterWidth: 100
                 }}>
                 <div className="noize-all__gutter-sizer"></div>
                 {items.map((v, i) => (
@@ -104,7 +105,7 @@ class Noise extends PureComponent {
                                 : null
                             }
                         </div>
-                        <Aside />
+                        <Aside noise={null} broadcast={null} />
                     </div>
                 </div>
             </div>

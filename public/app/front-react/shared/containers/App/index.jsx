@@ -7,6 +7,8 @@ import withRouter from 'react-router-dom/withRouter'
 import { IntlProvider } from 'react-intl'
 import Helmet from 'react-helmet'
 import ScrollableAnchor from 'react-scrollable-anchor'
+import 'intl';
+import 'intl/locale-data/jsonp/ru';
 
 import { createStructuredSelector } from 'reselect'
 

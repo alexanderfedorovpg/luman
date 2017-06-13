@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import dateFormat from 'dateformat'
-import { FormattedRelative } from 'react-intl'
+// import dateFormat from 'dateformat'
+// import { FormattedRelative } from 'react-intl'
+
+import FormatDate from 'components/FormatDate';
 
 import Img from 'components/Img'
 
@@ -26,8 +28,7 @@ function MiniNews({ data, className }) {
                 {Date.parse(data.publish_date)
                     ? (
                         <p className="mini-news__date">
-                            <FormattedRelative value={data.publish_date} units="day" />
-                            , {dateFormat(data.publish_date, 'HH:MM')}
+                            <FormatDate value={data.publish_date} />
                         </p>
                     )
                     : null

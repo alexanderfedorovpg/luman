@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
-import { FormattedTime, FormattedRelative } from 'react-intl';
 
 import NewsDetail from './NewsDetail/';
+import RenderSocialWidgets from './RenderSocialWidgets';
 import Icon from 'components/Icon';
 
-import { padding, font } from 'constants/style';
+import {padding, font} from 'constants/style';
 
 const Root = styled.div`
     max-width: 908px;
@@ -26,14 +26,32 @@ const CloseButton = styled(Icon)`
     right: 20px;
 `;
 
-const Preview = ({ data, users, onClose}) => {
-    let hasVideo = !!data.video_stream.url;
-    return (
-        <Root>
-            <CloseButton type="delete-lg" onClick={onClose} />
-            <NewsDetail data={data} hasVideo={hasVideo}/>
-        </Root>
-    );
-};
+class Preview extends Component {
+    replaceWidgets() {
+        if (this._timer) clearTimeout(this._timer);
+        this._timer = setTimeout(() => {
+            RenderSocialWidgets()
+        }, 1000)
+    }
+
+    componentDidMount() {
+        this.replaceWidgets()
+    }
+
+    componentDidUpdate() {
+        this.replaceWidgets()
+    }
+
+    render() {
+        const {data, users, onClose} = this.props;
+        let hasVideo = !!data.video_stream.url;
+        return (
+            <Root>
+                <CloseButton type="delete-lg" onClick={onClose}/>
+                <NewsDetail data={data} hasVideo={hasVideo}/>
+            </Root>
+        );
+    };
+}
 
 export default Preview;

@@ -6,6 +6,7 @@ import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
 import Socials from 'components/Socials';
+import RenderSocialWidgets from 'components/NewsDetail/Content/RenderSocialWidgets'
 
 class Content extends PureComponent {
 
@@ -25,9 +26,21 @@ class Content extends PureComponent {
         this.stop = this.stop.bind(this);
     }
 
+    replaceWidgets() {
+        if (this._timer) clearTimeout(this._timer);
+        this._timer = setTimeout(() => {
+            RenderSocialWidgets()
+        }, 1000)
+    }
+
+    componentDidUpdate() {
+        this.replaceWidgets()
+    }
+
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+        this.replaceWidgets()
     }
 
     componentWillUnmount() {
@@ -45,8 +58,8 @@ class Content extends PureComponent {
 
     play() {
         this.setState({
-            play: true
-        })
+            play: true,
+        });
         React.render('<div id="video-overlay"></div>', document.body);
     }
 
@@ -68,9 +81,13 @@ class Content extends PureComponent {
 
     render() {
         const { data, intl, children } = this.props
-        const theses = Array.isArray(data.theses)
-            ? data.theses
-            : `${data.theses}`.split('\\')
+        // let theses = [];
+
+        // if (data.theses) {
+        //     theses = Array.isArray(data.theses)
+        //         ? data.theses
+        //         : `${data.theses}`.split('\\');
+        // }
 
         const date = Date.parse(data.publish_date) && intl.formatDate(
             data.publish_date,
@@ -92,16 +109,36 @@ class Content extends PureComponent {
                         : null
                     }
                 </div>
-                <div onClick={e => this.stop(e)} className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray broadcast__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
-                    {theses.length && (
-                        <div className={classNames('text-bg-gray__block-text', { 'text-bg-gray__block-text_play': this.state.play })}>
-                            {theses.map((v, i) => (
-                                <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
-                                    {v}
-                                </div>
-                            ))}
-                        </div>
+                <div
+                    role="button"
+                    onClick={e => this.stop(e)}
+                    className={classNames(
+                        'text-bg-gray',
+                        'text-bg-gray--news',
+                        'inner-about__text-bg-gray',
+                        'broadcast__text-bg-gray',
+                        {
+                            'inner-about__text-bg-gray_play': this.state.play,
+                        },
                     )}
+                >
+                    {
+                        // !!theses.length &&
+                        // <div
+                        //     className={classNames(
+                        //         'text-bg-gray__block-text',
+                        //         {
+                        //             'text-bg-gray__block-text_play': this.state.play,
+                        //         },
+                        //     )}
+                        // >
+                        //     {theses.map((v, i) => (
+                        //         <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
+                        //             {v}
+                        //         </div>
+                        //     ))}
+                        // </div>
+                    }
                     <Video
                         className="broadcast__general-video"
                         play={this.state.play}

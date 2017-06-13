@@ -11,6 +11,7 @@ import configureStore from 'shared/redux/configureStore';
 import './polyfills';
 
 import ReactHotLoader from './components/ReactHotLoader';
+import ScrollToTop from './components/ScrollToTop';
 import App from 'shared/containers/App';
 
 // Get the DOM Element that will host our React application.
@@ -40,9 +41,11 @@ function renderApp(TheApp) {
     <ReactHotLoader>
       <AsyncComponentProvider rehydrateState={asyncComponentsRehydrateState}>
         <BrowserRouter forceRefresh={!supportsHistory}>
-          <Provider store={store}>
-            <TheApp />
-          </Provider>
+          <ScrollToTop>
+            <Provider store={store}>
+              <TheApp />
+            </Provider>
+          </ScrollToTop>
         </BrowserRouter>
       </AsyncComponentProvider>
     </ReactHotLoader>

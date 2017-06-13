@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { FormattedRelative } from 'react-intl'
+// import { FormattedRelative } from 'react-intl'
+
+import FormatDate from 'components/FormatDate';
 
 import { newsLink } from 'shared/utils/uri'
 import MiniNews from 'components/MiniNews'
@@ -65,7 +67,7 @@ function renderItem(className, type, data, war, wTitle) {
                     : (
                         <p className={`${type}__time-add`}>
                             {Date.parse(data.publish_date)
-                                ? <FormattedRelative value={data.publish_date} />
+                                ? <FormatDate value={data.publish_date} />
                                 : null
                             }
                             {Date.parse(data.updated_at) && Date.parse(data.publish_date)
@@ -75,7 +77,7 @@ function renderItem(className, type, data, war, wTitle) {
                             {Date.parse(data.updated_at)
                                 ? (
                                     <span className={`${type}__time-upadate`}>
-                                        Обновлено <FormattedRelative value={data.updated_at} />
+                                        Обновлено <FormatDate value={data.updated_at} />
                                     </span>
                                 )
                                 : null

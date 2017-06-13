@@ -97,10 +97,10 @@ class News extends Component {
                                     <Block data={now[4]} className="news-one-line__block-square" />
                                 </div>
                             </div>
-                            <MediaQuery minWidth="1600px">
+                            <MediaQuery minWidth="1300px">
                                 <Banner className="news-top__banner" />
                             </MediaQuery>
-                            <MediaQuery maxWidth="1035px">
+                            <MediaQuery maxWidth="929px">
                                 <BannerPreview className="news-top__banner-preview" />
                             </MediaQuery>
                             <div className="per-day news-top__per-day">
@@ -113,17 +113,17 @@ class News extends Component {
                                     <Block data={today[2]} className="news-one-line__block-square" />
                                 </div>
                             </div>
-                            <MediaQuery maxWidth="1035px">
+                            <MediaQuery maxWidth="929px">
                                 <div className="news-top__links">
                                     <Banner className="news-top__banner" />
                                     <Subscribe className="news-top__subscribe" />
                                 </div>
                             </MediaQuery>
-                            <MediaQuery minWidth="1036px" maxWidth="1599px">
+                            <MediaQuery minWidth="930px" maxWidth="1299px">
                                 <BannerPreview className="news-top__banner-preview" />
                             </MediaQuery>
 
-                            <MediaQuery minWidth="1036px" maxWidth="1599px">
+                            <MediaQuery minWidth="930px" maxWidth="1299px">
                                 <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
                                 {this.renderAdditionalData(data.slice(11))}
                                 {canLoad
@@ -137,19 +137,19 @@ class News extends Component {
                             </MediaQuery>
 
                         </div>
-                        <MediaQuery minWidth="1036px">
-                            <Aside />
-                            <MediaQuery minWidth="1036px" maxWidth="1599px">
+                        <MediaQuery minWidth="930px">
+                            <Aside top={[]} />
+                            <MediaQuery minWidth="930px" maxWidth="1299px">
                                 <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                             </MediaQuery>
                         </MediaQuery>
-                        <MediaQuery minWidth="1600px">
+                        <MediaQuery minWidth="1300px">
                             <div className="news-top__middle middle-col">
                                 <BannerPreview className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
 
-                        <MediaQuery minWidth="1600px">
+                        <MediaQuery minWidth="1300px">
                             <div className="news-top__left left-col left-col left-col_width_inner">
                                 <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
                                 {this.renderAdditionalData(data.slice(11))}
@@ -163,12 +163,12 @@ class News extends Component {
                                 }
                             </div>
                         </MediaQuery>
-                        <MediaQuery minWidth="1036px">
+                        <MediaQuery minWidth="930px">
                             <div className="news-top__right right-col">
-                                <MediaQuery minWidth="1600px">
+                                <MediaQuery minWidth="1300px">
                                     <Subscribe className="news-top__subscribe" />
                                 </MediaQuery>
-                                <MediaQuery minWidth="1600px">
+                                <MediaQuery minWidth="1300px">
                                     <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                                 </MediaQuery>
                             </div>

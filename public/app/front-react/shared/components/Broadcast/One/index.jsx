@@ -4,6 +4,8 @@ import classNames from 'classnames'
 import FromEnter from 'components/Broadcast/Item'
 import List from 'components/Broadcast/List'
 
+import { Link } from 'react-router-dom'
+
 import './style.scss'
 
 function EnterOne({ data, className }) {
@@ -12,9 +14,9 @@ function EnterOne({ data, className }) {
 
     return (
         <div className={classNames('enter-one enter-one__no-border', className)}>
-            <p className="from-enter__title section-title">
+            <Link to="/broadcast" className="enter-one__title section-title">
                 Из эфира
-            </p>
+            </Link>
             <FromEnter data={first} />
             <List data={rest} />
         </div>

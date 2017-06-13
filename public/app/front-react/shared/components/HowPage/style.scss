@@ -167,7 +167,7 @@
         left: 17%;
 
         width: rem(427);
-        height: rem(205);
+        min-height: rem(205);
         padding: #{rem(24)} #{rem(33)} #{rem(63)} #{rem(41)};
 
         text-align: right;

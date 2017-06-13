@@ -13,7 +13,7 @@
             justify-content: flex-end;
             padding-right: rem(10);
             padding-bottom: rem(32);
-            color: $gray-dirty;
+            color: $gray-date;
 
             @include below($mobile) {
                 display: none;
@@ -76,6 +76,10 @@
                 & .social-links {
                     opacity: .5;
                 }
+                @include below($tablet) {
+                    z-index: 4;
+                    background-color: rgba(36,55,70,.2);
+                }
             }
 
 
@@ -87,9 +91,22 @@
 
                 .general-video {
 
+                    margin-top: 0;
+
                     @include below($mobile) {
                         margin-right: 0;
                     }
+
+                }
+
+                .inner-about__video-info {
+                    align-self: flex-end;
+                    width: rem(136);
+                    font-size: rem(11);
+                    line-height: rem(14);
+                    padding-bottom: rem(15);
+                    padding-right: rem(14);
+                    padding-left: rem(5);
                 }
             }
         }
@@ -126,7 +143,7 @@
             p {
                 margin-bottom: rem(21);
 
-                letter-spacing: rem(-.35);
+                // letter-spacing: rem(-.35);
             }
             a {
                 outline: none;
@@ -212,7 +229,7 @@
             margin-top: rem(51);
             margin-bottom: rem(15);
 
-            letter-spacing: rem(-.5);
+            // letter-spacing: rem(-.5);
         }
 
         &__box-preview {
@@ -239,7 +256,7 @@
 
             font: #{rem(16)}/ #{rem(24)} $stemBold;
             color: $white;
-            letter-spacing: rem(-.8);
+            // letter-spacing: rem(-.8);
 
             background-image: url(/content/about/box-text.png);
             background-position: center;
@@ -322,7 +339,7 @@
             margin-top: rem(30);
 
             > p {
-                letter-spacing: rem(-0.35);
+                // letter-spacing: rem(-0.35);
             }
 
         }
@@ -342,11 +359,11 @@
             }
 
             @include above($tablet) {
-                left: rem(120);
+                left: rem(125);
             }
 
             @include above($desktop) {
-                left: rem(196);
+                left: rem(176);
             }
         }
 
@@ -390,7 +407,6 @@
     .news-preview {
         width: rem(351);
         padding-top: rem(18);
-
         position: relative;
 
         @include below($mobile) {
@@ -405,15 +421,21 @@
 
         @include above($desktop) {
             width: rem(351);
+            padding-top: rem(18);
         }
 
 
         &_play {
             visibility: hidden;
+            @include below($tablet) {
+                visibility: visible;
+            }
         }
 
         &_play .breadcrumbs {
-            display: none;
+            @include below($tablet) {
+                display: none;
+            }
         }
 
         &_play:before {
@@ -424,6 +446,10 @@
             position: absolute;
             // background-color: #eaecee;
             background-color: rgba(36, 55, 70, 0.6);
+            // display: none;
+            @include below($tablet) {
+                display: none;
+            }
         }
 
         &__img {
@@ -481,7 +507,7 @@
             font-size: rem(16);
             line-height: rem(24);
             color: $enter;
-            letter-spacing: rem(-0.45);
+            // letter-spacing: rem(-0.45);
         }
 
         &--wide {
@@ -542,23 +568,26 @@
 
         display: none;
 
-        &.is-active {
-            display: block;
-        }
-
-
         @include below($tablet) {
             left: rem(-57);
             top: rem(-73);
+            &.is-active {
+                display: block;
+            }
         }
 
         @include below($tabletLandscape) {
             left: rem(-235);
+            &.is-active {
+                display: block;
+            }
         }
+
         @include below($mobile) {
-            left: rem(-214);
-            top: -57px;
+            background-color: transparent;
         }
+
+
     }
 
     .scissors {
@@ -668,6 +697,13 @@
                         object-fit: cover;
                     }
                 }
+            }
+        }
+
+        .inner-about {
+
+            &__text-bg-gray {
+                padding-bottom: rem(30);
             }
         }
 

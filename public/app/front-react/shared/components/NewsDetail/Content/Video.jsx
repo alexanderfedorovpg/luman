@@ -1,13 +1,16 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+
 import classNames from 'classnames'
-import { FormattedRelative } from 'react-intl'
+// import { FormattedRelative } from 'react-intl'
 
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
 import Socials from 'components/Socials';
+import RenderSocialWidgets from './RenderSocialWidgets'
+import FormatDate from 'components/FormatDate';
 
-class Content extends Component {
+class Content extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -25,11 +28,22 @@ class Content extends Component {
         this.stop = this.stop.bind(this);
     }
 
+    replaceWidgets() {
+        if (this._timer) clearTimeout(this._timer);
+        this._timer = setTimeout(() => {
+            RenderSocialWidgets()
+        }, 1000)
+    }
+
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+        this.replaceWidgets()
     }
 
+    componentDidUpdate() {
+        this.replaceWidgets()
+    }
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateWindowDimensions);
     }
@@ -47,6 +61,17 @@ class Content extends Component {
         this.setState({
             play: true
         })
+
+        setTimeout(() => {
+            const video = document.getElementById('videoStream');
+
+            video.addEventListener('ended', () => {
+                this.setState({
+                    play: false
+                })
+            }, false);
+
+        }, 0)
     }
 
     stop(e) {
@@ -85,11 +110,25 @@ class Content extends Component {
 
     render() {
         const { data, children } = this.props
-        const theses = Array.isArray(data.theses)
-            ? data.theses
-            : `${data.theses}`.split('\\')
+        let theses = [];
+
+        if (data.theses) {
+            theses = Array.isArray(data.theses)
+                ? data.theses
+                : `${data.theses}`.split('\\');
+        }
 
         const image = data.image_preview || {};
+
+        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
+            data.body = data.body.replace('/ undefined', '');
+        }
+        if (data.body && data.body.indexOf('undefined /', '') > -1) {
+            data.body = data.body.replace('undefined /', '');
+        }
+        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
+            data.body = data.body.replace('undefined / undefined', '');
+        }
 
         return (
             <div>
@@ -99,7 +138,7 @@ class Content extends Component {
                 </h1>
                 <div className="inner-about__date">
                     {Date.parse(data.publish_date)
-                        ? <FormattedRelative value={data.publish_date} />
+                        ? <FormatDate value={data.publish_date} />
                         : null
                     }
                 </div>
@@ -118,12 +157,18 @@ class Content extends Component {
                     }
                     {data.video_stream && (data.video_stream.preview_author || data.video_stream.preview_source) && (
                         <div className="inner-about__video-info">
-                            <div>
-                                Фото:
-                            </div>
-                            {data.video_stream.preview_author}
-                            {data.video_stream.preview_author && data.video_stream.preview_source && ' / '}
-                            {data.video_stream.preview_source}
+                            {data.video_stream.preview_author !== 'undefined' && data.video_stream.preview_source !== 'undefined' ?
+                                <div>
+                                    <div>
+                                        Фото:
+                                    </div>
+                                    {data.video_stream.preview_author}
+                                    {data.video_stream.preview_author && data.video_stream.preview_source && ' / '}
+                                    {data.video_stream.preview_source}
+                                </div>
+                                :
+                                null
+                            }
                         </div>
                     )}
                     <Video

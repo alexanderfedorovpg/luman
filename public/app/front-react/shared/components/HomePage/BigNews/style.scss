@@ -21,8 +21,14 @@
         transition: opacity .5s ease-out;
     }
 
-    &:hover::before {
-        opacity: .7;
+    &:hover {
+        ::before {
+            opacity: .7;
+        }
+
+        .big-news__title {
+            color: $blue;
+        }
     }
 
     @include below($mobile) {
@@ -95,6 +101,8 @@
     &__title {
         font-family: $stemBold;
         color: $white;
+
+        transition: color .5s;
 
         @include below($mobile) {
             margin-bottom: rem(17);

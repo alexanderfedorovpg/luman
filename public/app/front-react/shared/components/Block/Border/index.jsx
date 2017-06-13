@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { FormattedRelative } from 'react-intl'
+// import { FormattedRelative } from 'react-intl'
+import FormatDate from 'components/FormatDate';
 
 import './style.scss'
 
@@ -18,7 +19,7 @@ function BlockBorder({ data, className }) {
                 </p>
                 <div className="block-rectangle-border__date">
                     {Date.parse(data.publish_date)
-                        ? <FormattedRelative value={data.publish_date} />
+                        ? <FormatDate value={data.publish_date} />
                         : null
                     }
                 </div>

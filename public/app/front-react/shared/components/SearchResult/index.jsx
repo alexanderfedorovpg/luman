@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import { FormattedRelative } from 'react-intl';
+// import { FormattedRelative } from 'react-intl';
+import FormatDate from 'components/FormatDate';
 
 import './style.scss';
 
@@ -59,7 +60,7 @@ const SearchResult = ({
                     className="global-search-item__time"
                     dateTime={dateObj.toISOString()}
                 >
-                    <FormattedRelative value={dateObj} />
+                    <FormatDate value={dateObj}/>
                 </time>
             </div>
         </article>

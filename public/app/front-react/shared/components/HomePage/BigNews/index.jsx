@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { FormattedRelative } from 'react-intl'
+// import { FormattedRelative } from 'react-intl'
+import FormatDate from 'components/FormatDate';
 
 import Img from 'components/Img'
 
@@ -27,14 +28,14 @@ function BigNews({ data, war, warTitle, className }) {
                 </p>
                 <p className="big-news__time-add">
                     {Date.parse(data.publish_date)
-                        ? <FormattedRelative value={data.publish_date} units="minute" />
+                        ? <FormatDate value={data.publish_date} />
                         : null
                     } /
                 </p>
                 <p className="big-news__time-update">
                     {'Обновлено '}
                     {Date.parse(data.updated_at)
-                        ? <FormattedRelative value={data.updated_at} units="minute" />
+                        ? <FormatDate value={data.updated_at}  />
                         : null
                     }
                 </p>

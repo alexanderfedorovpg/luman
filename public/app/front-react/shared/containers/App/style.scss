@@ -45,7 +45,7 @@ html {
 
 h1 {
     font: #{rem(36)}/ #{rem(48)} $stemBold;
-    letter-spacing: rem(-.9);
+    // letter-spacing: rem(-.9);
     color: $enter;
 
     @include below($mobile) {
@@ -120,7 +120,7 @@ main {
     font-size: rem(16);
     line-height: rem(30);
     text-transform: uppercase;
-    letter-spacing: rem(-.7);
+    // letter-spacing: rem(-.7);
     color: $black;
     border-bottom: 1px solid $gray;
 
@@ -150,7 +150,7 @@ main {
     }
 
     &_no-border {
-      border-bottom: none;
+        border-bottom: none;
     }
 }
 
@@ -271,7 +271,7 @@ main {
         margin-top: rem(30);
 
         > p {
-            letter-spacing: rem(-0.35);
+            // letter-spacing: rem(-0.35);
         }
 
     }
@@ -345,7 +345,9 @@ main {
         }
 
         &.inner-about__text-bg-gray_play:before {
-            visibility: hidden;
+            @include above($mobile) {
+                visibility: hidden;
+            }
         }
 
         &__block-text {
@@ -357,7 +359,7 @@ main {
             padding: #{rem(24)} 0 #{rem(30)} #{rem(41)};
 
             text-align: right;
-            letter-spacing: rem(-.8);
+            // letter-spacing: rem(-.8);
 
             background-color: #a13461;
             background-image: url(/content/text-bg-gray/text-block.png);
@@ -488,10 +490,6 @@ main {
             margin-top: rem(14);
         }
 
-        @include above($tabletLandscape) {
-            min-height: rem(673);
-        }
-
         &.text-bg-gray .text-bg-gray {
 
             &__block-text {
@@ -521,22 +519,25 @@ main {
                 }
 
                 @include above($tabletLandscape) {
-                    width: rem(225);
+                    width: rem(268);
                 }
 
                 &_play {
-                    opacity: .5;
-                    left: 69.4%;
 
-                    &:before {
-                        left: rem(-31);
-                        transform: scale(-1, 1);
-                    }
+                    @include above($tablet) {
+                        opacity: .5;
+                        left: 69.4%;
 
-                    &:after {
-                        left: rem(-31.7);
-                        transform: scale(-1, 1);
-                        width: calc(100% + 1.94375rem);
+                        &:before {
+                            left: rem(-31);
+                            transform: scale(-1, 1);
+                        }
+
+                        &:after {
+                            left: rem(-31.7);
+                            transform: scale(-1, 1);
+                            width: calc(100% + 1.94375rem);
+                        }
                     }
 
                 }
@@ -547,13 +548,12 @@ main {
 
                 font-size: rem(15);
                 line-height: rem(18);
-                letter-spacing: rem(-0.75);
+                // letter-spacing: rem(-0.75);
             }
 
         }
 
         .general-video {
-            width: rem(320);
             height: rem(573);
             margin-right: rem(24);
 
@@ -570,6 +570,10 @@ main {
             @include above($tabletLandscape) {
                 //margin-top: auto;
                 margin-right: rem(24);
+            }
+
+            @include above($desktop) {
+                width: rem(320);
             }
 
             &:before {
@@ -636,6 +640,7 @@ main {
 
                 @include above($desktop) {
                     margin-bottom: rem(29);
+                    text-align: left;
                 }
             }
 
@@ -746,7 +751,7 @@ main {
         p {
             margin-bottom: rem(21);
 
-            letter-spacing: rem(-.35);
+            // letter-spacing: rem(-.35);
         }
     }
 
@@ -755,7 +760,7 @@ main {
         margin-top: rem(51);
         margin-bottom: rem(15);
 
-        letter-spacing: rem(-.5);
+        // letter-spacing: rem(-.5);
     }
 
     &__box-preview {
@@ -782,7 +787,7 @@ main {
 
         font: #{rem(16)}/ #{rem(24)} $stemBold;
         color: $white;
-        letter-spacing: rem(-.8);
+        // letter-spacing: rem(-.8);
 
         background-image: url(/content/about/box-text.png);
         background-position: center;

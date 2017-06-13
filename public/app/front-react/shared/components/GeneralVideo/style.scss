@@ -64,7 +64,7 @@
 
     &__img {
         width: rem(300);
-        object-fit: contain;
+        object-fit: cover;
         object-position: bottom;
 
         @include below($mobile) {

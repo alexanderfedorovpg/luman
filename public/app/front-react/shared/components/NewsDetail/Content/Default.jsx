@@ -1,24 +1,57 @@
-import React from 'react';
-import { FormattedRelative } from 'react-intl';
+import React, {PureComponent} from 'react';
 import classNames from 'classnames'
 import ScissorsIcon from 'components/Icon/Scissors';
+import {FormattedRelative} from 'react-intl';
+import RenderSocialWidgets from './RenderSocialWidgets'
+import FormatDate from 'components/FormatDate';
 
 import Socials from 'components/Socials';
 import Rubrics from 'components/Rubrics';
 import Img from 'components/Img';
 
-function Content({ data, children }) {
-    const image = data.image_main || {};
-    const theses = Array.isArray(data.theses)
-            ? data.theses
-            : `${data.theses}`.split('\\');
+class Content extends PureComponent {
+    replaceWidgets() {
+        if (this._timer) clearTimeout(this._timer);
+        this._timer = setTimeout(() => {
+            RenderSocialWidgets()
+        }, 1000)
+    }
+
+    componentDidMount() {
+        this.replaceWidgets()
+    }
+
+    componentDidUpdate() {
+        this.replaceWidgets()
+    }
+
+    render() {
+        const {data, children} = this.props;
+        const image = data.image_main || {};
+        let theses = [];
+
+        if (data.theses) {
+            theses = Array.isArray(data.theses)
+                ? data.theses
+                : `${data.theses}`.split('\\');
+        }
+
+        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
+            data.body = data.body.replace('/ undefined', '');
+        }
+        if (data.body && data.body.indexOf('undefined /', '') > -1) {
+            data.body = data.body.replace('undefined /', '');
+        }
+        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
+            data.body = data.body.replace('undefined / undefined', '');
+        }
 
     return (
         <div>
             <h1>{data.title}</h1>
             <div className="inner-about__date">
                 {Date.parse(data.publish_date)
-                    ? <FormattedRelative value={data.publish_date} />
+                    ? <FormatDate value={data.publish_date} />
                     : null
                 }
             </div>
@@ -58,20 +91,21 @@ function Content({ data, children }) {
                                     Фото: {image.object_author} / {image.object_source}
                                 </figcaption>
                             )
-                        }
-                    </figure>
-                    <p className="news-preview__text">
-                        {data.sub_title}
-                    </p>
+                            }
+                        </figure>
+                        <p className="news-preview__text">
+                            {data.sub_title}
+                        </p>
+                    </div>
+                    <Socials shareLink={data.uri} title={data.title}/>
                 </div>
-                <Socials shareLink={data.uri} title={data.title}/>
+                <div className="inner-about__content">
+                    <div dangerouslySetInnerHTML={{__html: data.body}}/>
+                    {children}
+                </div>
             </div>
-            <div className="inner-about__content">
-                <div dangerouslySetInnerHTML={{ __html: data.body }} />
-                {children}
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Content;

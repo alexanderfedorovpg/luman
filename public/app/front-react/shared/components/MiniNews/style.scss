@@ -3,6 +3,8 @@
 
 .mini-news {
     position: relative;
+
+    max-width: 100%;;
     padding-bottom: rem(15);
     overflow: hidden;
 
@@ -18,10 +20,6 @@
         padding-top: rem(22);
     }
 
-    @include above($desktop) {
-        padding-top: rem(25);
-    }
-
     &:not(:last-child) {
         border-bottom: 1px solid $gray;
     }
@@ -29,6 +27,9 @@
     &__info {
         position: relative;
         z-index: 1;
+
+        max-width: 100%;
+        padding-right: rem(10);
 
         transition: all .5s ease-in-out;
 
@@ -66,12 +67,7 @@
         @include above($tablet) {
             font: #{rem(16)}/#{rem(21)} $stemBold;
         }
-
-        @include above($desktop) {
-            font: #{rem(18)}/1.275rem $stemBold;
-        }
     }
-
 
     &__date {
         margin-top: rem(3);

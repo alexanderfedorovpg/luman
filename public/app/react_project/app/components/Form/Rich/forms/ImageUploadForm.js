@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form/immutable';
 
 import Button from 'components/Button/TypedBtn';
-import { Group } from '../index';
-import InputRedux from '../ReduxForm/InputRedux';
-import ImageLoaderRedux from '../ReduxForm/ImageLoaderRedux';
+import { Group } from '../../index';
+import InputRedux from '../../ReduxForm/InputRedux';
+import ImageLoaderRedux from '../../ReduxForm/ImageLoaderRedux';
 
 const StyledImageLoader = styled(ImageLoaderRedux)`
     min-height: 100px;
