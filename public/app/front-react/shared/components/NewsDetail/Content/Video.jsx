@@ -120,6 +120,16 @@ class Content extends PureComponent {
 
         const image = data.image_preview || {};
 
+        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
+            data.body = data.body.replace('/ undefined', '');
+        }
+        if (data.body && data.body.indexOf('undefined /', '') > -1) {
+            data.body = data.body.replace('undefined /', '');
+        }
+        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
+            data.body = data.body.replace('undefined / undefined', '');
+        }
+
         return (
             <div>
                 <div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div>
