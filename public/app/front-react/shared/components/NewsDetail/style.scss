@@ -11,9 +11,10 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            width: rem(155);
             padding-right: rem(10);
             padding-bottom: rem(32);
-            color: $gray-dirty;
+            color: $gray-date;
 
             @include below($mobile) {
                 display: none;
@@ -91,16 +92,20 @@
 
                 .general-video {
 
-                    margin-top: 0px;
+                    margin-top: 0;
 
                     @include below($mobile) {
                         margin-right: 0;
                     }
-                    
+
                 }
 
                 .inner-about__video-info {
                     align-self: flex-end;
+                    font-size: rem(11);
+                    line-height: rem(14);
+                    padding-bottom: rem(15);
+                    padding-right: rem(14);
                 }
             }
         }
@@ -353,11 +358,11 @@
             }
 
             @include above($tablet) {
-                left: rem(120);
+                left: rem(125);
             }
 
             @include above($desktop) {
-                left: rem(196);
+                left: rem(176);
             }
         }
 
@@ -401,7 +406,6 @@
     .news-preview {
         width: rem(351);
         padding-top: rem(18);
-
         position: relative;
 
         @include below($mobile) {
@@ -416,6 +420,7 @@
 
         @include above($desktop) {
             width: rem(351);
+            padding-top: rem(18);
         }
 
 
@@ -580,7 +585,7 @@
         @include below($mobile) {
             background-color: transparent;
         }
-        
+
 
     }
 
@@ -674,8 +679,6 @@
     }
 
     &_noize {
-
-
 
         .news-preview--wide {
 
