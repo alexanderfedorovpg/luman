@@ -8,11 +8,12 @@ import MiniNews from 'components/MiniNews'
 import Related from 'components/RelatedNews'
 import Content from './Content'
 import Video from 'components/Aside/Video'
+import Aside from 'containers/Aside'
 
 import './style.scss'
 
 function Detail({ data, noise, now, related, broadcast, hasVideo }) {
-
+    const firstVideo = now[0] || {}
     return (
         <div className="inner-wrapper news-detail">
             <div className="inner-about inner-wrapper inner-default">
@@ -23,7 +24,7 @@ function Detail({ data, noise, now, related, broadcast, hasVideo }) {
                         </Content>
                     </div>
                     <div className="right-col">
-                        <Video data={{}} />
+                        <Aside noise={null} broadcast={null} now={now} />
                         <Group title="Главные новости" margin>
                             <Block data={now[0]} />
                             {now.slice(1, 5).map(v => (

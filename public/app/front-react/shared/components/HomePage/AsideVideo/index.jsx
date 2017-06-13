@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react'
 
 import GeneralVideo from 'components/GeneralVideo'
-
 import insideVideoPlaceholder from './obzor-inside-new.jpg'
 import mainVideoPlaceholder from './obzor-main-new.jpg'
-
 import Img from 'components/Img';
 import { ensureAbs } from 'shared/utils/uri';
-
 import classNames from 'classnames';
 
 class AsideVideo extends PureComponent {
@@ -27,7 +24,7 @@ class AsideVideo extends PureComponent {
             play: true
         })
 
-        
+
         setTimeout(() => {
             const videoSource = this.props.videos;
             let i = 0;
@@ -44,7 +41,7 @@ class AsideVideo extends PureComponent {
             }
             videoNode.addEventListener('ended', myHandler, false);
             videoPlay(0);
-            
+
             function myHandler() {
                 i++;
                 if (i == videoCount) {
@@ -59,7 +56,7 @@ class AsideVideo extends PureComponent {
 
     render() {
         const { data, className, main, videos } = this.props
-        
+
 
         return data.video_stream
             ? (
@@ -75,12 +72,12 @@ class AsideVideo extends PureComponent {
                 >
                     {
                         this.state.play ?
-                            
+
                             <video  ref='video' id='videoStream' style={{width: 100 + '%', height: 100 + '%'}} controls="controls" />
-                            
+
                             :
                             (
-                                <span>
+                                <span className="general-video__play-block">
                                     <a onClick={this.play} className="general-video__link" />
                                     <Img className="general-video__img" src={data.video_stream.preview} alt="" />
                                     <div className="general-video__info">
