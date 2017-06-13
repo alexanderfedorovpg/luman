@@ -36,8 +36,14 @@ class Content extends PureComponent {
                 : `${data.theses}`.split('\\');
         }
 
-        if (data.body && data.body.indexOf('undefined', '') > -1) {
-            data.body = data.body.replace('undefined', '');
+        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
+            data.body = data.body.replace('/ undefined', '');
+        }
+        if (data.body && data.body.indexOf('undefined /', '') > -1) {
+            data.body = data.body.replace('undefined /', '');
+        }
+        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
+            data.body = data.body.replace('undefined / undefined', '');
         }
 
     return (
