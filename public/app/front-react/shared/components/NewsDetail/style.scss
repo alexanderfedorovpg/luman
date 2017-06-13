@@ -11,7 +11,6 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            width: rem(155);
             padding-right: rem(10);
             padding-bottom: rem(32);
             color: $gray-date;
@@ -102,10 +101,12 @@
 
                 .inner-about__video-info {
                     align-self: flex-end;
+                    width: rem(136);
                     font-size: rem(11);
                     line-height: rem(14);
                     padding-bottom: rem(15);
                     padding-right: rem(14);
+                    padding-left: rem(5);
                 }
             }
         }
