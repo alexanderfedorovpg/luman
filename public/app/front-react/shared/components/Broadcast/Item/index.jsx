@@ -34,9 +34,9 @@ function FromEnter({ data, big, className }) {
                         ? data.program.name
                         : null
                     }
-                    {' '}
+                    {` `}
                     <span className="from-enter__time-add">
-                        {data.publish_date
+                        {Date.parse(data.publish_date)
                             ? <FormattedDate value={data.publish_date} month="long" day="2-digit" />
                             : null
                         }

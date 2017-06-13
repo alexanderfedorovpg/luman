@@ -27,15 +27,15 @@ function BigNews({ data, war, warTitle, className }) {
                     }
                 </p>
                 <p className="big-news__time-add">
-                    {data.publish_date
+                    {Date.parse(data.publish_date)
                         ? <FormatDate value={data.publish_date} />
                         : null
                     } /
                 </p>
                 <p className="big-news__time-update">
                     {'Обновлено '}
-                    {data.updated_at
-                        ? <FormatDate value={data.updated_at} />
+                    {Date.parse(data.updated_at)
+                        ? <FormatDate value={data.updated_at}  />
                         : null
                     }
                 </p>
