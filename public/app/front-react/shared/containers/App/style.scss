@@ -554,7 +554,6 @@ main {
         }
 
         .general-video {
-            width: rem(320);
             height: rem(573);
             margin-right: rem(24);
 
@@ -571,6 +570,10 @@ main {
             @include above($tabletLandscape) {
                 //margin-top: auto;
                 margin-right: rem(24);
+            }
+
+            @include above($desktop) {
+                width: rem(320);
             }
 
             &:before {
