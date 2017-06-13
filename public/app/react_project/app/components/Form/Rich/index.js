@@ -18,22 +18,24 @@ import VideoUploadForm from './forms/VideoUploadForm';
 
 import addEmbed from './widgets/AddEmbed'
 
-import extendImageBlot from './blots/imageBlot'
-import extendTwitterBlot from './blots/TwitterBlot'
-import extendInstagramBlot from './blots/InstagramBlot'
-import extendFacebookBlot from './blots/FacebookBlot'
-import extendHtmlBlot from './blots/HTMLBlot'
-import extendVideoBlot from './blots/videoBlot'
+import extendImageFormat from './format/imageFormat'
+import extendTwitterFormat from './format/TwitterFormat'
+import extendInstagramFormat from './format/InstagramFormat'
+import extendFacebookFormat from './format/FacebookFormat'
+import extendHtmlFormat from './format/HTMLFormat'
+import extendVideoFormat from './format/videoFormat'
+import extendVideoEmbedFormat from './format/videoEmbedFormat'
 /**
  * некий валидатор, который использует редактор, чтобы распознать html,
  * который в него закинули и применить к нему особые инструкции
  */
-extendImageBlot(Quill);
-extendTwitterBlot(Quill);
-extendInstagramBlot(Quill);
-extendFacebookBlot(Quill);
-extendHtmlBlot(Quill);
-extendVideoBlot(Quill);
+extendImageFormat(Quill);
+extendTwitterFormat(Quill);
+extendInstagramFormat(Quill);
+extendFacebookFormat(Quill);
+extendHtmlFormat(Quill);
+extendVideoFormat(Quill);
+extendVideoEmbedFormat(Quill);
 
 const Root = styled.div`
     .ql-laquo:after {
