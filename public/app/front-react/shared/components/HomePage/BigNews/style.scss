@@ -22,9 +22,6 @@
     }
 
     &:hover {
-        ::before {
-            opacity: .7;
-        }
 
         .big-news__title {
             color: $blue;
