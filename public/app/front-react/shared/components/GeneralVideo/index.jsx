@@ -44,20 +44,20 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
             {
                 play ?
                     <video id="videoStream" style={{width: 100 + '%', height: 100 + '%'}} controls="controls" src={ensureAbs(data.url)} autoPlay />
-                    
+
                     :
                     (
                         <span>
                             <a onClick={onPlay} className="general-video__link" />
                             <Img className="general-video__img" src={data.preview} alt="" />
+                            {data.url ?
+
+                                <img onClick={onPlay} className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
+                                :
+                                <img className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
+                            }
                             <div className="general-video__info">
                                 <div className="general-video__date general-video__date general-video__date_position">
-                                    {data.url ?
-
-                                        <img onClick={onPlay} className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                        :
-                                        <img className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                    }
                                     <span className="general-video__span">{playText}</span>
                                 </div>
                                 <div className="general-video__title">

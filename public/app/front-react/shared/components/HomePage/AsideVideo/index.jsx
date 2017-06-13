@@ -27,7 +27,7 @@ class AsideVideo extends PureComponent {
             play: true
         })
 
-        
+
         setTimeout(() => {
             const videoSource = this.props.videos;
             let i = 0;
@@ -44,7 +44,7 @@ class AsideVideo extends PureComponent {
             }
             videoNode.addEventListener('ended', myHandler, false);
             videoPlay(0);
-            
+
             function myHandler() {
                 i++;
                 if (i == videoCount) {
@@ -59,7 +59,7 @@ class AsideVideo extends PureComponent {
 
     render() {
         const { data, className, main, videos } = this.props
-        
+
 
         return data.video_stream
             ? (
@@ -75,26 +75,32 @@ class AsideVideo extends PureComponent {
                 >
                     {
                         this.state.play ?
-                            
+
                             <video  ref='video' id='videoStream' style={{width: 100 + '%', height: 100 + '%'}} controls="controls" />
-                            
+
                             :
                             (
                                 <span>
                                     <a onClick={this.play} className="general-video__link" />
                                     <Img className="general-video__img" src={data.video_stream.preview} alt="" />
+                                    {data.url ?
+
+                                        <img onClick={this.play} className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
+                                        :
+                                        <img className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
+                                    }
                                     <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
-                                            {data.url ?
+                                            {/*data.url ?
 
                                                 <img onClick={this.play} className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
                                                 :
                                                 <img className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                            }
+                                            */}
                                             <span className="general-video__span">27 марта</span>
                                         </div>
                                         <div className="general-video__title">
-                                            Все ключевые события этого дня
+                                            Ваш персональный ведущий
                                         </div>
                                         <div className="general-video__logo">
                                             <span className="general-video__logo-title">

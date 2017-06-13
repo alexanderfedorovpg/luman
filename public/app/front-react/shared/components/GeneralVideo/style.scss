@@ -68,6 +68,7 @@
         object-position: bottom;
 
         @include below($mobile) {
+            height: rem(390);
             margin-top: rem(15);
         }
 
@@ -111,30 +112,37 @@
         display: block;
         width: rem(250);
         padding-right: rem(75);
-        padding-left: rem(18);
+        padding-left: rem(15);
+        padding-bottom: rem(18);
+        padding-top: rem(16);
 
         font-size: rem(16);
+        font-weight: 700;
         line-height: rem(18);
         color: $white;
 
-        background-color: $dark;
+        background-color: $blue;
     }
 
     &__date_position {
         position: relative;
 
-        margin-bottom: rem(11);
+        margin-bottom: rem(5);
     }
 
-    &__span {
+    .general-video__span {
+        font-size: rem(18);
+        font-weight: 700;
+        line-height: rem(24);
+    }
+
+    .general-video__ico {
         position: absolute;
-        top: calc(50% - #{rem(9)});
-        left: 31px;
-    }
-
-    &__ico {
-        width: rem(36);
-        height: rem(36);
+        left: calc(50% - #{rem(48)});
+        top: calc(50% - #{rem(60)});
+        width: rem(96);
+        height: rem(96);
+        border: 1px solid $white;
     }
 
     &__logo {
@@ -145,7 +153,7 @@
 
         display: inline-block;
         width: rem(137);
-        height: rem(79);
+        height: rem(94);
         background-image: url(./purple-rtvi.png);
         background-size: contain;
     }
@@ -153,8 +161,8 @@
     &__logo-title {
         position: absolute;
         z-index: 1;
-        top: rem(5);
-        left: rem(4);
+        top: rem(9);
+        left: rem(13);
 
         font-size: rem(16);
         line-height: rem(18);
