@@ -119,7 +119,7 @@ class NewsListTransformer extends Transformer
             $transform['original_link'] = false;
         }
 
-
+        $transform['theses']=$news['theses'];
         $transform['keywords'] = explode(',', $news['keywords']);
 
         $transform['rubrics'] = News::find($news['id'])->rubrics()->orderBy('name')->get(['rubrics.id','rubrics.name'])->toArray();
