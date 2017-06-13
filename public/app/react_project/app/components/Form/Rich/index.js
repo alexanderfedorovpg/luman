@@ -111,24 +111,26 @@ class Rich extends PureComponent {
         }
     }
 
-    uploadFile(f, data, cb) {
-        this.props.showPreloader();
-        api.uploadFile(
-            f,
-            {
-                object_name: data.title,
-                object_author: data.author,
-                object_source: data.source
-            }
-        ).then(({ data: { file } }) => {
-            cb(file.url);
-            this.props.hidePreloader();
+    uploadFile(f, data) {
+        return new Promise((resolve, reject) => {
+            this.props.showPreloader();
+            api.uploadFile(
+                f,
+                {
+                    object_name: data.title,
+                    object_author: data.author,
+                    object_source: data.source
+                }
+            ).then(({ data: { file } }) => {
+                resolve(file.url);
+                this.props.hidePreloader();
+            })
         })
     }
 
     addImage(data, cb) {
         if (data.image != null && data.image[0] != null) {
-            this.uploadFile(data.image[0], data, (result) => {
+            this.uploadFile(data.image[0], data).then((result) => {
                 let editor = this.quill.getEditor();
                 let range = editor.getSelection(true);
                 editor.updateContents(
@@ -144,21 +146,27 @@ class Rich extends PureComponent {
     }
 
     addVideo(data, cb) {
-        if (data.video != null && data.video[0] != null) {
-            this.uploadFile(data.video[0], data, (result) => {
-                let editor = this.quill.getEditor();
-                let range = editor.getSelection(true);
-                editor.updateContents(
-                    new Delta()
-                        .retain(range.index)
-                        .delete(range.length)
-                        .insert({ 'ext-video': { src: result, ...data }}),
-                    'user'
-                );
+        let videoPromise = data.video != null && data.video[0] != null
+            && this.uploadFile(data.video[0], data);
 
-                cb();
-            });
-        }
+        let previewPromise = data.preview != null && data.preview[0] != null
+            && this.uploadFile(data.preview[0], data);
+
+        Promise.all([videoPromise, previewPromise]).then(([video, preview]) => {
+            if (!video) return;
+
+            let editor = this.quill.getEditor();
+            let range = editor.getSelection(true);
+            editor.updateContents(
+                new Delta()
+                    .retain(range.index)
+                    .delete(range.length)
+                    .insert({ 'ext-video': { src: video, preview_src: preview, ...data }}),
+                'user'
+            );
+
+            cb();
+        })
     }
 
     openEmbedModal = () => this.openModal('embed')

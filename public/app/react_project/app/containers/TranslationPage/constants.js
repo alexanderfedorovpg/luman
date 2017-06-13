@@ -22,6 +22,10 @@ export const SAVE_TITLE = 'app/TranslationPage/SAVE_TITLE';
 export const SAVE_TITLE_SUCCESS = 'app/TranslationPage/SAVE_TITLE_SUCCESS';
 export const SAVE_TITLE_FAILURE = 'app/TranslationPage/SAVE_TITLE_FAILURE';
 
+export const SAVE_THESES = 'app/TranslationPage/SAVE_THESES';
+export const SAVE_THESES_SUCCESS = 'app/TranslationPage/SAVE_THESES_SUCCESS';
+export const SAVE_THESES_FAILURE = 'app/TranslationPage/SAVE_THESES_FAILURE';
+
 export const SAVE_COVER = 'app/TranslationPage/SAVE_COVER';
 export const SAVE_COVER_SUCCESS = 'app/TranslationPage/SAVE_COVER_SUCCESS';
 export const SAVE_COVER_FAILURE = 'app/TranslationPage/SAVE_COVER_FAILURE';

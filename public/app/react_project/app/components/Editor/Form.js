@@ -7,7 +7,7 @@ import {
     TagsRedux,
     RichRedux,
 } from 'components/Form/ReduxForm';
-import { Horizontal, Group, Label } from 'components/Form';
+import { Horizontal, Group, Label, labeledInput } from 'components/Form';
 import VideoUpload from './Form.VideoUpload';
 import SpecialSelect from './Select';
 
@@ -190,45 +190,6 @@ function Part5Component(props) {
 const LabeledTitle = labeledInput(Title);
 const LabeledSubtitle = labeledInput(Subtitle);
 const LabeledInput = labeledInput(InputRedux);
-
-function labeledInput(WrappedComponent) {
-    return ({ input, title, description, limit, ...props }) => (
-        <Group>
-            <LabelLimited value={input.value} limit={limit}>
-                {title &&
-                    <span>
-                        {title}
-                    </span>
-                }
-                {description}
-            </LabelLimited>
-            <WrappedComponent input={input} {...props} />
-        </Group>
-    );
-}
-
-function LabelLimited({ children, value, limit }) {
-    let leftText = '';
-
-    if (limit) {
-        const left = limit - value.length;
-
-        leftText = `
-            : осталось ${
-                left < 0
-                    ? <span className="out">{left}</span>
-                    : left
-            } символов
-        `;
-    }
-
-    return (
-        <Label right light>
-            {children}
-            {leftText}
-        </Label>
-    );
-}
 
 const validate = (data) => {
     const values = data.toJS();

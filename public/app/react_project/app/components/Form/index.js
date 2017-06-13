@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { ifProp, rem } from 'utils/style';
 import { color, font } from 'constants/style';
@@ -127,7 +128,7 @@ export const Textarea = styled.textarea`
     `}
 
     ${ifProp('light')(css`
-        min-height: 91px;
+        min-height: 119px;
 
         color: #666666;
         font-family: ${font.opensans};
@@ -157,3 +158,37 @@ export const Textarea = styled.textarea`
         letter-spacing: -0.7px;
     `)}
 `;
+
+
+export const labeledInput = (WrappedComponent) => {
+    return ({ input, title, description, limit, ...props }) => (
+        <Group>
+            <LabelLimited value={input.value} limit={limit}>
+                {title &&
+                    <span>
+                        {title}
+                    </span>
+                }
+                {description}
+            </LabelLimited>
+            <WrappedComponent input={input} {...props} />
+        </Group>
+    );
+}
+
+function LabelLimited({ children, value, limit }) {
+    const left = limit - value.length;
+
+    return (
+        <Label right light>
+            {children}
+            {limit && ': осталось '}
+            {limit && (
+                left < 0
+                    ? <span className="out">{left}</span>
+                    : left
+            )}
+            {limit && ' символов'}
+        </Label>
+    );
+}

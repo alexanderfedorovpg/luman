@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form/immutable'
 
 import { Wrap } from 'components/Content'
 import Timeline from 'components/Translation/Timeline'
-import { Group, Textarea, Label } from 'components/Form'
+import { Group, Textarea, Label, labeledInput } from 'components/Form'
 import Input from 'components/Form/Input'
 import {
     InputRedux,
@@ -21,7 +21,8 @@ import {
     VideoStatusTitle,
     VideoStatusTimer,
     Data,
-    DataText
+    DataText,
+    Title
 } from './style'
 
 class Detail extends PureComponent {
@@ -36,6 +37,7 @@ class Detail extends PureComponent {
                         <Left>
                             <TranslationForm1 initialValues={{
                                 title: data.title,
+                                theses: data.theses,
                                 image: (data.cover || {}).cover_url,
                                 body: (edited||{}).body
                             }} />
@@ -94,17 +96,31 @@ const TranslationForm1 = reduxForm({
     validate
 })(formPart1)
 
+const LabeledTitle = labeledInput(Title)
+const LabeledTextarea = labeledInput(TextareaRedux)
+
 const formPart2 = ({}) => (
     <div>
+        <Group>
+            <Field
+                name="title"
+                title="Заголовок:"
+                limit="120"
+                component={LabeledTitle}
+                block
+            />
+        </Group>
         <Data>
             <Field name="image" component={ImageLoader} icon />
             <DataText>
                 <Group>
-                    <Label right light>
-                        <span>Заголовок: </span>
-                        осталось 30 символов
-                    </Label>
-                    <Field name="title" component={TextareaRedux} title block />
+                    <Field
+                        name="theses"
+                        title="Главное через //"
+                        component={LabeledTextarea}
+                        light
+                        block
+                    />
                 </Group>
             </DataText>
         </Data>

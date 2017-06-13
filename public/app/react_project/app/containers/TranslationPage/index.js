@@ -25,6 +25,7 @@ import {
     editComment,
     deleteComment,
     saveTitle,
+    saveTheses,
     saveCover,
     setCommentsAction,
     setCommentEdit
@@ -57,7 +58,7 @@ class TranslationPage extends PureComponent {
 
     componentDidMount() {
 
-        this.props.fetchOnline()
+        this.props.loadOnline()
 
         if (this.props.params.id) {
             this.fetchItem(this.props.params.id)
@@ -77,9 +78,9 @@ class TranslationPage extends PureComponent {
     // также загружает "новости по теме"
     fetchItem(id) {
         if (!this.getById(id)) {
-            this.props.fetchOnline(id)
+            this.props.loadOnline(id)
         }
-        this.props.fetchComments(id)
+        this.props.loadComments(id)
     }
 
     getById(id) {
@@ -112,6 +113,11 @@ class TranslationPage extends PureComponent {
         this.props.saveTitle({
             id: newsId,
             title: values.title
+        })
+
+        this.props.saveTheses({
+            id: newsId,
+            theses: values.theses
         })
 
         // File List имеет тип - объект
@@ -228,37 +234,18 @@ const mapStateToProps = state => ({
     formValues: getFormValues('translationForm')(state)
 })
 
-const mapDispatchToProps = dispatch => ({
-    toggleOnline(id) {
-        dispatch(toggleOnline(id))
-    },
-    fetchOnline(id) {
-        dispatch(loadOnline(id))
-    },
-    fetchComments(id) {
-        dispatch(loadComments(id))
-    },
-    addComment(params) {
-        dispatch(addComment(params))
-    },
-    editComment(params) {
-        dispatch(editComment(params))
-    },
-    deleteComment(id) {
-        dispatch(deleteComment(id))
-    },
-    saveTitle(params) {
-        dispatch(saveTitle(params))
-    },
-    saveCover(params) {
-        dispatch(saveCover(params))
-    },
-    setCommentsAction(action) {
-        dispatch(setCommentsAction(action))
-    },
-    setCommentEdit(id) {
-        dispatch(setCommentEdit(id))
-    },
+const mapDispatchToProps = ({
+    toggleOnline,
+    loadOnline,
+    loadComments,
+    addComment,
+    editComment,
+    deleteComment,
+    saveTitle,
+    saveTheses,
+    saveCover,
+    setCommentsAction,
+    setCommentEdit,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TranslationPage);
