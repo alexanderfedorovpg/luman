@@ -1,36 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form/immutable';
 
-import Input from 'components/Form/Input';
-import FileInput from 'components/Form/FileInput';
 import Button from 'components/Button/TypedBtn';
 import { Group } from 'components/Form';
+import InputRedux from 'components/Form/ReduxForm/InputRedux';
+import FileInputRedux from 'components/Form/ReduxForm/FileInputRedux';
+import ImageLoaderRedux from 'components/Form/ReduxForm/ImageLoaderRedux';
 
-const InputRedux = ({ input, meta: { touched, invalid, valid, error }, showError, ...props }) => (
-    <div>
-        <Input
-            {...props}
-            success={touched && valid && !props.disabled}
-            error={touched && invalid && !props.disabled}
-            value={input.value}
-            onChange={(e) => input.onChange(e)}
-        />
-        {
-            touched && showError && error &&
-            <Label light error>{error}</Label>
+const GroupWide = styled(Group)`
+    margin-left: 5px;
+    flex-grow: 1;
+
+    > * {
+        &:not(:last-child) {
+            margin-bottom: 5px;
         }
-    </div>
-);
-
-const FileInputRedux = ({ input, meta: { touched, invalid, valid }, ...props }) => (
-    <FileInput
-        {...props}
-        success={touched && valid && !props.disabled}
-        error={touched && invalid && !props.disabled}
-        value={input.value}
-        onChange={(e) => input.onChange(e.target.files)}
-    />
-);
+    }
+`;
 
 function UploadForm({ handleSubmit, reset }) {
     return (
@@ -45,29 +32,36 @@ function UploadForm({ handleSubmit, reset }) {
                     component={FileInputRedux}
                 />
             </Group>
-            <Group marginBottom="5px">
+            <Group md horizontal align="top">
                 <Field
-                    name="title"
-                    block
-                    placeholder="Название"
-                    component={InputRedux}
+                    placeholder="Добавить превью"
+                    name="preview"
+                    accept="image/*"
+                    multiple={false}
+                    icon
+                    size="s"
+                    component={ImageLoaderRedux}
                 />
-            </Group>
-            <Group marginBottom="5px">
-                <Field
-                    name="author"
-                    block
-                    placeholder="Автор"
-                    component={InputRedux}
-                />
-            </Group>
-            <Group sm>
-                <Field
-                    name="source"
-                    block
-                    placeholder="Источник"
-                    component={InputRedux}
-                />
+                <GroupWide>
+                    <Field
+                        name="title"
+                        block
+                        placeholder="Название"
+                        component={InputRedux}
+                    />
+                    <Field
+                        name="author"
+                        block
+                        placeholder="Автор"
+                        component={InputRedux}
+                    />
+                    <Field
+                        name="source"
+                        block
+                        placeholder="Источник"
+                        component={InputRedux}
+                    />
+                </GroupWide>
             </Group>
             <Group>
                 <Button

@@ -17,16 +17,16 @@ export default Quill => {
             title.classList.add('video__title');
             title.textContent = value.title
 
-            let image = document.createElement('img');
-            image.setAttribute('src', `${process.env.API_ENDPOINT_PUBLIC}/image/instead_video`);
-            image.classList.add('video__preview');
+            let preview = document.createElement('img');
+            preview.setAttribute('src', value.preview_src || `${process.env.API_ENDPOINT_PUBLIC}/image/instead_video`);
+            preview.classList.add('video__preview');
 
             node.dataset.src = value.src;
             node.dataset.title = value.title;
             node.dataset.author = value.author;
             node.dataset.source = value.source;
 
-            node.appendChild(image);
+            node.appendChild(preview);
             node.appendChild(title);
             node.appendChild(info);
 
@@ -34,8 +34,10 @@ export default Quill => {
         }
 
         static value(domNode) {
+            const preview = domNode.querySelector('img')
 
             return {
+                preview_src: preview.getAttribute('src'),
                 src: domNode.dataset.src,
                 title: domNode.dataset.title,
                 author: domNode.dataset.author,

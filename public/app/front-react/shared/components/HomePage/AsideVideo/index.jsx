@@ -19,24 +19,20 @@ class AsideVideo extends PureComponent {
         this.play = this.play.bind(this)
     }
 
+    stop(){
+        this.setState({play: false})
+    }
+
     play() {
         this.setState({
             play: true
         })
-
-
+        let that = this;
         setTimeout(() => {
             const videoSource = this.props.videos;
             let i = 0;
             const videoCount = videoSource.length;
-            const videoNode = this.refs.wrapp.childNodes[0];
-
-            const kostyl = () => {
-                this.setState({
-                    play: false
-                });
-            }
-
+            const videoNode = this.refs.video;
             function videoPlay(videoNum) {
                 if (videoSource[videoNum].video_stream.url) {
                     videoNode.setAttribute("src", ensureAbs(videoSource[videoNum].video_stream.url));
@@ -51,12 +47,11 @@ class AsideVideo extends PureComponent {
 
             function myHandler() {
                 i++;
-                if (i == videoCount) {
-                    i = 0;
-                    kostyl();
-                    // videoPlay(i);
-                } else {
-                    videoPlay(i);
+                if (i == 5) {
+                    that.stop();
+                    return false;
+                }else{
+                    videoPlay(i)
                 }
             }
         }, 0)
@@ -65,7 +60,16 @@ class AsideVideo extends PureComponent {
     render() {
         const { data, className, main, videos } = this.props
 
-
+        const overlayStyle = {
+            position: 'fixed',
+            backgroundColor: 'rgba(36, 55, 70, 0.6)',
+            opacity: .7,
+            height: '100%',
+            width: '100%',
+            top: 0,
+            left: 0,
+            zIndex: 8,
+        }
         return data.video_stream
             ? (
                 <div
@@ -80,8 +84,10 @@ class AsideVideo extends PureComponent {
                 >
                     {
                         this.state.play ?
-
-                            <video  ref='video' id='videoStream' style={{width: 100 + '%', height: 100 + '%'}} controls="controls" />
+                            <div style={{width: 100 + '%', height: 100 + '%'}}>
+                                <video ref='video' id='videoStream' style={{width: 100 + '%', height: 100 + '%', zIndex: 9,position: 'relative'}} controls="controls" />
+                                <div style={overlayStyle} onClick={()=>this.stop()}/>
+                            </div>
 
                             :
                             (

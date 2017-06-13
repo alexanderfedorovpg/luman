@@ -307,6 +307,11 @@ export const putArticleTitle = data => axios.put(`/newseditor/title`, qs.stringi
         'Content-Type': 'application/x-www-form-urlencoded',
     },
 });
+export const putArticleTheses = data => axios.put(`/newseditor/theses`, qs.stringify(data), {
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+});
 export const toggleOnlineStatus = id => axios.get(`/news/online/setstatus/${id}`);
 export const getPublicOnline = () => publicApi.get('/news/comments');
 // =============================================================================

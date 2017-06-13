@@ -108,7 +108,7 @@ const makeSelectUserGroup = () => createSelector(
 
 const makeSelectPreloader = () => createSelector(
     selectAppDomain(),
-    (app) => app.get('preloader')
+    (app) => !!app.get('preloader')
 );
 
 const makeSelectInfo = () => createSelector(
