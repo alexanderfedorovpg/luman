@@ -12,13 +12,14 @@ import Content from 'components/Aside'
 class Aside extends PureComponent {
 
     render() {
-        const { noise, broadcast, top } = this.props
+        const { noise, broadcast, top, now } = this.props
 
         return (
             <Content
                 noise={noise ? noise.map(v => v.news) : null}
                 top={top ? top.map(v => v.news) : null}
                 broadcast={broadcast ? broadcast.map(v => v.record) : null}
+                now={now ? now : null}
             />
         )
     }

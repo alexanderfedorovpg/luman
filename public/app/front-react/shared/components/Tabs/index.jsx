@@ -13,7 +13,7 @@ import './style.scss';
 // }
 
 class Tabs extends Component {
-    
+
     constructor(props) {
         super(props);
 
@@ -25,7 +25,7 @@ class Tabs extends Component {
         this.toggle = this.toggle.bind(this);
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
-    
+
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
@@ -49,13 +49,13 @@ class Tabs extends Component {
 // $tabletLandscape: 1036px;
 // $tabletLandscapeMax: 1599px;
 // $desktop: 1600px;
-        if (window.innerWidth <= 720) {
+        if (window.innerWidth <= 615) {
             count = 2;
-        } else if (window.innerWidth <= 1035) {
+        } else if (window.innerWidth <= 929) {
             count = 4;
-        } else if (window.innerWidth > 1035 && window.innerWidth < 1599) {
+        } else if (window.innerWidth > 930 && window.innerWidth < 1299) {
             count = 5;
-        } else if (window.innerWidth >= 1599) {
+        } else if (window.innerWidth >= 1299) {
             count = 6;
         }
         this.setState({
@@ -69,7 +69,7 @@ class Tabs extends Component {
         const { data, active, onChange, classNames } = this.props;
         let topData = data;
         topData = topData.slice(0, this.state.count);
-        
+
 
 
         return (
@@ -91,7 +91,7 @@ class Tabs extends Component {
                         </li>
                     ))}
                     <li onClick={this.toggle} className="breadcrumb__burger">
-                        <img src={burger} alt=""/>
+                        <img className="breadcrumb__pict-burger" src={burger} alt=""/>
                     </li>
                 </ul>
                 {this.state.toggle ?
@@ -102,7 +102,7 @@ class Tabs extends Component {
                                     Все новости
                                 </a>
                             </div>
-                            <img onClick={this.toggle} src={burger} alt=""/>
+                            <img className="breadcrumb__pict-burger_toggle" onClick={this.toggle} src={burger} alt=""/>
                         </div>
                         <ul className={cn(['breadcrumb__ul', classNames.ul])}>
                             {data.map(v => (

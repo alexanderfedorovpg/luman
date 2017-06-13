@@ -4,6 +4,17 @@
         &:not(:first-child) {
             margin-top: rem(15);
         }
+        .general-video {
+            &__play-block {
+                display: block;
+                height: inherit;
+                &::before,
+                .general-video__img,
+                .general-video__link {
+                    height: inherit;
+                }
+            }
+        }
     }
 
     &__mini-news {

@@ -16,6 +16,8 @@ import MoreNews from 'components/HomePage/MoreNews'
 import LoadMore from 'components/LoadMore'
 import Aside from 'containers/Aside'
 
+import AsideVideo from 'components/HomePage/AsideVideo'
+
 import './style.scss'
 
 class News extends Component {
@@ -138,7 +140,7 @@ class News extends Component {
 
                         </div>
                         <MediaQuery minWidth="930px">
-                            <Aside top={[]} />
+                            <Aside top={[]} now={now} />
                             <MediaQuery minWidth="930px" maxWidth="1299px">
                                 <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                             </MediaQuery>

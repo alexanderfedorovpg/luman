@@ -16,7 +16,7 @@ import BannerPreview from 'components/HomePage/BannerPreview'
 import RandomNews from 'components/HomePage/RandomNews'
 import MoreNews from 'components/HomePage/MoreNews'
 import LoadMore from 'components/LoadMore'
-import Video from 'components/Aside/Video'
+import Aside from 'containers/Aside'
 
 import './style.scss'
 
@@ -61,6 +61,7 @@ class Broadcast extends Component {
                 : true
         ))
 
+        const now = nowNews;
         return (
             <div className="inner-wrapper">
                 <div className="news-top news-top_broadcast">
@@ -87,7 +88,7 @@ class Broadcast extends Component {
                         </div>
                         <div className="right-col">
                             <MediaQuery minWidth="930px">
-                                <Video data={{}} />
+                                <Aside noise={null} broadcast={null} now={now} />
                                 <Group title="Главные новости" margin>
                                     {nowNews.map(v => (
                                         <MiniNews key={v.id} data={v} className="broadcast__mini-news" />

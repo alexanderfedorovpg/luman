@@ -86,9 +86,9 @@ class NoisePage extends PureComponent {
             pagination,
             now
         } = this.props
+        now = now.map(v => v.news);
 
         const item = this.getById(this.getId())
-
         return (
             <div>
                 <Helmet>
@@ -105,13 +105,14 @@ class NoisePage extends PureComponent {
                             <Detail
                                 data={item}
                                 noise={noise}
-                                now={now.map(v => v.news)}
+                                now={now}
                                 related={relatedNews}
                                 broadcast={broadcast} />
                         </div>
                     )
                     : (
                         <Noise
+                            now={now}
                             onLoadRequest={loadMore}
                             canLoad={pagination.page < pagination.lastPage}
                             noise={noise} />
