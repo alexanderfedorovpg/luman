@@ -41,7 +41,7 @@ function HomePage({
 
     const moreVideo = videoNews.slice(2, 5)
     const listVideo = videoNews.slice(5, 8)
-    
+
     // const todayVideos = today;
 
     return (
@@ -54,20 +54,20 @@ function HomePage({
                             <AsideVideo
                                 data={firstVideo}
                                 playTitle="date"
-                                title="Все ключевые события этого дня"
+                                title="Ваш персональный ведущий"
                                 main
                                 videos={now}
-                                className="general-news__general-video" />
+                                className="general-news__general-video " />
                         </MediaQuery>
                         <Now data={now.slice(1, 5)} className="general-news__now" />
                         <MediaQuery minWidth="615px" maxWidth="929px">
                             <AsideVideo
                                 data={firstVideo}
                                 playTitle="date"
-                                title="Все ключевые события этого дня"
+                                title="Ваш персональный ведущий"
                                 main
                                 videos={now}
-                                className="general-news__general-video" />
+                                className="general-news__general-video " />
                         </MediaQuery>
                     </div>
                     <div className="general-news__left-wrapper two-wrapper">
@@ -94,10 +94,10 @@ function HomePage({
                         <AsideVideo
                             data={firstVideo}
                             playTitle="date"
-                            title="Все ключевые события этого дня"
+                            title="Ваш персональный ведущий"
                             main
                             videos={now}
-                            className="general-news__general-video" />
+                            className="general-news__general-video " />
                     </MediaQuery>
 
                     <MediaQuery minWidth="930px" maxWidth="1299px">

@@ -35,10 +35,12 @@ class Aside extends PureComponent {
                     onPlay={this.play}
                     className={className}
                     playTitle="date"
-                    title="Все ключевые события этого дня" />
+                    title="Ваш персональный ведущий" />
             )
             : (
-                <img src={main ? mainVideoPlaceholder : insideVideoPlaceholder} className="general-video__img" />
+                <div className="general-video general-video_no-overlay">
+                    <img src={main ? mainVideoPlaceholder : insideVideoPlaceholder} className="general-video__img" />
+                </div>
             )
     }
 }
