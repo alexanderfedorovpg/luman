@@ -56,6 +56,7 @@ function HomePage({
                                 playTitle="date"
                                 title="Все ключевые события этого дня"
                                 main
+                                videos={now}
                                 className="general-news__general-video" />
                         </MediaQuery>
                         <Now data={now.slice(1, 5)} className="general-news__now" />
@@ -65,6 +66,7 @@ function HomePage({
                                 playTitle="date"
                                 title="Все ключевые события этого дня"
                                 main
+                                videos={now}
                                 className="general-news__general-video" />
                         </MediaQuery>
                     </div>
