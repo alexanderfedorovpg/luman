@@ -30,6 +30,13 @@ class AsideVideo extends PureComponent {
             let i = 0;
             const videoCount = videoSource.length;
             const videoNode = this.refs.wrapp.childNodes[0];
+
+            const kostyl = () => {
+                this.setState({
+                    play: false
+                });
+            }
+
             function videoPlay(videoNum) {
                 if (videoSource[videoNum].video_stream.url) {
                     videoNode.setAttribute("src", ensureAbs(videoSource[videoNum].video_stream.url));
@@ -46,7 +53,8 @@ class AsideVideo extends PureComponent {
                 i++;
                 if (i == videoCount) {
                     i = 0;
-                    videoPlay(i);
+                    kostyl();
+                    // videoPlay(i);
                 } else {
                     videoPlay(i);
                 }
