@@ -794,7 +794,7 @@ class NewsListEditorController extends CmsController
             $id = $request->input('id');
             $request->input('id');
             $news = News::findOrfail($id);
-            $news->title = $request->input('theses');
+            $news->theses = $request->input('theses');
 
             if ($news->save()) {
                 return $this->respond($news->toArray());
