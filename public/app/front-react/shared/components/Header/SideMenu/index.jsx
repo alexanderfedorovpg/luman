@@ -28,18 +28,6 @@ function SideMenu({active, toggle}) {
                             Из эфира
                         </NavLink>
                     </li>
-                    <li className="side-menu__item">
-                        <a href="#" className="side-menu__link">
-                            Телеканал
-                        </a>
-                        <ul className="side-menu__child">
-                            <li className="side-menu__child-item">
-                                <NavLink onClick={toggle} activeClassName="selected" to="/how" className="side-menu__link">
-                                    Как смотреть
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
                 <Subscribe className="side-menu__subscribe" />
             </nav>

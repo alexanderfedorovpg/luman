@@ -428,7 +428,7 @@
         }
 
 
-        &_play {
+        &_play figure{
             visibility: hidden;
             @include below($tablet) {
                 visibility: visible;
@@ -442,17 +442,17 @@
         }
 
         &_play:before {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            // background-color: #eaecee;
-            background-color: rgba(36, 55, 70, 0.6);
-            // display: none;
-            @include below($tablet) {
-                display: none;
-            }
+            // content: '';
+            // display: block;
+            // width: 100%;
+            // height: 100%;
+            // position: absolute;
+            // // background-color: #eaecee;
+            // background-color: rgba(36, 55, 70, 0.6);
+            // // display: none;
+            // @include below($tablet) {
+            //     display: none;
+            // }
         }
 
         &__img {
