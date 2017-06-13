@@ -216,6 +216,7 @@ main {
         height: rem(396);
 
         &::before,
+        & > span,
         .general-video__img,
         .general-video__link {
             height: inherit;

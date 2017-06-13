@@ -44,7 +44,7 @@ const initialState = fromJS({
         data: [],
     },
     programs: {},
-    preloader: false,
+    preloader: 0,
     infoModalText: '',
 });
 
@@ -102,10 +102,10 @@ function AppReducer(state = initialState, action) {
             return state.setIn(['rubrics', 'data'], fromJS(action.payload));
 
         case SHOW_PRELOADER:
-            return state.set('preloader', true);
+            return state.update('preloader', v => v+1);
 
         case HIDE_PRELOADER:
-            return state.set('preloader', false);
+            return state.update('preloader', v => v ? v-1 : 0);
 
         case SHOW_INFO:
             return state.set('infoModalText', action.payload.text);

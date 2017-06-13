@@ -30,6 +30,10 @@ import {
     SAVE_TITLE_SUCCESS,
     SAVE_TITLE_FAILURE,
 
+    SAVE_THESES,
+    SAVE_THESES_SUCCESS,
+    SAVE_THESES_FAILURE,
+
     SAVE_COVER,
     SAVE_COVER_SUCCESS,
     SAVE_COVER_FAILURE,
@@ -147,6 +151,21 @@ export const titleSaved = payload => ({
 
 export const titleSavingError = error => ({
     type: SAVE_TITLE_FAILURE,
+    error
+})
+
+export const saveTheses = payload => ({
+    type: SAVE_THESES,
+    payload
+})
+
+export const thesesSaved = payload => ({
+    type: SAVE_THESES_SUCCESS,
+    payload
+})
+
+export const thesesSavingError = error => ({
+    type: SAVE_THESES_FAILURE,
     error
 })
 

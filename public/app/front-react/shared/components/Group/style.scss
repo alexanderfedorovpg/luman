@@ -30,6 +30,10 @@
         @include above($desktop) {
             border-bottom: 1px solid $gray;
         }
+
+        &.section-title {
+            border-bottom: none;
+        }
     }
     &__wrapper {
         margin-top: rem(17);
