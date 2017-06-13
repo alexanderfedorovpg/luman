@@ -18,6 +18,8 @@ import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
 
+import AsideVideo from './AsideVideo'
+
 import mainVideoPlaceholder from './obzor-main-new.jpg'
 import './style.scss'
 
@@ -38,7 +40,7 @@ function HomePage({
     const moreNews = other.slice(7, 13)
 
     const videoNews = broadcast.map(v => v.record)
-    const firstVideo = videoNews[0] || {}
+    const firstVideo = now[0] || {}
     const secondVideo = videoNews[1] || {}
 
     const moreVideo = videoNews.slice(2, 5)
@@ -79,8 +81,9 @@ function HomePage({
                     {firstVideo.video_stream
                         ? (
                             <VideoWrapper>
-                                <Video
-                                    data={firstVideo.video_stream}
+                                <AsideVideo
+                                    data={firstVideo}
+                                    videos={now}
                                     playTitle="date"
                                     title="Все ключевые события этого дня"
                                     className="general-news__general-video" />
