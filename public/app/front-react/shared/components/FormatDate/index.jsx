@@ -6,8 +6,8 @@ import './style.scss';
 const twoDays = 172800000;
 
 function FormatDate({value}) {
-
-    const date = new Date(value);
+    const parsed = Date.parse(value);
+    const date = new Date(parsed);
     const now = new Date();
 
     function getDate () {
@@ -17,14 +17,13 @@ function FormatDate({value}) {
             // )
             return (
                 <span className='format-date'>
-                    <FormattedDate value={value} year='numeric' month='2-digit' day='2-digit'/>
-
-                    <FormattedTime value={value} hour='numeric' minute='numeric' />
+                    <FormattedDate value={parsed} year='numeric' month='2-digit' day='2-digit' />
+                    <FormattedTime value={parsed} hour='numeric' minute='numeric' />
                 </span>
             )
         } else {
             return (
-                <FormattedRelative value={value} />
+                <FormattedRelative value={parsed} />
             )
         }
     }

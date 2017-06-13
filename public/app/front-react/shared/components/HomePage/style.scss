@@ -106,6 +106,7 @@
     }
 
     &__big-news {
+        flex-shrink: 0;
 
         &_war {
             height: rem(515);
