@@ -38,6 +38,7 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
                     'general-video_play': play,
                     'general-video_left': left,
                     'general-video_collapsed': collapsed,
+                    'general-video_idx': collapsed,
                 },
             )}
         >
@@ -56,8 +57,15 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
                                 :
                                 <img className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
                             }
+
                             <div className="general-video__info">
                                 <div className="general-video__date general-video__date general-video__date_position">
+                                    {data.url ?
+
+                                        <img onClick={onPlay} className="general-video__ico general-video__ico_small" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
+                                        :
+                                        <img className="general-video__ico_small" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
+                                    }
                                     <span className="general-video__span">{playText}</span>
                                 </div>
                                 <div className="general-video__title">

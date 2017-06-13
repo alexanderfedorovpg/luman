@@ -57,7 +57,7 @@ function HomePage({
                                 title="Ваш персональный ведущий"
                                 main
                                 videos={now}
-                                className="general-news__general-video " />
+                                className="general-news__general-video general-video_idx" />
                         </MediaQuery>
                         <Now data={now.slice(1, 5)} className="general-news__now" />
                         <MediaQuery minWidth="615px" maxWidth="929px">
@@ -67,7 +67,7 @@ function HomePage({
                                 title="Ваш персональный ведущий"
                                 main
                                 videos={now}
-                                className="general-news__general-video " />
+                                className="general-news__general-video general-video_idx" />
                         </MediaQuery>
                     </div>
                     <div className="general-news__left-wrapper two-wrapper">
@@ -97,7 +97,7 @@ function HomePage({
                             title="Ваш персональный ведущий"
                             main
                             videos={now}
-                            className="general-news__general-video " />
+                            className="general-news__general-video general-video_idx" />
                     </MediaQuery>
 
                     <MediaQuery minWidth="930px" maxWidth="1299px">

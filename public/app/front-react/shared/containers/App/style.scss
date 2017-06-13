@@ -617,11 +617,6 @@ main {
                     width: rem(96);
                     height: rem(96);
                 }
-
-                @include above($desktop) {
-                    width: rem(40);
-                    height: rem(40);
-                }
             }
 
             &__date {
@@ -640,8 +635,9 @@ main {
                 }
 
                 @include above($desktop) {
-                    margin-bottom: rem(29);
-                    text-align: left;
+                    padding-right: rem(64);
+                    margin-bottom: rem(9);
+                    text-align: right;
                 }
             }
 
@@ -668,8 +664,9 @@ main {
                 }
 
                 @include above($desktop) {
-                    left: rem(33);
-                    right: auto;
+                    left: auto;
+                    top: calc(50% - #{rem(13)});
+                    right: rem(18);
                 }
             }
 

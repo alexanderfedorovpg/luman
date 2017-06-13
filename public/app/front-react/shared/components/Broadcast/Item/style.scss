@@ -24,9 +24,6 @@
         transition: background .5s ease-out;
     }
 
-    &:not(.block-square_list):hover::before {
-        background: rgba(0,0,0,.7);
-    }
 
     &:hover {
         .from-enter__title {

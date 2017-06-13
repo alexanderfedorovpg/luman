@@ -39,7 +39,7 @@ function Aside({ noise, broadcast, top, className, now }) {
                         playTitle="date"
                         title="Все ключевые события этого дня"
                         videos={now}
-                        className="general-news__general-video" />
+                        className="general-news__general-video general-video_idx" />
                 </div>
                 {
                     showTop &&

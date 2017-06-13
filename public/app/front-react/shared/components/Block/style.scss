@@ -23,10 +23,6 @@
         transition: background .5s ease-out;
     }
 
-    &:not(.block-square_list):hover::before {
-        background: rgba(0,0,0,.7);
-    }
-
     &:hover {
         .block-square__title-war,
         .block-square__title {
@@ -185,9 +181,6 @@
             color: $blue;
         }
 
-        &::before {
-            background: rgba(0, 0, 0, .7);
-        }
     }
 
     &__time-keeping {
