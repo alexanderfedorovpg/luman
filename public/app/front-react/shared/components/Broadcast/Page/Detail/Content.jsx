@@ -118,7 +118,7 @@ class Content extends PureComponent {
                         'inner-about__text-bg-gray',
                         'broadcast__text-bg-gray',
                         {
-                            'inner-about__text-bg-gray_play': this.state.play,
+                            'inner-video__text-bg-gray_play': this.state.play,
                         },
                     )}
                 >
