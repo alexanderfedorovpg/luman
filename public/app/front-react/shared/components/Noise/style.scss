@@ -11,7 +11,7 @@
         display: block;
         position: absolute;
         top: rem(-10);
-        right: rem(25);
+        right: rem(22);
         background-color: $white;
     }
 
@@ -28,8 +28,8 @@
 
     &__title {
         position: absolute !important;
-        left: rem(-2);
-        top: rem(-18);
+        left: rem(-3);
+        top: rem(-16);
         border-bottom: 0 !important;
         background: $white;
         display: block;
@@ -37,6 +37,7 @@
 
         line-height: rem(34);
         text-decoration: none;
+
     }
 
     &__mini-news {
@@ -92,7 +93,7 @@
 
         .info-noize__title {
             position: absolute;
-            padding-left: rem(24);
+            padding-left: rem(28);
             line-height: rem(30);
             border-bottom: 0;
         }
