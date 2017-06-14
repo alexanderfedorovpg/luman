@@ -93,7 +93,7 @@
     &__link {
         font: #{rem(16)} $stemBold;
         line-height: inherit;
-        letter-spacing: rem(.35);
+        // letter-spacing: rem(.35);
         color: $crumb;
         cursor: pointer;
         vertical-align: middle;

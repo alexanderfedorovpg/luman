@@ -60,14 +60,14 @@
         font: #{rem(18)}/#{rem(21)} $stemBold;
         color: $blue;
         text-decoration: none;
-        letter-spacing: rem(-.5);
+        // letter-spacing: rem(-.5);
     }
 
     &__introtext {
         font-size: rem(14);
         line-height: rem(21);
         color: $enter;
-        letter-spacing: rem(-.35);
+        // letter-spacing: rem(-.35);
     }
 
     &__time {

@@ -153,12 +153,12 @@
     &__time-update {
 
         color: $purple;
-        letter-spacing: rem(-.7);
+        // letter-spacing: rem(-.7);
 
         @include below($mobile) {
             font-size: rem(12);
             line-height: rem(16);
-            letter-spacing: rem(-1);
+            // letter-spacing: rem(-1);
         }
 
         @include above($tablet) {

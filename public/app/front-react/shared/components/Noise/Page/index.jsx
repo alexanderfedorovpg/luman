@@ -66,8 +66,8 @@ class Noise extends PureComponent {
             <Masonry
                 className={'noize-all__row'}
                 options={{
-                    columnWidth: 274,
-                    gutter: 37,
+                    columnWidth: 264,
+                    gutter: 54,
                     // gutterWidth: 100
                 }}>
                 <div className="noize-all__gutter-sizer"></div>

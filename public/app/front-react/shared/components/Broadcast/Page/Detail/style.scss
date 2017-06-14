@@ -351,7 +351,7 @@
     }
 
     &__general-video {
-        margin-bottom: rem(30);
+        margin-bottom: rem(41);
         margin-right: 0 !important;
         height: rem(443) !important;
         width: rem(780) !important;
@@ -385,17 +385,38 @@
             }
         }
 
+        .inner-default {
+
+            .social-links--pad {
+                left: rem(196);
+
+
+                @include below($tabletLandscapeMax) {
+                    left: 0;
+                }
+            }
+        }
+
         .inner-about {
 
             &__content {
-                margin-left: 0;
                 padding-left: 0;
+
+                @include below($tabletLandscapeMax) {
+                    margin-left: rem(51);
+                }
+
+                @include below($mobile) {
+                    margin-left: 0;
+                }
             }
 
             &__subtitle {
+                line-height: rem(24);
+                color: $enter;
 
                 @include below($mobile) {
-                    margin-top: rem(25);
+                    margin-bottom: rem(15);
                 }
             }
         }
@@ -415,14 +436,24 @@
             .text-bg-gray--news {
 
                 height: auto;
+                padding-bottom: rem(35);
+                margin-top: rem(3);
 
                 @include below($tabletLandscapeMax) {
                     width: rem(598);
+                    padding-left: rem(52);
                     transform: translateX(0);
+                }
+
+                @include below($tabletMax) {
+                    width: rem(614);
+                    padding-bottom: rem(29);
+                    padding-left: rem(68);
                 }
 
                 @include below($mobile) {
                     width: rem(300);
+                    padding-left: 0;
                 }
 
                 .general-video {
@@ -431,6 +462,7 @@
 
                     @include below($tabletMax) {
                         height: rem(335) !important;
+                        margin-bottom: rem(29);
                     }
 
                     @include below($mobile) {
@@ -441,6 +473,7 @@
 
                     &__img {
                         width: 100%;
+                        margin-top: 0;
                     }
 
                     &__date {
@@ -448,22 +481,18 @@
                     }
 
                     &__ico {
-                        width: rem(55);
-                        height: rem(55);
+                        display: none;
+                        width: rem(96);
+                        height: rem(96);
 
-                        @include below($tabletMax) {
-                            width: rem(96);
-                            height: rem(96);
+                        &_small {
+                            display: block;
                         }
                     }
 
                     &__span {
-                        top: calc(50% - #{rem(12.5)});
-                        left: rem(40);
-
-                        @include below($tabletMax) {
-                            left: rem(70);
-                        }
+                        top: calc(50% - #{rem(10)});
+                        left: rem(70);
                     }
                 }
             }
