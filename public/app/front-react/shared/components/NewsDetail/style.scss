@@ -8,6 +8,7 @@
         &__video-info {
             height: 100%;
             display: flex;
+            text-align: left;
             flex-direction: column;
             justify-content: flex-end;
             padding-right: rem(10);
@@ -108,7 +109,7 @@
                         bottom: 0;
                         width: rem(225);
                         padding-left: 0;
-                        padding-bottom: rem(9);
+                        padding-bottom: rem(20);
                     }
                 }
             }

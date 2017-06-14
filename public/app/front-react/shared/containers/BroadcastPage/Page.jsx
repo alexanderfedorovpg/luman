@@ -94,6 +94,7 @@ class BroadcastPage extends PureComponent {
             programs,
             pagination,
             nowNews,
+            relatedNews,
             setProgram,
             loadMore
         } = this.props
@@ -122,6 +123,7 @@ class BroadcastPage extends PureComponent {
                 {match.params.id
                     ? <Detail
                         data={item}
+                        relatedNews={relatedNews}
                         nowNews={nowNews.map(v => v.news)}
                     />
                     : <Broadcast
@@ -148,6 +150,7 @@ const mapStateToProps = state => ({
     program: selectProgram(state),
     pagination: selectPagination(state),
     nowNews: selectNowNews(state),
+    relatedNews: selectRelated(state),
 })
 
 const mapDispatchToProps = dispatch => ({
