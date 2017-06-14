@@ -150,7 +150,6 @@
 
     .info-noize {
         width: rem(300);
-        border: 2px dashed $gray-dirty;
         position: relative;
 
         @include below($mobile) {

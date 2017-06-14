@@ -88,7 +88,7 @@ class Header extends PureComponent {
                                     <InfoIcon width="18px" height="18px" />
                                 </Link>
                                 <TopMenu />
-                                <MediaQuery minWidth="1300px">
+                                <MediaQuery minWidth="1250px">
                                     <Rates />
                                 </MediaQuery>
                             </div>

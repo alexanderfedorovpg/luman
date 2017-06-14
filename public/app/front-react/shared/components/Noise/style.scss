@@ -3,7 +3,12 @@
 
 .info-noize {
     width: rem(300);
-    border: 2px dashed $gray-dirty;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 2px;
+    border-image: url(./border.png);
+    border-image-slice: 2;
+    border-image-repeat: repeat;
     position: relative;
 
     .icon_scissors {

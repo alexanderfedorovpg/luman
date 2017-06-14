@@ -171,7 +171,7 @@ class Content extends PureComponent {
                         )
                         : null
                     }
-                    <MediaQuery minDeviceWidth="1300px">
+                    <MediaQuery minWidth="1250px">
                         {this.renderInfo()}
                     </MediaQuery>
                     <Video
@@ -198,10 +198,10 @@ class Content extends PureComponent {
                         <p className="news-preview__text">
                             {data.sub_title}
                         </p>
-                        <MediaQuery maxDeviceWidth="1299px">
-                            {this.renderInfo()}
-                        </MediaQuery>
                     </div>
+                    <MediaQuery minWidth="615px" maxWidth="1249px">
+                        {this.renderInfo()}
+                    </MediaQuery>
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
