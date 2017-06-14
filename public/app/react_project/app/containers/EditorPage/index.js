@@ -41,7 +41,7 @@ class EditorPage extends Component {
         this.state = {
             preview: false,
         };
-
+        this.useFinishAction = false;
         this.openPreview = ::this.openPreview;
         this.closePreview = ::this.closePreview;
         this.submitHandler = ::this.submitHandler;
@@ -91,8 +91,7 @@ class EditorPage extends Component {
         return (data) => {
             const values = data.toJS();
             const { article, rubrics } = this.props;
-
-            cb({
+            let fields = {
                 id: article.id,
                 top: values.top,
                 title: values.title,
@@ -102,16 +101,16 @@ class EditorPage extends Component {
                 keywords: values.keywords.trim().replace(/ +/g, ','),
                 theses: values.theses,
                 image_main: typeof values.image_main === 'string'
-                    ? (article.image_main || {}).id
-                    : values.image_main[0],
+                        ? (article.image_main || {}).id
+                        : values.image_main[0],
                 image_main_info: {
                     object_name: values.image_main_title,
                     object_author: values.image_main_author,
                     object_source: values.image_main_source,
                 },
                 image_preview: typeof values.image_preview === 'string'
-                    ? (article.image_preview || {}).id
-                    : values.image_preview[0],
+                        ? (article.image_preview || {}).id
+                        : values.image_preview[0],
                 image_preview_info: {
                     object_name: values.image_preview_title,
                     object_author: values.image_preview_author,
@@ -125,8 +124,27 @@ class EditorPage extends Component {
                     object_author: values.videoPreview.author,
                     object_source: values.videoPreview.source,
                 },
-            });
+            };
+            if(this.useFinishAction) this.props.finishArticle(fields)
+            else cb(fields);
         };
+    }
+
+    /**
+     * костыль, без него никак. выставляет флаг this.useFinishAction,
+     * который в дальнейшем чекает валидатор(submitHandler) данных из формы
+     * и если он стоит в true, то за место отправки в статус "опубликованно", он ее шлет в "готово"
+     * @param text
+     */
+    preSubmit = (text) => {
+        if (text) {
+            if (text == 'finishArticle') {
+                this.useFinishAction = true;
+            }
+        } else {
+            this.useFinishAction = false;
+        }
+        return this.props.submit()
     }
 
     renderContent() {
@@ -153,7 +171,7 @@ class EditorPage extends Component {
         const headerProps = {
             moved: menuOpen,
             preview: this.openPreview,
-            onSubmit: this.props.submit,
+            onSubmit: this.preSubmit,
             reject: (article.id || formIsValid) && rejectArticle.bind(this, article.id || values),
         };
 
