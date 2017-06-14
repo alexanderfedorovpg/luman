@@ -156,10 +156,7 @@ class Content extends PureComponent {
                     {data.title}
                 </h1>
                 <div className="inner-about__date">
-                    {Date.parse(data.publish_date)
-                        ? <FormatDate value={data.publish_date} />
-                        : null
-                    }
+                    <FormatDate value={data.publish_date} />
                 </div>
                 <div onClick={e => this.stop(e)} className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
                     {theses.length

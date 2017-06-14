@@ -88,6 +88,9 @@
                         margin-right: 0;
                     }
 
+                    &__title {
+                        background-color: transparent;
+                    }
                 }
 
                 .inner-about__video-info {
@@ -108,7 +111,7 @@
 
         &__content {
             margin-top: rem(30);
-            margin-left: rem(82);
+            margin-left: rem(84);
             color: $enter;
 
             @include below($mobile) {

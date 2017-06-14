@@ -61,6 +61,7 @@ class Broadcast extends Component {
                 : true
         ))
 
+
         return (
             <div className="inner-wrapper">
                 <div className="news-top">
@@ -75,7 +76,7 @@ class Broadcast extends Component {
                     <div className="news-header">
                         <div className="news-header__title">
                             <div className="container news-header__container">
-                                Лиза из Сохо
+                                {programs.filter(v => v.id === program)[0].name}
                                 <div className="news-header__title-logo">
                                 </div>
                             </div>

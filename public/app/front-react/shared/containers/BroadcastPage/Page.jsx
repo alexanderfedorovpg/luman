@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
@@ -31,6 +32,7 @@ class BroadcastPage extends PureComponent {
     constructor(props) {
         super(props);
 
+        this.toPrograms = this.toPrograms.bind(this);
     }
 
     componentDidMount() {
@@ -60,6 +62,22 @@ class BroadcastPage extends PureComponent {
             this.props.fetch({ id })
         }
         this.props.fetchRelated(id)
+    }
+
+    toPrograms(id) {
+        const { history, setProgram } = this.props;
+
+        setProgram(id);
+        if (id) {
+            history.push({
+                pathname: '/programs/' + id
+            });
+        } else {
+            // history.push({
+            //     pathname: 'broadcast'
+            // })
+        }
+
     }
 
     getById(id) {
@@ -111,7 +129,7 @@ class BroadcastPage extends PureComponent {
                         broadcast={broadcast}
                         onLoadRequest={loadMore}
                         canLoad={pagination.page < pagination.lastPage}
-                        setProgram={setProgram}
+                        setProgram={this.toPrograms}
                         programs={p}
                         program={program}
                     />

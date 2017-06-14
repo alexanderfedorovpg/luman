@@ -30,6 +30,8 @@ class BroadcastProgramsPage extends PureComponent {
     constructor(props) {
         super(props);
 
+        this.toPrograms = this.toPrograms.bind(this);
+
     }
 
     componentDidMount() {
@@ -67,6 +69,23 @@ class BroadcastProgramsPage extends PureComponent {
         return broadcastData[id]
     }
 
+    toPrograms(id) {
+        const { history, setProgram } = this.props;
+
+        setProgram(id);
+        if (id) {
+            history.push({
+                pathname: '/programs/' + id
+            });
+        } else {
+            history.push({
+                pathname: '/broadcast'
+            })
+        }
+
+    }
+
+
     render() {
         let {
             match,
@@ -81,6 +100,7 @@ class BroadcastProgramsPage extends PureComponent {
         } = this.props
         const item = this.getById(match.params.id) || {}
         const p = [{ id: null, name: 'Все сразу' }, ...programs]
+        
 
         if(SHOW_STUB){
             return (
@@ -98,20 +118,16 @@ class BroadcastProgramsPage extends PureComponent {
                         <title>Из эфира</title>
                     </Helmet>
 
-                    {match.params.id
-                        ? <Detail
-                            data={item}
-                            noise={noise}
-                            hasVideo
-                            related={relatedNews}
-                            broadcast={broadcast}
-                        />
+                    {!match.params.id
+                        ? 
+                        null
                         :
                         <Broadcast
+                            dataId={match.params.id} 
                             broadcast={broadcast}
                             onLoadRequest={loadMore}
                             canLoad={pagination.page < pagination.lastPage}
-                            setProgram={setProgram}
+                            setProgram={this.toPrograms}
                             programs={p}
                             program={program}
                         />
