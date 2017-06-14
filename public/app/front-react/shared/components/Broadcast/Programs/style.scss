@@ -281,7 +281,7 @@
     .block-square {
 
         .block-square__info {
-            width: rem(250);
+            width: 100%;
         }
 
         .block-square__title {
@@ -358,7 +358,7 @@
         &-logo {
             height: rem(124);
             width: rem(214);
-            
+
             background-image: url(/content/rtvi/show-rtvi.png);
             background-size: cover;
 
@@ -389,7 +389,7 @@
             &:after {
                 content: ' ';
                 display: block;
-                
+
                 background-image: url(/content/broadcast/liza.png);
                 background-repeat: no-repeat;
                 background-position: top center;
@@ -409,7 +409,7 @@
 
     &__tabs {
         width: rem(615);
-        
+
         border-top: rem(1) solid #b9babc;
         padding: rem(15) 0 rem(80);
 
