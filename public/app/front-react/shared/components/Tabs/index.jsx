@@ -53,9 +53,9 @@ class Tabs extends Component {
             count = 2;
         } else if (window.innerWidth <= 929) {
             count = 4;
-        } else if (window.innerWidth > 930 && window.innerWidth < 1299) {
+        } else if (window.innerWidth > 930 && window.innerWidth < 1249) {
             count = 5;
-        } else if (window.innerWidth >= 1299) {
+        } else if (window.innerWidth >= 1250) {
             count = 6;
         }
         this.setState({
