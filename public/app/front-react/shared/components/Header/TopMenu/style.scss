@@ -47,6 +47,6 @@
         text-transform: uppercase;
     }
     &__link.selected {
-        color: #a03761;
+        color: $top-menu-active;
     }
 }

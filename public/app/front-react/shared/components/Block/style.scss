@@ -81,7 +81,7 @@
     }
 
     &__time-update {
-        color: $purple;
+        color: $gray;
     }
 
     &__time-keeping {
@@ -287,7 +287,7 @@
     }
 
     &__time-update {
-        color: $purple;
+        color: $gray;
 
         @include below($mobile) {
             display: block;

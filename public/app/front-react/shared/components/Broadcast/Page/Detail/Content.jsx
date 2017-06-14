@@ -99,7 +99,7 @@ class Content extends PureComponent {
 
         return (
             <div>
-                <div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div>
+                {/*<div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div> */}
                 <h1>
                     {data.title}
                 </h1>
@@ -118,7 +118,7 @@ class Content extends PureComponent {
                         'inner-about__text-bg-gray',
                         'broadcast__text-bg-gray',
                         {
-                            'inner-video__text-bg-gray_play': this.state.play,
+                            'inner-about__text-bg-gray_playy': this.state.play,
                         },
                     )}
                 >

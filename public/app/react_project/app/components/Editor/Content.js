@@ -147,7 +147,8 @@ class Content extends PureComponent {
             preview,
             closePreview,
             onChange,
-            onSubmit
+            onSubmit,
+            programs,
         } = this.props;
         return (
             <Root>
@@ -159,7 +160,7 @@ class Content extends PureComponent {
                                 initialValues={this.getInitialData()}/>
                         </Left>
                         <Right>
-                            <Part2 />
+                            <Part2 programs={programs} />
                         </Right>
                     </Wrap>
                 </header>
