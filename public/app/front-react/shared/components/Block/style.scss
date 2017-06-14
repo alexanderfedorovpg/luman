@@ -53,12 +53,13 @@
         bottom: rem(9);
         left: 0;
 
-        width: rem(280);
+        width: 100%;
         padding-left: rem(20);
     }
 
     &__title {
         margin-bottom: rem(3);
+        padding-right: rem(10);
 
         font: #{rem(18)}/#{rem(21)} $stemBold;
         color: $white;
@@ -73,8 +74,9 @@
     }
 
     &__time-add {
+        margin: rem(8) 0;
         font-size: rem(12);
-        line-height: rem(32);
+        line-height: normal;
         color: $gray;
     }
 
@@ -232,7 +234,7 @@
         bottom: rem(2);
         left: 0;
 
-        padding-left: rem(19);
+        padding-left: rem(17);
 
         @include below($mobile) {
             bottom: rem(20);
@@ -284,7 +286,7 @@
         }
     }
 
-    &__time-upadate {
+    &__time-update {
         color: $purple;
 
         @include below($mobile) {
