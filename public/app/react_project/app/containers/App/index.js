@@ -26,6 +26,7 @@ import { logout } from 'containers/LoginPage/actions';
 import {
     closeMenu,
     toggleMenu,
+    loadPrograms,
     loadRubrics,
     loadUsers,
     loadCurrentUser,
@@ -62,6 +63,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
         api.setToken(token);
 
         setTimeout(() => {
+            this.props.loadPrograms();
             this.props.loadRubrics();
             this.props.loadUsers();
             this.props.loadCurrentUser();
@@ -124,6 +126,10 @@ const mapDispatchToProps = (dispatch) => ({
 
     loadUsers() {
         dispatch(loadUsers());
+    },
+
+    loadPrograms() {
+        dispatch(loadPrograms());
     },
 
     loadCurrentUser() {
