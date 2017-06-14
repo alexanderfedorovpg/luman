@@ -101,6 +101,15 @@
                     padding-bottom: rem(15);
                     padding-right: rem(14);
                     padding-left: rem(5);
+
+                    @include below($tabletLandscapeMax) {
+                        position: absolute;
+                        right: 0;
+                        bottom: 0;
+                        width: rem(225);
+                        padding-left: 0;
+                        padding-bottom: rem(9);
+                    }
                 }
             }
         }
