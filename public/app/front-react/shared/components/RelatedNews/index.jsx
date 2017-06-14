@@ -13,7 +13,7 @@ import 'components/MiniNews/style.scss'
 
 function RelatedNews({ data, title }) {
     const first = data[0]
-    const rest = data.slice(1)
+    const rest = data.slice(1, 3)
 
     return (
         first
