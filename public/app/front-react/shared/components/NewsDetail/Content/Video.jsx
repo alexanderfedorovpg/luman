@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
-
+import MediaQuery from 'react-responsive'
 import classNames from 'classnames'
-// import { FormattedRelative } from 'react-intl'
 
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
@@ -108,9 +107,39 @@ class Content extends PureComponent {
         parent.replaceChild(iframe, target);
     }
 
+    renderInfo() {
+        const { data: { video_stream } } = this.props;
+
+        if (!video_stream) return null;
+
+        const author = video_stream.preview_author === 'undefined'
+            ? ''
+            : video_stream.preview_author;
+
+        const source = video_stream.preview_source === 'undefined'
+            ? ''
+            : video_stream.preview_source;
+
+        if (!author && !source) return null;
+
+        return (
+            <div className="inner-about__video-info">
+                <div>
+                    <div>
+                        Фото:
+                    </div>
+                    {author}
+                    {author && source && ' / '}
+                    {source}
+                </div>
+            </div>
+        )
+    }
+
     render() {
         const { data, children } = this.props
         let theses = [];
+        const body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
 
         if (data.theses) {
             theses = Array.isArray(data.theses)
@@ -119,16 +148,6 @@ class Content extends PureComponent {
         }
 
         const image = data.image_preview || {};
-
-        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
-            data.body = data.body.replace('/ undefined', '');
-        }
-        if (data.body && data.body.indexOf('undefined /', '') > -1) {
-            data.body = data.body.replace('undefined /', '');
-        }
-        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
-            data.body = data.body.replace('undefined / undefined', '');
-        }
 
         return (
             <div>
@@ -152,22 +171,9 @@ class Content extends PureComponent {
                         )
                         : null
                     }
-                    {data.video_stream && (data.video_stream.preview_author || data.video_stream.preview_source) && (
-                        <div className="inner-about__video-info">
-                            {data.video_stream.preview_author !== 'undefined' && data.video_stream.preview_source !== 'undefined' ?
-                                <div>
-                                    <div>
-                                        Фото:
-                                    </div>
-                                    {data.video_stream.preview_author}
-                                    {data.video_stream.preview_author && data.video_stream.preview_source && ' / '}
-                                    {data.video_stream.preview_source}
-                                </div>
-                                :
-                                null
-                            }
-                        </div>
-                    )}
+                    <MediaQuery minDeviceWidth="1300px">
+                        {this.renderInfo()}
+                    </MediaQuery>
                     <Video
                         className="general-news__general-video"
                         play={this.state.play}
@@ -192,12 +198,15 @@ class Content extends PureComponent {
                         <p className="news-preview__text">
                             {data.sub_title}
                         </p>
+                        <MediaQuery maxDeviceWidth="1299px">
+                            {this.renderInfo()}
+                        </MediaQuery>
                     </div>
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
                     <div
-                        dangerouslySetInnerHTML={{ __html: data.body }}
+                        dangerouslySetInnerHTML={{ __html: body }}
                         onClick={this.onContentClick}
                     />
                     {children}
