@@ -60,7 +60,7 @@ function Aside({ noise, broadcast, top, className, now }) {
                 : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
             }
             <Subscribe className="news-top__subscribe" />
-            <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1299px">
+            <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1249px">
                 <Banner className="news-top__banner" />
             </MediaQuery>
         </div>

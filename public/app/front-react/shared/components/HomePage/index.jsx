@@ -75,7 +75,7 @@ function HomePage({
                             data={todayNews}
                             className="general-news__per-day" />
 
-                        <MediaQuery minWidth="1300px">
+                        <MediaQuery minWidth="1250px">
                             {low => (
                                 <MediaQuery maxWidth="929px">
                                     {high => (low || high) &&
@@ -100,7 +100,7 @@ function HomePage({
                             className="general-news__general-video general-video_idx" />
                     </MediaQuery>
 
-                    <MediaQuery minWidth="930px" maxWidth="1299px">
+                    <MediaQuery minWidth="930px" maxWidth="1249px">
                         <Noise className="general-news__info-noize" data={noise} />
                         <Banner className="general-news__banner" />
                     </MediaQuery>
@@ -121,7 +121,7 @@ function HomePage({
                     </div>
                 </MediaQuery>
                 <div className="general-news__left general-news__left_more">
-                    <MediaQuery minWidth="1300px">
+                    <MediaQuery minWidth="1250px">
                         {low => (
                             <MediaQuery minWidth="615px" maxWidth="929px">
                                 {high => (low || high)
@@ -136,12 +136,12 @@ function HomePage({
                     <RandomNews className="general-news__random-news" data={randomNews} />
                 </div>
                 <div className="general-news__right general-news__right_more">
-                    <MediaQuery minWidth="1300px">
+                    <MediaQuery minWidth="1250px">
                         <Subscribe className="general-news__subscribe"/>
                     </MediaQuery>
                     <MoreNews className="general-news__more-news" data={moreNews} />
                 </div>
-                <MediaQuery minWidth="1300px">
+                <MediaQuery minWidth="1250px">
                     <div className="general-news__middle">
                         <BannerPreview className="general-news__banner-preview" />
                     </div>
