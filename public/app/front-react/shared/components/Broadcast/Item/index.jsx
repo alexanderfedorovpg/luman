@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { FormattedTime, FormattedDate } from 'react-intl'
+import { FormattedDate } from 'react-intl'
 
 import Img from 'components/Img'
 
@@ -34,10 +34,14 @@ function FromEnter({ data, big, className }) {
                         ? data.program.name
                         : null
                     }
-                    {` `}
+                    {' '}
                     <span className="from-enter__time-add">
-                        {Date.parse(data.publish_date)
-                            ? <FormattedDate value={data.publish_date} month="long" day="2-digit" />
+                        {data.publish_date
+                            ? <FormattedDate
+                                value={data.publish_date.replace(/-/g, '/')}
+                                month="long"
+                                day="2-digit"
+                            />
                             : null
                         }
                     </span>
