@@ -91,7 +91,7 @@ class App extends Component {
 
                             <Route exact path="/text-stream" component={TextStream} />
 
-                            <Route exact path="/programs" component={BroadcastProgramsPage} />
+                            <Route path="/programs/:id" component={BroadcastProgramsPage} />
 
                             <Route exact path="/info-page" component={InfoPage} />
 

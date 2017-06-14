@@ -91,7 +91,7 @@ class Tabs extends Component {
                                 </a>
                             </li>
                         ))}
-                        <li onClick={this.toggle} className="breadcrumb__burger">
+                        <li onClick={this.toggle} className={cn("breadcrumb__burger", {breadcrumb__burger_open : this.state.toggle})}>
                             <div className="breadcrumb__pict-burger">
                                 <span className="breadcrumb__appearance"></span>
                             </div>
