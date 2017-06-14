@@ -18,10 +18,7 @@ function BlockBorder({ data, className }) {
                     {data.title}
                 </p>
                 <div className="block-rectangle-border__date">
-                    {Date.parse(data.publish_date)
-                        ? <FormatDate value={data.publish_date} />
-                        : null
-                    }
+                    <FormatDate value={data.publish_date} />
                 </div>
             </Link>
         </div>
