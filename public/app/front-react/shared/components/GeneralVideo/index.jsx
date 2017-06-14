@@ -13,7 +13,10 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
 
     if (!data) {
         return (
-            <div className="general-video general-video_no-overlay">
+            <div className={classNames(
+                'general-video general-video_no-overlay',
+                className
+            )}>
                 <img className="general-video__img" src={placeholder} alt="" />
             </div>
         );
