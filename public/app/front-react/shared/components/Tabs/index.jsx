@@ -74,57 +74,60 @@ class Tabs extends Component {
 
         return (
             <div className={cn(['breadcrumb', classNames.root])}>
-                <ul className={cn(['breadcrumb__ul', classNames.ul])}>
-                    {topData.map(v => (
-                        <li
-                            key={v.id}
-                            className={cn('breadcrumb__item', {
-                                breadcrumb__item_active: v.id == active,
-                            })}
-                        >
-                            <a
-                                className="breadcrumb__link"
-                                onClick={() => onChange(v.id)}
+                <div className="breadcrumb__wrapper">
+                    <ul className={cn(['breadcrumb__ul', classNames.ul])}>
+                        {topData.map(v => (
+                            <li
+                                key={v.id}
+                                className={cn('breadcrumb__item', {
+                                    breadcrumb__item_active: v.id == active,
+                                })}
                             >
-                                {v.name}
-                            </a>
-                        </li>
-                    ))}
-                    <li onClick={this.toggle} className="breadcrumb__burger">
-                        <img className="breadcrumb__pict-burger" src={burger} alt=""/>
-                    </li>
-                </ul>
-                {this.state.toggle ?
-                    <div className="breadcrumb__toggle">
-                        <div className="breadcrumb__toggle_header">
-                            <div className="breadcrumb__item breadcrumb__item_active">
-                                <a href="#" className="breadcrumb__link">
-                                    Все новости
-                                </a>
-                            </div>
-                            <img className="breadcrumb__pict-burger_toggle" onClick={this.toggle} src={burger} alt=""/>
-                        </div>
-                        <ul className={cn(['breadcrumb__ul', classNames.ul])}>
-                            {data.map(v => (
-                                <li
-                                    key={v.id}
-                                    className={cn('breadcrumb__item', {
-                                        breadcrumb__item_active: v.id == active,
-                                    })}
+                                <a
+                                    className="breadcrumb__link"
+                                    onClick={() => onChange(v.id)}
                                 >
-                                    <a
-                                        className="breadcrumb__link"
-                                        onClick={() => onChange(v.id)}
-                                    >
-                                        {v.name}
+                                    {v.name}
+                                </a>
+                            </li>
+                        ))}
+                        <li onClick={this.toggle} className="breadcrumb__burger">
+                            <div className="breadcrumb__pict-burger">
+                                <span className="breadcrumb__appearance"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    {this.state.toggle ?
+                        <div className="breadcrumb__toggle">
+                            <div className="breadcrumb__toggle_header">
+                                <div className="breadcrumb__item breadcrumb__item_active">
+                                    <a href="#" className="breadcrumb__link">
+                                        Все передачи
                                     </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    :
-                    null
-                }
+                                </div>
+                            </div>
+                            <ul className={cn(['breadcrumb__ul', classNames.ul])}>
+                                {data.map(v => (
+                                    <li
+                                        key={v.id}
+                                        className={cn('breadcrumb__item', {
+                                            breadcrumb__item_active: v.id == active,
+                                        })}
+                                    >
+                                        <a
+                                            className="breadcrumb__link"
+                                            onClick={() => onChange(v.id)}
+                                        >
+                                            {v.name}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        :
+                        null
+                    }
+                </div>
             </div>
         );
     }
