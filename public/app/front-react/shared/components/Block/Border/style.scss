@@ -26,4 +26,8 @@
         font: #{rem(12)} / #{rem(24)} $stemReg;
         color: $gray-date;
     }
+
+    &.noize-all__block-rectangle-border {
+        width: rem(274);
+    }
 }
