@@ -6,6 +6,10 @@ import './style.scss';
 const twoDays = 172800000;
 
 function FormatDate({value}) {
+    if (!value) {
+        return null;
+    }
+
     // for stupid Safari
     const fixedVal = value.replace(/-/g, '/');
 
