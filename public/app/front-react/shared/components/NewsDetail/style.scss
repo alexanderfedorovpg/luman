@@ -7,7 +7,6 @@
 
         &__video-info {
             height: 100%;
-            text-align: right;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -15,16 +14,8 @@
             padding-bottom: rem(32);
             color: $gray-date;
 
-            @include below($mobile) {
-                display: none;
-            }
-
-            @include above($tablet) {
-                display: none;
-            }
-
             @include above($desktop) {
-                display: flex;
+                text-align: right;
             }
         }
 
