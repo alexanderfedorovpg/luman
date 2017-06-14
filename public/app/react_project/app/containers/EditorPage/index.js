@@ -209,6 +209,7 @@ class EditorPage extends Component {
                         {...headerProps}
                     />
 
+
                     <Content
                         article={article}
                         formValues={this.props.formValues}
