@@ -150,7 +150,7 @@ class Content extends PureComponent {
                     <div className="inner-about__subtitle">
                         {data.sub_title}
                     </div>
-                    <Socials shareLink={data.uri} title={data.title}/>
+                    <Socials shareLink={window.location.href} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
                     <div dangerouslySetInnerHTML={{ __html: data.body }} />
