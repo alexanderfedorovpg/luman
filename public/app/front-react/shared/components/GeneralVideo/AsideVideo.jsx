@@ -85,6 +85,10 @@ class AsideVideo extends PureComponent {
             zIndex: 8,
         }
 
+        if (!videos) return null
+
+        const data = videos[0] || {}
+
         return data.video_stream
             ? (
                 <div
