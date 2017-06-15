@@ -213,7 +213,6 @@ main {
     position: relative;
 
     .general-video {
-        height: rem(396);
 
         &::before,
         & > span,
@@ -224,7 +223,7 @@ main {
     }
 
     .general-video__img {
-        height: rem(396);
+        // height: rem(396);
     }
 
     &_play {
@@ -305,396 +304,395 @@ main {
 
         color: $gray-date;
     }
+}
 
+.text-bg-gray {
+    position: relative;
+    z-index: 1;
 
-    .text-bg-gray {
-        position: relative;
-        z-index: 1;
+    background-color: $bg-text;
 
-        background-color: $bg-text;
+    &:before {
+        content: ' ';
 
-        &:before {
-            content: ' ';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: rem(-900);
 
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: rem(-900);
+        width: rem(900);
 
-            width: rem(900);
-
-            background: $bg-text;
-        }
-
-        @include below($mobile) {
-            width: 100%;
-        }
-
-        @include above($tabletLandscape) {
-            width: rem(720);
-            min-height: 0;
-        }
-
-        @include above($tablet) {
-            width: rem(740);
-            min-height: 0;
-        }
-
-        @include above($desktop) {
-            min-height: rem(386);
-            width: rem(1039);
-        }
-
-        &.inner-about__text-bg-gray_play:before {
-            @include above($mobile) {
-                visibility: hidden;
-            }
-        }
-
-        &__block-text {
-            position: absolute;
-            bottom: rem(-72);
-            left: 17%;
-
-            width: rem(427);
-            padding: #{rem(24)} 0 #{rem(30)} #{rem(41)};
-
-            text-align: right;
-            // letter-spacing: rem(-.8);
-
-            background-color: #a13461;
-            background-image: url(/content/text-bg-gray/text-block.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-
-            @include below($mobile) {
-                background-color: transparent;
-                background-image: linear-gradient(to left, #a13461 rem(275), transparent rem(25)) !important;
-            }
-
-            &::after,
-            &::before {
-                content: '';
-                position: absolute;
-            }
-
-            &::before {
-                top: 0;
-                left: 100%;
-
-                width: rem(32);
-                height: 100%;
-                margin-left: rem(-1);
-
-                background-image: linear-gradient(-110deg, transparent rem(25), #a13461 rem(26));
-
-                @include below($mobile) {
-                    left: rem(-1);
-                    background-image: linear-gradient(110deg, transparent rem(25), #a13461 rem(26));
-                }
-            }
-
-            &::after {
-                top: 100%;
-                left: 0;
-
-                width: calc(100% + #{rem(31)});
-                height: rem(32);
-                margin-top: rem(-1);
-
-                background-image: linear-gradient(15deg, transparent rem(25), #a13461 rem(26));
-
-                @include below($mobile) {
-                    left: rem(-2);
-                    width: calc(100% + #{rem(2)});
-                    background-image: linear-gradient(-10deg, transparent rem(25), #a13461 rem(26));
-                }
-            }
-
-            @include below($mobile) {
-                position: relative;
-                left: 0;
-                top: 0;
-            }
-        }
-
-        &__text {
-            font: #{rem(18)}/ #{rem(24)} $stemBold;
-
-            color: $white;
-        }
-
-        &__text-lite {
-            font: #{rem(15)}/ #{rem(24)} $stemBold;
-            color: $white;
-        }
-
-        &__title {
-            margin-bottom: rem(24);
-
-            font-family: $stemBold;
-            font-size: rem(24);
-            line-height: rem(21);
-            color: $purple;
-        }
-
-        &__update {
-            position: absolute;
-            right: rem(-32);
-            bottom: rem(-22);
-            cursor: pointer;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: rem(155);
-            height: rem(75);
-            padding-top: rem(8);
-
-            font-family: $stemBold;
-            font-size: rem(16);
-            color: $white;
-            text-decoration: none;
-            text-transform: uppercase;
-
-            background: url('/general/geometry/ice-cube.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            &:hover {
-                color: $white;
-            }
-        }
-
+        background: $bg-text;
     }
 
-    .text-bg-gray--news {
+    @include below($mobile) {
+        width: 100%;
+    }
 
-        display: flex;
-        align-items: flex-start;
-        flex-direction: row;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        margin-top: rem(7);
-        margin-bottom: 0;
+    @include above($tabletLandscape) {
+        width: rem(720);
+        min-height: 0;
+    }
+
+    @include above($tablet) {
+        width: rem(740);
+        min-height: 0;
+    }
+
+    @include above($desktop) {
+        min-height: rem(386);
+        width: rem(1039);
+    }
+
+    &.inner-about__text-bg-gray_play:before {
+        @include above($mobile) {
+            visibility: hidden;
+        }
+    }
+
+    &__block-text {
+        position: absolute;
+        bottom: rem(-72);
+        left: 17%;
+
+        width: rem(427);
+        padding: #{rem(24)} 0 #{rem(30)} #{rem(41)};
+
+        text-align: right;
+        // letter-spacing: rem(-.8);
+
+        background-color: #a13461;
+        background-image: url(/content/text-bg-gray/text-block.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
 
         @include below($mobile) {
-            flex-wrap: wrap;
-            height: auto;
-            justify-content: flex-start;
-            //flex-direction: column;
-            padding-bottom: rem(50);
+            background-color: transparent;
+            background-image: linear-gradient(to left, #a13461 rem(275), transparent rem(25)) !important;
         }
 
-        @include above($tablet) {
-            height: auto;
-            margin-top: rem(14);
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
         }
 
-        &.text-bg-gray .text-bg-gray {
+        &::before {
+            top: 0;
+            left: 100%;
 
-            &__block-text {
-                z-index: 9;
-                top: rem(23);
-                bottom: auto;
+            width: rem(32);
+            height: 100%;
+            margin-left: rem(-1);
 
-                width: rem(317);
-                padding: rem(23) rem(29) rem(33) rem(24);
-
-                text-align: left;
-                transition: left .3s;
-
-                background-image: url(/content/text-bg-gray/text-block2.png);
-
-                @include below($mobile) {
-                    top: rem(19);
-                    width: rem(300);
-                    padding-left: rem(38);
-                    padding-top: rem(31);
-                    text-align: right;
-                }
-
-                @include above($tablet) {
-                    top: rem(20);
-                    width: rem(281);
-                }
-
-                @include above($tabletLandscape) {
-                    width: rem(268);
-                }
-
-                &_play {
-
-                    @include above($tablet) {
-                        opacity: .5;
-                        left: 69.4%;
-
-                        &:before {
-                            left: rem(-31);
-                            transform: scale(-1, 1);
-                        }
-
-                        &:after {
-                            left: rem(-31.7);
-                            transform: scale(-1, 1);
-                            width: calc(100% + 1.94375rem);
-                        }
-                    }
-
-                }
-
-            }
-            &__text {
-                margin-bottom: rem(18);
-
-                font-size: rem(15);
-                line-height: rem(18);
-                // letter-spacing: rem(-0.75);
-            }
-
-        }
-
-        .general-video {
-            height: rem(573);
-            margin-right: rem(24);
+            background-image: linear-gradient(-110deg, transparent rem(25), #a13461 rem(26));
 
             @include below($mobile) {
+                left: rem(-1);
+                background-image: linear-gradient(110deg, transparent rem(25), #a13461 rem(26));
+            }
+        }
+
+        &::after {
+            top: 100%;
+            left: 0;
+
+            width: calc(100% + #{rem(31)});
+            height: rem(32);
+            margin-top: rem(-1);
+
+            background-image: linear-gradient(15deg, transparent rem(25), #a13461 rem(26));
+
+            @include below($mobile) {
+                left: rem(-2);
+                width: calc(100% + #{rem(2)});
+                background-image: linear-gradient(-10deg, transparent rem(25), #a13461 rem(26));
+            }
+        }
+
+        @include below($mobile) {
+            position: relative;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    &__text {
+        font: #{rem(18)}/ #{rem(24)} $stemBold;
+
+        color: $white;
+    }
+
+    &__text-lite {
+        font: #{rem(15)}/ #{rem(24)} $stemBold;
+        color: $white;
+    }
+
+    &__title {
+        margin-bottom: rem(24);
+
+        font-family: $stemBold;
+        font-size: rem(24);
+        line-height: rem(21);
+        color: $purple;
+    }
+
+    &__update {
+        position: absolute;
+        right: rem(-32);
+        bottom: rem(-22);
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: rem(155);
+        height: rem(75);
+        padding-top: rem(8);
+
+        font-family: $stemBold;
+        font-size: rem(16);
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        background: url('/general/geometry/ice-cube.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        &:hover {
+            color: $white;
+        }
+    }
+
+}
+
+.text-bg-gray--news {
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-top: rem(7);
+    margin-bottom: 0;
+
+    @include below($mobile) {
+        flex-wrap: wrap;
+        height: auto;
+        justify-content: flex-start;
+        //flex-direction: column;
+        padding-bottom: rem(50);
+    }
+
+    @include above($tablet) {
+        height: auto;
+        margin-top: rem(14);
+    }
+
+    &.text-bg-gray .text-bg-gray {
+
+        &__block-text {
+            z-index: 9;
+            top: rem(23);
+            bottom: auto;
+
+            width: rem(317);
+            padding: rem(23) rem(29) rem(33) rem(24);
+
+            text-align: left;
+            transition: left .3s;
+
+            background-image: url(/content/text-bg-gray/text-block2.png);
+
+            @include below($mobile) {
+                top: rem(19);
                 width: rem(300);
+                padding-left: rem(38);
+                padding-top: rem(31);
+                text-align: right;
             }
 
             @include above($tablet) {
-                width: rem(300);
-                margin-top: rem(100);
-                margin-right: rem(20);
+                top: rem(20);
+                width: rem(281);
             }
 
             @include above($tabletLandscape) {
-                //margin-top: auto;
-                margin-right: rem(24);
+                width: rem(268);
             }
 
-            @include above($desktop) {
-                width: rem(320);
-            }
-
-            &:before {
-                right: 0;
-                bottom: 0;
-
-                width: auto;
-                height: auto;
-            }
-
-            &__link {
-                right: 0;
-                bottom: 0;
-
-                width: auto;
-                height: auto;
-            }
-
-            &__img {
-                display: block;
-                max-width: 100%;
-                height: 100%;
-                width: auto;
-                object-fit: cover;
+            &_play {
 
                 @include above($tablet) {
-                    margin-top: 0;
+                    opacity: .5;
+                    left: 69.4%;
+
+                    &:before {
+                        left: rem(-31);
+                        transform: scale(-1, 1);
+                    }
+
+                    &:after {
+                        left: rem(-31.7);
+                        transform: scale(-1, 1);
+                        width: calc(100% + 1.94375rem);
+                    }
                 }
+
             }
 
-            &__ico {
-                display: inline;
+        }
+        &__text {
+            margin-bottom: rem(18);
 
-                @include below($mobile) {
-                    width: rem(96);
-                    height: rem(96);
-                }
-
-                @include above($tablet) {
-                    width: rem(96);
-                    height: rem(96);
-                }
-            }
-
-            &__date {
-                margin-bottom: rem(29);
-
-                @include below($mobile) {
-                    padding-right: rem(44);
-                    margin-bottom: rem(8);
-                    text-align: right;
-                }
-
-                @include above($tablet) {
-                    padding-right: rem(44);
-                    margin-bottom: rem(8);
-                    text-align: right;
-                }
-
-                @include above($desktop) {
-                    padding-right: rem(64);
-                    margin-bottom: rem(9);
-                    text-align: right;
-                }
-            }
-
-            &__info {
-                right: 0;
-
-                width: auto;
-            }
-
-            &__span {
-                left: rem(33);
-
-                font-family: $stemReg;
-                font-size: rem(14);
-
-                @include below($mobile) {
-                    left: auto;
-                    right: rem(9);
-                }
-
-                @include above($tablet) {
-                    left: auto;
-                    right: rem(9);
-                }
-
-                @include above($desktop) {
-                    left: auto;
-                    top: calc(50% - #{rem(13)});
-                    right: rem(18);
-                }
-            }
-
-            &__title {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: auto;
-                min-height: rem(60);
-                padding-right: rem(8);
-                padding-left: rem(108);
-                margin-left: rem(38);
-
-                background-color: $gray-dirty;
-            }
-
+            font-size: rem(15);
+            line-height: rem(18);
+            // letter-spacing: rem(-0.75);
         }
 
     }
 
-    .text-bg-gray--primary {
-        height: auto;
-        min-height: unset;
-        padding-top: rem(26);
-        padding-bottom: rem(68);
-        padding-left: rem(195);
-        margin-bottom: rem(30);
+    .general-video {
+        height: rem(573);
+        margin-right: rem(24);
+
+        @include below($mobile) {
+            width: rem(300);
+        }
+
+        @include above($tablet) {
+            width: rem(300);
+            margin-top: rem(100);
+            margin-right: rem(20);
+        }
+
+        @include above($tabletLandscape) {
+            //margin-top: auto;
+            margin-right: rem(24);
+        }
+
+        @include above($desktop) {
+            width: rem(320);
+        }
+
+        &:before {
+            right: 0;
+            bottom: 0;
+
+            width: auto;
+            height: auto;
+        }
+
+        &__link {
+            right: 0;
+            bottom: 0;
+
+            width: auto;
+            height: auto;
+        }
+
+        &__img {
+            display: block;
+            max-width: 100%;
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+
+            @include above($tablet) {
+                margin-top: 0;
+            }
+        }
+
+        &__ico {
+            display: inline;
+
+            @include below($mobile) {
+                width: rem(96);
+                height: rem(96);
+            }
+
+            @include above($tablet) {
+                width: rem(96);
+                height: rem(96);
+            }
+        }
+
+        &__date {
+            margin-bottom: rem(29);
+
+            @include below($mobile) {
+                padding-right: rem(44);
+                margin-bottom: rem(8);
+                text-align: right;
+            }
+
+            @include above($tablet) {
+                padding-right: rem(44);
+                margin-bottom: rem(8);
+                text-align: right;
+            }
+
+            @include above($desktop) {
+                padding-right: rem(64);
+                margin-bottom: rem(9);
+                text-align: right;
+            }
+        }
+
+        &__info {
+            right: 0;
+
+            width: auto;
+        }
+
+        &__span {
+            left: rem(33);
+
+            font-family: $stemReg;
+            font-size: rem(14);
+
+            @include below($mobile) {
+                left: auto;
+                right: rem(9);
+            }
+
+            @include above($tablet) {
+                left: auto;
+                right: rem(9);
+            }
+
+            @include above($desktop) {
+                left: auto;
+                top: calc(50% - #{rem(13)});
+                right: rem(18);
+            }
+        }
+
+        &__title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            min-height: rem(60);
+            padding-right: rem(8);
+            padding-left: rem(108);
+            margin-left: rem(38);
+
+            background-color: $gray-dirty;
+        }
+
     }
+
+}
+
+.text-bg-gray--primary {
+    height: auto;
+    min-height: unset;
+    padding-top: rem(26);
+    padding-bottom: rem(68);
+    padding-left: rem(195);
+    margin-bottom: rem(30);
 }
 
 .inner-about {

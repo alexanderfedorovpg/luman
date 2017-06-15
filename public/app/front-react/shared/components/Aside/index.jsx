@@ -10,7 +10,7 @@ import Banner from 'components/HomePage/Banner'
 import MiniNews from 'components/MiniNews'
 import Group from 'components/Group'
 import Block from 'components/Block'
-import AsideVideo from 'components/HomePage/AsideVideo'
+import AsideVideo from 'components/GeneralVideo/AsideVideo'
 
 import efirPlaceholder from './efir.jpg'
 import './style.scss';
@@ -20,7 +20,6 @@ function Aside({ noise, broadcast, top, className, now }) {
     const showNoise = !!noise && !!noise.length;
     const showTop = !!top && !!top.length;
     const broadcastVideos = showBroadcast ? broadcast.slice(1) : [];
-    const firstVideo = now[0] || {}
 
     return (
         <div className={classNames('right-col', className)}>
@@ -35,7 +34,6 @@ function Aside({ noise, broadcast, top, className, now }) {
             <MediaQuery minWidth="930px">
                 <div className="aside__video">
                     <AsideVideo
-                        data={firstVideo}
                         playTitle="date"
                         title="Все ключевые события этого дня"
                         videos={now}
