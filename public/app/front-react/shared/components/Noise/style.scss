@@ -3,7 +3,12 @@
 
 .info-noize {
     width: rem(300);
-    border: 2px dashed $gray-dirty;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 2px;
+    border-image: url(./border.png);
+    border-image-slice: 2;
+    border-image-repeat: repeat;
     position: relative;
 
     .icon_scissors {
@@ -11,7 +16,8 @@
         display: block;
         position: absolute;
         top: rem(-10);
-        right: rem(25);
+        right: rem(22);
+        background-color: $white;
     }
 
     &__wrapper {
@@ -27,8 +33,8 @@
 
     &__title {
         position: absolute !important;
-        left: rem(-2);
-        top: rem(-18);
+        left: rem(-3);
+        top: rem(-16);
         border-bottom: 0 !important;
         background: $white;
         display: block;
@@ -36,6 +42,7 @@
 
         line-height: rem(34);
         text-decoration: none;
+
     }
 
     &__mini-news {
@@ -52,7 +59,7 @@
                 font-family: $stemBold;
                 font-size: rem(21);
                 line-height: rem(21);
-                letter-spacing: rem(-0.2);
+                // letter-spacing: rem(-0.2);
             }
         }
 
@@ -91,7 +98,7 @@
 
         .info-noize__title {
             position: absolute;
-            padding-left: rem(24);
+            padding-left: rem(28);
             line-height: rem(30);
             border-bottom: 0;
         }

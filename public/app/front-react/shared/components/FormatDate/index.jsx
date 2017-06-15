@@ -6,8 +6,18 @@ import './style.scss';
 const twoDays = 172800000;
 
 function FormatDate({value}) {
+    if (!value) {
+        return null;
+    }
 
-    const date = new Date(value);
+    // for stupid Safari
+    const fixedVal = value.replace(/-/g, '/');
+
+    if (!Date.parse(fixedVal)) {
+        return null;
+    }
+
+    const date = new Date(fixedVal);
     const now = new Date();
 
     function getDate () {
@@ -17,14 +27,13 @@ function FormatDate({value}) {
             // )
             return (
                 <span className='format-date'>
-                    <FormattedDate value={value} year='numeric' month='2-digit' day='2-digit'/>
-
-                    <FormattedTime value={value} hour='numeric' minute='numeric' />
+                    <FormattedDate value={fixedVal} year='numeric' month='2-digit' day='2-digit' />
+                    <FormattedTime value={fixedVal} hour='numeric' minute='numeric' />
                 </span>
             )
         } else {
             return (
-                <FormattedRelative value={value} />
+                <FormattedRelative value={fixedVal} />
             )
         }
     }

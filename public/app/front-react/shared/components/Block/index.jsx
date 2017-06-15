@@ -66,21 +66,13 @@ function renderItem(className, type, data, war, wTitle) {
                     )
                     : (
                         <p className={`${type}__time-add`}>
-                            {Date.parse(data.publish_date)
-                                ? <FormatDate value={data.publish_date} />
-                                : null
-                            }
-                            {Date.parse(data.updated_at) && Date.parse(data.publish_date)
-                                ? ' / '
-                                : ''
-                            }
-                            {Date.parse(data.updated_at)
-                                ? (
-                                    <span className={`${type}__time-upadate`}>
-                                        Обновлено <FormatDate value={data.updated_at} />
-                                    </span>
-                                )
-                                : null
+                            <FormatDate value={data.publish_date} />
+                            {!!data.updated_at && '/ '}
+                            {
+                                !!data.updated_at &&
+                                <span className={`${type}__time-update`}>
+                                    Обновлено <FormatDate value={data.updated_at} />
+                                </span>
                             }
                         </p>
                     )

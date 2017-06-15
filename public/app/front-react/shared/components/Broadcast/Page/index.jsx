@@ -16,7 +16,7 @@ import BannerPreview from 'components/HomePage/BannerPreview'
 import RandomNews from 'components/HomePage/RandomNews'
 import MoreNews from 'components/HomePage/MoreNews'
 import LoadMore from 'components/LoadMore'
-import Video from 'components/Aside/Video'
+import Aside from 'containers/Aside'
 
 import './style.scss'
 
@@ -61,6 +61,7 @@ class Broadcast extends Component {
                 : true
         ))
 
+        const now = nowNews;
         return (
             <div className="inner-wrapper">
                 <div className="news-top news-top_broadcast">
@@ -80,28 +81,28 @@ class Broadcast extends Component {
                                     <Item data={data[6]} />
                                     <Item data={data[7]} />
                                 </div>
-                                <MediaQuery maxWidth="1299px">
+                                <MediaQuery maxWidth="1249px">
                                     <BannerPreview className="news-top__banner-preview" />
                                 </MediaQuery>
                             </div>
                         </div>
                         <div className="right-col">
                             <MediaQuery minWidth="930px">
-                                <Video data={{}} />
+                                <Aside noise={null} broadcast={null} now={now} />
                                 <Group title="Главные новости" margin>
                                     {nowNews.map(v => (
                                         <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
                                     ))}
                                 </Group>
                             </MediaQuery>
-                            <MediaQuery minWidth="930px" maxWidth="1299px">
+                            <MediaQuery minWidth="930px" maxWidth="1249px">
                                 <div className="news-one-line__row">
                                     <Banner className="news-top__banner" />
                                     <Subscribe className="news-top__subscribe" />
                                 </div>
                             </MediaQuery>
                         </div>
-                        <MediaQuery minWidth="1300px">
+                        <MediaQuery minWidth="1250px">
                             <div className="news-top__middle middle-col">
                                 <BannerPreview className="news-top__banner-preview" />
                             </div>
@@ -114,7 +115,7 @@ class Broadcast extends Component {
                                 <Item data={data[11]} />
                             </div>
                         </div>
-                        <MediaQuery minWidth="1300px">
+                        <MediaQuery minWidth="1250px">
                             <div className="news-one-line__row">
                                 <Banner className="news-top__banner" />
                                 <Subscribe className="news-top__subscribe" />

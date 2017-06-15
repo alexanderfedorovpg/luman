@@ -14,6 +14,7 @@ import {
     DELETE_COMMENT,
 
     SAVE_TITLE,
+    SAVE_THESES,
     SAVE_COVER,
 
     strings
@@ -40,6 +41,9 @@ import {
 
     titleSaved,
     titleSavingError,
+
+    thesesSaved,
+    thesesSavingError,
 
     coverSaved,
     coverSavingError,
@@ -139,6 +143,17 @@ export function* saveTitle({ payload }) {
     }
 }
 
+export function* saveTheses({ payload }) {
+
+    try {
+        const { data } = yield call(api.putArticleTheses, payload)
+
+        yield put(thesesSaved(data))
+    } catch (err) {
+        yield put(thesesSavingError(err))
+    }
+}
+
 export function* toggleOnline({ payload }) {
 
     try {
@@ -193,6 +208,8 @@ export function* onlineData() {
 
 export function* articleData() {
     yield takeLatest(SAVE_TITLE, saveTitle)
+
+    yield takeLatest(SAVE_THESES, saveTheses)
 
     yield takeLatest(SAVE_COVER, saveCover)
 }

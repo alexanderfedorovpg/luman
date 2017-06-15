@@ -67,8 +67,11 @@ function Header({ moved, del, ret, preview, onSubmit }) {
                         <CustomButton xs primary onClick={preview}>
                             Предпросмотр
                         </CustomButton>
-                        <CustomButton xs success onClick={onSubmit}>
-
+                        <CustomButton xs success onClick={()=>onSubmit('finishArticle')}>
+                            <Icon type="okay" />
+                            Готово
+                        </CustomButton>
+                        <CustomButton xs success onClick={()=>onSubmit()}>
                             <Icon type="okay" />
                             Опубликовать
                         </CustomButton>

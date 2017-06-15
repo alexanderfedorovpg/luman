@@ -50,10 +50,7 @@ class Content extends PureComponent {
         <div>
             <h1>{data.title}</h1>
             <div className="inner-about__date">
-                {Date.parse(data.publish_date)
-                    ? <FormatDate value={data.publish_date} />
-                    : null
-                }
+                <FormatDate value={data.publish_date} />
             </div>
             <div className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors' : data.top < 6})}>
                 { data.top < 6 &&

@@ -91,7 +91,7 @@
             }
 
             .mini-news__title {
-                letter-spacing: rem(-.5);
+                // letter-spacing: rem(-.5);
             }
         }
 
@@ -219,7 +219,7 @@
 
                         @include below($mobile) {
                             height: auto;
-                            
+
                         }
                     }
                 }
@@ -297,7 +297,7 @@
             }
 
             .block-square__title {
-                letter-spacing: rem(-.2);
+                // letter-spacing: rem(-.2);
             }
 
             .block-square__info {
@@ -337,13 +337,13 @@
         .block-square {
 
             .block-square__info {
-                width: rem(250);
+                width: 100%;
             }
 
             .block-square__title {
                 margin-bottom: 0;
 
-                letter-spacing: rem(-.2);
+                // letter-spacing: rem(-.2);
             }
         }
 
@@ -437,7 +437,7 @@
                     font-family: $stemBold;
                     font-size: rem(21);
                     line-height: rem(21);
-                    letter-spacing: rem(-0.2);
+                    // letter-spacing: rem(-0.2);
                 }
             }
 

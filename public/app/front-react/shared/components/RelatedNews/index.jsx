@@ -11,16 +11,16 @@ import 'components/HomePage/RandomNews/style.scss'
 import 'components/Block/style.scss'
 import 'components/MiniNews/style.scss'
 
-function RelatedNews({ data }) {
+function RelatedNews({ data, title }) {
     const first = data[0]
-    const rest = data.slice(1)
+    const rest = data.slice(1, 3)
 
     return (
         first
         ? (
             <div className="similar-news similar-news--wide">
                 <p className="similar-news__title section-title">
-                    Новости по теме
+                    {title || 'Новости по теме'}
                 </p>
                 <div className="similar-news__row">
                     <div className="similar-news__col-l">

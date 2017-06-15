@@ -8,7 +8,6 @@ import BlockBorder from 'components/Block/Border'
 import MiniNews from 'components/MiniNews'
 import Aside from 'containers/Aside'
 import ScissorIcon from 'components/Icon/Scissors'
-
 import './style.scss'
 
 class Noise extends PureComponent {
@@ -67,8 +66,8 @@ class Noise extends PureComponent {
             <Masonry
                 className={'noize-all__row'}
                 options={{
-                    columnWidth: 274,
-                    gutter: 37,
+                    columnWidth: 264,
+                    gutter: 54,
                     // gutterWidth: 100
                 }}>
                 <div className="noize-all__gutter-sizer"></div>
@@ -82,8 +81,7 @@ class Noise extends PureComponent {
     }
 
     render() {
-        const { noise, onLoadRequest, canLoad } = this.props
-
+        const { noise, onLoadRequest, canLoad, now} = this.props
         return (
             <div className="inner-wrapper">
                 <div className="noize-all">
@@ -105,7 +103,7 @@ class Noise extends PureComponent {
                                 : null
                             }
                         </div>
-                        <Aside noise={null} broadcast={null} />
+                        <Aside noise={null} broadcast={null} now={now} />
                     </div>
                 </div>
             </div>

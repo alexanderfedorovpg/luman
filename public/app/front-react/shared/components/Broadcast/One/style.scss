@@ -17,7 +17,10 @@
 
     &__title {
         text-decoration: none;
-        border-bottom: none;
+
+        &.section-title {
+            border-bottom: none;
+        }
     }
 
 }

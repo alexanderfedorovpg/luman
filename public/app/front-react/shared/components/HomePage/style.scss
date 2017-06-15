@@ -59,6 +59,7 @@
 
     &__right {
         width: rem(300);
+
     }
 
     &__left-wrapper {
@@ -105,6 +106,7 @@
     }
 
     &__big-news {
+        flex-shrink: 0;
 
         &_war {
             height: rem(515);
@@ -148,7 +150,6 @@
 
     .info-noize {
         width: rem(300);
-        border: 2px dashed $gray-dirty;
         position: relative;
 
         @include below($mobile) {
@@ -232,7 +233,7 @@
             }
 
             .mini-news__title {
-                letter-spacing: rem(-.3);
+                // letter-spacing: rem(-.3);
             }
 
             .info-noize__mini-news {
@@ -256,7 +257,7 @@
                 .block-square__title {
                     margin-bottom: rem(33) !important;
 
-                    letter-spacing: rem(.25);
+                    // letter-spacing: rem(.25);
                 }
             }
         }
@@ -330,6 +331,9 @@
         &_war {
             margin-top: rem(18);
         }
+    }
+
+    &__general-video {
     }
 
     &__list-video {

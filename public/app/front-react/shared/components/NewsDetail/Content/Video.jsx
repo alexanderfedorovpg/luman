@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
-
+import MediaQuery from 'react-responsive'
 import classNames from 'classnames'
-// import { FormattedRelative } from 'react-intl'
 
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
@@ -32,6 +31,22 @@ class Content extends PureComponent {
         if (this._timer) clearTimeout(this._timer);
         this._timer = setTimeout(() => {
             RenderSocialWidgets()
+            let tags = document.getElementsByClassName('inner-about__content')[0].getElementsByClassName('video');
+            for (let i = 0; i < tags.length; i++) {
+                let item = tags[i];
+
+                const btnPlay = document.createElement('img');
+                btnPlay.setAttribute('src', '/content/video-ico/video-ico-big.svg');
+                btnPlay.style.position = 'absolute';
+                btnPlay.style.left = 'calc(50% - 3rem)';
+                btnPlay.style.top = 'calc(50% - 3.75rem)';
+                btnPlay.style.width = '6rem';
+                btnPlay.style.height = '6rem';
+                btnPlay.style.border = '1px solid #fff';
+                btnPlay.classList.add('btn_play');
+
+                item.appendChild(btnPlay);
+            }
         }, 1000)
     }
 
@@ -104,13 +119,45 @@ class Content extends PureComponent {
         iframe.setAttribute('src', src);
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('allowfullscreen', true);
-
+        iframe.style.zIndex = '5';
+        iframe.style.position = 'relative';
+        parent.getElementsByClassName('btn_play')[0].style.display = 'none';
         parent.replaceChild(iframe, target);
+    }
+
+    renderInfo() {
+        const { data: { video_stream } } = this.props;
+
+        if (!video_stream) return null;
+
+        const author = video_stream.preview_author === 'undefined'
+            ? ''
+            : video_stream.preview_author;
+
+        const source = video_stream.preview_source === 'undefined'
+            ? ''
+            : video_stream.preview_source;
+
+        if (!author && !source) return null;
+
+        return (
+            <div className="inner-about__video-info">
+                <div>
+                    <div>
+                        Фото:
+                    </div>
+                    {author}
+                    {author && source && ' / '}
+                    {source}
+                </div>
+            </div>
+        )
     }
 
     render() {
         const { data, children } = this.props
         let theses = [];
+        const body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
 
         if (data.theses) {
             theses = Array.isArray(data.theses)
@@ -120,16 +167,6 @@ class Content extends PureComponent {
 
         const image = data.image_preview || {};
 
-        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
-            data.body = data.body.replace('/ undefined', '');
-        }
-        if (data.body && data.body.indexOf('undefined /', '') > -1) {
-            data.body = data.body.replace('undefined /', '');
-        }
-        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
-            data.body = data.body.replace('undefined / undefined', '');
-        }
-
         return (
             <div>
                 <div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div>
@@ -137,10 +174,7 @@ class Content extends PureComponent {
                     {data.title}
                 </h1>
                 <div className="inner-about__date">
-                    {Date.parse(data.publish_date)
-                        ? <FormatDate value={data.publish_date} />
-                        : null
-                    }
+                    <FormatDate value={data.publish_date} />
                 </div>
                 <div onClick={e => this.stop(e)} className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
                     {theses.length
@@ -155,22 +189,9 @@ class Content extends PureComponent {
                         )
                         : null
                     }
-                    {data.video_stream && (data.video_stream.preview_author || data.video_stream.preview_source) && (
-                        <div className="inner-about__video-info">
-                            {data.video_stream.preview_author !== 'undefined' && data.video_stream.preview_source !== 'undefined' ?
-                                <div>
-                                    <div>
-                                        Фото:
-                                    </div>
-                                    {data.video_stream.preview_author}
-                                    {data.video_stream.preview_author && data.video_stream.preview_source && ' / '}
-                                    {data.video_stream.preview_source}
-                                </div>
-                                :
-                                null
-                            }
-                        </div>
-                    )}
+                    <MediaQuery minWidth="1250px">
+                        {this.renderInfo()}
+                    </MediaQuery>
                     <Video
                         className="general-news__general-video"
                         play={this.state.play}
@@ -196,11 +217,14 @@ class Content extends PureComponent {
                             {data.sub_title}
                         </p>
                     </div>
+                    <MediaQuery minWidth="615px" maxWidth="1249px">
+                        {this.renderInfo()}
+                    </MediaQuery>
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
                     <div
-                        dangerouslySetInnerHTML={{ __html: data.body }}
+                        dangerouslySetInnerHTML={{ __html: body }}
                         onClick={this.onContentClick}
                     />
                     {children}

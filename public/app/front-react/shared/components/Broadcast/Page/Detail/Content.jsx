@@ -99,7 +99,7 @@ class Content extends PureComponent {
 
         return (
             <div>
-                <div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div>
+                {/*<div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div> */}
                 <h1>
                     {data.title}
                 </h1>
@@ -118,7 +118,7 @@ class Content extends PureComponent {
                         'inner-about__text-bg-gray',
                         'broadcast__text-bg-gray',
                         {
-                            'inner-about__text-bg-gray_play': this.state.play,
+                            'inner-about__text-bg-gray_playy': this.state.play,
                         },
                     )}
                 >
@@ -150,7 +150,7 @@ class Content extends PureComponent {
                     <div className="inner-about__subtitle">
                         {data.sub_title}
                     </div>
-                    <Socials shareLink={data.uri} title={data.title}/>
+                    <Socials shareLink={'http://news.rtvi.com/broadcast/' + data.id} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
                     <div dangerouslySetInnerHTML={{ __html: data.body }} />

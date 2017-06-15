@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
@@ -31,6 +32,7 @@ class BroadcastPage extends PureComponent {
     constructor(props) {
         super(props);
 
+        this.toPrograms = this.toPrograms.bind(this);
     }
 
     componentDidMount() {
@@ -62,6 +64,22 @@ class BroadcastPage extends PureComponent {
         this.props.fetchRelated(id)
     }
 
+    toPrograms(id) {
+        const { history, setProgram } = this.props;
+
+        setProgram(id);
+        if (id) {
+            history.push({
+                pathname: '/programs/' + id
+            });
+        } else {
+            // history.push({
+            //     pathname: 'broadcast'
+            // })
+        }
+
+    }
+
     getById(id) {
         const { broadcastData } = this.props
 
@@ -76,6 +94,7 @@ class BroadcastPage extends PureComponent {
             programs,
             pagination,
             nowNews,
+            relatedNews,
             setProgram,
             loadMore
         } = this.props
@@ -104,6 +123,7 @@ class BroadcastPage extends PureComponent {
                 {match.params.id
                     ? <Detail
                         data={item}
+                        relatedNews={relatedNews}
                         nowNews={nowNews.map(v => v.news)}
                     />
                     : <Broadcast
@@ -111,7 +131,7 @@ class BroadcastPage extends PureComponent {
                         broadcast={broadcast}
                         onLoadRequest={loadMore}
                         canLoad={pagination.page < pagination.lastPage}
-                        setProgram={setProgram}
+                        setProgram={this.toPrograms}
                         programs={p}
                         program={program}
                     />
@@ -130,6 +150,7 @@ const mapStateToProps = state => ({
     program: selectProgram(state),
     pagination: selectPagination(state),
     nowNews: selectNowNews(state),
+    relatedNews: selectRelated(state),
 })
 
 const mapDispatchToProps = dispatch => ({

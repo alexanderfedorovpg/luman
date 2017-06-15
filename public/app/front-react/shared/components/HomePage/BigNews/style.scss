@@ -22,9 +22,6 @@
     }
 
     &:hover {
-        ::before {
-            opacity: .7;
-        }
 
         .big-news__title {
             color: $blue;
@@ -155,13 +152,13 @@
 
     &__time-update {
 
-        color: $purple;
-        letter-spacing: rem(-.7);
+        color: $gray;
+        // letter-spacing: rem(-.7);
 
         @include below($mobile) {
             font-size: rem(12);
             line-height: rem(16);
-            letter-spacing: rem(-1);
+            // letter-spacing: rem(-1);
         }
 
         @include above($tablet) {

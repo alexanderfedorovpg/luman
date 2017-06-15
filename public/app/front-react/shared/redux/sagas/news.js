@@ -149,7 +149,7 @@ export default function* news() {
             yield put(relatedFetched(data))
         }
         catch (e) {
-            yield put(relatedfetchError(e))
+            yield put(relatedFetchError(e))
         }
     })
 

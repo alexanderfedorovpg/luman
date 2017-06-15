@@ -23,10 +23,6 @@
         transition: background .5s ease-out;
     }
 
-    &:not(.block-square_list):hover::before {
-        background: rgba(0,0,0,.7);
-    }
-
     &:hover {
         .block-square__title-war,
         .block-square__title {
@@ -57,16 +53,17 @@
         bottom: rem(9);
         left: 0;
 
-        width: rem(280);
+        width: 100%;
         padding-left: rem(20);
     }
 
     &__title {
         margin-bottom: rem(3);
+        padding-right: rem(10);
 
         font: #{rem(18)}/#{rem(21)} $stemBold;
         color: $white;
-        letter-spacing: rem(-.9);
+        // letter-spacing: rem(-.9);
 
         transition: color .5s;
     }
@@ -77,13 +74,14 @@
     }
 
     &__time-add {
+        margin: rem(8) 0;
         font-size: rem(12);
-        line-height: rem(32);
+        line-height: normal;
         color: $gray;
     }
 
     &__time-update {
-        color: $purple;
+        color: $gray;
     }
 
     &__time-keeping {
@@ -185,9 +183,6 @@
             color: $blue;
         }
 
-        &::before {
-            background: rgba(0, 0, 0, .7);
-        }
     }
 
     &__time-keeping {
@@ -239,7 +234,7 @@
         bottom: rem(2);
         left: 0;
 
-        padding-left: rem(19);
+        padding-left: rem(17);
 
         @include below($mobile) {
             bottom: rem(20);
@@ -277,7 +272,7 @@
         &_font_small {
             font-size: rem(18);
             line-height: rem(21);
-            letter-spacing: rem(-.8);
+            // letter-spacing: rem(-.8);
         }
     }
 
@@ -291,8 +286,8 @@
         }
     }
 
-    &__time-upadate {
-        color: $purple;
+    &__time-update {
+        color: $gray;
 
         @include below($mobile) {
             display: block;

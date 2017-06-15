@@ -68,6 +68,7 @@
         object-position: bottom;
 
         @include below($mobile) {
+            height: rem(390);
             margin-top: rem(15);
         }
 
@@ -111,13 +112,15 @@
         display: block;
         width: rem(250);
         padding-right: rem(75);
-        padding-left: rem(18);
+        padding-left: rem(15);
+        padding-bottom: rem(18);
 
         font-size: rem(16);
+        font-weight: 700;
         line-height: rem(18);
         color: $white;
 
-        background-color: $dark;
+        background-color: $blue;
     }
 
     &__date_position {
@@ -145,7 +148,7 @@
 
         display: inline-block;
         width: rem(137);
-        height: rem(79);
+        height: rem(94);
         background-image: url(./purple-rtvi.png);
         background-size: contain;
     }
@@ -183,6 +186,33 @@
 
     &_no-overlay {
         &::before {
+            display: none;
+        }
+    }
+
+    &_idx {
+
+        .general-video__ico {
+            position: absolute;
+            left: calc(50% - #{rem(48)});
+            top: calc(50% - #{rem(60)});
+            width: rem(96);
+            height: rem(96);
+            border: 1px solid $white;
+        }
+
+        .general-video__span {
+            left: 0;
+            font-size: rem(18);
+            font-weight: 700;
+            line-height: rem(24);
+        }
+
+        .general-video__date_position {
+            margin-bottom: rem(27);
+        }
+
+        .general-video__ico_small {
             display: none;
         }
     }

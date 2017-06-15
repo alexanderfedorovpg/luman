@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Left as ContentLeft, Right as ContentRight } from 'components/Content'
-import { ImageLoaderRedux } from 'components/Form/ReduxForm';
+import { ImageLoaderRedux, InputRedux } from 'components/Form/ReduxForm';
 
 import { padding, font, color } from 'constants/style'
 import { rem } from 'utils/style'
@@ -60,6 +60,11 @@ export const Data = styled.div`
     align-items: flex-end;
     justify-content: space-between;
 
+`
+
+export const Title = styled(InputRedux)`
+    font-size: ${rem(30)};
+    color: #333;
 `
 
 export const DataText = styled.div`

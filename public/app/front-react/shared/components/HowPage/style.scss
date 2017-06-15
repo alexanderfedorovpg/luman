@@ -47,7 +47,7 @@
         p {
             margin-bottom: rem(21);
 
-            letter-spacing: rem(-.35);
+            // letter-spacing: rem(-.35);
         }
     }
 
@@ -56,7 +56,7 @@
         margin-top: rem(51);
         margin-bottom: rem(15);
 
-        letter-spacing: rem(-.5);
+        // letter-spacing: rem(-.5);
     }
 
     &__box-preview {
@@ -83,7 +83,7 @@
 
         font: #{rem(16)}/ #{rem(24)} $stemBold;
         color: $white;
-        letter-spacing: rem(-.8);
+        // letter-spacing: rem(-.8);
 
         background-image: url(/content/about/box-text.png);
         background-position: center;
@@ -171,7 +171,7 @@
         padding: #{rem(24)} #{rem(33)} #{rem(63)} #{rem(41)};
 
         text-align: right;
-        letter-spacing: rem(-.8);
+        // letter-spacing: rem(-.8);
 
         background-image: url(/content/text-bg-gray/text-block.png);
         background-repeat: no-repeat;
@@ -260,7 +260,7 @@
 
             font-size: rem(15);
             line-height: rem(18);
-            letter-spacing: rem(-0.75);
+            // letter-spacing: rem(-0.75);
         }
 
     }
@@ -380,10 +380,10 @@
         font-family: $stemBold;
         font-size: rem(24);
         color: $enter;
-        letter-spacing: rem(-0.4);
+        // letter-spacing: rem(-0.4);
     }
     p {
-        letter-spacing: rem(-0.35);
+        // letter-spacing: rem(-0.35);
     }
     .text-cols {
         margin-bottom: rem(32);
@@ -429,7 +429,7 @@
             font-family: $stemBold;
             font-size: rem(14);
             color: $enter;
-            letter-spacing: rem(-0.15);
+            // letter-spacing: rem(-0.15);
             text-transform: uppercase;
         }
     }
@@ -484,7 +484,7 @@
             font-family: $stemBold;
             font-size: rem(16);
             color: #e9ebed;
-            letter-spacing: rem(-0.3);
+            // letter-spacing: rem(-0.3);
             text-transform: uppercase;
 
             border: 0;
@@ -518,7 +518,7 @@
     color: $enter;
     font-family: $stemReg;
     font-size: rem(14);
-    letter-spacing: -0.14px;
+    // letter-spacing: -0.14px;
     text-transform: uppercase;
     .dig {
         position: relative;
@@ -561,7 +561,7 @@
     font-family: $stemReg;
     font-size: rem(16);
     line-height: rem(18);
-    letter-spacing: rem(-0.4);
+    // letter-spacing: rem(-0.4);
 }
 .input-block {
     width: 100%;
