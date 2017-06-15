@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react'
 
-import GeneralVideo from 'components/GeneralVideo'
 import insideVideoPlaceholder from './obzor-inside-new.jpg'
 import mainVideoPlaceholder from './obzor-main-new.jpg'
-import close from './close.png'
 import Img from 'components/Img';
 import { ensureAbs } from 'shared/utils/uri';
 import classNames from 'classnames';
-import {FormattedRelative, FormattedDate, FormattedTime, addLocaleData} from 'react-intl';
+import {FormattedDate, addLocaleData} from 'react-intl';
 import ru from 'react-intl/locale-data/ru'
 
 class AsideVideo extends PureComponent {
@@ -23,9 +21,7 @@ class AsideVideo extends PureComponent {
     }
 
     stop(){
-        if(this.state.play){
-            this.setState({play: false})
-        }
+        this.setState({play: false})
     }
 
     play() {
@@ -75,6 +71,16 @@ class AsideVideo extends PureComponent {
     render() {
         const { data, className, main, videos } = this.props
 
+        const overlayStyle = {
+            position: 'fixed',
+            backgroundColor: 'rgba(36, 55, 70, 0.6)',
+            opacity: .7,
+            height: '100%',
+            width: '100%',
+            top: 0,
+            left: 0,
+            zIndex: 8,
+        }
         return data.video_stream
             ? (
                 <div
@@ -90,8 +96,8 @@ class AsideVideo extends PureComponent {
                     {
                         this.state.play ?
                             <div style={{width: 100 + '%', height: 100 + '%'}}>
-                                <div className="general-video__close" onClick={()=>this.stop()}><img src={close}/></div>
                                 <video ref='video' id='videoStream' style={{width: 100 + '%', height: 100 + '%', zIndex: 9,position: 'relative'}} controls="controls" />
+                                <div style={overlayStyle} onClick={()=>this.stop()}/>
                             </div>
 
                             :
