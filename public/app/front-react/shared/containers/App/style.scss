@@ -61,6 +61,10 @@ h2 {
 
 a {
     outline: none;
+    cursor: pointer;
+    &:hover {
+        color: $blue;
+    }
 }
 
 main {
