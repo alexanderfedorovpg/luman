@@ -7,7 +7,7 @@
 
     img {
         position: absolute;
-        right: 12px;    
+        right: 12px;
     }
 
     & .react-datepicker__input-container, & input {
@@ -20,5 +20,16 @@
 
     &.small {
         width: rem(111);
+    }
+
+    &_programm {
+
+        &.small {
+
+            @include below($mobile) {
+                width: rem(300);
+                @include margin_y(#{rem(15)});
+            }
+        }
     }
 }

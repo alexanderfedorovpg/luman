@@ -38,7 +38,7 @@ moment.locale('ru');
 // `;
 
 const Datepicker = ({ startDate, selected, className, onChange, ...props }) => (
-    <div className={className+' datepicker'}>
+    <div className={'datepicker ' + className}>
         <DatePicker
             startDate={startDate ? moment(startDate) : null}
             dateFormat="DD.MM.YYYY"

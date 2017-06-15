@@ -47,7 +47,7 @@
     }
 
     &__list-mini {
-        width: rem(300);
+        width: rem(292);
 
         .mini-news__title {
             font-size: rem(14);
@@ -55,6 +55,7 @@
     }
 
     .block-square {
+        width: rem(292);
         height: rem(250);
     }
 
@@ -65,8 +66,15 @@
 
         position: relative;
 
-        border-top: 2px dashed $gray-dirty;
-        border-right: 2px dashed $gray-dirty;
+        border-color: transparent;
+        border-style: solid;
+        border-top-width: 2px;
+        border-right-width: 2px;
+        border-left-width: 0;
+        border-bottom-width: 0;
+        border-image: url(../border.png);
+        border-image-slice: 2;
+        border-image-repeat: repeat;
 
         .icon_scissors {
             position: absolute;
@@ -92,7 +100,7 @@
         height: rem(1105);}
 
     &__item {
-        margin-bottom: rem(11.5);
+        margin-bottom: rem(20);
     }
 
     &__gutter-sizer {
