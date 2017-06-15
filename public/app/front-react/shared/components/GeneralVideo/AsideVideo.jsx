@@ -58,10 +58,9 @@ class AsideVideo extends PureComponent {
         }, 0)
     }
 
-    getPublishDate() {
+    getPublishDate(date) {
         addLocaleData([...ru]);
-        let date = this.props.data.publish_date;
-        const fixedVal = date.replace(/-/g, '/');
+        const fixedVal = (date||'').replace(/-/g, '/');
         if (!Date.parse(fixedVal)) {
             return null;
         }
@@ -69,7 +68,11 @@ class AsideVideo extends PureComponent {
     }
 
     render() {
-        const { data, className, main, videos } = this.props
+        const { className, main, videos } = this.props
+
+        if (!videos) return null
+
+        const data = videos[0] || {}
 
         const overlayStyle = {
             position: 'fixed',
@@ -81,6 +84,7 @@ class AsideVideo extends PureComponent {
             left: 0,
             zIndex: 8,
         }
+
         return data.video_stream
             ? (
                 <div
@@ -113,13 +117,7 @@ class AsideVideo extends PureComponent {
                                     }
                                     <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
-                                            {/*data.url ?
-
-                                                <img onClick={this.play} className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                                :
-                                                <img className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                            */}
-                                            <span className="general-video__span">{this.getPublishDate()}</span>
+                                            <span className="general-video__span">{this.getPublishDate(data.publish_date)}</span>
                                         </div>
                                         <div className="general-video__title">
                                             Ваш персональный ведущий
