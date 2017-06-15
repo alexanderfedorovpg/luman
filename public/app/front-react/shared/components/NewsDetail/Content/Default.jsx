@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import classNames from 'classnames'
 import ScissorsIcon from 'components/Icon/Scissors';
 import {FormattedRelative} from 'react-intl';
+import {replaceStrToLink} from 'shared/utils/uri';
 import RenderSocialWidgets from './RenderSocialWidgets'
 import FormatDate from 'components/FormatDate';
 
@@ -45,7 +46,7 @@ class Content extends PureComponent {
         if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
             data.body = data.body.replace('undefined / undefined', '');
         }
-
+        if(data.body) data.body = replaceStrToLink(data.body);
     return (
         <div>
             <h1>{data.title}</h1>
@@ -67,9 +68,10 @@ class Content extends PureComponent {
                     (
                         <div className="text-bg-gray__block-text active">
                             {theses.map((v, i) => (
-                                <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
-                                    {v}
-                                </div>
+                                <div key={i}
+                                     dangerouslySetInnerHTML={{ __html: replaceStrToLink(v) }}
+                                     className="text-bg-gray__text text-bg-gray__text-lite"
+                                />
                             ))}
                         </div>
                     )
@@ -90,9 +92,9 @@ class Content extends PureComponent {
                             )
                             }
                         </figure>
-                        <p className="news-preview__text">
-                            {data.sub_title}
-                        </p>
+                        <p className="news-preview__text"
+                           dangerouslySetInnerHTML={{__html: replaceStrToLink(data.sub_title)}}
+                        />
                     </div>
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
