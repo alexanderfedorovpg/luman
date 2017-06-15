@@ -73,7 +73,7 @@ class AsideVideo extends PureComponent {
 
         if (!videos) return null
 
-        const data = videos[0]
+        const data = videos[0] || {}
 
         return data.video_stream
             ? (
