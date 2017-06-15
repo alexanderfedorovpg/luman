@@ -501,9 +501,14 @@
             }
 
         }
-        &__source {
+        &__title {
             margin-top: rem(3);
 
+            font-family: $stemBold;
+            font-size: rem(11);
+            color: $gray-dirty;
+        }
+        &__source {
             font-family: $stemReg;
             font-size: rem(11);
             color: $gray-date;
