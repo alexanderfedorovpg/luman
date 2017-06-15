@@ -6,6 +6,8 @@ import mainVideoPlaceholder from './obzor-main-new.jpg'
 import Img from 'components/Img';
 import { ensureAbs } from 'shared/utils/uri';
 import classNames from 'classnames';
+import {FormattedRelative, FormattedDate, FormattedTime, addLocaleData} from 'react-intl';
+import ru from 'react-intl/locale-data/ru'
 
 class AsideVideo extends PureComponent {
 
@@ -55,6 +57,16 @@ class AsideVideo extends PureComponent {
                 }
             }
         }, 0)
+    }
+
+    getPublishDate() {
+        addLocaleData([...ru]);
+        let date = this.props.data.publish_date;
+        const fixedVal = date.replace(/-/g, '/');
+        if (!Date.parse(fixedVal)) {
+            return null;
+        }
+        return <FormattedDate day='numeric' month='long' value={fixedVal}/>;
     }
 
     render() {
@@ -108,7 +120,7 @@ class AsideVideo extends PureComponent {
                                                 :
                                                 <img className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
                                             */}
-                                            <span className="general-video__span">27 марта</span>
+                                            <span className="general-video__span">{this.getPublishDate()}</span>
                                         </div>
                                         <div className="general-video__title">
                                             Ваш персональный ведущий
