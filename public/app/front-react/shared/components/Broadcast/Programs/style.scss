@@ -1,343 +1,260 @@
 @import "~style/mixins";
 @import "~style/vars";
 
-.news-top {
 
-    &__full {
-        width: 100%;
-    }
+.news-top_programs {
 
-    &__row {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: flex-start;
+    .news-top {
 
-        &-item {
-            margin-bottom: rem(20);
-            width: rem(300);
-        }
-    }
-    &__mini-news {
-        padding-top: rem(10);
-        padding-bottom: 0;
-
-        border-bottom: none !important;
-
-        &:nth-of-type(1) {
-            padding-top: 0;
-            margin-top: rem(-4);
+        &__news-header {
+            margin-top: rem(23);
         }
 
-        .mini-news__title {
-            display: inline-block;
+        &__news-one-line {
+            margin-top: rem(-65);
 
-            font-size: rem(14);
-            line-height: rem(19);
-        }
+            @include below($tabletLandscapeMax) {
+                margin-top: rem(15);
+            }
 
-        .mini-news__date {
-            margin-top: rem(-4);
+            .block-square__info {
+                bottom: rem(10);
+            }
 
-            font-size: 12px;
-        }
-    }
-
-    &__container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: stretch;
-        justify-content: space-between;
-        margin-bottom: rem(65);
-
-        &.no-flex {
-            display: block;
-        }
-    }
-
-    &__news-one-line {
-        margin-top: rem(-60);
-
-        .block-square__info {
-            bottom: rem(10) !important;
-        }
-
-        .block-square__title {
-            margin-bottom: 0 !important;
-        }
-
-    }
-
-    &__margin-top-bottom {
-        margin-bottom: rem(30);
-        height: rem(60);
-    }
-
-    &__left {
-        margin-top: rem(-9);
-    }
-
-    &__info-noize {
-        margin-top: rem(23);
-
-        .info-noize__wrapper {
-            margin-top: rem(19);
-        }
-
-        .info-noize__mini-news {
-
-            &:first-child {
-
-                .mini-news__title {
-                    line-height: rem(22) !important;
-                }
+            .block-square__title {
+                margin-bottom: 0;
             }
         }
 
-        .mini-news__title {
-            // letter-spacing: rem(-.5);
-        }
-    }
-
-    &__enter-one {
-        position: relative;
-
-        margin-top: rem(30);
-    }
-
-    &__banner {
-        margin-top: rem(9);
-    }
-
-    &__plots-week {
-        margin-top: rem(24);
-
-        .block-rectangle-mini__points {
-            margin-right: rem(10);
-        }
-    }
-
-    &__per-day {
-        margin-top: rem(37);
-
-        .block-square__title {
-            margin-bottom: rem(3) !important;
-        }
-    }
-
-    &__banner-preview {
-        height: rem(142);
-        margin-top: rem(14);
-        margin-bottom: rem(28);
-    }
-
-    &__random-news {
-        margin-top: rem(57);
-        margin-bottom: rem(20);
-    }
-
-    &__subscribe {
-        margin-top: rem(42);
-    }
-
-    &__more-news {
-        margin-top: rem(17);
-
-        .mini-news {
-
-            &:not(:first-child) {
-                margin-top: rem(17);
-
-                .mini-news__title {
-                    line-height: rem(18);
-                }
-            }
-        }
-    }
-
-    &_margin {
-        margin-top: rem(51);
-    }
-}
-
-
-.news-one-line {
-
-    & .from-enter_big {
-        height: rem(387);
-    }
-
-    &__item-bottom .from-enter{
-        align-self: flex-end;
-    }
-
-    &__row {
-        // @include margin_y(#{rem(-7)});
-        margin-bottom: rem(14);
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    &__block-rectangle {
-        @include margin_y(#{rem(7)});
-        width: rem(617);
-        height: rem(245);
-
-        .block-rectangle__link,
-        .block-rectangle__img {
-            height: rem(245);
-        }
-    }
-
-    .block-rectangle__info {
-        bottom: rem(6);
-    }
-
-    &__block-square {
-        @include margin_y(#{rem(7)});
-        width: rem(300);
-
-        &::before,
-        .block-square__img,
-        .block-square__link {
-            width: rem(300);
-        }
-
-        .block-square__title {
-            // letter-spacing: rem(-.2);
-        }
-
-        .block-square__info {
-            bottom: rem(8);
-        }
-    }
-
-    &__date {
-
-        .button {
-            color: #00a5b6;
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-
-        height: 49px;
-        font-size: 14px;
-
-        color: #243746;
-        text-transform: uppercase;
-
-        &-wrap {
-            padding-top: 93px;
-        }
-
-        &-items {
+        &__container {
             display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: stretch;
             justify-content: space-between;
+            margin-bottom: rem(65);
 
-            & .from-enter:first-child {
-                margin-right: 18px;
+            &.no-flex {
+                display: block;
             }
         }
 
-    }
-}
+        &__container-programs {
+            margin-bottom: rem(55);
+        }
 
-.plots-week {
+        &__subscribe-programs {
+            margin-top: rem(-10);
 
-    &__list {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-}
+            @include below($tabletMax) {
+                margin-top: rem(11);
+            }
 
-.per-day {
+            @include below($mobile) {
+                margin-top: 0;
+                margin-bottom: rem(20);
+            }
+        }
 
-    &__title {
-        line-height: rem(32);
+        &__banner-preview {
+            margin-top: rem(-15);
+            margin-bottom: rem(30);
 
-        border-bottom: none;
-    }
+            @include below($tabletMax) {
+                margin-top: rem(15);
+                margin-bottom: rem(18);
+            }
+        }
 
-    &__wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    &__wrapper_margin {
-        margin-top: rem(17);
-    }
-
-    .block-square {
-
-        .block-square__info {
+        &__full {
             width: 100%;
         }
+    }
 
-        .block-square__title {
-            margin-bottom: 0;
+    .banner__where-view {
+        margin-bottom: rem(30);
 
-            // letter-spacing: rem(-.2);
+        @include below($tabletLandscapeMax) {
+            width: rem(613);
+        }
+
+        @include below($tabletMax) {
+            width: rem(300);
+            margin-top: rem(20);
+            margin-bottom: rem(20);
         }
     }
 
-    &__block-square {
+    .left-col_width_inner {
 
-        .block-square__info {
-            bottom: rem(19);
+        @include below($tabletMax) {
+            width: rem(300);
         }
+    }
 
-        .block-square__title {
-            margin-bottom: rem(42);
+    .from-enter_big {
+
+        @include below($tabletLandscapeMax) {
+            width: 100%;
+            margin-bottom: 0;
         }
+    }
 
-        .block-square__title-war {
-            position: relative;
+    .news-one-line {
 
-            display: inline-block;
+        .from-enter_big {
+            height: rem(387);
 
-            font: #{rem(12)}/#{rem(24)} $stemReg;
-            color: $white;
-            text-transform: uppercase;
+            @include below($tabletLandscapeMax) {
+                height: rem(450);
+            }
 
-            &::before {
-                content: '';
-
-                position: absolute;
-                z-index: -1;
-                top: 0;
-                left: rem(-25);
-
-                display: block;
-                width: calc(100% + #{rem(48)});
-                height: 100%;
-
-                background-color: $war;
-                transform: skew(-30deg);
+            @include below($tabletMax) {
+                margin-bottom: rem(8);
             }
         }
-    }
 
-    &__block-rectangle {
+        &__item-bottom {
+            margin-bottom: rem(30);
 
-    }
+            @include below($mobile) {
+                margin-bottom: rem(15);
+            }
+        }
 
-}
+        &__item-bottom .from-enter{
+            align-self: flex-end;
+        }
 
-.broadcast {
+        &__row {
+            margin-bottom: rem(14);
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
 
-    &__popular {
-        width: #{rem(300)}
+            @include below($tabletMax) {
+                @include margin_y(#{rem(-10)});
+            }
+
+            .from-enter {
+
+                @include below($tabletMax) {
+                    @include margin_y(#{rem(10)});
+                }
+            }
+        }
+
+        &__block-rectangle {
+            @include margin_y(#{rem(7)});
+            width: rem(617);
+            height: rem(245);
+
+            .block-rectangle__link,
+            .block-rectangle__img {
+                height: rem(245);
+            }
+        }
+
+        .block-rectangle__info {
+            bottom: rem(6);
+        }
+
+        &__block-square {
+            @include margin_y(#{rem(7)});
+            width: rem(300);
+
+            &::before,
+            .block-square__img,
+            .block-square__link {
+                width: rem(300);
+            }
+
+            .block-square__title {
+                // letter-spacing: rem(-.2);
+            }
+
+            .block-square__info {
+                bottom: rem(8);
+            }
+        }
+
+        &__date {
+            height: rem(49);
+            font-size: rem(14);
+
+            color: #243746;
+
+            @include below($tabletLandscapeMax) {
+                height: auto;
+                padding-bottom: rem(9);
+                margin-bottom: rem(19);
+                border-bottom: 1px solid $gray;
+            }
+
+            @include below($mobile) {
+                height: auto;
+            }
+
+            .button {
+                color: #00a5b6;
+                text-decoration: none;
+                text-transform: uppercase;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+        }
+
+        &__date-title {
+            color: $enter;
+            margin-right: rem(23);
+
+            @include below($mobile) {
+                display: block;
+                margin-bottom: rem(10);
+            }
+        }
+
+        &__date-wrap {
+            width: rem(615);
+            padding-top: rem(93);
+
+            @include below($tabletLandscapeMax) {
+                width: 100%;
+                padding-top: rem(28);
+            }
+
+            @include below($tabletMax) {
+                width: 100%;
+            }
+
+            &_view-desktop {
+
+                @include below($tabletMax) {
+                    margin-top: 0;
+                    padding-top: 0;
+                }
+            }
+        }
+
+        &__date-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        &__from-text,
+        &__to-text {
+            margin-right: rem(11);
+
+            @include below($mobile) {
+                margin-right: 0;
+            }
+        }
     }
 }
 
@@ -346,25 +263,34 @@
 
     &__title {
 
-        padding-top: rem(25);
+        @include padding_y(#{rem(20)});
 
         background-color: #778091;
-        height: rem(70);
 
         color: #fff;
         font-size: rem(36);
         text-transform: uppercase;
 
         &-logo {
-            height: rem(124);
-            width: rem(214);
+            width: rem(204);
+            height: rem(113);
 
             background-image: url(/content/rtvi/show-rtvi.png);
             background-size: cover;
 
             position: absolute;
-            left: 49.1%;
-            top: -25px;
+            left: rem(630);
+            top: rem(-20);
+
+            @include below($tabletLandscapeMax) {
+                left: rem(465);
+                width: rem(180);
+                height: rem(98);
+            }
+
+            @include below($tabletMax) {
+                display: none;
+            }
         }
 
     }
@@ -374,19 +300,52 @@
     }
 
     &__content {
-        padding-top: rem(20);
+        padding-top: rem(37);
         font-size: rem(15);
         line-height: rem(26);
 
         background-image: url(/content/broadcast/programs-bg.png);
+        background-size: cover;
 
-        &-container {
-            margin-bottom: rem(45);
-            width: 38.4375rem;
+        @include below($tabletLandscapeMax) {
+            padding-top: rem(50);
+        }
 
+        @include below($tabletMax) {
+            padding-top: rem(27);
+        }
+
+        @include below($mobile) {
+            display: flex;
+            flex-wrap: wrap;
+            padding-top: rem(15);
+        }
+    }
+
+    &__content-container {
+        margin-bottom: rem(40);
+        width: 38.4375rem;
+
+        @include below($tabletMax) {
+            padding-right: 53%;
+            margin-bottom: 0;
+        }
+
+        @include below($mobile) {
+            width: rem(300);
+            padding-right: 0;
+            margin-bottom: rem(15);
+            margin-top: rem(15);
+        }
+    }
+
+    &__container {
+
+        &_personality {
             position: relative;
+            order: 3;
 
-            &:after {
+            &::after {
                 content: ' ';
                 display: block;
 
@@ -395,23 +354,62 @@
                 background-position: top center;
                 background-size: cover;
 
-                width: rem(412);
-                height: rem(500);
+                width: rem(382);
+                height: rem(465);
 
                 position: absolute;
-                top: rem(-232);
-                right: rem(-579);
+                right: rem(60);
+                bottom: 0;
 
+                @include below($tabletLandscapeMax) {
+                    right: 0;
+                }
+
+                @include below($tabletMax) {
+                    right: rem(-18);
+                    width: rem(377);
+                    height: rem(378);
+                }
+
+                @include below($mobile) {
+                    position: static;
+                    width: rem(300);
+                }
+            }
+
+            @include below($mobile) {
+                order: 1;
             }
         }
 
+        &_personal-description {
+            order: 2;
+        }
+
+        &_tabs {
+            order: 2;
+
+            @include below($mobile) {
+                order: 3;
+            }
+        }
     }
 
     &__tabs {
         width: rem(615);
 
         border-top: rem(1) solid #b9babc;
-        padding: rem(15) 0 rem(80);
+        padding: rem(8) 0 rem(70);
+
+        @include below($tabletMax) {
+            padding-bottom: rem(15);
+            border-top: none;
+        }
+
+        @include below($mobile) {
+            width: rem(300);
+            padding-bottom: rem(15);
+        }
 
         &_item {
             display: inline-block;
@@ -428,6 +426,5 @@
             }
         }
     }
-
 
 }
