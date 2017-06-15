@@ -66,6 +66,10 @@ class AsideVideo extends PureComponent {
     render() {
         const { className, main, videos } = this.props
 
+        if (!videos) return null
+
+        const data = videos[0] || {}
+
         const overlayStyle = {
             position: 'fixed',
             backgroundColor: 'rgba(36, 55, 70, 0.6)',
