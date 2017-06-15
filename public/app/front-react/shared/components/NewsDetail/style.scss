@@ -112,6 +112,14 @@
                         padding-bottom: rem(20);
                     }
                 }
+
+                .general-video__ico {
+                    display: none;
+
+                    &_small {
+                        display: inline;
+                    }
+                }
             }
         }
 
