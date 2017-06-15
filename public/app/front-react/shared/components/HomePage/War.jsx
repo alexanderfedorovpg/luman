@@ -17,7 +17,7 @@ import MoreNews from './MoreNews'
 import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
-import AsideVideo from 'components/HomePage/AsideVideo'
+import AsideVideo from './AsideVideo'
 
 import mainVideoPlaceholder from './obzor-main-new.jpg'
 import './style.scss'
@@ -79,15 +79,13 @@ function HomePage({
                 <div className="general-news__right right-col">
                     {firstVideo.video_stream
                         ? (
-                            <VideoWrapper>
-                                <AsideVideo
-                                    data={firstVideo}
-                                    playTitle="date"
-                                    title="Все ключевые события этого дня"
-                                    main
-                                    videos={now}
-                                    className="general-news__general-video" />
-                            </VideoWrapper>
+                            <AsideVideo
+                                data={firstVideo}
+                                playTitle="date"
+                                title="Все ключевые события этого дня"
+                                main
+                                videos={now}
+                                className="general-news__general-video general-video_idx"/>
                         )
                         : (
                             <img src={mainVideoPlaceholder} className="general-video__img" />

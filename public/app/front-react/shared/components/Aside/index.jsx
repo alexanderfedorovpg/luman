@@ -10,7 +10,7 @@ import Banner from 'components/HomePage/Banner'
 import MiniNews from 'components/MiniNews'
 import Group from 'components/Group'
 import Block from 'components/Block'
-import AsideVideo from 'components/HomePage/AsideVideo'
+import AsideVideo from 'components/GeneralVideo/AsideVideo'
 
 import efirPlaceholder from './efir.jpg'
 import './style.scss';
