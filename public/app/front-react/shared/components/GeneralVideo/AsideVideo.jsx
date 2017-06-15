@@ -58,21 +58,13 @@ class AsideVideo extends PureComponent {
         }, 0)
     }
 
-    getPublishDate(date) {
+    getPublishDate() {
         addLocaleData([...ru]);
-        const fixedVal = (date||'').replace(/-/g, '/');
-        if (!Date.parse(fixedVal)) {
-            return null;
-        }
-        return <FormattedDate day='numeric' month='long' value={fixedVal}/>;
+        return <FormattedDate day='numeric' month='long' value={new Date()}/>;
     }
 
     render() {
         const { className, main, videos } = this.props
-
-        if (!videos) return null
-
-        const data = videos[0] || {}
 
         const overlayStyle = {
             position: 'fixed',
@@ -118,7 +110,7 @@ class AsideVideo extends PureComponent {
                                     }
                                     <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
-                                            <span className="general-video__span">{this.getPublishDate(data.publish_date)}</span>
+                                            <span className="general-video__span">{this.getPublishDate()}</span>
                                         </div>
                                         <div className="general-video__title">
                                             Ваш персональный ведущий
