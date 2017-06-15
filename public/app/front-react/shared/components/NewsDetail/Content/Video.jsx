@@ -204,7 +204,11 @@ class Content extends PureComponent {
                             <Img
                                 src={image.url}
                                 title={image.object_name||''}
-                                alt={image.object_name||''} />
+                                alt={image.object_name||''}
+                            />
+                            <figcaption className="news-preview__title">
+                                {image.object_name}
+                            </figcaption>
                             {image.object_author && image.object_source
                                 && (
                                     <figcaption className="news-preview__source">

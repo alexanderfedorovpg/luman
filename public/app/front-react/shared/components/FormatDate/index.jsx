@@ -6,36 +6,44 @@ import './style.scss';
 const twoDays = 172800000;
 
 function FormatDate({value}) {
-    if (!value) {
-        return null;
-    }
-
-    // for stupid Safari
-    const fixedVal = value.replace(/-/g, '/');
-
-    if (!Date.parse(fixedVal)) {
-        return null;
-    }
-
-    const date = new Date(fixedVal);
     const now = new Date();
+    let date = null;
+
+    if (value instanceof Date) {
+        date = value;
+    }
+    else if (value instanceof String) {
+        // for stupid Safari
+        const fixedVal = typeof value === 'string'
+            ? value.replace(/-/g, '/')
+            : value;
+
+        if (!Date.parse(fixedVal)) {
+            return null;
+        }
+
+        date = new Date(fixedVal);
+    }
+    else {
+        return null;
+    }
+
+    if (!date) {
+        return null;
+    }
 
     function getDate () {
-        if (now.getTime() - date.getTime() >= 172800000) {
-            // return (
-            //     <span>{date.toLocaleDateString()} {date.getHours()}:{date.getMinutes()}</span>
-            // )
-            return (
+
+        return now.getTime() - date.getTime() >= 172800000
+            ? (
                 <span className='format-date'>
-                    <FormattedDate value={fixedVal} year='numeric' month='2-digit' day='2-digit' />
-                    <FormattedTime value={fixedVal} hour='numeric' minute='numeric' />
+                    <FormattedDate value={date} year='numeric' month='2-digit' day='2-digit' />
+                    <FormattedTime value={date} hour='numeric' minute='numeric' />
                 </span>
             )
-        } else {
-            return (
-                <FormattedRelative value={fixedVal} />
+            : (
+                <FormattedRelative value={date} />
             )
-        }
     }
 
     return getDate();

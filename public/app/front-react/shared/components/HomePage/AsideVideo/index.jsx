@@ -73,8 +73,10 @@ class AsideVideo extends PureComponent {
     }
 
     render() {
-        const { data, className, main, videos } = this.props
+        const { className, main, videos } = this.props
+        if (!videos) return null
 
+        const data = videos[0] || {}
         return data.video_stream
             ? (
                 <div
