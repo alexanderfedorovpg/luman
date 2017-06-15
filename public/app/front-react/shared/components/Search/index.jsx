@@ -27,9 +27,6 @@ class Search extends React.PureComponent {
         if (this.props.onSearch && this.state.query) {
             this.props.onSearch(this.state.query);
 
-            this.setState({
-                open: false,
-            });
             (this.props.setOpen||(()=>{}))(false);
         }
     }
@@ -42,6 +39,7 @@ class Search extends React.PureComponent {
 
     onSubmitClick(e) {
         if (this.props.open) {
+            this.props.setOpen(false);
             return;
         }
 
