@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 
-import GeneralVideo from 'components/GeneralVideo'
 import insideVideoPlaceholder from './obzor-inside-new.jpg'
 import mainVideoPlaceholder from './obzor-main-new.jpg'
 import close from './close.png'
@@ -104,13 +103,7 @@ class AsideVideo extends PureComponent {
                                     }
                                     <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
-                                            {/*data.url ?
-
-                                                <img onClick={this.play} className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                                :
-                                                <img className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                            */}
-                                            <span className="general-video__span">{this.getPublishDate()}</span>
+                                            <span className="general-video__span">{this.getPublishDate(data.publish_date)}</span>
                                         </div>
                                         <div className="general-video__title">
                                             Ваш персональный ведущий

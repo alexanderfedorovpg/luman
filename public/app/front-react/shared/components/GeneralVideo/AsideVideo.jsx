@@ -64,7 +64,7 @@ class AsideVideo extends PureComponent {
     }
 
     render() {
-        const {className, main, videos } = this.props
+        const { className, main, videos } = this.props
 
         const overlayStyle = {
             position: 'fixed',
@@ -76,9 +76,11 @@ class AsideVideo extends PureComponent {
             left: 0,
             zIndex: 8,
         }
+
         if (!videos) return null
 
         const data = videos[0] || {}
+
         return data.video_stream
             ? (
                 <div
@@ -111,12 +113,6 @@ class AsideVideo extends PureComponent {
                                     }
                                     <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
-                                            {/*data.url ?
-
-                                                <img onClick={this.play} className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                                :
-                                                <img className="general-video__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
-                                            */}
                                             <span className="general-video__span">{this.getPublishDate()}</span>
                                         </div>
                                         <div className="general-video__title">
