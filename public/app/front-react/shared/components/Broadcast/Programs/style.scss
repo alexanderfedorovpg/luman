@@ -280,7 +280,7 @@
 
             position: absolute;
             left: rem(630);
-            top: rem(-20);
+            top: rem(-21);
 
             @include below($tabletLandscapeMax) {
                 left: rem(465);
