@@ -60,12 +60,7 @@ class AsideVideo extends PureComponent {
 
     getPublishDate() {
         addLocaleData([...ru]);
-        let date = this.props.videos[0].publish_date;
-        const fixedVal = date.replace(/-/g, '/');
-        if (!Date.parse(fixedVal)) {
-            return null;
-        }
-        return <FormattedDate day='numeric' month='long' value={fixedVal}/>;
+        return <FormattedDate day='numeric' month='long' value={new Date()}/>;
     }
 
     render() {
