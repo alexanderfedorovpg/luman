@@ -242,6 +242,7 @@ main {
     }
 
     .text-bg-gray {
+        width: rem(1040);
 
         @include below($mobile) {
             width: 100%;
@@ -253,6 +254,10 @@ main {
 
         @include above($tablet) {
             width: rem(740) ;
+        }
+
+        @include above($desktop) {
+            width: rem(1040);
         }
     }
 }

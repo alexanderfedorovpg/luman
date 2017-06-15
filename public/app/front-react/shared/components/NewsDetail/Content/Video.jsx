@@ -144,9 +144,7 @@ class Content extends PureComponent {
         return (
             <div className="inner-about__video-info">
                 <div>
-                    <div>
-                        Фото:
-                    </div>
+                    <span>Фото: </span>
                     {author}
                     {author && source && ' / '}
                     {source}
@@ -201,6 +199,9 @@ class Content extends PureComponent {
                         onPlay={this.play}
                         left
                         data={data.video_stream} />
+                    <MediaQuery maxWidth="614px">
+                        {this.renderInfo()}
+                    </MediaQuery>
                     <div className={classNames("news-preview", {'news-preview_play' : this.state.play})}>
                         <Rubrics data={data.rubrics} className={!this.state.play ? 'active' : ''} />
                         <figure className="news-preview__img">

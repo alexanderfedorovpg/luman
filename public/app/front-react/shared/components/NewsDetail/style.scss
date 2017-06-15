@@ -89,6 +89,13 @@
                         margin-right: 0;
                     }
 
+                    &__img {
+
+                        @include below($mobile) {
+                            margin-top: 0;
+                        }
+                    }
+
                     &__title {
                         background-color: transparent;
                     }
@@ -110,6 +117,22 @@
                         width: rem(225);
                         padding-left: 0;
                         padding-bottom: rem(20);
+                    }
+
+                    @include below($mobile) {
+                        position: static;
+                        width: rem(300);
+                        margin-top: rem(7);
+                        padding-bottom: 0;
+                        line-height: rem(18);
+                    }
+                }
+
+                .general-video__ico {
+                    display: none;
+
+                    &_small {
+                        display: inline;
                     }
                 }
             }
