@@ -14,7 +14,10 @@ class AlterTableNewsChBodyToLtext extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->longText('body')->nullable()->change();
+            $sql="
+        ALTER TABLE  `news` CHANGE COLUMN `body` `body` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL ;
+        ";
+            DB::connection()->getPdo()->exec($sql);
 
         });
     }
