@@ -60,7 +60,7 @@ class AsideVideo extends PureComponent {
 
     getPublishDate() {
         addLocaleData([...ru]);
-        let date = this.props.data.publish_date;
+        let date = this.props.videos[0].publish_date;
         const fixedVal = date.replace(/-/g, '/');
         if (!Date.parse(fixedVal)) {
             return null;
@@ -69,7 +69,7 @@ class AsideVideo extends PureComponent {
     }
 
     render() {
-        const { data, className, main, videos } = this.props
+        const {className, main, videos } = this.props
 
         const overlayStyle = {
             position: 'fixed',
@@ -81,6 +81,9 @@ class AsideVideo extends PureComponent {
             left: 0,
             zIndex: 8,
         }
+        if (!videos) return null
+
+        const data = videos[0] || {}
         return data.video_stream
             ? (
                 <div
