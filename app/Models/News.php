@@ -180,13 +180,13 @@ class News extends Model
 
     public function scopeAirRecords($query)
     {
-        $query->whereHas('rubrics', function ($subQuery)   {
-            $subQuery->where('rubrics.name', 'like', "%из эфира%");
-        });
+//        $query->whereHas('rubrics', function ($subQuery)   {
+//            $subQuery->where('rubrics.name', 'like', "%из эфира%");
+//        });
+//
+//        return $query;
 
-        return $query;
-        //
-        //return $query->whereNotNull('program_id');
+         return $query->whereNotNull('program_id');
     }
 
 

@@ -211,7 +211,7 @@ class NewsListEditorController extends CmsController
             $video_stream_preview = $request->input('video_stream_preview');
             $body = $request->input('body');
 
-
+            $program_id=$request->input('program_id');
             $editor_id = $request->input('editor_id');
             $image_main = $request->input('image_main');
             $image_preview = $request->input('image_preview');
@@ -281,16 +281,15 @@ class NewsListEditorController extends CmsController
                 if (isset($is_war_mode)) {
                     $newsEdit->is_war_mode = $is_war_mode;
                 }
+                if (isset($program_id)) {
+                    $newsEdit->program_id = $program_id;
+                }
+
 
                 if ($log_moderation->setEndModeration() && $newsEdit->save()) {
                     if (isset($rubrics) && is_array($rubrics)) {
                          $newsEdit->rubrics()->sync($rubrics);
-                        if (Rubrics::whereIn('id',$rubrics)->pluck('name')->contains(function ($value, $key) {
-                            return mb_strtolower($value) == 'из эфира';
-                        })) {
-                            $newsEdit->program_id=TvProgram::first()->id;
-                            $newsEdit->save();
-                        }
+
 
                     }
                     $image_main_r = $request->input('image_main');
@@ -428,6 +427,11 @@ class NewsListEditorController extends CmsController
             if ($request->get('rubrics')) {
                 $rubrics = $request->get('rubrics');
             }
+
+            if ($request->get('program_id')) {
+                $news->program_id=  $request->get('program_id');
+            }
+
             if (isset($theses)) {
                 $news->theses = $theses;
             }
@@ -457,12 +461,7 @@ class NewsListEditorController extends CmsController
 
                 if (isset($rubrics) && is_array($rubrics)) {
                      $news->rubrics()->attach($rubrics);
-                    if (Rubrics::whereIn('id',$rubrics)->pluck('name')->contains(function ($value, $key) {
-                        return mb_strtolower($value) == 'из эфира';
-                    })) {
-                        $news->program_id=TvProgram::first()->id;
-                        $news->save();
-                    }
+
                 }
                 if ($request->input('uri')) {
                     $uri = new NewsUri(['uri' => $request->input('uri')]);

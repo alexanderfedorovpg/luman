@@ -188,7 +188,6 @@ export function* publishRecords() {
 }
 
 export function* initPage() {
-    yield call(getPrograms);
     yield call(getRecords, { payload: { replace: true } });
 }
 
