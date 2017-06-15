@@ -21,7 +21,7 @@ export const newsLink = article => (
  */
 export const replaceStrToLink = (text) => {
     if (text)
-        return text.replace(/&gt;&gt;(.+?)&gt;&gt;(.+?)&gt;&gt;/g, '<a href="$1" target="_blank">$2</a>', 'g')
+        return text.replace(/&gt;&gt;(.+?)&gt;&gt;(.+?)&gt;&gt;/g, '<a href="$2" target="_blank">$1</a>', 'g')
             .replace(/>>(.+?)>>(.+?)>>/g, '<a href="$1">$2</a>', 'g')
     else
         return text
