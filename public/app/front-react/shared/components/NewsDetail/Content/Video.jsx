@@ -215,7 +215,7 @@ class Content extends PureComponent {
                             <figcaption className="news-preview__title">
                                 {image.object_name}
                             </figcaption>
-                            {image.object_author || image.object_source
+                            {(image.object_author || image.object_source)
                                 && (
                                     <figcaption className="news-preview__source">
                                         Фото: {image.object_author} {image.object_author && image.object_source && ' / '} {image.object_source}
