@@ -59,6 +59,16 @@
 
     &_collapsed {
         height: rem(396);
+
+        @include below($tabletMax) {
+            height: rem(335);
+        }
+
+        @include below($mobile) {
+            margin-right: 0;
+            width: rem(300);
+            height: auto;
+        }
     }
 
     iframe {

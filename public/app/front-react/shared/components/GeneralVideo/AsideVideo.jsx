@@ -85,10 +85,6 @@ class AsideVideo extends PureComponent {
             zIndex: 8,
         }
 
-        if (!videos) return null
-
-        const data = videos[0] || {}
-
         return data.video_stream
             ? (
                 <div
@@ -96,6 +92,7 @@ class AsideVideo extends PureComponent {
                         'general-video',
                         className,
                         {
+                            'general-video_collapsed': !this.state.play,
                             'general-video_play': this.state.play
                         },
                     )}
