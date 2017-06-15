@@ -128,6 +128,14 @@
                     }
                 }
 
+                .inner-about__photo {
+                    display: block;
+
+                    @include below($mobile) {
+                        display: inline;
+                    }
+                }
+
                 .general-video__ico {
                     display: none;
 

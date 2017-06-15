@@ -144,7 +144,7 @@ class Content extends PureComponent {
         return (
             <div className="inner-about__video-info">
                 <div>
-                    <span>Фото: </span>
+                    <span className="inner-about__photo">Фото: </span>
                     {author}
                     {author && source && ' / '}
                     {source}
