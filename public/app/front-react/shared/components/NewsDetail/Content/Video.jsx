@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import MediaQuery from 'react-responsive'
 import classNames from 'classnames'
+import {replaceStrToLink} from 'shared/utils/uri';
 
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
@@ -155,7 +156,8 @@ class Content extends PureComponent {
     render() {
         const { data, children } = this.props
         let theses = [];
-        const body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
+        let body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
+        body = replaceStrToLink(body);
 
         if (data.theses) {
             theses = Array.isArray(data.theses)
@@ -179,9 +181,10 @@ class Content extends PureComponent {
                         ? (
                             <div className={classNames('text-bg-gray__block-text', { 'text-bg-gray__block-text_play': this.state.play })}>
                                 {theses.map((v, i) => (
-                                    <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
-                                        {v}
-                                    </div>
+                                    <div key={i}
+                                         dangerouslySetInnerHTML={{ __html: replaceStrToLink(v) }}
+                                         className="text-bg-gray__text text-bg-gray__text-lite"
+                                    />
                                 ))}
                             </div>
                         )
@@ -218,9 +221,9 @@ class Content extends PureComponent {
                                 )
                             }
                         </figure>
-                        <p className="news-preview__text">
-                            {data.sub_title}
-                        </p>
+                        <p className="news-preview__text"
+                           dangerouslySetInnerHTML={{__html: replaceStrToLink(data.sub_title)}}
+                        />
                     </div>
                     <MediaQuery minWidth="615px" maxWidth="1249px">
                         {this.renderInfo()}
