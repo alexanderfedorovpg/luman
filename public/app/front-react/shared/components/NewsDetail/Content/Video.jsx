@@ -178,7 +178,7 @@ class Content extends PureComponent {
                 <div className="inner-about__date">
                     <FormatDate value={data.publish_date} />
                 </div>
-                <div onClick={e => this.stop(e)} className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
+                <div className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-about__text-bg-gray_play' : this.state.play})}>
                     {theses.length
                         ? (
                             <div className={classNames('text-bg-gray__block-text', { 'text-bg-gray__block-text_play': this.state.play })}>
