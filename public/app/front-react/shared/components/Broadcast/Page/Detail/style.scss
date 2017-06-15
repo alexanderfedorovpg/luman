@@ -110,6 +110,7 @@
 
             .photo__title {
                 color: #243746;
+                font-family: "StemText Regular", sans-serif;
                 position: relative;
                 z-index: 2;
             }
@@ -144,6 +145,7 @@
         padding-left: rem(20);
         margin-top: rem(51);
         margin-bottom: rem(15);
+        font-family: "StemText Regular", sans-serif;
 
         // letter-spacing: rem(-.5);
     }

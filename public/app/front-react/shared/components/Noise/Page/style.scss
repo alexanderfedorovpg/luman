@@ -47,7 +47,7 @@
     }
 
     &__list-mini {
-        width: rem(292);
+        width: rem(300);
 
         .mini-news__title {
             font-size: rem(14);
@@ -55,13 +55,12 @@
     }
 
     .block-square {
-        width: rem(292);
+        width: rem(300);
         height: rem(250);
     }
 
     &__list {
         padding-top: rem(30);
-        padding-right: rem(10);
         margin-bottom: rem(30);
 
         position: relative;
@@ -69,7 +68,7 @@
         border-color: transparent;
         border-style: solid;
         border-top-width: 2px;
-        border-right-width: 2px;
+        border-right-width: 0;
         border-left-width: 0;
         border-bottom-width: 0;
         border-image: url(../border.png);
@@ -100,7 +99,7 @@
         height: rem(1105);}
 
     &__item {
-        margin-bottom: rem(20);
+        margin-bottom: rem(16);
     }
 
     &__gutter-sizer {

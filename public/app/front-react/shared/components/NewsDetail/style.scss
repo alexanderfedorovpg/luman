@@ -220,6 +220,7 @@
                 }
 
                 .photo__title {
+                    font-family: "StemText Regular", sans-serif;
                     font-size: rem(12);
                     line-height: rem(18);
                     color: #243746;
@@ -230,6 +231,7 @@
                 figcaption {
                     position: relative;
                     z-index: 1;
+                    font-family: "StemText Regular", sans-serif;
                 }
 
                 &:after {
@@ -267,7 +269,7 @@
             padding-left: rem(20);
             margin-top: rem(51);
             margin-bottom: rem(15);
-
+            font-family: "StemText Regular", sans-serif;
             // letter-spacing: rem(-.5);
         }
 
@@ -373,8 +375,6 @@
         }
 
         .inner-about__content {
-            position: relative;
-
             margin-top: rem(24);
 
             > p {
