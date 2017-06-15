@@ -32,22 +32,22 @@ class Content extends PureComponent {
         if (this._timer) clearTimeout(this._timer);
         this._timer = setTimeout(() => {
             RenderSocialWidgets()
-            let tags = document.getElementsByClassName('inner-about__content')[0].getElementsByClassName('video');
-            for (let i = 0; i < tags.length; i++) {
-                let item = tags[i];
+            // let tags = document.getElementsByClassName('inner-about__content')[0].getElementsByClassName('video');
+            // for (let i = 0; i < tags.length; i++) {
+            //     let item = tags[i];
 
-                const btnPlay = document.createElement('img');
-                btnPlay.setAttribute('src', '/content/video-ico/video-ico-big.svg');
-                btnPlay.style.position = 'absolute';
-                btnPlay.style.left = 'calc(50% - 3rem)';
-                btnPlay.style.top = 'calc(50% - 3.75rem)';
-                btnPlay.style.width = '6rem';
-                btnPlay.style.height = '6rem';
-                btnPlay.style.border = '1px solid #fff';
-                btnPlay.classList.add('btn_play');
+            //     const btnPlay = document.createElement('img');
+            //     btnPlay.setAttribute('src', '/content/video-ico/video-ico-big.svg');
+            //     btnPlay.style.position = 'absolute';
+            //     btnPlay.style.left = 'calc(50% - 3rem)';
+            //     btnPlay.style.top = 'calc(50% - 3.75rem)';
+            //     btnPlay.style.width = '6rem';
+            //     btnPlay.style.height = '6rem';
+            //     btnPlay.style.border = '1px solid #fff';
+            //     btnPlay.classList.add('btn_play');
 
-                item.appendChild(btnPlay);
-            }
+            //     item.appendChild(btnPlay);
+            // }
         }, 1000)
     }
 
@@ -91,14 +91,16 @@ class Content extends PureComponent {
     }
 
     stop(e) {
-        if (e.target.classList.value.indexOf('inner-about__text-bg-gray') > -1) {
-            if (e.target.classList.value.indexOf('inner-about__text-bg-gray_play') > -1) {
+        const { classList } = e.target;
+
+        if (classList.contains('inner-about__text-bg-gray')) {
+            if (classList.contains('inner-about__text-bg-gray_play')) {
                 this.setState({
                     play: false
                 })
             }
         } else {
-            if (e.target.classList.value.indexOf('general-video') < 0) {
+            if (!classList.contains('general-video')) {
                 this.setState({
                     play: false
                 })
@@ -213,10 +215,10 @@ class Content extends PureComponent {
                             <figcaption className="news-preview__title">
                                 {image.object_name}
                             </figcaption>
-                            {image.object_author && image.object_source
+                            {(image.object_author || image.object_source)
                                 && (
                                     <figcaption className="news-preview__source">
-                                        Фото: {image.object_author} / {image.object_source}
+                                        Фото: {image.object_author} {image.object_author && image.object_source && ' / '} {image.object_source}
                                     </figcaption>
                                 )
                             }
