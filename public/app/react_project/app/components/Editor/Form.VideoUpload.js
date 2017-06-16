@@ -72,7 +72,7 @@ class VideoUpload extends PureComponent {
             preview: videoPreview.file.input.value,
             author: videoPreview.author.input.value,
             source: videoPreview.source.input.value,
-            url: video.file.input.value
+            url: video.file.input.value,
         };
 
         return (

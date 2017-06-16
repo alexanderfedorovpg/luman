@@ -178,6 +178,15 @@ class NewsListEditorController extends CmsController
                 }
             }
 
+            $video_stream = $request->input('video_stream');
+
+            $video_stream_rule = 'exists:cdn_files,id';
+
+            if (isset($video_stream) && !is_numeric($video_stream)) {
+                $video_stream_rule = 'url';
+            }
+
+
             $rules['id'] = 'required|exists:news,id';
             $rules['editor_id'] = 'numeric|exists:users,id';
 
@@ -189,7 +198,7 @@ class NewsListEditorController extends CmsController
 
             //  $rules['theses'] = 'required';
             $rules['program_id'] = 'integer|exists:tv_programs,id';
-            $rules['video_stream'] = 'exists:cdn_files,id';
+            $rules['video_stream'] =$video_stream_rule;
             $rules['video_stream_preview'] = 'numeric|exists:cdn_files,id';
             $rules['image_main'] = 'numeric|exists:cdn_files,id';
             $rules['image_preview'] = 'numeric|exists:cdn_files,id';
@@ -207,7 +216,7 @@ class NewsListEditorController extends CmsController
             $sub_title = $request->input('sub_title');
             $top = $request->input('top');
             $note = $request->input('note');
-            $video_stream = $request->input('video_stream');
+
             $video_stream_preview = $request->input('video_stream_preview');
             $body = $request->input('body');
 
@@ -234,7 +243,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->title = $title;
                 $newsEdit->sub_title = $sub_title;
                 $newsEdit->note = $note;
-                $newsEdit->video_stream = $video_stream;
+
                 $newsEdit->is_publish = 0;
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
@@ -260,11 +269,16 @@ class NewsListEditorController extends CmsController
                 if (isset($theses)) {
                     $newsEdit->theses = $theses;
                 }
-                if (isset($sub_title)) {
+                if (isset($sub_title) ) {
                     $newsEdit->sub_title = $sub_title;
                 }
-                if (isset($video_stream)) {
+                if (isset($video_stream) &&  is_numeric($video_stream)) {
+
                     $newsEdit->video_stream = $video_stream;
+                }
+                else{
+
+                    $newsEdit->ext_video_link=$video_stream;
                 }
                 if (isset($image_main)) {
                     $newsEdit->image_main = $image_main;
@@ -359,6 +373,14 @@ class NewsListEditorController extends CmsController
                 }
             }
 
+            $video_stream = $request->input('video_stream');
+
+            $video_stream_rule = 'exists:cdn_files,id';
+
+            if (isset($video_stream) && !is_numeric($video_stream)) {
+                $video_stream_rule = 'url';
+            }
+
             $rules['editor_id'] = 'numeric|exists:users,id';
 
             $rules['is_online'] = 'in:0,1';
@@ -368,7 +390,7 @@ class NewsListEditorController extends CmsController
             $rules['title'] = 'required|max:120';
 
 //            $rules['theses'] = 'required';
-            $rules['video_stream'] = 'integer|exists:cdn_files,id';
+            $rules['video_stream'] = $video_stream_rule;;
             $rules['video_stream_preview'] = 'integer|exists:cdn_files,id';
             $rules['image_main'] = 'integer|exists:cdn_files,id';
             $rules['image_preview'] = 'integer|exists:cdn_files,id';
@@ -384,7 +406,7 @@ class NewsListEditorController extends CmsController
             $sub_title = $request->input('sub_title');
             $top = $request->input('top');
             $note = $request->input('note');
-            $video_stream = $request->input('video_stream');
+
 
             $body = $request->input('body');
 
@@ -406,7 +428,7 @@ class NewsListEditorController extends CmsController
             $news->title = $title;
             $news->sub_title = $sub_title;
             $news->note = $note ? $note : '';
-            $news->video_stream = $video_stream;
+
             $news->is_publish = 0;
             $news->publish_date = new \DateTime();
             $news->top = $top;
@@ -438,8 +460,11 @@ class NewsListEditorController extends CmsController
             if (isset($sub_title)) {
                 $news->sub_title = $sub_title;
             }
-            if (isset($video_stream)) {
+            if (isset($video_stream) &&  is_numeric($video_stream)) {
                 $news->video_stream = $video_stream;
+            }
+            else{
+                $news->ext_video_link=$video_stream;
             }
             if (isset($image_main)) {
                 $news->image_main = $image_main;
