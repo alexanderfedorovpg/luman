@@ -63,6 +63,7 @@ a {
     outline: none;
     cursor: pointer;
     color: $blue;
+    text-decoration: none;
 
     &:hover {
         color: $blue;
@@ -107,15 +108,15 @@ main {
     }
 
     @include above($tablet) {
-        width: rem(615);
+        width: rem(617);
     }
 
     @include above($tabletLandscape) {
-        width: rem(930);
+        width: rem(932);
     }
 
     @include above($desktop) {
-        width: rem(1250);
+        width: rem(1248);
     }
 
 }
@@ -183,10 +184,10 @@ main {
     }
 
     &_width_inner {
-        width: rem(930);
+        width: rem(932);
 
         @include below($tabletLandscapeMax) {
-            width: rem(615);
+            width: rem(617);
         }
 
         @include below($tabletMax) {

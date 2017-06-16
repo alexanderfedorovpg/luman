@@ -182,7 +182,7 @@
             width: 100%;
 
             @include below($tabletLandscapeMax) {
-                width: rem(615);
+                width: rem(617);
             }
         }
 
@@ -225,14 +225,14 @@
             }
 
             &_item-top {
-                @include margin_x(#{rem(-7.5)});
+                @include margin_x(#{rem(-8)});
 
                 @include below($tabletMax) {
                     margin-bottom: 0;
                 }
 
                 .from-enter {
-                    @include margin_x(#{rem(7.5)});
+                    @include margin_x(#{rem(8)});
 
                     @include below($tabletMax) {
                         margin-bottom: rem(19);
@@ -256,7 +256,7 @@
                 @include margin_x(#{rem(-8)});
 
                 @include below($tabletLandscapeMax) {
-                    @include margin_x(#{rem(-7.5)});
+                    @include margin_x(#{rem(-8)});
                 }
 
                 @include below($tabletMax) {
@@ -270,7 +270,7 @@
                     @include margin_x(#{rem(8)});
 
                     @include below($tabletLandscapeMax) {
-                        @include margin_x(#{rem(7.5)});
+                        @include margin_x(#{rem(8)});
                     }
                 }
             }
@@ -279,7 +279,7 @@
                 @include margin_x(#{rem(-8)});
 
                 @include below($tabletLandscapeMax) {
-                    @include margin_x(#{rem(-7.5)});
+                    @include margin_x(#{rem(-8)});
                 }
 
                 @include below($tabletMax) {
@@ -293,7 +293,7 @@
                     @include margin_x(#{rem(8)});
 
                     @include below($tabletLandscapeMax) {
-                        @include margin_x(#{rem(7.5)});
+                        @include margin_x(#{rem(8)});
                     }
                 }
             }

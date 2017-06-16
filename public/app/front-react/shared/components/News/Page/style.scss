@@ -78,11 +78,11 @@
             }
 
             @include above($tabletLandscape) {
-                width: rem(615);
+                width: rem(617);
             }
 
             @include above($desktop) {
-                width: rem(930);
+                width: rem(932);
             }
         }
 
@@ -285,8 +285,8 @@
     .news-one-line {
 
         &__row {
-            @include margin_y(#{rem(-7.5)});
-            @include margin_x(#{rem(-7.5)});
+            @include margin_y(#{rem(-8)});
+            @include margin_x(#{rem(-8)});
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -296,13 +296,13 @@
             }
 
             @include above($tabletLandscape) {
-                @include margin_y(#{rem(-7.5)});
+                @include margin_y(#{rem(-8)});
             }
         }
 
         &__block-rectangle {
-            @include margin_y(#{rem(7.5)});
-            @include margin_x(#{rem(7.5)});
+            @include margin_y(#{rem(8)});
+            @include margin_x(#{rem(8)});
             width: rem(615);
             height: rem(250);
 
@@ -315,7 +315,7 @@
             }
 
             @include above($tabletLandscape) {
-                @include margin_y(#{rem(7.5)});
+                @include margin_y(#{rem(8)});
                 width: rem(615);
             }
 
@@ -330,8 +330,8 @@
         }
 
         &__block-square {
-            @include margin_y(#{rem(7.5)});
-            @include margin_x(#{rem(7.5)});
+            @include margin_y(#{rem(8)});
+            @include margin_x(#{rem(8)});
             width: rem(300);
 
             @include above($tablet) {
@@ -339,7 +339,7 @@
             }
 
             @include above($tabletLandscape) {
-                @include margin_y(#{rem(7.5)});
+                @include margin_y(#{rem(8)});
             }
 
             &::before,

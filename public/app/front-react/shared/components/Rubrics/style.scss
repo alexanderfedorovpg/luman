@@ -11,6 +11,7 @@
         color: $gray-date;
         text-decoration: none;
         text-transform: uppercase;
+        cursor: auto;
 
         &:after {
             content: '/';
@@ -27,8 +28,17 @@
             display: none;
         }
 
+        &:hover {
+            color: $gray-date;
+        }
+
         &[href] {
             color: $blue;
+            cursor: pointer;
+
+            &:hover {
+                color: $blue;
+            }
         }
     }
 }
