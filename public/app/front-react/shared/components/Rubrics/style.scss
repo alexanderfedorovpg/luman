@@ -8,7 +8,7 @@
 
         font-family: $stemReg;
         font-size: rem(12);
-        color: $blue;
+        color: $gray-date;
         text-decoration: none;
         text-transform: uppercase;
 
@@ -25,6 +25,10 @@
 
         &:last-child:after {
             display: none;
+        }
+
+        &[href] {
+            color: $blue;
         }
     }
 }

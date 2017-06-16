@@ -10,17 +10,20 @@
     }
 
     &__wrapper {
-       display: flex;
+        display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        @include margin_x(#{rem(-8)});
 
         @include below($mobile) {
             flex-wrap: wrap;
-            width: 100%;
 
             .block-square:not(:first-child) {
                 margin-top: rem(14);
             }
+        }
+
+        .block-square {
+            @include margin_x(#{rem(8)});
         }
     }
 

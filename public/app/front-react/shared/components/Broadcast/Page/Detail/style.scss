@@ -29,6 +29,10 @@
         font-size: rem(18);
         font-family: $stemBold;
         width: rem(780);
+
+        @include below($tabletLandscapeMax) {
+            width: auto;
+        }
     }
 
     &__enter-one {
@@ -49,19 +53,8 @@
         position: relative;
 
         margin-top: rem(20);
-        margin-bottom: rem(100);
-
+        margin-bottom: 0;
         transform: translateX(-17%);
-
-        // .inner-default &_play.text-bg-gray {
-        //     // position: relative;
-        //     z-index: 4;
-        //     background-color: #4c4c4c;
-
-        //     .social-links {
-        //         opacity: .5;
-        //     }
-        // }
     }
 
     &__left {
@@ -352,22 +345,6 @@
         border-bottom: none;
     }
 
-    &__general-video {
-        margin-bottom: rem(41);
-        margin-right: 0 !important;
-        height: rem(443) !important;
-        width: rem(780) !important;
-
-        .general-video__title {
-            justify-content: flex-start !important;
-            padding-left: rem(125) !important;
-        }
-        .general-video__date {
-            margin-left: rem(160);
-            margin-bottom: rem(13) !important;
-        }
-    }
-
     &__text-bg-gray {
         flex-direction: column;
         justify-content: flex-start;
@@ -408,6 +385,10 @@
                     margin-left: rem(51);
                 }
 
+                @include below($tabletMax) {
+                    margin-left: rem(67);
+                }
+
                 @include below($mobile) {
                     margin-left: 0;
                 }
@@ -438,8 +419,8 @@
             .text-bg-gray--news {
 
                 height: auto;
-                padding-bottom: rem(35);
                 margin-top: rem(3);
+                padding-bottom: rem(29);
 
                 @include below($tabletLandscapeMax) {
                     width: rem(598);
@@ -449,7 +430,6 @@
 
                 @include below($tabletMax) {
                     width: rem(614);
-                    padding-bottom: rem(29);
                     padding-left: rem(68);
                 }
 
@@ -459,8 +439,15 @@
                 }
 
                 .general-video {
-                    height: rem(425) !important;
+                    height: rem(425);
+                    width: rem(780);
                     margin-top: 0;
+                    margin-bottom: rem(41);
+                    margin-right: 0;
+
+                    @include below($tabletLandscapeMax) {
+                        width: rem(546);
+                    }
 
                     @include below($tabletMax) {
                         height: rem(335) !important;
@@ -469,16 +456,24 @@
 
                     @include below($mobile) {
                         width: rem(300) !important;
+                        width: rem(300) !important;
                         height: auto !important;
                         margin-right: 0 !important;
+                    }
+
+                    &__title {
+                        justify-content: flex-start;
+                        padding-left: rem(125);
                     }
 
                     &__img {
                         width: 100%;
                         margin-top: 0;
+                        margin-bottom: rem(13);
                     }
 
                     &__date {
+                        margin-left: rem(165);
                         text-align: left;
                     }
 

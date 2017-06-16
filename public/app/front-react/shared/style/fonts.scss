@@ -10,4 +10,6 @@ $font-1: 'Open Sans', Helvetica, Arial, sans-serif;
 
 @include font-face('StemText Regular', '/fonts/StemText-Regular', normal, $exts: woff woff2 ttf);
 @include font-face('StemText Bold', '/fonts/StemText-Bold', normal, $exts: woff woff2 ttf);
+@include font-face('Open Sans', '/fonts/opensans-bold', bold, $exts: woff woff2 ttf);
+@include font-face('Open Sans', '/fonts/opensans-italic', italic, $exts: woff woff2 ttf);
 @include font-face('Open Sans', '/fonts/opensans-regular', normal, $exts: woff woff2 ttf);
