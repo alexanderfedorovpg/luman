@@ -47,7 +47,6 @@
             position: relative;
 
             margin-top: rem(20);
-            margin-bottom: rem(100);
 
             transform: translateX(-17%);
 
@@ -163,6 +162,7 @@
 
             @include above($tablet) {
                 margin-left: 0;
+
                 margin-top: rem(24);
             }
 
@@ -551,8 +551,8 @@
             font-family: $stemBold;
             font-size: rem(16);
             line-height: rem(24);
+            letter-spacing: rem(1);
             color: $enter;
-            // letter-spacing: rem(-0.45);
         }
 
         &--wide {
@@ -762,6 +762,10 @@
 
                     @include below($tabletLandscapeMax) {
                         margin-left: 0;
+                    }
+
+                    @include below($tabletMax) {
+                        margin-left: rem(68);
                     }
 
                     @include below($mobile) {
