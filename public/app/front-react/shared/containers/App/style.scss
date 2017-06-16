@@ -749,7 +749,6 @@ main {
     }
 
     &__content {
-        //padding-left: rem(82);
         margin-top: rem(30);
 
         @include below($tabletMax) {
