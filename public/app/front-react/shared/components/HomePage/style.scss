@@ -192,7 +192,8 @@
         }
 
         &__wrapper {
-            @include padding_x(#{rem(14)});
+            padding-left: rem(18);
+            padding-right: rem(14);
 
             @include above($tablet) {
                 margin-top: rem(37);
