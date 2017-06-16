@@ -157,15 +157,18 @@ class Content extends PureComponent {
                         <Left>
                             <Part1
                                 onSubmit={onSubmit}
-                                initialValues={this.getInitialData()}/>
+                                initialValues={this.getInitialData()}
+                            />
                         </Left>
                         <Right>
-                            <Part2 programs={programs} />
+                            <Part2
+                                programs={programs}
+                            />
                         </Right>
                     </Wrap>
                 </header>
                 <Action>
-                    <Part3 rubrics={rubrics}/>
+                    <Part3 rubrics={rubrics} />
                 </Action>
                 <Wrap>
                     <Left>
@@ -203,8 +206,8 @@ class Content extends PureComponent {
 }
 
 Content.propTypes = {
-    article:  PropTypes.object.isRequired,
-    rubrics:  PropTypes.array.isRequired,
+    article: PropTypes.object.isRequired,
+    rubrics: PropTypes.array.isRequired,
     chatRoom: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,

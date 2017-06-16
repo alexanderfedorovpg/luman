@@ -6,7 +6,7 @@ import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
 import Socials from 'components/Socials';
-import RenderSocialWidgets from 'components/NewsDetail/Content/RenderSocialWidgets'
+import renderSocialWidgets from 'components/NewsDetail/Content/renderSocialWidgets'
 
 class Content extends PureComponent {
 
@@ -29,7 +29,7 @@ class Content extends PureComponent {
     replaceWidgets() {
         if (this._timer) clearTimeout(this._timer);
         this._timer = setTimeout(() => {
-            RenderSocialWidgets()
+            renderSocialWidgets()
         }, 1000)
     }
 

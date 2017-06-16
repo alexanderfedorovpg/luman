@@ -23,7 +23,7 @@ function Detail({ data, nowNews, relatedNews }) {
                         </Content>
                     </div>
                     <div className="general-news__right right-col">
-                        <Aside noise={null} broadcast={null} now={now} />
+                        <Aside noise={null} broadcast={null} top={null} now={now} />
                         <Group title="Главные новости" margin>
                             <Block data={nowNews[0]} />
                             {nowNews.slice(1, 5).map(v => (

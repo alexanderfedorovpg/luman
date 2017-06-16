@@ -510,7 +510,7 @@ main {
             bottom: auto;
 
             width: rem(317);
-            padding: rem(23) rem(29) rem(33) rem(24);
+            padding: rem(43) rem(29) 0 rem(24);
 
             text-align: left;
             transition: left .3s;
@@ -554,6 +554,9 @@ main {
 
             }
 
+        }
+        &__block-text_play {
+            padding: rem(43) rem(24) 0 0;
         }
         &__text {
             margin-bottom: rem(18);

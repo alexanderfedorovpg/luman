@@ -7,7 +7,7 @@ import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
 import Socials from 'components/Socials';
-import RenderSocialWidgets from './RenderSocialWidgets'
+import renderSocialWidgets from './renderSocialWidgets'
 import FormatDate from 'components/FormatDate';
 
 class Content extends PureComponent {
@@ -31,23 +31,7 @@ class Content extends PureComponent {
     replaceWidgets() {
         if (this._timer) clearTimeout(this._timer);
         this._timer = setTimeout(() => {
-            RenderSocialWidgets()
-            // let tags = document.getElementsByClassName('inner-about__content')[0].getElementsByClassName('video');
-            // for (let i = 0; i < tags.length; i++) {
-            //     let item = tags[i];
-
-            //     const btnPlay = document.createElement('img');
-            //     btnPlay.setAttribute('src', '/content/video-ico/video-ico-big.svg');
-            //     btnPlay.style.position = 'absolute';
-            //     btnPlay.style.left = 'calc(50% - 3rem)';
-            //     btnPlay.style.top = 'calc(50% - 3.75rem)';
-            //     btnPlay.style.width = '6rem';
-            //     btnPlay.style.height = '6rem';
-            //     btnPlay.style.border = '1px solid #fff';
-            //     btnPlay.classList.add('btn_play');
-
-            //     item.appendChild(btnPlay);
-            // }
+            renderSocialWidgets()
         }, 1000)
     }
 
@@ -110,8 +94,8 @@ class Content extends PureComponent {
 
     onContentClick(e) {
         const target = e.target
-
-        if (!target.classList.contains('video__preview')) return;
+console.log(target, target.parentNode); return;
+        if (!target.classList.contains('video__preview-wrapper')) return;
 
         const parent = target.parentNode;
         const src = parent.dataset.src;
@@ -124,7 +108,6 @@ class Content extends PureComponent {
         iframe.setAttribute('allowfullscreen', true);
         iframe.style.zIndex = '5';
         iframe.style.position = 'relative';
-        parent.getElementsByClassName('btn_play')[0].style.display = 'none';
         parent.replaceChild(iframe, target);
     }
 
@@ -147,9 +130,7 @@ class Content extends PureComponent {
             <div className="inner-about__video-info">
                 <div>
                     <span className="inner-about__photo">Фото: </span>
-                    {author}
-                    {author && source && ' / '}
-                    {source}
+                    <span dangerouslySetInnerHTML={{__html:replaceStrToLink(`${author} ${author && source && ' / '} ${source}`)}}/>
                 </div>
             </div>
         )
