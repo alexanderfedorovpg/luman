@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import ScissorsIcon from 'components/Icon/Scissors';
 import {FormattedRelative} from 'react-intl';
 import {replaceStrToLink} from 'shared/utils/uri';
-import RenderSocialWidgets from './RenderSocialWidgets'
+import renderSocialWidgets from './renderSocialWidgets'
 import FormatDate from 'components/FormatDate';
 
 import Socials from 'components/Socials';
@@ -14,7 +14,7 @@ class Content extends PureComponent {
     replaceWidgets() {
         if (this._timer) clearTimeout(this._timer);
         this._timer = setTimeout(() => {
-            RenderSocialWidgets()
+            renderSocialWidgets()
         }, 1000)
     }
 
@@ -36,17 +36,8 @@ class Content extends PureComponent {
                 ? data.theses
                 : `${data.theses}`.split('\\');
         }
-
-        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
-            data.body = data.body.replace('/ undefined', '');
-        }
-        if (data.body && data.body.indexOf('undefined /', '') > -1) {
-            data.body = data.body.replace('undefined /', '');
-        }
-        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
-            data.body = data.body.replace('undefined / undefined', '');
-        }
-        if(data.body) data.body = replaceStrToLink(data.body);
+        let body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
+        body = replaceStrToLink(body);
         return (
             <div>
                 <h1>{data.title}</h1>
@@ -100,7 +91,7 @@ class Content extends PureComponent {
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
-                    <div dangerouslySetInnerHTML={{__html: data.body}}/>
+                    <div dangerouslySetInnerHTML={{__html: body}}/>
                     {children}
                 </div>
             </div>
