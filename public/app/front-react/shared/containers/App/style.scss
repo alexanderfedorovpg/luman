@@ -62,6 +62,7 @@ h2 {
 a {
     outline: none;
     cursor: pointer;
+    color: inherit;
     &:hover {
         color: $blue;
     }

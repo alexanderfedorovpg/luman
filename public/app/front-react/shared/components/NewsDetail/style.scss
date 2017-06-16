@@ -184,7 +184,7 @@
             a {
                 outline: none;
                 cursor: pointer;
-                color: $enter;
+                color: inherit;
                 &:hover {
                     color: $blue!important;
                 }

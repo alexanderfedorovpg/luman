@@ -47,14 +47,15 @@ class Content extends PureComponent {
             data.body = data.body.replace('undefined / undefined', '');
         }
         if(data.body) data.body = replaceStrToLink(data.body);
-    return (
-        <div>
-            <h1>{data.title}</h1>
-            <div className="inner-about__date">
-                <FormatDate value={data.publish_date} />
-            </div>
-            <div className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors' : data.top < 6})}>
-                { data.top < 6 &&
+        return (
+            <div>
+                <h1>{data.title}</h1>
+                <div className="inner-about__date">
+                    <FormatDate value={data.publish_date}/>
+                </div>
+                <div
+                    className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors': data.top < 6})}>
+                    { data.top < 6 &&
                     (
                         <div className="scissors scissors_noize">
                             Инфошум
@@ -62,33 +63,33 @@ class Content extends PureComponent {
                             </div>
                         </div>
                     )
-                }
-                {
-                    !!theses.length &&
-                    (
-                        <div className="text-bg-gray__block-text active">
-                            {theses.map((v, i) => (
-                                <div key={i}
-                                     dangerouslySetInnerHTML={{ __html: replaceStrToLink(v) }}
-                                     className="text-bg-gray__text text-bg-gray__text-lite"
-                                />
-                            ))}
-                        </div>
-                    )
-                }
-                <div className="news-preview news-preview--wide">
-                    <Rubrics data={data.rubrics} />
-                    <figure className="news-preview__img">
-                        <Img
-                            src={image.url}
-                            title={image.object_name || ''}
-                            alt={image.object_name || ''}
-                        />
-                        {image.object_author && image.object_source
+                    }
+                    {
+                        !!theses.length &&
+                        (
+                            <div className="text-bg-gray__block-text active">
+                                {theses.map((v, i) => (
+                                    <div key={i}
+                                         dangerouslySetInnerHTML={{__html: replaceStrToLink(v)}}
+                                         className="text-bg-gray__text text-bg-gray__text-lite"
+                                    />
+                                ))}
+                            </div>
+                        )
+                    }
+                    <div className="news-preview news-preview--wide">
+                        <Rubrics data={data.rubrics}/>
+                        <figure className="news-preview__img">
+                            <Img
+                                src={image.url}
+                                title={image.object_name || ''}
+                                alt={image.object_name || ''}
+                            />
+                            {image.object_author && image.object_source
                             && (
-                                <figcaption className="news-preview__source">
-                                    Фото: {image.object_author} / {image.object_source}
-                                </figcaption>
+                                <figcaption className="news-preview__source"
+                                            dangerouslySetInnerHTML={{__html: replaceStrToLink(`Фото: ${image.object_author} / ${image.object_source}`)}}
+                                />
                             )
                             }
                         </figure>

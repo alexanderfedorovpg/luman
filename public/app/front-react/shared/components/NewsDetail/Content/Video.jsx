@@ -212,14 +212,14 @@ class Content extends PureComponent {
                                 title={image.object_name||''}
                                 alt={image.object_name||''}
                             />
-                            <figcaption className="news-preview__title">
-                                {image.object_name}
-                            </figcaption>
+                            <figcaption className="news-preview__title"
+                                        dangerouslySetInnerHTML={{__html: replaceStrToLink(image.object_name)}}
+                            />
                             {(image.object_author || image.object_source)
                                 && (
-                                    <figcaption className="news-preview__source">
-                                        Фото: {image.object_author} {image.object_author && image.object_source && ' / '} {image.object_source}
-                                    </figcaption>
+                                    <figcaption className="news-preview__source"
+                                        dangerouslySetInnerHTML={{__html: replaceStrToLink(`Фото: ${image.object_author} ${image.object_author && image.object_source && ' / '} ${image.object_source}`)}}
+                                    />
                                 )
                             }
                         </figure>
