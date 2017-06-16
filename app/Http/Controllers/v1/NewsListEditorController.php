@@ -428,7 +428,7 @@ class NewsListEditorController extends CmsController
             $news->title = $title;
             $news->sub_title = $sub_title;
             $news->note = $note ? $note : '';
-            $news->video_stream = $video_stream;
+
             $news->is_publish = 0;
             $news->publish_date = new \DateTime();
             $news->top = $top;
