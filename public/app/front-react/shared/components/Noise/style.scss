@@ -21,7 +21,7 @@
     }
 
     &__wrapper {
-        margin-top: rem(30);
+        margin-top: rem(31);
         padding-left: rem(14);
         padding-right: rem(14);
         padding-bottom: rem(14);
@@ -32,17 +32,20 @@
     }
 
     &__title {
-        position: absolute !important;
         left: rem(-3);
         top: rem(-16);
-        border-bottom: 0 !important;
         background: $white;
         display: block;
-        padding-left: rem(28);
+
 
         line-height: rem(34);
         text-decoration: none;
 
+        &.section-title {
+            position: absolute;
+            border-bottom: 0;
+            padding-left: rem(28);
+        }
     }
 
     &__mini-news {

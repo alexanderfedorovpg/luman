@@ -79,59 +79,6 @@
                 color: $blue!important;
             }
         }
-
-        & figure {
-            position: relative;
-
-            img {
-
-                width: 100%;
-                object-fit: cover;
-
-                position: relative;
-                z-index: 2;
-            }
-
-            .photo__info {
-                margin-top: 0.1875rem;
-                font-family: "StemText Regular", sans-serif;
-                font-size: rem(12);
-                color: #9fa0a2;
-                z-index: 2;
-                position: relative;
-            }
-
-            .photo__title {
-                color: #243746;
-                font-family: "StemText Regular", sans-serif;
-                position: relative;
-                z-index: 2;
-            }
-
-            &:after {
-                content: ' ';
-                display: block;
-                /* width: 10000px; */
-                /*width: 64.9375rem;*/
-                height: 100%;
-                position: absolute;
-                z-index: 0;
-                background: #eaecee;
-                top: 0px;
-                // left: -50.2%;
-                //left: calc(55% - 897px);
-                width: rem(1338);
-                transform: translateX(-47.5%);
-
-                @include below($tabletLandscapeMax) {
-                    width: rem(887);
-                }
-
-                @include below($mobile) {
-                    width: rem(534);
-                }
-            }
-        }
     }
 
     &__figure-title {

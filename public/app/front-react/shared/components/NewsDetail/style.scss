@@ -329,8 +329,40 @@
 
             }
 
-            .photo {
+            figure {
                 position: relative;
+
+                background-color: $bg-text;
+
+                &:before {
+                    content: ' ';
+
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: rem(-900);
+
+                    width: rem(900);
+
+                    background: $bg-text;
+                }
+
+                @include below($mobile) {
+                    width: 100%;
+                }
+
+
+                @include above($tablet) {
+                    width: rem(548);
+                }
+
+                @include above($tabletLandscape) {
+                    width: rem(534);
+                }
+
+                @include above($desktop) {
+                    width: rem(783);
+                }
 
                 img {
 
@@ -339,14 +371,6 @@
 
                     position: relative;
                     z-index: 2;
-
-                    @include below($tabletLandscapeMax) {
-                        width: calc(100% + #{rem(13)});
-                    }
-
-                    @include below($tabletMax) {
-                        width: 100%;
-                    }
                 }
 
                 &__info {
@@ -372,34 +396,6 @@
                     position: relative;
                     z-index: 1;
                     font-family: $stemReg;
-                }
-
-                &:after {
-                    content: ' ';
-                    display: block;
-                    width: rem(1338);
-                    height: 100%;
-                    position: absolute;
-                    z-index: 0;
-                    background: #eaecee;
-                    top: 0;
-
-                    transform: translateX(-47.5%);
-
-                    @include below($tabletLandscapeMax) {
-                        width: rem(1021);
-                        transform: translateX(-54.5%);
-                    }
-
-                    @include below($tabletMax) {
-                        width: rem(1046);
-                        transform: translateX(-47.5%);
-                    }
-
-                    @include below($mobile) {
-                        width: rem(571);
-                        transform: translateX(-47.5%);
-                    }
                 }
             }
         }
