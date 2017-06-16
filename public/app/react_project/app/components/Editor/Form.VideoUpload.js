@@ -57,6 +57,11 @@ class VideoUpload extends PureComponent {
             videoPreview.source.input.onChange(values.source);
         }
 
+        if (values.url) {
+            video.id.input.onChange(null);
+            video.file.input.onChange(values.url);
+        }
+
         this.closeModal();
     }
 
@@ -67,6 +72,7 @@ class VideoUpload extends PureComponent {
             preview: videoPreview.file.input.value,
             author: videoPreview.author.input.value,
             source: videoPreview.source.input.value,
+            url: video.file.input.value
         };
 
         return (
