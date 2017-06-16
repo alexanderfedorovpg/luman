@@ -23,7 +23,7 @@ class HomepageRecord extends Model
 
 
     protected $events = [
-        'saved' => CacheClearObserver::class,       
+        'created' => CacheClearObserver::class,
     ];
 
     /**
