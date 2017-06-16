@@ -2,7 +2,8 @@ import React, {PureComponent} from 'react';
 import classNames from 'classnames'
 import ScissorsIcon from 'components/Icon/Scissors';
 import {FormattedRelative} from 'react-intl';
-import RenderSocialWidgets from './RenderSocialWidgets'
+import {replaceStrToLink} from 'shared/utils/uri';
+import renderSocialWidgets from './renderSocialWidgets'
 import FormatDate from 'components/FormatDate';
 
 import Socials from 'components/Socials';
@@ -13,7 +14,7 @@ class Content extends PureComponent {
     replaceWidgets() {
         if (this._timer) clearTimeout(this._timer);
         this._timer = setTimeout(() => {
-            RenderSocialWidgets()
+            renderSocialWidgets()
         }, 1000)
     }
 
@@ -35,25 +36,17 @@ class Content extends PureComponent {
                 ? data.theses
                 : `${data.theses}`.split('\\');
         }
-
-        if (data.body && data.body.indexOf('/ undefined', '') > -1) {
-            data.body = data.body.replace('/ undefined', '');
-        }
-        if (data.body && data.body.indexOf('undefined /', '') > -1) {
-            data.body = data.body.replace('undefined /', '');
-        }
-        if (data.body && data.body.indexOf('undefined / undefined', '') > -1) {
-            data.body = data.body.replace('undefined / undefined', '');
-        }
-
-    return (
-        <div>
-            <h1>{data.title}</h1>
-            <div className="inner-about__date">
-                <FormatDate value={data.publish_date} />
-            </div>
-            <div className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors' : data.top < 6})}>
-                { data.top < 6 &&
+        let body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
+        body = replaceStrToLink(body);
+        return (
+            <div>
+                <h1>{data.title}</h1>
+                <div className="inner-about__date">
+                    <FormatDate value={data.publish_date}/>
+                </div>
+                <div
+                    className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors': data.top < 6})}>
+                    { data.top < 6 &&
                     (
                         <div className="scissors scissors_noize">
                             Инфошум
@@ -61,43 +54,44 @@ class Content extends PureComponent {
                             </div>
                         </div>
                     )
-                }
-                {
-                    !!theses.length &&
-                    (
-                        <div className="text-bg-gray__block-text active">
-                            {theses.map((v, i) => (
-                                <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
-                                    {v}
-                                </div>
-                            ))}
-                        </div>
-                    )
-                }
-                <div className="news-preview news-preview--wide">
-                    <Rubrics data={data.rubrics} />
-                    <figure className="news-preview__img">
-                        <Img
-                            src={image.url}
-                            title={image.object_name || ''}
-                            alt={image.object_name || ''}
-                        />
-                        {image.object_author && image.object_source
+                    }
+                    {
+                        !!theses.length &&
+                        (
+                            <div className="text-bg-gray__block-text active">
+                                {theses.map((v, i) => (
+                                    <div key={i}
+                                         dangerouslySetInnerHTML={{__html: replaceStrToLink(v)}}
+                                         className="text-bg-gray__text text-bg-gray__text-lite"
+                                    />
+                                ))}
+                            </div>
+                        )
+                    }
+                    <div className="news-preview news-preview--wide">
+                        <Rubrics data={data.rubrics}/>
+                        <figure className="news-preview__img">
+                            <Img
+                                src={image.url}
+                                title={image.object_name || ''}
+                                alt={image.object_name || ''}
+                            />
+                            {image.object_author && image.object_source
                             && (
-                                <figcaption className="news-preview__source">
-                                    Фото: {image.object_author} / {image.object_source}
-                                </figcaption>
+                                <figcaption className="news-preview__source"
+                                            dangerouslySetInnerHTML={{__html: replaceStrToLink(`Фото: ${image.object_author} / ${image.object_source}`)}}
+                                />
                             )
                             }
                         </figure>
-                        <p className="news-preview__text">
-                            {data.sub_title}
-                        </p>
+                        <p className="news-preview__text"
+                           dangerouslySetInnerHTML={{__html: replaceStrToLink(data.sub_title)}}
+                        />
                     </div>
                     <Socials shareLink={data.uri} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
-                    <div dangerouslySetInnerHTML={{__html: data.body}}/>
+                    <div dangerouslySetInnerHTML={{__html: body}}/>
                     {children}
                 </div>
             </div>

@@ -24,7 +24,7 @@ function Detail({ data, noise, now, related, broadcast, hasVideo }) {
                         </Content>
                     </div>
                     <div className="right-col">
-                        <Aside noise={null} broadcast={null} now={now} />
+                        <Aside noise={null} broadcast={null} top={null} now={now} />
                         <Group title="Главные новости" margin>
                             <Block data={now[0]} />
                             {now.slice(1, 5).map(v => (

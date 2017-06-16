@@ -13,3 +13,16 @@ export const newsLink = article => (
             : `/noise/${article.code}`
         : ''
 )
+
+/**
+ * заменяет конструкцию вида >>текст>>ссылка>> на ссылку
+ * @param text
+ * @returns {*}
+ */
+export const replaceStrToLink = (text) => {
+    if (text)
+        return text.replace(/&gt;&gt;(.+?)&gt;&gt;(.+?)&gt;&gt;/g, '<a href="$2" target="_blank">$1</a>', 'g')
+            .replace(/>>(.+?)>>(.+?)>>/g, '<a href="$2">$1</a>', 'g')
+    else
+        return text
+}

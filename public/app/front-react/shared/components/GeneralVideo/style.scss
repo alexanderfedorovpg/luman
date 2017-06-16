@@ -3,8 +3,21 @@
 
 .general-video {
     position: relative;
-    overflow: hidden;
+    /*    overflow: hidden;*/
     transition: height .3s;
+
+    &__close {
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: -17px;
+        z-index: 11;
+
+            img {
+            cursor: pointer;
+            width: 100%;
+        }
+    }
 
     &::before {
         content: '';
@@ -46,6 +59,16 @@
 
     &_collapsed {
         height: rem(396);
+
+        @include below($tabletMax) {
+            height: rem(335);
+        }
+
+        @include below($mobile) {
+            margin-right: 0;
+            width: rem(300);
+            height: auto;
+        }
     }
 
     iframe {

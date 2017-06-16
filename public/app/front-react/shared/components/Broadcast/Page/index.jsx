@@ -88,7 +88,7 @@ class Broadcast extends Component {
                         </div>
                         <div className="right-col">
                             <MediaQuery minWidth="930px">
-                                <Aside noise={null} broadcast={null} now={now} />
+                                <Aside noise={null} broadcast={null} top={null} now={now} />
                                 <Group title="Главные новости" margin>
                                     {nowNews.map(v => (
                                         <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
@@ -96,7 +96,7 @@ class Broadcast extends Component {
                                 </Group>
                             </MediaQuery>
                             <MediaQuery minWidth="930px" maxWidth="1249px">
-                                <div className="news-one-line__row">
+                                <div className="news-one-line__row  news-one-line__row_banners">
                                     <Banner className="news-top__banner" />
                                     <Subscribe className="news-top__subscribe" />
                                 </div>
@@ -116,7 +116,7 @@ class Broadcast extends Component {
                             </div>
                         </div>
                         <MediaQuery minWidth="1250px">
-                            <div className="news-one-line__row">
+                            <div className="news-one-line__row news-one-line__row_banners">
                                 <Banner className="news-top__banner" />
                                 <Subscribe className="news-top__subscribe" />
                             </div>

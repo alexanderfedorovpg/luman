@@ -78,7 +78,7 @@
             }
 
             @include above($tabletLandscape) {
-                width: rem(613);
+                width: rem(615);
             }
 
             @include above($desktop) {
@@ -285,24 +285,25 @@
     .news-one-line {
 
         &__row {
-            @include margin_y(#{rem(-7)});
+            @include margin_y(#{rem(-7.5)});
+            @include margin_x(#{rem(-7.5)});
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
 
             @include above($tablet) {
                 @include margin_y(#{rem(-11)});
             }
 
             @include above($tabletLandscape) {
-                @include margin_y(#{rem(-7)});
+                @include margin_y(#{rem(-7.5)});
             }
         }
 
         &__block-rectangle {
-            @include margin_y(#{rem(7)});
-            width: rem(617);
+            @include margin_y(#{rem(7.5)});
+            @include margin_x(#{rem(7.5)});
+            width: rem(615);
             height: rem(250);
 
             @include below($mobile) {
@@ -314,8 +315,8 @@
             }
 
             @include above($tabletLandscape) {
-                @include margin_y(#{rem(7)});
-                width: rem(613);
+                @include margin_y(#{rem(7.5)});
+                width: rem(615);
             }
 
             .block-rectangle__link,
@@ -329,7 +330,8 @@
         }
 
         &__block-square {
-            @include margin_y(#{rem(7)});
+            @include margin_y(#{rem(7.5)});
+            @include margin_x(#{rem(7.5)});
             width: rem(300);
 
             @include above($tablet) {
@@ -337,7 +339,7 @@
             }
 
             @include above($tabletLandscape) {
-                @include margin_y(#{rem(7)});
+                @include margin_y(#{rem(7.5)});
             }
 
             &::before,
@@ -377,7 +379,7 @@
         &__wrapper {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            @include margin_x(#{rem(-9)});
         }
 
         &__wrapper_margin {

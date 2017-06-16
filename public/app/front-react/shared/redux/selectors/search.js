@@ -24,7 +24,7 @@ export const makeGetSearchResults = () => createSelector(
 
         return {
             id: parseInt(item.id, 10),
-            date: parseInt(item.publish_date, 10),
+            date: item.publish_date,
             title: item.title,
             text: item.note,
             img: item.preview,

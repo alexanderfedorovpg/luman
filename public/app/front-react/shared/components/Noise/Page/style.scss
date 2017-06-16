@@ -55,18 +55,25 @@
     }
 
     .block-square {
+        width: rem(300);
         height: rem(250);
     }
 
     &__list {
         padding-top: rem(30);
-        padding-right: rem(10);
         margin-bottom: rem(30);
 
         position: relative;
 
-        border-top: 2px dashed $gray-dirty;
-        border-right: 2px dashed $gray-dirty;
+        border-color: transparent;
+        border-style: solid;
+        border-top-width: 2px;
+        border-right-width: 0;
+        border-left-width: 0;
+        border-bottom-width: 0;
+        border-image: url(../border.png);
+        border-image-slice: 2;
+        border-image-repeat: repeat;
 
         .icon_scissors {
             position: absolute;
@@ -92,7 +99,7 @@
         height: rem(1105);}
 
     &__item {
-        margin-bottom: rem(11.5);
+        margin-bottom: rem(16);
     }
 
     &__gutter-sizer {
