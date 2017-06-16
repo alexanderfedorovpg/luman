@@ -36,6 +36,7 @@ class News extends Model
         'moderation',
         'theses',
         'program_id',
+        'ext_video_link'
 
     ];
 
