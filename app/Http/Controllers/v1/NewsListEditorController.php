@@ -182,7 +182,7 @@ class NewsListEditorController extends CmsController
 
             $video_stream_rule = 'exists:cdn_files,id';
 
-            if (isset($video_stream) && !is_integer($video_stream)) {
+            if (isset($video_stream) && !is_numeric($video_stream)) {
                 $video_stream_rule = 'url';
             }
 
@@ -243,7 +243,7 @@ class NewsListEditorController extends CmsController
                 $newsEdit->title = $title;
                 $newsEdit->sub_title = $sub_title;
                 $newsEdit->note = $note;
-                $newsEdit->video_stream = $video_stream;
+
                 $newsEdit->is_publish = 0;
                 $newsEdit->publish_date = null;
                 $newsEdit->top = $top;
@@ -272,10 +272,12 @@ class NewsListEditorController extends CmsController
                 if (isset($sub_title) ) {
                     $newsEdit->sub_title = $sub_title;
                 }
-                if (isset($video_stream) &&  is_integer($video_stream)) {
+                if (isset($video_stream) &&  is_numeric($video_stream)) {
+
                     $newsEdit->video_stream = $video_stream;
                 }
                 else{
+
                     $newsEdit->ext_video_link=$video_stream;
                 }
                 if (isset($image_main)) {
@@ -375,7 +377,7 @@ class NewsListEditorController extends CmsController
 
             $video_stream_rule = 'exists:cdn_files,id';
 
-            if (isset($video_stream) && !is_integer($video_stream)) {
+            if (isset($video_stream) && !is_numeric($video_stream)) {
                 $video_stream_rule = 'url';
             }
 
@@ -404,7 +406,7 @@ class NewsListEditorController extends CmsController
             $sub_title = $request->input('sub_title');
             $top = $request->input('top');
             $note = $request->input('note');
-            $video_stream = $request->input('video_stream');
+
 
             $body = $request->input('body');
 
@@ -458,7 +460,7 @@ class NewsListEditorController extends CmsController
             if (isset($sub_title)) {
                 $news->sub_title = $sub_title;
             }
-            if (isset($video_stream) &&  is_integer($video_stream)) {
+            if (isset($video_stream) &&  is_numeric($video_stream)) {
                 $news->video_stream = $video_stream;
             }
             else{
