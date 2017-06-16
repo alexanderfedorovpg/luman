@@ -184,7 +184,7 @@
             a {
                 outline: none;
                 cursor: pointer;
-                color: inherit;
+
                 &:hover {
                     color: $blue!important;
                 }
@@ -193,6 +193,38 @@
             .video {
                 position: relative;
                 width: rem(300);
+
+                background: $bg-text;
+
+                &:before {
+                    content: ' ';
+
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: rem(-900);
+
+                    width: rem(900);
+
+                    background: $bg-text;
+                }
+
+                @include below($mobile) {
+                    width: 100%;
+                }
+
+
+                @include above($tablet) {
+                    width: rem(548);
+                }
+
+                @include above($tabletLandscape) {
+                    width: rem(534);
+                }
+
+                @include above($desktop) {
+                    width: rem(783);
+                }
 
                 &__preview {
                     max-width: 100%;
@@ -268,33 +300,9 @@
                     z-index: 1;
                 }
 
-                &:after {
-                    content: ' ';
-                    display: block;
-                    width: rem(1338);
-                    height: 100%;
-                    position: absolute;
-                    z-index: 0;
-                    background: #eaecee;
-                    top: 0;
-                    right: 0;
-
-                    @include below($tabletLandscapeMax) {
-                        width: rem(1021);
-                    }
-
-                    @include below($tabletMax) {
-                        width: rem(1046);
-                    }
-
-                    @include below($mobile) {
-                        width: rem(571);
-                    }
-                }
-
             }
 
-            figure {
+            .photo {
                 position: relative;
 
                 background-color: $bg-text;
@@ -643,6 +651,7 @@
         &__source {
             font-family: $stemReg;
             font-size: rem(11);
+            line-height: rem(42);
             color: $gray-date;
         }
         &__text {
@@ -797,30 +806,28 @@
         }
 
         &_noize {
+            right: rem(-40);
+            top: rem(10);
+            width: rem(98);
+            height: rem(40);
+            padding: rem(6);
 
             &:after {
-
-                @include below($tabletMax) {
-                    left: rem(-25);
-                    width: calc(100% + #{rem(25)});
-                }
+                left: rem(-25);
+                width: calc(100% + #{rem(25)});
+                height: rem(20);
+                background-image: linear-gradient(-12deg, transparent 0.8625rem, #a13461 #{rem(15)});
             }
 
-            @include below($tabletMax) {
+            @include below($mobile) {
                 right: rem(-13);
                 top: rem(12);
-                width: rem(98);
-                height: rem(40);
-                padding: rem(6);
             }
 
             .scissors__icon {
                 position: relative;
                 z-index: 1;
-
-                @include below($tabletMax) {
-                    left: rem(-21);
-                }
+                left: rem(-21);
             }
         }
 
@@ -833,16 +840,24 @@
             &.news-preview  {
 
                 .news-preview__img {
-                    height: rem(335);
-
-                    @include below($mobile) {
-                        height: auto;
-                    }
+                    margin-bottom: 0;
 
                     img {
-                        height: inherit;
-                        object-fit: cover;
+                        min-height: rem(335);
+
+                        @include below($mobile) {
+                            height: auto;
+                        }
+
+                        img {
+                            height: inherit;
+                            object-fit: cover;
+                        }
                     }
+                }
+
+                .news-preview__text {
+                    margin-top: rem(14);
                 }
             }
         }
