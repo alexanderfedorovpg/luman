@@ -152,6 +152,7 @@
         &__content {
             margin-top: rem(30);
             margin-left: rem(84);
+            z-index: 2;
             color: $enter;
 
             @include below($mobile) {
@@ -194,6 +195,25 @@
                 position: relative;
                 width: rem(300);
 
+                &_playing {
+
+                    .video__preview,
+                    .video__logo,
+                    .video__play {
+                        display: none;
+                    }
+                    .video__overlay,
+                    .video__element {
+                        display: block;
+                    }
+                    .video__preview-wrapper {
+
+                        &:before,
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
                 &__preview {
                     max-width: 100%;
                     height: 100%;
@@ -202,7 +222,7 @@
                     display: block;
                 }
                 &__preview-wrapper {
-                    max-height: rem(593);
+                    height: rem(593);
                     width: 100%;
                     position: relative;
                     z-index: 1;
@@ -219,6 +239,21 @@
                     &:before {
                         background: rgba(0, 0, 0, .32);
                     }
+                }
+                &__element {
+                    display: none;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                }
+                &__overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: rgba(0, 0, 0, .32);
                 }
                 &__play {
                     background-image: url(/content/video-ico/video-ico-big.svg);

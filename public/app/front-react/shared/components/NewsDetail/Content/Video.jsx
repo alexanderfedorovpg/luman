@@ -94,21 +94,34 @@ class Content extends PureComponent {
 
     onContentClick(e) {
         const target = e.target
-console.log(target, target.parentNode); return;
+        const parent = target.parentNode;
+
+        if (target.classList.contains('video__overlay')) {
+            parent.parentNode.classList.remove('video_playing');
+            parent.querySelector('.video__element').pause();
+            return;
+        }
+
         if (!target.classList.contains('video__preview-wrapper')) return;
 
-        const parent = target.parentNode;
         const src = parent.dataset.src;
 
         if (!src) return;
 
-        const iframe = document.createElement('iframe');
-        iframe.setAttribute('src', src);
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allowfullscreen', true);
-        iframe.style.zIndex = '5';
-        iframe.style.position = 'relative';
-        parent.replaceChild(iframe, target);
+        if (!target.querySelector('.video__element')) {
+            const video = document.createElement('video');
+            video.setAttribute('src', src);
+            video.setAttribute('allowfullscreen', true);
+            video.setAttribute('autoplay', true);
+            video.setAttribute('controls', 'controls');
+            video.classList.add('video__element');
+            target.appendChild(video);
+            const overlay = document.createElement('div');
+            overlay.classList.add('video__overlay');
+            target.insertBefore(overlay, video);
+        }
+
+        parent.classList.add('video_playing');
     }
 
     renderInfo() {
