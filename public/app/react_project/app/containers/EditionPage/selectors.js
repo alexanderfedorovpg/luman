@@ -44,12 +44,18 @@ const makeGetUsers = () => createSelector(
         const users = usersImmutable.toJS();
         const groups = groupsImmutable.toJS();
 
-        function makeGroupName(group) {
-            if (!group) {
+        function makeGroupName(groupId) {
+            if (!groupId) {
                 return '';
             }
 
-            return groups.byId[group].name;
+            const group = groups.byId[groupId];
+
+            if (!group || !group.name) {
+                return '';
+            }
+
+            return groups.byId[groupId].name;
         }
 
         return Object.values(users).reduce((result, user) => {
