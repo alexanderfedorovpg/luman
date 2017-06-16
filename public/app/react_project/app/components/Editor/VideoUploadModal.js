@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { reduxForm, Field } from 'redux-form/immutable';
 import ContentModal from 'components/Modal/ContentModal';
 import TypedBtn from 'components/Button/TypedBtn';
-import { Group } from 'components/Form';
+import { Group, Label } from 'components/Form';
 import {
     FileInputRedux,
     ImageLoaderRedux,
@@ -35,7 +35,14 @@ const GroupWide = styled(Group)`
     }
 `;
 
-const UploadFormModal = ({ isOpen, close, programs, valid, dirty, handleSubmit }) => (
+const UploadFormModal = ({
+    isOpen,
+    close,
+    programs,
+    valid,
+    dirty,
+    handleSubmit
+}) => (
     <ContentModal
         title="Загрузка видео для новости"
         contentLabel="Добавить видео к новости"
@@ -51,6 +58,14 @@ const UploadFormModal = ({ isOpen, close, programs, valid, dirty, handleSubmit }
                     icon="arrow"
                     placeholder="Выберите видео"
                     component={FileInputRedux}
+                />
+                <Label>или</Label>
+                <Field
+                    block
+                    type="url"
+                    name="url"
+                    placeholder="Вставьте ссылку на видео"
+                    component={InputRedux}
                 />
             </Group>
             <Group md>
@@ -113,8 +128,8 @@ UploadFormModal.propTypes = {
 const validate = (values) => {
     const errors = {};
 
-    if (!values.get('video')) {
-        errors.video = 'Выберите видео';
+    if (!values.get('video') && !values.get('url')) {
+        errors.video = 'Выберите видео или вставьте ссылку на видео';
     }
 
     return errors;

@@ -40,6 +40,7 @@ function Part2Component({ programs }) {
             names={[
                 'video.id',
                 'video.file',
+                'video.url',
                 'video.program_id',
                 'videoPreview.id',
                 'videoPreview.file',

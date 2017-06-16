@@ -71,7 +71,7 @@ class VideoUpload extends PureComponent {
 
         return (
             <div>
-                {video && video.file && video.file.input.value
+                {video && ((video.url && video.url.input.value) || (video.file && video.file.input.value))
                     ? (
                         <VideoStatus
                             onClick={this.openModal}
