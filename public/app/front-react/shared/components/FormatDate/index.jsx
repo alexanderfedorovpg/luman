@@ -14,12 +14,7 @@ function FormatDate({ value }) {
     } else if (typeof value === 'string') {
         // for stupid Safari
         const fixedVal = value.replace(/-/g, '/');
-
-        if (!Date.parse(fixedVal)) {
-            return null;
-        }
-
-        date = new Date(fixedVal);
+        date = Date.parse(fixedVal) && new Date(fixedVal);
     } else {
         return null;
     }
@@ -28,18 +23,16 @@ function FormatDate({ value }) {
         return null;
     }
 
-    function getDate() {
-        return now.getTime() - date.getTime() >= twoDays
-            ?
-                <span className="format-date">
-                    <FormattedDate value={date} year="numeric" month="2-digit" day="2-digit" />
-                    <FormattedTime value={date} hour="numeric" minute="numeric" />
-                </span>
-            :
-                <FormattedRelative value={date} />;
-    }
-
-    return getDate();
+    return now.getTime() - date.getTime() >= twoDays
+        ? (
+            <span className="format-date">
+                <FormattedDate value={date} year="numeric" month="2-digit" day="2-digit" />
+                <FormattedTime value={date} hour="numeric" minute="numeric" />
+            </span>
+        )
+        : (
+            <FormattedRelative value={date} />
+        );
 }
 
 export default FormatDate;
