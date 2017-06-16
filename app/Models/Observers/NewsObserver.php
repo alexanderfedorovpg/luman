@@ -2,10 +2,7 @@
 
 namespace App\Models\Observers;
 
-use App\Models\HomepageInfoNoise;
-use App\Models\HomepageNews;
-use App\Models\HomepageRecord;
-use App\Models\HomepageWar;
+
 use App\Models\News;
 use Illuminate\Support\Facades\Cache;
 
