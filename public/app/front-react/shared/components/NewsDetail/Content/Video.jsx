@@ -130,9 +130,7 @@ console.log(target, target.parentNode); return;
             <div className="inner-about__video-info">
                 <div>
                     <span className="inner-about__photo">Фото: </span>
-                    {author}
-                    {author && source && ' / '}
-                    {source}
+                    <span dangerouslySetInnerHTML={{__html:replaceStrToLink(`${author} ${author && source && ' / '} ${source}`)}}/>
                 </div>
             </div>
         )

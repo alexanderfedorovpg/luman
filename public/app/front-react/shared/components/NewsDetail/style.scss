@@ -84,7 +84,7 @@
                 .general-video {
 
                     margin-top: 0;
-
+                    z-index: 8;
                     @include below($mobile) {
                         margin-right: 0;
                     }
@@ -709,14 +709,16 @@
     }
 
     .inner-about-video_overlay {
-        position: absolute;
-        left: calc(100% - #{rem(1085)});
-        top: rem(-57);
+        position: fixed;
+        left: 0;
+        top: 0;
         background-color: rgba(36, 55, 70, 0.6);
         z-index: 4;
 
         display: none;
-
+        &.is-active {
+            display: block;
+        }
         @include below($tablet) {
             left: rem(-57);
             top: rem(-73);
