@@ -88,7 +88,7 @@ class Broadcast extends Component {
                         </div>
                         <div className="right-col">
                             <MediaQuery minWidth="930px">
-                                <Aside noise={null} broadcast={null} now={now} />
+                                <Aside noise={null} broadcast={null} top={null} now={now} />
                                 <Group title="Главные новости" margin>
                                     {nowNews.map(v => (
                                         <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
