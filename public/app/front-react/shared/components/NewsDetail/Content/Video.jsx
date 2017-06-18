@@ -129,13 +129,8 @@ class Content extends PureComponent {
 
         if (!video_stream) return null;
 
-        const author = video_stream.preview_author === 'undefined'
-            ? ''
-            : video_stream.preview_author;
-
-        const source = video_stream.preview_source === 'undefined'
-            ? ''
-            : video_stream.preview_source;
+        const author = video_stream.preview_author || '';
+        const source = video_stream.preview_source || '';
 
         if (!author && !source) return null;
 
@@ -143,7 +138,7 @@ class Content extends PureComponent {
             <div className="inner-about__video-info">
                 <div>
                     <span className="inner-about__photo">Фото: </span>
-                    <span dangerouslySetInnerHTML={{__html:replaceStrToLink(`${author || ''} ${author && source && ' / '} ${source || ''}`)}}/>
+                    <span dangerouslySetInnerHTML={{__html:replaceStrToLink(`${author} ${author && source && ' / '} ${source}`)}}/>
                 </div>
             </div>
         )
