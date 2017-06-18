@@ -95,6 +95,8 @@ class News extends Component {
                                     <Block data={now[2]} className="news-one-line__block-square" />
                                     <Block data={now[3]} className="news-one-line__block-square" />
                                     <Block data={now[4]} className="news-one-line__block-square" />
+                                    <Block data={now[5]} className="news-one-line__block-square" />
+                                    <Block data={now[6]} className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
                             <MediaQuery minWidth="1250px">
