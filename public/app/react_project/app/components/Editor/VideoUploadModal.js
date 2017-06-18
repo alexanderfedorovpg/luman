@@ -72,7 +72,7 @@ const UploadFormModal = ({
                 <Field
                     placeholder="Программа"
                     searchable={false}
-                    clearable={true}
+                    clearable={false}
                     name="program_id"
                     options={programs}
                     component={SelectRedux}

@@ -65,9 +65,9 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
                                 <div className="general-video__date general-video__date general-video__date_position">
                                     {data.url ?
 
-                                        <img onClick={onPlay} className="general-video__ico general-video__ico_small" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
+                                        <img onClick={onPlay} className="general-video__ico general-video__ico_small" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
                                         :
-                                        <img className="general-video__ico general-video__ico_small" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
+                                        <img className="general-video__ico general-video__ico_small" src="/content/video-icovideo-ico-big.svg" alt="" role="presentation" />
                                     }
                                     <span className="general-video__span">{playText}</span>
                                 </div>
