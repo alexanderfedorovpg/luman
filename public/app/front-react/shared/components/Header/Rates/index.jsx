@@ -8,15 +8,15 @@ function Rates() {
         <ul className="rates">
             <li className="rates__item">
                 <span className="rates__name">Доллар</span>
-                <span className="rates__value">57,01</span>
+                <span className="rates__value">57,89</span>
             </li>
             <li className="rates__item">
                 <span className="rates__name">Евро</span>
-                <span className="rates__value">62,12</span>
+                <span className="rates__value">64,52</span>
             </li>
             <li className="rates__item">
                 <span className="rates__name">Шекель</span>
-                <span className="rates__value">45,90</span>
+                <span className="rates__value">16,36</span>
             </li>
             <li className="rates__item">
                 <span className="rates__name">Нефть</span>
