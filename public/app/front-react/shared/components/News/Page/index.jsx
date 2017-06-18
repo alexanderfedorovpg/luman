@@ -106,9 +106,9 @@ class News extends Component {
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
                             <div className="per-day news-top__per-day">
-                                <p className="per-day__title section-title">
+                                /*<p className="per-day__title section-title">
                                     Главное за последние сутки
-                                </p>
+                                </p>*/
                                 <div className="per-day__wrapper">
                                     <Block data={today[0]} className="news-one-line__block-square" />
                                     <Block data={today[1]} className="news-one-line__block-square" />
