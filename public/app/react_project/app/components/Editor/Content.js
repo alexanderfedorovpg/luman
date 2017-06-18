@@ -53,6 +53,7 @@ class Content extends PureComponent {
                 author: video.preview_author,
                 source: video.preview_source,
             },
+            program_id: props.article.program_id || null,
             body:         props.article.body || '',
             title:        props.article.title || '',
             subtitle:     props.article.sub_title || '',
