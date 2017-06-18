@@ -29,7 +29,7 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
 
         case 'duration':
         default:
-            playText = data.duration ? String(data.duration).replace('.', ':') : 'Смотреть';
+            playText = data.duration ? String(data.duration).replace('.', ':') : '';
     }
 
     return (
