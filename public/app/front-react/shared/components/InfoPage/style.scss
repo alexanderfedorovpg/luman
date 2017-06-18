@@ -179,7 +179,8 @@
     }
 
     &__item:not(:first-of-type) {
-        padding-top: rem(65)
+        //padding-top: rem(65)
+        padding-top: rem(0)
     }
 
     &__list {
