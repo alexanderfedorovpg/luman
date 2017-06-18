@@ -65,7 +65,7 @@ function Aside({ noise, broadcast, top, className, now, inside, noisePage }) {
                             ? <FromEnter data={broadcastVideos} />
                             : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
                         }
-                        <Subscribe className="news-top__subscribe" />
+                        {/* <Subscribe className="news-top__subscribe" /> */}
                     </div>
                 )
                 :

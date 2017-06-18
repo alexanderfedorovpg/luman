@@ -39,6 +39,7 @@ class VideoUpload extends PureComponent {
         const {
             video,
             videoPreview,
+            program_id,
         } = this.props;
 
         // Если загрузили новое видео, то обнуляем превью
@@ -59,7 +60,12 @@ class VideoUpload extends PureComponent {
 
         if (values.url) {
             video.id.input.onChange(null);
-            video.file.input.onChange(values.url);
+            video.file.input.onChange(null);
+            video.url.input.onChange(values.url);
+        }
+
+        if (values.program_id) {
+            program_id.input.onChange(values.program_id);
         }
 
         this.closeModal();

@@ -128,6 +128,10 @@ UploadFormModal.propTypes = {
 const validate = (values) => {
     const errors = {};
 
+    if (!values.get('program_id')) {
+        errors.program_id = 'Выберите программу';
+    }
+
     if (!values.get('video') && !values.get('url')) {
         errors.video = 'Выберите видео или вставьте ссылку на видео';
     }
