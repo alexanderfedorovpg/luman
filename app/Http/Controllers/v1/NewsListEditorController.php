@@ -296,7 +296,7 @@ class NewsListEditorController extends CmsController
                     $newsEdit->is_war_mode = $is_war_mode;
                 }
                 if ($program_id) {
-                    dd($program_id);
+
                     $newsEdit->program_id = $program_id;
                 }
 
