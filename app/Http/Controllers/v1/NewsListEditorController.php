@@ -266,10 +266,10 @@ class NewsListEditorController extends CmsController
                 if ($request->get('rubrics')) {
                     $rubrics = $request->get('rubrics');
                 }
-                if (isset($theses)) {
+                if ($theses) {
                     $newsEdit->theses = $theses;
                 }
-                if (isset($sub_title) ) {
+                if ($sub_title ) {
                     $newsEdit->sub_title = $sub_title;
                 }
                 if (isset($video_stream) &&  is_numeric($video_stream)) {
@@ -280,22 +280,23 @@ class NewsListEditorController extends CmsController
 
                     $newsEdit->ext_video_link=$video_stream;
                 }
-                if (isset($image_main)) {
+                if ($image_main) {
                     $newsEdit->image_main = $image_main;
                 }
-                if (isset($image_preview)) {
+                if ($image_preview) {
                     $newsEdit->image_preview = $image_preview;
                 }
-                if (isset($video_stream_preview)) {
+                if ($video_stream_preview) {
                     $newsEdit->video_stream_preview = $video_stream_preview;
                 }
-                if (isset($is_online)) {
+                if ($is_online) {
                     $newsEdit->is_online = $is_online;
                 }
-                if (isset($is_war_mode)) {
+                if ($is_war_mode) {
                     $newsEdit->is_war_mode = $is_war_mode;
                 }
-                if (isset($program_id)) {
+                if ($program_id) {
+
                     $newsEdit->program_id = $program_id;
                 }
 
