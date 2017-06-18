@@ -80,7 +80,7 @@ function HomePage({
                             )}
                         </MediaQuery>
                         <MediaQuery minWidth="615px" maxWidth="929px">
-                            <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
+                            <EnterOne className="general-news__enter-one" data={videoNews} />
                         </MediaQuery>
                     </div>
                 </div>
@@ -104,7 +104,7 @@ function HomePage({
                         {low => (
                             <MediaQuery maxWidth="614px">
                                 {high => (low || high) &&
-                                    <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
+                                    <EnterOne className="general-news__enter-one" data={videoNews} />
                                 }
                             </MediaQuery>
                         )}

@@ -12,7 +12,7 @@ import Content from 'components/Aside'
 class Aside extends PureComponent {
 
     render() {
-        const { noise, broadcast, top, now, inside, noisePage } = this.props
+        const { noise, broadcast, top, now, inside, noisePage, ...rest } = this.props
 
         return (
             <Content
@@ -22,6 +22,7 @@ class Aside extends PureComponent {
                 now={now ? now : null}
                 inside={inside ? inside : false}
                 noisePage={noisePage ? noisePage : false}
+                {...rest}
             />
         )
     }

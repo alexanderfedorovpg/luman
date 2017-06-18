@@ -9,8 +9,12 @@ import { Link } from 'react-router-dom'
 import './style.scss'
 
 function EnterOne({ data, className }) {
-    const first = data[0]
-    const rest = data.slice(0, 3)
+    if (!data || !data.length) {
+        return null;
+    }
+
+    const first = data[0];
+    const rest = data.slice(1, 3);
 
     return (
         <div className={classNames('enter-one enter-one__no-border', className)}>
@@ -18,7 +22,10 @@ function EnterOne({ data, className }) {
                 Из эфира
             </Link>
             <FromEnter data={first} />
-            <List data={rest} />
+            {
+                !!rest.length &&
+                <List data={rest} />
+            }
         </div>
     )
 }
