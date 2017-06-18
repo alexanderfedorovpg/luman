@@ -62,7 +62,9 @@ h2 {
 a {
     outline: none;
     cursor: pointer;
-    color: inherit;
+    color: $blue;
+    text-decoration: none;
+
     &:hover {
         color: $blue;
     }
@@ -106,15 +108,15 @@ main {
     }
 
     @include above($tablet) {
-        width: rem(615);
+        width: rem(617);
     }
 
     @include above($tabletLandscape) {
-        width: rem(930);
+        width: rem(932);
     }
 
     @include above($desktop) {
-        width: rem(1250);
+        width: rem(1248);
     }
 
 }
@@ -182,10 +184,10 @@ main {
     }
 
     &_width_inner {
-        width: rem(930);
+        width: rem(932);
 
         @include below($tabletLandscapeMax) {
-            width: rem(613);
+            width: rem(617);
         }
 
         @include below($tabletMax) {
@@ -279,7 +281,7 @@ main {
         z-index: 0;
         margin-top: rem(30);
         font-family: $openSans;
-        font-size: rem(15);
+        font-size: rem(16);
 
         > p {
 
@@ -430,13 +432,13 @@ main {
     }
 
     &__text {
-        font: #{rem(18)}/ #{rem(24)} $stemBold;
+        font: #{rem(18)}/ #{rem(24)} $stemReg;
 
         color: $white;
     }
 
     &__text-lite {
-        font: #{rem(15)}/ #{rem(24)} $stemBold;
+        font: #{rem(15)}/ #{rem(24)} $stemReg;
         color: $white;
     }
 
@@ -562,6 +564,7 @@ main {
 
             font-size: rem(15);
             line-height: rem(18);
+            letter-spacing: rem(1);
             // letter-spacing: rem(-0.75);
         }
 
@@ -738,7 +741,6 @@ main {
         position: relative;
 
         margin-top: rem(20);
-        margin-bottom: rem(100);
 
         transform: translateX(-17%);
     }
@@ -748,7 +750,6 @@ main {
     }
 
     &__content {
-        padding-left: rem(82);
         margin-top: rem(30);
 
         @include below($tabletMax) {

@@ -20,7 +20,7 @@ function FromEnter({ data, big, className }) {
                 {video
                     ? (
                         <div className="block-square__time-keeping">
-                            <img className="block-square__ico" src="/content/video-ico/play_time.svg" alt="" role="presentation" />
+                            <img className="block-square__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
                             <span className="block-square__keeping">{video.duration}</span>
                         </div>
                     )

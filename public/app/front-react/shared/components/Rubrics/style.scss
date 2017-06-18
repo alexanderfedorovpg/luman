@@ -8,9 +8,10 @@
 
         font-family: $stemReg;
         font-size: rem(12);
-        color: $blue;
+        color: $gray-date;
         text-decoration: none;
         text-transform: uppercase;
+        cursor: auto;
 
         &:after {
             content: '/';
@@ -25,6 +26,19 @@
 
         &:last-child:after {
             display: none;
+        }
+
+        &:hover {
+            color: $gray-date;
+        }
+
+        &[href] {
+            color: $blue;
+            cursor: pointer;
+
+            &:hover {
+                color: $blue;
+            }
         }
     }
 }

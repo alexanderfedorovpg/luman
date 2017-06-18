@@ -94,14 +94,10 @@
 			return $this->respondFail500x();
 		}
 
-		/**
-		 * Отправить всем клиентам пуш-уведомление кастомного вида
-		 *
-		 * @param string $guid
-		 *
-		 * @return \Illuminate\Http\JsonResponse
-		 */
-
+        /**
+         * @param $guid
+         * @return \Illuminate\Http\JsonResponse
+         */
 		public function removeDevice( $guid ) {
 
 			$device = Device::where( 'guid', '=', $guid );
@@ -114,12 +110,10 @@
 
 		}
 
-		/**
-		 * Отправить всем клиентам пуш-уведомление кастомного вида
-		 *
-		 * @return \Illuminate\Http\JsonResponse
-		 */
-
+        /**
+         * @param Request $request
+         * @return \Illuminate\Http\JsonResponse
+         */
 		public function sendOneMessage( Request $request ) {
 
 

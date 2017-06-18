@@ -7,7 +7,7 @@ import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
 import Img from 'components/Img'
 import Socials from 'components/Socials';
-import RenderSocialWidgets from './RenderSocialWidgets'
+import renderSocialWidgets from './renderSocialWidgets'
 import FormatDate from 'components/FormatDate';
 
 class Content extends PureComponent {
@@ -31,23 +31,7 @@ class Content extends PureComponent {
     replaceWidgets() {
         if (this._timer) clearTimeout(this._timer);
         this._timer = setTimeout(() => {
-            RenderSocialWidgets()
-            // let tags = document.getElementsByClassName('inner-about__content')[0].getElementsByClassName('video');
-            // for (let i = 0; i < tags.length; i++) {
-            //     let item = tags[i];
-
-            //     const btnPlay = document.createElement('img');
-            //     btnPlay.setAttribute('src', '/content/video-ico/video-ico-big.svg');
-            //     btnPlay.style.position = 'absolute';
-            //     btnPlay.style.left = 'calc(50% - 3rem)';
-            //     btnPlay.style.top = 'calc(50% - 3.75rem)';
-            //     btnPlay.style.width = '6rem';
-            //     btnPlay.style.height = '6rem';
-            //     btnPlay.style.border = '1px solid #fff';
-            //     btnPlay.classList.add('btn_play');
-
-            //     item.appendChild(btnPlay);
-            // }
+            renderSocialWidgets()
         }, 1000)
     }
 
@@ -110,22 +94,34 @@ class Content extends PureComponent {
 
     onContentClick(e) {
         const target = e.target
-
-        if (!target.classList.contains('video__preview')) return;
-
         const parent = target.parentNode;
+
+        if (target.classList.contains('video__overlay')) {
+            parent.parentNode.classList.remove('video_playing');
+            parent.querySelector('.video__element').pause();
+            return;
+        }
+
+        if (!target.classList.contains('video__preview-wrapper')) return;
+
         const src = parent.dataset.src;
 
         if (!src) return;
 
-        const iframe = document.createElement('iframe');
-        iframe.setAttribute('src', src);
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allowfullscreen', true);
-        iframe.style.zIndex = '5';
-        iframe.style.position = 'relative';
-        parent.getElementsByClassName('btn_play')[0].style.display = 'none';
-        parent.replaceChild(iframe, target);
+        if (!target.querySelector('.video__element')) {
+            const video = document.createElement('video');
+            video.setAttribute('src', src);
+            video.setAttribute('allowfullscreen', true);
+            video.setAttribute('autoplay', true);
+            video.setAttribute('controls', 'controls');
+            video.classList.add('video__element');
+            target.appendChild(video);
+            const overlay = document.createElement('div');
+            overlay.classList.add('video__overlay');
+            target.insertBefore(overlay, video);
+        }
+
+        parent.classList.add('video_playing');
     }
 
     renderInfo() {

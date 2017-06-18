@@ -182,7 +182,7 @@
             width: 100%;
 
             @include below($tabletLandscapeMax) {
-                width: rem(615);
+                width: rem(617);
             }
         }
 
@@ -199,11 +199,10 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
-            width: 100%;
 
             &_top {
                 margin-bottom: rem(30);
+                justify-content: space-between;
 
                 @include below($tabletMax) {
                     margin-bottom: rem(6);
@@ -226,12 +225,14 @@
             }
 
             &_item-top {
+                @include margin_x(#{rem(-8)});
 
                 @include below($tabletMax) {
                     margin-bottom: 0;
                 }
 
                 .from-enter {
+                    @include margin_x(#{rem(8)});
 
                     @include below($tabletMax) {
                         margin-bottom: rem(19);
@@ -243,6 +244,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
+                width: 100%;
 
                 @include below($tabletMax) {
                     margin-top: rem(-12);
@@ -251,6 +253,11 @@
             }
 
             &_after-preview {
+                @include margin_x(#{rem(-8)});
+
+                @include below($tabletLandscapeMax) {
+                    @include margin_x(#{rem(-8)});
+                }
 
                 @include below($tabletMax) {
 
@@ -258,14 +265,35 @@
                         margin-bottom: rem(20);
                     }
                 }
+
+                .from-enter {
+                    @include margin_x(#{rem(8)});
+
+                    @include below($tabletLandscapeMax) {
+                        @include margin_x(#{rem(8)});
+                    }
+                }
             }
 
             &_after-banners {
+                @include margin_x(#{rem(-8)});
+
+                @include below($tabletLandscapeMax) {
+                    @include margin_x(#{rem(-8)});
+                }
 
                 @include below($tabletMax) {
 
                     .from-enter {
                         margin-bottom: rem(20);
+                    }
+                }
+
+                .from-enter {
+                    @include margin_x(#{rem(8)});
+
+                    @include below($tabletLandscapeMax) {
+                        @include margin_x(#{rem(8)});
                     }
                 }
             }
@@ -273,7 +301,7 @@
 
         &__block-rectangle {
             @include margin_y(#{rem(7)});
-            width: rem(617);
+            width: rem(615);
             height: rem(245);
 
             .block-rectangle__link,

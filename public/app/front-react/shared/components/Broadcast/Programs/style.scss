@@ -58,7 +58,7 @@
 
         &__banner-preview {
             margin-top: rem(-15);
-            margin-bottom: rem(30);
+            margin-bottom: rem(24);
 
             @include below($tabletMax) {
                 margin-top: rem(15);
@@ -75,7 +75,7 @@
         margin-bottom: rem(30);
 
         @include below($tabletLandscapeMax) {
-            width: rem(613);
+            width: rem(615);
         }
 
         @include below($tabletMax) {
@@ -93,6 +93,8 @@
     }
 
     .from-enter_big {
+        margin-left: 0;
+        margin-right: 0;
 
         @include below($tabletLandscapeMax) {
             width: 100%;
@@ -115,7 +117,8 @@
         }
 
         &__item-bottom {
-            margin-bottom: rem(30);
+            margin-bottom: rem(22) !important;
+            justify-content: space-between;
 
             @include below($mobile) {
                 margin-bottom: rem(15);
@@ -131,24 +134,20 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
-            width: 100%;
 
-            @include below($tabletMax) {
-                @include margin_y(#{rem(-10)});
-            }
+            &_margin {
+                @include margin_x(#{rem(-8)});
 
-            .from-enter {
-
-                @include below($tabletMax) {
-                    @include margin_y(#{rem(10)});
+                .from-enter {
+                    @include margin_x(#{rem(8)});
+                    margin-bottom: rem(16);
                 }
             }
         }
 
         &__block-rectangle {
             @include margin_y(#{rem(7)});
-            width: rem(617);
+            width: rem(615);
             height: rem(245);
 
             .block-rectangle__link,
@@ -220,8 +219,8 @@
         }
 
         &__date-wrap {
-            width: rem(615);
-            padding-top: rem(93);
+            width: rem(617);
+            padding-top: rem(94);
 
             @include below($tabletLandscapeMax) {
                 width: 100%;
@@ -244,8 +243,12 @@
         &__date-items {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
-        }
+            @include margin_x(#{rem(-8)});
+
+            .from-enter {
+                @include margin_x(#{rem(8)});
+            }
+         }
 
         &__from-text,
         &__to-text {
@@ -304,7 +307,7 @@
         font-size: rem(15);
         line-height: rem(26);
 
-        background-image: url(/content/broadcast/programs-bg.png);
+        background-image: url(/content/broadcast/programs.png);
         background-size: cover;
 
         @include below($tabletLandscapeMax) {

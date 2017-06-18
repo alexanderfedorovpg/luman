@@ -25,6 +25,12 @@ import extendFacebookFormat from './format/FacebookFormat'
 import extendHtmlFormat from './format/HTMLFormat'
 import extendVideoFormat from './format/videoFormat'
 import extendVideoEmbedFormat from './format/videoEmbedFormat'
+
+import playIcon from './video-ico-big.svg'
+import videoLogo from './green-rtvi-left.png'
+import { rem } from 'utils/style'
+
+
 /**
  * некий валидатор, который использует редактор, чтобы распознать html,
  * который в него закинули и применить к нему особые инструкции
@@ -38,34 +44,71 @@ extendVideoFormat(Quill);
 extendVideoEmbedFormat(Quill);
 
 const Root = styled.div`
-    .ql-laquo:after {
-        content: "«";
-    }
-
-    .ql-raquo:after {
-        content: "»";
-    }
-
-    .ql-aquos:after {
-        content: "«»";
-    }
-
-    .ql-em-dash:after {
-        content: "—";
-    }
-
-    .ql-embed:after {
-        content: "embed";
-    }
-    .ql-html {
-        margin-left:50px;
-    }
-    .ql-html:after {
-        content: "html";
-    }
 
     .ql-toolbar.ql-toolbar {
         border-bottom: none;
+    }
+
+    .ql-toolbar {
+        .ql-embed,
+        .ql-html {
+            width: auto;
+        }
+    }
+
+    .ql-editor {
+        .video {
+            width: ${rem(300)};
+
+            &__preview {
+                max-width: 100%;
+                height: 100%;
+                width: auto;
+                object-fit: cover;
+                display: block;
+            }
+            &__preview-wrapper {
+                max-height: rem(593);
+                width: 100%;
+                position: relative;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: rgba(0, 0, 0, .7);
+                }
+            }
+            &__play {
+                background-image: url(${playIcon});
+                display: block;
+                position: absolute;
+                left: calc(50% - 3rem);
+                top: calc(50% - 3.75rem);
+                width: 6rem;
+                height: 6rem;
+                border: 1px solid #fff;
+            }
+            &__logo {
+                content: "news";
+                display: block;
+                position: absolute;
+                width: ${rem(147)};
+                height: ${rem(85)};
+                background-image: url(${videoLogo});
+                bottom: 0;
+                font-size: ${rem(16)};
+                line-height: ${rem(18)};
+                color: #fff;
+                text-transform: uppercase;
+                text-align: right;
+                padding-right: 11px;
+                padding-top: 7px;
+            }
+        }
     }
 `
 
@@ -111,9 +154,9 @@ class Rich extends PureComponent {
         }
     }
 
-    uploadFile(f, data, cb) {
+    uploadFile(f, data) {
         this.props.showPreloader();
-        api.uploadFile(
+        return api.uploadFile(
             f,
             {
                 object_name: data.title,
@@ -121,14 +164,15 @@ class Rich extends PureComponent {
                 object_source: data.source
             }
         ).then(({ data: { file } }) => {
-            cb(file.url);
             this.props.hidePreloader();
+
+            return file.url;
         })
     }
 
     addImage(data, cb) {
         if (data.image != null && data.image[0] != null) {
-            this.uploadFile(data.image[0], data, (result) => {
+            this.uploadFile(data.image[0], data).then((result) => {
                 let editor = this.quill.getEditor();
                 let range = editor.getSelection(true);
                 editor.updateContents(
@@ -144,21 +188,36 @@ class Rich extends PureComponent {
     }
 
     addVideo(data, cb) {
-        if (data.video != null && data.video[0] != null) {
-            this.uploadFile(data.video[0], data, (result) => {
+        let videoPromise = data.video != null && data.video[0] != null
+            ? this.uploadFile(data.video[0], data)
+            : null
+        let previewPromise = data.preview != null && data.preview[0] != null
+            ? this.uploadFile(data.preview[0], data)
+            : null
+
+        if (!videoPromise) return;
+
+        Promise
+            .all([videoPromise, previewPromise])
+            .then(([video, preview]) => {
                 let editor = this.quill.getEditor();
                 let range = editor.getSelection(true);
                 editor.updateContents(
                     new Delta()
                         .retain(range.index)
                         .delete(range.length)
-                        .insert({ 'ext-video': { src: result, ...data }}),
+                        .insert({
+                            'ext-video': {
+                                src: video,
+                                preview_src: preview,
+                                ...data
+                            }
+                        }),
                     'user'
                 );
 
                 cb();
-            });
-        }
+            })
     }
 
     openEmbedModal = () => this.openModal('embed')
@@ -254,14 +313,20 @@ class Rich extends PureComponent {
                         <button className="ql-clean"/>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-laquo" title="Ctrl + 2" />
-                        <button className="ql-raquo" title="Ctrl + 3" />
-                        <button className="ql-aquos" title="Ctrl + 4" />
-                        <button className="ql-em-dash" title="Ctrl + 1" />
+                        <button className="ql-laquo" title="Ctrl + 2">«</button>
+                        <button className="ql-raquo" title="Ctrl + 3">»</button>
+                        <button className="ql-aquos" title="Ctrl + 4">«»</button>
+                        <button className="ql-em-dash" title="Ctrl + 1">—</button>
                     </div>
                     <div className="ql-formats">
-                        <button className="ql-embed"/>
-                        <button className="ql-html"/>
+                        <button className="ql-embed">
+                            embed
+                        </button>
+                    </div>
+                    <div className="ql-formats">
+                        <button className="ql-html">
+                            html
+                        </button>
                     </div>
                 </div>
                 <ReactQuill

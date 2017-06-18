@@ -27,7 +27,7 @@ class HomepageInfoNoise extends Model
     public $table = 'homepage_info_noise';
 
     protected $events = [
-        'saved' => CacheClearObserver::class,       
+        'created' => CacheClearObserver::class,
     ];
 
     /**

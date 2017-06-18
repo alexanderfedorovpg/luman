@@ -91,6 +91,7 @@ class EditorPage extends Component {
         return (data) => {
             const values = data.toJS();
             const { article, rubrics } = this.props;
+
             let fields = {
                 id: article.id,
                 top: values.top,
@@ -118,7 +119,9 @@ class EditorPage extends Component {
                 },
                 body: values.body,
                 program_id: values.program_id,
-                video_stream: values.video.id || (values.video.file || [])[0],
+                video_stream: values.video.id || (typeof values.video.file === 'string'
+                    ? values.video.file
+                    : (values.video.file || [])[0]),
                 video_stream_preview: values.videoPreview.id || (values.videoPreview.file || [])[0],
                 video_stream_preview_info: {
                     object_author: values.videoPreview.author,

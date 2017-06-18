@@ -82,7 +82,12 @@ function* uploadFile(file, info) {
 
 function* uploadFiles(data) {
     const result = {};
-    const files = ['image_main', 'image_preview', 'video_stream', 'video_stream_preview'];
+    const files = ['image_main', 'image_preview', 'video_stream_preview'];
+
+    if (typeof data.video_stream !== 'string') {
+        files.push('video_stream');
+    }
+
     const responses = yield files.map((file) => call(uploadFile, data[file], data[`${file}_info`]));
 
     files.forEach((file, ind) => { result[file] = responses[ind]; });

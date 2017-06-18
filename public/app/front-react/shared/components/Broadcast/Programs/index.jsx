@@ -169,8 +169,8 @@ class Broadcast extends Component {
                         </MediaQuery>
 
 
-                        <div className="middle-col">
-                            <div className="news-one-line__row">
+                        <div className="middle-col news-top__programs">
+                            <div className="news-one-line__row news-one-line__row_margin">
                                 <Item data={data[8]} />
                                 <Item data={data[9]} />
                                 <Item data={data[10]} />
@@ -196,7 +196,7 @@ class Broadcast extends Component {
                         </MediaQuery>
 
                         <div className="middle-col">
-                            <div className="news-one-line__row">
+                            <div className="news-one-line__row news-one-line__row_margin">
                                 <Item data={data[12]} />
                                 <Item data={data[13]} />
                                 <Item data={data[14]} />
