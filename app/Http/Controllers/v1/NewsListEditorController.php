@@ -266,7 +266,7 @@ class NewsListEditorController extends CmsController
                 if ($request->get('rubrics')) {
                     $rubrics = $request->get('rubrics');
                 }
-                if ($these) {
+                if ($theses) {
                     $newsEdit->theses = $theses;
                 }
                 if ($sub_title ) {
