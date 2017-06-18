@@ -73,35 +73,41 @@ class AsideVideo extends PureComponent {
         const data = videos[0] || {}
         return data.video_stream
             ? (
-                <div
-                    className={classNames(
-                        'general-video',
-                        className,
+                <div style={{position: 'relative'}}>
+                    {this.state.play && <div className="general-video__close" onClick={() => this.stop()}><img src={close}/></div>}
+                    <div className={classNames(
+                            'general-video',
+                            className,
+                            {
+                                'general-video_play': this.state.play
+                            },
+                        )}
+                        ref="wrapp"
+                    >
                         {
-                            'general-video_play': this.state.play
-                        },
-                    )}
-                    ref="wrapp"
-                >
-                    {
-                        this.state.play ?
-                            <div style={{width: 100 + '%', height: 100 + '%'}}>
-                                <div className="general-video__close" onClick={()=>this.stop()}><img src={close}/></div>
-                                <video ref='video' id='videoStream' style={{width: 100 + '%', height: 100 + '%', zIndex: 9,position: 'relative'}} controls="controls" />
-                            </div>
-
-                            :
-                            (
-                                <span className="general-video__play-block">
-                                    <a onClick={this.play} className="general-video__link" />
-                                    <Img className="general-video__img" src={data.video_stream.preview} alt="" />
-                                    {data.url ?
-
-                                        <img onClick={this.play} className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
-                                        :
-                                        <img className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
-                                    }
-                                    <div className="general-video__info">
+                            this.state.play ?
+                                <div style={{width: 100 + '%', height: 100 + '%'}}>
+                                    <video ref='video' id='videoStream' style={{
+                                        width:    100 + '%',
+                                        height:   100 + '%',
+                                        zIndex:   9,
+                                        position: 'relative'
+                                    }} controls="controls"/>
+                                </div>
+                                :
+                                (
+                                    <span className="general-video__play-block">
+                                    <a onClick={this.play} className="general-video__link"/>
+                                    <Img className="general-video__img" src={data.video_stream.preview} alt=""/>
+                                        {data.url ?
+                                            <img onClick={this.play}
+                                                 className="general-video__ico"
+                                                 src="/content/video-ico/video-ico-big.svg" alt="" role="presentation"/>
+                                            :
+                                            <img className="general-video__ico"
+                                                 src="/content/video-ico/video-ico-big.svg" alt="" role="presentation"/>
+                                        }
+                                        <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
                                             <span className="general-video__span">{this.getPublishDate(data.publish_date)}</span>
                                         </div>
@@ -115,9 +121,11 @@ class AsideVideo extends PureComponent {
                                         </div>
                                     </div>
                                 </span>
-                            )
-                    }
+                                )
+                        }
+                    </div>
                 </div>
+
             )
             : (
                 <img src={main ? mainVideoPlaceholder : insideVideoPlaceholder} className="general-video__img" />

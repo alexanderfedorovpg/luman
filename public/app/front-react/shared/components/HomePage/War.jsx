@@ -10,11 +10,9 @@ import Block from 'components/Block'
 import MiniNews from 'components/MiniNews'
 import Video from 'components/GeneralVideo'
 import VideoWrapper from 'components/GeneralVideo/Wrapper'
-import Banner from './Banner'
+import Banner from 'components/Banner'
 import RandomNews from './RandomNews'
-import Subscribe from 'components/Subscribe'
 import MoreNews from './MoreNews'
-import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
 import AsideVideo from './AsideVideo'
@@ -99,13 +97,12 @@ function HomePage({
                 </div>
                 <div className="general-news__left general-news__left_more">
                     <div className="general-news__left-wrapper">
-                        <Banner className="general-news__banner" />
-                        {/*<BannerPreview className="general-news__banner-preview" />*/}
+                        <Banner type="large" className="general-news__banner" />
                     </div>
                     <RandomNews className="general-news__random-news" data={randomNews} />
                 </div>
                 <div className="general-news__right general-news__right_more">
-                    <Subscribe className="general-news__subscribe"/>
+                    <Banner type="subscribe" className="general-news__subscribe"/>
                     {newsBlock.slice(4, 10).map(v => (
                         <MiniNews key={v.id} data={v} className="info-noize__mini-news info-noize__mini-news_war" />
                     ))}

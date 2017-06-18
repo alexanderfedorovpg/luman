@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { links } from './constants';
+import subscribe from './imgs/subscribe.png';
 import './style.scss';
 
 function renderLink(link) {
@@ -17,11 +18,11 @@ function renderLink(link) {
     );
 }
 
-function Subscribe({ className }) {
+const Subscribe = ({images, url, className, defaultUrl}) => {
     return (
         <div className={classNames('subscribe', className)}>
-            <a className="subscribe__link" href="javascript:void(0)">
-                <img className="subscribe__img" src="/content/subscribe/subscribe.png" alt="" role="presentation" />
+            <a className="subscribe__link" href={url || defaultUrl}>
+                <img className="subscribe__img" src={images ? images.mobile : subscribe} alt="" role="presentation"/>
             </a>
             <div className="subscribe__container">
                 <div className="subscribe-networks subscribe__subscribe-networks">
