@@ -143,7 +143,7 @@ class Content extends PureComponent {
             <div className="inner-about__video-info">
                 <div>
                     <span className="inner-about__photo">Фото: </span>
-                    <span dangerouslySetInnerHTML={{__html:replaceStrToLink(`${author} ${author && source && ' / '} ${source}`)}}/>
+                    <span dangerouslySetInnerHTML={{__html:replaceStrToLink(`${author || ''} ${author && source && ' / '} ${source || ''}`)}}/>
                 </div>
             </div>
         )
@@ -206,13 +206,16 @@ class Content extends PureComponent {
                                 title={image.object_name||''}
                                 alt={image.object_name||''}
                             />
-                            <figcaption className="news-preview__title"
-                                        dangerouslySetInnerHTML={{__html: replaceStrToLink(image.object_name)}}
-                            />
+                            {
+                                !!image.object_name &&
+                                <figcaption className="news-preview__title"
+                                            dangerouslySetInnerHTML={{__html: replaceStrToLink(image.object_name)}}
+                                />
+                            }
                             {(image.object_author || image.object_source)
                                 && (
                                     <figcaption className="news-preview__source"
-                                        dangerouslySetInnerHTML={{__html: replaceStrToLink(`Фото: ${image.object_author} ${image.object_author && image.object_source && ' / '} ${image.object_source}`)}}
+                                        dangerouslySetInnerHTML={{__html: replaceStrToLink(`Фото: ${image.object_author || image.object_author} ${image.object_author && image.object_source && ' / '} ${image.object_source || image.object_source}`)}}
                                     />
                                 )
                             }
