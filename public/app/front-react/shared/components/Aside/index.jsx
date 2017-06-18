@@ -18,10 +18,7 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
     const showBroadcast = !!broadcast && !!broadcast.length;
     const showNoise = !!noise && !!noise.length;
     const showTop = !!top && !!top.length;
-    const broadcastVideos = showBroadcast ? broadcast.slice(1) : [];
     const isInside = !!inside && inside;
-
-    console.log(broadcastPage);
 
     return (
         <div className={classNames('right-col', className)}>
@@ -58,8 +55,8 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
                 (
                     <div>
                         {
-                            (showBroadcast && broadcastVideos.length)
-                            ? <FromEnter data={broadcastVideos} />
+                            showBroadcast
+                            ? <FromEnter data={broadcast} />
                             : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
                         }
                         {/* <Subscribe className="news-top__subscribe" /> */}
