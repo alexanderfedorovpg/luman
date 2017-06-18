@@ -6,7 +6,7 @@ import Group from 'components/Group'
 import Block from 'components/Block'
 import RelatedNews from 'components/RelatedNews'
 import MiniNews from 'components/MiniNews'
-import Subscribe from 'components/Subscribe'
+import Banner from 'components/Banner'
 import Aside from 'containers/Aside'
 
 import './style.scss'
@@ -30,7 +30,7 @@ function Detail({ data, nowNews, relatedNews }) {
                                 <MiniNews key={v.id} data={v} className="broadcast__mini-news info-noize__mini-news" />
                             ))}
                         </Group>
-                        <Subscribe />
+                        <Banner type="subscribe" />
                     </div>
                 </div>
             </div>

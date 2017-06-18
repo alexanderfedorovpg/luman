@@ -13,7 +13,6 @@ import {
     makeGetLoading,
 } from 'selectors/search';
 import BigSearch from 'components/BigSearch';
-import BannerPreview from 'components/HomePage/BannerPreview'
 import Tabs from 'components/Tabs';
 import SearchResultList from 'components/SearchResultList';
 import AsideContainer from 'containers/Aside';
@@ -108,7 +107,7 @@ class SearchPage extends PureComponent {
                                 <AsideContainer />
                             </div>
                             <div className="p-search__middle middle-col">
-                                <BannerPreview className="p-search__banner-preview" />
+                                <Banner type="preview" className="p-search__banner-preview" />
                             </div>
                         </div>
                     </div>

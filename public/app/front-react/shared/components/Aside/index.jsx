@@ -5,8 +5,7 @@ import MediaQuery from 'react-responsive'
 import Video from './Video'
 import Noise from 'components/Noise'
 import FromEnter from 'components/Broadcast/One'
-import Subscribe from 'components/Subscribe'
-import Banner from 'components/HomePage/Banner'
+import Banner from 'components/Banner'
 import MiniNews from 'components/MiniNews'
 import Group from 'components/Group'
 import Block from 'components/Block'
@@ -57,9 +56,9 @@ function Aside({ noise, broadcast, top, className, now }) {
                 ? <FromEnter data={broadcastVideos} />
                 : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
             }
-            <Subscribe className="news-top__subscribe" />
+            <Banner type="subscribe" className="news-top__subscribe" />
             <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1249px">
-                <Banner className="news-top__banner" />
+                <Banner type="large" className="news-top__banner" />
             </MediaQuery>
         </div>
     )
