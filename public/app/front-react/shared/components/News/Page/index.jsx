@@ -110,6 +110,9 @@ class News extends Component {
                                     <Block data={today[0]} className="news-one-line__block-square" />
                                     <Block data={today[1]} className="news-one-line__block-square" />
                                     <Block data={today[2]} className="news-one-line__block-square" />
+                                    <Block data={today[3]} className="news-one-line__block-square" />
+                                    <Block data={today[4]} className="news-one-line__block-square" />
+                                    <Block data={today[5]} className="news-one-line__block-square" />
                                 </div>
                             </div>
                             <MediaQuery maxWidth="929px">
