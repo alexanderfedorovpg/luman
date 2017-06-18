@@ -36,7 +36,7 @@ class Broadcast extends Component {
         let values = [...data]
 
         while (data.length) {
-            items = items.push(this.renderItems(values.splice(0, 4)))
+            items.push(this.renderItems(values.splice(0, 4)))
         }
 
         return items
