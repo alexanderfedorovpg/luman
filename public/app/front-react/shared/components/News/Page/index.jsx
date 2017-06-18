@@ -90,13 +90,13 @@ class News extends Component {
                             { /*<Tabs data={rubrics} active={rubric} onChange={setRubric} /> */}
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row">
-                                    <Block data={now[6]} rectangle className="news-one-line__block-rectangle" />
+                                    <Block data={now[0]} rectangle className="news-one-line__block-rectangle" />
                                     <Block data={now[1]} className="news-one-line__block-square" />
                                     <Block data={now[2]} className="news-one-line__block-square" />
                                     <Block data={now[3]} className="news-one-line__block-square" />
                                     <Block data={now[4]} className="news-one-line__block-square" />
                                     <Block data={now[5]} className="news-one-line__block-square" />
-                                    <Block data={now[6]} className="news-one-line__block-rectangle" />
+                                    <Block data={now[6]} rectangle className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
                             <MediaQuery minWidth="1250px">
