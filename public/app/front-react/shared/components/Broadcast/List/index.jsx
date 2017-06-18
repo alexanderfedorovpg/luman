@@ -17,7 +17,7 @@ function ListVideo({ data, className }) {
                             {value.title}
                         </Link>
                         <p className="list-video__category">
-                            {`${value.program.name} `}
+                            {`${value.program ? value.program.name : ''} `}
                             <span className="list-video__time-add">
                                 {Date.parse(value.publish_date)
                                     ? <FormattedDate value={value.publish_date} month="long" day="2-digit" />
