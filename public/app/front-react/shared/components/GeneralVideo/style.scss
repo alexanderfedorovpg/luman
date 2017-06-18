@@ -3,7 +3,7 @@
 
 .general-video {
     position: relative;
-    /*    overflow: hidden;*/
+    overflow: hidden;
     transition: height .3s;
 
     &__close {
@@ -13,7 +13,7 @@
         right: -17px;
         z-index: 11;
 
-            img {
+        img {
             cursor: pointer;
             width: 100%;
         }
@@ -33,7 +33,6 @@
 
         background-color: rgba(0, 0, 0, .32);
     }
-
 
     @include below($mobile) {
         margin-top: rem(15);

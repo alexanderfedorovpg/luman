@@ -34,8 +34,8 @@ let array = [
         type:   'large', //принимает 1-4 колоночные картинки
         url:    '/',
         images: {
-            mobile:          '/content/banner/banner-mobile.png',
-            desktop:         '/content/banner/banner.png',
+            mobile:          '/content/banner/how_1c.gif',
+            desktop:         '/content/banner/how_3c.gif',
         },
         url_to: '/now'
     },
