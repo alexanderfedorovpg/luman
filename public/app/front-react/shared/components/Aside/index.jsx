@@ -20,29 +20,17 @@ function Aside({ noise, broadcast, top, className, now, inside, noisePage }) {
     const showTop = !!top && !!top.length;
     const broadcastVideos = showBroadcast ? broadcast.slice(1) : [];
     const isInside = !!inside && inside;
-    const isNoise = !!noisePage && noisePage;
 
     return (
         <div className={classNames('right-col', className)}>
-            {
-                showBroadcast &&
-                <Video data={broadcast[0]} />
-            }
-            {
-                showNoise &&
-                <Noise data={noise} />
-            }
             <MediaQuery minWidth="930px">
                 <div className="aside__video" style={{height: '396px'}}>
-                    {!isNoise ?
-                        <AsideVideo
-                            playTitle="date"
-                            title="Все ключевые события этого дня"
-                            videos={now}
-                            className="general-news__general-video general-video_idx" />
-                        :
-                        null
-                    }
+                    <AsideVideo
+                        playTitle="date"
+                        title="Все ключевые события этого дня"
+                        videos={now}
+                        className="general-news__general-video general-video_idx"
+                    />
                 </div>
                 {
                     showTop &&
@@ -57,6 +45,10 @@ function Aside({ noise, broadcast, top, className, now, inside, noisePage }) {
                     </Group>
                 }
             </MediaQuery>
+            {
+                showNoise &&
+                <Noise data={noise} />
+            }
             {!isInside ?
                 (
                     <div>
