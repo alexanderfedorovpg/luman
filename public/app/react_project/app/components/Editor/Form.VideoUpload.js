@@ -72,14 +72,21 @@ class VideoUpload extends PureComponent {
     }
 
     render() {
-        const { video, videoPreview, programs } = this.props;
+        const { video, videoPreview, program_id, programs } = this.props;
+        const videoVal = video.file.input.value;
         const initialValues = {
-            video: video.file.input.value,
+            video: videoVal,
             preview: videoPreview.file.input.value,
             author: videoPreview.author.input.value,
             source: videoPreview.source.input.value,
-            url: video.file.input.value,
+            program_id: program_id.input.value,
+            url: video.url.input.value || '',
         };
+
+        if (typeof videoVal === 'string') {
+            initialValues.video = null;
+            initialValues.url = videoVal;
+        }
 
         return (
             <div>
