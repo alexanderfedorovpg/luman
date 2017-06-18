@@ -12,7 +12,7 @@ import Content from 'components/Aside'
 class Aside extends PureComponent {
 
     render() {
-        const { noise, broadcast, top, now } = this.props
+        const { noise, broadcast, top, now, inside, noisePage } = this.props
 
         return (
             <Content
@@ -20,6 +20,8 @@ class Aside extends PureComponent {
                 top={top ? top.map(v => v.news) : null}
                 broadcast={broadcast ? broadcast.map(v => v.record) : null}
                 now={now ? now : null}
+                inside={inside ? inside : false}
+                noisePage={noisePage ? noisePage : false}
             />
         )
     }
