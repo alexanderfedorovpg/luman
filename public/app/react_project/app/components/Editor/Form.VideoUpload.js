@@ -59,8 +59,7 @@ class VideoUpload extends PureComponent {
         }
 
         if (values.url) {
-            video.id.input.onChange(null);
-            video.file.input.onChange(null);
+            console.log(values.url);
             video.url.input.onChange(values.url);
         }
 
@@ -83,7 +82,7 @@ class VideoUpload extends PureComponent {
             url: video.url.input.value || '',
         };
 
-        if (typeof videoVal === 'string') {
+        if (!!videoVal && typeof videoVal === 'string') {
             initialValues.video = null;
             initialValues.url = videoVal;
         }
