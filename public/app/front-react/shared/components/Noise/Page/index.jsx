@@ -103,7 +103,7 @@ class Noise extends PureComponent {
                                 : null
                             }
                         </div>
-                        <Aside noise={null} broadcast={null} now={now} />
+                        <Aside noise={null} broadcast={null} now={now} inside={true} noisePage={true}/>
                     </div>
                 </div>
             </div>

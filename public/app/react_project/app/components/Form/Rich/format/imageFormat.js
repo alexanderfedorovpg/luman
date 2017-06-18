@@ -23,7 +23,13 @@ export default Quill => {
             title.textContent = value.title
 
             node.appendChild(info)
-            info.textContent = `Фото: ${value.author} / ${value.source}`
+
+            if (value.author || value.source) {
+                const author = value.author || '';
+                const divider = value.author && value.source ? ' / ' : '';
+                const source = value.source || '';
+                info.textContent = `Фото: ${author}${divider}${source}`;
+            }
 
             node.dataset.title = value.title;
             node.dataset.author = value.author;

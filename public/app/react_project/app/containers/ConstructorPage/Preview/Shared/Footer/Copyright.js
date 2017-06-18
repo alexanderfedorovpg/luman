@@ -18,7 +18,7 @@ function Copyright() {
 
     return (
         <Root>
-            <Text>&#169; Overseas Media,
+            <Text>&#169; ООО "ЭрТиВиАй Продакшн",
                 <br />2002–2017
             </Text>
         </Root>

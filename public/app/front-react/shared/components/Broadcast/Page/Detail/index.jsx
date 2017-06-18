@@ -6,7 +6,7 @@ import Group from 'components/Group'
 import Block from 'components/Block'
 import RelatedNews from 'components/RelatedNews'
 import MiniNews from 'components/MiniNews'
-import Subscribe from 'components/Subscribe'
+import Banner from 'components/Banner'
 import Aside from 'containers/Aside'
 
 import './style.scss'
@@ -23,14 +23,15 @@ function Detail({ data, nowNews, relatedNews }) {
                         </Content>
                     </div>
                     <div className="general-news__right right-col">
-                        <Aside noise={null} broadcast={null} top={null} now={now} />
+                        <div style={{height: '396px'}} className="kostyl">
+                        </div>
                         <Group title="Главные новости" margin>
                             <Block data={nowNews[0]} />
                             {nowNews.slice(1, 5).map(v => (
                                 <MiniNews key={v.id} data={v} className="broadcast__mini-news info-noize__mini-news" />
                             ))}
                         </Group>
-                        <Subscribe />
+                        <Banner type="subscribe" />
                     </div>
                 </div>
             </div>

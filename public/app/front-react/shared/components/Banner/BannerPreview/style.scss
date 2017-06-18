@@ -1,0 +1,12 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.banner-preview {
+    position: relative;
+
+    &__img {
+       width: 100%;
+        height: auto;
+    }
+
+}

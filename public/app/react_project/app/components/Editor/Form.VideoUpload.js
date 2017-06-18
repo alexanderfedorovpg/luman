@@ -39,6 +39,7 @@ class VideoUpload extends PureComponent {
         const {
             video,
             videoPreview,
+            program_id,
         } = this.props;
 
         // Если загрузили новое видео, то обнуляем превью
@@ -58,22 +59,33 @@ class VideoUpload extends PureComponent {
         }
 
         if (values.url) {
-            video.id.input.onChange(null);
-            video.file.input.onChange(values.url);
+            console.log(values.url);
+            video.url.input.onChange(values.url);
+        }
+
+        if (values.program_id) {
+            program_id.input.onChange(values.program_id);
         }
 
         this.closeModal();
     }
 
     render() {
-        const { video, videoPreview, programs } = this.props;
+        const { video, videoPreview, program_id, programs } = this.props;
+        const videoVal = video.file.input.value;
         const initialValues = {
-            video: video.file.input.value,
+            video: videoVal,
             preview: videoPreview.file.input.value,
             author: videoPreview.author.input.value,
             source: videoPreview.source.input.value,
-            url: video.file.input.value,
+            program_id: program_id.input.value,
+            url: video.url.input.value || '',
         };
+
+        if (!!videoVal && typeof videoVal === 'string') {
+            initialValues.video = null;
+            initialValues.url = videoVal;
+        }
 
         return (
             <div>

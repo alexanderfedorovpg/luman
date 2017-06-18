@@ -8,9 +8,7 @@ import MiniNews from 'components/MiniNews'
 import Block from 'components/Block'
 import BlockMini from 'components/Block/Mini'
 import BlockBorder from 'components/Block/Border'
-import Subscribe from 'components/Subscribe'
-import Banner from 'components/HomePage/Banner'
-import BannerPreview from 'components/HomePage/BannerPreview'
+import Banner from 'components/Banner'
 import RandomNews from 'components/HomePage/RandomNews'
 import MoreNews from 'components/HomePage/MoreNews'
 import LoadMore from 'components/LoadMore'
@@ -100,10 +98,10 @@ class News extends Component {
                                 </div>
                             </div>
                             <MediaQuery minWidth="1250px">
-                                <Banner className="news-top__banner" />
+                                <Banner type="large" className="news-top__banner" />
                             </MediaQuery>
                             <MediaQuery maxWidth="929px">
-                                <BannerPreview className="news-top__banner-preview" />
+                                <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
                             <div className="per-day news-top__per-day">
                                 <p className="per-day__title section-title">
@@ -117,12 +115,12 @@ class News extends Component {
                             </div>
                             <MediaQuery maxWidth="929px">
                                 <div className="news-top__links">
-                                    <Banner className="news-top__banner" />
-                                    <Subscribe className="news-top__subscribe" />
+                                    <Banner type="large" className="news-top__banner" />
+                                    <Banner type="subscribe" className="news-top__subscribe" />
                                 </div>
                             </MediaQuery>
                             <MediaQuery minWidth="930px" maxWidth="1249px">
-                                <BannerPreview className="news-top__banner-preview" />
+                                <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
 
                             <MediaQuery minWidth="930px" maxWidth="1249px">
@@ -147,7 +145,7 @@ class News extends Component {
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
                             <div className="news-top__middle middle-col">
-                                <BannerPreview className="news-top__banner-preview" />
+                                <Banner type="preview" className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
 
@@ -168,7 +166,7 @@ class News extends Component {
                         <MediaQuery minWidth="930px">
                             <div className="news-top__right right-col">
                                 <MediaQuery minWidth="1250px">
-                                    <Subscribe className="news-top__subscribe" />
+                                    <Banner type="subscribe" className="news-top__subscribe" />
                                 </MediaQuery>
                                 <MediaQuery minWidth="1250px">
                                     <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />

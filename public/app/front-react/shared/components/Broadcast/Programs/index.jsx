@@ -10,9 +10,7 @@ import List from 'components/Broadcast/List'
 import Block from 'components/Block'
 import BlockMini from 'components/Block/Mini'
 import BlockBorder from 'components/Block/Border'
-import Subscribe from 'components/Subscribe'
-import Banner from 'components/HomePage/Banner'
-import BannerPreview from 'components/HomePage/BannerPreview'
+import Banner from 'components/Banner'
 import RandomNews from 'components/HomePage/RandomNews'
 import MoreNews from 'components/HomePage/MoreNews'
 import LoadMore from 'components/LoadMore'
@@ -155,24 +153,24 @@ class Broadcast extends Component {
                         </div>
                         <MediaQuery maxWidth="1249px">
                             <div className="news-top__middle middle-col">
-                                <BannerPreview className="news-top__banner-preview" />
+                                <Banner type="preview" className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
 
                         <MediaQuery minWidth="1250px">
                             <div className="left-col left-col_width_inner">
-                                <Banner className="news-top__banner" />
+                                <Banner type="large" className="news-top__banner" />
                             </div>
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
                             <div className="right-col">
-                                <Subscribe className="news-top__subscribe-programs" />
+                                <Banner type="subscribe" className="news-top__subscribe-programs" />
                             </div>
                         </MediaQuery>
 
 
-                        <div className="middle-col">
-                            <div className="news-one-line__row">
+                        <div className="middle-col news-top__programs">
+                            <div className="news-one-line__row news-one-line__row_margin">
                                 <Item data={data[8]} />
                                 <Item data={data[9]} />
                                 <Item data={data[10]} />
@@ -182,23 +180,23 @@ class Broadcast extends Component {
 
                         <MediaQuery minWidth="1250px">
                             <div className="news-top__middle middle-col">
-                                <BannerPreview className="news-top__banner-preview" />
+                                <Banner type="preview" className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
 
                         <MediaQuery maxWidth="1249px">
                             <div className="left-col left-col_width_inner">
-                                <Banner className="news-top__banner" />
+                                <Banner type="large" className="news-top__banner" />
                             </div>
                         </MediaQuery>
                         <MediaQuery maxWidth="1249px">
                             <div className="right-col">
-                                <Subscribe className="news-top__subscribe-programs" />
+                                <Banner type="subscribe" className="news-top__subscribe-programs" />
                             </div>
                         </MediaQuery>
 
                         <div className="middle-col">
-                            <div className="news-one-line__row">
+                            <div className="news-one-line__row news-one-line__row_margin">
                                 <Item data={data[12]} />
                                 <Item data={data[13]} />
                                 <Item data={data[14]} />

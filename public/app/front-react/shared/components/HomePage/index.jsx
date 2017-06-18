@@ -13,11 +13,9 @@ import MiniNews from 'components/MiniNews'
 import Video from 'components/Aside/Video'
 import AsideVideo from './AsideVideo'
 import EnterOne from 'components/Broadcast/One'
-import Banner from './Banner'
+import Banner from 'components/Banner'
 import RandomNews from './RandomNews'
-import Subscribe from 'components/Subscribe'
 import MoreNews from './MoreNews'
-import BannerPreview from './BannerPreview'
 import MoreVideo from './MoreVideo'
 import ListVideo from 'components/Broadcast/List'
 
@@ -71,10 +69,7 @@ function HomePage({
                         </MediaQuery>
                     </div>
                     <div className="general-news__left-wrapper two-wrapper">
-                        <Today
-                            data={todayNews}
-                            className="general-news__per-day" />
-
+                        <Today data={todayNews} className="general-news__per-day" />
                         <MediaQuery minWidth="1250px">
                             {low => (
                                 <MediaQuery maxWidth="929px">
@@ -85,7 +80,7 @@ function HomePage({
                             )}
                         </MediaQuery>
                         <MediaQuery minWidth="615px" maxWidth="929px">
-                            <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
+                            <EnterOne className="general-news__enter-one" data={videoNews} />
                         </MediaQuery>
                     </div>
                 </div>
@@ -102,14 +97,14 @@ function HomePage({
 
                     <MediaQuery minWidth="930px" maxWidth="1249px">
                         <Noise className="general-news__info-noize" data={noise} />
-                        <Banner className="general-news__banner" />
+                        <Banner type="large" className="general-news__banner" />
                     </MediaQuery>
 
                     <MediaQuery minWidth="930px">
                         {low => (
                             <MediaQuery maxWidth="614px">
                                 {high => (low || high) &&
-                                    <EnterOne className="general-news__enter-one" data={videoNews.slice(1)} />
+                                    <EnterOne className="general-news__enter-one" data={videoNews} />
                                 }
                             </MediaQuery>
                         )}
@@ -117,7 +112,7 @@ function HomePage({
                 </div>
                 <MediaQuery maxWidth="929px" minWidth="615px">
                     <div className="general-news__middle">
-                        <BannerPreview className="general-news__banner-preview" />
+                        <Banner type="preview" className="general-news__banner-preview" />
                     </div>
                 </MediaQuery>
                 <div className="general-news__left general-news__left_more">
@@ -126,9 +121,9 @@ function HomePage({
                             <MediaQuery minWidth="615px" maxWidth="929px">
                                 {high => (low || high)
                                     ? <div className="general-news__left-wrapper">
-                                        <Banner className="general-news__banner" />
+                                        <Banner type="large" className="general-news__banner" />
                                     </div>
-                                    : <BannerPreview className="general-news__banner-preview" />
+                                    : <Banner type="preview" className="general-news__banner-preview" />
                                 }
                             </MediaQuery>
                         )}
@@ -137,13 +132,13 @@ function HomePage({
                 </div>
                 <div className="general-news__right general-news__right_more">
                     <MediaQuery minWidth="1250px">
-                        <Subscribe className="general-news__subscribe"/>
+                        <Banner type="subscribe" className="general-news__subscribe"/>
                     </MediaQuery>
                     <MoreNews className="general-news__more-news" data={moreNews} />
                 </div>
                 <MediaQuery minWidth="1250px">
                     <div className="general-news__middle">
-                        <BannerPreview className="general-news__banner-preview" />
+                        <Banner type="preview" className="general-news__banner-preview" />
                     </div>
                 </MediaQuery>
                 {/*<div className="general-news__left general-news__left_more">

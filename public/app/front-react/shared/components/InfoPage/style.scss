@@ -167,7 +167,8 @@
     }
 
     p {
-        // letter-spacing: rem(-0.35);
+        font-size: rem(16);
+        font-family: $stemReg;
     }
 
     .text-cols {
@@ -179,7 +180,8 @@
     }
 
     &__item:not(:first-of-type) {
-        padding-top: rem(65)
+        //padding-top: rem(65)
+        padding-top: rem(0)
     }
 
     &__list {

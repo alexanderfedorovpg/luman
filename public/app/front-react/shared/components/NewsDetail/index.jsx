@@ -12,8 +12,9 @@ import Aside from 'containers/Aside'
 
 import './style.scss'
 
-function Detail({ data, noise, now, related, broadcast, hasVideo }) {
+function Detail({ data, noise, now, related, broadcast, hasVideo, noisePage }) {
     const firstVideo = now[0] || {}
+    const isNoise = !!noisePage && noisePage;
     return (
         <div className="inner-wrapper news-detail">
             <div className="inner-about inner-wrapper inner-default">
@@ -24,14 +25,18 @@ function Detail({ data, noise, now, related, broadcast, hasVideo }) {
                         </Content>
                     </div>
                     <div className="right-col">
-                        <Aside noise={null} broadcast={null} top={null} now={now} />
+                        <Aside noise={null} broadcast={null} top={null} now={now} inside={true} noisePage={isNoise}/>
                         <Group title="Главные новости" margin>
                             <Block data={now[0]} />
                             {now.slice(1, 5).map(v => (
                                 <MiniNews key={v.id} data={v} className="info-noize__mini-news" />
                             ))}
                         </Group>
-                        <Noise className="info-noize__news-detail" data={noise} />
+                        {!isNoise ?
+                            <Noise className="info-noize__news-detail" data={noise} />
+                            :
+                            null
+                        }
                     </div>
                 </div>
             </div>
