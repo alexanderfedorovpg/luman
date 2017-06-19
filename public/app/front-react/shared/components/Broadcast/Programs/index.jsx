@@ -87,10 +87,6 @@ class Broadcast extends Component {
                                 </div>
                             </div>
                             <div className="container news-header__container  news-header__container_tabs">
-                                <div className="news-header__tabs">
-                                    <div className="news-header__tabs_item active">Лучшие моменты</div>
-                                    <div className="news-header__tabs_item">Все выпуски</div>
-                                </div>
                             </div>
                             <div className="container news-header__container news-header__container_personality"></div>
                         </div>
