@@ -66,8 +66,8 @@ class RecoverTools extends Command
 
             foreach ($news as $n) {
                 $n->body = str_replace($find, $replace,$n->body,$count);
-                dump($count);
-             //   $n->save();
+
+                 $n->save();
             }
         });
     }
