@@ -83,6 +83,7 @@ $app->register(\Illuminate\Redis\RedisServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
  $app->register(App\Providers\LogServiceProvider::class);
+$app->register(Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +111,7 @@ $config = [
     'mail',
     'parser',
     'cdn',
+    'push',
 ];
 
 foreach ($config as $file) {

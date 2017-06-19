@@ -520,7 +520,7 @@ class NewsListEditorController extends CmsController
             $news = News::find($id);
             $log_moderation = new NewsModerationLogHelper($news);
 
-            if ($this->user_id != $news->editor_id) {
+            if ($this->user_id != $news->editor_id && !Auth::user()->isAdmin()) {
                 return $this->respondWithError("Данный пользователь не являеться редактором данной новости");
             }
 
