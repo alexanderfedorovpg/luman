@@ -38,9 +38,9 @@ function BannerPreview({images, url, className, multi}) {
     }
     if (url) {
         return (
-            <Link to={url}>
+            <a to={url}>
                 <Banner {...{images, className}}/>
-            </Link>
+            </a>
         )
     } else {
         return (
