@@ -83,6 +83,7 @@ class Broadcast extends Component {
                         <div className="news-header__content">
                             <div className="container news-header__container news-header__container_personal-description">
                                 <div className="news-header__content-container">
+                                    <!--
                                     <p>
                                         Лиза Каймин - наш проводник в мир кичта и гламура американской тусовки.
                                     </p>
@@ -95,6 +96,7 @@ class Broadcast extends Component {
                                     <p>
                                         отпрысков
                                     </p>
+                                    -->
                                 </div>
                             </div>
                             <div className="container news-header__container  news-header__container_tabs">
