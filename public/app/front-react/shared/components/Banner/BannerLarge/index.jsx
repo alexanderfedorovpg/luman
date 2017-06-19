@@ -21,7 +21,7 @@ const Banner = ({images, url, className})=> (
 const BannerLarge = ({images, url, className}) => {
     if (url) {
         return (
-            <a to={url}>
+            <a href={url}>
                 <Banner {...{images, url, className}}/>
             </a>
         )
