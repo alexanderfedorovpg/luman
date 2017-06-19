@@ -99,7 +99,6 @@ class BroadcastPage extends PureComponent {
             loadMore
         } = this.props
         const item = this.getById(match.params.id) || {}
-        const p = [{ id: null, name: 'Все сразу' }, ...programs]
 
         if(SHOW_STUB){
             return (
@@ -132,8 +131,7 @@ class BroadcastPage extends PureComponent {
                         onLoadRequest={loadMore}
                         canLoad={pagination.page < pagination.lastPage}
                         setProgram={this.toPrograms}
-                        programs={p}
-                        program={program}
+                        programs={programs}
                     />
                 }
             </div>
