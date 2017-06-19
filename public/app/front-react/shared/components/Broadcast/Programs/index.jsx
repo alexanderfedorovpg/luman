@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MediaQuery from 'react-responsive'
 import { withRouter, Link } from 'react-router-dom';
+import moment from 'moment';
 
 import Title from 'components/Title'
 import Tabs from 'components/Tabs'
@@ -23,10 +24,48 @@ import content from './programs-content';
 import './style.scss'
 
 class Broadcast extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            filter: {
+                start: null,
+                end: null,
+            },
+        };
+
+        this.onFilter = this.onFilter.bind(this);
+        this.changeStart = this.changeDate.bind(this, 'start');
+        this.changeEnd = this.changeDate.bind(this, 'end');
+    }
+
+    changeDate(type, date) {
+        const { filter } = this.state;
+        let start = type === 'start' ? date : filter.start;
+        let end = type === 'end' ? date : filter.end;
+
+        if (moment(start).isAfter(end)) {
+            const temp = start;
+            start = end;
+            end = temp;
+        }
+
+        this.setState({
+            filter: { start, end },
+        });
+    }
+
+    onFilter() {
+        if (!this.props.onFilter) {
+            return;
+        }
+
+        this.props.onFilter(this.state.filter);
+    }
 
     renderItems(data) {
         return (
-            <div className="news-one-line__row">
+            <div className="news-one-line__row news-one-line__row_after-banners">
                 <Item data={data[0]} />
                 <Item data={data[1]} />
                 <Item data={data[2]} />
@@ -39,7 +78,7 @@ class Broadcast extends Component {
         let items = []
         let values = [...data]
 
-        while (data.length) {
+        while (values.length) {
             items = items.push(this.renderItems(values.splice(0, 4)))
         }
 
@@ -56,7 +95,7 @@ class Broadcast extends Component {
             match,
         } = this.props
 
-        const program = match.params.id;
+        const program = parseInt(match.params.id, 10);
         const data = broadcast.filter(v => (
             program
                 ? (v.program || {}).id === program
@@ -64,6 +103,7 @@ class Broadcast extends Component {
         ));
         const selectedProgram = programs.filter(v => v.id === program)[0];
         const programName = selectedProgram ? selectedProgram.name : '';
+        const { filter } = this.state;
 
         return (
             <div className="inner-wrapper">
@@ -92,6 +132,10 @@ class Broadcast extends Component {
                                 </div>
                             </div>
                             <div className="container news-header__container  news-header__container_tabs">
+                                {/*<div className="news-header__tabs">
+                                    <div className="news-header__tabs_item active">Лучшие моменты</div>
+                                    <div className="news-header__tabs_item">Все выпуски</div>
+                                </div>*/}
                             </div>
                             <div className="container news-header__container news-header__container_personality">
                                 <img src={content[program].photo} alt="" className={'news-header__personality ' +  content[program].big_image} />
@@ -111,6 +155,36 @@ class Broadcast extends Component {
                                             <MediaQuery minWidth="1250px">
 
                                             </MediaQuery>
+                                            <div className="news-one-line__date">
+                                                <div>
+                                                    Поиск выпуска по дате эфира: c
+                                                    {' '}
+                                                    <Datepicker
+                                                        className="small"
+                                                        onChange={this.changeStart}
+                                                        selectsStart
+                                                        selected={filter.start}
+                                                        startDate={filter.start}
+                                                        endDate={filter.end}
+                                                    />
+                                                    по
+                                                    {' '}
+                                                    <Datepicker
+                                                        className="small"
+                                                        onChange={this.changeEnd}
+                                                        selectsEnd
+                                                        selected={filter.end}
+                                                        startDate={filter.start}
+                                                        endDate={filter.end}
+                                                    />
+                                                    <button
+                                                        className="button"
+                                                        onClick={this.onFilter}
+                                                    >
+                                                        Показать
+                                                    </button>
+                                                </div>
+                                            </div>
                                             <div className="news-one-line__date-items">
                                                 <Item data={data[5]} />
                                                 <Item data={data[6]} />

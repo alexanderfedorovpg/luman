@@ -19,10 +19,9 @@ import Aside from 'containers/Aside'
 import './style.scss'
 
 class Broadcast extends Component {
-
     renderItems(data) {
         return (
-            <div className="news-one-line__row">
+            <div className="news-one-line__row news-one-line__row_after-banners">
                 <Item data={data[0]} />
                 <Item data={data[1]} />
                 <Item data={data[2]} />

@@ -31,7 +31,6 @@ class BroadcastProgramsPage extends PureComponent {
         super(props);
 
         this.toPrograms = this.toPrograms.bind(this);
-
     }
 
     componentDidMount() {
