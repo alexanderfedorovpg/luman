@@ -18,7 +18,7 @@ let array = [
         images: {
             mobile:          '/content/banner/reload1.png',
             tabletLandscape: '/content/banner/reload2.png',
-            desktop:         '/content/banner/reload3.png',
+            desktop:         '/content/banner/reload4.png',
         },
         url_to: '/broadcast/323'
     },
@@ -35,7 +35,7 @@ let array = [
         url:    '/',
         images: {
             mobile:          '/content/banner/reload1.png',
-            desktop:         '/content/banner/reload4.png',
+            desktop:         '/content/banner/reload3.png',
         },
         url_to: '/broadcast/323'
     },
