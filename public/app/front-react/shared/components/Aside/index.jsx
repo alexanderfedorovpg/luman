@@ -25,7 +25,7 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
             <MediaQuery minWidth="930px">
                 {
                     !broadcastPage &&
-                    <div className="aside__video" style={{ height: '396px' }}>
+                    <div className="aside__video">
                         <AsideVideo
                             playTitle="date"
                             title="Все ключевые события этого дня"
