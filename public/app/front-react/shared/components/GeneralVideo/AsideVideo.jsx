@@ -141,7 +141,12 @@ class AsideVideo extends PureComponent {
                 </div>
             )
             : (
-                <img src={main ? mainVideoPlaceholder : insideVideoPlaceholder} className="general-video__img" />
+                <div className={classNames(
+                    'general-video',
+                    className,
+                )}>
+                    <img src={main ? mainVideoPlaceholder : insideVideoPlaceholder} className="general-video__img" />
+                </div>
             )
     }
 }
