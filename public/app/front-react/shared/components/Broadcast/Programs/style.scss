@@ -4,6 +4,24 @@
 
 .news-top_programs {
 
+    .from-enter {
+
+        &__info {
+            bottom: rem(21);
+        }
+
+        &__category {
+            margin-top: rem(11);
+        }
+
+        &_big {
+
+            .from-enter__category {
+                margin-top: rem(16);
+            }
+        }
+    }
+
     .news-top {
 
         &__news-header {
