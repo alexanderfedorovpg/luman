@@ -81,13 +81,7 @@ class Content extends PureComponent {
 
     render() {
         const { data, intl, children } = this.props
-        // let theses = [];
-
-        // if (data.theses) {
-        //     theses = Array.isArray(data.theses)
-        //         ? data.theses
-        //         : `${data.theses}`.split('\\');
-        // }
+        let body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
 
         const date = Date.parse(data.publish_date) && intl.formatDate(
             data.publish_date,
@@ -99,7 +93,6 @@ class Content extends PureComponent {
 
         return (
             <div>
-                {/*<div onClick={this.stop} style={this.state.overlay} className={classNames('inner-about-video_overlay', {'is-active' : this.state.play})}></div> */}
                 <h1>
                     {data.title}
                 </h1>
@@ -122,23 +115,6 @@ class Content extends PureComponent {
                         },
                     )}
                 >
-                    {
-                        // !!theses.length &&
-                        // <div
-                        //     className={classNames(
-                        //         'text-bg-gray__block-text',
-                        //         {
-                        //             'text-bg-gray__block-text_play': this.state.play,
-                        //         },
-                        //     )}
-                        // >
-                        //     {theses.map((v, i) => (
-                        //         <div key={i} className="text-bg-gray__text text-bg-gray__text-lite">
-                        //             {v}
-                        //         </div>
-                        //     ))}
-                        // </div>
-                    }
                     <Video
                         className="broadcast__general-video"
                         play={this.state.play}
@@ -153,7 +129,7 @@ class Content extends PureComponent {
                     <Socials shareLink={'http://news.rtvi.com/broadcast/' + data.id} title={data.title}/>
                 </div>
                 <div className="inner-about__content">
-                    <div dangerouslySetInnerHTML={{ __html: data.body }} />
+                    <div dangerouslySetInnerHTML={{ __html: body }} />
                     {children}
                 </div>
             </div>
