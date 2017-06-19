@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MediaQuery from 'react-responsive'
+import { withRouter } from 'react-router-dom';
 
 import Title from 'components/Title'
 import Tabs from 'components/Tabs'
@@ -18,6 +19,7 @@ import Video from 'components/Aside/Video'
 
 import Datepicker from 'components/Datepicker'
 
+import content from './programs-content';
 import './style.scss'
 
 class Broadcast extends Component {
@@ -48,18 +50,20 @@ class Broadcast extends Component {
         const {
             broadcast,
             programs,
-            program,
             setProgram,
             onLoadRequest,
-            canLoad
+            canLoad,
+            match,
         } = this.props
 
+        const program = match.params.id;
         const data = broadcast.filter(v => (
             program
-                ? (v.program||{}).id == program
+                ? (v.program || {}).id === program
                 : true
-        ))
-
+        ));
+        const selectedProgram = programs.filter(v => v.id === program)[0];
+        const programName = selectedProgram ? selectedProgram.name : '';
 
         return (
             <div className="inner-wrapper">
@@ -75,20 +79,21 @@ class Broadcast extends Component {
                     <div className="news-header news-top__news-header">
                         <div className="news-header__title">
                             <div className="container news-header__container">
-                                {programs.filter(v => v.id === program)[0].name}
-                                <div className="news-header__title-logo">
-                                </div>
+                                {programName}
+                                <div className={'news-header__title-logo news-header__title-logo_' + content[program].category} />
                             </div>
                         </div>
                         <div className="news-header__content">
                             <div className="container news-header__container news-header__container_personal-description">
-                                <div className="news-header__content-container">
-
+                                <div className={'news-header__content-container ' + content[program].big_text}>
+                                    <p>{content[program].desc}</p>
                                 </div>
                             </div>
                             <div className="container news-header__container  news-header__container_tabs">
                             </div>
-                            <div className="container news-header__container news-header__container_personality"></div>
+                            <div className="container news-header__container news-header__container_personality">
+                                <img src={content[program].photo} alt="" className={'news-header__personality ' +  content[program].big_image} />
+                            </div>
                         </div>
                     </div>
                     <div className="news-top__container container">
@@ -184,4 +189,4 @@ class Broadcast extends Component {
     }
 }
 
-export default Broadcast
+export default withRouter(Broadcast);

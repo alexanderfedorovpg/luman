@@ -34,10 +34,10 @@ let array = [
         type:   'large', //принимает 1-4 колоночные картинки
         url:    '/',
         images: {
-            mobile:          '/content/banner/reload1.png',
-            desktop:         '/content/banner/reload3.png',
+            mobile:          '/content/banner/here_and_there_1c.png',
+            desktop:         '/content/banner/here_and_there_3c.png',
         },
-        url_to: '/broadcast/323'
+        url_to: ''
     },
 ]
 
@@ -60,7 +60,7 @@ const Banner = ({type, className,match}) => {
     const data = getData(type, match.url);
 
     if (type == LARGE) {
-        return <BannerLarge images={data.images} url={data.url_to} defaultUrl={'/how'} className={className}/>
+        return <BannerLarge images={data.images} url={data.url_to} className={className}/>
     } else if (type == PREVIEW) {
         return <BannerPreview images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
         //return null;
