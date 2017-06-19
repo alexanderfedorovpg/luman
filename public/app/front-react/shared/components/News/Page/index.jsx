@@ -23,19 +23,16 @@ class News extends Component {
     renderItems(data) {
 
         return [
-            <Block data={data[0]} />,
-            <div>
-                {data.slice(1, 5).map(v => (
-                    <MiniNews key={v.id} data={v} className="news-top__mini-news" />
-                ))}
+            <div key={data[0].id} className="news-top__row-item">
+                <Block data={data[0]} rectangle />
+                <Block data={data[1]} />
+                <Block data={data[2]} />
             </div>,
-            <Block data={data[5]} />,
-            <div>
-                {data.slice(6, 10).map(v => (
-                    <MiniNews key={v.id} data={v} className="news-top__mini-news" />
-                ))}
+            <div key={data[3].id} className="news-top__row-item">
+                <Block data={data[3]} />
+                <Block data={data[4]} />
+                <Block data={data[5]} rectangle />
             </div>,
-            <BlockBorder data={data[10]} />,
         ]
     }
 
@@ -43,21 +40,13 @@ class News extends Component {
         let items = []
 
         while (data.length) {
-            items = items.concat(this.renderItems(data.splice(0, 11)))
+            items = items.concat(this.renderItems(data.splice(0, 6)))
         }
 
         return (
-            <Masonry
-                className={'news-top__row'}
-                options={{
-                    gutter: 10
-                }}>
-                {items.map((v, i) => (
-                    <div key={i} className="news-top__row-item">
-                        {v}
-                    </div>
-                ))}
-            </Masonry>
+            <div className="news-top__row">
+                {items}
+            </div>
         )
     }
 
@@ -73,11 +62,7 @@ class News extends Component {
             canLoad
         } = this.props
 
-        const data = news.filter(v => (
-            rubric
-                ? v.rubrics.find(({ id }) => id == rubric)
-                : true
-        ))
+        const data = news
 
         return (
             <div className="inner-wrapper">
@@ -87,7 +72,6 @@ class News extends Component {
                             <Title anchor='news'>
                                 Новости
                             </Title>
-                            { /*<Tabs data={rubrics} active={rubric} onChange={setRubric} /> */}
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row">
                                     <Block data={now[0]} rectangle className="news-one-line__block-rectangle" />
@@ -103,17 +87,12 @@ class News extends Component {
                         <MediaQuery minWidth="930px">
                             <Aside top={null} inside broadcast={null} now={now} />
                         </MediaQuery>
-                        {/*
-                         <MediaQuery minWidth="930px" maxWidth="1249px">
-                         <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
-                         </MediaQuery>
-                        */}
                         <MediaQuery minWidth="1250px">
                             <div className="news-top__middle middle-col">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
-                        <div className="left-col left-col_width_inner">
+                        <div className="news-top__middle middle-col">
                             <MediaQuery maxWidth="929px">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
@@ -121,10 +100,7 @@ class News extends Component {
                                 <div className="per-day__wrapper">
                                     <Block data={today[0]} className="news-one-line__block-square" />
                                     <Block data={today[1]} className="news-one-line__block-square" />
-                                    <Block data={today[2]} className="news-one-line__block-square" />
-                                    <Block data={today[3]} className="news-one-line__block-square" />
-                                    <Block data={today[4]} className="news-one-line__block-square" />
-                                    <Block data={today[5]} className="news-one-line__block-square" />
+                                    <Block data={today[2]} rectangle className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
                             <MediaQuery maxWidth="929px">
@@ -138,16 +114,12 @@ class News extends Component {
                             </MediaQuery>
 
                             <MediaQuery minWidth="930px" maxWidth="1249px">
-                                <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
-                                {this.renderAdditionalData(data.slice(11))}
-                                {canLoad
-                                    ? (
-                                        <LoadMore onClick={onLoadRequest}>
-                                            Больше новостей
-                                        </LoadMore>
-                                    )
-                                    : null
-                                }
+                                {this.renderAdditionalData(data.slice())}
+                                {canLoad && (
+                                    <LoadMore onClick={onLoadRequest}>
+                                        Больше новостей
+                                    </LoadMore>
+                                )}
                             </MediaQuery>
 
                         </div>
@@ -166,24 +138,13 @@ class News extends Component {
                         </MediaQuery>
 
                         <MediaQuery minWidth="1250px">
-                            <div className="news-top__left left-col left-col left-col_width_inner">
-                                <RandomNews data={data.slice(0, 7)} className="news-top__random-news" />
-                                {this.renderAdditionalData(data.slice(11))}
-                                {canLoad
-                                    ? (
-                                        <LoadMore onClick={onLoadRequest}>
-                                            Больше новостей
-                                        </LoadMore>
-                                    )
-                                    : null
-                                }
-                            </div>
-                        </MediaQuery>
-                        <MediaQuery minWidth="930px">
-                            <div className="news-top__right right-col">
-                                <MediaQuery minWidth="1250px">
-                                    <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
-                                </MediaQuery>
+                            <div className="news-top__middle middle-col">
+                                {this.renderAdditionalData(data.slice())}
+                                {canLoad && (
+                                    <LoadMore onClick={onLoadRequest}>
+                                        Больше новостей
+                                    </LoadMore>
+                                )}
                             </div>
                         </MediaQuery>
                     </div>

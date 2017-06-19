@@ -39,7 +39,6 @@
     }
 
     @include above($desktop) {
-        width: rem(615);
         height: rem(505);
     }
 
