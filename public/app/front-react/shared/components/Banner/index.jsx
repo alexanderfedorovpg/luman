@@ -12,7 +12,6 @@ const SUBSCRIBE = 'subscribe';
 
 
 let array = [
-    /*
     {
         type:   'preview', //принимает 1-2-4 колоночные картинки
         url:    '/',
@@ -23,7 +22,6 @@ let array = [
         },
         url_to: '/broadcast/323'
     },
-    */
     {
         type:   'subscribe',//принимает только 1-колоночную картинку
         url:    '/news/8-ssha-vveli-sanktsii-protiv-treh-jivuschih-v-moskve-grajdan-kndr',
@@ -65,7 +63,7 @@ const Banner = ({type, className,match}) => {
         return <BannerLarge images={data.images} url={data.url_to} defaultUrl={'/how'} className={className}/>
     } else if (type == PREVIEW) {
         //return <BannerPreview images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
-        return <BannerPreview images='' url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
+        return null
     } else if (type == SUBSCRIBE) {
         return <Subscribe images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
     } else {
