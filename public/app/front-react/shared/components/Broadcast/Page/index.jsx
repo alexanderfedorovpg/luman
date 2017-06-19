@@ -19,10 +19,9 @@ import Aside from 'containers/Aside'
 import './style.scss'
 
 class Broadcast extends Component {
-
     renderItems(data) {
         return (
-            <div className="news-one-line__row">
+            <div className="news-one-line__row news-one-line__row_after-banners">
                 <Item data={data[0]} />
                 <Item data={data[1]} />
                 <Item data={data[2]} />
@@ -35,7 +34,7 @@ class Broadcast extends Component {
         let items = []
         let values = [...data]
 
-        while (data.length) {
+        while (values.length) {
             items.push(this.renderItems(values.splice(0, 4)))
         }
 
@@ -53,12 +52,7 @@ class Broadcast extends Component {
             canLoad
         } = this.props
 
-        const data = broadcast.filter(v => (
-            program
-                ? (v.program||{}).id == program
-                : true
-        ))
-
+        const data = broadcast.slice(0, 20);
         const now = nowNews;
 
         return (
@@ -69,7 +63,7 @@ class Broadcast extends Component {
                             <Title anchor="broadcast">
                                 Из эфира
                             </Title>
-                            <Tabs data={programs} active={program} onChange={setProgram} />
+                            <Tabs data={programs} onChange={setProgram} />
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row news-one-line__row_top">
                                     <Item data={data[0]} big />

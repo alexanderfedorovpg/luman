@@ -166,9 +166,9 @@
         // letter-spacing: rem(-0.4);
     }
 
-    p {
+    &__introtext {
         font-size: rem(16);
-        font-family: $stemReg;
+        font-family: $openSans;
     }
 
     .text-cols {

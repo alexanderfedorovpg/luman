@@ -4,6 +4,11 @@
 
 .news-top_programs {
 
+    .news-top__title {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .from-enter {
 
         &__info {
@@ -215,9 +220,14 @@
             }
 
             .button {
+                padding: 0;
+                border: none;
+
                 color: #00a5b6;
                 text-decoration: none;
                 text-transform: uppercase;
+
+                background: none;
 
                 &:hover {
                     text-decoration: underline;
@@ -403,6 +413,7 @@
 
         &_tabs {
             order: 2;
+            padding-bottom: rem(70);
 
             @include below($mobile) {
                 order: 3;
@@ -453,10 +464,10 @@
     }
 
     &__tabs {
-        width: rem(615);
+        width: rem(617);
 
         border-top: rem(1) solid #b9babc;
-        padding: rem(8) 0 rem(70);
+        padding: rem(8) 0 0;
 
         @include below($tabletMax) {
             padding-bottom: rem(15);
