@@ -55,19 +55,10 @@ function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcas
                 showNoise &&
                 <Noise data={noise} />
             }
-            {!isInside ?
-                (
-                    <div>
-                        {
-                            showBroadcast
-                            ? <FromEnter data={broadcast} />
-                            : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
-                        }
-                        {/* <Subscribe className="news-top__subscribe" /> */}
-                    </div>
-                )
-                :
-                null
+            {
+                !isInside && showBroadcast &&
+                <FromEnter data={broadcast} />
+                {/* <Subscribe className="news-top__subscribe" /> */}
             }
             {!isInside ?
                 <Banner type="subscribe" className="news-top__subscribe" />
