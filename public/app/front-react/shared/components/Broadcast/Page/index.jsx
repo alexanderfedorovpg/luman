@@ -92,6 +92,7 @@ class Broadcast extends Component {
                                     broadcast={null}
                                     top={null}
                                     now={now}
+                                    inside
                                 />
                                 <Group title="Главные новости" margin>
                                     {nowNews.map(v => (
