@@ -4,6 +4,24 @@
 
 .news-top_programs {
 
+    .from-enter {
+
+        &__info {
+            bottom: rem(21);
+        }
+
+        &__category {
+            margin-top: rem(11);
+        }
+
+        &_big {
+
+            .from-enter__category {
+                margin-top: rem(16);
+            }
+        }
+    }
+
     .news-top {
 
         &__news-header {
@@ -352,7 +370,8 @@
                 content: ' ';
                 display: block;
 
-                background-image: url(/content/broadcast/liza.png);
+                //
+                //background-image: url(/content/broadcast/liza.png);
                 background-repeat: no-repeat;
                 background-position: top center;
                 background-size: cover;

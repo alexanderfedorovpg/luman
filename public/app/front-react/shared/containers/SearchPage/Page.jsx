@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
+import Banner from 'components/Banner'
 
 import { search, changeSearchCategory, setInitialState } from 'actions/search';
 import {

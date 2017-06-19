@@ -83,25 +83,10 @@ class Broadcast extends Component {
                         <div className="news-header__content">
                             <div className="container news-header__container news-header__container_personal-description">
                                 <div className="news-header__content-container">
-                                    <p>
-                                        Лиза Каймин - наш проводник в мир кичта и гламура американской тусовки.
-                                    </p>
-                                    <p>
-                                        В объективах камер окажутся: закрытые вечеринки, роскошные свадьбы,
-                                    </p>
-                                    <p>
-                                        домашние приёмы олигархов, увлечения селебрити и их отвязных
-                                    </p>
-                                    <p>
-                                        отпрысков
-                                    </p>
+
                                 </div>
                             </div>
                             <div className="container news-header__container  news-header__container_tabs">
-                                <div className="news-header__tabs">
-                                    <div className="news-header__tabs_item active">Лучшие моменты</div>
-                                    <div className="news-header__tabs_item">Все выпуски</div>
-                                </div>
                             </div>
                             <div className="container news-header__container news-header__container_personality"></div>
                         </div>
@@ -112,32 +97,12 @@ class Broadcast extends Component {
                                 <div className="news-one-line news-top__news-one-line">
                                     <div className="news-one-line__row news-one-line__item-bottom">
                                         <MediaQuery maxWidth="1249px">
-                                            <div className="news-one-line__date-wrap">
-                                                <div className="news-one-line__date">
-                                                    <div>
-                                                        <span className="news-one-line__date-title">Поиск выпуска по дате эфира:</span>
-                                                        <span className="news-one-line__from-text"> c </span>
-                                                        <Datepicker className='small datepicker_programm' />
-                                                        <span className="news-one-line__to-text">по</span>
-                                                        <Datepicker className='small datepicker_programm' />
-                                                        <a href="#" className='button' role="button">Показать</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </MediaQuery>
                                         <Item data={data[0]} big />
                                         <div className="news-one-line__date-wrap news-one-line__date-wrap_view-desktop">
                                             <MediaQuery minWidth="1250px">
-                                                <div className="news-one-line__date">
-                                                    <div>
-                                                        <span className="news-one-line__date-title">Поиск выпуска по дате эфира:</span>
-                                                        <span className="news-one-line__from-text"> c </span>
-                                                        <Datepicker className='small datepicker_programm' />
-                                                        <span className="news-one-line__to-text">по</span>
-                                                        <Datepicker className='small datepicker_programm' />
-                                                        <a href="#" className='button' role="button">Показать</a>
-                                                    </div>
-                                                </div>
+
                                             </MediaQuery>
                                             <div className="news-one-line__date-items">
                                                 <Item data={data[5]} />

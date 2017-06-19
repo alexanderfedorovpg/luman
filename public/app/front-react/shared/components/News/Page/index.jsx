@@ -95,6 +95,8 @@ class News extends Component {
                                     <Block data={now[2]} className="news-one-line__block-square" />
                                     <Block data={now[3]} className="news-one-line__block-square" />
                                     <Block data={now[4]} className="news-one-line__block-square" />
+                                    <Block data={now[5]} className="news-one-line__block-square" />
+                                    <Block data={now[6]} rectangle className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
                             <MediaQuery minWidth="1250px">
@@ -104,13 +106,13 @@ class News extends Component {
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
                             <div className="per-day news-top__per-day">
-                                <p className="per-day__title section-title">
-                                    Главное за последние сутки
-                                </p>
                                 <div className="per-day__wrapper">
                                     <Block data={today[0]} className="news-one-line__block-square" />
                                     <Block data={today[1]} className="news-one-line__block-square" />
                                     <Block data={today[2]} className="news-one-line__block-square" />
+                                    <Block data={today[3]} className="news-one-line__block-square" />
+                                    <Block data={today[4]} className="news-one-line__block-square" />
+                                    <Block data={today[5]} className="news-one-line__block-square" />
                                 </div>
                             </div>
                             <MediaQuery maxWidth="929px">
@@ -138,7 +140,7 @@ class News extends Component {
 
                         </div>
                         <MediaQuery minWidth="930px">
-                            <Aside top={[]} now={now} />
+                            <Aside top={null} inside broadcast={null} now={now} />
                             <MediaQuery minWidth="930px" maxWidth="1249px">
                                 <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                             </MediaQuery>

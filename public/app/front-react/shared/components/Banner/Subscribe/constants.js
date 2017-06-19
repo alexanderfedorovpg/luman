@@ -17,7 +17,7 @@ export const links = [
         img: ok,
     },
     {
-        href: 'https://vk.com/rtvichannel',
+        href: 'https://vk.com/rtvi',
         img: vk,
     },
 ];
