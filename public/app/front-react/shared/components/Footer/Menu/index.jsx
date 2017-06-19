@@ -26,6 +26,9 @@ function Menu({ className }) {
 export default Menu
 
 const menuData = [
+    {
+        title: 'qqqq'
+    }
     // {
     //     title: 'Телепрограмма',
     //     link: '/#'
@@ -34,10 +37,10 @@ const menuData = [
     //     title: 'Лицензии',
     //     link: '/#'
     // },
-    {
-        title: 'Как смотреть',
-        link: '/how'
-    },
+    //{
+    //    title: 'Как смотреть',
+    //    link: '/how'
+    //},
     // {
     //     title: 'Карьера',
     //     link: '/#'
