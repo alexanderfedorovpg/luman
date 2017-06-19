@@ -4,6 +4,7 @@ namespace App\Console;
 
 
 use App\Console\Commands\Parse\Parse;
+use App\Console\Commands\RecoverTools\RecoverTools;
 use App\Console\Commands\Rbac\Administarator;
 use App\Console\Commands\Rbac\Permission;
 use Illuminate\Console\Scheduling\Schedule;
@@ -19,7 +20,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Administarator::class,
         Permission::class,
-        Parse::class
+        Parse::class,
+        RecoverTools::class
     ];
 
     /**
