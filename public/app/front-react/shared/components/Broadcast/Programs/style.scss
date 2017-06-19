@@ -4,6 +4,11 @@
 
 .news-top_programs {
 
+    .news-top__title {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .from-enter {
 
         &__info {

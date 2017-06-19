@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import MediaQuery from 'react-responsive'
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import Title from 'components/Title'
 import Tabs from 'components/Tabs'
@@ -71,7 +71,9 @@ class Broadcast extends Component {
                     <div className="news-top__container news-top__container-programs container">
                         <div className="news-top__left news-top__full">
                             <Title>
-                                Из эфира
+                                <Link className="news-top__title" to="/broadcast">
+                                    Из эфира
+                                </Link>
                             </Title>
                             <Tabs data={programs} active={program} onChange={setProgram} />
                         </div>
