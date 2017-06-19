@@ -83,7 +83,7 @@ class News extends Component {
             <div className="inner-wrapper">
                 <div className="news-top news-top_all-news">
                     <div className="news-top__container container">
-                        <div className="news-top__left left-col left-col left-col_width_inner">
+                        <div className="news-top__left left-col left-col_width_inner">
                             <Title anchor='news'>
                                 Новости
                             </Title>
@@ -99,9 +99,21 @@ class News extends Component {
                                     <Block data={now[6]} rectangle className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
-                            <MediaQuery minWidth="1250px">
-                                <Banner type="large" className="news-top__banner" />
-                            </MediaQuery>
+                        </div>
+                        <MediaQuery minWidth="930px">
+                            <Aside top={null} inside broadcast={null} now={now} />
+                        </MediaQuery>
+                        {/*
+                         <MediaQuery minWidth="930px" maxWidth="1249px">
+                         <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
+                         </MediaQuery>
+                        */}
+                        <MediaQuery minWidth="1250px">
+                            <div className="news-top__middle middle-col">
+                                <Banner type="preview" className="news-top__banner-preview" />
+                            </div>
+                        </MediaQuery>
+                        <div className="left-col left-col_width_inner">
                             <MediaQuery maxWidth="929px">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
@@ -139,15 +151,17 @@ class News extends Component {
                             </MediaQuery>
 
                         </div>
-                        <MediaQuery minWidth="930px">
-                            <Aside top={null} inside broadcast={null} now={now} />
-                            <MediaQuery minWidth="930px" maxWidth="1249px">
-                                <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
-                            </MediaQuery>
+
+                        <MediaQuery minWidth="1250px">
+                            <div className="left-col left-col_width_inner">
+                                <Banner type="large" className="news-top__banner" />
+                            </div>
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
-                            <div className="news-top__middle middle-col">
-                                <Banner type="preview" className="news-top__banner-preview" />
+                            <div className="right-col">
+                                <MediaQuery minWidth="1250px">
+                                    <Banner type="subscribe" className="news-top__subscribe" />
+                                </MediaQuery>
                             </div>
                         </MediaQuery>
 
@@ -167,9 +181,6 @@ class News extends Component {
                         </MediaQuery>
                         <MediaQuery minWidth="930px">
                             <div className="news-top__right right-col">
-                                <MediaQuery minWidth="1250px">
-                                    <Banner type="subscribe" className="news-top__subscribe" />
-                                </MediaQuery>
                                 <MediaQuery minWidth="1250px">
                                     <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                                 </MediaQuery>

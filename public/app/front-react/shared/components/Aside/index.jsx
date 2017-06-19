@@ -55,24 +55,13 @@ function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcas
                 showNoise &&
                 <Noise data={noise} />
             }
-            {!isInside ?
-                (
-                    <div>
-                        {
-                            showBroadcast
-                            ? <FromEnter data={broadcast} />
-                            : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
-                        }
-                        {/* <Subscribe className="news-top__subscribe" /> */}
-                    </div>
-                )
-                :
-                null
+            {
+                !isInside && showBroadcast &&
+                <FromEnter data={broadcast} />
             }
-            {!isInside ?
+            {
+                !isInside &&
                 <Banner type="subscribe" className="news-top__subscribe" />
-                :
-                null
             }
             <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1249px">
                 <Banner type="large" className="news-top__banner" />
