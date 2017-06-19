@@ -321,6 +321,7 @@
     }
 
     &__content {
+        position: relative;
         padding-top: rem(37);
         font-size: rem(15);
         line-height: rem(26);
@@ -369,6 +370,7 @@
             @include below($mobile) {
                 order: 1;
             }
+
         }
 
         &_personal-description {
@@ -411,6 +413,10 @@
         @include below($mobile) {
             position: static;
             width: rem(300);
+        }
+
+        &_big {
+
         }
     }
 
