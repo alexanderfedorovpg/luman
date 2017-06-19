@@ -704,7 +704,7 @@
             padding-top: rem(12);
 
             @include below($tabletLandscapeMax) {
-                width: rem(615);
+                width: rem(617);
             }
 
             @include below($tabletMax) {
@@ -726,7 +726,7 @@
                         height: rem(381);
 
                         @include below($tabletLandscapeMax) {
-                            width: rem(615);
+                            width: rem(617);
                         }
 
                         @include below($tabletMax) {

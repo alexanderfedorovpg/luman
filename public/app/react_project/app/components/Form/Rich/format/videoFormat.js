@@ -32,9 +32,9 @@ export default Quill => {
             preview.classList.add('video__preview');
 
             node.dataset.src = value.src;
-            node.dataset.title = value.title;
-            node.dataset.author = value.author;
-            node.dataset.source = value.source;
+            node.dataset.title = value.title||'';
+            node.dataset.author = value.author||'';
+            node.dataset.source = value.source||'';
 
             wrapper.appendChild(preview);
             wrapper.appendChild(playBtn);

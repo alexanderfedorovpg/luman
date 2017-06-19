@@ -31,9 +31,9 @@ export default Quill => {
                 info.textContent = `Фото: ${author}${divider}${source}`;
             }
 
-            node.dataset.title = value.title;
-            node.dataset.author = value.author;
-            node.dataset.source = value.source;
+            node.dataset.title = value.title||'';
+            node.dataset.author = value.author||'';
+            node.dataset.source = value.source||'';
 
             return node;
         }
