@@ -366,39 +366,6 @@
             position: relative;
             order: 3;
 
-            &::after {
-                content: ' ';
-                display: block;
-
-                //
-                //background-image: url(/content/broadcast/liza.png);
-                background-repeat: no-repeat;
-                background-position: top center;
-                background-size: cover;
-
-                width: rem(382);
-                height: rem(465);
-
-                position: absolute;
-                right: rem(60);
-                bottom: 0;
-
-                @include below($tabletLandscapeMax) {
-                    right: 0;
-                }
-
-                @include below($tabletMax) {
-                    right: rem(-18);
-                    width: rem(377);
-                    height: rem(378);
-                }
-
-                @include below($mobile) {
-                    position: static;
-                    width: rem(300);
-                }
-            }
-
             @include below($mobile) {
                 order: 1;
             }
@@ -414,6 +381,36 @@
             @include below($mobile) {
                 order: 3;
             }
+        }
+    }
+
+    &__personality {
+        display: block;
+
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+
+        width: rem(382);
+        height: rem(465);
+
+        position: absolute;
+        right: rem(60);
+        bottom: 0;
+
+        @include below($tabletLandscapeMax) {
+            right: 0;
+        }
+
+        @include below($tabletMax) {
+            right: rem(-18);
+            width: rem(377);
+            height: rem(378);
+        }
+
+        @include below($mobile) {
+            position: static;
+            width: rem(300);
         }
     }
 

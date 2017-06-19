@@ -18,6 +18,7 @@ import Video from 'components/Aside/Video'
 
 import Datepicker from 'components/Datepicker'
 
+import content from './programs-content';
 import './style.scss'
 
 class Broadcast extends Component {
@@ -56,10 +57,9 @@ class Broadcast extends Component {
 
         const data = broadcast.filter(v => (
             program
-                ? (v.program||{}).id == program
+                ? (v.program || {}).id === program
                 : true
-        ))
-
+        ));
 
         return (
             <div className="inner-wrapper">
@@ -83,12 +83,14 @@ class Broadcast extends Component {
                         <div className="news-header__content">
                             <div className="container news-header__container news-header__container_personal-description">
                                 <div className="news-header__content-container">
-
+                                    <p>{content[program].desc}</p>
                                 </div>
                             </div>
                             <div className="container news-header__container  news-header__container_tabs">
                             </div>
-                            <div className="container news-header__container news-header__container_personality"></div>
+                            <div className="container news-header__container news-header__container_personality">
+                                <img src={content[program].photo} alt="" className="news-header__personality"/>
+                            </div>
                         </div>
                     </div>
                     <div className="news-top__container container">
