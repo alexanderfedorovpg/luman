@@ -24,14 +24,14 @@ class News extends Component {
 
         return [
             <div key={data[0].id} className="news-top__row-item">
-                <Block data={data[0]} className="news-one-line__block-square" />
-                <Block data={data[1]} className="news-one-line__block-square" />
-                <Block data={data[2]} rectangle className="news-one-line__block-rectangle" />
+                <Block data={data[0]} rectangle />
+                <Block data={data[1]} />
+                <Block data={data[2]} />
             </div>,
             <div key={data[3].id} className="news-top__row-item">
-                <Block data={data[3]} rectangle className="news-one-line__block-rectangle" />
-                <Block data={data[4]} className="news-one-line__block-square" />
-                <Block data={data[5]} className="news-one-line__block-square" />
+                <Block data={data[3]} />
+                <Block data={data[4]} />
+                <Block data={data[5]} rectangle />
             </div>,
         ]
     }
