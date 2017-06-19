@@ -12,6 +12,7 @@ const SUBSCRIBE = 'subscribe';
 
 
 let array = [
+    /*
     {
         type:   'preview', //принимает 1-2-4 колоночные картинки
         url:    '/',
@@ -22,6 +23,7 @@ let array = [
         },
         url_to: '/broadcast/323'
     },
+    */
     {
         type:   'subscribe',//принимает только 1-колоночную картинку
         url:    '/news/8-ssha-vveli-sanktsii-protiv-treh-jivuschih-v-moskve-grajdan-kndr',
