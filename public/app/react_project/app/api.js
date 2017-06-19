@@ -216,6 +216,18 @@ export const publishArticle = (id) => axios.put(`/newseditor/publish/${id}`);
 // File API
 // =============================================================================
 
+/**
+ * отдает превьюшку для видео справа на странице, на сайте
+ * @returns {AxiosPromise}
+ */
+export const loadCoverImg = () => {
+    return axios.get('/air/cover');
+}
+
+export const uploadCoverImg = (id) => {
+    return axios.post('/air/cover', {value: id})
+}
+
 export const uploadFile = (file, data = {}) => {
     const formData = new FormData();
 
