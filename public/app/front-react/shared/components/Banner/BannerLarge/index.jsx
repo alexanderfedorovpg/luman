@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import MediaQuery from 'react-responsive'
 import how_3c from './img/how_3c.gif'
 import how_1c from './img/how_1c.gif'
+import isExternal from 'is-url-external';
 
 import './style.scss'
 
@@ -20,10 +21,14 @@ const Banner = ({images, url, className})=> (
 
 const BannerLarge = ({images, url, className}) => {
     if (url) {
-        return (
-            <Link to={url}>
+        return (isExternal(url) ?
+            <a to={url}>
                 <Banner {...{images, url, className}}/>
-            </Link>
+            </a>
+                :
+                <Link to={url}>
+                    <Banner {...{images, url, className}}/>
+                </Link>
         )
     } else {
         return <Banner {...{images, url, className}}/>
