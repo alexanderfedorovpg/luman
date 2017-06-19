@@ -296,10 +296,10 @@
             width: rem(204);
             height: rem(113);
 
-            background-image: url(/content/rtvi/show-rtvi.png);
             background-size: cover;
 
             position: absolute;
+            z-index: 1;
             left: rem(630);
             top: rem(-21);
 
@@ -312,6 +312,19 @@
             @include below($tabletMax) {
                 display: none;
             }
+
+            &_show {
+                background-image: url(/content/rtvi/show.png);
+            }
+
+            &_talk {
+                background-image: url(/content/rtvi/talk.png);
+            }
+
+            &_news {
+                background-image: url(/content/rtvi/news.png);
+            }
+
         }
 
     }
@@ -345,7 +358,7 @@
     }
 
     &__content-container {
-        margin-bottom: rem(40);
+        padding-bottom: rem(40);
         width: 38.4375rem;
 
         @include below($tabletMax) {
@@ -359,6 +372,18 @@
             margin-bottom: rem(15);
             margin-top: rem(15);
         }
+
+        &_big {
+
+            @include below($tabletLandscapeMax) {
+                width: rem(390);
+            }
+
+            @include below($tabletMax) {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
     }
 
     &__container {
@@ -370,7 +395,6 @@
             @include below($mobile) {
                 order: 1;
             }
-
         }
 
         &_personal-description {
@@ -397,6 +421,7 @@
         height: rem(465);
 
         position: absolute;
+        z-index: 1;
         right: rem(60);
         bottom: 0;
 
@@ -406,8 +431,8 @@
 
         @include below($tabletMax) {
             right: rem(-18);
-            width: rem(377);
-            height: rem(378);
+            width: rem(328);
+            height: auto;
         }
 
         @include below($mobile) {
@@ -416,7 +441,14 @@
         }
 
         &_big {
+            width: rem(545);
+            height: auto;
 
+            @include below($tabletMax) {
+                width: 100%;
+                min-width: rem(300);
+                position: static;
+            }
         }
     }
 

@@ -80,19 +80,19 @@ class Broadcast extends Component {
                         <div className="news-header__title">
                             <div className="container news-header__container">
                                 {programName}
-                                <div className="news-header__title-logo" />
+                                <div className={'news-header__title-logo news-header__title-logo_' + content[program].category} />
                             </div>
                         </div>
                         <div className="news-header__content">
                             <div className="container news-header__container news-header__container_personal-description">
-                                <div className="news-header__content-container">
+                                <div className={'news-header__content-container ' + content[program].big_text}>
                                     <p>{content[program].desc}</p>
                                 </div>
                             </div>
                             <div className="container news-header__container  news-header__container_tabs">
                             </div>
                             <div className="container news-header__container news-header__container_personality">
-                                <img src={content[program].photo} alt="" className="news-header__personality"/>
+                                <img src={content[program].photo} alt="" className={'news-header__personality ' +  content[program].big_image} />
                             </div>
                         </div>
                     </div>
