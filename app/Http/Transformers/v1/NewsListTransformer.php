@@ -51,7 +51,21 @@ class NewsListTransformer extends Transformer
                 'preview_author' => $preview['object_author'],
                 'preview_name' => $preview['object_name'],
             ];
-        } else {
+        } elseif($news['ext_video_link']){
+            $preview=CdnFile::where('id', '=', $news['video_stream_preview'])->first();
+            $transform['video_stream'] = [
+                'url' => $news['ext_video_link'],
+                'id' => null,
+                'duration' => null,
+                'preview' => $preview['url'],
+                'preview_id' => $news['video_stream_preview'],
+                'preview_source' => $preview['object_source'],
+                'preview_author' => $preview['object_author'],
+                'preview_name' => $preview['object_name'],
+            ];
+        }
+        else
+        {
             $transform['video_stream'] = null;
         }
 
