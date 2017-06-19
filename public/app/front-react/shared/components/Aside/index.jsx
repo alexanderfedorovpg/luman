@@ -14,7 +14,7 @@ import AsideVideo from 'components/GeneralVideo/AsideVideo'
 import efirPlaceholder from './efir.jpg'
 import './style.scss';
 
-function Aside({ noise, broadcast, top, className, now, inside, broadcastPage }) {
+function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcastPage }) {
     const showBroadcast = !!broadcast && !!broadcast.length;
     const showNoise = !!noise && !!noise.length;
     const showTop = !!top && !!top.length;
@@ -37,11 +37,15 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
                 {
                     showTop &&
                     <Group title="Главные новости" margin>
-                        <Block data={top[0]} />
+                        {
+                            topBig &&
+                            <Block data={top[0]} />
+                        }
                         {top.map((v, ind) => {
                             if (ind === 0) {
                                 return null;
                             }
+
                             return <MiniNews key={v.id} data={v} className="aside__mini-news" />
                         })}
                     </Group>
@@ -76,5 +80,9 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
         </div>
     )
 }
+
+Aside.defaultProps = {
+    topBig: true,
+};
 
 export default Aside

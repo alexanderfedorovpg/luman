@@ -60,6 +60,7 @@ class Broadcast extends Component {
         ))
 
         const now = nowNews;
+
         return (
             <div className="inner-wrapper">
                 <div className="news-top news-top_broadcast">
@@ -87,18 +88,12 @@ class Broadcast extends Component {
                         <div className="right-col">
                             <MediaQuery minWidth="930px">
                                 <Aside
-                                    broadcastPage
                                     noise={null}
                                     broadcast={null}
-                                    top={null}
                                     now={now}
+                                    topBig={false}
                                     inside
                                 />
-                                <Group title="Главные новости" margin>
-                                    {nowNews.map(v => (
-                                        <MiniNews key={v.id} data={v} className="broadcast__mini-news" />
-                                    ))}
-                                </Group>
                             </MediaQuery>
                             <MediaQuery minWidth="930px" maxWidth="1249px">
                                 <div className="news-one-line__row  news-one-line__row_banners">
