@@ -7,6 +7,7 @@ import { ensureAbs } from 'shared/utils/uri';
 import classNames from 'classnames';
 import {FormattedDate, addLocaleData} from 'react-intl';
 import ru from 'react-intl/locale-data/ru'
+import close from './close.png'
 
 class AsideVideo extends PureComponent {
 
@@ -83,36 +84,44 @@ class AsideVideo extends PureComponent {
 
         return data.video_stream
             ? (
-                <div
-                    className={classNames(
-                        'general-video',
-                        className,
+                <div style={{position: 'relative'}}>
+                    {this.state.play && <div className="general-video__close" onClick={() => this.stop()}><img src={close}/></div>}
+                    <div
+                        className={classNames(
+                            'general-video',
+                            className,
+                            {
+                                'general-video_collapsed': !this.state.play,
+                                'general-video_play':      this.state.play
+                            },
+                        )}
+                        ref="wrapp"
+                    >
                         {
-                            'general-video_collapsed': !this.state.play,
-                            'general-video_play': this.state.play
-                        },
-                    )}
-                    ref="wrapp"
-                >
-                    {
-                        this.state.play ?
-                            <div style={{width: 100 + '%', height: 100 + '%'}}>
-                                <video ref='video' id='videoStream' style={{width: 100 + '%', height: 100 + '%', zIndex: 9,position: 'relative'}} controls="controls" />
-                                <div style={overlayStyle} onClick={()=>this.stop()}/>
-                            </div>
+                            this.state.play ?
+                                <div style={{width: 100 + '%', height: 100 + '%'}}>
+                                    <video ref='video' id='videoStream' style={{
+                                        width:    100 + '%',
+                                        height:   100 + '%',
+                                        zIndex:   9,
+                                        position: 'relative'
+                                    }} controls="controls"/>
+                                </div>
 
-                            :
-                            (
-                                <span className="general-video__play-block">
-                                    <a onClick={this.play} className="general-video__link" />
-                                    <Img className="general-video__img" src={data.video_stream.preview} alt="" />
-                                    {data.url ?
+                                :
+                                (
+                                    <span className="general-video__play-block">
+                                    <a onClick={this.play} className="general-video__link"/>
+                                    <Img className="general-video__img" src={data.video_stream.preview} alt=""/>
+                                        {data.url ?
 
-                                        <img onClick={this.play} className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
-                                        :
-                                        <img className="general-video__ico" src="/content/video-ico/video-ico-big.svg" alt="" role="presentation" />
-                                    }
-                                    <div className="general-video__info">
+                                            <img onClick={this.play} className="general-video__ico"
+                                                 src="/content/video-ico/video-ico-big.svg" alt="" role="presentation"/>
+                                            :
+                                            <img className="general-video__ico"
+                                                 src="/content/video-ico/video-ico-big.svg" alt="" role="presentation"/>
+                                        }
+                                        <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
                                             <span className="general-video__span">{this.getPublishDate()}</span>
                                         </div>
@@ -126,8 +135,9 @@ class AsideVideo extends PureComponent {
                                         </div>
                                     </div>
                                 </span>
-                            )
-                    }
+                                )
+                        }
+                    </div>
                 </div>
             )
             : (
