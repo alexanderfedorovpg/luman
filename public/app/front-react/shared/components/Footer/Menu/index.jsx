@@ -26,9 +26,6 @@ function Menu({ className }) {
 export default Menu
 
 const menuData = [
-    {
-        title: 'qqqq'
-    }
     // {
     //     title: 'Телепрограмма',
     //     link: '/#'
