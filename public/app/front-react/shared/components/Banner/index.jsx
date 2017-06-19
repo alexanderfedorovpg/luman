@@ -16,28 +16,28 @@ let array = [
         type:   'preview', //принимает 1-2-4 колоночные картинки
         url:    '/',
         images: {
-            mobile:          '/content/banner/banner-mobile.png',
-            tabletLandscape: '/content/banner/banner-tablet-landscape.png',
-            desktop:         '/content/banner/banner.png',
+            mobile:          '/content/banner/reload1.png',
+            tabletLandscape: '/content/banner/reload3.png',
+            desktop:         '/content/banner/reload4.png',
         },
-        url_to: '/yahoho13'
+        url_to: '/broadcast/323'
     },
     {
         type:   'subscribe',//принимает только 1-колоночную картинку
         url:    '/news/8-ssha-vveli-sanktsii-protiv-treh-jivuschih-v-moskve-grajdan-kndr',
         images: {
-            mobile:          '/content/subscribe/subscribe.png',
+            mobile:          '/content/banner/reload1.png',
         },
-        url_to: '/yahoho12'
+        url_to: '/broadcast/323'
     },
     {
         type:   'large', //принимает 1-4 колоночные картинки
         url:    '/',
         images: {
-            mobile:          '/content/banner/how_1c.gif',
-            desktop:         '/content/banner/how_3c.gif',
+            mobile:          '/content/banner/reload1.png',
+            desktop:         '/content/banner/reload4.png',
         },
-        url_to: '/now'
+        url_to: '/broadcast/323'
     },
 ]
 
