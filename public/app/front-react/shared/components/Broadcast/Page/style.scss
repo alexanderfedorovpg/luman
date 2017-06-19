@@ -3,6 +3,17 @@
 
 .news-top_broadcast {
 
+    .from-enter {
+
+        &__info {
+            bottom: rem(21);
+        }
+
+        &__category {
+            margin-top: rem(17);
+        }
+    }
+
     .news-top {
 
         &__row {
