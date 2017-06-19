@@ -101,7 +101,7 @@ class Broadcast extends Component {
                                 <div className="news-one-line news-top__news-one-line">
                                     <div className="news-one-line__row news-one-line__item-bottom">
                                         <MediaQuery maxWidth="1249px">
-                                            <div className="news-one-line__date-wrap">
+                                            <div className="news-one-line__date-wrap" style="display: none;">
                                                 <div className="news-one-line__date">
                                                     <div>
                                                         <span className="news-one-line__date-title">Поиск выпуска по дате эфира:</span>
@@ -117,7 +117,7 @@ class Broadcast extends Component {
                                         <Item data={data[0]} big />
                                         <div className="news-one-line__date-wrap news-one-line__date-wrap_view-desktop">
                                             <MediaQuery minWidth="1250px">
-                                                <div className="news-one-line__date">
+                                                <div className="news-one-line__date" style="display: none;">
                                                     <div>
                                                         <span className="news-one-line__date-title">Поиск выпуска по дате эфира:</span>
                                                         <span className="news-one-line__from-text"> c </span>
