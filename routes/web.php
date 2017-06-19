@@ -97,7 +97,8 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
 	$group->post('/notification/','NotificationController@addDevice');
 	$group->delete('/notification/{guid}','NotificationController@removeDevice');
 	$group->post('/notification/one','NotificationController@sendOneMessage');
-	$group->post('/notification/to','NotificationController@sendMessageTo');
+	$group->post('/notification/fcm','NotificationController@sendMessageToFCM');
+    $group->post('/notification/apns','NotificationController@sendMessageToAPNS');
 
     //Права
     $group->get('/permission','PermissionController@index');

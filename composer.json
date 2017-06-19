@@ -11,7 +11,8 @@
         "vluzrmos/tinker": "^1.3",
         "doctrine/dbal": "^2.5",
         "predis/predis": "^1.1",
-        "illuminate/redis": "^5.4"
+        "illuminate/redis": "^5.4",
+        "davibennun/laravel-push-notification": "dev-laravel5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
