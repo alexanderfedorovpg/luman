@@ -99,9 +99,12 @@ class News extends Component {
                                     <Block data={now[6]} rectangle className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
-                            <MediaQuery minWidth="1250px">
-                                <Banner type="large" className="news-top__banner" />
-                            </MediaQuery>
+                            {/*
+                             <MediaQuery minWidth="1250px">
+                             <Banner type="large" className="news-top__banner" />
+                             </MediaQuery>
+                            */}
+
                             <MediaQuery maxWidth="929px">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
@@ -140,7 +143,7 @@ class News extends Component {
 
                         </div>
                         <MediaQuery minWidth="930px">
-                            <Aside top={[]} now={now} />
+                            <Aside top={[]} now={now}/>
                             <MediaQuery minWidth="930px" maxWidth="1249px">
                                 <MoreNews data={data.slice(7, 11)} className="news-top__more-news" />
                             </MediaQuery>

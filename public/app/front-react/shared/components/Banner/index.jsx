@@ -62,8 +62,8 @@ const Banner = ({type, className,match}) => {
     if (type == LARGE) {
         return <BannerLarge images={data.images} url={data.url_to} defaultUrl={'/how'} className={className}/>
     } else if (type == PREVIEW) {
-        //return <BannerPreview images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
-        return null;
+        return <BannerPreview images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
+        //return null;
     } else if (type == SUBSCRIBE) {
         return <Subscribe images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
     } else {

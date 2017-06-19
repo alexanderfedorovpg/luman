@@ -107,7 +107,7 @@ class NoisePage extends PureComponent {
                                 noise={noise}
                                 now={now}
                                 related={relatedNews}
-                                broadcast={broadcast} 
+                                broadcast={broadcast}
                                 noisePage={true}/>
                         </div>
                     )
