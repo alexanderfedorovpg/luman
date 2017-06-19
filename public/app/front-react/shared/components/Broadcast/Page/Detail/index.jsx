@@ -23,15 +23,7 @@ function Detail({ data, nowNews, relatedNews }) {
                         </Content>
                     </div>
                     <div className="general-news__right right-col">
-                        <div style={{height: '396px'}} className="kostyl">
-                        </div>
-                        <Group title="Главные новости" margin>
-                            <Block data={nowNews[0]} />
-                            {nowNews.slice(1, 5).map(v => (
-                                <MiniNews key={v.id} data={v} className="broadcast__mini-news info-noize__mini-news" />
-                            ))}
-                        </Group>
-                        <Banner type="subscribe" />
+                        <Aside now={nowNews} noise={null} broadcast={null} />
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ import AsideVideo from 'components/GeneralVideo/AsideVideo'
 import efirPlaceholder from './efir.jpg'
 import './style.scss';
 
-function Aside({ noise, broadcast, top, className, now, inside, broadcastPage }) {
+function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcastPage }) {
     const showBroadcast = !!broadcast && !!broadcast.length;
     const showNoise = !!noise && !!noise.length;
     const showTop = !!top && !!top.length;
@@ -25,7 +25,7 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
             <MediaQuery minWidth="930px">
                 {
                     !broadcastPage &&
-                    <div className="aside__video" style={{ height: '396px' }}>
+                    <div className="aside__video">
                         <AsideVideo
                             playTitle="date"
                             title="Все ключевые события этого дня"
@@ -37,11 +37,15 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
                 {
                     showTop &&
                     <Group title="Главные новости" margin>
-                        <Block data={top[0]} />
+                        {
+                            topBig &&
+                            <Block data={top[0]} />
+                        }
                         {top.map((v, ind) => {
                             if (ind === 0) {
                                 return null;
                             }
+
                             return <MiniNews key={v.id} data={v} className="aside__mini-news" />
                         })}
                     </Group>
@@ -51,24 +55,13 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
                 showNoise &&
                 <Noise data={noise} />
             }
-            {!isInside ?
-                (
-                    <div>
-                        {
-                            showBroadcast
-                            ? <FromEnter data={broadcast} />
-                            : <img src={efirPlaceholder} className="from-enter enter-one" alt="" />
-                        }
-                        {/* <Subscribe className="news-top__subscribe" /> */}
-                    </div>
-                )
-                :
-                null
+            {
+                !isInside && showBroadcast &&
+                <FromEnter data={broadcast} />
             }
-            {!isInside ?
+            {
+                !isInside &&
                 <Banner type="subscribe" className="news-top__subscribe" />
-                :
-                null
             }
             <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1249px">
                 <Banner type="large" className="news-top__banner" />
@@ -76,5 +69,9 @@ function Aside({ noise, broadcast, top, className, now, inside, broadcastPage })
         </div>
     )
 }
+
+Aside.defaultProps = {
+    topBig: true,
+};
 
 export default Aside
