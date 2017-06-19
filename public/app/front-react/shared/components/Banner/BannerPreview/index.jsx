@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import _rand from 'lodash/random';
-import _each from 'lodash/foreach';
 
 import banner from './img/banner.png'
 import bannerMobile from './img/banner-mobile.png'
