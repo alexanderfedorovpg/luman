@@ -189,16 +189,22 @@ function Item({
     toggleDelete,
     checkPermissions
 }) {
+    const edited = data.created_at !== data.updated_at;
+
     return (
         <Root>
             <Wrapper>
                 <Left>
                     {
-                        Date.parse(data.publish_date) ?
+                        Date.parse(data.created_at) ?
                             <Update>
                                 <FormattedRelative
-                                    value={data.publish_date}
+                                    value={data.created_at}
                                 />
+                                {
+                                    edited &&
+                                    ' / отредактировано'
+                                }
                             </Update>
                             :
                             null

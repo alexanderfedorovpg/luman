@@ -26,13 +26,15 @@ class AirRecordTransformer extends Transformer
             $transform['video'] = null;
         }
 
+        $cover=null;
         $settings = Settings::where('name' ,'=', 'between_air_cover')->first();
-        $cover = CdnFile::where('id', '=', $settings->value)->pluck('url')->first();
+        if ($settings){
+            $cover = CdnFile::where('id', '=', $settings->value)->pluck('url')->first();
+        }
+
         if ($cover) {
             $transform["air_cover"]=$cover;
         }
-
-        $transform["air_cover"]=null;
 
         unset($transform["video_stream_preview"]);
         $transform['rubrics'] = News::find($record['id'])->rubrics()->orderBy('name')->get(['rubrics.id','rubrics.name'])->toArray();
