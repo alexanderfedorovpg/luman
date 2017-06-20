@@ -1,27 +1,32 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
-export const selectBroadcastDomain = state => state.broadcast
+export const selectBroadcastDomain = state => state.broadcast;
 
 export const selectBroadcastData = createSelector(
     selectBroadcastDomain,
-    root => root.all.data
-)
+    root => root.all.data,
+);
 
 export const selectBroadcast = createSelector(
     selectBroadcastDomain,
     selectBroadcastData,
-    (root, list) => root.all.ids.map(id => list[id])
-)
+    (root, list) => root.all.ids.map(id => list[id]),
+);
 
 export const selectPagination = createSelector(
     selectBroadcastDomain,
     (root, list) => ({
         page: root.all.page,
         lastPage: root.all.lastPage,
-    })
-)
+    }),
+);
+
+export const selectFilters = createSelector(
+    selectBroadcastDomain,
+    root => root.filters,
+);
 
 export const selectProgram = createSelector(
     selectBroadcastDomain,
-    root => root.all.program
-)
+    root => root.all.program,
+);
