@@ -5,6 +5,7 @@ namespace App\Http\Transformers\v1;
 use App\Http\Transformers\Transformer;
 use App\Models\CdnFile;
 use App\Models\News;
+use App\Models\Settings;
 use App\Models\TvProgram;
 use App\Models\Rubrics;
 
@@ -24,6 +25,15 @@ class AirRecordTransformer extends Transformer
         } else {
             $transform['video'] = null;
         }
+
+        $settings = Settings::where('name' ,'=', 'between_air_cover')->first();
+        $cover = CdnFile::where('id', '=', $settings->value)->pluck('url')->first();
+        if ($cover) {
+            $transform["air_cover"]=$cover;
+        }
+
+        $transform["air_cover"]=null;
+
         unset($transform["video_stream_preview"]);
         $transform['rubrics'] = News::find($record['id'])->rubrics()->orderBy('name')->get(['rubrics.id','rubrics.name'])->toArray();
         return $transform;
