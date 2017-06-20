@@ -1,0 +1,13 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.address {
+    color: $white;
+    font-family: $openSans;
+    font-size: rem(11);
+    line-height: rem(18);
+
+    &__phone {
+        color: $white;
+    }
+}

@@ -4,7 +4,6 @@ import Aside from 'containers/Aside';
 
 import './style.scss'
 
-
 function Info({}) {
     return(
         <div className="inner-wrapper inner-about">
@@ -78,7 +77,7 @@ function Info({}) {
                         </div>
                     </div>
                 </div>
-                <Aside noise={null} top={null} broadcast={null} inside={null} noisePage={null} now inside />
+                <Aside noise={null} top={null} broadcast={null} noisePage={null} now inside />
             </div>
         </div>
     )

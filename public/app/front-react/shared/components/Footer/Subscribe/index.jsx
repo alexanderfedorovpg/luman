@@ -10,14 +10,14 @@ function Subscribe({ className }) {
             <p className="subscribe-networks__title">Подпишитесь на нас
             </p>
             <div className="subscribe-networks__list-network">
-                {subData.map(({ img, href }, i) => (
+                {subData.map(({ img, img_hover, href }, i) => (
                     <a
                         key={i}
                         target="_blank"
                         className="subscribe-networks__ico-link"
                         href={href || '#'}
                     >
-                        <img className="subscribe-networks__ico-image" src={img} alt="" role="presentation" />
+                        <img className="subscribe-networks__ico-image" src={img} data-hover={img_hover} alt="" role="presentation" />
                     </a>
                 ))}
             </div>
@@ -31,31 +31,43 @@ const subData = [
     {
         title: 'facebook',
         img: '/content/subscribe-networks/facebook.png',
-        href: 'https://www.facebook.com/myRTVi',
+        img_hover: '/content/subscribe-networks/facebook-hover.png',
+        href: 'https://www.facebook.com/myRTVi/',
     },
     {
         title: 'twitter',
         img: '/content/subscribe-networks/twitter.png',
+        img_hover: '/content/subscribe-networks/twitter-hover.png',
         href: 'https://twitter.com/RTVi',
     },
     {
-        title: 'youtube',
-        img: '/content/subscribe-networks/youtube.png',
-        href: '',
+        title: 'instagram',
+        img: '/content/subscribe-networks/instagram.png',
+        img_hover: '/content/subscribe-networks/instagram-hover.png',
+        href: 'https://instagram.com/rtvichannel/',
     },
     {
-        title: 'viber',
-        img: '/content/subscribe-networks/viber.png',
-        href: 'https://chats.viber.com/rtvi',
+        title: 'vk',
+        img: '/content/subscribe-networks/vk.png',
+        img_hover: '/content/subscribe-networks/vk-hover.png',
+        href: 'https://vk.com/rtvi',
     },
     {
         title: 'ok',
         img: '/content/subscribe-networks/ok.png',
-        href: 'https://ok.ru/rtvi',
+        img_hover: '/content/subscribe-networks/ok-hover.png',
+        href: 'http://ok.ru/rtvi',
     },
     {
-        title: 'rss',
-        img: '/content/subscribe-networks/rss.png',
-        href: '',
+        title: 'telegram',
+        img: '/content/subscribe-networks/telegram.png',
+        img_hover: '/content/subscribe-networks/telegram-hover.png',
+        href: 'https://t.me/rtvireal',
+    },
+    {
+        title: 'viber',
+        img: '/content/subscribe-networks/viber.png',
+        img_hover: '/content/subscribe-networks/viber-hover.png',
+        href: 'http://viber.com/rtvi',
     },
 ];

@@ -2,17 +2,34 @@
 @import "~style/vars";
 
 .copyright {
+    font-size: 0;
 
     &__text {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+        font-family: $openSans;
         font-size: rem(11);
+        line-height: rem(24);
         color: fade-out($copyright, .38);
 
         @include below($mobile) {
             line-height: rem(24);
+            width: 100%;
         }
 
         @include above($tablet) {
             line-height: rem(17);
+        }
+
+        &:nth-of-type(2) {
+            width: calc(50% - #{rem(16)});
+            margin-left: rem(16);
+
+            @include below($mobile) {
+                width: 100%;
+                margin-left: 0;
+            }
         }
     }
 }

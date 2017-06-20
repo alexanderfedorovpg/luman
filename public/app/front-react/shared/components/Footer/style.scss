@@ -14,14 +14,20 @@
     }
 
     &__copyright {
+        width: rem(340);
 
         @include below($mobile) {
             width: 50%;
-            margin-top: rem(-20);
+        }
+
+        @include below($tabletMax) {
+            width: 100%;
+            margin-bottom: rem(15);
         }
 
         @include above($tabletLandscape) {
             margin-top: rem(4);
+            margin-bottom: 0;
         }
     }
 
@@ -40,6 +46,10 @@
         }
     }
 
+    &__logo-wrapper {
+        width: 100%;
+    }
+
     &__left-part {
 
         @include below($mobile) {
@@ -53,7 +63,7 @@
         }
 
         @include above($tabletLandscape) {
-            width: rem(126);
+            width: rem(340);
         }
     }
 
@@ -69,8 +79,12 @@
         }
 
         @include above($tabletLandscape) {
-            width: rem(377);
-            margin-left: rem(41);
+            width: rem(250);
+            margin-left: rem(32);
+        }
+
+        @include above($desktop) {
+            margin-left: rem(62);
         }
     }
 
@@ -88,8 +102,8 @@
         }
 
         @include above($tabletLandscape) {
-            width: rem(255);
-            margin-left: rem(89);
+            width: rem(285);
+            margin-left: rem(25);
             padding-left: 0;
             padding-top: 0;
         }
