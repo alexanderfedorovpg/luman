@@ -98,14 +98,12 @@ class Broadcast extends Component {
         const program = parseInt(match.params.id, 10);
         const data = broadcast.filter(v => (
             program
-                ? (v.program || {}).id === program
+                ? v.program_id === program
                 : true
         ));
         const selectedProgram = programs.filter(v => v.id === program)[0];
         const programName = selectedProgram ? selectedProgram.name : '';
         const { filter } = this.state;
-
-        console.log(data);
 
         return (
             <div className="inner-wrapper">
