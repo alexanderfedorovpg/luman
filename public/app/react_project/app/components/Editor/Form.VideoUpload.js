@@ -50,6 +50,9 @@ class VideoUpload extends PureComponent {
             videoPreview.id.input.onChange(null);
             videoPreview.file.input.onChange(null);
         }
+        else if (!values.video && values.url) {
+            video.file.input.onChange(values.url);
+        }
 
         if (values.preview && typeof values.preview !== 'string') {
             videoPreview.id.input.onChange(null);
@@ -58,9 +61,6 @@ class VideoUpload extends PureComponent {
             videoPreview.source.input.onChange(values.source);
         }
 
-        if (values.url) {
-            video.url.input.onChange(values.url);
-        }
 
         if (values.program_id) {
             program_id.input.onChange(values.program_id);
