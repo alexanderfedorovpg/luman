@@ -453,8 +453,13 @@
         }
 
         &_big {
-            width: rem(545);
+            right: rem(-165);
+            width: rem(826);
             height: auto;
+
+            @include below($tabletLandscapeMax) {
+                right: rem(-285);
+            }
 
             @include below($tabletMax) {
                 width: 100%;

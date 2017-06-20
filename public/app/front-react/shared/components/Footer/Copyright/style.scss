@@ -2,13 +2,20 @@
 @import "~style/vars";
 
 .copyright {
+    font-size: 0;
 
     &__text {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+        font-family: $openSans;
         font-size: rem(11);
+        line-height: rem(24);
         color: fade-out($copyright, .38);
 
         @include below($mobile) {
             line-height: rem(24);
+            width: 100%;
         }
 
         @include above($tablet) {

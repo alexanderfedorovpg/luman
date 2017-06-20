@@ -107,6 +107,7 @@ class Item extends Component {
 
     render() {
         const { data, toMain, onRemove, push } = this.props;
+        const edited = data.created_at !== data.updated_at;
 
         return (
             <DragSourceWrapper data={data} toMain={toMain}>
@@ -131,8 +132,12 @@ class Item extends Component {
                     </Attachment>
                     {
                         !!Date.parse(data.publish_date) &&
-                        <StyledDate dateTime={moment(data.publish_date).format('YYYY-MM-DD')}>
-                            <FormattedRelative value={data.publish_date} />
+                        <StyledDate dateTime={moment(data.created_at).format('YYYY-MM-DD')}>
+                            <FormattedRelative value={data.created_at || data.publish_date} />
+                            {
+                                edited &&
+                                ' / отредактировано'
+                            }
                         </StyledDate>
                     }
                 </Footer>
