@@ -13,7 +13,11 @@
 
             &-item {
                 margin-bottom: rem(20);
-                width: rem(300);
+                display: flex;
+
+                & > div:not(:last-child) {
+                    margin-right: rem(16);
+                }
             }
         }
         &__mini-news {

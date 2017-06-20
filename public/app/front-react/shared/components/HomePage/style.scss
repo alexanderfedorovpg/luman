@@ -356,7 +356,7 @@
 
         @include above($desktop) {
             height: rem(145);
-            margin-top: rem(-21);
+            margin-top: rem(21);
         }
 
         &_war {

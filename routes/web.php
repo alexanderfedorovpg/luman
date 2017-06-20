@@ -143,14 +143,17 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     $group->delete('/tv-program/{id}','TvProgramController@destroy');
 
     //Записи эфиров
+    $group->post('/air/cover','AirRecordController@storeCover');
+    $group->get('/air/cover','AirRecordController@showCover');
     $group->get('/air/record','AirRecordController@index');
-    $group->get('/air/record/{id}','AirRecordController@show');
+    $group->get('/air/record/{id:[0-9]+}','AirRecordController@show');
     $group->post('/air/record','AirRecordController@create');
     $group->put('/air/record/{id:[0-9]+}','AirRecordController@update');
     $group->delete('/air/record/{id}','AirRecordController@destroy');
     $group->put('/air/record/publish','AirRecordController@publish');
     $group->post('/air/record/upload','AirRecordController@upload');
     $group->put('/air/record/trigger_vc','AirRecordController@triggerVisibleConstructor');
+
 
     //Конструктор главной страницы
     $group->get('/homepage','HomepageController@index');
@@ -170,6 +173,14 @@ $app->group(['prefix' => 'api/v1', 'namespace'=>'\App\Http\Controllers\v1'], fun
     //Логи
     $group->get('/logs','LogController@getAll');
     $group->get('/logs/user','LogController@getCurrentUser');
+
+    //Настройки
+    $group->get('settings','SettingsController@index');
+    $group->get('settings/{id}','SettingsController@show');
+    $group->post('settings','SettingsController@store');
+    $group->put('settings/{id}','SettingsController@update');
+    $group->delete('settings/{id}','SettingsController@destroy');
+
 });
 
 
