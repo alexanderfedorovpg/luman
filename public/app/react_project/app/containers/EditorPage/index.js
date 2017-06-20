@@ -120,7 +120,6 @@ class EditorPage extends Component {
                 body: values.body,
                 program_id: values.program_id,
                 video_stream: values.video.id ||
-                    values.video.url ||
                     (typeof values.video.file === 'string'
                         ? values.video.file
                         : (values.video.file || [])[0]),
