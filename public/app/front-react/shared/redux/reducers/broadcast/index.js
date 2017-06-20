@@ -1,7 +1,9 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-import all from './all.js'
+import all from './all';
+import filters from './filters';
 
 export default combineReducers({
-    all
-})
+    all,
+    filters,
+});

@@ -32,6 +32,26 @@ let array = [
         url_to: '/broadcast/323'
     },
     {
+        type:   'preview', //принимает 1-3 колоночные картинки
+        url:    '/news',
+        images: {
+            mobile:          '/content/banner/here_and_there_1c.png',
+            tabletLandscape: '/content/banner/here_and_there_2c.png',
+            desktop:         '/content/banner/here_and_there_3c.png',
+        },
+        url_to: 'https://www.rtvi.com/broadcast/385'
+    },
+    {
+        type:   'preview', //принимает 1-3 колоночные картинки
+        url:    '/broadcast',
+        images: {
+            mobile:          '/content/banner/here_and_there_1c.png',
+            tabletLandscape: '/content/banner/here_and_there_2c.png',
+            desktop:         '/content/banner/here_and_there_3c.png',
+        },
+        url_to: 'https://www.rtvi.com/broadcast/385'
+    },
+    {
         type:   'large', //принимает 1-3 колоночные картинки
         url:    '/',
         images: {

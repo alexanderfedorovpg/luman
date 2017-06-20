@@ -82,6 +82,9 @@ function HomePage({
                         <MediaQuery minWidth="615px" maxWidth="929px">
                             <EnterOne className="general-news__enter-one" data={videoNews} />
                         </MediaQuery>
+                        <MediaQuery maxWidth="1249">
+                            <RandomNews className="general-news__random-news" data={randomNews} />
+                        </MediaQuery>
                     </div>
                 </div>
                 <div className="general-news__right right-col">
@@ -128,7 +131,9 @@ function HomePage({
                             </MediaQuery>
                         )}
                     </MediaQuery>
-                    <RandomNews className="general-news__random-news" data={randomNews} />
+                    <MediaQuery minWidth="1250px">
+                        <RandomNews className="general-news__random-news" data={randomNews} />
+                    </MediaQuery>
                 </div>
                 <div className="general-news__right general-news__right_more">
                     <MediaQuery minWidth="1250px">

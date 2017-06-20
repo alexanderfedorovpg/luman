@@ -538,26 +538,24 @@ main {
             &_play {
 
                 @include above($tablet) {
-                    opacity: .5;
-                    left: 69.4%;
+                    left: calc(100% - #{rem(245)});
+                }
 
-                    &:before {
-                        left: rem(-31);
-                        transform: scale(-1, 1);
-                    }
+                @include above($tabletLandscape) {
+                    left: calc(100% - #{rem(249)});
+                }
 
-                    &:after {
-                        left: rem(-31.7);
-                        transform: scale(-1, 1);
-                        width: calc(100% + 1.94375rem);
-                    }
+                @include above($desktop) {
+                    left: calc(100% - #{rem(352)});
                 }
 
             }
 
         }
         &__block-text_play {
-            padding: rem(43) rem(24) 0 0;
+            @include above($tablet) {
+                padding: rem(43) 0 0 rem(24);
+            }
         }
         &__text {
             margin-bottom: rem(18);

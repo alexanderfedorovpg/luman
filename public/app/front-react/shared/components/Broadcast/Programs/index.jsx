@@ -65,7 +65,7 @@ class Broadcast extends Component {
 
     renderItems(data) {
         return (
-            <div className="news-one-line__row news-one-line__row_after-banners">
+            <div className="news-one-line__row news-one-line__row_margin">
                 <Item data={data[0]} />
                 <Item data={data[1]} />
                 <Item data={data[2]} />
@@ -79,7 +79,7 @@ class Broadcast extends Component {
         let values = [...data]
 
         while (values.length) {
-            items = items.push(this.renderItems(values.splice(0, 4)))
+            items.push(this.renderItems(values.splice(0, 4)))
         }
 
         return items
@@ -104,6 +104,8 @@ class Broadcast extends Component {
         const selectedProgram = programs.filter(v => v.id === program)[0];
         const programName = selectedProgram ? selectedProgram.name : '';
         const { filter } = this.state;
+
+        console.log(data);
 
         return (
             <div className="inner-wrapper">
@@ -186,8 +188,8 @@ class Broadcast extends Component {
                                                 </div>
                                             </div>
                                             <div className="news-one-line__date-items">
-                                                <Item data={data[5]} />
-                                                <Item data={data[6]} />
+                                                <Item data={data[1]} />
+                                                <Item data={data[2]} />
                                             </div>
                                         </div>
                                     </div>
@@ -217,10 +219,10 @@ class Broadcast extends Component {
 
                         <div className="middle-col news-top__programs">
                             <div className="news-one-line__row news-one-line__row_margin">
-                                <Item data={data[8]} />
-                                <Item data={data[9]} />
-                                <Item data={data[10]} />
-                                <Item data={data[11]} />
+                                <Item data={data[3]} />
+                                <Item data={data[4]} />
+                                <Item data={data[5]} />
+                                <Item data={data[6]} />
                             </div>
                         </div>
 
@@ -243,13 +245,13 @@ class Broadcast extends Component {
 
                         <div className="middle-col">
                             <div className="news-one-line__row news-one-line__row_margin">
-                                <Item data={data[12]} />
-                                <Item data={data[13]} />
-                                <Item data={data[14]} />
-                                <Item data={data[15]} />
+                                <Item data={data[7]} />
+                                <Item data={data[8]} />
+                                <Item data={data[9]} />
+                                <Item data={data[10]} />
                             </div>
+                            {this.renderAdditionalData(data.slice(11))}
                         </div>
-                        {this.renderAdditionalData(data.slice(16))}
                         {canLoad
                             ? (
                                 <LoadMore onClick={onLoadRequest}>
