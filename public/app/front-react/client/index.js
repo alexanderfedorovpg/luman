@@ -65,6 +65,9 @@ renderApp(App);
 // to react-boilerplate for that tip.)
 require('./registerServiceWorker');
 
+// SW disabled, so remove previously added service workers
+require('./unregisterServiceWorker');
+
 // The following is needed so that we can support hot reloading our application.
 if (process.env.BUILD_FLAG_IS_DEV === 'true' && module.hot) {
   // Accept changes to this file for hot reloading.
