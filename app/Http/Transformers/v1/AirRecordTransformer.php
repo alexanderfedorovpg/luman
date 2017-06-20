@@ -26,7 +26,7 @@ class AirRecordTransformer extends Transformer
             $transform['video'] = null;
         }
 
-        $settings = Settings::find('name' ,'=', 'between_air_cover')->first();
+        $settings = Settings::where('name' ,'=', 'between_air_cover')->first();
         $cover = CdnFile::where('id', '=', $settings->value)->pluck('url')->first();
         if ($cover) {
             $transform["air_cover"]=$cover;
