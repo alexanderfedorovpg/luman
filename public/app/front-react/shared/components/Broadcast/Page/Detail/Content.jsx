@@ -60,7 +60,11 @@ class Content extends PureComponent {
         this.setState({
             play: true,
         });
-        React.render('<div id="video-overlay"></div>', document.body);
+        if (!document.getElementById('video-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.id = 'video-overlay';
+            document.body.appendChild(overlay);
+        }
     }
 
     stop(e) {
