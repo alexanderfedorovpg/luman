@@ -96,8 +96,6 @@ class NewsEditorTransformer extends Transformer
         }
 
 
-
-
         $datetime_now = new \DateTime($news['is_publish'] ? $news['publish_date'] : "now");
         $time_edit = new \DateTime($news['created_at']);
         $interval = $time_edit->diff($datetime_now);
