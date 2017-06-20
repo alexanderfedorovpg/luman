@@ -1,27 +1,27 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import Helmet from 'react-helmet'
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 
-import stubImage from './stub.png'
+import stubImage from './stub.png';
 
 import {
     selectNoise,
     selectRelated,
-} from 'selectors/news'
+} from 'selectors/news';
 import {
     selectProgram,
     selectPagination,
     selectBroadcast,
-    selectBroadcastData
-} from 'selectors/broadcast'
-import { selectPrograms } from 'selectors/programs'
+    selectBroadcastData,
+} from 'selectors/broadcast';
+import { selectPrograms } from 'selectors/programs';
 
-import { fetchNoise, fetchRelated } from 'actions/news'
-import { fetch, fetchMore, setProgram } from 'actions/broadcast'
+import { fetchNoise, fetchRelated } from 'actions/news';
+import { fetch, fetchMore, setProgram, changeDateFilter } from 'actions/broadcast';
 
-import Detail from 'components/NewsDetail'
-import Broadcast from 'components/Broadcast/Programs/index.jsx'
-import BroadcastStub from 'components/Broadcast/Page/stub.jsx'
+import Detail from 'components/NewsDetail';
+import Broadcast from 'components/Broadcast/Programs/index.jsx';
+import BroadcastStub from 'components/Broadcast/Page/stub.jsx';
 
 const SHOW_STUB = false; // показываем заглушку
 
@@ -34,21 +34,20 @@ class BroadcastProgramsPage extends PureComponent {
     }
 
     componentDidMount() {
-        const { match } = this.props
+        const { match } = this.props;
 
-        this.props.fetch()
-        this.props.fetchNoise()
+        this.props.fetch();
+        this.props.fetchNoise();
 
         if (match.params.id) {
-            this.fetchItem(match.params.id)
+            this.fetchItem(match.params.id);
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
-
             if (nextProps.match.params.id) {
-                this.fetchItem(nextProps.match.params.id)
+                this.fetchItem(nextProps.match.params.id);
             }
         }
     }
@@ -57,15 +56,15 @@ class BroadcastProgramsPage extends PureComponent {
     // также загружает "новости по теме"
     fetchItem(id) {
         if (!this.getById(id)) {
-            this.props.fetch({ id })
+            this.props.fetch({ id });
         }
-        this.props.fetchRelated(id)
+        this.props.fetchRelated(id);
     }
 
     getById(id) {
-        const { broadcastData } = this.props
+        const { broadcastData } = this.props;
 
-        return broadcastData[id]
+        return broadcastData[id];
     }
 
     toPrograms(id) {
@@ -74,19 +73,17 @@ class BroadcastProgramsPage extends PureComponent {
         setProgram(id);
         if (id) {
             history.push({
-                pathname: '/programs/' + id
+                pathname: `/programs/${id}`,
             });
         } else {
             history.push({
-                pathname: '/broadcast'
-            })
+                pathname: '/broadcast',
+            });
         }
-
     }
 
-
     render() {
-        let {
+        const {
             match,
             broadcast,
             noise,
@@ -95,22 +92,21 @@ class BroadcastProgramsPage extends PureComponent {
             programs,
             pagination,
             setProgram,
-            loadMore
-        } = this.props
-        const item = this.getById(match.params.id) || {}
+            loadMore,
+        } = this.props;
+        const item = this.getById(match.params.id) || {};
 
-
-        if(SHOW_STUB){
+        if (SHOW_STUB) {
             return (
                 <div>
                     <Helmet>
                         <title>Из эфира</title>
                     </Helmet>
-                    <BroadcastStub stubImage={stubImage}/>
+                    <BroadcastStub stubImage={stubImage} />
                 </div>
-            )
-        }else{
-            return (
+            );
+        }
+        return (
                 <div>
                     <Helmet>
                         <title>Из эфира</title>
@@ -124,14 +120,14 @@ class BroadcastProgramsPage extends PureComponent {
                             dataId={match.params.id}
                             broadcast={broadcast}
                             onLoadRequest={loadMore}
+                            onFilter={this.props.changeDateFilter}
                             canLoad={pagination.page < pagination.lastPage}
                             setProgram={this.toPrograms}
                             programs={programs}
                         />
                     }
                 </div>
-            )
-        }
+            );
     }
 }
 
@@ -143,25 +139,28 @@ const mapStateToProps = state => ({
     pagination: selectPagination(state),
     relatedNews: selectRelated(state),
     noise: selectNoise(state),
-})
+});
 
 const mapDispatchToProps = dispatch => ({
     fetch(params) {
-        dispatch(fetch(params))
+        dispatch(fetch(params));
     },
     loadMore() {
-        dispatch(fetchMore())
+        dispatch(fetchMore());
     },
     setProgram(id) {
-        dispatch(setProgram(id))
-        dispatch(fetch())
+        dispatch(setProgram(id));
+        dispatch(fetch());
     },
     fetchNoise() {
-        dispatch(fetchNoise())
+        dispatch(fetchNoise());
     },
     fetchRelated(id) {
-        dispatch(fetchRelated(id))
+        dispatch(fetchRelated(id));
     },
-})
+    changeDateFilter(filter) {
+        dispatch(changeDateFilter(filter));
+    },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(BroadcastProgramsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(BroadcastProgramsPage);
