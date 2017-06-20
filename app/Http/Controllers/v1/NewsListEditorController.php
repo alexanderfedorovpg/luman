@@ -6,6 +6,7 @@ use App\Models\CdnFile;
 use App\Models\NewsUri;
 use App\Models\Rubrics;
 use App\Models\TvProgram;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth,
     Illuminate\Http\Request,
     App\Models\News,
@@ -225,9 +226,9 @@ class NewsListEditorController extends CmsController
             $image_main = $request->input('image_main');
             $image_preview = $request->input('image_preview');
             $is_online = $request->input('is_online');
-            $updated_at = new \DateTime(); // date('Y-m-d H:i:s')
+          //  $updated_at = new \DateTime(); // date('Y-m-d H:i:s')
             $is_war_mode = $request->input('is_war_mode');
-            $publish_date = $request->input('publish_date');
+           // $publish_date = $request->input('publish_date');
             $original_source_link = $request->input('original_source_link');
             $moderation = $request->input('moderation');
             $theses = $request->input('theses');
@@ -416,9 +417,9 @@ class NewsListEditorController extends CmsController
             $image_main = $request->input('image_main');
             $image_preview = $request->input('image_preview');
             $is_online = $request->input('is_online');
-            $updated_at = new \DateTime(); // date('Y-m-d H:i:s')
+            //$updated_at = new \DateTime(); // date('Y-m-d H:i:s')
             $is_war_mode = $request->input('is_war_mode');
-            $publish_date = $request->input('publish_date');
+            //$publish_date = $request->input('publish_date');
             $original_source_link = $request->input('original_source_link');
             $moderation = $request->input('moderation');
             $theses = $request->input('theses');
@@ -431,7 +432,7 @@ class NewsListEditorController extends CmsController
             $news->note = $note ? $note : '';
 
             $news->is_publish = 0;
-            $news->publish_date = new \DateTime();
+           // $news->publish_date = new \DateTime();
             $news->top = $top;
             $news->body = $body ? $body : '';
 
@@ -681,7 +682,11 @@ class NewsListEditorController extends CmsController
             $this->validate($request, News::$rules);
 
             $news = News::find($id);
-            $news->publish_date = new \DateTime();
+
+            if ( !$news->publish_date){
+                $news->publish_date = Carbon::now();
+            }
+
             $log_moderation = new NewsModerationLogHelper($news);
 
             if ((!Auth::user()->isAdmin()) && ($this->user_id != $news->editor_id)) {

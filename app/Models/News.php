@@ -50,7 +50,12 @@ class News extends Model
     protected $events = [
         'saved' => NewsObserver::class,       
     ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'publish_date',
 
+    ];
     public function uri()
     {
         return $this->hasOne(NewsUri::class, 'news_id', 'id');
