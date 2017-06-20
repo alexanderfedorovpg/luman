@@ -59,7 +59,6 @@ class VideoUpload extends PureComponent {
         }
 
         if (values.url) {
-            console.log(values.url);
             video.url.input.onChange(values.url);
         }
 

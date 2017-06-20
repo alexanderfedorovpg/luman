@@ -155,6 +155,9 @@ const values = {
   // and it is served by the "server" bundle.
   serviceWorker: {
     // Enabled?
+    // NOTE: currently in client/index.js we unregister service workers.
+    //       if you want enable SW, then you need to check out client/index.js
+    //       for SW unregistration
     enabled: false,
     // Service worker name
     fileName: 'sw.js',

@@ -38,7 +38,7 @@ let array = [
             mobile:  '/content/banner/here_and_there_1c.png',
             desktop: '/content/banner/here_and_there_3c.png',
         },
-        url_to: ''
+        url_to: 'https://www.rtvi.com/broadcast/385'
     },
 ]
 

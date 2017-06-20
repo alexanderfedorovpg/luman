@@ -96,8 +96,6 @@ class NewsEditorTransformer extends Transformer
         }
 
 
-
-
         $datetime_now = new \DateTime($news['is_publish'] ? $news['publish_date'] : "now");
         $time_edit = new \DateTime($news['created_at']);
         $interval = $time_edit->diff($datetime_now);
@@ -116,7 +114,7 @@ class NewsEditorTransformer extends Transformer
         $time_edit = new \DateTime($news['created_at']);
         $interval = $time_edit->diff($datetime_now);
         $transform['time_edit'] = $interval->format('%D:%H:%I:%S');
-         $transHelper = new UrlReplaceHelper();
+        $transHelper = new UrlReplaceHelper();
         $url_title = $transHelper->translate($news['title']);
         $uri=NewsUri::where('news_id','=',$news['id'])->pluck('uri')->first();
         $transform['uri'] = $uri?'https://'.$uri:'https://rtvi.com/news/'. $news['id'].'-'.$url_title;

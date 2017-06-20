@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Transformers\v1\NewsEditorTransformer;
+use App\Models\CdnFile;
+use App\Models\Settings;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +14,8 @@ use App\Models\News;
 use App\Http\Traits\AirRecordFilter;
 use App\Helpers\FileHelper;
 use App\Filespot\Configuration;
+use Illuminate\Support\Facades\Validator;
+
 
 /**
  * Контроллер записей эфиров
@@ -44,7 +48,7 @@ class AirRecordController extends CmsController
      */
     public function index(Request $request)
     {
-        $records = $this->filter($request, News::query())->AirRecords()->where('delete','=','0')->get();
+        $records = $this->filter($request, News::query())->AirRecords()->where('delete', '=', '0')->get();
 
         return $this->respond(
             $this->recordTransformer->transformCollection($records->toArray())
@@ -86,9 +90,9 @@ class AirRecordController extends CmsController
 
 //        $request->request->add(['video_stream'=> $request->input('video')]);
 //        $request->request->add(['video_stream_preview'=>  $request->input('video_preview')]);
-        $editor_id =$request->input('editor_id');
+        $editor_id = $request->input('editor_id');
 
-        $request->request->add( ['editor_id'=> $editor_id?$editor_id:Auth::id()] );
+        $request->request->add(['editor_id' => $editor_id ? $editor_id : Auth::id()]);
 
         $news = new NewsListEditorController();
         $result = $news->create($request);
@@ -111,14 +115,14 @@ class AirRecordController extends CmsController
         ]);
 
         $request->request->add(['id' => $id]);
-        $editor_id =$request->input('editor_id');
+        $editor_id = $request->input('editor_id');
 
-        $request->request->add( ['editor_id'=> $editor_id?$editor_id:Auth::id()] );
+        $request->request->add(['editor_id' => $editor_id ? $editor_id : Auth::id()]);
 
         $news = new NewsListEditorController();
 
 
-       $result = $news->edit($request);
+        $result = $news->edit($request);
         return $this->respond($result->original);
     }
 
@@ -132,7 +136,7 @@ class AirRecordController extends CmsController
     {
 
         $news = new NewsListEditorController();
-        $result=$news->delete($id);
+        $result = $news->delete($id);
 
         return $this->respond($result->original);
     }
@@ -147,7 +151,7 @@ class AirRecordController extends CmsController
     {
 
         $news = new NewsListEditorController();
-        $result=$news->publish($request, $request->input('id'));
+        $result = $news->publish($request, $request->input('id'));
         return $this->respond($result->original);
     }
 
@@ -191,5 +195,63 @@ class AirRecordController extends CmsController
         $news->triggerVisibleConstructor($request);
     }
 
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function storeCover(Request $request)
+    {
+        try {
+
+            $validation = Validator::make(
+                $request->all(),
+                [
+                    'value' => 'required',
+                ]
+            );
+
+            if ($validation->fails()) {
+
+                throw new ValidationException($validation->errors()->all());
+            }
+
+
+            $settings = Settings::updateOrCreate(['name' => 'between_air_cover'],
+                [
+                    'value' => $request->input('value'),
+                    'description' => 'Пребивка между роликами',
+                ]);
+
+            return $this->respond( ['url'=> CdnFile::where('id', '=', $settings->value)->pluck('url')->first()] );
+
+        } catch (ValidationException $e) {
+            return $this->respondFail422x($e->validator);
+        } catch (Exception $e) {
+            $this->respondFail500x($e->getMessage());
+        }
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function showCover()
+    {
+        try {
+
+            $settings = Settings::where( 'name' ,'=', 'between_air_cover' )->first();
+            $cover = CdnFile::where('id', '=', $settings->value)->pluck('url')->first();
+
+            if ($cover) {
+                return $this->respond(['url'=>$cover]);
+            }
+            return $this->respond(null);
+
+
+        } catch (Exception $e) {
+            $this->respondFail500x($e->getMessage());
+        }
+    }
 
 }
