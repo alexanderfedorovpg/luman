@@ -14,7 +14,6 @@
     }
 
     &__copyright {
-        width: rem(340);
 
         @include below($mobile) {
             width: 50%;
@@ -63,7 +62,11 @@
         }
 
         @include above($tabletLandscape) {
-            width: rem(340);
+            width: rem(313);
+        }
+
+        @include above($desktop) {
+            width: rem(355);
         }
     }
 
@@ -84,7 +87,8 @@
         }
 
         @include above($desktop) {
-            margin-left: rem(62);
+            margin-left: rem(46);
+            margin-top: rem(4);
         }
     }
 
@@ -103,7 +107,7 @@
 
         @include above($tabletLandscape) {
             width: rem(285);
-            margin-left: rem(25);
+            margin-left: rem(52);
             padding-left: 0;
             padding-top: 0;
         }
