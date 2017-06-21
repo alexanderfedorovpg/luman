@@ -199,6 +199,13 @@ main {
 
 .middle-col {
     width: 100%;
+
+    &_size {
+
+        @include between($tabletLandscape, $tabletLandscapeMax) {
+            width: rem(617);
+        }
+    }
 }
 
 .right-col {

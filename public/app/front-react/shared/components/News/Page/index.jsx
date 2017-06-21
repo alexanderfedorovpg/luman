@@ -73,11 +73,11 @@ class News extends Component {
                             <Aside top={null} inside broadcast={null} now={now} />
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
-                            <div className="news-top__middle middle-col">
+                            <div className="news-top__middle middle-col ">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
-                        <div className="news-top__middle middle-col">
+                        <div className="news-top__middle middle-col middle-col_size">
                             <MediaQuery maxWidth="929px">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
@@ -123,7 +123,7 @@ class News extends Component {
                         </MediaQuery>
 
                         <MediaQuery minWidth="1250px">
-                            <div className="news-top__middle middle-col">
+                            <div className="news-top__middle middle-col ">
                                 {this.renderAdditionalData(data.slice())}
                                 {canLoad && (
                                     <LoadMore onClick={onLoadRequest}>
