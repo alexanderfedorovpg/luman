@@ -42,16 +42,19 @@ class VideoUpload extends PureComponent {
             program_id,
         } = this.props;
 
-        // Если загрузили новое видео, то обнуляем превью
-        if (values.video && typeof values.video !== 'string') {
-            video.id.input.onChange(null);
-            video.file.input.onChange(values.video);
-
+        const resetPrevVideo = () => {
             videoPreview.id.input.onChange(null);
             videoPreview.file.input.onChange(null);
-        }
-        else if (!values.video && values.url) {
+            video.id.input.onChange(null);
+        };
+
+        // Если загрузили новое видео, то обнуляем превью
+        if (values.url) {
             video.file.input.onChange(values.url);
+            resetPrevVideo();
+        } else if (values.video && typeof values.video !== 'string') {
+            video.file.input.onChange(values.video);
+            resetPrevVideo();
         }
 
         if (values.preview && typeof values.preview !== 'string') {
@@ -60,7 +63,6 @@ class VideoUpload extends PureComponent {
             videoPreview.author.input.onChange(values.author);
             videoPreview.source.input.onChange(values.source);
         }
-
 
         if (values.program_id) {
             program_id.input.onChange(values.program_id);
@@ -80,6 +82,8 @@ class VideoUpload extends PureComponent {
             program_id: program_id.input.value,
             url: video.url.input.value || '',
         };
+
+        console.log(video);
 
         if (!!videoVal && typeof videoVal === 'string') {
             initialValues.video = null;

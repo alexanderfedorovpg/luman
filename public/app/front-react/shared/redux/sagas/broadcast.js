@@ -51,9 +51,9 @@ function* getBroadcastList(params, replace) {
         const { data } = yield call(axios.get, `${endpoint}/air/record`, {
             params: {
                 ...filterParams,
-                ...params,
                 limit: 16,
                 programId: program,
+                ...params,
             },
         });
 
@@ -70,10 +70,10 @@ function* getBroadcastList(params, replace) {
 }
 
 export default function* broadcast() {
-    yield takeEvery(fetch.getType(), function* ({ payload }) {
-        yield payload && payload.id
+    yield takeEvery(fetch.getType(), function* ({ payload = {} }) {
+        yield payload.id
             ? call(getBroadcastItem, payload.id)
-            : call(getBroadcastList);
+            : call(getBroadcastList, payload.params || {}, payload.replace);
     });
 
     yield takeEvery(fetchMore.getType(), function* () {
