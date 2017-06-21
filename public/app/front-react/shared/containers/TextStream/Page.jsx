@@ -106,7 +106,7 @@ class TextStream extends PureComponent {
         const { online, now, other } = this.props;
 
         const comments = (online.comments||[]).sort((a, b) => (
-            this.state.order * (new Date(b.publish_date) - new Date(a.publish_date))
+            this.state.order * (new Date(b.created_at) - new Date(a.created_at))
         ))
 
         return (

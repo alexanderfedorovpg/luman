@@ -36,9 +36,9 @@ function FromEnter({ data, big, className }) {
                     }
                     {' '}
                     <span className="from-enter__time-add">
-                        {data.publish_date
+                        {data.created_at
                             ? <FormattedDate
-                                value={data.publish_date.replace(/-/g, '/')}
+                                value={data.created_at.replace(/-/g, '/')}
                                 month="long"
                                 day="2-digit"
                             />
