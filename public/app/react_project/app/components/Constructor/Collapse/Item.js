@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Icon from 'components/Icon'
 import Article from './Article'
 import NotFound from './NotFound'
+import CoverImg from 'containers/ConstructorPage/CoverImg'
 
 import { font, padding } from 'constants/style';
 import { rem, ifProp } from 'utils/style';
@@ -30,6 +31,11 @@ const Header = styled.p`
     color: #000;
     text-transform: uppercase;
     cursor: pointer;
+`
+
+const Preview = styled.div`
+    padding-right: 1.875rem;
+    padding-left: 1.125rem;
 `
 
 const Title = styled.span`
@@ -158,6 +164,7 @@ class CollapseItem extends React.Component {
                     <Title>{category.name}</Title>
                     <DropdownIcon type="dropdown-arrow" />
                 </Header>
+                {category.id == 1 && <Preview><CoverImg/></Preview>}
                 <Wrap>
                     <Content>
                         {items}

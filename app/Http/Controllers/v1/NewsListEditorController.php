@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\v1;
 
 use App\Models\CdnFile;
+use App\Models\HomepageInfoNoise;
+use App\Models\HomepageNews;
+use App\Models\HomepageRecord;
+use App\Models\HomepageWar;
 use App\Models\NewsUri;
 use App\Models\Rubrics;
 use App\Models\TvProgram;
@@ -529,6 +533,12 @@ class NewsListEditorController extends CmsController
             $news->moderation = 0;
 
             if ($log_moderation->rejectionModeration() && $news->save()) {
+
+                HomepageNews::where('news_id','=',$news->id)->delete();
+                HomepageInfoNoise::where('news_id','=',$news->id)->delete();
+                HomepageWar::where('news_id','=',$news->id)->delete();
+                HomepageRecord::where('news_id','=',$news->id)->delete();
+
                 $this->log->setLog('DELETE_NEWS', $this->user_id, "Successful, news id=" . $id . " delete");
                 return $this->respondCreated(
                     ["data" => "delete"]

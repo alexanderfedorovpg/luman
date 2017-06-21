@@ -12,7 +12,8 @@ class NewsObserver
     public function saved(News $news)
     {
 
-//        if ($news['attributes']['is_publish'] == 0 && $news['original']['is_publish'] == 1) {
+
+//        if ($news['attributes']['is_publish'] == 0 && isset($news['original']['is_publish']) && $news['original']['is_publish'] == 1) {
 //
 //            HomepageNews::destroy($news['attributes']['id']);
 //            HomepageInfoNoise::destroy($news['attributes']['id']);
