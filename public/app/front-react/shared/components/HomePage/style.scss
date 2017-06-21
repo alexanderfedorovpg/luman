@@ -364,7 +364,7 @@
     }
 
     &__banner-preview {
-
+        margin-top: rem(21);
 
         @include above($tabletLandscape) {
             height: rem(122.5);
@@ -372,7 +372,7 @@
 
         @include above($desktop) {
             height: rem(145);
-            margin-top: rem(21);
+
         }
 
         &_war {
