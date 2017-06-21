@@ -76,7 +76,6 @@ export default function* broadcast() {
     });
 
     yield takeEvery(fetchMore.getType(), function* () {
-        console.log('load more');
         const loadedRecords = yield select(selectBroadcastIds);
         yield call(getBroadcastList, { offset: loadedRecords.length });
     });

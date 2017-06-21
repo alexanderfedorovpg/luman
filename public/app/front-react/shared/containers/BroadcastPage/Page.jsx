@@ -38,7 +38,7 @@ class BroadcastPage extends PureComponent {
     componentDidMount() {
         const { match } = this.props
 
-        this.props.fetch({ replace: true })
+        this.props.setProgram(null);
         this.props.fetchNoise()
 
         if (match.params.id) {
@@ -160,7 +160,7 @@ const mapDispatchToProps = dispatch => ({
     },
     setProgram(id) {
         dispatch(setProgram(id))
-        dispatch(fetch())
+        dispatch(fetch({ replace: true }))
     },
     fetchNoise() {
         dispatch(fetchNoise())
