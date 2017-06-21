@@ -80,10 +80,6 @@
             right: rem(20);
             fill: $gray-dirty;
             background-color: $white;
-
-            @include below($mobile) {
-                top: rem(-5);
-            }
         }
     }
 

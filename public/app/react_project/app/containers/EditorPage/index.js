@@ -91,6 +91,7 @@ class EditorPage extends Component {
         return (data) => {
             const values = data.toJS();
             const { article, rubrics } = this.props;
+            console.log(values);
 
             let fields = {
                 id: article.id,

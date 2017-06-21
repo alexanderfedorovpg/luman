@@ -10,13 +10,20 @@
             flex-direction: column;
             flex-wrap: wrap;
             align-items: flex-start;
+            @include margin_x(#{rem(-8)});
+            @include margin_y(#{rem(-8)});
 
             &-item {
-                margin-bottom: rem(20);
                 display: flex;
+                flex-wrap: wrap;
 
-                & > div:not(:last-child) {
-                    margin-right: rem(16);
+                @include below($tabletLandscapeMax) {
+                    display: inline-flex;
+                }
+
+                & > div {
+                    @include margin_x(#{rem(8)});
+                    @include margin_y(#{rem(8)});
                 }
             }
         }
@@ -137,6 +144,7 @@
 
             @include above($desktop) {
                 margin-top: rem(18);
+                margin-bottom: rem(28)
             }
         }
 
@@ -160,11 +168,11 @@
             }
 
             @include above($tabletLandscape) {
-                margin-top: rem(37);
+                margin-top: rem(8);
             }
 
             @include above($desktop) {
-                margin-top: rem(15);
+                margin-top: rem(7);
             }
 
             .per-day__title {
@@ -205,11 +213,12 @@
             }
 
             @include above($tabletLandscape) {
-                margin-top: 0;
+               @include margin_y(#{rem(15)});
             }
 
             @include above($desktop) {
-                margin-top: rem(16);
+                margin-top: rem(23);
+                margin-bottom: 0;
             }
         }
 

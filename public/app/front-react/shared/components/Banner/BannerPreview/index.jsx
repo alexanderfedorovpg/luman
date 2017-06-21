@@ -5,7 +5,9 @@ import MediaQuery from 'react-responsive';
 import _rand from 'lodash/random';
 
 import banner from './img/banner.png'
-import bannerMobile from './img/banner-mobile.png'
+import colum_1 from './img/here_and_there_1c.png'
+import colum_2 from './img/here_and_there_2c.png'
+import colum_4 from './img/here_and_there_4c.png'
 import bannerTabletLandscape from './img/banner-tablet-landscape.png'
 
 import './style.scss'
@@ -13,15 +15,15 @@ import './style.scss'
 const Banner = ({images, className}) => (
     <div className={classNames('banner-preview', className)}>
         <MediaQuery maxWidth="614px">
-            <img className="banner-preview__img" src={images ? images.mobile : bannerMobile} alt=""
+            <img className="banner-preview__img" src={images ? images.mobile : colum_1} alt=""
                  role="presentation"/>
         </MediaQuery>
         <MediaQuery minWidth="615px" maxWidth="1249px">
-            <img className="banner-preview__img" src={images ? images.tabletLandscape : bannerTabletLandscape} alt=""
+            <img className="banner-preview__img" src={images ? images.tabletLandscape : colum_2} alt=""
                  role="presentation"/>
         </MediaQuery>
         <MediaQuery minWidth="1250px">
-            <img className="banner-preview__img" src={images ? images.desktop : banner} alt="" role="presentation"/>
+            <img className="banner-preview__img" src={images ? images.desktop : colum_4} alt="" role="presentation"/>
         </MediaQuery>
     </div>
 )

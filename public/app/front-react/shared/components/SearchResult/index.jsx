@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
+import moment from 'moment';
 // import { FormattedRelative } from 'react-intl';
 import FormatDate from 'components/FormatDate';
 
@@ -18,7 +19,7 @@ const SearchResult = ({
     categoryLink,
 }) => {
     const link = `${categoryLink}/${id}`;
-    const dateObj = date instanceof Date ? date : new Date(date);
+    let dateObj = null;
     const rootClass = cn([
         'global-search-item',
         classNames.root,
@@ -26,6 +27,11 @@ const SearchResult = ({
             'global-search-item--full': !img,
         },
     ]);
+
+    if (date) {
+        console.log(typeof date);
+        dateObj = date instanceof Date ? date : moment(parseInt(date, 10));
+    }
 
     return (
         <article className={rootClass}>
@@ -38,7 +44,6 @@ const SearchResult = ({
                                 className="global-search-item__img"
                                 src={img}
                                 alt=""
-                                role="presentation"
                             />
                         </Link>
                     </figure>
@@ -56,12 +61,15 @@ const SearchResult = ({
                 <p className="global-search-item__introtext">
                     {text}
                 </p>
-                <time
-                    className="global-search-item__time"
-                    dateTime={dateObj.toISOString()}
-                >
-                    <FormatDate value={dateObj}/>
-                </time>
+                {
+                    !!dateObj &&
+                    <time
+                        className="global-search-item__time"
+                        dateTime={dateObj.format()}
+                    >
+                        <FormatDate value={dateObj} />
+                    </time>
+                }
             </div>
         </article>
     );

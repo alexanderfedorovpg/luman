@@ -12,9 +12,9 @@ import {
 } from 'selectors/news'
 import {
     selectProgram,
-    selectPagination,
     selectBroadcast,
-    selectBroadcastData
+    selectBroadcastData,
+    selectCanLoad,
 } from 'selectors/broadcast'
 import { selectPrograms } from 'selectors/programs'
 
@@ -38,7 +38,7 @@ class BroadcastPage extends PureComponent {
     asyncBootstrap() {
         const { match } = this.props
 
-        this.props.fetch()
+        this.props.setProgram(null);
         this.props.fetchNoise()
 
         if (match.params.id) {
@@ -96,7 +96,7 @@ class BroadcastPage extends PureComponent {
             broadcast,
             program,
             programs,
-            pagination,
+            canLoad,
             nowNews,
             relatedNews,
             setProgram,
@@ -133,7 +133,7 @@ class BroadcastPage extends PureComponent {
                         nowNews={nowNews.map(v => v.news)}
                         broadcast={broadcast}
                         onLoadRequest={loadMore}
-                        canLoad={pagination.page < pagination.lastPage}
+                        canLoad={canLoad}
                         setProgram={this.toPrograms}
                         programs={programs}
                     />
@@ -150,9 +150,9 @@ const mapStateToProps = state => ({
     broadcastData: selectBroadcastData(state),
     programs: selectPrograms(state),
     program: selectProgram(state),
-    pagination: selectPagination(state),
     nowNews: selectNowNews(state),
     relatedNews: selectRelated(state),
+    canLoad: selectCanLoad(state),
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -164,7 +164,7 @@ const mapDispatchToProps = dispatch => ({
     },
     setProgram(id) {
         dispatch(setProgram(id))
-        dispatch(fetch())
+        dispatch(fetch({ replace: true }))
     },
     fetchNoise() {
         dispatch(fetchNoise())

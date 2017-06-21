@@ -11,7 +11,7 @@ import {
 } from 'actions/broadcast';
 
 import {
-    selectPagination,
+    selectBroadcastIds,
     selectProgram,
     selectFilters,
 } from 'selectors/broadcast';
@@ -51,16 +51,15 @@ function* getBroadcastList(params, replace) {
         const { data } = yield call(axios.get, `${endpoint}/air/record`, {
             params: {
                 ...filterParams,
-                ...params,
                 limit: 16,
                 programId: program,
+                ...params,
             },
         });
 
         yield put(fetched({
             data: data.data,
-            page: data.current_page,
-            lastPage: data.last_page,
+            total: data.total,
             replace,
         }));
     } catch (e) {
@@ -70,18 +69,15 @@ function* getBroadcastList(params, replace) {
 }
 
 export default function* broadcast() {
-    yield takeEvery(fetch.getType(), function* ({ payload }) {
-        yield payload && payload.id
+    yield takeEvery(fetch.getType(), function* ({ payload = {} }) {
+        yield payload.id
             ? call(getBroadcastItem, payload.id)
-            : call(getBroadcastList);
+            : call(getBroadcastList, payload.params || {}, payload.replace);
     });
 
     yield takeEvery(fetchMore.getType(), function* () {
-        const { page, lastPage } = yield select(selectPagination);
-
-        if (page < lastPage) {
-            yield call(getBroadcastList, { page: page + 1 });
-        }
+        const loadedRecords = yield select(selectBroadcastIds);
+        yield call(getBroadcastList, { offset: loadedRecords.length });
     });
 
     yield takeEvery(changeDateFilter.getType(), function* () {

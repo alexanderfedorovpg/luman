@@ -32,11 +32,12 @@ function Detail({ data, noise, now, related, broadcast, hasVideo, noisePage }) {
                                 <MiniNews key={v.id} data={v} className="info-noize__mini-news" />
                             ))}
                         </Group>
-                        {!isNoise ?
+
+                        {/*!isNoise ?
                             <Noise className="info-noize__news-detail" data={noise} />
                             :
                             null
-                        }
+                        */}
                     </div>
                 </div>
             </div>

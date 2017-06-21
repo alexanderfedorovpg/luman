@@ -65,7 +65,7 @@ class Broadcast extends Component {
 
     renderItems(data) {
         return (
-            <div className="news-one-line__row news-one-line__row_margin">
+            <div key={data[0].id} className="news-one-line__row news-one-line__row_margin">
                 <Item data={data[0]} />
                 <Item data={data[1]} />
                 <Item data={data[2]} />
