@@ -11,7 +11,7 @@ import {
 } from 'actions/broadcast';
 
 import {
-    selectPagination,
+    selectBroadcastIds,
     selectProgram,
     selectFilters,
 } from 'selectors/broadcast';
@@ -59,8 +59,7 @@ function* getBroadcastList(params, replace) {
 
         yield put(fetched({
             data: data.data,
-            page: data.current_page,
-            lastPage: data.last_page,
+            total: data.total,
             replace,
         }));
     } catch (e) {
@@ -77,11 +76,8 @@ export default function* broadcast() {
     });
 
     yield takeEvery(fetchMore.getType(), function* () {
-        const { page, lastPage } = yield select(selectPagination);
-
-        if (page < lastPage) {
-            yield call(getBroadcastList, { page: page + 1 });
-        }
+        const loadedRecords = yield select(selectBroadcastIds);
+        yield call(getBroadcastList, { offset: loadedRecords.length });
     });
 
     yield takeEvery(changeDateFilter.getType(), function* () {

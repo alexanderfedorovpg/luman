@@ -10,7 +10,7 @@ import {
 } from 'selectors/news';
 import {
     selectProgram,
-    selectPagination,
+    selectCanLoad,
     selectBroadcast,
     selectBroadcastData,
 } from 'selectors/broadcast';
@@ -24,6 +24,12 @@ import Broadcast from 'components/Broadcast/Programs/index.jsx';
 import BroadcastStub from 'components/Broadcast/Page/stub.jsx';
 
 const SHOW_STUB = false; // показываем заглушку
+const fetchPayload = {
+    params: {
+        limit: 15,
+    },
+    replace: true,
+};
 
 class BroadcastProgramsPage extends PureComponent {
 
@@ -35,35 +41,15 @@ class BroadcastProgramsPage extends PureComponent {
 
     componentDidMount() {
         const { match } = this.props;
+        const programId = match.params.id;
 
-        this.props.fetch({
-            params: {
-                limit: 15,
-            },
-            replace: true,
-        });
+        if (programId) {
+            this.props.setProgram(programId);
+        } else {
+            this.props.fetch(fetchPayload);
+        }
+
         this.props.fetchNoise();
-
-        if (match.params.id) {
-            this.fetchItem(match.params.id);
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props.match.params.id !== nextProps.match.params.id) {
-            if (nextProps.match.params.id) {
-                this.fetchItem(nextProps.match.params.id);
-            }
-        }
-    }
-
-    // загружает новость, если ее нет в списке
-    // также загружает "новости по теме"
-    fetchItem(id) {
-        if (!this.getById(id)) {
-            this.props.fetch({ id });
-        }
-        this.props.fetchRelated(id);
     }
 
     getById(id) {
@@ -75,8 +61,8 @@ class BroadcastProgramsPage extends PureComponent {
     toPrograms(id) {
         const { history, setProgram } = this.props;
 
-        setProgram(id);
         if (id) {
+            setProgram(id);
             history.push({
                 pathname: `/programs/${id}`,
             });
@@ -95,7 +81,7 @@ class BroadcastProgramsPage extends PureComponent {
             relatedNews,
             program,
             programs,
-            pagination,
+            canLoad,
             setProgram,
             loadMore,
         } = this.props;
@@ -126,7 +112,7 @@ class BroadcastProgramsPage extends PureComponent {
                             broadcast={broadcast}
                             onLoadRequest={loadMore}
                             onFilter={this.props.changeDateFilter}
-                            canLoad={pagination.page < pagination.lastPage}
+                            canLoad={canLoad}
                             setProgram={this.toPrograms}
                             programs={programs}
                         />
@@ -141,7 +127,7 @@ const mapStateToProps = state => ({
     broadcastData: selectBroadcastData(state),
     programs: selectPrograms(state),
     program: selectProgram(state),
-    pagination: selectPagination(state),
+    canLoad: selectCanLoad(state),
     relatedNews: selectRelated(state),
     noise: selectNoise(state),
 });
@@ -155,7 +141,7 @@ const mapDispatchToProps = dispatch => ({
     },
     setProgram(id) {
         dispatch(setProgram(id));
-        dispatch(fetch());
+        dispatch(fetch(fetchPayload));
     },
     fetchNoise() {
         dispatch(fetchNoise());
