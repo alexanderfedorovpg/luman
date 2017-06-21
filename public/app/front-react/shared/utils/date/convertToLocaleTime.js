@@ -3,7 +3,7 @@ import parseDate from './parseDate';
 const MOSCOW_OFFSET = -3 * 60 * 60 * 1000;
 
 export default function (date) {
-    let dateObj = parseDate(date);
+    const dateObj = parseDate(date);
 
     if (!dateObj) {
         return null;
