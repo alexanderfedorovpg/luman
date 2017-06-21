@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import moment from 'moment';
 // import { FormattedRelative } from 'react-intl';
 import FormatDate from 'components/FormatDate';
 
@@ -29,8 +28,7 @@ const SearchResult = ({
     ]);
 
     if (date) {
-        console.log(typeof date);
-        dateObj = date instanceof Date ? date : moment(parseInt(date, 10));
+        dateObj = date instanceof Date ? date : new Date(date);
     }
 
     return (
@@ -62,10 +60,10 @@ const SearchResult = ({
                     {text}
                 </p>
                 {
-                    !!dateObj &&
+                    !!dateObj && !isNaN(dateObj.getTime()) &&
                     <time
                         className="global-search-item__time"
-                        dateTime={dateObj.format()}
+                        dateTime={dateObj.toISOString()}
                     >
                         <FormatDate value={dateObj} />
                     </time>

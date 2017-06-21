@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import burger from './burger.png';
+import enhanceWithClickOutside from 'react-click-outside';
 
+import burger from './burger.png';
 import './style.scss';
 
 // function Tabs({ data, active, onChange, classNames }) {
@@ -19,10 +20,11 @@ class Tabs extends Component {
 
         this.state = {
             toggle: false,
-            count: 0
-        }
+            count: 0,
+        };
 
         this.toggle = this.toggle.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
@@ -35,10 +37,28 @@ class Tabs extends Component {
         window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
+    close() {
+        this.setState({
+            toggle: false,
+        });
+    }
+
+    handleClickOutside() {
+        this.close();
+    }
+
     toggle() {
         this.setState({
-            toggle: !this.state.toggle
-        })
+            toggle: !this.state.toggle,
+        });
+    }
+
+    onChange(id) {
+        if (this.props.onChange) {
+            this.props.onChange(id);
+        }
+
+        this.close();
     }
 
     updateWindowDimensions() {
@@ -59,18 +79,14 @@ class Tabs extends Component {
             count = 6;
         }
         this.setState({
-            count: count,
+            count,
         });
     }
 
-
     render() {
-
-        const { data, active, onChange, classNames } = this.props;
+        const { data, active, classNames } = this.props;
         let topData = data;
         topData = topData.slice(0, this.state.count);
-
-
 
         return (
             <div className={cn(['breadcrumb', classNames.root])}>
@@ -85,15 +101,19 @@ class Tabs extends Component {
                             >
                                 <a
                                     className="breadcrumb__link"
-                                    onClick={() => onChange(v.id)}
+                                    onClick={() => this.onChange(v.id)}
                                 >
                                     {v.name}
                                 </a>
                             </li>
                         ))}
-                        <li onClick={this.toggle} className={cn("breadcrumb__burger", {breadcrumb__burger_open : this.state.toggle})}>
+                        <li
+                            onClick={this.toggle}
+                            className={cn('breadcrumb__burger', { breadcrumb__burger_open: this.state.toggle })}
+                            role="button"
+                        >
                             <div className="breadcrumb__pict-burger">
-                                <span className="breadcrumb__appearance"></span>
+                                <span className="breadcrumb__appearance" />
                             </div>
                         </li>
                     </ul>
@@ -116,7 +136,7 @@ class Tabs extends Component {
                                     >
                                         <a
                                             className="breadcrumb__link"
-                                            onClick={() => onChange(v.id)}
+                                            onClick={() => this.onChange(v.id)}
                                         >
                                             {v.name}
                                         </a>
@@ -151,4 +171,4 @@ Tabs.propTypes = {
     }),
 };
 
-export default Tabs;
+export default enhanceWithClickOutside(Tabs);
