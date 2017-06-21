@@ -8,6 +8,8 @@ import {
     SAVE_CHANGES,
     REMOVE_FROM_CONSTRUCTOR,
     LOAD_ITEMS,
+    LOAD_COVER_IMG,
+    SAVE_COVER_IMG,
     GET_ONLINE,
 
     strings,
@@ -37,8 +39,20 @@ import {
 
     onlineLoaded,
     onlineLoadingError,
+
+    loadedCoverImg,
+    failureSetCoverImg,
 } from './actions';
 
+
+export function* loadCoverImg() {
+    try {
+        const {data} = yield call(api.loadCoverImg);
+        yield put(loadedCoverImg(data));
+    } catch (err) {
+        yield put(failureSetCoverImg(err));
+    }
+}
 
 export function* getHomeNews() {
     try {
@@ -158,6 +172,7 @@ export function* getItems({ payload: { type } }) {
 }
 
 export function* constructorData() {
+    yield takeLatest(LOAD_COVER_IMG, loadCoverImg);
     yield takeLatest(LOAD_HOME_NEWS, getHomeNews);
     yield takeLatest(LOAD_CATEGORIES, getCategories);
     yield takeLatest(SAVE_CHANGES, saveHomeNews);

@@ -13,6 +13,11 @@ const selectSearchVars = createSelector(
     (root) => root.getIn(['news', 'search'])
 );
 
+const selectCoverImg = createSelector(
+    selectConstructorPageDomain,
+    (root) => root.getIn(['coverImg'], Map()).toJS()
+);
+
 const selectHomeNews = createSelector(
     selectConstructorPageDomain,
     (root) => root.getIn(['temporary', 'home'], Map()).toJS()
@@ -83,4 +88,5 @@ export {
     selectPristine,
     selectRecords,
     selectOnline,
+    selectCoverImg,
 };

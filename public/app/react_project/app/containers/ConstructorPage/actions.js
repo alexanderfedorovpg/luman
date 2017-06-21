@@ -31,8 +31,37 @@ import {
 
     SET_FILTER,
 
+    SAVE_COVER_IMG,
+
+    LOAD_COVER_IMG,
+    LOAD_COVER_IMG_SUCCESS,
+    LOAD_COVER_IMG_FAILURE,
+
     SET_OPTION,
 } from './constants';
+
+export const setCoverImg = (data) => ({
+    type:    SAVE_COVER_IMG,
+    payload: {
+        ...data,
+    }
+});
+
+export const failureSetCoverImg = (error) => ({
+    type: LOAD_COVER_IMG_FAILURE,
+    error,
+});
+
+export const getCoverImg = () => ({
+    type: LOAD_COVER_IMG,
+});
+
+export const loadedCoverImg = (data) => ({
+    type:    LOAD_COVER_IMG_SUCCESS,
+    payload: {
+        ...data
+    }
+});
 
 export const moveItem = (type, source, target) => ({
     type: MOVE_ITEM,

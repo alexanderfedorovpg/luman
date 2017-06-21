@@ -24,6 +24,11 @@ import {
     SET_FILTER,
 
     SET_OPTION,
+
+    SAVE_COVER_IMG,
+
+    LOAD_COVER_IMG,
+    LOAD_COVER_IMG_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({
@@ -57,6 +62,9 @@ const initialState = fromJS({
     },
     online: {
         data: []
+    },
+    coverImg: {
+        url: ''
     }
 });
 
@@ -64,6 +72,17 @@ function constructorPageReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_HOME_NEWS:
             return state.setIn(['home', 'loading'], true);
+
+        case LOAD_COVER_IMG:
+            return state.setIn(['home', 'loading'], true);
+
+        case SAVE_COVER_IMG:
+            return state.setIn(['coverImg'], fromJS(action.payload));
+
+        case LOAD_COVER_IMG_SUCCESS:
+            return state
+                .setIn(['coverImg'], fromJS(action.payload))
+                .setIn(['home', 'loading'], false)
 
         case LOAD_HOME_NEWS_SUCCESS:
             const newData = fromJS(action.payload);

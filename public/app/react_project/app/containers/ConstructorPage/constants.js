@@ -37,6 +37,12 @@ export const SET_FILTER = 'app/ConstructorPage/SET_FILTER';
 
 export const SET_OPTION = 'app/ConstructorPage/SET_OPTION';
 
+export const LOAD_COVER_IMG = 'app/ConstructorPage/LOAD_COVER_IMG';
+export const LOAD_COVER_IMG_SUCCESS = 'app/ConstructorPage/LOAD_COVER_IMG_SUCCESS';
+export const LOAD_COVER_IMG_FAILURE = 'app/ConstructorPage/LOAD_COVER_IMG_FAILURE';
+
+export const SAVE_COVER_IMG = 'app/ConstructorPage/SAVE_COVER_IMG';
+
 export const strings = {
     saveHomeSuccess: 'Изменения сохранены',
 };
