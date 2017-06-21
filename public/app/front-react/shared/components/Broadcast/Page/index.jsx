@@ -92,7 +92,7 @@ class Broadcast extends Component {
                             <MediaQuery minWidth="930px" maxWidth="1249px">
                                 <div className="news-one-line__row  news-one-line__row_banners">
                                     <Banner type="large" className="news-top__banner" />
-                                    <Banner type="subscribe" className="news-top__subscribe" />
+                                    <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                                 </div>
                             </MediaQuery>
                         </div>
@@ -112,13 +112,13 @@ class Broadcast extends Component {
                         <MediaQuery minWidth="1250px">
                             <div className="news-one-line__row news-one-line__row_banners">
                                 <Banner type="large" className="news-top__banner" />
-                                <Banner type="subscribe" className="news-top__subscribe" />
+                                <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                             </div>
                         </MediaQuery>
                         <MediaQuery maxWidth="929px">
                             <div className="news-one-line__row news-one-line__row_banners">
                                 <Banner type="large" className="news-top__banner" />
-                                <Banner type="subscribe" className="news-top__subscribe" />
+                                <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                             </div>
                         </MediaQuery>
                         <div className="news-top__middle_ether">

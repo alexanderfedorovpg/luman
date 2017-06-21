@@ -111,10 +111,13 @@ class NewsPage extends PureComponent {
                 <Helmet>
                     <title>
                         {match.params.code
-                            ? `Новости - ${item.title || ''}`
+                            ? `Новости: ${item.title || ''}`
                             : 'Новости'
                         }
                     </title>
+                    {item.id && <meta property="og:title" content={`Новости: ${item.title || ''}`} />}
+                    {item.id && <meta property="og:url" content={item.uri} />}
+                    {item.id && <meta property="og:image" content={item.image_main && item.image_main.url} />}
                 </Helmet>
 
                 {match.params.code

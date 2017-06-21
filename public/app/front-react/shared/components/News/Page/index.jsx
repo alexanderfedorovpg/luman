@@ -20,32 +20,17 @@ import './style.scss'
 
 class News extends Component {
 
-    renderItems(data) {
-
-        return [
-            <div key={data[0].id} className="news-top__row-item">
-                <Block data={data[0]} rectangle />
-                <Block data={data[1]} />
-                <Block data={data[2]} />
-            </div>,
-            <div key={data[3].id} className="news-top__row-item">
-                <Block data={data[3]} />
-                <Block data={data[4]} />
-                <Block data={data[5]} rectangle />
-            </div>,
-        ]
-    }
-
     renderAdditionalData(data) {
-        let items = []
-
-        while (data.length) {
-            items = items.concat(this.renderItems(data.splice(0, 6)))
-        }
 
         return (
             <div className="news-top__row">
-                {items}
+                {data.map((v, i) => (
+                    <Block
+                        key={v.id}
+                        data={v}
+                        rectangle={i % 6 === 0 || i % 6 === 5}
+                    />
+                ))}
             </div>
         )
     }
@@ -88,11 +73,11 @@ class News extends Component {
                             <Aside top={null} inside broadcast={null} now={now} />
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
-                            <div className="news-top__middle middle-col">
+                            <div className="news-top__middle middle-col ">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </div>
                         </MediaQuery>
-                        <div className="news-top__middle middle-col">
+                        <div className="news-top__middle middle-col middle-col_size">
                             <MediaQuery maxWidth="929px">
                                 <Banner type="preview" className="news-top__banner-preview" />
                             </MediaQuery>
@@ -106,7 +91,7 @@ class News extends Component {
                             <MediaQuery maxWidth="929px">
                                 <div className="news-top__links">
                                     <Banner type="large" className="news-top__banner" />
-                                    <Banner type="subscribe" className="news-top__subscribe" />
+                                    <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                                 </div>
                             </MediaQuery>
                             <MediaQuery minWidth="930px" maxWidth="1249px">
@@ -132,13 +117,13 @@ class News extends Component {
                         <MediaQuery minWidth="1250px">
                             <div className="right-col">
                                 <MediaQuery minWidth="1250px">
-                                    <Banner type="subscribe" className="news-top__subscribe" />
+                                    <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                                 </MediaQuery>
                             </div>
                         </MediaQuery>
 
                         <MediaQuery minWidth="1250px">
-                            <div className="news-top__middle middle-col">
+                            <div className="news-top__middle middle-col ">
                                 {this.renderAdditionalData(data.slice())}
                                 {canLoad && (
                                     <LoadMore onClick={onLoadRequest}>

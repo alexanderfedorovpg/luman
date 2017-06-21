@@ -102,7 +102,7 @@ function HomePage({
                     <RandomNews className="general-news__random-news" data={randomNews} />
                 </div>
                 <div className="general-news__right general-news__right_more">
-                    <Banner type="subscribe" className="general-news__subscribe"/>
+                    <Banner type="subscribe" className="general-news__subscribe subscribe_in-body"/>
                     {newsBlock.slice(4, 10).map(v => (
                         <MiniNews key={v.id} data={v} className="info-noize__mini-news info-noize__mini-news_war" />
                     ))}

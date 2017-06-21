@@ -126,18 +126,16 @@ class Broadcast extends Component {
                             </div>
                         </div>
                         <div className="news-header__content">
-                            <div className="container news-header__container news-header__container_personal-description">
-                                <div className={'news-header__content-container ' + content[program].big_text}>
+                            <div className="container news-header__container news-header__container_position">
+                                <div className={'news-header__content-container news-header__content-container_personal-description ' + content[program].big_text}>
                                     <p>{content[program].desc}</p>
                                 </div>
-                            </div>
-                            <div className="container news-header__container  news-header__container_tabs">
-                                {/*<div className="news-header__tabs">
-                                    <div className="news-header__tabs_item active">Лучшие моменты</div>
-                                    <div className="news-header__tabs_item">Все выпуски</div>
-                                </div>*/}
-                            </div>
-                            <div className="container news-header__container news-header__container_personality">
+                                <div className="container news-header__container  news-header__container_tabs">
+                                    {/*<div className="news-header__tabs">
+                                     <div className="news-header__tabs_item active">Лучшие моменты</div>
+                                     <div className="news-header__tabs_item">Все выпуски</div>
+                                     </div>*/}
+                                </div>
                                 <img src={content[program].photo} alt="" className={'news-header__personality ' +  content[program].big_image} />
                             </div>
                         </div>
@@ -210,7 +208,7 @@ class Broadcast extends Component {
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
                             <div className="right-col">
-                                <Banner type="subscribe" className="news-top__subscribe-programs" />
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
                             </div>
                         </MediaQuery>
 
@@ -237,7 +235,7 @@ class Broadcast extends Component {
                         </MediaQuery>
                         <MediaQuery maxWidth="1249px">
                             <div className="right-col">
-                                <Banner type="subscribe" className="news-top__subscribe-programs" />
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
                             </div>
                         </MediaQuery>
 

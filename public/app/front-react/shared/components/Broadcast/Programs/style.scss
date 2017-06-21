@@ -344,6 +344,21 @@
 
     &__container {
         position: relative;
+
+        @include below($mobile) {
+            position: static;
+        }
+
+        &_position {
+            min-height: rem(285);
+
+            @include below($mobile) {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                padding-top: rem(15);
+            }
+        }
     }
 
     &__content {
@@ -363,11 +378,6 @@
             padding-top: rem(27);
         }
 
-        @include below($mobile) {
-            display: flex;
-            flex-wrap: wrap;
-            padding-top: rem(15);
-        }
     }
 
     &__content-container {
@@ -398,22 +408,13 @@
                 padding-right: 0;
             }
         }
-    }
-
-    &__container {
-
-        &_personality {
-            position: relative;
-            order: 3;
-
-            @include below($mobile) {
-                order: 1;
-            }
-        }
 
         &_personal-description {
             order: 2;
         }
+    }
+
+    &__container {
 
         &_tabs {
             order: 2;
@@ -439,6 +440,8 @@
         z-index: 1;
         right: rem(60);
         bottom: 0;
+        order: 3;
+
 
         @include below($tabletLandscapeMax) {
             right: 0;
@@ -453,6 +456,7 @@
         @include below($mobile) {
             position: static;
             width: rem(300);
+            order: 1;
         }
 
         &_big {
@@ -470,6 +474,7 @@
                 position: static;
             }
         }
+
     }
 
     &__tabs {

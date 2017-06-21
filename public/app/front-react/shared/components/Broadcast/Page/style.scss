@@ -134,7 +134,7 @@
         &__banner-preview {
             height: rem(142);
             margin-top: rem(14);
-            margin-bottom: rem(28);
+            margin-bottom: rem(27);
 
             @include below($tabletLandscapeMax) {
                 height: auto;

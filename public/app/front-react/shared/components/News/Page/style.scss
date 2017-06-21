@@ -7,24 +7,15 @@
 
         &__row {
             display: flex;
-            flex-direction: column;
             flex-wrap: wrap;
             align-items: flex-start;
             @include margin_x(#{rem(-8)});
             @include margin_y(#{rem(-8)});
 
-            &-item {
-                display: flex;
-                flex-wrap: wrap;
-
-                @include below($tabletLandscapeMax) {
-                    display: inline-flex;
-                }
-
-                & > div {
-                    @include margin_x(#{rem(8)});
-                    @include margin_y(#{rem(8)});
-                }
+            .block-square,
+            .block-rectangle {
+                @include margin_x(#{rem(8)});
+                @include margin_y(#{rem(8)});
             }
         }
         &__mini-news {
