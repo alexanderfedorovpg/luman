@@ -13,7 +13,7 @@ function renderLink(link) {
             target="_blank"
             className="subscribe-networks__ico-link"
         >
-            <img src={link.img} alt="" className="subscribe-networks__ico-image" />
+            <span className={'subscribe-networks__ico-image subscribe-networks__ico-image_' + link.title}></span>
         </a>
     );
 }

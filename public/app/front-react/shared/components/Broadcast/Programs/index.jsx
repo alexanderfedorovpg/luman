@@ -208,7 +208,7 @@ class Broadcast extends Component {
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
                             <div className="right-col">
-                                <Banner type="subscribe" className="news-top__subscribe-programs" />
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
                             </div>
                         </MediaQuery>
 
@@ -235,7 +235,7 @@ class Broadcast extends Component {
                         </MediaQuery>
                         <MediaQuery maxWidth="1249px">
                             <div className="right-col">
-                                <Banner type="subscribe" className="news-top__subscribe-programs" />
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
                             </div>
                         </MediaQuery>
 

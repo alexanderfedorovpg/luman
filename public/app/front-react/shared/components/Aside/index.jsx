@@ -61,7 +61,7 @@ function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcas
             }
             {
                 !isInside &&
-                <Banner type="subscribe" className="news-top__subscribe" />
+                <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
             }
             <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1249px">
                 <Banner type="large" className="news-top__banner" />

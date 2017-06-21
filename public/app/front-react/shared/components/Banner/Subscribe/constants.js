@@ -1,23 +1,32 @@
-import vk from './imgs/vkk.png';
-import fb from './imgs/fb.png';
-import tw from './imgs/tw.png';
-import ok from './imgs/okk.png';
+
 
 export const links = [
     {
-        href: 'https://www.facebook.com/myRTVi',
-        img: fb,
+        title: 'facebook',
+        href: 'https://www.facebook.com/myRTVi/',
     },
     {
+        title: 'twitter',
         href: 'https://twitter.com/RTVi',
-        img: tw,
     },
     {
-        href: 'https://ok.ru/rtvi',
-        img: ok,
+        title: 'instagram',
+        href: 'https://instagram.com/rtvichannel/',
     },
     {
+        title: 'vk',
         href: 'https://vk.com/rtvi',
-        img: vk,
+    },
+    {
+        title: 'ok',
+        href: 'http://ok.ru/rtvi',
+    },
+    {
+        title: 'telegram',
+        href: 'https://t.me/rtvireal',
+    },
+    {
+        title: 'viber',
+        href: 'http://viber.com/rtvi',
     },
 ];

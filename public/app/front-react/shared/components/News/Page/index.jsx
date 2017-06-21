@@ -91,7 +91,7 @@ class News extends Component {
                             <MediaQuery maxWidth="929px">
                                 <div className="news-top__links">
                                     <Banner type="large" className="news-top__banner" />
-                                    <Banner type="subscribe" className="news-top__subscribe" />
+                                    <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                                 </div>
                             </MediaQuery>
                             <MediaQuery minWidth="930px" maxWidth="1249px">
@@ -117,7 +117,7 @@ class News extends Component {
                         <MediaQuery minWidth="1250px">
                             <div className="right-col">
                                 <MediaQuery minWidth="1250px">
-                                    <Banner type="subscribe" className="news-top__subscribe" />
+                                    <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                                 </MediaQuery>
                             </div>
                         </MediaQuery>
