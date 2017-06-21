@@ -140,7 +140,7 @@ function HomePage({
                 </div>
                 <div className="general-news__right general-news__right_more">
                     <MediaQuery minWidth="1250px">
-                        <Banner type="subscribe" className="general-news__subscribe"/>
+                        <Banner type="subscribe" className="general-news__subscribe subscribe_in-body"/>
                     </MediaQuery>
                     <MoreNews className="general-news__more-news" data={moreNews} />
                 </div>

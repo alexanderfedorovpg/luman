@@ -8,7 +8,9 @@
     }
 
     &:hover {
+
         & .subscribe {
+
             &__container {
                 display: block;
             }
@@ -17,23 +19,38 @@
 
     &__container {
         position: absolute;
-        z-index: 2;
+        z-index: 3;
 
         display: none;
         width: rem(300);
-        padding: 1.2rem 1.1rem .9rem;
+        @include padding_y(#{rem(26)});
+        @include padding_x(#{rem(16)});
         margin-top: -.5rem;
 
         border: rem(1) solid $dark-blue;
         background-color: $white;
 
         .subscribe-networks {
+
             &__ico-image {
-                width: 2rem;
+                width: rem(30);
+                height: rem(30);
+            }
+
+
+        }
+    }
+
+    &_in-body {
+
+        .subscribe-networks {
+
+            &__list-network {
+                margin-top: 0;
             }
 
             &__ico-link:not(:last-child) .subscribe-networks__ico-image {
-                margin-right: .45rem;
+                margin-right: rem(9);
             }
         }
     }
