@@ -637,7 +637,6 @@
 
         &__img {
             margin-top: rem(16);
-            margin-bottom: rem(42);
 
             @include below($mobile) {
                 margin-bottom: rem(16);
@@ -651,7 +650,9 @@
 
             @include above($tabletLandscape) {
                 margin-top: rem(16);
+                margin-bottom: rem(9);
             }
+
 
             img {
                 display: block;
@@ -695,7 +696,6 @@
             font-family: $stemBold;
             font-size: rem(16);
             line-height: rem(24);
-            letter-spacing: rem(1);
             color: $enter;
         }
 

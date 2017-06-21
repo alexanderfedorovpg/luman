@@ -25,17 +25,13 @@
         @include above($desktop) {
             width: rem(915);
         }
-    }
 
-    &__left_more {
+        &_more {
 
-        @include above($tabletLandscape) {
-           //- margin-top: rem(-60);
-        }
-
-        @include above($desktop) {
-            width: rem(932);
-            margin-top: 0;
+            @include above($desktop) {
+                width: rem(932);
+                margin-top: 0;
+            }
         }
     }
 
@@ -60,6 +56,12 @@
     &__right {
         width: rem(300);
 
+        &_more {
+
+            @include below($tabletMax) {
+                width: 100%;
+            }
+        }
     }
 
     &__left-wrapper {
@@ -314,8 +316,22 @@
     &__more-news {
         margin-top: rem(23);
 
+        @include below($tabletMax) {
+            display: flex;
+            flex-wrap: wrap;
+
+            .mini-news {
+                width: 50%;
+            }
+        }
+
         @include below($mobile) {
+            display: block;
             margin-top: 0;
+
+            .mini-news {
+                width: rem(300);
+            }
         }
 
         &_war {
