@@ -26,25 +26,27 @@ class SearchPage extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.onSearch = this.onSearch.bind(this);
-        this.onCategoryChange = this.onCategoryChange.bind(this);
-    }
+        const parsed = queryString.parse(props.location.search);
 
-    componentWillMount() {
-        const parsed = queryString.parse(this.props.location.search);
-
-        this.setState({
+        this.state = {
             paramsFromUrl: {
                 query: parsed.query,
                 category: parsed.category || 'all',
             },
-        });
+        }
+
+        this.onSearch = this.onSearch.bind(this);
+        this.onCategoryChange = this.onCategoryChange.bind(this);
     }
 
-    componentDidMount() {
+    asyncBootstrap() {
         const parsed = queryString.parse(this.props.location.search);
 
         this.props.setInitialState(this.state.paramsFromUrl);
+    }
+
+    componentDidMount() {
+        this.asyncBootstrap()
     }
 
     changeUrl(overwriteParams) {

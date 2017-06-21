@@ -34,7 +34,7 @@ class NewsPage extends PureComponent {
         super(props);
     }
 
-    componentDidMount() {
+    asyncBootstrap() {
         const { match } = this.props;
 
         this.props.fetchTop();
@@ -45,6 +45,10 @@ class NewsPage extends PureComponent {
         if (match.params.code) {
             this.fetchItem(this.getId());
         }
+    }
+
+    componentDidMount() {
+        this.asyncBootstrap()
     }
 
     componentWillReceiveProps(nextProps) {

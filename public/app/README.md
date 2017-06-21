@@ -38,4 +38,5 @@ API_ENDPOINT_CMS=https://example.com    - адрес апи CMS
 API_ENDPOINT_PUBLIC=https://example.com - адрес апи публичной части
 PORT=8080                               - порт на котором будет запущен нод сервер 
                                           публичной части
+DISABLE_SSR                             - (default: false) отключить рендеринг на сервере
 ```

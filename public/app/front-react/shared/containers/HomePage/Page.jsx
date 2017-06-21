@@ -20,8 +20,12 @@ import HomeWar from 'components/HomePage/War'
 
 class HomePage extends PureComponent {
 
-    componentDidMount() {
+    asyncBootstrap() {
         this.props.fetchOnline()
+    }
+
+    componentDidMount() {
+        this.asyncBootstrap()
     }
 
     render() {

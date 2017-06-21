@@ -33,7 +33,7 @@ class BroadcastProgramsPage extends PureComponent {
         this.toPrograms = this.toPrograms.bind(this);
     }
 
-    componentDidMount() {
+    asyncBootstrap() {
         const { match } = this.props;
 
         this.props.fetch();
@@ -42,6 +42,10 @@ class BroadcastProgramsPage extends PureComponent {
         if (match.params.id) {
             this.fetchItem(match.params.id);
         }
+    }
+
+    componentDidMount() {
+        this.asyncBootstrap()
     }
 
     componentWillReceiveProps(nextProps) {
