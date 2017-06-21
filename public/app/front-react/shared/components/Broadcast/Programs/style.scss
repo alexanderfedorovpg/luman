@@ -292,6 +292,8 @@
 
 
 .news-header {
+    position: relative;
+    z-index: 0;
 
     &__title {
 

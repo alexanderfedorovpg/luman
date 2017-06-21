@@ -218,6 +218,7 @@
 
             @include above($desktop) {
                 margin-top: rem(23);
+                margin-bottom: 0;
             }
         }
 
