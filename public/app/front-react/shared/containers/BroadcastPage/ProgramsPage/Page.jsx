@@ -36,7 +36,12 @@ class BroadcastProgramsPage extends PureComponent {
     componentDidMount() {
         const { match } = this.props;
 
-        this.props.fetch();
+        this.props.fetch({
+            params: {
+                limit: 15,
+            },
+            replace: true,
+        });
         this.props.fetchNoise();
 
         if (match.params.id) {
