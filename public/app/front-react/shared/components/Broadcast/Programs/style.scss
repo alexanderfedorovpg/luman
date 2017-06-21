@@ -373,6 +373,7 @@
     &__content-container {
         padding-bottom: rem(40);
         width: 38.4375rem;
+        font-family: $openSans;
 
         @include below($tabletMax) {
             padding-right: 53%;
@@ -455,7 +456,7 @@
         }
 
         &_big {
-            right: rem(-165);
+            right: rem(-190);
             width: rem(826);
             height: auto;
 
