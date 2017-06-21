@@ -37,7 +37,8 @@ class NewsListTransformer extends Transformer
         $transform['subtitle'] = $news['sub_title'];
 
 
-
+        $transform['created_at'] = $news['created_at'];
+        $transform['updated_at'] = $news['updated_at'];
 
         if ($news['video_stream']) {
             $preview=CdnFile::where('id', '=', $news['video_stream_preview'])->first();
