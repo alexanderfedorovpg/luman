@@ -12,6 +12,7 @@ import config from 'config';
 import ServerHTML from './ServerHTML';
 import App from 'shared/containers/App';
 import configureStore from 'shared/redux/configureStore';
+import rootSaga from 'shared/redux/sagas';
 
 /**
  * React application middleware, supports server side rendering.
@@ -60,9 +61,7 @@ export default function reactApplicationMiddleware(request, response) {
     </AsyncComponentProvider>
   );
 
-  // Pass our app into the react-async-component helper so that any async
-  // components are resolved for the render.
-  asyncBootstrapper(app).then(() => {
+  store.runSaga().done.then(() => {
     const appString = renderToString(app);
 
     // Generate the html response.
@@ -94,5 +93,11 @@ export default function reactApplicationMiddleware(request, response) {
             200,
       )
       .send(`<!DOCTYPE html>${html}`);
+  });
+
+  // Pass our app into the react-async-component helper so that any async
+  // components are resolved for the render.
+  asyncBootstrapper(app).then(() => {
+    store.close();
   });
 }

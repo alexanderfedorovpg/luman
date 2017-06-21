@@ -84,6 +84,6 @@ export function number(name, defaultVal) {
 
 export function bool(name, defaultVal) {
   return process.env[name]
-    ? process.env[name] === "true" || process.env[name] === "1"
+    ? process.env[name].toLowerCase() === "true" || process.env[name] === "1"
     : defaultVal;
 }

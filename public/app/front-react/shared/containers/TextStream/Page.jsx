@@ -50,8 +50,12 @@ class TextStream extends PureComponent {
         this.onOrderChange = this.onOrderChange.bind(this)
     }
 
-    componentDidMount() {
+    asyncBootstrap() {
         this.props.fetchOnline()
+    }
+
+    componentDidMount() {
+        this.asyncBootstrap()
 
         this.queueUpdate()
     }

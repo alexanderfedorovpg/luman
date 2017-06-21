@@ -39,7 +39,7 @@ let array = [
             tabletLandscape: '/content/banner/here_and_there_2c.png',
             desktop:         '/content/banner/here_and_there_4c.png',
         },
-        url_to: 'https://www.rtvi.com/broadcast/385'
+        url_to: '/programs/2'
     },
     {
         type:   'preview',
@@ -49,7 +49,7 @@ let array = [
             tabletLandscape: '/content/banner/here_and_there_2c.png',
             desktop:         '/content/banner/here_and_there_4c.png',
         },
-        url_to: 'https://www.rtvi.com/broadcast/385'
+        url_to: '/programs/2'
     },
     {
         type:   'large',
@@ -58,7 +58,7 @@ let array = [
             mobile:  '/content/banner/here_and_there_1c.png',
             desktop: '/content/banner/here_and_there_3c.png',
         },
-        url_to: 'https://www.rtvi.com/broadcast/385'
+        url_to: '/programs/2'
     },
 ]
 

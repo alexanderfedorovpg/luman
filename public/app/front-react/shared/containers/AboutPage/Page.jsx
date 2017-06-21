@@ -15,9 +15,13 @@ class AboutPage extends PureComponent {
         super(props);
     }
 
-    componentDidMount() {
+    asyncBootstrap() {
         this.props.fetchRecords()
         this.props.fetchNoise()
+    }
+
+    componentDidMount() {
+        this.asyncBootstrap()
     }
 
     render() {

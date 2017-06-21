@@ -39,17 +39,19 @@ class BroadcastProgramsPage extends PureComponent {
         this.toPrograms = this.toPrograms.bind(this);
     }
 
-    componentDidMount() {
+    asyncBootstrap() {
         const { match } = this.props;
         const programId = match.params.id;
-
         if (programId) {
             this.props.setProgram(programId);
         } else {
             this.props.fetch(fetchPayload);
         }
-
         this.props.fetchNoise();
+    }
+
+    componentDidMount() {
+        this.asyncBootstrap()
     }
 
     getById(id) {

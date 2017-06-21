@@ -37,7 +37,7 @@ const values = {
   clientDevServerPort: EnvVars.number('CLIENT_DEV_PORT', 7331),
 
   // Disable server side rendering?
-  disableSSR: false,
+  disableSSR: EnvVars.bool('DISABLE_SSR', false),
 
   // How long should we set the browser cache for the served assets?
   // Don't worry, we add hashes to the files, so if they change the new files

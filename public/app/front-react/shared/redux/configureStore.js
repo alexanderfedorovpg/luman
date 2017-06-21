@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware, { END } from 'redux-saga'
 import reducer from './reducers'
 import sagas from './sagas'
 
@@ -38,7 +38,8 @@ function configureStore(initialState) {
     });
   }
 
-  sagas.map(saga => sagaMiddleware.run(saga))
+  store.close = () => store.dispatch(END);
+  store.runSaga = () => sagaMiddleware.run(sagas);
 
   return store;
 }

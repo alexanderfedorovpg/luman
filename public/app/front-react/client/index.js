@@ -3,7 +3,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import asyncBootstrapper from 'react-async-bootstrapper';
+import reactTreeWalker from 'react-tree-walker'
 import { AsyncComponentProvider } from 'react-async-component';
 import { Provider } from 'react-redux';
 import configureStore from 'shared/redux/configureStore';
@@ -31,6 +31,8 @@ const store = configureStore(
   window.__APP_STATE__, // eslint-disable-line no-underscore-dangle
 );
 
+store.runSaga();
+
 /**
  * Renders the given React Application component.
  */
@@ -54,7 +56,20 @@ function renderApp(TheApp) {
   // We use the react-async-component in order to support code splitting of
   // our bundle output. It's important to use this helper.
   // @see https://github.com/ctrlplusb/react-async-component
-  asyncBootstrapper(app).then(() => render(app, container));
+  reactTreeWalker(
+    app,
+    (element, instance) => {
+      if (
+        instance &&
+        instance.constructor.name === 'AsyncComponent' &&
+        typeof instance.asyncBootstrap === 'function'
+      ) {
+        return instance.asyncBootstrap()
+      }
+      return true
+    },
+    {}
+  ).then(() => render(app, container));
 }
 
 // Execute the first render of our app.
