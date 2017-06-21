@@ -7,18 +7,20 @@ export const selectBroadcastData = createSelector(
     root => root.all.data,
 );
 
-export const selectBroadcast = createSelector(
+export const selectBroadcastIds = createSelector(
     selectBroadcastDomain,
-    selectBroadcastData,
-    (root, list) => root.all.ids.map(id => list[id]),
+    root => root.all.ids,
 );
 
-export const selectPagination = createSelector(
+export const selectBroadcast = createSelector(
+    selectBroadcastIds,
+    selectBroadcastData,
+    (ids, list) => ids.map(id => list[id]),
+);
+
+export const selectCanLoad = createSelector(
     selectBroadcastDomain,
-    (root, list) => ({
-        page: root.all.page,
-        lastPage: root.all.lastPage,
-    }),
+    root => root.all.canLoadMore,
 );
 
 export const selectFilters = createSelector(

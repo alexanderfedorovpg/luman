@@ -6,26 +6,29 @@ import { fetched, setProgram, changeDateFilter } from 'actions/broadcast';
 const initialState = {
     ids: [],
     data: {},
-    page: 1,
-    lastPage: 1,
+    canLoadMore: false,
     program: null,
 };
 
 export default createReducer({
     [fetched]: (state, payload) => {
         let ids = payload.data.map(v => v.id);
+        let canLoadMore = false;
         const dataBase = payload.replace ? {} : state.data;
 
         if (!payload.replace) {
-            ids = ids.concat(state.ids);
+            ids = _uniq(ids.concat(state.ids));
+        }
+
+        if (ids.length < payload.total) {
+            canLoadMore = true;
         }
 
         return {
             ...state,
 
-            ids: _uniq(ids),
-            page: payload.page || state.page,
-            lastPage: Number.isInteger(payload.lastPage) ? payload.lastPage : state.lastPage,
+            ids,
+            canLoadMore,
             data: payload.data.reduce((acc, v) => ({ ...acc, [v.id]: v }), dataBase),
         };
     },
