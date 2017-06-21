@@ -282,6 +282,7 @@ main {
         margin-top: rem(30);
         font-family: $openSans;
         font-size: rem(16);
+        line-height: rem(24);
 
         > p {
 
@@ -562,8 +563,6 @@ main {
 
             font-size: rem(15);
             line-height: rem(18);
-            letter-spacing: rem(1);
-            // letter-spacing: rem(-0.75);
         }
 
     }
