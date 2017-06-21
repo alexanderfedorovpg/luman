@@ -20,32 +20,17 @@ import './style.scss'
 
 class News extends Component {
 
-    renderItems(data) {
-
-        return [
-            <div key={data[0].id} className="news-top__row-item">
-                <Block data={data[0]} rectangle />
-                <Block data={data[1]} />
-                <Block data={data[2]} />
-            </div>,
-            <div key={data[3].id} className="news-top__row-item">
-                <Block data={data[3]} />
-                <Block data={data[4]} />
-                <Block data={data[5]} rectangle />
-            </div>,
-        ]
-    }
-
     renderAdditionalData(data) {
-        let items = []
-
-        while (data.length) {
-            items = items.concat(this.renderItems(data.splice(0, 6)))
-        }
 
         return (
             <div className="news-top__row">
-                {items}
+                {data.map((v, i) => (
+                    <Block
+                        key={v.id}
+                        data={v}
+                        rectangle={i % 6 === 0 || i % 6 === 5}
+                    />
+                ))}
             </div>
         )
     }
