@@ -2,6 +2,7 @@
   "minify": true,
   "options": [],
   "feature-detects": [
-    "elem/picture"
+    "elem/picture",
+    "css/objectfit"
   ]
 }

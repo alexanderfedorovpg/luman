@@ -4,6 +4,7 @@ module.exports = {
     plugins: [
         // require('postcss-simple-vars'),
         // require('postcss-cssnext'),
-        // require('postcss-import')
+        // require('postcss-import'),
+        require('postcss-object-fit-images'),
     ],
 };

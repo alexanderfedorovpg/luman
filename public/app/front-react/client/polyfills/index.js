@@ -16,3 +16,7 @@ if (!Modernizr.picture) {
 } else {
   console.log('Client has support for "picture".');
 }
+
+if (!Modernizr.objectfit) {
+    require('object-fit-images')();
+}
