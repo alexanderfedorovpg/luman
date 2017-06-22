@@ -89,6 +89,9 @@ function HomePage({
                     <MediaQuery minWidth="930px" maxWidth="1249px">
                         <Banner type="preview" className="general-news__banner-preview" />
                     </MediaQuery>
+                    <MediaQuery minWidth="930px" maxWidth="1249px">
+                        <RandomNews className="general-news__random-news" data={randomNews} />
+                    </MediaQuery>
                 </div>
                 <div className="general-news__right right-col">
                     <MediaQuery minWidth="930px">
@@ -103,7 +106,7 @@ function HomePage({
 
                     <MediaQuery minWidth="930px" maxWidth="1249px">
                         <Noise className="general-news__info-noize" data={noise} />
-                        <Banner type="large" className="general-news__banner" />
+                        <Banner type="subscribe" className="general-news__banner" />
                     </MediaQuery>
 
                     <MediaQuery minWidth="930px">
@@ -115,12 +118,24 @@ function HomePage({
                             </MediaQuery>
                         )}
                     </MediaQuery>
-                </div>
-                <MediaQuery maxWidth="929px" minWidth="615px">
-                    <div className="general-news__middle">
+                    <MediaQuery minWidth="930px" maxWidth="1249px">
+                        <MoreNews className="general-news__more-news" data={moreNews} />
+                    </MediaQuery>
+                    <MediaQuery maxWidth="614px">
                         <Banner type="preview" className="general-news__banner-preview" />
-                    </div>
-                </MediaQuery>
+                    </MediaQuery>
+                </div>
+                <div className="general-news__middle">
+                    <MediaQuery maxWidth="929px" minWidth="615px">
+                        <Banner type="preview" className="general-news__banner-preview" />
+                    </MediaQuery>
+                    <MediaQuery maxWidth="929px">
+                        <RandomNews className="general-news__random-news" data={randomNews} />
+                    </MediaQuery>
+                    <MediaQuery maxWidth="929px">
+                        <MoreNews className="general-news__more-news" data={moreNews} />
+                    </MediaQuery>
+                </div>
                 <div className="general-news__left general-news__left_more">
                     <MediaQuery minWidth="1250px">
                         {low => (
@@ -142,7 +157,9 @@ function HomePage({
                     <MediaQuery minWidth="1250px">
                         <Banner type="subscribe" className="general-news__subscribe subscribe_in-body"/>
                     </MediaQuery>
-                    <MoreNews className="general-news__more-news" data={moreNews} />
+                    <MediaQuery minWidth="1250px">
+                        <MoreNews className="general-news__more-news" data={moreNews} />
+                    </MediaQuery>
                 </div>
                 <MediaQuery minWidth="1250px">
                     <div className="general-news__middle">
