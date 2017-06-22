@@ -25,7 +25,7 @@ function MiniNews({ data, className }) {
                     to={newsLink(data)}
                     dangerouslySetInnerHTML={{ __html: data.title }} />
                 <p className="mini-news__date">
-                    <FormatDate value={data.publish_date} />
+                    <FormatDate value={data.created_at} />
                 </p>
             </div>
         </div>

@@ -27,14 +27,12 @@ function BigNews({ data, war, warTitle, className }) {
                     }
                 </p>
                 <p className="big-news__time-add">
-                    <FormatDate value={data.publish_date} />
+                    <FormatDate value={data.created_at} />
                     {!!data.updated_at && ' / '}
                     {
                         !!data.updated_at &&
                         <span className="big-news__time-update">
                             Обновлено
-                            {' '}
-                            <FormatDate value={data.updated_at} />
                         </span>
                     }
                 </p>

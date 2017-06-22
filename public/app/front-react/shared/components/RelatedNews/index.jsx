@@ -35,16 +35,16 @@ function RelatedNews({ data, title }) {
                                             {v.title}
                                         </Link>
                                         <p className="mini-news__date">
-                                            {Date.parse(v.publish_date)
+                                            {v.created_at
                                                 ? (
                                                     <span>
                                                         <FormattedDate
-                                                            value={v.publish_date}
+                                                            value={v.created_at}
                                                             month="long"
                                                             day="2-digit" />
                                                         {' '}
                                                         <FormattedTime
-                                                            value={v.publish_date} />
+                                                            value={v.created_at} />
                                                     </span>
                                                 )
                                                 : null

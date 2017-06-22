@@ -18,7 +18,7 @@ function BlockBorder({ data, className }) {
                     {data.title}
                 </p>
                 <div className="block-rectangle-border__date">
-                    <FormatDate value={data.publish_date} />
+                    <FormatDate value={data.created_at} />
                 </div>
             </Link>
         </div>
