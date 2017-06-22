@@ -105,6 +105,7 @@ class NoisePage extends PureComponent {
                     {item.id && <meta property="og:title" content={`Инфошум: ${item.title||''}`} />}
                     {item.id && <meta property="og:url" content={item.uri} />}
                     {item.id && <meta property="og:image" content={item.image_main && item.image_main.url} />}
+                    {item.id && <meta property="og:image:secure_url" content={item.image_main && item.image_main.url} />}
                 </Helmet>
                 {match.params.code
                     ? (
