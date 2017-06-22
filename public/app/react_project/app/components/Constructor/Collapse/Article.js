@@ -156,9 +156,9 @@ class Article extends Component {
                             {data.rubrics
                                 ? (
                                     <Rubrics>
-                                        {data.rubrics.map((value) => (
-                                            <span>
-                                                {value.name}
+                                        {data.rubrics.map(v => (
+                                            <span key={v.id}>
+                                                {v.name}
                                             </span>
                                         ))}
                                     </Rubrics>
@@ -197,20 +197,12 @@ class Article extends Component {
         ));
     }
 }
-                // <Edit
-                //     message="Редактировать"
-                //     eventType="hover"
-                //     direction="bottom"
-                //     icon="go-right"
-                //     onClick={e => {
-                //         // hide(data.id)
-                //         e.stopPropagation()
-                //     }} />
 
 const source = {
     beginDrag(props) {
         return {
             index: props.index,
+            category: props.category,
             data: props.data,
         };
     },

@@ -9,6 +9,8 @@ import Collapse from 'components/Constructor/Collapse';
 import {
     setOption,
     moveItem,
+    removeFromMain,
+    itemToMain,
     chooseCategory,
 } from '../actions'
 
@@ -119,8 +121,9 @@ const mapDispatchToProps = dispatch => ({
     chooseCategory(category) {
         dispatch(chooseCategory(category))
     },
-    moveItem(type, source, target) {
-        dispatch(moveItem(type, source, target))
+    moveItem(type, source, target, category) {
+        dispatch(removeFromMain(source, type))
+        dispatch(itemToMain(source, type, category.id, target && target.id))
     },
     push(path) {
         dispatch(push(path))

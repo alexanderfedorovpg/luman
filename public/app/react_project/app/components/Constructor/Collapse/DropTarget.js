@@ -7,7 +7,11 @@ const target = {
         const index = calculateIndex(props, monitor, component)
 
         if (Number.isInteger(item.index)) {
-            props.onChange(monitor.getItem().index)
+            props.onChange(
+                item.index,
+                item.data,
+                item.category,
+            )
         }
 
         (props.onMove||(()=>{}))(-1)

@@ -17,4 +17,3 @@ export const Left = styled(Content.Left) `
 export const Right = styled(Content.Right)`
     flex-grow: 1;
 `;
-    // padding-left: ${rem(19)};
