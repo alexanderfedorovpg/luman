@@ -132,6 +132,17 @@ class News extends Component {
                                 )}
                             </div>
                         </MediaQuery>
+
+                        <MediaQuery maxWidth="929px">
+                            <div className="news-top__middle news-top__middle_margin middle-col ">
+                                {this.renderAdditionalData(data.slice())}
+                                {canLoad && (
+                                    <LoadMore onClick={onLoadRequest}>
+                                        Больше новостей
+                                    </LoadMore>
+                                )}
+                            </div>
+                        </MediaQuery>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 @import "~style/vars";
 
 .footer {
+    flex-shrink: 0;
     padding-top: rem(34);
     padding-bottom: rem(50);
 

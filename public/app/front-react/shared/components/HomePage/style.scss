@@ -297,7 +297,7 @@
         }
 
         @include above($tabletLandscape) {
-            margin-top: rem(15);
+            margin-top: rem(0);
         }
 
         @include above($desktop) {

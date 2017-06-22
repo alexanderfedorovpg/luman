@@ -83,8 +83,6 @@ class VideoUpload extends PureComponent {
             url: video.url.input.value || '',
         };
 
-        console.log(video);
-
         if (!!videoVal && typeof videoVal === 'string') {
             initialValues.video = null;
             initialValues.url = videoVal;

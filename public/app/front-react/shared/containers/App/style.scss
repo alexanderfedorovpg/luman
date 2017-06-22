@@ -72,7 +72,7 @@ a {
 
 main {
     margin-top: 1px;
-    flex: 1;
+    flex: 1 0 auto;
 
     @include below($mobile) {
         padding-top: rem(43);
@@ -87,6 +87,7 @@ main {
     }
 }
 .war {
+
     main {
         padding-top: rem(113);
     }
@@ -97,6 +98,14 @@ main {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+       height: 100vh;
+    }
+}
+
+.wrapper-header {
+    flex-shrink: 0;
 }
 
 .container {
@@ -215,6 +224,10 @@ main {
         margin-top: rem(30);
         width: 100%;
         object-fit: cover;
+
+        @include below($tabletLandscapeMax) {
+            margin-top: rem(12);
+        }
     }
     .info-noize {
         margin-top: rem(30);
