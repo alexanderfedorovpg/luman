@@ -132,6 +132,10 @@ class HomepageController extends CmsController
 
 
             }
+            if (env('CACHE_DRIVER') == 'redis') {
+
+                Cache::flush();
+            }
 
         } catch (ValidationException $e) {
             return $this->respondFail422x($e->response->original);

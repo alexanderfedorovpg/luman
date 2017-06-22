@@ -11,9 +11,13 @@ class CacheClearObserver
    public function clearCache()
     {
 
-        if (env('CACHE_DRIVER')=='redis') {           
-             Cache::flush(); 
-         }
+        if (env('CACHE_DRIVER') == 'redis') {
+
+                Cache::flush();
+          
+
+
+        }
            
       
        
