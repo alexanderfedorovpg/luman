@@ -72,7 +72,7 @@ a {
 
 main {
     margin-top: 1px;
-    flex: 1;
+    flex: 1 0 auto;
 
     @include below($mobile) {
         padding-top: rem(43);
@@ -87,16 +87,20 @@ main {
     }
 }
 .war {
+
     main {
         padding-top: rem(113);
     }
 }
 
 .root {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+}
+
+.wrapper-header {
+    flex-shrink: 0;
 }
 
 .container {
