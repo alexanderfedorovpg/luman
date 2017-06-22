@@ -155,12 +155,9 @@
             }
 
             @include above($tablet) {
-                margin-top: rem(7);
-            }
-
-            @include above($tabletLandscape) {
                 margin-top: rem(8);
             }
+            
 
             @include above($desktop) {
                 margin-top: rem(7);
@@ -287,6 +284,13 @@
 
         &_margin {
             margin-top: rem(51);
+        }
+
+        &__middle {
+
+            &_margin {
+                margin-top: rem(30);
+            }
         }
     }
 
