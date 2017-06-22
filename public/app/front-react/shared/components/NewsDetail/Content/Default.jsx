@@ -42,7 +42,7 @@ class Content extends PureComponent {
             <div>
                 <h1>{data.title}</h1>
                 <div className="inner-about__date">
-                    <FormatDate value={data.created_at}/>
+                    <FormatDate created={data.publish_date} />
                 </div>
                 <div
                     className={classNames('text-bg-gray text-bg-gray--news inner-about__text-bg-gray', {'inner-scissors': data.top < 6})}>

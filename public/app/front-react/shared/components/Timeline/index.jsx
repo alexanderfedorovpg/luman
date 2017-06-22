@@ -15,7 +15,7 @@ function Timeline({ data }) {
                 <div className="timeline__item" key={i}>
                     <div className="timeline__date">
                         <time className="timeline__time">
-                            <FormatDate value={v.created_at} />
+                            <FormatDate created={v.publish_date} />
                         </time>
                     </div>
                     <div className="timeline__cnt">

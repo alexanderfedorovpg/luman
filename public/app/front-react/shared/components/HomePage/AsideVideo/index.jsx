@@ -109,7 +109,7 @@ class AsideVideo extends PureComponent {
                                         }
                                         <div className="general-video__info">
                                         <div className="general-video__date general-video__date general-video__date_position">
-                                            <span className="general-video__span">{this.getPublishDate(data.created_at)}</span>
+                                            <span className="general-video__span">{this.getPublishDate(data.publish_date)}</span>
                                         </div>
                                         <div className="general-video__title">
                                             Ваш персональный ведущий
