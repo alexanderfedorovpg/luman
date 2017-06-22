@@ -165,7 +165,7 @@ class Article extends Component {
                                 )
                                 : null
                             }
-                            {true ?
+                            {data.video ?
                                 <Title>
                                     {data.title}
                                 </Title>
