@@ -121,6 +121,10 @@ class BroadcastPage extends PureComponent {
             <div>
                 <Helmet>
                     <title>Из эфира</title>
+                    {item.id && <meta property="og:title" content={`Из эфира: ${item.title||''}`} />}
+                    {item.id && <meta property="og:url" content={item.uri} />}
+                    {item.id && <meta property="og:image" content={item.image_main && item.image_main.url} />}
+                    {item.id && <meta property="og:image:secure_url" content={item.image_main && item.image_main.url} />}
                 </Helmet>
 
                 {match.params.id
