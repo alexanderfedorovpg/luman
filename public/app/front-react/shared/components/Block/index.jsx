@@ -66,14 +66,10 @@ function renderItem(className, type, data, war, wTitle) {
                     )
                     : (
                         <p className={`${type}__time-add`}>
-                            <FormatDate value={data.created_at} />
-                            {!!data.updated_at && '/ '}
-                            {
-                                !!data.updated_at &&
-                                <span className={`${type}__time-update`}>
-                                    Обновлено
-                                </span>
-                            }
+                            <FormatDate
+                                created={data.publish_date}
+                                updated={data.updated_at}
+                            />
                         </p>
                     )
                 }

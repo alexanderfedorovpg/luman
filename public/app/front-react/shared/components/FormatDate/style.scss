@@ -2,6 +2,7 @@
 @import "~style/vars";
 
 .format-date {
+    display: flex;
 
     & span {
         margin-right: rem(5);

@@ -23,9 +23,13 @@ function MiniNews({ data, className }) {
                 <Link
                     className="mini-news__title"
                     to={newsLink(data)}
-                    dangerouslySetInnerHTML={{ __html: data.title }} />
+                    dangerouslySetInnerHTML={{ __html: data.title }}
+                />
                 <p className="mini-news__date">
-                    <FormatDate value={data.created_at} />
+                    <FormatDate
+                        created={data.publish_date}
+                        updated={data.updated_at}
+                    />
                 </p>
             </div>
         </div>

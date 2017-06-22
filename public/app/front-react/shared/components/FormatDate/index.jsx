@@ -7,17 +7,31 @@ import './style.scss';
 
 const twoDays = 172800000;
 
-function FormatDate({ value }) {
-    const now = new Date();
-    const date = convertToLocaleTime(value);
-
-    if (!date) {
+const renderUpdate = (createDate, updateDate) => {
+    if (!updateDate) {
         return null;
     }
 
-    return now.getTime() - date.getTime() >= twoDays
-        ? (
-            <span className="format-date">
+    const isUpdated = createDate !== updateDate;
+
+    if (!isUpdated) {
+        return null;
+    }
+
+    const divider = createDate ? '/ ' : '';
+
+    return `${divider}Обновлено`;
+};
+
+function FormatDate({ created, updated }) {
+    const now = new Date();
+    const date = convertToLocaleTime(created);
+    let createdEl = null;
+
+    if (date) {
+        createdEl = now.getTime() - date.getTime() >= twoDays ?
+        (
+            <div>
                 <FormattedDate
                     value={date}
                     year="numeric"
@@ -29,11 +43,18 @@ function FormatDate({ value }) {
                     hour="numeric"
                     minute="numeric"
                 />
-            </span>
+            </div>
         )
-        : (
-            <FormattedRelative value={date} />
-        );
+        :
+            <FormattedRelative value={date} />;
+    }
+
+    return (
+        <div className="format-date">
+            {createdEl}
+            {renderUpdate(created, updated)}
+        </div>
+    );
 }
 
 export default FormatDate;

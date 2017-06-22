@@ -16,13 +16,9 @@
         margin-left: rem(21);
     }
 
-    &__nav {
-        height: 100%;
-    }
     &__ul {
         display: flex;
         align-items: center;
-        height: 100%;
 
         list-style-type: none;
     }
