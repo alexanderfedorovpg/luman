@@ -21,7 +21,7 @@ class HomepageNews extends Model
     ];
 
     protected $events = [
-        'created' => CacheClearObserver::class,
+        'saved' => CacheClearObserver::class,
     ];
 
     /**
