@@ -17,7 +17,7 @@ export default createReducer({
         const dataBase = payload.replace ? {} : state.data;
 
         if (!payload.replace) {
-            ids = _uniq(ids.concat(state.ids));
+            ids = _uniq(state.ids.concat(ids));
         }
 
         if (ids.length < payload.total) {

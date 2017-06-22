@@ -21,7 +21,7 @@ import './style.scss'
 class Broadcast extends Component {
     renderItems(data) {
         return (
-            <div className="news-one-line__row news-one-line__row_after-banners">
+            <div key={data[0].id} className="news-one-line__row news-one-line__row_after-banners">
                 <Item data={data[0]} />
                 <Item data={data[1]} />
                 <Item data={data[2]} />
@@ -52,7 +52,7 @@ class Broadcast extends Component {
             canLoad
         } = this.props
 
-        const data = broadcast.slice(0, 20);
+        const data = broadcast;
         const now = nowNews;
 
         return (
