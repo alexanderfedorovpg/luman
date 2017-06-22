@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Models\HomepageWar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 use App\Http\Transformers\v1\HomepageTransformer;
 use App\Models\HomepageNews;
