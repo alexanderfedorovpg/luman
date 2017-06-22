@@ -14,7 +14,7 @@ import AsideVideo from 'components/GeneralVideo/AsideVideo'
 import efirPlaceholder from './efir.jpg'
 import './style.scss';
 
-function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcastPage }) {
+function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcastPage, coverImg }) {
     const showBroadcast = !!broadcast && !!broadcast.length;
     const showNoise = !!noise && !!noise.length;
     const showTop = !!top && !!top.length;
@@ -31,6 +31,7 @@ function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcas
                             title="Все ключевые события этого дня"
                             videos={now}
                             className="general-news__general-video general-video_idx"
+                            coverImg={coverImg}
                         />
                     </div>
                 }
