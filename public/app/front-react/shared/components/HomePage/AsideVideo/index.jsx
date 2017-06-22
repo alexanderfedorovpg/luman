@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { selectCoverImg } from 'selectors/aside'
+import { fetchCoverImg } from 'actions/aside'
 
 import insideVideoPlaceholder from './obzor-inside-new.jpg'
 import mainVideoPlaceholder from './obzor-main-new.jpg'
@@ -26,7 +29,9 @@ class AsideVideo extends PureComponent {
             this.setState({play: false})
         }
     }
-
+    componentWillMount(){
+        this.props.fetchCoverImg();
+    }
     play() {
         this.setState({
             play: true
@@ -67,7 +72,7 @@ class AsideVideo extends PureComponent {
     }
 
     render() {
-        const { className, main, videos } = this.props
+        const { className, main, videos, coverImg } = this.props
         if (!videos) return null
 
         const data = videos[0] || {}
@@ -98,7 +103,7 @@ class AsideVideo extends PureComponent {
                                 (
                                     <span className="general-video__play-block">
                                     <a onClick={this.play} className="general-video__link"/>
-                                    <Img className="general-video__img" src={data.video_stream.preview} alt=""/>
+                                    <Img className="general-video__img" src={coverImg || data.video_stream.preview} alt=""/>
                                         {data.url ?
                                             <img onClick={this.play}
                                                  className="general-video__ico"
@@ -133,4 +138,14 @@ class AsideVideo extends PureComponent {
     }
 }
 
-export default AsideVideo
+const mapStateToProps = (state, ownProps) => ({
+    coverImg: selectCoverImg(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchCoverImg(){
+        dispatch(fetchCoverImg());
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AsideVideo)
