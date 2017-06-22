@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import { FormattedRelative, injectIntl } from 'react-intl'
+import moment from 'moment';
 
 import Video from 'components/GeneralVideo'
 import Rubrics from 'components/Rubrics'
@@ -87,8 +88,8 @@ class Content extends PureComponent {
         const { data, intl, children } = this.props
         let body = (data.body||'').replace(/undefined \/ undefined|\/ undefined|undefined \//g, '');
 
-        const date = Date.parse(data.created_at) && intl.formatDate(
-            data.created_at,
+        const date = !!data.publish_date && intl.formatDate(
+            data.publish_date,
             {
                 month: 'long',
                 day: '2-digit'
@@ -101,9 +102,9 @@ class Content extends PureComponent {
                     {data.title}
                 </h1>
                 <div className="inner-about__date">
-                    {Date.parse(data.created_at)
-                        ? <FormattedRelative value={data.created_at} />
-                        : null
+                    {
+                        !!data.publish_date &&
+                        <FormattedRelative value={moment(data.publish_date).toDate()} />
                     }
                 </div>
                 <div

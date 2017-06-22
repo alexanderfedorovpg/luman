@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { FormattedDate } from 'react-intl'
 import { Link } from 'react-router-dom'
+import moment from 'moment';
 
 import './style.scss'
 
@@ -19,9 +20,13 @@ function ListVideo({ data, className }) {
                         <p className="list-video__category">
                             {`${value.program ? value.program.name : ''} `}
                             <span className="list-video__time-add">
-                                {value.created_at
-                                    ? <FormattedDate value={value.created_at} month="long" day="2-digit" />
-                                    : null
+                                {
+                                    !!value.publish_date &&
+                                    <FormattedDate
+                                        value={moment(value.publish_date).toDate()}
+                                        month="long"
+                                        day="2-digit"
+                                    />
                                 }
                             </span>
                         </p>

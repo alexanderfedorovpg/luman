@@ -53,6 +53,8 @@ function* getBroadcastList(params, replace) {
                 ...filterParams,
                 limit: 16,
                 programId: program,
+                filter_by: 'TIME',
+                order_direction: 'DESC',
                 ...params,
             },
         });

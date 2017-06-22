@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FormattedDate } from 'react-intl'
+import moment from 'moment';
 
 import Img from 'components/Img'
 
@@ -36,13 +37,13 @@ function FromEnter({ data, big, className }) {
                     }
                     {' '}
                     <span className="from-enter__time-add">
-                        {data.created_at
-                            ? <FormattedDate
-                                value={data.created_at.replace(/-/g, '/')}
+                        {
+                            !!data.publish_date &&
+                            <FormattedDate
+                                value={moment(data.publish_date).toDate()}
                                 month="long"
                                 day="2-digit"
                             />
-                            : null
                         }
                     </span>
                 </p>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FormattedDate, FormattedTime } from 'react-intl'
 
 import Block from 'components/Block'
+import FormatDate from 'components/FormatDate';
 
 import { newsLink } from 'shared/utils/uri'
 
@@ -35,19 +36,12 @@ function RelatedNews({ data, title }) {
                                             {v.title}
                                         </Link>
                                         <p className="mini-news__date">
-                                            {v.created_at
-                                                ? (
-                                                    <span>
-                                                        <FormattedDate
-                                                            value={v.created_at}
-                                                            month="long"
-                                                            day="2-digit" />
-                                                        {' '}
-                                                        <FormattedTime
-                                                            value={v.created_at} />
-                                                    </span>
-                                                )
-                                                : null
+                                            {
+                                                !!v.publish_date &&
+                                                <FormatDate
+                                                    created={v.publish_date}
+                                                    updated={v.updated_at}
+                                                />
                                             }
                                         </p>
                                     </div>
