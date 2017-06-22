@@ -379,9 +379,11 @@ main {
     }
 
     &.inner-about__text-bg-gray_play:before {
-        @include above($mobile) {
+
+        background-color: rgba(36, 55, 70, 0.2);
+        /*@include above($mobile) {
             visibility: hidden;
-        }
+        }*/
     }
 
     &__block-text {

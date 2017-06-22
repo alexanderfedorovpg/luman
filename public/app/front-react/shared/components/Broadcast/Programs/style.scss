@@ -34,7 +34,7 @@
         }
 
         &__news-one-line {
-            margin-top: rem(-65);
+            margin-top: rem(-123);
 
             @include below($tabletLandscapeMax) {
                 margin-top: rem(15);
@@ -70,7 +70,7 @@
             margin-top: rem(-10);
 
             @include below($tabletMax) {
-                margin-top: rem(11);
+                margin-top: rem(6);
             }
 
             @include below($mobile) {
@@ -80,13 +80,13 @@
         }
 
         &__banner-preview {
-            margin-top: rem(-15);
             margin-bottom: rem(24);
 
             @include below($tabletMax) {
                 margin-top: rem(15);
                 margin-bottom: rem(18);
             }
+
         }
 
         &__full {
@@ -103,7 +103,7 @@
 
         @include below($tabletMax) {
             width: rem(300);
-            margin-top: rem(20);
+            margin-top: rem(14);
             margin-bottom: rem(20);
         }
     }
@@ -128,20 +128,25 @@
     .news-one-line {
 
         .from-enter_big {
-            height: rem(387);
+            height: rem(394);
 
             @include below($tabletLandscapeMax) {
                 height: rem(450);
+                margin-bottom: rem(8);
             }
 
             @include below($tabletMax) {
-                margin-bottom: rem(8);
+                margin-bottom: rem(16);
             }
         }
 
         &__item-bottom {
             margin-bottom: rem(22) !important;
             justify-content: space-between;
+
+            @include below($tabletMax) {
+                margin-bottom: 0 !important;
+            }
 
             @include below($mobile) {
                 margin-bottom: rem(15);
@@ -160,6 +165,10 @@
 
             &_margin {
                 @include margin_x(#{rem(-8)});
+
+                @include below($tabletMax) {
+                    margin-bottom: 0;
+                }
 
                 .from-enter {
                     @include margin_x(#{rem(8)});
@@ -249,7 +258,7 @@
 
         &__date-wrap {
             width: rem(617);
-            padding-top: rem(94);
+            padding-top: rem(143);
 
             @include below($tabletLandscapeMax) {
                 width: 100%;
@@ -305,41 +314,6 @@
         font-size: rem(36);
         text-transform: uppercase;
 
-        &-logo {
-            width: rem(204);
-            height: rem(113);
-
-            background-size: cover;
-
-            position: absolute;
-            z-index: 1;
-            left: rem(630);
-            top: rem(-21);
-
-            @include below($tabletLandscapeMax) {
-                left: rem(465);
-                width: rem(180);
-                height: rem(98);
-            }
-
-            @include below($tabletMax) {
-                display: none;
-            }
-
-            &_show {
-                background-image: url(/content/rtvi/show.png);
-            }
-
-            &_talk {
-                background-image: url(/content/rtvi/talk.png);
-            }
-
-            &_news {
-                background-image: url(/content/rtvi/news.png);
-            }
-
-        }
-
     }
 
     &__container {
@@ -350,7 +324,7 @@
         }
 
         &_position {
-            min-height: rem(285);
+            min-height: rem(292);
 
             @include below($mobile) {
                 display: flex;
@@ -380,10 +354,88 @@
 
     }
 
+    &__content-logo {
+        width: rem(204);
+        height: rem(113);
+
+        background-size: cover;
+
+        position: absolute;
+        z-index: 2;
+        left: rem(615);
+        bottom: 0;
+
+        @include below($tabletLandscapeMax) {
+            left: rem(465);
+            width: rem(180);
+            height: rem(98);
+        }
+
+        @include below($tabletMax) {
+            display: none;
+        }
+
+        &_show {
+            background-image: url(/content/rtvi/show.png);
+        }
+
+        &_talk {
+            background-image: url(/content/rtvi/talk.png);
+        }
+
+        &_news {
+            background-image: url(/content/rtvi/news.png);
+        }
+
+    }
+
+    &__time-programm {
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        bottom: 0;
+        width: 50%;
+        padding-top: rem(13);
+        padding-bottom: rem(12);
+        padding-left: rem(177);
+        font-size: rem(16);
+        line-height: rem(24);
+        color: $cities;
+        background-color: rgba(36, 55, 70, .5);
+
+        @include below($tabletMax) {
+            display: none;
+        }
+    }
+
+    &__time-day {
+        text-transform: uppercase;
+        margin-right: rem(13);
+
+    }
+
+    &__time-cities {
+        font-size: rem(16);
+        line-height: rem(24);
+        color: $white;
+
+        &:not(:last-child) {
+            margin-right: rem(8);
+        }
+    }
+
+    &__time {
+        font-weight: 300;
+    }
+
     &__content-container {
         padding-bottom: rem(40);
         width: 38.4375rem;
         font-family: $openSans;
+        font-size: rem(14);
+        line-height: rem(24);
+        font-weight: bold;
+        color: $enter;
 
         @include below($tabletMax) {
             padding-right: 53%;
@@ -433,7 +485,7 @@
         background-position: top center;
         background-size: cover;
 
-        width: rem(382);
+        width: rem(438);
         height: rem(465);
 
         position: absolute;

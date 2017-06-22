@@ -67,9 +67,11 @@
                 & .social-links {
                     opacity: .5;
                 }
+
                 @include below($tablet) {
                     z-index: 4;
                     background-color: rgba(36,55,70,.2);
+
                 }
             }
 
@@ -616,6 +618,7 @@
         }
 
         &_play .breadcrumbs {
+
             @include below($tablet) {
                 display: none;
             }
