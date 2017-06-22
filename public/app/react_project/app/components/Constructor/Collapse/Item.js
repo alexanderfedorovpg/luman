@@ -112,12 +112,12 @@ class CollapseItem extends React.Component {
         return this.props.data[index]
     }
 
-    onMove(index) {
+    onMove(index, item, sourceCategory) {
         const { placeholder } = this.state
-        const { onMove, data } = this.props
+        const { onMove, data, category } = this.props
 
-        if (index != placeholder && index != (placeholder-1)) {
-            onMove(data[index].id, (data[placeholder]||{}).id)
+        if (index != placeholder && index != (placeholder-1) || sourceCategory !== category.id) {
+            onMove(item, data[placeholder]||null, category)
         }
     }
 
@@ -170,7 +170,10 @@ class CollapseItem extends React.Component {
                         {items}
                         {data.length
                             ? null
-                            : <NotFound category={category.id} />
+                            : <NotFound
+                                category={category.id}
+                                onChange={this.onMove}
+                            />
                         }
                     </Content>
                 </Wrap>
