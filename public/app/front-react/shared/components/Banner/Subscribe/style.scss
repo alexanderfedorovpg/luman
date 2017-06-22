@@ -23,7 +23,8 @@
 
         display: none;
         width: rem(300);
-        @include padding_y(#{rem(26)});
+        padding-top: rem(26);
+        padding-bottom: rem(15);
         @include padding_x(#{rem(16)});
         margin-top: -.5rem;
 
