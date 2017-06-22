@@ -58,9 +58,7 @@ class UploadPreviewImg extends Component {
     }
 
     handleSubmit = (data) => {
-        console.log('data.toJS()',data.toJS());
         let img = data.toJS().preview[0];
-        //this.props.updateCoverImg({img: img});
         this.uploadFile(img, (url)=>{
             this.props.updateCoverImg({url: url})
             this.closeModal();
