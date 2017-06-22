@@ -61,6 +61,8 @@ function* getTopList(params) {
                 limit: 12,
                 top: 5,
                 top_direction: 'up',
+                filter_by: 'TIME',
+                order_direction: 'DESC',
                 rubrics_id: rubric
             }
         })

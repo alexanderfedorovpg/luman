@@ -20,7 +20,7 @@ const renderUpdate = (createDate, updateDate) => {
 
     const divider = createDate ? '/ ' : '';
 
-    return `${divider}Обновлено`;
+    return <span>{divider}Обновлено</span>;
 };
 
 function FormatDate({ created, updated }) {
@@ -31,7 +31,7 @@ function FormatDate({ created, updated }) {
     if (date) {
         createdEl = now.getTime() - date.getTime() >= twoDays ?
         (
-            <div>
+            <span>
                 <FormattedDate
                     value={date}
                     year="numeric"
@@ -43,17 +43,17 @@ function FormatDate({ created, updated }) {
                     hour="numeric"
                     minute="numeric"
                 />
-            </div>
+            </span>
         )
         :
             <FormattedRelative value={date} />;
     }
 
     return (
-        <div className="format-date">
+        <span className="format-date">
             {createdEl}
             {renderUpdate(created, updated)}
-        </div>
+        </span>
     );
 }
 

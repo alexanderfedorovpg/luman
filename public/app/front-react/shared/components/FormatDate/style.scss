@@ -4,7 +4,7 @@
 .format-date {
     display: flex;
 
-    & span {
+    span:not(:last-child) {
         margin-right: rem(5);
     }
 }
