@@ -96,6 +96,8 @@ function* getNoiseList(params) {
                 ...params,
                 limit: 30,
                 top: 4,
+                filter_by: 'TIME',
+                order_direction: 'DESC',
                 top_direction: 'down'
             }
         })
