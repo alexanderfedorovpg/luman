@@ -33,6 +33,11 @@
         width: rem(30);
         height: rem(30);
         background-image: url('/content/subscribe-networks/subscribe-sprite.png');
+        border: 1px solid $blue;
+
+        &:hover {
+            border-color: $purple;
+        }
 
         &_facebook {
             background-position: -30px -0;

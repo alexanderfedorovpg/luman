@@ -63,7 +63,7 @@ class Header extends PureComponent {
         const { war, warTitle } = this.props;
 
         return (
-            <div>
+            <div className="wrapper-header">
                 <MediaQuery maxWidth="614px">
                     <SideMenu active={this.state.toggleMenu} toggle={this.toggleMenu}/>
                 </MediaQuery>

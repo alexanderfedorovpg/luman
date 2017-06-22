@@ -125,8 +125,6 @@ export function* publishArticle({ payload }) {
         const uploadedFiles = yield call(uploadFiles, payload);
         const data = { ...payload, ...uploadedFiles };
 
-        data.uri = `rtvi.com/${data.id}-${translit(data.title)}`;
-
         const { data: response } = yield call(api.finishArticle, data);
 
         yield call(api.publishArticle, response.id);
@@ -201,59 +199,3 @@ export function* articleData() {
 export default [
     articleData,
 ];
-
-
-function translit(value) {
-    // Символ, на который будут заменяться все спецсимволы
-    const space = '-';
-    // Берем значение из нужного поля и переводим в нижний регистр
-    const text = value.toLowerCase();
-
-    // Массив для транслитерации
-    /* eslint-disable */
-    const transl = {
-        А: 'A', Б: 'B', В: 'V', Г: 'G', Д: 'D', Е: 'E', Ё: 'E', Ж: 'ZH',
-        З: 'Z', И: 'I', Й: 'J', К: 'K', Л: 'L', М: 'M', Н: 'N',
-        О: 'O', П: 'P', Р: 'R', С: 'S', Т: 'T', У: 'U', Ф: 'F', Х: 'H',
-        Ц: 'C', Ч: 'CH', Ш: 'SH', Щ: 'SH', Ъ: space, Ы: 'Y', Ь: space, Э: 'E', Ю: 'YU', Я: 'YA',
-        а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh',
-        з: 'z', и: 'i', й: 'j', к: 'k', л: 'l', м: 'm', н: 'n',
-        о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h',
-        ц: 'c', ч: 'ch', ш: 'sh', щ: 'sh', ъ: space, ы: 'y', ь: space, э: 'e', ю: 'yu', я: 'ya',
-        ' ': space, _: space, '`': space, '~': space, '!': space, '@': space,
-        '#': space, $: space, '%': space, '^': space, '&': space, '*': space,
-        '(': space, ')': space, '-': space, '\=': space, '+': space, '[': space,
-        ']': space, '\\': space, '|': space, '/': space, '.': space, ',': space,
-        '{': space, '}': space, '\'': space, '"': space, ';': space, ':': space,
-        '?': space, '<': space, '>': space, '№': space,
-    };
-    /* eslint-enable */
-
-    let result = '';
-    let curentSym = '';
-
-    for (let i = 0; i < text.length; i++) {
-        // Если символ найден в массиве то меняем его
-        if (transl[text[i]] != undefined) {
-            if (curentSym != transl[text[i]] || curentSym != space) {
-                result += transl[text[i]];
-                curentSym = transl[text[i]];
-            }
-        }
-        // Если нет, то оставляем так как есть
-        else {
-            result += text[i];
-            curentSym = text[i];
-        }
-    }
-
-    result = TrimStr(result);
-
-    // Выводим результат
-    return result;
-}
-
-function TrimStr(s) {
-    s = s.replace(/^-/, '');
-    return s.replace(/-$/, '');
-}
