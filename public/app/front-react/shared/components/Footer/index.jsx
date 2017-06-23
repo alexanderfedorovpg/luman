@@ -3,6 +3,7 @@ import React from 'react'
 import Copyright from './Copyright'
 import Address from './Address'
 import Subscribe from './Subscribe'
+import Applications from './Applications'
 
 import './style.scss'
 
@@ -21,6 +22,7 @@ function Footer() {
                 </div>
                 <div className="footer__middle-part">
                     <Address className="footer__address" />
+                    <Applications className="footer__applications" />
                 </div>
                 <div className="footer__right-part">
                     <Subscribe className="footer__subscribe-networks" />
