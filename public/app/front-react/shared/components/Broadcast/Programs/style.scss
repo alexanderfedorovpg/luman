@@ -514,7 +514,7 @@
         &_big {
             right: rem(-190);
             width: rem(826);
-            height: auto;
+            height: rem(462);
 
             @include below($tabletLandscapeMax) {
                 right: rem(-285);
