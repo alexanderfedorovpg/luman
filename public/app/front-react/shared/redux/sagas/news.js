@@ -58,7 +58,7 @@ function* getTopList(params) {
         const { data } = yield call(axios.get, `${endpoint}/news`, {
             params: {
                 ...params,
-                limit: 12,
+                limit: 14,
                 top: 5,
                 top_direction: 'up',
                 filter_by: 'TIME',

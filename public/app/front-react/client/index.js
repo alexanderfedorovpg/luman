@@ -12,6 +12,7 @@ import './polyfills';
 
 import ReactHotLoader from './components/ReactHotLoader';
 import ScrollToTop from './components/ScrollToTop';
+import Metrics from './components/Metrics';
 import App from 'shared/containers/App';
 
 // Get the DOM Element that will host our React application.
@@ -43,11 +44,13 @@ function renderApp(TheApp) {
     <ReactHotLoader>
       <AsyncComponentProvider rehydrateState={asyncComponentsRehydrateState}>
         <BrowserRouter forceRefresh={!supportsHistory}>
-          <ScrollToTop>
-            <Provider store={store}>
-              <TheApp />
-            </Provider>
-          </ScrollToTop>
+          <Metrics>
+            <ScrollToTop>
+              <Provider store={store}>
+                <TheApp />
+              </Provider>
+            </ScrollToTop>
+          </Metrics>
         </BrowserRouter>
       </AsyncComponentProvider>
     </ReactHotLoader>
