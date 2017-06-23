@@ -41,6 +41,11 @@ export class Broadcast extends PureComponent {
             removeFromConstructor,
         } = this.props;
 
+        const categories = [{
+            id: 1,
+            name: 'Из эфира',
+        }];
+
         return (
             <Wrap>
                 <Left>
@@ -55,7 +60,7 @@ export class Broadcast extends PureComponent {
                     <Collapse
                         type={'broadcast'}
                         onRemove={removeFromMain}
-                        categories={programs}
+                        categories={categories}
                     />
                 </Right>
             </Wrap>

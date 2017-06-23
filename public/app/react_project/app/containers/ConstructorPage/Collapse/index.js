@@ -35,10 +35,8 @@ export class CollapseContainer extends PureComponent {
                 return item => value.id == item.category.id
 
             case 'noise':
-                return item => true
-
             case 'broadcast':
-                return item => value.id == item.data.program_id
+                return item => true
 
             default:
                 return (v) => v

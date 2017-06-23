@@ -158,9 +158,6 @@ class Broadcast extends Component {
                             <div className="news-top__left">
                                 <div className="news-one-line news-top__news-one-line">
                                     <div className="news-one-line__row news-one-line__item-bottom">
-                                        <MediaQuery maxWidth="1249px">
-
-                                        </MediaQuery>
                                         <Item data={data[0]} big />
                                         <div className="news-one-line__date-wrap news-one-line__date-wrap_view-desktop">
                                             <div className="news-one-line__date-items">
@@ -176,7 +173,41 @@ class Broadcast extends Component {
                             </div>
                         </div>
 
-
+                        <MediaQuery maxWidth="614px">
+                            <div className="news-top__middle middle-col">
+                                <Banner type="app_mobile" column={1} className="news-top__banner" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery minWidth="614px" maxWidth="930px">
+                            <div className="news-top__middle middle-col">
+                                <Banner type="app_mobile" column={2} className="news-top__banner" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery minWidth="930px" maxWidth="1249px">
+                            <div className="news-top__middle middle-col">
+                                <Banner type="app_mobile" column={3} className="news-top__banner" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery minWidth="1250px">
+                            <div className="left-col left-col_width_inner">
+                                <Banner type="app_mobile" column={3} className="news-top__banner" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery minWidth="1250px">
+                            <div className="right-col">
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery maxWidth="1249px">
+                            <div className="left-col left-col_width_inner">
+                                <Banner type="large" className="news-top__banner" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery maxWidth="1249px">
+                            <div className="right-col">
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
+                            </div>
+                        </MediaQuery>
                         <div className="middle-col news-top__programs">
                             <div className="news-one-line__row news-one-line__row_margin">
                                 <Item data={data[3]} />

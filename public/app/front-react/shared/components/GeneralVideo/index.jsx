@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Hls from 'hls.js';
 
 import Img from 'components/Img';
 import { ensureAbs } from 'shared/utils/uri';
@@ -7,6 +8,7 @@ import { ensureAbs } from 'shared/utils/uri';
 
 import './style.scss';
 import placeholder from './instead_video.jpg';
+import Player from './Player';
 
 function Video({ data, play, onPlay, playTitle, title, left, collapsed, className }) {
     let playText;
@@ -32,6 +34,8 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
             playText = data.duration ? String(data.duration).replace('.', ':') : '';
     }
 
+
+
     return (
         <div
             className={classNames(
@@ -47,8 +51,7 @@ function Video({ data, play, onPlay, playTitle, title, left, collapsed, classNam
         >
             {
                 play ?
-                    <video id="videoStream" style={{width: 100 + '%', height: 100 + '%'}} controls="controls" src={ensureAbs(data.url)} autoPlay />
-
+                    <Player src={data.url} />
                     :
                     (
                         <span>

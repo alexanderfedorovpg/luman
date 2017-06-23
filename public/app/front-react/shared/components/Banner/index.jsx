@@ -10,6 +10,7 @@ import BannerAppMobile from './BannerAppMobile';
 const LARGE = 'large';//принимает 1-3 колоночные картинки
 const PREVIEW = 'preview'; //принимает 1-2-4 колоночные картинки
 const SUBSCRIBE = 'subscribe';//принимает 1 колоночные картинки
+const APP_MOBILE = 'app_mobile';//принимает 1 колоночные картинки
 
 
 let array = [
@@ -78,20 +79,20 @@ const getData = (type, urlNow) => {
     }
 }
 
-const Banner = ({type, className, match}) => {
+const Banner = ({type, className, match, column}) => {
     const data = getData(type, match.url);
-
     if (type == LARGE) {
         if(data.multi){
-            return <BannerAppMobile className={className}/>
+            return <BannerAppMobile column={column || 1} className={className}/>
         }else{
             return <BannerLarge images={data.images} url={data.url_to} className={className}/>
         }
     } else if (type == PREVIEW) {
         return <BannerPreview images={data.images} url={data.url_to || '/programs/2'} className={className}/>
-
     } else if (type == SUBSCRIBE) {
         return <Subscribe images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
+    } else if (type == APP_MOBILE) {
+        return <BannerAppMobile column={column || 1} className={className}/>
     } else {
         return null;
     }

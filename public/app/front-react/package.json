@@ -69,6 +69,7 @@
     "express": "4.15.2",
     "has-flag": "^2.0.0",
     "helmet": "3.5.0",
+    "hls.js": "^0.7.9",
     "hpp": "0.2.2",
     "immutability-helper": "^2.1.2",
     "intl": "^1.2.5",
