@@ -158,9 +158,6 @@ class Broadcast extends Component {
                             <div className="news-top__left">
                                 <div className="news-one-line news-top__news-one-line">
                                     <div className="news-one-line__row news-one-line__item-bottom">
-                                        <MediaQuery maxWidth="1249px">
-
-                                        </MediaQuery>
                                         <Item data={data[0]} big />
                                         <div className="news-one-line__date-wrap news-one-line__date-wrap_view-desktop">
                                             <div className="news-one-line__date-items">
@@ -175,6 +172,28 @@ class Broadcast extends Component {
                                 </div>
                             </div>
                         </div>
+
+                        <MediaQuery minWidth="1250px">
+                            <div className="left-col left-col_width_inner">
+                                <Banner type="large" className="news-top__banner" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery minWidth="1250px">
+                            <div className="right-col">
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
+                            </div>
+                        </MediaQuery>
+
+                        <MediaQuery maxWidth="1249px">
+                            <div className="left-col left-col_width_inner">
+                                <Banner type="large" className="news-top__banner" />
+                            </div>
+                        </MediaQuery>
+                        <MediaQuery maxWidth="1249px">
+                            <div className="right-col">
+                                <Banner type="subscribe" className="news-top__subscribe-programs subscribe_in-body" />
+                            </div>
+                        </MediaQuery>
 
 
                         <div className="middle-col news-top__programs">

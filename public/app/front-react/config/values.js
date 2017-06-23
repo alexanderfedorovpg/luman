@@ -77,10 +77,10 @@ const values = {
   cspExtensions: {
     childSrc: ['*'],
     connectSrc: [],
-    defaultSrc: [],
+    defaultSrc: ['blob:'],
     fontSrc: ['data:', 'https://fonts.googleapis.com/css', 'https://fonts.gstatic.com'],
     imgSrc: ['data:', '*'],
-    mediaSrc: ['*'],
+    mediaSrc: ['*', 'blob:'],
     manifestSrc: [],
     objectSrc: [],
     scriptSrc: [
