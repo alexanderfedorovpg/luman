@@ -1,8 +1,10 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 
 import Copyright from './Copyright'
 import Address from './Address'
 import Subscribe from './Subscribe'
+import Applications from './Applications'
 
 import './style.scss'
 
@@ -21,8 +23,17 @@ function Footer() {
                 </div>
                 <div className="footer__middle-part">
                     <Address className="footer__address" />
+                    <MediaQuery minWidth="930px">
+                        <Applications className="footer__applications" />
+                    </MediaQuery>
+                    <MediaQuery maxWidth="614px">
+                        <Applications className="footer__applications" />
+                    </MediaQuery>
                 </div>
                 <div className="footer__right-part">
+                    <MediaQuery minWidth="615px" maxWidth="929px">
+                        <Applications className="footer__applications" />
+                    </MediaQuery>
                     <Subscribe className="footer__subscribe-networks" />
                 </div>
             </div>

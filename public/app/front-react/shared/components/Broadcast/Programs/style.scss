@@ -346,7 +346,7 @@
         font-size: rem(15);
         line-height: rem(26);
 
-        background-image: url(/content/broadcast/programs.png);
+        background-image: url(/content/broadcast/programs-bg.png);
         background-size: cover;
 
         @include below($tabletLandscapeMax) {
@@ -416,12 +416,13 @@
     }
 
     &__time-day {
-        text-transform: uppercase;
         margin-right: rem(13);
-
+        font-family: $stemBold;
+        text-transform: uppercase;
     }
 
     &__time-cities {
+        font-family: $stemBold;
         font-size: rem(16);
         line-height: rem(24);
         color: $white;
@@ -432,7 +433,7 @@
     }
 
     &__time {
-        font-weight: 300;
+        font-family: $stemReg;
     }
 
     &__content-container {

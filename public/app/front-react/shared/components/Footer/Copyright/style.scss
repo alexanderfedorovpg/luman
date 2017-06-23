@@ -14,12 +14,20 @@
         color: fade-out($copyright, .38);
 
         @include below($mobile) {
-            line-height: rem(24);
+            line-height: rem(20);
             width: 100%;
+
+            &:first-child {
+                margin-bottom: rem(2);
+            }
         }
 
         @include above($tablet) {
             line-height: rem(17);
+        }
+
+        @include below($tabletLandscapeMax) {
+            width: 100%;
         }
     }
 }

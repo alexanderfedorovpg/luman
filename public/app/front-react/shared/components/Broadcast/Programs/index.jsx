@@ -143,8 +143,8 @@ class Broadcast extends Component {
                                 ? <div className="news-header__time-programm">
                                     <div className="container news-header__container-program">
                                         <span className="news-header__time-day">{content[program].time_program.day}</span>
-                                        <span className="news-header__time-cities">{content[program].time_program.city1} <span className="news-header__time">{content[program].time_program.time1}</span> / </span>
-                                        <span className="news-header__time-cities">{content[program].time_program.city2} <span className="news-header__time">{content[program].time_program.time2}</span> / </span>
+                                        <span className="news-header__time-cities">{content[program].time_program.city1} <span className="news-header__time">{content[program].time_program.time1} /</span></span>
+                                        <span className="news-header__time-cities">{content[program].time_program.city2} <span className="news-header__time">{content[program].time_program.time2} /</span></span>
                                         <span className="news-header__time-cities">{content[program].time_program.city3} <span className="news-header__time">{content[program].time_program.time3}</span> </span>
                                     </div>
                                 </div>

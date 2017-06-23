@@ -23,6 +23,13 @@ const values = {
     htmlPage: true,
 
     apiEndpoint: true,
+
+    analytics: true
+  },
+
+  analytics: {
+      google: EnvVars.string('GOOGLE_ANALYTICS'),
+      yandex: EnvVars.number('YANDEX_METRIKA'),
   },
 
   apiEndpoint: EnvVars.string('API_ENDPOINT_PUBLIC', 'http://librorum-client.rtvi.ddemo.ru/api/v1/web'),
