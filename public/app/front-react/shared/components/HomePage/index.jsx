@@ -161,9 +161,24 @@ function HomePage({
                         <MoreNews className="general-news__more-news" data={moreNews} />
                     </MediaQuery>
                 </div>
-                <MediaQuery minWidth="1250px">
+                <MediaQuery maxWidth="614px">
                     <div className="general-news__middle">
-                        <Banner type="preview" className="general-news__banner-preview" />
+                        <Banner type="app_mobile" column={1} className="news-top__banner" />
+                    </div>
+                </MediaQuery>
+                <MediaQuery minWidth="614px" maxWidth="930px">
+                    <div className="news-top__middle middle-col">
+                        <Banner type="app_mobile" column={2} className="news-top__banner" />
+                    </div>
+                </MediaQuery>
+                <MediaQuery minWidth="930px" maxWidth="1249px">
+                    <div className="general-news__middle">
+                        <Banner type="app_mobile" column={2} className="general-news__banner-preview" />
+                    </div>
+                </MediaQuery>
+                <MediaQuery minWidth="1250px">
+                    <div className="general-news__middle" style={{width:'930px'}}>
+                        <Banner type="app_mobile" column={3} className="general-news__banner-preview" />
                     </div>
                 </MediaQuery>
                 {/*<div className="general-news__left general-news__left_more">

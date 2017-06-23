@@ -111,7 +111,7 @@ class Broadcast extends Component {
                         </div>
                         <MediaQuery minWidth="1250px">
                             <div className="news-one-line__row news-one-line__row_banners">
-                                <Banner type="large" className="news-top__banner" />
+                                <Banner type="app_mobile" column={3} className="news-top__banner" />
                                 <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
                             </div>
                         </MediaQuery>

@@ -111,7 +111,7 @@ class News extends Component {
 
                         <MediaQuery minWidth="1250px">
                             <div className="left-col left-col_width_inner">
-                                <Banner type="large" className="news-top__banner" />
+                                <Banner type="app_mobile" column={3} className="news-top__banner" />
                             </div>
                         </MediaQuery>
                         <MediaQuery minWidth="1250px">
