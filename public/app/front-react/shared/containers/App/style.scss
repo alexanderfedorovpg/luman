@@ -538,7 +538,7 @@ main {
 
         &__block-text {
             z-index: 9;
-            top: rem(23);
+            top: rem(26);
             bottom: auto;
 
             width: rem(317);
@@ -558,7 +558,7 @@ main {
             }
 
             @include above($tablet) {
-                top: rem(20);
+                top: rem(26);
                 width: rem(281);
             }
 
@@ -569,23 +569,36 @@ main {
             &_play {
 
                 @include above($tablet) {
-                    left: calc(100% - #{rem(245)});
+                    left: calc(100% - #{rem(227)});
+
+                    &:before {
+                        left: rem(-31);
+                        transform: scale(-1, 1);
+                    }
+
+                    &:after {
+                        left: rem(-31.7);
+                        transform: scale(-1, 1);
+                        width: calc(100% + 1.94375rem);
+                    }
                 }
 
                 @include above($tabletLandscape) {
-                    left: calc(100% - #{rem(249)});
+                    left: calc(100% - #{rem(230)});
                 }
 
                 @include above($desktop) {
-                    left: calc(100% - #{rem(352)});
+                    left: calc(100% - #{rem(319)});
                 }
 
             }
 
         }
         &__block-text_play {
-            @include above($tablet) {
-                padding: rem(43) 0 0 rem(24);
+            padding: rem(43) rem(24) 0 0;
+
+            @include below($mobile) {
+                padding-left: rem(38);
             }
         }
         &__text {

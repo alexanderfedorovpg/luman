@@ -86,8 +86,18 @@
 
                     margin-top: 0;
                     z-index: 8;
+
+                    @include below($tabletLandscapeMax) {
+                        margin-top: rem(100);
+                    }
+
+                    @include below($tabletMax) {
+                        margin-right: rem(21);
+                    }
+
                     @include below($mobile) {
                         margin-right: 0;
+                        margin-top: 0;
                     }
 
                     &__img {
@@ -165,12 +175,11 @@
 
             @include above($tablet) {
                 margin-left: 0;
-
+                padding-left: rem(55);
                 margin-top: rem(24);
             }
 
             @include above($tabletLandscape) {
-                margin-left: rem(64);
                 margin-top: rem(22);
             }
 
@@ -600,7 +609,7 @@
         }
 
         @include above($tablet) {
-            width: rem(225);
+            width: rem(238);
             padding-top: rem(14);
         }
 
@@ -669,8 +678,8 @@
                 }
 
                 @include above($tablet) {
-                    width: rem(225);
-                    height: rem(150);
+                    width: rem(238);
+                    height: rem(158);
                 }
 
                 @include above($desktop) {
@@ -872,6 +881,17 @@
     }
 
     &_noize {
+
+        .news-preview {
+
+            &__source {
+
+                @include below($mobile) {
+                    margin-top: rem(10);
+                    line-height: normal;
+                }
+            }
+        }
 
         .news-preview--wide {
 

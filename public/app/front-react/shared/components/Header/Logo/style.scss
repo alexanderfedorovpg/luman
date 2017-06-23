@@ -9,4 +9,20 @@
         left: 0;
         width: rem(138);
     }
+
+    &__polygon1 {
+        fill: #a03761;
+    }
+
+    &__polygon2 {
+        fill: $white;
+    }
+
+    &__rect {
+        fill: none;
+    }
+
+    &__group {
+        clip-path:url(#clip-path);
+    }
 }

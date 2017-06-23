@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import logo from './logo.png'
-import logoWar from './logo-war.png'
+
+const logo = '/content/logo/logo.svg'
+const logoWar = '/content/logo/logo-war.svg'
+
 import './style.scss'
 
 function Logo({ war }) {
