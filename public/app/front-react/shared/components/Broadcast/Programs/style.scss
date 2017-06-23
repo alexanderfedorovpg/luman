@@ -316,6 +316,10 @@
 
     }
 
+    &__program-name {
+        line-height: rem(40);
+    }
+
     &__container {
         position: relative;
 
@@ -330,6 +334,7 @@
                 display: flex;
                 flex-direction: column;
                 flex-wrap: wrap;
+                min-height: 1px;
                 padding-top: rem(15);
             }
         }
@@ -362,13 +367,14 @@
 
         position: absolute;
         z-index: 2;
-        left: rem(615);
+        left: rem(614);
         bottom: 0;
 
         @include below($tabletLandscapeMax) {
-            left: rem(465);
+            display: none;
+            /*left: rem(465);
             width: rem(180);
-            height: rem(98);
+            height: rem(98);*/
         }
 
         @include below($tabletMax) {
@@ -403,8 +409,9 @@
         color: $cities;
         background-color: rgba(36, 55, 70, .5);
 
-        @include below($tabletMax) {
-            display: none;
+        @include below($tabletLandscapeMax) {
+           width: 100%;
+            padding-left: 0;
         }
     }
 
@@ -522,6 +529,7 @@
 
             @include below($tabletMax) {
                 width: 100%;
+                height: auto;
                 min-width: rem(300);
                 position: static;
             }
