@@ -17,6 +17,10 @@
         flex-direction: row;
         justify-content: space-between;
         margin-top: rem(8);
+
+        @include below($mobile) {
+            justify-content: flex-start;
+        }
     }
 
     &__item {
@@ -29,6 +33,13 @@
 
             &:not(:last-child) {
                 margin-bottom: rem(10);
+            }
+        }
+
+        @include below($mobile) {
+
+            &:not(:last-child) {
+                margin-right: rem(10);
             }
         }
 

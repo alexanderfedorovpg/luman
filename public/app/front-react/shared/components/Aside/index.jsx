@@ -65,7 +65,7 @@ function Aside({ noise, broadcast, top, topBig, className, now, inside, broadcas
                 <Banner type="subscribe" className="news-top__subscribe subscribe_in-body" />
             }
             <MediaQuery minDeviceWidth="930px" maxDeviceWidth="1249px">
-                <Banner type="large" className="news-top__banner" />
+                <Banner type="app_mobile" column={1} className="news-top__banner" />
             </MediaQuery>
         </div>
     )
