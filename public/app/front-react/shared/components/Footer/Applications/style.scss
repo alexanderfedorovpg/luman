@@ -1,0 +1,49 @@
+@import "~style/mixins";
+@import "~style/vars";
+
+.applications {
+
+    &__title {
+        font-size: rem(14);
+        line-height: rem(24);
+        text-transform: uppercase;
+        letter-spacing: rem(.5);
+        color: $white;
+    }
+
+    &__links {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: rem(8);
+    }
+
+    &__item {
+        position: relative;
+        width: rem(115);
+        height: rem(36);
+        border: 1px solid $blue;
+
+        @include below($tabletLandscapeMax) {
+
+            &:not(:last-child) {
+                margin-bottom: rem(10);
+            }
+        }
+
+        &:hover {
+            border-color: $purple;
+        }
+
+    }
+
+    &__ico {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+}

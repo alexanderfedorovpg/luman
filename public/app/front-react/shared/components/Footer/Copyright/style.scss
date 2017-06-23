@@ -21,5 +21,9 @@
         @include above($tablet) {
             line-height: rem(17);
         }
+
+        @include below($tabletLandscapeMax) {
+            width: 100%;
+        }
     }
 }

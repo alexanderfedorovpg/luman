@@ -63,7 +63,7 @@
         }
 
         @include above($tabletLandscape) {
-            width: rem(313);
+            width: rem(177);
         }
 
         @include above($desktop) {
@@ -72,23 +72,28 @@
     }
 
     &__middle-part {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
 
         @include below($mobile) {
             width: 100%;
         }
 
         @include above($tablet) {
-            width: 50%;
+            width: 100%;
             margin-left: 0;
         }
 
         @include above($tabletLandscape) {
-            width: rem(250);
-            margin-left: rem(32);
+            width: rem(415);
+            margin-left: rem(16);
         }
 
         @include above($desktop) {
-            margin-left: rem(46);
+            width: rem(510);
+            margin-left: rem(27);
             margin-top: rem(4);
         }
     }
@@ -102,15 +107,20 @@
         @include above($tablet) {
             width: 50%;
             margin-left: 0;
-            padding-left: rem(9);
             padding-top: rem(4);
         }
 
         @include above($tabletLandscape) {
             width: rem(285);
-            margin-left: rem(52);
+            margin-left: rem(36);
+            margin-top: rem(-3);
             padding-left: 0;
             padding-top: 0;
+        }
+
+        @include above($desktop) {
+            margin-left: rem(56);
+            margin-top: rem(2);
         }
     }
 
@@ -138,6 +148,30 @@
                 @include below($mobile) {
                     width: 37%;
                 }
+            }
+        }
+    }
+
+    &__applications {
+        width: rem(240);
+        margin-top: rem(-2);
+
+        @include below($tabletLandscapeMax) {
+            width: rem(150);
+        }
+    }
+
+    &__subscribe-networks {
+
+        .subscribe-networks__list-network {
+            position: relative;
+            top: rem(6);
+        }
+
+        .subscribe-networks__ico-link:not(:last-child) {
+
+            .subscribe-networks__ico-image {
+                margin-right: rem(10);
             }
         }
     }
