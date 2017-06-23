@@ -5,6 +5,7 @@ import {withRouter} from 'react-router'
 import BannerLarge from './BannerLarge';
 import BannerPreview from './BannerPreview';
 import Subscribe from './Subscribe';
+import BannerAppMobile from './BannerAppMobile';
 
 const LARGE = 'large';//принимает 1-3 колоночные картинки
 const PREVIEW = 'preview'; //принимает 1-2-4 колоночные картинки
@@ -13,15 +14,14 @@ const SUBSCRIBE = 'subscribe';//принимает 1 колоночные кар
 
 let array = [
     {
-        type:   'preview',
-        url:    '/',
-        multi:  true,
-        images: {
-            mobile:          ['/content/banner/Android_1c.png', '/content/banner/iPhone_1c.png'],
-            tabletLandscape: ['/content/banner/Android_2c.png', '/content/banner/iPhone_2c.png'],
-            desktop:         ['/content/banner/Android_3c.png', '/content/banner/iPhone_3c.png'],
-        },
-        url_to: ['https://play.google.com/store/apps/details?id=com.rtvi.mobile', 'https://itunes.apple.com/ph/app/rtvi/id1222310129?mt=8']
+        type:  'large',
+        url:   '/news',
+        multi: true,
+    },
+    {
+        type:  'large',
+        url:   '/broadcast',
+        multi: true,
     },
     {
         type:   'subscribe',
@@ -82,9 +82,14 @@ const Banner = ({type, className, match}) => {
     const data = getData(type, match.url);
 
     if (type == LARGE) {
-        return <BannerLarge images={data.images} url={data.url_to} className={className}/>
+        if(data.multi){
+            return <BannerAppMobile className={className}/>
+        }else{
+            return <BannerLarge images={data.images} url={data.url_to} className={className}/>
+        }
     } else if (type == PREVIEW) {
-        return <BannerPreview multi={data.multi} images={data.images} url={data.url_to || '/programs/2'} className={className}/>
+        return <BannerPreview images={data.images} url={data.url_to || '/programs/2'} className={className}/>
+
     } else if (type == SUBSCRIBE) {
         return <Subscribe images={data.images} url={data.url_to} defaultUrl={'javascript:void(0)'} className={className}/>
     } else {

@@ -68,7 +68,7 @@ class App extends Component {
                         <html lang="ru" />
                         <meta charSet="utf-8" />
                         <title>{config('htmlPage.defaultTitle')}</title>
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0  maximum-scale=1.0" />
                         <meta name="format-detection" content="telephone=no" />
                         <meta name="HandheldFriendly" content="true" />
                         <meta property="og:type" content="website" />

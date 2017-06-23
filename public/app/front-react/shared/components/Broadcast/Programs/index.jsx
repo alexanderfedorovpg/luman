@@ -122,7 +122,6 @@ class Broadcast extends Component {
                         <div className="news-header__title">
                             <div className="container news-header__container">
                                 {programName}
-                                <div className={'news-header__title-logo news-header__title-logo_' + content[program].category} />
                             </div>
                         </div>
                         <div className="news-header__content">
@@ -137,7 +136,19 @@ class Broadcast extends Component {
                                      </div>*/}
                                 </div>
                                 <img src={content[program].photo} alt="" className={'news-header__personality ' +  content[program].big_image} />
+                                <div className={'news-header__content-logo news-header__content-logo_' + content[program].category} />
                             </div>
+
+                            {content[program].time_program
+                                ? <div className="news-header__time-programm">
+                                    <span className="news-header__time-day">{content[program].time_program.day}</span>
+                                    <span className="news-header__time-cities">{content[program].time_program.city1} <span className="news-header__time">{content[program].time_program.time1}</span> / </span>
+                                    <span className="news-header__time-cities">{content[program].time_program.city2} <span className="news-header__time">{content[program].time_program.time2}</span> / </span>
+                                    <span className="news-header__time-cities">{content[program].time_program.city3} <span className="news-header__time">{content[program].time_program.time3}</span> </span>
+                                </div>
+                                : null
+                            }
+
                         </div>
                     </div>
                     <div className="news-top__container container">
@@ -150,39 +161,6 @@ class Broadcast extends Component {
                                         </MediaQuery>
                                         <Item data={data[0]} big />
                                         <div className="news-one-line__date-wrap news-one-line__date-wrap_view-desktop">
-                                            <MediaQuery minWidth="1250px">
-
-                                            </MediaQuery>
-                                            <div className="news-one-line__date">
-                                                <div>
-                                                    Поиск выпуска по дате эфира: c
-                                                    {' '}
-                                                    <Datepicker
-                                                        className="small"
-                                                        onChange={this.changeStart}
-                                                        selectsStart
-                                                        selected={filter.start}
-                                                        startDate={filter.start}
-                                                        endDate={filter.end}
-                                                    />
-                                                    по
-                                                    {' '}
-                                                    <Datepicker
-                                                        className="small"
-                                                        onChange={this.changeEnd}
-                                                        selectsEnd
-                                                        selected={filter.end}
-                                                        startDate={filter.start}
-                                                        endDate={filter.end}
-                                                    />
-                                                    <button
-                                                        className="button"
-                                                        onClick={this.onFilter}
-                                                    >
-                                                        Показать
-                                                    </button>
-                                                </div>
-                                            </div>
                                             <div className="news-one-line__date-items">
                                                 <Item data={data[1]} />
                                                 <Item data={data[2]} />

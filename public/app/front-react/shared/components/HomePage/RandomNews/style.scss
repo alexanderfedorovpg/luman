@@ -20,6 +20,10 @@
             // display: none;
         }
 
+        @include below($mobile) {
+            height: auto;
+        }
+
         .mini-news {
             padding-top: rem(6);
             padding-bottom: 0;
