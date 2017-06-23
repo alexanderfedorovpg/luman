@@ -38,11 +38,13 @@ class BroadcastPage extends PureComponent {
     asyncBootstrap() {
         const { match } = this.props
 
-        this.props.setProgram(null);
         this.props.fetchNoise()
 
         if (match.params.id) {
             this.fetchItem(match.params.id)
+        }else{
+            this.props.setProgram(null);
+
         }
     }
 
