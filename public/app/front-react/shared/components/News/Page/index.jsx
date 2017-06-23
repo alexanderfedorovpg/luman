@@ -24,7 +24,7 @@ class News extends Component {
 
         return (
             <div className="news-top__row">
-                {data.map((v, i) => (
+                {data.slice(0, -(data.length % 3) || undefined).map((v, i) => (
                     <Block
                         key={v.id}
                         data={v}
@@ -59,13 +59,13 @@ class News extends Component {
                             </Title>
                             <div className="news-one-line news-top__news-one-line">
                                 <div className="news-one-line__row">
-                                    <Block data={now[0]} rectangle className="news-one-line__block-rectangle" />
-                                    <Block data={now[1]} className="news-one-line__block-square" />
-                                    <Block data={now[2]} className="news-one-line__block-square" />
-                                    <Block data={now[3]} className="news-one-line__block-square" />
-                                    <Block data={now[4]} className="news-one-line__block-square" />
-                                    <Block data={now[5]} className="news-one-line__block-square" />
-                                    <Block data={now[6]} rectangle className="news-one-line__block-rectangle" />
+                                    <Block data={data[0]} rectangle className="news-one-line__block-rectangle" />
+                                    <Block data={data[1]} className="news-one-line__block-square" />
+                                    <Block data={data[2]} className="news-one-line__block-square" />
+                                    <Block data={data[3]} className="news-one-line__block-square" />
+                                    <Block data={data[4]} className="news-one-line__block-square" />
+                                    <Block data={data[5]} className="news-one-line__block-square" />
+                                    <Block data={data[6]} rectangle className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
                         </div>
@@ -83,9 +83,9 @@ class News extends Component {
                             </MediaQuery>
                             <div className="per-day news-top__per-day">
                                 <div className="per-day__wrapper">
-                                    <Block data={today[0]} className="news-one-line__block-square" />
-                                    <Block data={today[1]} className="news-one-line__block-square" />
-                                    <Block data={today[2]} rectangle className="news-one-line__block-rectangle" />
+                                    <Block data={data[0]} className="news-one-line__block-square" />
+                                    <Block data={data[1]} className="news-one-line__block-square" />
+                                    <Block data={data[2]} rectangle className="news-one-line__block-rectangle" />
                                 </div>
                             </div>
                             <MediaQuery maxWidth="929px">
@@ -99,7 +99,7 @@ class News extends Component {
                             </MediaQuery>
 
                             <MediaQuery minWidth="930px" maxWidth="1249px">
-                                {this.renderAdditionalData(data.slice())}
+                                {this.renderAdditionalData(data.slice(10))}
                                 {canLoad && (
                                     <LoadMore onClick={onLoadRequest}>
                                         Больше новостей
@@ -124,7 +124,7 @@ class News extends Component {
 
                         <MediaQuery minWidth="1250px">
                             <div className="news-top__middle middle-col ">
-                                {this.renderAdditionalData(data.slice())}
+                                {this.renderAdditionalData(data.slice(10))}
                                 {canLoad && (
                                     <LoadMore onClick={onLoadRequest}>
                                         Больше новостей
@@ -135,7 +135,7 @@ class News extends Component {
 
                         <MediaQuery maxWidth="929px">
                             <div className="news-top__middle news-top__middle_margin middle-col ">
-                                {this.renderAdditionalData(data.slice())}
+                                {this.renderAdditionalData(data.slice(10))}
                                 {canLoad && (
                                     <LoadMore onClick={onLoadRequest}>
                                         Больше новостей
