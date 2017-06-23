@@ -121,7 +121,7 @@ class Broadcast extends Component {
                     <div className="news-header news-top__news-header">
                         <div className="news-header__title">
                             <div className="container news-header__container">
-                                {programName}
+                                <p className="news-header__program-name">{programName}</p>
                             </div>
                         </div>
                         <div className="news-header__content">
@@ -141,10 +141,12 @@ class Broadcast extends Component {
 
                             {content[program].time_program
                                 ? <div className="news-header__time-programm">
-                                    <span className="news-header__time-day">{content[program].time_program.day}</span>
-                                    <span className="news-header__time-cities">{content[program].time_program.city1} <span className="news-header__time">{content[program].time_program.time1}</span> / </span>
-                                    <span className="news-header__time-cities">{content[program].time_program.city2} <span className="news-header__time">{content[program].time_program.time2}</span> / </span>
-                                    <span className="news-header__time-cities">{content[program].time_program.city3} <span className="news-header__time">{content[program].time_program.time3}</span> </span>
+                                    <div className="container news-header__container-program">
+                                        <span className="news-header__time-day">{content[program].time_program.day}</span>
+                                        <span className="news-header__time-cities">{content[program].time_program.city1} <span className="news-header__time">{content[program].time_program.time1}</span> / </span>
+                                        <span className="news-header__time-cities">{content[program].time_program.city2} <span className="news-header__time">{content[program].time_program.time2}</span> / </span>
+                                        <span className="news-header__time-cities">{content[program].time_program.city3} <span className="news-header__time">{content[program].time_program.time3}</span> </span>
+                                    </div>
                                 </div>
                                 : null
                             }
