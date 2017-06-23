@@ -101,7 +101,7 @@ main {
 
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
        height: 100vh;
-        overflow: auto;
+        overflow: visible;
     }
 }
 

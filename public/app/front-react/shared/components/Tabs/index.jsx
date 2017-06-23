@@ -76,7 +76,7 @@ class Tabs extends Component {
         } else if (window.innerWidth > 930 && window.innerWidth < 1249) {
             count = 6;
         } else if (window.innerWidth >= 1250) {
-            count = 7;
+            count = 6;
         }
         this.setState({
             count,
