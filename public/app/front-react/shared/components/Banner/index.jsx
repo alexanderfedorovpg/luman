@@ -60,7 +60,7 @@ let array = [
             tabletLandscape:  '/content/banner/namedni_2c.jpg',
             desktop: '/content/banner/namedni_3c.jpg',
         },
-        url_to: '/programs/2'
+        url_to: '/programs/3'
     },
 ]
 
