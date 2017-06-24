@@ -53,7 +53,7 @@ let array = [
         url_to: '/programs/2'
     },
     {
-        type:   'large',
+        type:   'preview',
         url:    '/',
         images: {
             mobile:          '/content/banner/namedni_1c.jpg',
