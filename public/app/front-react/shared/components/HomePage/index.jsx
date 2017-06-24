@@ -87,7 +87,7 @@ function HomePage({
                         </MediaQuery>
                     </div>
                     <MediaQuery minWidth="930px" maxWidth="1249px">
-                        <Banner type="preview" className="general-news__banner-preview" />
+                        <Banner type="large" className="general-news__banner-preview" />
                     </MediaQuery>
                     <MediaQuery minWidth="930px" maxWidth="1249px">
                         <RandomNews className="general-news__random-news" data={randomNews} />

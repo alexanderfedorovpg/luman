@@ -9,8 +9,11 @@ import './style.scss'
 
 const Banner = ({images, url, className})=> (
     <div className={classNames('banner banner__where-view', className)}>
-        <MediaQuery maxWidth="1249px">
+        <MediaQuery maxWidth="614px">
             <img src={images ? images.mobile : how_1c} alt="" role="presentation"/>
+        </MediaQuery>
+        <MediaQuery minWidth="615px" maxWidth="1249px">
+            <img src={images ? images.tabletLandscape : how_1c} alt="" role="presentation"/>
         </MediaQuery>
         <MediaQuery minWidth="1250px">
             <img src={images ? images.desktop : how_3c} alt="" role="presentation"/>
