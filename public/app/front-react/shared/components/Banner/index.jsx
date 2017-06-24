@@ -17,11 +17,23 @@ let array = [
     {
         type:  'large',
         url:   '/news',
+        images: {
+            mobile:          '/content/banner/namedni_1c.jpg',
+            tabletLandscape: '/content/banner/namedni_2c.jpg',
+            desktop:         '/content/banner/namedni_3c.jpg',
+        },
+        url_to: '/programs/3',
         multi: true,
     },
     {
         type:  'large',
         url:   '/broadcast',
+        images: {
+            mobile:          '/content/banner/namedni_1c.jpg',
+            tabletLandscape: '/content/banner/namedni_2c.jpg',
+            desktop:         '/content/banner/namedni_3c.jpg',
+        },
+        url_to: '/programs/3',
         multi: true,
     },
     {
