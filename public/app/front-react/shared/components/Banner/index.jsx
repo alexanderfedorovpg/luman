@@ -56,8 +56,9 @@ let array = [
         type:   'large',
         url:    '/',
         images: {
-            mobile:  '/content/banner/namedni_1c.png',
-            desktop: '/content/banner/namedni_3c.png',
+            mobile:  '/content/banner/namedni_1c.jpg',
+            tabletLandscape:  '/content/banner/namedni_2c.jpg',
+            desktop: '/content/banner/namedni_3c.jpg',
         },
         url_to: '/programs/2'
     },
