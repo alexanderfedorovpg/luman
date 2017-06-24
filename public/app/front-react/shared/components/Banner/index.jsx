@@ -56,8 +56,8 @@ let array = [
         type:   'large',
         url:    '/',
         images: {
-            mobile:  '/content/banner/here_and_there_1c.png',
-            desktop: '/content/banner/here_and_there_3c.png',
+            mobile:  '/content/banner/namedni_1c.png',
+            desktop: '/content/banner/namedni_3c.png',
         },
         url_to: '/programs/2'
     },
