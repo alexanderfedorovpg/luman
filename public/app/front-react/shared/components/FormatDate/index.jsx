@@ -29,16 +29,16 @@ function FormatDate({ created, updated }) {
             {
                 !!date &&
                 <span>
+                    <FormattedTime
+                        value={date}
+                        hour="numeric"
+                        minute="numeric"
+                    />
                     <FormattedDate
                         value={date}
                         year="numeric"
                         month="long"
                         day="2-digit"
-                    />
-                    <FormattedTime
-                        value={date}
-                        hour="numeric"
-                        minute="numeric"
                     />
                 </span>
             }
