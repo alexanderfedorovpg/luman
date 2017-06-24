@@ -5898,6 +5898,14 @@ react-facebook@^4.0.13:
     prop-types "^15.5.8"
     react-spinner-children "^1.0.5"
 
+react-ga@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.2.0.tgz#45235de1356e4d988d9b82214d615a08489c9291"
+  dependencies:
+    create-react-class "^15.5.2"
+    object-assign "^4.0.1"
+    prop-types "^15.5.6"
+
 react-helmet@5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.0.3.tgz#c6da63ee96e83aa7c8fe6d041f28dd288b1b006d"
@@ -6042,6 +6050,10 @@ react-tree-walker@^2.1.1:
 react-tweet-embed@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-tweet-embed/-/react-tweet-embed-1.0.6.tgz#a5e1c9cd633f18db3ef1c604c472afe3ce5ee746"
+
+react-yandex-metrika@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-yandex-metrika/-/react-yandex-metrika-2.1.0.tgz#56a0fa343d4088e59762d9b8348ef838b76104b0"
 
 react@15.5.4:
   version "15.5.4"

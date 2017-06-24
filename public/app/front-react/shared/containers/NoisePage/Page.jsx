@@ -68,15 +68,12 @@ class NoisePage extends PureComponent {
     // загружает новость, если ее нет в списке
     // также загружает "новости по теме"
     fetchItem(id) {
-        if (!this.getById(id)) {
-            this.props.fetchNoise({ id })
-        }
+        this.props.fetchNoise({ id })
         this.props.fetchRelated(id)
     }
 
     getById(id) {
         const { noiseData } = this.props
-
         return noiseData[id] || {}
     }
 
@@ -116,7 +113,8 @@ class NoisePage extends PureComponent {
                                 now={now}
                                 related={relatedNews}
                                 broadcast={broadcast}
-                                noisePage={true}/>
+                                noisePage
+                            />
                         </div>
                     )
                     : (
@@ -124,7 +122,8 @@ class NoisePage extends PureComponent {
                             now={now}
                             onLoadRequest={loadMore}
                             canLoad={pagination.page < pagination.lastPage}
-                            noise={noise} />
+                            noise={noise}
+                        />
                     )
                 }
             </div>
