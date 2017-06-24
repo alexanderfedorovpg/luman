@@ -122,7 +122,7 @@ function HomePage({
                         <MoreNews className="general-news__more-news" data={moreNews} />
                     </MediaQuery>
                     <MediaQuery maxWidth="614px">
-                        <Banner type="preview" className="general-news__banner-preview" />
+                        <Banner type="large" className="general-news__banner-preview" />
                     </MediaQuery>
                 </div>
                 <div className="general-news__middle">
